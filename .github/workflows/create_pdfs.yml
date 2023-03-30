@@ -9,27 +9,17 @@ name: create mindmaps
 
 on:
   workflow_dispatch:
-    tags:
-      - "*"
-  # push:
-  #   branches: [ master ]
-  #   tags:
-  #     - "*"
-  # pull_request:
-  #   branches: [ master ]
-  #   tags:
-  #     - "*"
+    inputs:
+      subject:
+        description: 'Which mindmap should be generated?'
+        type: string
+        required: true
+        default: "Computer_Architecture"
 
 jobs:
   build:
-    name: Mindmap ${{ matrix.subject_name }}
+    name: Mindmap ${{ github.event.subject }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - subject_name: Mindmap Computer Architecture
-            path: ./Computer_Architecture
-            file_name: mindmap.pdf
 
     steps:
       - name: Checkout Master Branch
@@ -41,16 +31,16 @@ jobs:
         with:
           run: |
             apk add make
-            cd ${{ matrix.path }}
-            "make" "Dokumentation.pdf"
+            cd ./${{ github.event.subject }}
+            make Mindmap.pdf
         continue-on-error: true
 
-      - name: Upload binaries to release
+      - name: Upload mindmap to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
-          file: dist/picoc_compiler.tar.gz
-          asset_name: ${{ matrix.subject_name }}
+          file: ${{ github.event.subject }}/Mindmap.pdf
+          asset_name: ${{ github.event.subject }}
           tag: ${{ github.ref }}
           overwrite: true
-          body: "Release all Mindmaps"
+          body: "Released Mindmaps"

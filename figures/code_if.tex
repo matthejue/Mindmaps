@@ -1,0 +1,16 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+\begin{BVerbatim}[gobble=4]
+    main:
+      bne x22, x23, .else  # go to Else if i != j
+      # add x19, x20, x21  # f = g + h (skipped if i != j)
+      beq x0, x0, .exit    # if 0 == 0, go to Exit
+    .else:
+      # sub x19, x20, x21  # f = g - h (skipped if i = j)
+    .exit:
+  \end{BVerbatim}
+\end{document}

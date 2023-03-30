@@ -1,0 +1,17 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+  \begin{BVerbatim}[gobble=4]
+    swap:
+      slli x6, x11, 2 # reg x6 = k * 4
+      add x6, x10, x6 # reg x6 = v + (k * 4)
+      lw x5, 0(x6)    # reg x5 (temp) = v[k]
+      lw x7, 4(x6)    # reg x7 = v[k + 1]
+      sw x7, 0(x6)    # v[k] = reg x7
+      sw x5, 4(x6)    # v[k+1] = reg x5 (temp)
+      jalr x0, 0(x1)  # return to calling routine
+  \end{BVerbatim}
+\end{document}

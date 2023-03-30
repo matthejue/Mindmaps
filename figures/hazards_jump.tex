@@ -1,0 +1,20 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+  \begin{BVerbatim}[]
+0   jal x1 label  IF | ID | EX | ME | WB
+1                                A  | A  | W
+2   jalr x0 0(x1)      IF | ID | EX | ME | WB
+3                                N
+4
+5   jal x1 label  IF | ID | EX | ME | WB
+6                                A  | A  | W
+7   add x2,x3,x4       IF | ID | EX | ME | WB
+8                                N
+9   jalr x0 0(x1)           IF | ID | EX | ME | WB
+10                                    N
+  \end{BVerbatim}
+\end{document}

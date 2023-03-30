@@ -1,0 +1,12 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+  \begin{BVerbatim}[gobble=4]
+    slli x8,x3,2
+    add x8,x2,x8
+    lw x8,0(x8)
+  \end{BVerbatim}
+\end{document}

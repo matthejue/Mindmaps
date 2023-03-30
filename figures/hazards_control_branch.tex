@@ -1,0 +1,27 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+  \begin{BVerbatim}[]
+0   beq x1 x2 label    IF | ID | EX | ME | WB
+1                                W    W
+2   add x9 x5 x6            IF | ID | EX | ME | WB
+3                           N
+4   add x9 x5 x6                 IF | ID | EX | ME | WB
+5                                N
+6   lw x9 0(x5)                       IF | ID | EX | ME | WB
+7                                     N
+8
+9   beq x1 x2 label    IF | ID | EX | ME | WB
+10                                W    W
+11  lw x3 0(x5)             IF | ID | EX | ME | WB
+12                          N                   A  | W
+13  add stalled                  IF | ID | -- | -- | --
+14                               N         N
+15  add x9 x3 x3                      IF | ID | EX | ME | WB
+16                                    N         N
+  \end{BVerbatim}
+\end{document}
+

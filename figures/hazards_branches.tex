@@ -1,0 +1,59 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+  \begin{BVerbatim}[]
+0   add x1 x5 x6  IF | ID | EX | ME | WB
+1                                A  | A  | W
+2   add x2 x5 x6      IF | ID | EX | ME | WB
+3                                    A  | A  | W
+4   addi x8 x9 1           IF | ID | EX | ME | WB
+5
+6   beq x1 x2 label             IF | ID | EX | ME | WB
+7                                    N    N
+8
+9   add x1 x5 x6  IF | ID | EX | ME | WB
+10                               A  | A  | W
+11  add x2 x5 x6       IF | ID | EX | ME | WB
+12                                    A  | A  | W
+13  beq stalled             IF | ID | -- | -- | --
+14                               N    N
+15  beq x1 x2 label              IF | ID | EX | ME | WB
+16                                   N    N
+17
+18  lw x1 0(x5)   IF | ID | EX | ME | WB
+19                                    A  | W
+20  add x2 x5 x6       IF | ID | EX | ME | WB
+21                                    A  | A  | W
+22  beq stalled             IF | ID | -- | -- | --
+23                               N    N
+24  beq x1 x2 label              IF | ID | EX | ME | WB
+25                                    N    N
+26
+27  add x1 x5 x6  IF | ID | EX | ME | WB
+28                               A  | A  | W
+29  lw x2 0(x5)        IF | ID | EX | ME | WB
+30                                         A  | W
+31  beq stalled             IF | ID | -- | -- | --
+32                               N    N
+33  beq stalled                  -- | ID | -- | -- | --
+34                                    N    N
+35  beq x1 x2 label                   IF | ID | EX | ME | WB
+36                                         N    N
+37
+38  lw x1 0(x5)   IF | ID | EX | ME | WB
+39                                    A  | W
+40  add stalled        IF | ID | -- | -- | --
+41                                    A  | A  | W
+42  add x2 x1 x1            IF | ID | EX | ME | WB
+43                                         A  | A  | W
+44  beq stalled                  IF | ID | -- | -- | --
+45                                    N    N
+46  beq stalled                       -- | ID | -- | -- | --
+47                                         N    N
+48  beq x1 x2 label                        IF | ID | EX | ME | WB
+49                                              N    N
+  \end{BVerbatim}
+\end{document}

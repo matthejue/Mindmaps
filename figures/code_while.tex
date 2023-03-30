@@ -1,0 +1,17 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+  \begin{BVerbatim}[gobble=4]
+    .loop:
+      # slli x10, x22, 2   # Temp reg x10 = i * 4
+      # add x10, x10, x25  # x10 = address of save[i]
+      # lw x9, 0(x10)      # Temp reg x9 = save[i]
+      bne x9, x24, .exit   # go to Exit if save[i] != k
+      # addi x22, x22, 1   # i = i + 1
+      beq x0, x0, .loop    # go to Loop
+    .exit:
+  \end{BVerbatim}
+\end{document}

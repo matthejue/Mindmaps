@@ -1,0 +1,50 @@
+% https://tex.stackexchange.com/questions/43331/control-vertical-space-before-and-after-verbatim-environment
+\documentclass[varwidth, convert]{standalone}
+
+\usepackage{fancyvrb}
+
+\begin{document}
+  \begin{BVerbatim}[]
+0   lw x1 0(x5)   IF | ID | EX | ME | WB
+1                                     A  | W
+2   add stalled        IF | ID | -- | -- | --
+3                                N
+4   add x8 x1 x1            IF | ID | EX | ME | WB
+5                                     N
+6   lw x9 0(x1)                  IF | ID | EX | ME | WB
+7                                          N
+8
+9   lw x1 0(x5)   IF | ID | EX | ME | WB
+10                                    A  | W
+11  addi x7 x6 1       IF | ID | EX | ME | WB
+12
+13  add x8 x1 x1            IF | ID | EX | ME | WB
+14                                    N
+15  lw x9 0(x1)                  IF | ID | EX | ME | WB
+16                                         N
+17
+18  lw x1 0(x5)   IF | ID | EX | ME | WB
+19                                    A  | W
+20  lw stalled         IF | ID | -- | -- | --
+21                                         A  | W
+22  lw x2 0(x1)             IF | ID | EX | ME | WB
+23                                    N         A  | W
+24  add stalled                  IF | ID | -- | -- | --
+25                                         N
+26  add x8 x1 x2                      IF | ID | EX | ME | WB
+27                                              N
+28  add x9 x1 x2                           IF | ID | EX | ME | WB
+29                                                   N
+30
+31  lw x1 0(x5)   IF | ID | EX | ME | WB
+32                                    A  | W
+33  lw x2 0(x6)        IF | ID | EX | ME | WB
+34                                         A  | W
+35  add stalled             IF | ID | -- | -- | --
+36                                    N
+37  add x8 x1 x2                 IF | ID | EX | ME | WB
+38                                         N
+39  add x9 x1 x2                      IF | ID | EX | ME | WB
+40                                              N
+  \end{BVerbatim}
+\end{document}

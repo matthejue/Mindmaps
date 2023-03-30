@@ -40,7 +40,8 @@ jobs:
         with:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
           file: ${{ github.event.inputs.subject }}/Mindmap.pdf
-          asset_name: ${{ github.event.inputs.subject }}
-          tag: ${{ github.ref }}
+          asset_name: ${{ github.event.inputs.subject }}.pdf
+          # tag: ${{ github.ref }}
           overwrite: true
-          body: "Released Mindmaps"
+          tag: "Released Mindmaps"
+          body: "Mindmap ${{ github.event.inputs.subject }}/Mindmap.pdf was added / updated recently"

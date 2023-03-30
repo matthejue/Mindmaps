@@ -5,7 +5,7 @@
 # https://github.com/svenstaro/upload-release-action
 # https://blog.knoldus.com/manual-trigger-in-github-actions/
 
-name: create executables
+name: create mindmaps
 
 on:
   workflow_dispatch:

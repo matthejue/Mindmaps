@@ -1,0 +1,56 @@
+# resources: https://github.com/qutebrowser/qutebrowser/blob/master/.github/workflows/nightly.yml
+# https://github.com/JackMcKew/pyinstaller-action-windows,
+# https://github.com/Nuitka/Nuitka-Action
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+# https://github.com/svenstaro/upload-release-action
+# https://blog.knoldus.com/manual-trigger-in-github-actions/
+
+name: create executables
+
+on:
+  workflow_dispatch:
+    tags:
+      - "*"
+  # push:
+  #   branches: [ master ]
+  #   tags:
+  #     - "*"
+  # pull_request:
+  #   branches: [ master ]
+  #   tags:
+  #     - "*"
+
+jobs:
+  build:
+    name: Mindmap ${{ matrix.subject_name }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - subject_name: Mindmap Computer Architecture
+            path: ./Computer_Architecture
+            file_name: mindmap.pdf
+
+    steps:
+      - name: Checkout Master Branch
+        uses: actions/checkout@v3
+        with:
+          ref: "master"
+
+      - uses: matthejue/texlive-action-personal-copy/full@master
+        with:
+          run: |
+            apk add make
+            cd ${{ matrix.path }}
+            "make" "Dokumentation.pdf"
+        continue-on-error: true
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.UPLOAD_TO_REPO }}
+          file: dist/picoc_compiler.tar.gz
+          asset_name: ${{ matrix.subject_name }}
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Release all Mindmaps"

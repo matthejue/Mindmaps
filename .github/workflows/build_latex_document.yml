@@ -1,0 +1,68 @@
+name: Build LaTeX document
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    # - uses: xu-cheng/texlive-action/full@v1
+
+    - uses: matthejue/texlive-action-personal-copy/full@master
+      with:
+        run: |
+          apk add make
+          "make" "Dokumentation.pdf"
+      continue-on-error: true
+    - name: Push log file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
+      with:
+        source_file: 'Dokumentation.log'
+        destination_repo: 'matthejue/Bachelorarbeit_Dokumentation_out'
+        destination_folder: ''
+        user_email: 'matthejue@gmail.com'
+        user_name: 'matthejue'
+        commit_message: 'updated log'
+    - name: Push test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
+      with:
+        source_file: 'Dokumentation.pdf'
+        destination_repo: 'matthejue/Bachelorarbeit_Dokumentation_out'
+        destination_folder: ''
+        user_email: 'matthejue@gmail.com'
+        user_name: 'matthejue'
+        commit_message: 'updated pdf'
+
+    # - uses: xu-cheng/texlive-action/full@v1
+    - uses: matthejue/texlive-action-personal-copy/full@master
+      with:
+        run: |
+          apk add make
+          "make" "Main.pdf"
+      continue-on-error: true
+    - name: Push log file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
+      with:
+        source_file: 'Main.log'
+        destination_repo: 'matthejue/Bachelorarbeit_Praesentation_out'
+        destination_folder: ''
+        user_email: 'matthejue@gmail.com'
+        user_name: 'matthejue'
+        commit_message: 'updated log'
+    - name: Push test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
+      with:
+        source_file: 'Main.pdf'
+        destination_repo: 'matthejue/Bachelorarbeit_Praesentation_out'
+        destination_folder: ''
+        user_email: 'matthejue@gmail.com'
+        user_name: 'matthejue'
+        commit_message: 'updated pdf'

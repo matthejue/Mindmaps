@@ -18,7 +18,7 @@ on:
 
 jobs:
   build:
-    name: Mindmap ${{ github.event.subject }}
+    name: Mindmap ${{ github.event.inputs.subject }}
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +31,7 @@ jobs:
         with:
           run: |
             apk add make
-            cd ./${{ github.event.subject }}
+            cd ./${{ github.event.inputs.subject }}
             make Mindmap.pdf
         continue-on-error: true
 
@@ -39,8 +39,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
-          file: ${{ github.event.subject }}/Mindmap.pdf
-          asset_name: ${{ github.event.subject }}
+          file: ${{ github.event.inputs.subject }}/Mindmap.pdf
+          asset_name: ${{ github.event.inputs.subject }}
           tag: ${{ github.ref }}
           overwrite: true
           body: "Released Mindmaps"

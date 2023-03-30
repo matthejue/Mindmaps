@@ -32,7 +32,7 @@ jobs:
           run: |
             apk add make
             "cd" "./${{ github.event.inputs.subject }}"
-            "make"" "Mindmap.pdf"
+            "make" "Mindmap.pdf"
         continue-on-error: true
 
       - name: Upload mindmap to release

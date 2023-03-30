@@ -1,7 +1,7 @@
-PWD /home/areo/Documents/Studium/Mindmaps
+PWD /home/areo/Documents/Studium/Mindmaps/Computer_Architecture
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/areo/Documents/Studium/Mindmaps/Mindmap.tex
+INPUT Mindmap.tex
 OUTPUT Mindmap.log
 INPUT /usr/share/texmf-dist/tex/latex/standalone/standalone.cls
 INPUT /usr/share/texmf-dist/tex/latex/standalone/standalone.cls
@@ -89,11 +89,6 @@ INPUT /usr/share/texmf-dist/tex/latex/base/size10.clo
 INPUT /usr/share/texmf-dist/tex/latex/base/size10.clo
 INPUT /usr/share/texmf-dist/tex/latex/base/size10.clo
 INPUT /usr/share/texmf-dist/tex/latex/base/size10.clo
-INPUT ./Mindmap.pdf
-INPUT ./Mindmap.aux
-INPUT Mindmap.aux
-INPUT Mindmap.aux
-INPUT ./Mindmap.pdf
 INPUT /usr/share/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texmf-dist/tex/generic/babel/babel.sty
 INPUT /usr/share/texmf-dist/tex/generic/babel/babel.sty

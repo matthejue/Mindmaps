@@ -39,7 +39,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
-          file: ${{ github.event.inputs.subject }}/Mindmap.pdf
+          file: Mindmap.pdf
           asset_name: ${{ github.event.inputs.subject }}
           tag: ${{ github.ref }}
           overwrite: true

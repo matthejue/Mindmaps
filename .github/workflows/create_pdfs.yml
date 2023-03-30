@@ -9,6 +9,9 @@ name: create mindmaps
 
 on:
   workflow_dispatch:
+    tags:
+      - '[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+'
     inputs:
       subject:
         description: 'Which mindmap should be generated?'
@@ -33,7 +36,7 @@ jobs:
             apk add make
             "cd" "./${{ github.event.inputs.subject }}"
             "make" "Mindmap.pdf"
-        continue-on-error: true
+        # continue-on-error: true
 
       - name: Upload mindmap to release
         uses: svenstaro/upload-release-action@v2
@@ -41,7 +44,6 @@ jobs:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
           file: ${{ github.event.inputs.subject }}/Mindmap.pdf
           asset_name: ${{ github.event.inputs.subject }}.pdf
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref_name }}
           overwrite: true
           body: "Mindmap ${{ github.event.inputs.subject }}/Mindmap.pdf was added / updated most recently"
-

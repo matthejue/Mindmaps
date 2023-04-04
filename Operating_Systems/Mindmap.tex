@@ -1,0 +1,418 @@
+\documentclass[convert]{standalone}
+% \documentclass{standalone}
+\usepackage[ngerman]{babel}
+
+ \usepackage{csquotes}
+\usepackage{xcolor}
+% \usepackage{anyfontsize}
+\usepackage{adjustbox}
+% \usepackage[]{enumitem}
+\usepackage{nicematrix}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{graphs}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadings}
+\usetikzlibrary{mindmap, shadows, backgrounds} % , calc
+
+\definecolor{PrimaryColor}{HTML}{53DCCC}
+\definecolor{SecondaryColor}{HTML}{F1A48F}
+\colorlet{BoxColor}{gray!10!white}
+
+\newlength{\leveldistance}
+\setlength{\leveldistance}{20cm}
+
+\begin{document}
+    % https://tex.stackexchange.com/questions/118601/mindmap-sibling-angle-in-tikz
+    % \tikzset{
+      % set angles for level/.style={level #1/.append style={sibling angle=360/\the\tikznumberofchildren}},
+      % level/.append style={set angles for level=#1}% solution 1
+    % }
+    \begin{tikzpicture}[
+        auto,
+        huge mindmap,
+        fill opacity=0.6,
+        draw opacity=0.8,
+        concept color = SecondaryColor,
+        % https://tex.stackexchange.com/questions/82530/how-to-draw-a-filled-rectangle-without-a-border-using-tikz
+        every annotation/.style={fill=BoxColor, draw=none, align=center, fill = BoxColor, text width = 3cm},
+        grow cyclic,
+        level 1/.append style = {
+          concept color=PrimaryColor,
+          level distance=\leveldistance,
+          sibling angle=360/\the\tikznumberofchildren,
+        },
+        level 2/.append style = {
+          concept color=SecondaryColor,
+          level distance=\leveldistance / 2,
+          sibling angle=20,
+        },
+        level 3/.append style = {
+          concept color=PrimaryColor,
+          level distance=\leveldistance / 3,
+        },
+        level 4/.append style = {
+          concept color=SecondaryColor,
+          level distance=\leveldistance / 4,
+        },
+        level 5/.append style = {
+          concept color=PrimaryColor,
+          level distance=\leveldistance / 5,
+        },
+        level 6/.append style = {
+          concept color=SecondaryColor,
+          level distance=\leveldistance / 6,
+        },
+        concept connection/.append style = {
+          color = BoxColor,
+        },
+    ]
+    % damit Annotationen nicht auch eine Drop Shadow erhalten
+    \begin{scope}[
+        every node/.style = {concept, circular drop shadow}, % draw=none
+        every child/.style={concept},
+      ]
+      \node (betriebssysteme) at (current page.center) {Betriebssysteme}
+      child {
+        node (prozesse) {Prozesse}
+        child {
+          node {Speicherorganisation}
+            child {
+              node {Codesegment}
+            }
+            child {
+              node {Datensegment}
+                child {
+                  node {Globale Statische Daten}
+                }
+                child {
+                  node (heap) {Heap}
+                }
+                child {
+                  node {Stack}
+                }
+            }
+        }
+        child {
+          node (prozesswechsel) {Prozesswechsel}
+        }
+        child {
+          node {Threads}
+        }
+        child {
+          node {Prozesszustände}
+        }
+        child {
+          node (nebenlaeufigkeit) {Nebenläufigkeit}
+          child {
+            node (parallelismusecht) {Echter Parellismus}
+          }
+          child {
+            node (parallelismuspseudo) {Pseodo-Parellismus}
+          }
+        }
+      }
+      child {
+        node (wechselseitigerausschluss) {Wechselseitiger Ausschluss}
+          child {
+            node {Deadlocks und Livelocks}
+              child {
+                node {Vorraussetzungen für Deadlock}
+              }
+              child {
+                node {Ressourcendiagramme}
+              }
+              child {
+                node {Belegungs-Anforderungs-Graphen}
+              }
+              child {
+                node {Bankieralgorithmus}
+                child {
+                  node {Unsicherer Zustand}
+                }
+              }
+          }
+          child {
+            node {Anforderungen an Wechelseitigen Ausschluss}
+          }
+          child {
+            node {Software-Lösungen}
+              child {
+                node {Aktives Warten}
+              }
+          }
+          child {
+            node {Hardware-Unterstützung}
+          }
+          child {
+            node (integriertbetriebssystem) {Integriert ins Betriebssystem}
+              child {
+                node {Mutexe}
+              }
+              child {
+                node (semaphoren) {Semaphoren}
+              }
+          }
+      }
+      child {
+        node {Scheduling}
+          child {
+            node (preemptiv) {Präemptiv}
+              child {
+                node {RR}
+              }
+              child {
+                node (srt) {SRT}
+              }
+          }
+          child {
+            node {Nicht-Präemptiv}
+              child {
+                node {FCFS}
+              }
+              child {
+                node (sjf) {SJF}
+              }
+              child {
+                node {LJF}
+              }
+              child {
+                node {HRRN}
+              }
+          }
+      }
+      child {
+        node {Übersetzung}
+          child {
+            node {Symboltabelle}
+            child {
+              node {Sichtbarkeitsbereiche}
+            }
+          }
+          child {
+            node (dynamischerspeicher) {Dynamischer Speicher}
+              child {
+                node {malloc}
+              }
+              child {
+                node {free}
+              }
+          }
+          child {
+            node {Funktionen}
+              child {
+                node {Stackframes}
+              }
+              child {
+                node {Call by Value}
+              }
+              child {
+                node {Call by Reference}
+              }
+          }
+          child {
+            node {Arithmetische und Logische Ausdrücke, Zuweisungen}
+          }
+          child {
+            node {Kontrollstrukturen}
+              child {
+                node {If-Else}
+              }
+              child {
+                node {While}
+              }
+              child {
+                node {Do-While}
+              }
+          }
+          child {
+            node {Felder, Verbunde, Zeiger}
+          }
+      }
+      child {
+        node (interrupts) {Interrupts}
+          child {
+            node {ISR, IVT und ISN}
+          }
+          child {
+            node {Interrupt-Controller}
+          }
+          child {
+            node (interrupthardware) {Hardware-Interrupt}
+          }
+          child {
+            node (kontextwechsel) {Kontextwechsel}
+              child {
+                node (wechselbenutzerkernel) {Wechsel vom Benutzer- in den Kernelmodus}
+              }
+          }
+          child {
+            node (interruptsoftware) {Software-Interrupt}
+              child {
+                node (systemaufrufe) {Systemaufrufe}
+              }
+          }
+      }
+      child {
+        node {Befehlssatzarchitektur (RETI)}
+          child {
+            node {Befehlssatz (RETI)}
+          }
+          child {
+            node {Memory Map}
+              child {
+                node {EPROM}
+              }
+              child {
+                node {UART}
+              }
+              child {
+                node {SRAM}
+              }
+        }
+          child {
+            node {Busprotokolle und I/O-Protokolle}
+          }
+          child {
+            node {Zustandsdiagramme}
+              child {
+                node (kontrolllogik) {Erweiterte Kontrollogik}
+              }
+              child {
+                node {Fetch- und Execute-Phase}
+              }
+          }
+          child {
+            node {Register, Buse, Treiber, Kontrollsignale}
+          }
+      }
+      child {
+        node {Speicherverwaltung}
+          child {
+            node {Strategien}
+              child {
+                node {Abrufstrategie}
+              }
+              child {
+                node {Austauschstrategie}
+              }
+              child {
+                node {Strategie zur Verwaltung des \enquote{Resident Set}}
+              }
+              child {
+                node {Cleaning-Strategie}
+              }
+              child {
+                node {Strategie zum Multiprogramming-Grad}
+              }
+          }
+          child {
+            node (fragmentierung) {Interne und Externe Fragmentierung}
+          }
+          child {
+            node {Paritionierung}
+            child {
+              node {Statische Partitionierung}
+            }
+            child {
+              node {Dynamische Partitionierung}
+              child {
+                node {Best Fit}
+              }
+              child {
+                node {First Fit}
+              }
+              child {
+                node {Next Fit}
+              }
+            }
+            child {
+              node (buddysystem) {Buddy-System}
+            }
+          }
+          child {
+            node {Segmentierung}
+            child {
+              node {Kombiniert mit virtuellem Speicher}
+            }
+            child {
+              node (kombinationpaging) {Kombiniert mit Paging}
+            }
+          }
+          child {
+            node (paging) {Paging}
+            child {
+              node (zweistufigeseitentabelle) {Zweistufige Seitentablle}
+            }
+            child {
+              node {Invertierte Seitentabellen}
+            }
+            child {
+              node {TLB}
+              child {
+                node {Virtuelle Cache-Adressierung}
+              }
+            }
+          }
+      }
+      child {
+        node {Dateisysteme}
+          child {
+            node (partitionstabellen) {Partitionstabellen}
+              child {
+                node {MBR}
+              }
+              child {
+                node {GPT}
+              }
+          }
+          child {
+            node (zugriffsrechte) {Zugriffsrechte}
+          }
+          child {
+            node {I-Node basierte Dateisysteme}
+          }
+          child {
+            node {FAT}
+          }
+          child {
+            node (hardlinkssoftlinks) {Hardlinks und Softlinks}
+          }
+      };
+    \end{scope}
+      % ┌───────────────────┐
+      % │ Verbindungslinien │
+      % └───────────────────┘
+      \begin{pgfonlayer}{background}
+      \draw [concept connection]
+          (kontrolllogik) edge (interrupts)
+          (prozesswechsel) edge (kontextwechsel)
+          (nebenlaeufigkeit) edge (wechselseitigerausschluss)
+          (prozesswechsel) edge (kontextwechsel)
+          (kombinationpaging) edge (paging)
+          (parallelismuspseudo) edge (preemptiv)
+          (parallelismuspseudo) edge (prozesswechsel)
+          (systemaufrufe) edge (wechselbenutzerkernel)
+          (sjf) edge (srt)
+          (dynamischerspeicher) edge (heap)
+          (prozesswechsel) edge (preemptiv);
+      \end{pgfonlayer}
+      % ┌──────────────┐
+      % │ Annotationen │
+      % └──────────────┘
+      % https://tex.stackexchange.com/questions/279275/how-to-label-paths-in-tikz
+      \path (interrupts) -- node[annotation, above, align=center, pos=0.05] {zur Kommunikation mit einem Peripheriegerät kann Interrupt-driven IO verwendet werden. Weitere mehr oder weniger gute Alternativen sind DMA und Polling.} (betriebssysteme);
+      \path (interruptsoftware) -- node[annotation, above, align=center, pos=0.05] {eine Form von Prozessorinterner Exception neben Traps.} (betriebssysteme);
+      \path (interrupthardware) -- node[annotation, above, align=center, pos=0.05] {Prozessorexterne Exception.} (betriebssysteme);
+      \path (partitionstabellen) -- node[annotation, above, align=center, pos=0.05] {Dateisysteme sind in Partitionen untergebracht, die von einer Partitionstabelle verwaltet werden.} (betriebssysteme);
+      \path (zugriffsrechte) -- node[annotation, above, align=center, pos=0.05] {Dateien und Verzeichnisse haben je nach Dateisystem Zugriffsrechte, die unterschiedlich impelementiert sind.} (betriebssysteme);
+      \path (prozesse) -- node[annotation, above, align=center, pos=0.05] {Prozesse werden über eine Prozesstabelle verwaltet, die im Adressraum des Betriebssystems (Hauptspeicher) untergebracht ist.} (betriebssysteme);
+      \path (hardlinkssoftlinks) -- node[annotation, above, align=center, pos=0.05] {In einem Verzeichnissystem können je nach Dateisystem Softlinks und / oder Hardlinks implementiert sein.} (betriebssysteme);
+      \path (wechselseitigerausschluss) -- node[annotation, above, align=center, pos=0.05] {Laufen mehrere Prozesse oder Threads entweder echt parallel oder pseudo-parellel, muss beim Zugriff auf geteilte Ressourcen Wechselseitiger Ausschluss gewährleistet sein. Man definiert Programmteile, die auf eine geteilte Ressource zugreifen als Kritische Abschnitte, in denen sich zwei Prozesse nicht gleichzeitig aufhalten dürfen.} (betriebssysteme); % , sloped
+      \path (buddysystem) -- node[annotation, above, align=center, pos=0.05] {Kompromiss zwischen Statischer und Dynamischer Partitionierung} (betriebssysteme);
+      \path (semaphoren) -- node[annotation, above, align=center, pos=0.01] {Lösungemöglichkeit für das Produzenten-Konsumenten-Problem} (betriebssysteme);
+      \path (prozesswechsel) -- node[annotation, above, align=center, pos=0.05] {Wird vom Dispatcher des Betriebssystems ausgeführt. Scheduler des Betriebssystems weist Rechenzeit zu.} (betriebssysteme);
+      \path (zweistufigeseitentabelle) -- node[annotation, above, align=center, pos=0.05] {Kombiniert mit virtuellem Speicher} (betriebssysteme);
+  \node [annotation, below] at (betriebssysteme.south) {Diese Mindmap wird ohne Garantie auf Korrektheit und Vollständigkeit zur Verfügung gestellt!};
+    \end{tikzpicture}
+\end{document}

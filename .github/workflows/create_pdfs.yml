@@ -9,9 +9,6 @@ name: create mindmaps
 
 on:
   workflow_dispatch:
-    tags:
-      - '[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+'
     inputs:
       subject:
         description: 'Which mindmap should be generated?'

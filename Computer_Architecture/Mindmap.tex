@@ -1251,7 +1251,7 @@
                                   \item stall if the \texttt{Need} of the $i$st instruction is in a \alert{lower} stage
                                   \item no special action if the \texttt{Need} of the $i$st instruction is in a \alert{higher} stage as it will already be written to register when the instruction reaches it's higher stage with the \alert{Need}
                                 \end{itemize}
-                                \item this procedure just looks at the preceding stages of the \alert{single cycle diagram} as \alert{forwarding} can only happen within the single cycle diagramm
+                              \item this procedure just looks at the preceding stages of the \alert{single cycle diagram} (\alert{column} within the \alert{multicycle diagram} read from the \alert{bottom}) as \alert{forwarding} can only happen within the single cycle diagramm
                               \end{itemize}
                             \end{minipage}
                           }

@@ -35,7 +35,7 @@ jobs:
             "make" "Mindmap.pdf"
         # continue-on-error: true
 
-      - name: Upload mindmap to release
+      - name: Upload pdf of mindmap to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
@@ -44,3 +44,13 @@ jobs:
           tag: ${{ github.ref_name }}
           overwrite: true
           body: "Mindmap ${{ github.event.inputs.subject }}.pdf was added / updated most recently"
+
+      - name: Upload png of mindmap to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.UPLOAD_TO_REPO }}
+          file: ${{ github.event.inputs.subject }}/Mindmap.png
+          asset_name: ${{ github.event.inputs.subject }}.png
+          tag: ${{ github.ref_name }}
+          overwrite: true
+          body: "Mindmap ${{ github.event.inputs.subject }}.png was added / updated most recently"

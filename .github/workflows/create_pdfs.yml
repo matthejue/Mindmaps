@@ -35,7 +35,7 @@ jobs:
             cd ./${{ github.event.inputs.subject }}
             chmod +x ./figures/generate_pngs.sh
             bash ./figures/generate_pngs.sh
-            make Mindmap.pdf
+            # make Mindmap.pdf
         # continue-on-error: true
 
       - name: Upload pdf of mindmap to release

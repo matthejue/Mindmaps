@@ -31,6 +31,7 @@ jobs:
         with:
           run: |
             apk add make
+            apk add imagemagick
             "cd" "./${{ github.event.inputs.subject }}"
             "make" "Mindmap.pdf"
         # continue-on-error: true

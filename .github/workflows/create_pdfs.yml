@@ -32,8 +32,9 @@ jobs:
           run: |
             apk add make
             apk add imagemagick
-            "cd" "./${{ github.event.inputs.subject }}"
-            "make" "Mindmap.pdf"
+            cd ./${{ github.event.inputs.subject }}
+            ./figures/generate_pngs.sh
+            make Mindmap.pdf
         # continue-on-error: true
 
       - name: Upload pdf of mindmap to release

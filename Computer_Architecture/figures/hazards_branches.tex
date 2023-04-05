@@ -21,7 +21,7 @@
 13  beq stalled             IF | ID | -- | -- | --
 14                               N    N
 15  beq x1 x2 label              IF | ID | EX | ME | WB
-16                                   N    N
+16                                    N    N
 17
 18  lw x1 0(x5)   IF | ID | EX | ME | WB
 19                                    A  | W
@@ -51,9 +51,7 @@
 43                                         A  | A  | W
 44  beq stalled                  IF | ID | -- | -- | --
 45                                    N    N
-46  beq stalled                       -- | ID | -- | -- | --
+46  beq x1 x2 label                   IF | ID | EX | ME | WB
 47                                         N    N
-48  beq x1 x2 label                        IF | ID | EX | ME | WB
-49                                              N    N
   \end{BVerbatim}
 \end{document}

@@ -33,7 +33,8 @@ jobs:
             apk add make
             apk add imagemagick
             cd ./${{ github.event.inputs.subject }}
-            sh ./figures/generate_pngs.sh
+            chmod +x ./figures/generate_pngs.sh
+            ./figures/generate_pngs.sh
             make Mindmap.pdf
         # continue-on-error: true
 

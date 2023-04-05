@@ -20,6 +20,9 @@ jobs:
   build:
     name: Mindmap ${{ github.event.inputs.subject }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Checkout Master Branch
@@ -33,10 +36,12 @@ jobs:
             apk add make
             apk add imagemagick
             cd ./${{ github.event.inputs.subject }}
-            cd ./figures
-            chmod +x ./generate_pngs.sh
-            ./generate_pngs.sh
-            cd ..
+            if [[ -f ./figures/generate_pngs.sh ]]; then
+              cd ./figures
+              chmod +x ./generate_pngs.sh
+              ./generate_pngs.sh
+              cd ..
+            fi
             make Mindmap.pdf
         # continue-on-error: true
 

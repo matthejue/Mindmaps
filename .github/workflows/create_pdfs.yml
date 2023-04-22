@@ -5,20 +5,20 @@
 # https://github.com/svenstaro/upload-release-action
 # https://blog.knoldus.com/manual-trigger-in-github-actions/
 
-name: create mindmaps
+name: create pdfs and pngs
 
 on:
   workflow_dispatch:
     inputs:
       subject:
-        description: 'Which mindmap should be generated?'
+        description: 'Which document should be generated?'
         type: string
         required: true
         default: "Computer_Architecture"
 
 jobs:
   build:
-    name: Mindmap ${{ github.event.inputs.subject }}
+    name: Document ${{ github.event.inputs.subject }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -34,7 +34,7 @@ jobs:
         with:
           run: |
             apk add make
-            apk add imagemagick
+            # apk add imagemagick
             cd ./${{ github.event.inputs.subject }}
             if [[ -f ./figures/generate_pngs.sh ]]; then
               cd ./figures
@@ -42,25 +42,25 @@ jobs:
               ./generate_pngs.sh
               cd ..
             fi
-            make Mindmap.pdf
+            latexmk -pdf main.tex
         # continue-on-error: true
 
-      - name: Upload pdf of mindmap to release
+      - name: Upload pdf of document to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
-          file: ${{ github.event.inputs.subject }}/Mindmap.pdf
+          file: ${{ github.event.inputs.subject }}/main.pdf
           asset_name: ${{ github.event.inputs.subject }}.pdf
           tag: ${{ github.ref_name }}
           overwrite: true
-          body: "Mindmap ${{ github.event.inputs.subject }}.pdf was added / updated most recently"
+          body: "Document ${{ github.event.inputs.subject }}.pdf was added / updated most recently"
 
-      - name: Upload png of mindmap to release
+      - name: Upload png of document to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.UPLOAD_TO_REPO }}
-          file: ${{ github.event.inputs.subject }}/Mindmap.png
+          file: ${{ github.event.inputs.subject }}/main.png
           asset_name: ${{ github.event.inputs.subject }}.png
           tag: ${{ github.ref_name }}
           overwrite: true
-          body: "Mindmap ${{ github.event.inputs.subject }}.png was added / updated most recently"
+          body: "Document ${{ github.event.inputs.subject }}.png was added / updated most recently"

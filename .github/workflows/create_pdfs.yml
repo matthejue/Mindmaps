@@ -35,6 +35,7 @@ jobs:
           run: |
             apk add make
             # apk add imagemagick
+            apk add poppler-utils
             cd ./${{ github.event.inputs.subject }}
             if [[ -f ./figures/generate_pngs.sh ]]; then
               cd ./figures

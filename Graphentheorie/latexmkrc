@@ -2,5 +2,5 @@
 $pdflatex = "pdflatex -shell-escape -file-line-error -halt-on-error";
 
 END {
-  system("pdftocairo -png -singlefile main.pdf")
+  system("pdftocairo -png -rx 300 -ry 300 -singlefile main.pdf")
 }

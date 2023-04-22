@@ -25,10 +25,10 @@
 \usetikzlibrary{shadings}
 \usetikzlibrary{mindmap, shadows, backgrounds} % , calc
 
-\definecolor{PrimaryColor}{HTML}{003BAB}
-\definecolor{PrimaryColorDimmed}{HTML}{9CC6D3}
-\definecolor{SecondaryColor}{HTML}{FFF77B}
-\definecolor{SecondaryColorDimmed}{HTML}{EDE7A9}
+\definecolor{SecondaryColor}{HTML}{BBAF01}
+\definecolor{SecondaryColorDimmed}{HTML}{FEF684}
+\definecolor{PrimaryColor}{HTML}{E95112}
+\definecolor{PrimaryColorDimmed}{HTML}{F6AF91}
 \colorlet{BoxColor}{gray!10!white}
 
 % colored bold
@@ -99,25 +99,158 @@
       every node/.style = {concept, circular drop shadow}, % draw=none
       every child/.style={concept},
     ]
-  \node (ca) at (current page.center) {Computer Architecture}
+  \node (gt) at (current page.center) {Graph Theory}
   child {
-    node {Test}
-  };
+    node {Undirected Graphs $G = (V, E, R)$
+      \resizebox{\textwidth}{!}{
+        \begin{minipage}[t]{10cm}
+          \begin{itemize}
+            \item \alert{vertex} set, e.g. $V(G) = \{v_1, v_2, \ldots\}$
+            \item \alert{edge} set, e.g. $E(G) = \{e_1, e_2, \ldots\}$
+            \item \alert{relation}, e.g. $R(G) = \{(e_1, \{v_1, v_2\}), \ldots\}$ that associates with each \alert{edge} a set of \alert{two vertices}
+            \item one writes $e = uv$ (or $vu$) for an edge e with endpoints $u$ and $v$
+          \end{itemize}
+        \end{minipage}
+      }
+    }
+      child {
+        node {Types of graphs}
+          child {
+            node (bipartite graphs) {Bipartite Graphs
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item A graph $G$ is \alert{bipartite} if $V(G)$ is the union of two disjoint independent sets
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Chromatic number $\chi(G)$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item is the \alert{minimum} number of colors such that \alert{adjacent vertices} receive \alert{different colors}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {k-partite Graph
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item a graph $G$ is \alert{k-partite} if $V(G)$ can be expressed as the union of $k$ independent sets
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node (simple graph) {Simple Graph
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item no loops
+                    \item no multiple edges
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+      }
+      child {
+        node {Adjacency
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item if $u$ and $v$ are endpoints of an edge they are \alert{adjacent}
+                \item short: $u\leftrightarrow v$
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        % https://latex.org/forum/viewtopic.php?t=8650
+        node {Complement $\overline{G}$
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item of a simple graph $G$ is the simple graph with:
+              \begin{itemize}
+                \item vertex set $V(G)$
+                \item edge set $uv \in E(\overline{G}) \Leftrightarrow uv\not\in E(G)$
+              \end{itemize}
+            \end{itemize}
+            \end{minipage}
+          }
+        }
+          child {
+            node {Clique
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a set of \alert{pairwise adjacent vertices}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node (independant set) {Independant (stable) set
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item is a set of pairwise nonadjacent vertices
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+      }
+      child {
+        node {Path
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item a \alert{simple graph} whose vertices can be ordered such that two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+          child {
+            node {Cycle
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{enumerate}
+                    \item is a graph with an equal number of vertices and edges
+                    \item whose vertices can be placed around a circle such that two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
+                  \end{enumerate}
+                \end{minipage}
+              }
+            }
+          }
+      }
+    };
   \end{scope}
   % ┌───────────────────┐
   % │ Verbindungslinien │
   % └───────────────────┘
   \begin{pgfonlayer}{background}
-  % \draw [concept connection]
+    \draw [concept connection]
   %     (commoncasefast) edge (amdahl)
   %     (branchpredictionbuffer) edge (2bitpredictor)
   %     (loadusedatahazard) edge (forwarding)
-  %     (datahazardsforbranches) edge (forwarding);
+      (bipartite graphs) edge (independant set);
   \end{pgfonlayer}
   % ┌──────────────┐
   % │ Annotationen │
   % └──────────────┘
   % https://tex.stackexchange.com/questions/302976/node-positioning-middle-point-mind-map-connection-bar
+  \node [annotation, below] at (gt.south) {This mindmap is provided without guarantee of correctness and completeness!};
   % \path (measuringexecutiontime) -- node[annotation, above, align=center, pos=0.01] {Similiar to \textbf{Response Time:} How long it takes to do a task} (ca);
   % \path (performance) -- node[annotation, above, align=center, pos=0.01] {Similiar to \textbf{Throughput}: Total work done per time unit (e.g. tasks, transactions\ldots / per hour)} (ca);
   % \path (elapsedtime) -- node[annotation, above, align=center, pos=0.01] {Also called \textbf{Wall Clock Time} or \textbf{Real Time}} (ca);
@@ -125,6 +258,5 @@
   % % \path (branchpredictionbuffer) -- node[annotation, below, align=center, pos=-0.06] {Also called Branch History Table} (ca);
   % \path (multicycle) -- node[annotation, above, align=center, pos=0.01] {Optimize space} (ca);
   % \path (pipelining) -- node[annotation, above, align=center, pos=0.01] {Optimize time} (ca);
-  % \node [annotation, below] at (ca.south) {This mindmap is provided without guarantee of correctness and completeness!};
   \end{tikzpicture}
 \end{document}

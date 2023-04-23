@@ -3,6 +3,9 @@
 % https://tex.stackexchange.com/questions/570303/use-blacktriangleright-as-itemize-label
 \usepackage{amssymb} % for black triangleright
 
+\usepackage{graphicx}
+% \graphicspath{figures/}
+
 \renewcommand{\labelitemi}{$\textcolor{SwitchColor}{\bullet}$}
 \renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
 \renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blacksquare}$}
@@ -162,16 +165,82 @@
           }
       }
       child {
-        node {Adjacency
+        node {Matrix representation
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{8cm}
               \begin{itemize}
-                \item if $u$ and $v$ are endpoints of an edge they are \alert{adjacent}
-                \item short: $u\leftrightarrow v$
+                \item \alert{loopless} graph $G$
+                \item $V(G) = \{v_1, \ldots, v_n\}$
+                \item $E(G) = \{e_1, \ldots e_m\}$
               \end{itemize}
+              \includegraphics[width=0.3\textwidth, center]{./figures/matrix_representation.png}
             \end{minipage}
           }
         }
+          child {
+            node {Adjacency matrix $A(G)$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item is a $n\times n$ matrix with entries $a_{i,j}$
+                    \item where $a_{i,j}$ is the number of edges with endpoints $\{v_i, v_j\}$
+                  \end{itemize}
+                  \includegraphics[width=0.3\textwidth, center]{./figures/adjacency_matrix.png}
+                \end{minipage}
+              }
+            }
+              child {
+                node {Adjacency
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item if $u$ and $v$ are endpoints of an edge they are \alert{adjacent}
+                        \item short: $u\leftrightarrow v$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+          }
+          child {
+            node {Incidence matrix $M(G)$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item is a $n\times m$ matrix with entries $m_{i,j}$ (that means the $m$ columns are edges)
+                    \item where $m_{i,j}$ is 
+                    \begin{itemize}
+                      \item $1$ if $v_i$ is an endpoint of $e_j$ and
+                      \item $0$ otherwise
+                    \end{itemize}
+                  \end{itemize}
+                  \includegraphics[width=0.3\textwidth, center]{./figures/incidence_matrix.png}
+                \end{minipage}
+              }
+            }
+              child {
+                node {Incidence
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item $v$ and $e$ are \alert{incident} if $v$ is an endpoint of $e$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Degree
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item the \alert{degree} of vertex $v$ is the number of incident edges
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+          }
       }
       child {
         % https://latex.org/forum/viewtopic.php?t=8650
@@ -212,12 +281,40 @@
           }
       }
       child {
+        node {Subgraph
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item of a graph $G$ is a graph $H$ such that
+                \begin{itemize}
+                  \item $V(H)\subseteq V(G)$
+                  \item $E(H)\subseteq E(G)$
+                  \item the assignment of endpoints to edges in $H$ is the same as in $G$
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Connections
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item Graph $G$ is \alert{connected} if each pair of vertices in G belongs to a path
+                \item otherwise Graph $G$ is \alert{disconnected}
+              \end{itemize}
+            \end{minipage}
+          }}
+        }
+      }
+      child {
         node {Path
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{8cm}
               \begin{itemize}
                 \item a \alert{simple graph} whose vertices can be ordered such that two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
               \end{itemize}
+              \includegraphics[width=0.3\textwidth, center]{./figures/path.png}
             \end{minipage}
           }
         }
@@ -225,14 +322,39 @@
             node {Cycle
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
-                  \begin{enumerate}
-                    \item is a graph with an equal number of vertices and edges
-                    \item whose vertices can be placed around a circle such that two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
-                  \end{enumerate}
+                  \begin{itemize}
+                    \item is a graph
+                    \begin{enumerate}
+                      \item with an \alert{equal} number of \alert{vertices} and \alert{edges}
+                      \item whose \alert{vertices} can be placed around a \alert{circle} 
+                      \begin{itemize}
+                        \item such that two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
+                      \end{itemize}
+                    \end{enumerate}
+                  \end{itemize}
+                  \includegraphics[width=0.3\textwidth, center]{./figures/cycle.png}
                 \end{minipage}
               }
             }
           }
+      }
+      child {
+        node {Isomorphism
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item from a \alert{simple graph} $G$ to a \alert{simple graph} $H$
+                \item is a \alert{bijection} $f: V(G) \rightarrow V(H)$ such that
+                \begin{itemize}
+                  \item $uv\in E(G) \Rightarrow f(u)f(v)\in E(H)$
+                \end{itemize}
+                \begin{itemize}
+                  \item ones says $G$ \alert{is isomorphic} $H$ if there's an \alert{isomorphism} from $G$ to $H$ ($G \cong H$)
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
       }
     };
   \end{scope}

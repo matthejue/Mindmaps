@@ -228,17 +228,18 @@
                     \end{minipage}
                   }
                 }
-              }
-              child {
-                node {Degree
-                  \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{8cm}
-                      \begin{itemize}
-                        \item the \alert{degree} of vertex $v$ is the number of incident edges
-                      \end{itemize}
-                    \end{minipage}
+                  child {
+                    node {Degree
+                      \resizebox{\textwidth}{!}{
+                        \begin{minipage}[t]{8cm}
+                          \begin{itemize}
+                            \item the \alert{degree} of vertex $v$ is the number of incident edges
+                            \item the number of $1$'s in a row of the incidence matrix
+                          \end{itemize}
+                        \end{minipage}
+                      }
+                    }
                   }
-                }
               }
           }
       }
@@ -308,34 +309,99 @@
         }
       }
       child {
-        node {Path
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
-              \begin{itemize}
-                \item a \alert{simple graph} whose vertices can be ordered such that two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
-              \end{itemize}
-              \includegraphics[width=0.3\textwidth, center]{./figures/path.png}
-            \end{minipage}
-          }
-        }
+        node {Connections in Graphs}
           child {
-            node {Cycle
+            node {Walk
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item is a graph
-                    \begin{enumerate}
-                      \item with an \alert{equal} number of \alert{vertices} and \alert{edges}
-                      \item whose \alert{vertices} can be placed around a \alert{circle} 
-                      \begin{itemize}
-                        \item such that two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
-                      \end{itemize}
-                    \end{enumerate}
+                    \item is a list $v_0, e_1, v_1, \ldots e_k, v_k$ of \alert{vertices} and \alert{edges}
+                    \item for $1 \le i \le k$ the \alert{edge} $e_i$ has \alert{endpoints} $v_{i-1}$ and $v_i$
+                    \item the \alert{length} is its \alert{number of edges}
                   \end{itemize}
-                  \includegraphics[width=0.3\textwidth, center]{./figures/cycle.png}
                 \end{minipage}
               }
             }
+            child {
+              node {u,v-walk
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Closed walk
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item a walk with \alert{equal first} and \alert{last vertex}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Trail
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                    \item a \alert{walk without repeating edges}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Path
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a \alert{simple graph} whose vertices can be ordered such that:
+                    \begin{itemize}
+                      \item two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
+                    \end{itemize}
+                    \item the \alert{length} is its \alert{number of edges}
+                  \end{itemize}
+                  \includegraphics[width=0.3\textwidth, center]{./figures/path.png}
+                \end{minipage}
+              }
+            }
+              child {
+                node {u,v-path
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item a path whose vertices of degree $1$ are $u$ and $v$ if $u\ne v$
+                        \item if $u=v$ then the $u,v-path$ consists only of vertex $u$ and has no edges
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Cycle
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item is a graph
+                        \begin{enumerate}
+                          \item with an \alert{equal} number of \alert{vertices} and \alert{edges}
+                          \item whose \alert{vertices} can be placed around a \alert{circle} such that:
+                          \begin{itemize}
+                            \item two vertices are adjacent $\Rightarrow$ they are consecutive in the circle
+                          \end{itemize}
+                        \end{enumerate}
+                      \end{itemize}
+                      \includegraphics[width=0.3\textwidth, center]{./figures/cycle.png}
+                    \end{minipage}
+                  }
+                }
+              }
           }
       }
       child {
@@ -349,8 +415,19 @@
                   \item $uv\in E(G) \Rightarrow f(u)f(v)\in E(H)$
                 \end{itemize}
                 \begin{itemize}
-                  \item ones says $G$ \alert{is isomorphic} $H$ if there's an \alert{isomorphism} from $G$ to $H$ ($G \cong H$)
+                  \item one says $G$ \alert{is isomorphic to} $H$ if there's an \alert{isomorphism} from $G$ to $H$ ($G \cong H$)
                 \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Decomposition of a graph
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item is a \alert{list of subgraphs} such that \alert{each edge} appears in \alert{exactly one subgraph} in the list 
               \end{itemize}
             \end{minipage}
           }

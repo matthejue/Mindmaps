@@ -1,0 +1,47 @@
+\documentclass{standalone}
+\usepackage[english]{babel}
+
+\usepackage{amssymb} % for black triangleright
+\usepackage{amsmath}
+\usepackage[export]{adjustbox}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage{pseudo}
+\usepackage{float}
+\usepackage{xparse}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,theorems}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{graphs}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadings}
+\usetikzlibrary{mindmap, shadows, backgrounds} % , calc
+
+\usepackage[style=authortitle]{biblatex}
+\addbibresource{./Library/library.bib}
+
+% \definecolor{SwitchColor}{HTML}{FFFFFF}
+\definecolor{PrimaryColor}{HTML}{C95000}
+\definecolor{PrimaryColorDimmed}{HTML}{FFC8A3}
+\definecolor{SecondaryColor}{HTML}{C99300}
+\definecolor{SecondaryColorDimmed}{HTML}{FFE7A5}
+\colorlet{BoxColor}{gray!10!white}
+\definecolor{SwitchColor}{named}{PrimaryColor}
+
+
+\newcommand\alert[1]{\textcolor{SwitchColor}{#1}}
+\newcommand{\ma}[1]{$\mathcal{#1}$}
+\renewcommand{\tt}[1]{{\small\texttt{#1}}}
+\renewcommand{\labelitemi}{$\textcolor{SwitchColor}{\bullet}$}
+\renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
+\renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blacksquare}$}
+
+\input{./content/Deklarationen_Mindmap.tex}
+\input{./content/Schnipsel.tex}
+
+\begin{document}
+  \input{./content/Mindmap.tex}
+\end{document}

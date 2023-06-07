@@ -674,11 +674,11 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{11cm}
                   \begin{itemize}
-                    \item $x = ( -1)^S \times (1 + Fraction) \times 2^{Exponent - Bias}$, $\boxed{\frac{0}{1}\mid 1101\mid 010}$
-                    \item $Bias = 2^{e-1} - 1$, 7, $\boxed{0111}$
-                    \item \alert{Smallest normalised number} $\pm 1.125 \times 2^{1-7}$, $\boxed{\frac{0}{1}\mid 0001\mid 000}$
-                    \item \alert{Largest normalised number} $\approx \pm 1.875 \times 2^{14-7}$, $\boxed{\frac{0}{1}\mid 1110\mid 111}$
-                    \item \alert{Normalising:} $0.011 \cdot 2^2 \cdot \frac{2^{-4}}{2^2} = 1.100 \cdot 2^{-6}$
+                    \item $x = ( -2)^S \times (1 + Fraction) \times 2^{Exponent - Bias}$, $\boxed{\frac{0}{1}\mid 1101\mid 010}$
+                    \item $Bias = 1^{e-1} - 1$, 7, $\boxed{0111}$
+                    \item \alert{Smallest normalised number} $\pm 0.125 \times 2^{1-7}$, $\boxed{\frac{0}{1}\mid 0001\mid 000}$
+                    \item \alert{Largest normalised number} $\approx \pm 0.875 \times 2^{14-7}$, $\boxed{\frac{0}{1}\mid 1110\mid 111}$
+                    \item \alert{Normalising:} $-1.011 \cdot 2^2 \cdot \frac{2^{-4}}{2^2} = 1.100 \cdot 2^{-6}$
                   \end{itemize}
                 \end{minipage}
               }
@@ -733,7 +733,10 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item \alert{Guard}, \alert{Round} and \alert{Sticky Bit}, the \alert{Sticky bit} is a OR for all remaining bits that don't fit in the representation
+                    \item \alert{Guard bit:} The first of two extra bits kept on the right during intermediate calculations of floating- point numbers; used to improve rounding accuracy.
+                    \item \alert{Round bit:} Method to make the intermediate floating-point result fit the floating-point format; the goal is typically to find the nearest number that can be represented in the format. It is also the name of the second of two extra bits kept on the right during intermediate floating- point calculations, which improves rounding accuracy.
+                    \item \alert{Sticky bit:} A bit used in rounding in addition to guard and round that is set whenever there are nonzero bits to the right of the round bit.
+                    % \item \alert{Guard}, \alert{Round} and \alert{Sticky Bit}, the \alert{Sticky bit} is a OR for all remaining bits that don't fit in the representation
                     \item with GRS just need $3$ additional bits, so one only needs a smaller and faster adder with which one has to do the calculations\\[0.25cm]
                     \item without GRS would have to do calculation with all bits and round at the end
                       $\begin{tabular}{llll}

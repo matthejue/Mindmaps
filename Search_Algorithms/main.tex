@@ -13,6 +13,10 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,theorems}
 
+\usepackage{fontspec}
+% https://dejavu-fonts.github.io/Download.html
+\newfontfamily\gyre{DejaVu Math TeX Gyre}
+
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
 \usetikzlibrary{graphs}
@@ -39,9 +43,9 @@
 \renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
 \renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blacksquare}$}
 
-\input{./content/Deklarationen_Mindmap.tex}
-\input{./content/Schnipsel.tex}
+\input{./content/Deklarationen_Mindmap}
+\input{./content/Schnipsel}
 
 \begin{document}
-  \input{./content/Mindmap.tex}
+  \input{./content/Mindmap}
 \end{document}

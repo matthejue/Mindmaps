@@ -35,6 +35,9 @@ jobs:
           run: |
             apk add make
             # apk add imagemagick
+            mkdir ~/.fonts
+            cp ./DejaVuMathTeXGyre.ttf ~/.fonts/DejaVuMathTeXGyre.ttf
+            fc-cache -f -v
             apk add poppler-utils
             cd ./${{ github.event.inputs.subject }}
             if [[ -f ./figures/generate_pngs.sh ]]; then
@@ -43,7 +46,7 @@ jobs:
               ./generate_pngs.sh
               cd ..
             fi
-            latexmk -pdf main.tex
+            latexmk main.tex
         # continue-on-error: true
 
       - name: Upload pdf of document to release

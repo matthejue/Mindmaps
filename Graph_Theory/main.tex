@@ -104,6 +104,226 @@
     ]
   \node (gt) at (current page.center) {Graph Theory}
   child {
+    node {Dual Problems}
+    child {
+      node {Min-Cut and Maximum-Flow
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item coming later in the lecture
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+    }
+    child {
+      node {Matching and Vertex cover
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item  the  size of a \alert{vertex cover} is always at least as big as the size of a \alert{matching}
+              \item \alert{Theorem (König und Egerváry):} For any bipartite graph $G$ the size of maximum matching equals the size of minimum vertex cover
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Matching
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item A \alert{matching} $M$ in a graph $G$ is a set of non-loop edges with no shared endpoints
+                \begin{itemize}
+                  \item the vertices incident to the edges of a matching M are \alert{$M$-saturated}
+                  \item the other vertices are \alert{$M$-unsaturated}
+                  \item a \alert{perfect matching} saturates every vertex
+                  \item the \alert{size} of a matching is given by the \alert{number of edges}
+                  \item a \alert{maximal matching} in a graph is a matching that cannot be enlarged by adding an edge
+                  \item a \alert{maximum matching} is a matching of maximum size (among all matchings in a graph)
+                  \item $\alpha'(G)$ is the maximum size of matching of edges in $G$
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node (mec) {Other Connections
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \alert{Theorem(Gallai):} If G is a graph without isolated vertices, then $\alpha'(G) + \beta'(G) = n(G)$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Theorem (Berge)
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item  A matching $M$ in a graph $G$ is a maximum matching in $G$ \alert{iff} $G$ has no $M$-augmenting path
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node (apa) {Augmenting Path Algorithm
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item  Repeatedly applying the Augmenting Path Algorithm to a bipartite graph produces a \alert{matching} and a \alert{vertex cover} of equal size
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Alternating and Augmenting Paths
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item Given a matching $M$ in $G$, an \alert{$M$-alternating path} is a path that alternates between edges in $M$ and edges not in $M$
+                    \item An $M$-alternating path whose endpoints are unsaturated by $M$ is an \alert{$M$-augmenting path}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Theorem (Hall)
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item An $X$, $Y$-bigraph has a matching that saturates $X$ if and only if $|N(S)| \ge |S|$ for all $S \subseteq X$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {X,Y-Bigraph
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Complete Graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $K_{2n}$ has $f_n = (2n-1)\cdot f_{n-1} = 1\cdot 3\cdot 5\cdot (2n-1)$ choices for choices for perfect matchings
+                  \begin{itemize}
+                    \item $K_n$ is a complete graph with $n$ vertices, i.e. a simple graph with maximum number of edges
+                  \end{itemize}
+                  \item $K_{2n+1}$ has no perfect matching because the node number of vertices is odd
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Regular Bipartite graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item for $k > 0$, every $k$-regular bipartite graph has a perfect matching
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Symmetric Differences of Matchings
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item  Every component of the symmetric difference of two matchings
+                  \begin{itemize}
+                    \item is a path or
+                    \item an even cycle
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node (vc) {Vertex cover
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item a set $Q \subseteq V(G)$ that contains at least one endpoint of every edge
+                \item the vertices $Q$ cover $E(G)$
+                \begin{itemize}
+                  \item $\beta(G)$ is the minimum size of vertex cover in $G$
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+    }
+    child {
+      node {Independence number and edge cover
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item content
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Independence number
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item Vertices are \alert{independent}, if they are not connected via an edge
+                \begin{itemize}
+                  \item $\alpha(G)$ is the maximum size of independent set of vertices in $G$
+                \end{itemize} 
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node (isvc) {Other Connections
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item in a graph $G$ the set $S$ is an independent set \alert{iff} $\overline{S}$ is a vertex cover
+                  \item $\alpha(G) + \beta(G) = n(G)$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node (ec) {Edge cover 
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item is a set $L$ of edges such that every vertex of $G$ is incident to some edge of $L$
+                \begin{itemize}
+                  \item $\beta'(G)$ is the minimum size of edge cover in $G$
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+    }
+  }
+  child {
     node {Undirected Graphs $G = (V, E, R)$
       \resizebox{\textwidth}{!}{
         \begin{minipage}[t]{10cm}
@@ -446,7 +666,10 @@
   %     (commoncasefast) edge (amdahl)
   %     (branchpredictionbuffer) edge (2bitpredictor)
   %     (loadusedatahazard) edge (forwarding)
-      (bipartite graphs) edge (independant set);
+      (bipartite graphs) edge (independant set)
+      (vc) edge (isvc)
+      (vc) edge (apa)
+      (ec) edge (mec);
   \end{pgfonlayer}
   % ┌──────────────┐
   % │ Annotationen │

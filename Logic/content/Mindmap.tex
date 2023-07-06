@@ -1,0 +1,105 @@
+%!Tex Root = ../main.tex
+% ./Packete.tex
+% ./Design.tex
+% ./Vorbereitung.tex
+% ./Aufgabe1.tex
+% ./Aufgabe2.tex
+% ./Aufgabe3.tex
+% ./Aufgabe4.tex
+% ./Appendix.tex
+
+\begin{mindmap}
+  \begin{mindmapcontent}
+    \node (lo) at (current page.center) {Logic}
+    child {
+      node {Propositional Logic / Aussagenlogik
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize} 
+              \item \alert{countable alphabet} of \alert{atomic propositions}: e.g. $\Sigma = \{$P, Q, R, \dots$\}$
+              \begin{itemize}
+                \item atomic propositions can be \alert{true} (T) or \alert{false} (F)
+                \item the truth of a formula follows from the truth of its atomic propositions (\alert{truth assignment} or \alert{interpretation}) and the connectives.
+              \end{itemize}
+              \item \alert{logic formula:} e.g. $P \vee Q$, \alert{atomic formula / atom:} e.g. $P$
+              \begin{itemize}
+                \item \alert{operator precedence:} $\neg > \wedge > \vee > \Rightarrow > \Leftrightarrow$
+              \end{itemize}
+              \item \alert{literal:} (possibly negated) atomic formula
+              \item \alert{clause:} disjunction of literals
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Syntax and Semantics
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{Sentences} are expressed according to the syntax of the representation language
+                \begin{itemize}
+                  \item \alert{Syntax} specifies all the sentences that are well-formed
+                  \begin{itemize}
+                    \item $x + y = 4$ is a well-formed sentence 
+                    \item $x4y+ =$ is not a well-formed sentence
+                  \end{itemize}
+                  \item A logic also defines the \alert{semantics} (meaning) of sentences
+                  \begin{itemize}
+                    \item Defines the \alert{truth} of a sentence with respect to each possible world
+                    \item E.g., specifies that the sentence $x + y = 4$ is true in a world in which $x = 2$ and $y = 2$, but not in a world in which $x = 1$ and $y = 1$
+                  \end{itemize}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Logical Entailment / Logische Ableitung bzw. Deduktion
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item $\alpha \models \beta$ \alert{iff} $M(\alpha) \subseteq M(\beta)$ \alert{iff} in every model in which $\alpha$ is true, $\beta$ is also true 
+                \begin{itemize}
+                  \item when a sentence $\beta$ \alert{\enquote{logically follows}} from another sentence $\alpha$, $\alpha$ \alert{\enquote{entails}} $\beta$
+                  \item $I \models \varphi$: Interpretation $I$ \alert{\enquote{satisfies}} a formula $\varphi$ or $\varphi$ \alert{\enquote{is true under}} $I$ when $I(\varphi) = T$
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+          child {
+            node (models) {Models
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item If a sentence $\alpha$ is true in a possible \alert{world} $m$, we say that $m$ \alert{satisfies} $\alpha$ or $m$ is a \alert{model} of $\alpha$
+                    \begin{itemize}
+                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ $\hat=$ On-Menge
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Interpretation
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item \alert{truth assignment} of the atoms in $\sigma$
+                    \item $I: \Sigma \mapsto \{T, F\}$
+                    \item $I\models$, $I\not\models $, $I\models P iff P^I = $, $I\not\models \neg \varphi iff I\models \varphi$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+      }
+    };
+  \end{mindmapcontent}
+  \begin{edges}
+    \edge{lo}{models} % just test
+  \end{edges}
+  \annotation{lo.south}{This mindmap is provided without guarantee of correctness and completeness!}
+\end{mindmap}

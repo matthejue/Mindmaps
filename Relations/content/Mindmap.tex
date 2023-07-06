@@ -1,0 +1,377 @@
+%!Tex Root = ../main.tex
+% ./Packete.tex
+% ./Design.tex
+% ./Vorbereitung.tex
+% ./Aufgabe1.tex
+% ./Aufgabe2.tex
+% ./Aufgabe3.tex
+% ./Aufgabe4.tex
+% ./Appendix.tex
+
+\begin{mindmap}
+  \begin{mindmapcontent}
+    \node (re) at (current page.center) {Relations
+      % \resizebox{\textwidth}{!}{
+      %   \begin{minipage}[t]{10cm}
+      %     \tiny
+      %     \begin{itemize}
+      %       \item a subset of a Cartesian product $A\times B$,
+      %     \end{itemize}
+      %   \end{minipage}
+      % }
+    }
+    child {
+      node {Heterogeneous relations
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item a binary relation, a subset of a Cartesian product $A\times B$, where $A$ and $B$ are possibly distinct sets
+              \item for all examples in the child nodes the following relation $R\subseteq A\times B$ is assumed
+              \item \alert{left-unique} and \alert{right-total} both describe relationships focusing on the \alert{codomain} $B$ while their correspondings counterparts for functions \alert{right-unique } and \alert{left-total } focus on the \alert{domain} $A$             
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Bijective Function
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item 1-to-1 correspondence
+              \end{itemize}
+              \begin{resettikz}
+                \ctikzfig{./figures/bijective_function}
+              \end{resettikz}
+            \end{minipage}
+          }
+        }
+          child {
+            node {Function
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item left-unique and right-total
+                    \item every element from $A$ has \alert{exactly} one partner in $B$: $\forall a \in A \exists ! b \in B:(a, b) \in R$
+                  \end{itemize}
+                  \begin{resettikz}
+                    \ctikzfig{./figures/function}
+                  \end{resettikz}
+                \end{minipage}
+              }
+            }
+              child {
+                node {Right-unique
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item for every element $a$ from the domain $A$ exists \alert{at most} one element $b$ in the codomain $B$: $\forall a \in A\; \forall b, d \in B:(a, b) \in R \wedge(a, d) \in R \Rightarrow b=d$
+                        \item with only this property it's a partial function
+                      \end{itemize}
+                      \begin{resettikz}
+                        \ctikzfig{../figures/right_unique}
+                      \end{resettikz}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+              node {Left-total
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item for every element $a$ from the domain $A$ exists \alert{at least} one element $b$ in the codomain $B$: $\forall a \in A\; \exists b \in B:(a, b) \in R$
+                      \item with only this property it's a \enquote{Multifunktion} (german)
+                    \end{itemize}
+                    \begin{resettikz}
+                      \ctikzfig{./figures/left_total}
+                    \end{resettikz}
+                  \end{minipage}
+                }
+              }
+            }
+        }
+        child {
+          node {Bijective
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item injective and surjective
+                  \item every element from $B$ has \alert{exactly} one partner in $A$: $\forall b \in B \exists ! a \in A:(a, b) \in R$
+                \end{itemize}
+                \begin{resettikz}
+                  \ctikzfig{./figures/bijective}
+                \end{resettikz}
+              \end{minipage}
+            }
+          }
+            child {
+              node {Injective / Left-unique
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item every element from $B$ has \alert{at most} one partner in $A$: $\forall b \in B \forall a, c \in A:(a, b) \in R \wedge(c, b) \in R \Rightarrow a=c$, \textit{mnemonic:} \enquote{a injection shouldn't be made twice at the same spot}
+                    \end{itemize}
+                    \begin{resettikz}
+                      \ctikzfig{./figures/left_unique}
+                    \end{resettikz}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Surjective / Right-total
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item every element from $B$ has \alert{at least} one partner in $A$: $\forall b \in B \exists a \in A:(a, b) \in R$
+                    \end{itemize}
+                    \begin{resettikz}
+                      \ctikzfig{./figures/right_total}
+                    \end{resettikz}
+                  \end{minipage}
+                }
+              }
+            }
+        }
+      }
+    }
+    child {
+      node (test) {Homogeneous relations
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item a binary relation over $X$ and itself
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Equivalence relations
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item reflexive
+                \item symmetric
+                \item transitive
+              \end{itemize}
+              \begin{resettikz}
+                \ctikzfig{./figures/equivalence_relation}
+              \end{resettikz}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Order relations}
+        child {
+          node {Partial Order relations
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item reflexive
+                  \item antisymmetric
+                  \item transitive
+                  \item the set of subsets of a given set (its power set) ordered by inclusion is a partial order
+                \end{itemize}
+                \begin{resettikz}
+                  \ctikzfig{./figures/partial_order}
+                \end{resettikz}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Strict Partial Order relations
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item irreflexive
+                    \item antisymmetric
+                    \item transitive
+                  \end{itemize}
+                  \begin{resettikz}
+                    \ctikzfig{./figures/strict_partial_order}
+                  \end{resettikz}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Total / Linear Order relations
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item reflexive 
+                  \item antisymmetric 
+                  \item transitive 
+                  \item connected / strongly connected
+                  \item Reflexivity already follows from strong connectednes
+                \end{itemize}
+                \begin{resettikz}
+                  \ctikzfig{./figures/total_order}
+                \end{resettikz}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Strict Total Order relations
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item irreflexive 
+                    \item antisymmetric / asymmetric
+                    \item transitive 
+                    \item connected
+                    \item Asymmetry follows from transitivity and irreflexivity;[8] moreover, irreflexivity follows from asymmetry
+                  \end{itemize}
+                  \begin{resettikz}
+                    \ctikzfig{./figures/strict_total_order}
+                  \end{resettikz}
+                \end{minipage}
+              }
+            }
+          }
+        }
+      }
+      child {
+        node {Reflexive
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item for all $x\in X$, $xRx$
+                \item $\ge$ is a reflexive relation but $>$ is not
+              \end{itemize}
+              \begin{resettikz}
+                \ctikzfig{./figures/reflexive}
+              \end{resettikz}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Irreflexive
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item for all $x\in X$, not $xRx$
+                  \item $>$ is a reflexive relation but $\ge$ is not
+                \end{itemize}
+                \begin{resettikz}
+                  \ctikzfig{./figures/irreflexive}
+                \end{resettikz}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Symmetric
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item for all $x, y\in X$, if $xRy$ then $yRx$
+              \end{itemize}
+              \begin{resettikz}
+                \ctikzfig{./figures/irreflexive}
+              \end{resettikz}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Antisymmetric
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item for all $x, y\in X$, if $xRy$ and $yRx$ then $x=y$
+                  \item $\ge$ is an antisymmetric relation
+                \end{itemize}
+              \begin{resettikz}
+                \ctikzfig{./figures/antisymmetric}
+              \end{resettikz}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Asymmetric
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item for all $x, y\in X$, if $xRy$ then not $yRx$
+                  \item a relation is \alert{asymmetric} if and only if it is both \alert{antisymmetric} and \alert{irreflexive}
+                  \item $>$ is an asymmetric relation, but $\ge$ is not
+                \end{itemize}
+              \begin{resettikz}
+                \ctikzfig{./figures/asymmetric}
+              \end{resettikz}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Transitive
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item for all $x, y, z\in X$ if $xRy$ and $yRz$ then $xRz$
+                \item \enquote{is ancestor of} is a transitive relation, while \enquote{is parent of} is not
+              \end{itemize}
+              \begin{resettikz}
+              \ctikzfig{./figures/transitive}
+              \end{resettikz}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Connected
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item for all $x, y\in X,$ if $x\ne y$ then $xRy$ or $yRx$
+              \end{itemize}
+              \begin{resettikz}
+              \ctikzfig{./figures/connected}
+              \end{resettikz}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Strongly Connected
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item for all $x, y\in X$, $xRy$ or $yRx$
+                  \item formerly called total
+                \end{itemize}
+              \begin{resettikz}
+              \end{resettikz}
+              \begin{resettikz}
+              \ctikzfig{./figures/strongly_connected}
+              \end{resettikz}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Dense
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item for all $x, y\in X$, if $xRy$ then some $z\in X$ exists sucht that $xRz$ and $zRy$
+              \end{itemize}
+              \begin{resettikz}
+              \ctikzfig{./figures/dense}
+              \end{resettikz}
+            \end{minipage}
+          }
+        }
+      }
+    };
+  \end{mindmapcontent}
+  % \begin{edges}
+  %   \edge{test}{re}
+  % \end{edges}
+  \annotation{re.south}{This mindmap is provided without guarantee of correctness and completeness!};
+\end{mindmap}

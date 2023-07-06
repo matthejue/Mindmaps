@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (0) at (-1, 0) {};
+		\node [style=circle node] (1) at (1, 0) {};
+		\node [style=circle node] (2) at (3, 0) {};
+		\node [style=circle node] (3) at (-3, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={graph_theory_directed_right}, bend left=15, looseness=1.25] (0) to (1);
+		\draw [style={graph_theory_directed_right}, bend left] (1) to (2);
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (3) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (0) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (1) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (2) to ();
+		\draw [style={graph_theory_directed_right}, bend left, looseness=1.25] (2) to (1);
+		\draw [style={graph_theory_directed_right}, bend left] (1) to (0);
+		\draw [style={graph_theory_directed_right}, bend left] (0) to (3);
+		\draw [style={graph_theory_directed_right}, bend left] (3) to (0);
+		\draw [style={graph_theory_directed_right}, bend left=45, looseness=1.25] (1) to (3);
+		\draw [style={graph_theory_directed_right}, bend left=60] (2) to (0);
+		\draw [style={graph_theory_directed_right}, bend left=45, looseness=1.25] (3) to (1);
+		\draw [style={graph_theory_directed_right}, bend left=45, looseness=1.25] (0) to (2);
+		\draw [style={graph_theory_directed_right}, bend left=60, looseness=1.25] (3) to (2);
+		\draw [style={graph_theory_directed_right}, bend left=60, looseness=1.25] (2) to (3);
+	\end{pgfonlayer}
+\end{tikzpicture}

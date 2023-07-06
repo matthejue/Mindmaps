@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (12) at (2, 0) {};
+		\node [style=circle node] (13) at (4, 0) {};
+		\node [style=circle node] (14) at (6, 0) {};
+		\node [style=circle node] (27) at (-5, 0) {};
+		\node [style=circle node] (28) at (-3, 0) {};
+		\node [style=circle node] (29) at (-1, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={graph_theory_directed_right}, bend left, looseness=1.25] (12) to (13);
+		\draw [style={graph_theory_directed_right}, bend left] (13) to (14);
+		\draw [style={graph_theory_directed_right}] (27) to (28);
+		\draw [style={graph_theory_directed_right}] (28) to (29);
+		\draw [style={graph_theory_directed_right}, bend left=45, looseness=1.25] (27) to (29);
+		\draw [style={graph_theory_directed_right}, bend left=315, looseness=1.25] (14) to (12);
+		\draw [style={graph_theory_directed_right}, bend right=45, looseness=1.25] (12) to (14);
+		\draw [style={graph_theory_directed_right}, bend left, looseness=1.25] (13) to (12);
+		\draw [style={graph_theory_directed_right}, bend left, looseness=1.25] (14) to (13);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (0) at (-6, 0) {};
+		\node [style=circle node] (1) at (-4, 0) {};
+		\node [style=circle node] (2) at (-2, 0) {};
+		\node [style=circle node] (3) at (-6, 0) {};
+		\node [style=circle node] (4) at (1, 0) {};
+		\node [style=circle node] (5) at (3, 0) {};
+		\node [style=circle node] (6) at (5, 0) {};
+		\node [style=circle node] (7) at (1, 0) {};
+		\node [style=none] (8) at (0, 1) {};
+		\node [style=none] (9) at (0, -1) {};
+		\node [style=none] (10) at (6, -1) {};
+		\node [style=none] (11) at (6, 1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (3) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (1) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (2) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (7) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (6) to ();
+		\draw (8.center) to (10.center);
+		\draw (11.center) to (9.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

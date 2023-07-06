@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (0) at (-5, 0) {};
+		\node [style=circle node] (1) at (-3, 0) {};
+		\node [style=circle node] (2) at (-1, 0) {};
+		\node [style=circle node] (3) at (2, 0) {};
+		\node [style=circle node] (4) at (4, 0) {};
+		\node [style=circle node] (5) at (6, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={graph_theory_directed_right}] (3) to (4);
+		\draw [style={graph_theory_directed_right}] (4) to (5);
+	\end{pgfonlayer}
+\end{tikzpicture}

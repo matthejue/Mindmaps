@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (15) at (-5, 0) {};
+		\node [style=circle node] (16) at (-3, 0) {};
+		\node [style=circle node] (17) at (-1, 0) {};
+		\node [style=circle node] (18) at (2, 0) {};
+		\node [style=circle node] (19) at (4, 0) {};
+		\node [style=circle node] (20) at (6, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={graph_theory_directed_right}, bend right=15] (15) to (16);
+		\draw [style={graph_theory_directed_right}, bend right=15] (16) to (17);
+		\draw [style={graph_theory_directed_right}, bend left=345] (17) to (16);
+		\draw [style={graph_theory_directed_right}, bend left=345, looseness=1.25] (16) to (15);
+		\draw [style={graph_theory_directed_right}, bend right=15] (18) to (19);
+		\draw [style={graph_theory_directed_right}, bend left=345, looseness=1.25] (19) to (18);
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (19) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (20) to ();
+	\end{pgfonlayer}
+\end{tikzpicture}

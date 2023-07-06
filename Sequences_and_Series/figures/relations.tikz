@@ -1,0 +1,73 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (0) at (-2, 0) {};
+		\node [style=circle node] (1) at (0, 0) {};
+		\node [style=circle node] (2) at (2, 0) {};
+		\node [style=circle node] (3) at (-2, 0) {};
+		\node [style=circle node] (4) at (5, 0) {};
+		\node [style=circle node] (5) at (7, 0) {};
+		\node [style=circle node] (6) at (9, 0) {};
+		\node [style=circle node] (7) at (5, 0) {};
+		\node [style=circle node] (12) at (5, -12.25) {};
+		\node [style=circle node] (13) at (7, -12.25) {};
+		\node [style=circle node] (14) at (9, -12.25) {};
+		\node [style=circle node] (15) at (-2, -3) {};
+		\node [style=circle node] (16) at (0, -3) {};
+		\node [style=circle node] (17) at (2, -3) {};
+		\node [style=circle node] (18) at (5, -3) {};
+		\node [style=circle node] (19) at (7, -3) {};
+		\node [style=circle node] (20) at (9, -3) {};
+		\node [style=circle node] (21) at (5, -6) {};
+		\node [style=circle node] (22) at (7, -6) {};
+		\node [style=circle node] (23) at (9, -6) {};
+		\node [style=circle node] (27) at (-2, -12.25) {};
+		\node [style=circle node] (28) at (0, -12.25) {};
+		\node [style=circle node] (29) at (2, -12.25) {};
+		\node [style=circle node] (30) at (-2, -6) {};
+		\node [style=circle node] (31) at (0, -6) {};
+		\node [style=circle node] (32) at (2, -6) {};
+		\node [style=circle node] (33) at (5, -9) {};
+		\node [style=circle node] (34) at (7, -9) {};
+		\node [style=circle node] (35) at (9, -9) {};
+		\node [style=circle node] (36) at (-2, -15.25) {};
+		\node [style=circle node] (37) at (0, -15.25) {};
+		\node [style=circle node] (38) at (2, -15.25) {};
+		\node [style=circle node] (39) at (-2, -9) {};
+		\node [style=circle node] (40) at (0, -9) {};
+		\node [style=circle node] (41) at (2, -9) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (3) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (1) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (2) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (7) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (6) to ();
+		\draw [style={graph_theory_directed_right}, bend left, looseness=1.25] (12) to (13);
+		\draw [style={graph_theory_directed_right}, bend left] (13) to (14);
+		\draw [style={graph_theory_directed_right}, bend right=15] (15) to (16);
+		\draw [style={graph_theory_directed_right}, bend right=15] (16) to (17);
+		\draw [style={graph_theory_directed_right}, bend left=345] (17) to (16);
+		\draw [style={graph_theory_directed_right}, bend left=345, looseness=1.25] (16) to (15);
+		\draw [style={graph_theory_directed_right}, bend right=15] (18) to (19);
+		\draw [style={graph_theory_directed_right}, bend left=345, looseness=1.25] (19) to (18);
+		\draw [style={graph_theory_directed_right}] (21) to (22);
+		\draw [style={graph_theory_directed_right}] (27) to (28);
+		\draw [style={graph_theory_directed_right}] (28) to (29);
+		\draw [style={graph_theory_directed_right}, bend left=45, looseness=1.25] (27) to (29);
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (19) to ();
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (20) to ();
+		\draw [style={graph_theory_directed_right}] (30) to (31);
+		\draw [style={graph_theory_directed_right}] (31) to (32);
+		\draw [style={graph_theory_directed_right}] (33) to (34);
+		\draw [style={graph_theory_directed_right}, in=135, out=45, loop] (35) to ();
+		\draw [style={graph_theory_directed_right}, bend left=315, looseness=1.25] (14) to (12);
+		\draw [style={graph_theory_directed_right}, bend right=45, looseness=1.25] (12) to (14);
+		\draw [style={graph_theory_directed_right}, bend left, looseness=1.25] (13) to (12);
+		\draw [style={graph_theory_directed_right}, bend left, looseness=1.25] (14) to (13);
+		\draw [style={graph_theory_directed_right}] (36) to (37);
+		\draw [style={graph_theory_directed_right}] (38) to (37);
+		\draw [style={graph_theory_directed_right}, bend left=315, looseness=1.25] (38) to (36);
+		\draw [style={graph_theory_directed_right}] (39) to (40);
+		\draw [style={graph_theory_directed_right}] (40) to (41);
+	\end{pgfonlayer}
+\end{tikzpicture}

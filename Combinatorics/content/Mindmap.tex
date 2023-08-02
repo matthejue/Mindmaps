@@ -1,0 +1,244 @@
+%!Tex Root = ../main.tex
+% ./Packete.tex
+% ./Design.tex
+% ./Vorbereitung.tex
+% ./Aufgabe1.tex
+% ./Aufgabe2.tex
+% ./Aufgabe3.tex
+% ./Aufgabe4.tex
+% ./Appendix.tex
+
+\begin{mindmap}
+  \begin{mindmapcontent}
+    \node (co) at (current page.center) {Kombinatorik / Combinatorics}
+    child {
+      node {Variationen und Permutationen
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item \underline{Urnenmodell:} \alert{Reihenfolge berücksichtigt} ($\approx$ Folge)
+                \vspace{-2cm}
+                \begin{resettikz}
+                  \ctikzfig{example_urn_problem_order_important}
+                \end{resettikz}
+                \vspace{-2cm}
+              \item \underline{Fächermodell:} \alert{unterscheidbar}
+                \vspace{-2cm}
+                \begin{resettikz}
+                  \ctikzfig{example_box_problem_destinguishable}
+                \end{resettikz}
+                \vspace{-2cm}
+              \item \alert{Variation} wenn $k<n$
+              \item \alert{Permutation} wenn $k=n$
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Variationen / Permutationen mit Wiedeholung
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
+                \item \alert{Anzahl:} $n^k$, $k$ beliebig ($k>n$ ist erlaubt)
+                  \begin{itemize}
+                    \item Anzahl \alert{Folgen}, wobei Folgenglieder sich \alert{nicht unterscheiden} müssen
+                  \end{itemize}
+                \item \alert{bijektive Relation} für Urnenmodell
+                \item \alert{Funktion} für Fächermodell
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Urnenmodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
+                    $\{(2, 1), (1, 2)\}, \{(3, 1), (2, 2)\}, \{(3, 1), (1, 2)\},$\\
+                    $\{(1, 1), (1, 2)\}, \{(2, 1), (2, 2)\}, \{(3, 1), (3, 2)\}\}$
+                  \item $|\Omega| = 3^2 = 9$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Fächermodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
+                    $\{(1, 2), (2, 1)\}, \{(1, 3), (2, 2)\}, \{(1, 3), (2, 1)\},$\\
+                    $\{(1, 1), (2, 1)\}, \{(1, 2), (2, 2)\}, \{(1, 3), (2, 3)\}\}$
+                  \item $|\Omega| = 3^2 = 9$
+                  \item in Fächern selbst spielt \alert{Reihenfolge} der Kugeln darin \alert{keine Rolle}, nur welche Kugeln darin sind spielt eine Rolle (jedes Fach verhält sich also wie eine \alert{gewöhnliche Menge}, $\{(1, 3), (2, 3)\}$ und $\{(2, 3), (1, 3)\}$ werden \alert{nicht unterschieden})
+                  \item es spielt hingegeben eine Rolle, welche Kugel welchem Fach zugeordnet ist ($\{(1, 3), (2, 2)\}$ und $\{(1, 2), (2, 3)\}$ werden \alert{unterschieden})
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Variationen / Permutationen ohne Wiedeholung
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
+                \item \alert{Anzahl:} $\dfrac{n!}{(n-k)!}$, $k\le n$
+                \begin{itemize}
+                  \item $\dfrac{n!}{(n-n)!} = \dfrac{n!}{1} = n!$, $k=n$
+                  \item Anzahl \alert{Folgen}, wobei Folgenglieder sich alle \alert{unterscheiden} müssen
+                \end{itemize}
+                \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
+                \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Urnenmodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
+                    $\{(2, 1), (1, 2)\}, \{(3, 1), (2, 2)\}, \{(3, 1), (1, 2)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Fächermodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
+                    $\{(1, 2), (2, 1)\}, \{(1, 3), (2, 2)\}, \{(1, 3), (2, 1)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+    }
+    child {
+      node {Kombinationen
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item \underline{Urnenmodell:} \alert{Reihenfolge nicht berücksichtigt} ($\approx$ Menge)
+                \vspace{-2cm}
+                \begin{resettikz}
+                  \ctikzfig{example_urn_problem_order_unimportant}
+                \end{resettikz}
+                \vspace{-2cm}
+              \item \underline{Fächermodell:} \alert{nicht unterscheidbar}
+                \vspace{-2cm}
+                \begin{resettikz}
+                  \ctikzfig{example_box_problem_indestinguishable}
+                \end{resettikz}
+                \vspace{-2cm}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Kombinationen ohne Wiederholung
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
+                \item \alert{Anzahl:} $\dbinom{n}{k} = \dfrac{n!}{k!\cdot(n-k)!} = \dfrac{n\cdot (n-1) \cdot \ldots \cdot (n-k+1)}{k!}$, $k\le n$
+                \begin{itemize}
+                  \item \alert{Binomialkoeffizient} für Anzahl \alert{gewöhnlicher Untermengen} der Länge $k$
+                  \item $\dbinom{n}{n} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot 1} = 1$, $k=n$
+                \end{itemize}
+                \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
+                \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Fächermodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\Omega = \{\{(1, x), (2, x)\}, \{(2, x), (3, x)\}, \{(1, x), (3, x)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{2!(3-2)!} = \dfrac{6}{2} = 3$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Urnenmodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\Omega = \{\{(x, 1), (x, 2)\}, \{(x, 2), (x, 3)\}, \{(x, 1), (x, 3)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{2!(3-2)!} = \dfrac{6}{2} = 3$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Kombinationen mit Wiederholung
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
+                \item \alert{Anzahl:} $\dbinom{n+k-1}{k} = \dfrac{(n+k-1)!}{k!\cdot(n+k-1-k)!} = \dfrac{(n+k-1)!}{k!\cdot(n-1)!} = \dfrac{n\cdot (n+1)\cdot \ldots \cdot (n+k-1)}{k!}$, $k$ beliebig ($k>n$ ist erlaubt) 
+                \begin{itemize}
+                  \item spezieller \alert{Binomialkoeffizient} $\left(\!\!\dbinom{n}{k}\!\!\right) = \dbinom{n + k - 1}{k} = \dbinom{n+k-1}{n-1}$ für Anzahl \alert{Multimengen} der Länge $k$
+                \end{itemize}
+                \item \alert{surjektive Relation} für Urnenmodell
+                \item \alert{Funktion} für Fächermodell
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Fächermodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                   \item $\Omega = \{\{(x, 1), (x, 2)\}, \{(x, 2), (x, 3)\}, \{(x, 1), (x, 3)\},$\\
+                     $\{(x, 1)\}, \{(x, 2)\}, \{(x, 3)\}\}$
+                   \item $|\Omega| = \dfrac{(3+2-1)!}{2!(3-1)!} = \dfrac{4\cdot 3}{2} = 6$
+                   \item nur die \alert{Anzahl Kugeln} in einem Fach \alert{spielt} eine \alert{Rolle}, da die Kugeln \alert{nicht unterscheidbar} sind
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Urnenmodell
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\Omega = \{\{(1, x), (2, x)\}, \{(2, x), (3, x)\}, \{(1, x), (3, x)\},$\\
+                    $\{(1, x)\}, \{(2, x)\}, \{(3, x)\}\}$
+                   \item $|\Omega| = \dfrac{(3+2-1)!}{2!(3-1)!} = \dfrac{4\cdot 3}{2} = 6$
+                 \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+    };
+  \end{mindmapcontent}
+  % \begin{edges}
+  %   \edge{lc}{bc}
+  % \end{edges}
+  \annotation{co.south}{This mindmap is provided without guarantee of correctness and completeness!};
+\end{mindmap}
+
+% die Sache mit injektiver Funktion bei Variationen und bijektiver Funktion bei Permutationen

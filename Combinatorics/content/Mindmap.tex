@@ -10,9 +10,9 @@
 
 \begin{mindmap}
   \begin{mindmapcontent}
-    \node (co) at (current page.center) {Kombinatorik / Combinatorics}
+    \node (co) at (current page.center) {Kombinatorik (combinatorics)}
     child {
-      node {Variationen und Permutationen
+      node {Variationen und Permutationen (partial permutations and permutations)
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{8cm}
             \begin{itemize}
@@ -35,9 +35,9 @@
         }
       }
       child {
-        node {Variationen / Permutationen mit Wiedeholung
+        node {Variationen / Permutationen mit Wiederholung
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
+            \begin{minipage}[t]{12cm}
               \begin{itemize}
                 \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $n^k$, $k$ beliebig ($k>n$ ist erlaubt)
@@ -45,7 +45,13 @@
                     \item Anzahl \alert{Folgen}, wobei Folgenglieder sich \alert{nicht unterscheiden} müssen
                   \end{itemize}
                 \item \alert{bijektive Relation} für Urnenmodell
+                \begin{itemize}
+                  \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
+                \end{itemize}
                 \item \alert{Funktion} für Fächermodell
+                \begin{itemize}
+                  \item \alert{nicht injektiv} (linkseindeutig)
+                \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -82,18 +88,25 @@
         }
       }
       child {
-        node {Variationen / Permutationen ohne Wiedeholung
+        node {Variationen / Permutationen ohne Wiederholung
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
+            \begin{minipage}[t]{12cm}
               \begin{itemize}
                 \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dfrac{n!}{(n-k)!}$, $k\le n$
                 \begin{itemize}
                   \item $\dfrac{n!}{(n-n)!} = \dfrac{n!}{1} = n!$, $k=n$
                   \item Anzahl \alert{Folgen}, wobei Folgenglieder sich alle \alert{unterscheiden} müssen
+                  \item \alert{Herleitung:} für die erste Stelle gibt es $n$ Kombinationen, für die zweite $n-1$ Kombinationen, also $n!$, wenn man bis 1 runtergeht. Allerdings gibt es nur $k\le n$ Stellen, daher muss man 1 bis $n-k$, also $(n-k)!$ in den Nenner schreiben, damit sich $1$ bis $n-k$ im Zähler damit rauskürzen
                 \end{itemize}
                 \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
+                \begin{itemize}
+                  \item \alert{rechtseindeutig} (also wie partielle Funktion)
+                \end{itemize}
                 \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
+                \begin{itemize}
+                  \item \alert{injektiv} (linkseindeutig)
+                \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -127,7 +140,7 @@
       }
     }
     child {
-      node {Kombinationen
+      node {Kombinationen (combinations)
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{8cm}
             \begin{itemize}
@@ -150,7 +163,7 @@
       child {
         node {Kombinationen ohne Wiederholung
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
+            \begin{minipage}[t]{12cm}
               \begin{itemize}
                 \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dbinom{n}{k} = \dfrac{n!}{k!\cdot(n-k)!} = \dfrac{n\cdot (n-1) \cdot \ldots \cdot (n-k+1)}{k!}$, $k\le n$
@@ -159,7 +172,13 @@
                   \item $\dbinom{n}{n} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot 1} = 1$, $k=n$
                 \end{itemize}
                 \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
+                \begin{itemize}
+                  \item \alert{rechtseindeutig} (also wie partielle Funtion)
+                \end{itemize}
                 \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
+                \begin{itemize}
+                  \item \alert{injektiv} (linkseindeutig)
+                \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -192,7 +211,7 @@
       child {
         node {Kombinationen mit Wiederholung
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
+            \begin{minipage}[t]{12cm}
               \begin{itemize}
                 \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dbinom{n+k-1}{k} = \dfrac{(n+k-1)!}{k!\cdot(n+k-1-k)!} = \dfrac{(n+k-1)!}{k!\cdot(n-1)!} = \dfrac{n\cdot (n+1)\cdot \ldots \cdot (n+k-1)}{k!}$, $k$ beliebig ($k>n$ ist erlaubt) 
@@ -200,7 +219,13 @@
                   \item spezieller \alert{Binomialkoeffizient} $\left(\!\!\dbinom{n}{k}\!\!\right) = \dbinom{n + k - 1}{k} = \dbinom{n+k-1}{n-1}$ für Anzahl \alert{Multimengen} der Länge $k$
                 \end{itemize}
                 \item \alert{surjektive Relation} für Urnenmodell
+                \begin{itemize}
+                  \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
+                \end{itemize}
                 \item \alert{Funktion} für Fächermodell
+                \begin{itemize}
+                  \item \alert{nicht injektiv} (linkseindeutig)
+                \end{itemize}
               \end{itemize}
             \end{minipage}
           }

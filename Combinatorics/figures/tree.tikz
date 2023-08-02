@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (1) at (-4, 0) {};
+		\node [style=circle node] (2) at (0, 4) {};
+		\node [style=circle node] (3) at (4, 6) {};
+		\node [style=circle node alternative] (4) at (4, 2) {};
+		\node [style=circle node alternative] (5) at (0, -4) {};
+		\node [style=circle node] (6) at (4, -2) {};
+		\node [style=circle node alternative] (7) at (4, -6) {};
+		\node [style=circle node] (8) at (8, 7) {};
+		\node [style=circle node alternative] (9) at (8, 5) {};
+		\node [style=circle node alternative] (10) at (8, 0.75) {};
+		\node [style=circle node] (11) at (8, 3) {};
+		\node [style=circle node] (12) at (8, -1) {};
+		\node [style=circle node alternative] (13) at (8, -3) {};
+		\node [style=circle node] (14) at (8, -5) {};
+		\node [style=circle node alternative] (15) at (8, -7) {};
+		\node [style=none] (16) at (0, 9) {};
+		\node [style=none] (17) at (8, 9) {};
+		\node [style=none] (18) at (9, 8) {= n};
+		\node [style=none] (19) at (0, 8) {1};
+		\node [style=none] (20) at (4, 8) {};
+		\node [style=none] (21) at (8, 8) {};
+		\node [style=none] (22) at (4, 8) {2};
+		\node [style=none] (23) at (8, 8) {3};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=marked undirected edge] (1.center) to (2);
+		\draw (2) to (3);
+		\draw (3) to (8);
+		\draw (3) to (9);
+		\draw (4) to (11);
+		\draw [style=marked undirected edge] (4) to (10);
+		\draw (6) to (12);
+		\draw [style=marked undirected edge] (6) to (13);
+		\draw [style=marked undirected edge, in=195, out=15] (7) to (14);
+		\draw (7) to (15);
+		\draw [style=marked undirected edge] (5) to (7);
+		\draw [style=marked undirected edge] (5) to (6);
+		\draw [style=marked undirected edge] (4) to (2);
+		\draw [style=marked undirected edge] (5) to (1.center);
+		\draw [style=dist, in=180, out=0] (16.center) to (17.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (16) at (-1, 0) {};
+		\node [style=circle node] (17) at (1, 0) {};
+		\node [style=circle node] (18) at (1.75, 2) {};
+		\node [style=circle node] (19) at (-1.75, 2) {};
+		\node [style=circle node] (20) at (0, 3.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (20) to (18);
+		\draw (18) to (17);
+		\draw (17) to (16);
+		\draw (16) to (19);
+		\draw (19) to (20);
+		\draw (20) to (16);
+		\draw (17) to (20);
+		\draw (18) to (16);
+		\draw (18) to (19);
+		\draw (19) to (17);
+	\end{pgfonlayer}
+\end{tikzpicture}

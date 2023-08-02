@@ -45,12 +45,13 @@
                     \item Anzahl \alert{Folgen}, wobei Folgenglieder sich \alert{nicht unterscheiden} müssen
                   \end{itemize}
                 \item \alert{bijektive Relation} für Urnenmodell
-                \begin{itemize}
-                  \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
-                \end{itemize}
+                % \begin{itemize}
+                %   \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
+                % \end{itemize}
                 \item \alert{Funktion} für Fächermodell
                 \begin{itemize}
-                  \item \alert{nicht injektiv} (linkseindeutig)
+                  % \item \alert{nicht injektiv} (linkseindeutig)
+                  \item jede Funktion $f: D\rightarrow Z$ mit $|D|=k$ und $|Z|=n$ hat $n^k$ verschiedene Variationen oder Permutationen (für $k=n$) wie die Elemente beider Mengen aneinander zugewiesen werden können
                 \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -100,12 +101,13 @@
                   \item \alert{Herleitung:} für die erste Stelle gibt es $n$ Kombinationen, für die zweite $n-1$ Kombinationen, also $n!$, wenn man bis 1 runtergeht. Allerdings gibt es nur $k\le n$ Stellen, daher muss man 1 bis $n-k$, also $(n-k)!$ in den Nenner schreiben, damit sich $1$ bis $n-k$ im Zähler damit rauskürzen
                 \end{itemize}
                 \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
-                \begin{itemize}
-                  \item \alert{rechtseindeutig} (also wie partielle Funktion)
-                \end{itemize}
+                % \begin{itemize}
+                %   \item \alert{rechtseindeutig} (also wie partielle Funktion)
+                % \end{itemize}
                 \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
                 \begin{itemize}
-                  \item \alert{injektiv} (linkseindeutig)
+                  % \item \alert{injektiv} (linkseindeutig)
+                  \item jede injektive Funktion $f: D\rightarrow Z$ mit $|D|=k$ und $|Z|=n$ hat $\dfrac{n!}{(n-k)!} $ verschiedene Variationen oder Permutationen (für $k=n$) wie die Elemente beider Mengen injektiv aneinander zugewiesen werden können
                 \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -169,16 +171,17 @@
                 \item \alert{Anzahl:} $\dbinom{n}{k} = \dfrac{n!}{k!\cdot(n-k)!} = \dfrac{n\cdot (n-1) \cdot \ldots \cdot (n-k+1)}{k!}$, $k\le n$
                 \begin{itemize}
                   \item \alert{Binomialkoeffizient} für Anzahl \alert{gewöhnlicher Untermengen} der Länge $k$
+                  \item \alert{Herleitung:} $(n-k)!$ ist wie bei der Herleitung der Anzahl von Variationen ohne Wiederholung nur dazu da von $n!$ die $n-k$ Faktoren $(n-k)\cdot \ldots \cdot 1$ herauszukürzen, sodass da nur noch die Faktoren $n\cdot (n-1) \cdot \ldots \cdot (n-k+1)$ für die $k$ Stellen übrig bleiben. Das $k!$ im Nenner ist die Anzahl der verschiedenen Permutationen einer Variation / Permutation mit $k$ Stellen und hat die Aufgabe dafür zu sorgen, dass alle $k!$ verschiedenen Permutationen einer Variation / Permutation, die in $n!$ gezählt werden als nur eine Kombination zählen.
                   \item $\dbinom{n}{n} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot 1} = 1$, $k=n$
                 \end{itemize}
                 \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
-                \begin{itemize}
-                  \item \alert{rechtseindeutig} (also wie partielle Funtion)
-                \end{itemize}
+                % \begin{itemize}
+                %   \item \alert{rechtseindeutig} (also wie partielle Funtion)
+                % \end{itemize}
                 \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
-                \begin{itemize}
-                  \item \alert{injektiv} (linkseindeutig)
-                \end{itemize}
+                % \begin{itemize}
+                %   \item \alert{injektiv} (linkseindeutig)
+                % \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -207,6 +210,55 @@
             }
           }
         }
+        child {
+          node {Vollständige Graphen
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item Anzahl Kanten in einem vollständigen Graphen bzw. maixmal Anzahl Kanten in einem einfachen Graphen
+                    \begin{itemize}
+                      \item erster betrachteter Knoten hat $n-1$ Kanten zu allen anderen Knoten
+                      \item zweiter betrachteter Knoten hat $n-1$ Kanten zu allen anderen Knoten, aber es gibt bereits eine Kante zum ersten betrachteten Knoten, also $n-2$
+                      \item also $\displaystyle n - 1 + \ldots + 1 = \sum_{i=1}^{n-1} i = \frac{n(n-1)}{2} = \binom{n}{2}$
+                    \end{itemize}
+                \end{itemize}
+                \begin{resettikz}
+                  \ctikzfig{./figures/completegraph}
+                \end{resettikz}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Binärbäume
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{10cm}
+                \begin{itemize}
+                  \item Anzahl Pfade, bei denen ein Ereignis genau $k$ mal auftritt
+                  \begin{itemize}
+                    \item alle Untermengen von $\{1, \ldots, n\}$ der Länge $k$, also $\dbinom{n}{k}$
+                    \item im Beispiel unten ist die Anzahl Pfade folglich: $\dbinom{3}{2} = \dfrac{3\cdot 2}{2} = 3$
+                  \end{itemize}
+                \end{itemize}
+                \begin{resettikz}
+                  \ctikzfig{./figures/tree}
+                \end{resettikz}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Bezug zu Summenformel
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{10cm}
+                \begin{itemize}
+                  \item $\dbinom{n}{2} = \dfrac{n!}{2!(n-2)!} = \dfrac{n(n-1)(n-2)!}{2!(n-2)!} = \dfrac{n(n-1)}{2}$
+                  \item $\dbinom{n+1}{2} = \dfrac{(n+1)!}{2!(n+1-2)!} = \dfrac{(n+1)n(n-1)!}{2!(n-1)!} = \dfrac{n(n+1)}{2}$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
       }
       child {
         node {Kombinationen mit Wiederholung
@@ -219,13 +271,13 @@
                   \item spezieller \alert{Binomialkoeffizient} $\left(\!\!\dbinom{n}{k}\!\!\right) = \dbinom{n + k - 1}{k} = \dbinom{n+k-1}{n-1}$ für Anzahl \alert{Multimengen} der Länge $k$
                 \end{itemize}
                 \item \alert{surjektive Relation} für Urnenmodell
-                \begin{itemize}
-                  \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
-                \end{itemize}
+                % \begin{itemize}
+                %   \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
+                % \end{itemize}
                 \item \alert{Funktion} für Fächermodell
-                \begin{itemize}
-                  \item \alert{nicht injektiv} (linkseindeutig)
-                \end{itemize}
+                % \begin{itemize}
+                %   \item \alert{nicht injektiv} (linkseindeutig)
+                % \end{itemize}
               \end{itemize}
             \end{minipage}
           }

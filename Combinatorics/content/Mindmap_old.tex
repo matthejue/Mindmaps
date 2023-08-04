@@ -10,31 +10,19 @@
 
 \begin{mindmap}
   \begin{mindmapcontent}
-    \node (co) at (current page.center) {Kombinatorik (combinatorics)
-      \resizebox{\textwidth}{!}{
-        \begin{minipage}[t]{12cm}
-          \begin{itemize}
-            \item \alert{Anordnung:} (auch Permutation) alle Elemente der Grundmenge werden betrachtet
-            \item \alert{Auswahl:} (auch Variation oder Kombination) eine Stichprobe der Grundmenge wird betrachtet
-          \end{itemize}
-        \end{minipage}
-      }
-    }
+    \node (co) at (current page.center) {Kombinatorik (combinatorics)}
     child {
       node {Variationen (partial permutations)
         \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{12cm}
+          \begin{minipage}[t]{8cm}
             \begin{itemize}
-            \item \underline{Urnenmodell:} \alert{Auswahl} von Bällen aus der Urne für ein Podium bei der die \alert{Reihenfolge} ($\approx$ Tupel) der Podiumsplätze \alert{berücksichtigt} wird
-            % \begin{itemize}
-            %   \item auch geordnete Stichprobe 
-            % \end{itemize}
+              \item \underline{Urnenmodell:} \alert{Reihenfolge berücksichtigt} ($\approx$ Folge)
                 \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_urn_problem_order_important}
                 \end{resettikz}
-                \vspace{-2cm} 
-              \item \underline{Fächermodell:} Bälle sind \alert{unterscheidbar}
+                \vspace{-2cm}
+              \item \underline{Fächermodell:} \alert{unterscheidbar}
                 \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_box_problem_destinguishable}
@@ -51,9 +39,18 @@
               \begin{itemize}
                 \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $n^k$, $k$ beliebig ($k>n$ ist erlaubt)
-                  % \begin{itemize}
-                  %   \item Anzahl \alert{Folgen}, wobei Folgenglieder sich \alert{nicht unterscheiden} müssen
-                  % \end{itemize}
+                  \begin{itemize}
+                    \item Anzahl \alert{Folgen}, wobei Folgenglieder sich \alert{nicht unterscheiden} müssen
+                  \end{itemize}
+                \item \alert{bijektive Relation} für Urnenmodell
+                % \begin{itemize}
+                %   \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
+                % \end{itemize}
+                \item \alert{Funktion} für Fächermodell
+                \begin{itemize}
+                  % \item \alert{nicht injektiv} (linkseindeutig)
+                  \item jede Funktion $f: D\rightarrow Z$ mit $|D|=k$ und $|Z|=n$ hat $n^k$ verschiedene Variationen oder Permutationen (für $k=n$) wie die Elemente beider Mengen aneinander zugewiesen werden können
+                \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -63,12 +60,10 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $U = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
-                            $\{(2, 1), (1, 2)\}, \{(3, 1), (2, 2)\}, \{(3, 1), (1, 2)\},$\\
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
+                    $\{(2, 1), (1, 2)\}, \{(3, 1), (2, 2)\}, \{(3, 1), (1, 2)\},$\\
                     $\{(1, 1), (1, 2)\}, \{(2, 1), (2, 2)\}, \{(3, 1), (3, 2)\}\}$
-                  \item \alert{Variationen:} $\{(1, 2), (2, 3), (1, 3), (2, 1), (3, 2), (3, 1),$\\
-                    $(1, 1), (2, 2), (3, 3)\}$
-                  \item $|U| = 3^2 = 9$
+                  \item $|\Omega| = 3^2 = 9$
                 \end{itemize}
               \end{minipage}
             }
@@ -79,12 +74,10 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $F = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
                     $\{(1, 2), (2, 1)\}, \{(1, 3), (2, 2)\}, \{(1, 3), (2, 1)\},$\\
                     $\{(1, 1), (2, 1)\}, \{(1, 2), (2, 2)\}, \{(1, 3), (2, 3)\}\}$
-                  \item \alert{Variationen:} $\{(1, 2), (2, 3), (1, 3), (2, 1), (3, 2), (3, 1),$\\
-                    $(1, 1), (2, 2), (3, 3)\}$
-                  \item $|F| = 3^2 = 9$
+                  \item $|\Omega| = 3^2 = 9$
                   \item in Fächern selbst spielt \alert{Reihenfolge} der Kugeln darin \alert{keine Rolle}, nur welche Kugeln darin sind spielt eine Rolle (jedes Fach verhält sich also wie eine \alert{gewöhnliche Menge}, $\{(1, 3), (2, 3)\}$ und $\{(2, 3), (1, 3)\}$ werden \alert{nicht unterschieden})
                   \item es spielt hingegeben eine Rolle, welche Kugel welchem Fach zugeordnet ist ($\{(1, 3), (2, 2)\}$ und $\{(1, 2), (2, 3)\}$ werden \alert{unterschieden})
                 \end{itemize}
@@ -122,9 +115,20 @@
             \begin{minipage}[t]{12cm}
               \begin{itemize}
                 \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
-                \item \alert{Anzahl:} $\dfrac{n!}{(n-k)!}$, $k \le n$
+                \item \alert{Anzahl:} $\dfrac{n!}{(n-k)!}$, $k\le n$
                 \begin{itemize}
-                  \item \alert{Herleitung:} für die erste Stelle gibt es $n$ Möglichkeiten, für die zweite $n-1$ Möglichkeiten, also $n!$, wenn man bis 1 runtergeht. Allerdings gibt es nur $k\le n$ Stellen, daher muss man 1 bis $n-k$, also $(n-k)!$ in den Nenner schreiben, damit sich $1$ bis $n-k$ im Zähler damit rauskürzen
+                  \item $\dfrac{n!}{(n-n)!} = \dfrac{n!}{1} = n!$, $k=n$
+                  \item Anzahl \alert{Folgen}, wobei Folgenglieder sich alle \alert{unterscheiden} müssen
+                  \item \alert{Herleitung:} für die erste Stelle gibt es $n$ Kombinationen, für die zweite $n-1$ Kombinationen, also $n!$, wenn man bis 1 runtergeht. Allerdings gibt es nur $k\le n$ Stellen, daher muss man 1 bis $n-k$, also $(n-k)!$ in den Nenner schreiben, damit sich $1$ bis $n-k$ im Zähler damit rauskürzen
+                \end{itemize}
+                \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
+                % \begin{itemize}
+                %   \item \alert{rechtseindeutig} (also wie partielle Funktion)
+                % \end{itemize}
+                \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
+                \begin{itemize}
+                  % \item \alert{injektiv} (linkseindeutig)
+                  \item jede injektive Funktion $f: D\rightarrow Z$ mit $|D|=k$ und $|Z|=n$ hat $\dfrac{n!}{(n-k)!} $ verschiedene Variationen oder Permutationen (für $k=n$) wie die Elemente beider Mengen injektiv aneinander zugewiesen werden können
                 \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -135,10 +139,9 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $U = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
                     $\{(2, 1), (1, 2)\}, \{(3, 1), (2, 2)\}, \{(3, 1), (1, 2)\}\}$
-                  \item \alert{Variationen:} $\{(1, 2), (2, 3), (1, 3), (2, 1), (3, 2), (3, 1)\}$
-                  \item $|U| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
+                  \item $|\Omega| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
                 \end{itemize}
               \end{minipage}
             }
@@ -149,10 +152,9 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $F = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
                     $\{(1, 2), (2, 1)\}, \{(1, 3), (2, 2)\}, \{(1, 3), (2, 1)\}\}$
-                  \item \alert{Variationen:} $\{(1, 2), (2, 3), (1, 3), (2, 1), (3, 2), (3, 1)\}$
-                  \item $|F| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
+                  \item $|\Omega| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
                 \end{itemize}
               \end{minipage}
             }
@@ -163,15 +165,15 @@
     child {
       node {Permutationen (permutations)
         \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{12cm}
+          \begin{minipage}[t]{8cm}
             \begin{itemize}
-              \item \underline{Urnenmodell:} \alert{Anordnung} aller Bälle aus der Urne auf einem Podium bei dem die \alert{Reihenfolge} ($\approx$ Tupel) \alert{aller} Podiumsplätze  \alert{berücksichtigt} wird (ohne Wiederholung) oder die \alert{Reihenfolge} mancher \alert{Gruppen von Podiumsplätzen nicht berücksichtigt} wird (mit Wiederholung)
+              \item \underline{Urnenmodell:} \alert{Reihenfolge berücksichtigt} ($\approx$ Folge)
                 \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_urn_problem_order_important_permutations}
                 \end{resettikz}
-                \vspace{-2cm} 
-              \item \underline{Fächermodell:} Neu-\alert{Anordnung} der Bälle, die \alert{alle unterscheidbar} sind (ohne Wiederholung) oder bei denen \alert{Gruppen von Bällen nicht unterscheidbar} sind (mit Wiederholung)
+                \vspace{-2cm}
+              \item \underline{Fächermodell:} \alert{unterscheidbar}
                 \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_box_problem_destinguishable_permutations}
@@ -186,25 +188,17 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell. Der Urne werden alle Bälle entnommen. Im Gegensatz zu Variationen und Kombinationen mit Wiederholung bezieht sich das \enquote{mit Wiederholung} hier darauf, dass Gruppen von Bällen identisch sind oder Gruppen von Podiumsplätze nicht unterschieden werden
+                \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
+                \item \alert{Anzahl:} $\dfrac{n!}{k!}$
+                % \item \alert{bijektive Relation} für Urnenmodell
+                % % \begin{itemize}
+                % %   \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
+                % % \end{itemize}
+                % \item \alert{Funktion} für Fächermodell
                 % \begin{itemize}
-                  \item es ist garnicht möglich Zurücklegen wie bei Variationen und Kombinationen mit Wiederholung zu haben, da Zurücklegen auch impliziert, dass ein Ball jedes mal aufs neue zurückgelegt und dann wieder gezogen werden kann, aber beim Multinomialkoeffzienten gibt es eine Beschränkung wie oft ein Ball wieder gezogen werden dürfte. Es ist daher einfacher es darauf zu beziehen, dass Gruppen von Bällen identisch sind oder Gruppen von Podiumsplätze nicht unterschieden werden
+                %   % \item \alert{nicht injektiv} (linkseindeutig)
+                %   \item jede Funktion $f: D\rightarrow Z$ mit $|D|=k$ und $|Z|=n$ hat $n^k$ verschiedene Variationen oder Permutationen (für $k=n$) wie die Elemente beider Mengen aneinander zugewiesen werden können
                 % \end{itemize}
-                \item \alert{Anzahl:} $\dbinom{n}{k_1, k_2, \ldots, k_m} = \dfrac{n!}{k_1! \cdot k_2! \cdot \ldots \cdot k_m!}$, $\displaystyle \sum_{i=1}^{m} k_i = n$
-        %         \begin{itemize}
-        %           \begin{itemize}
-                  % \item z.B. Worte der Länge $n$ mit $m$ verschiedenen Symbolen, die jeweils $k_i$ mal im Wort vorkommen herausbekommen. Die nichtnegative Indices $k_1$ bis $k_m$ ergeben in Summe $n$: $\displaystyle \sum_{i=1}^{m} k_i = n$, da man immer die Anzahl Permutationen herausbekommen will, also die Länge $k$ der Permutationen gleich ist, wie die Länge $n$ des ursprünglichen Wortes: $k=n$.  % TODO: korrekt?
-        %             % TODO: wieso Multiplikation im Nenner?
-        %             % \item Ein $k_i$ gibt an, wie oft ein bestimmtes Symbol eines Wortes im Wort vorkommt 
-        %             \item \alert{Herleitung:} 
-        %             \begin{itemize}
-        %               % \item im Gegensatz zum Binomialkoeffizienten ist das $(n-k)!$ nicht notwenig, da man immer die Anzahl Permutationen in diesem Spezialfall herausbekommen will, bei denen $k=n$ ist und somit keine Faktoren von $n!$ rausgekürzt werden müssen
-        %               \item mit dem Produkt der Fakultäten $k_1!$ bis $k_m$! im Nenner sorgt man dafür, dass die verschiedenen Permutationen eines $k_i$ mal im Wort vorkommenden Symbols, die von $n!$ mitgezählt werden als eine Kombination gezählt werden
-        %               \item da die verschiedenen Permutationen eines Symbols mit den Permutationen eines anderen Symbols weitere Permutationen bildet, wird multipliziert
-        %             \end{itemize}
-        %           \item hat man nur zwei verschiedene Symbole in einem Wort, kann man einfach den üblichen Binomialkoeffizienten $\dbinom{n}{k}$ verwenden, wobei $k!$ für das eine Symbol steht und $(n-k)!$ für das andere Symbol, dass $n-k$ mal im Wort vorkommt, welches die Länge $n$ hat: $\dbinom{n}{k_1, k_2} = \dbinom{n}{k_1, n-k_1} = \dfrac{n!}{k_1!(n-k_1)!} = \dbinom{n}{k_1}$
-        %           \end{itemize}
-        %         \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -213,12 +207,12 @@
           node {Urnenmodell
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $U = \{\{(1, 1), (2, 2), (3, 2)\}, \{(1, 2), (2, 1), (3, 2)\},$\\
-                    $\{(1, 2), (2, 2), (3, 1)\}\}$
-                  \item \alert{Permutationen:} $\{(1, 2, 2), (2, 1, 2), (2, 2, 1)\}$
-                  \item $|U| = \dfrac{3!}{1!2!} = \dfrac{6}{2} = 3$
-                \end{itemize}
+                % \begin{itemize}
+                %   \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
+                %     $\{(2, 1), (1, 2)\}, \{(3, 1), (2, 2)\}, \{(3, 1), (1, 2)\},$\\
+                %     $\{(1, 1), (1, 2)\}, \{(2, 1), (2, 2)\}, \{(3, 1), (3, 2)\}\}$
+                %   \item $|\Omega| = 3^2 = 9$
+                % \end{itemize}
               \end{minipage}
             }
           }
@@ -227,12 +221,14 @@
           node {Fächermodell
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $F = \{\{(1, 1), (2, 2), (2, 3)\}, \{(2, 1), (1, 2), (2, 3)\},$\\
-                    $\{(2, 1), (2, 2), (1, 3)\}\}$
-                  \item \alert{Permutationen:} $\{(1, 2, 2), (2, 1, 2), (2, 2, 1)\}$
-                  \item $|F| = \dfrac{3!}{1!2!} = \dfrac{6}{2} = 3$
-                \end{itemize}
+                % \begin{itemize}
+                %   \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
+                %     $\{(1, 2), (2, 1)\}, \{(1, 3), (2, 2)\}, \{(1, 3), (2, 1)\},$\\
+                %     $\{(1, 1), (2, 1)\}, \{(1, 2), (2, 2)\}, \{(1, 3), (2, 3)\}\}$
+                %   \item $|\Omega| = 3^2 = 9$
+                %   \item in Fächern selbst spielt \alert{Reihenfolge} der Kugeln darin \alert{keine Rolle}, nur welche Kugeln darin sind spielt eine Rolle (jedes Fach verhält sich also wie eine \alert{gewöhnliche Menge}, $\{(1, 3), (2, 3)\}$ und $\{(2, 3), (1, 3)\}$ werden \alert{nicht unterschieden})
+                %   \item es spielt hingegeben eine Rolle, welche Kugel welchem Fach zugeordnet ist ($\{(1, 3), (2, 2)\}$ und $\{(1, 2), (2, 3)\}$ werden \alert{unterschieden})
+                % \end{itemize}
               \end{minipage}
             }
           }
@@ -266,7 +262,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell. Der Urne werden alle Bälle entnommen
+                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dfrac{n!}{(n-n)!} = \dfrac{n!}{1} = n!$
               \end{itemize}
             \end{minipage}
@@ -277,9 +273,9 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $U = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 1)\}\}$
-                  \item \alert{Permutationen:} $\{(1, 2), (2, 1)\}$
-                  \item $|U| = 2! = 2$
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(2, 1), (3, 2)\}, \{(1, 1), (3, 2)\},$\\
+                    $\{(2, 1), (1, 2)\}, \{(3, 1), (2, 2)\}, \{(3, 1), (1, 2)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
                 \end{itemize}
               \end{minipage}
             }
@@ -290,9 +286,9 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $F = \{\{(1, 1), (2, 2)\}, \{(2, 1), (1, 2)\}\}$
-                  \item \alert{Permutationen:} $\{(1, 2), (2, 1)\}$
-                  \item $|F| = 2! = 2$
+                  \item $\Omega = \{\{(1, 1), (2, 2)\}, \{(1, 2), (2, 3)\}, \{(1, 1), (2, 3)\},$\\
+                    $\{(1, 2), (2, 1)\}, \{(1, 3), (2, 2)\}, \{(1, 3), (2, 1)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{(3-2)!} = \dfrac{6}{1} = 6$
                 \end{itemize}
               \end{minipage}
             }
@@ -303,18 +299,15 @@
     child {
       node {Kombinationen (combinations)
         \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{12cm}
+          \begin{minipage}[t]{8cm}
             \begin{itemize}
-            \item \underline{Urnenmodell:} \alert{Auswahl} für ein Podium bei der die \alert{Reihenfolge} ($\approx$ Menge) der Podiumsplätze \alert{nicht berücksichtigt} wird
-              % \begin{itemize}
-              %   \item auch ungeordnete Stichprobe 
-              % \end{itemize}
+              \item \underline{Urnenmodell:} \alert{Reihenfolge nicht berücksichtigt} ($\approx$ Menge)
                 \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_urn_problem_order_unimportant}
                 \end{resettikz}
-                \vspace{-2cm} 
-              \item \underline{Fächermodell:} Bälle sind \alert{nicht unterscheidbar}
+                \vspace{-2cm}
+              \item \underline{Fächermodell:} \alert{nicht unterscheidbar}
                 \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_box_problem_indestinguishable}
@@ -334,9 +327,17 @@
                 \begin{itemize}
                   \item \alert{Binomialkoeffizient} für Anzahl \alert{gewöhnlicher Untermengen} mit $k$ Elementen
                   \item \alert{Herleitung:} $(n-k)!$ ist wie bei der Herleitung der Anzahl von Variationen ohne Wiederholung nur dazu da von $n!$ die $n-k$ Faktoren $(n-k)\cdot \ldots \cdot 1$ herauszukürzen, sodass da nur noch die Faktoren $n\cdot (n-1) \cdot \ldots \cdot (n-k+1)$ für die $k$ Stellen übrig bleiben. Das $k!$ im Nenner ist die Anzahl der verschiedenen Permutationen einer Variation / Permutation mit $k$ Stellen und hat die Aufgabe dafür zu sorgen, dass alle $k!$ verschiedenen Permutationen einer Variation / Permutation, die in $n!$ gezählt werden als nur eine Kombination zählen.
-                  % \item \alert{Alternative Herleitung für $(n-k)!$}: Man will die Anzahl Permutationen eines Wortes der Länge $n$ herausfinden, welches nur $2$ Symbole hat. Wenn das eine Symbol $k$ mal vorkommt, kommt das andere Symbol $n-k$ mal vor. Die Anzahl Permutationen ist folglich: $\dfrac{n!}{k!(n-k)!}$ (siehe Herleitung Multinomialkoeffzient). Die Anzahl Permutationen in einem Wort der Länge $n$ bei nur $2$ Symbolen, die jeweils $k$ und $n-k$ mal im Wort vorkommen ist gleich der Anzahl gewöhnlicher Untermengen mit $k$ Elementen in einer Menge mit $n$ Elementen, da $asdf$ %TODO
+                  \item \alert{Alternative Herleitung für $(n-k)!$}: Man will die Anzahl Permutationen eines Wortes der Länge $n$ herausfinden, welches nur $2$ Symbole hat. Wenn das eine Symbol $k$ mal vorkommt, kommt das andere Symbol $n-k$ mal vor. Die Anzahl Permutationen ist folglich: $\dfrac{n!}{k!(n-k)!}$ (siehe Herleitung Multinomialkoeffzient). Die Anzahl Permutationen in einem Wort der Länge $n$ bei nur $2$ Symbolen, die jeweils $k$ und $n-k$ mal im Wort vorkommen ist gleich der Anzahl gewöhnlicher Untermengen mit $k$ Elementen in einer Menge mit $n$ Elementen, da $asdf$ %TODO
                   \item $\dbinom{n}{n} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot 1} = 1$, $k=n$
                 \end{itemize}
+                \item \alert{partielle, bijektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Urnenmodell
+                % \begin{itemize}
+                %   \item \alert{rechtseindeutig} (also wie partielle Funtion)
+                % \end{itemize}
+                \item \alert{injektive Funktion} und \alert{bijektive Funktion} wenn $k=n$ für Fächermodell
+                % \begin{itemize}
+                %   \item \alert{injektiv} (linkseindeutig)
+                % \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -346,12 +347,8 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $F = \{\{(1, x), (2, x)\}, \{(2, x), (3, x)\}, \{(1, x), (3, x)\}\}$
-                  \item \alert{Kombinationen:} $\{(1, 2), (2, 3), (1, 3)\}$
-                  \begin{itemize}
-                    \item man kann anstelle von Tupelklammern $()$ auch Mengenklammern $\{\}$ verwenden, da die Reihenfolge egal ist
-                  \end{itemize}
-                  \item $|F| = \dfrac{3!}{2!(3-2)!} = \dfrac{6}{2} = 3$
+                  \item $\Omega = \{\{(1, x), (2, x)\}, \{(2, x), (3, x)\}, \{(1, x), (3, x)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{2!(3-2)!} = \dfrac{6}{2} = 3$
                 \end{itemize}
               \end{minipage}
             }
@@ -362,12 +359,8 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $U = \{\{(x, 1), (x, 2)\}, \{(x, 2), (x, 3)\}, \{(x, 1), (x, 3)\}\}$
-                  \item \alert{Kombinationen:} $\{(1, 2), (2, 3), (1, 3)\}$
-                  \begin{itemize}
-                    \item man kann anstelle von Tupelklammern $()$ auch Mengenklammern $\{\}$ verwenden, da die Reihenfolge egal ist
-                  \end{itemize}
-                  \item $|U| = \dfrac{3!}{2!(3-2)!} = \dfrac{6}{2} = 3$
+                  \item $\Omega = \{\{(x, 1), (x, 2)\}, \{(x, 2), (x, 3)\}, \{(x, 1), (x, 3)\}\}$
+                  \item $|\Omega| = \dfrac{3!}{2!(3-2)!} = \dfrac{6}{2} = 3$
                 \end{itemize}
               \end{minipage}
             }
@@ -431,8 +424,16 @@
                 \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dbinom{n+k-1}{k} = \dfrac{(n+k-1)!}{k!\cdot(n+k-1-k)!} = \dfrac{(n+k-1)!}{k!\cdot(n-1)!} = \dfrac{n\cdot (n+1)\cdot \ldots \cdot (n+k-1)}{k!}$, $k$ beliebig ($k>n$ ist erlaubt) 
                 \begin{itemize}
-                  \item spezieller \alert{Binomialkoeffizient} $\left(\!\!\dbinom{n}{k}\!\!\right) = \dbinom{n + k - 1}{k} = \dbinom{n+k-1}{n-1}$ für Anzahl \alert{Multimengen} mit $k$ Elementen
+                  \item spezieller \alert{Binomialkoeffizient} $\left(\!\!\dbinom{n}{k}\!\!\right) = \dbinom{n + k - 1}{k} = \dbinom{n+k-1}{n-1}$ für Anzahl \alert{Multimengen} der Länge $k$
                 \end{itemize}
+                \item \alert{surjektive Relation} für Urnenmodell
+                % \begin{itemize}
+                %   \item \alert{nicht rechtseindeutig} (also wie Multifunktion)
+                % \end{itemize}
+                \item \alert{Funktion} für Fächermodell
+                % \begin{itemize}
+                %   \item \alert{nicht injektiv} (linkseindeutig)
+                % \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -442,13 +443,9 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                   \item \alert{Menge möglicher Relationen:}\\ $F = \{\{(x, 1), (x, 2)\}, \{(x, 2), (x, 3)\}, \{(x, 1), (x, 3)\},$\\
+                   \item $\Omega = \{\{(x, 1), (x, 2)\}, \{(x, 2), (x, 3)\}, \{(x, 1), (x, 3)\},$\\
                      $\{(x, 1)\}, \{(x, 2)\}, \{(x, 3)\}\}$
-                   \item \alert{Kombinationen:} $\{(1, 2), (2, 3), (1, 3), (1, 1), (2, 2), (3, 3)\}$
-                    \begin{itemize}
-                      \item man kann anstelle von Tupelklammern $()$ auch Mengenklammern $\{\}$ verwenden, da die Reihenfolge egal ist. Man muss eine Menge mit nur einem Element $\{x\}$ dann nur korrekt als $(x, x)$ interpretieren
-                    \end{itemize}
-                   \item $|F| = \dfrac{(3+2-1)!}{2!(3-1)!} = \dfrac{4\cdot 3}{2} = 6$
+                   \item $|\Omega| = \dfrac{(3+2-1)!}{2!(3-1)!} = \dfrac{4\cdot 3}{2} = 6$
                    \item nur die \alert{Anzahl Kugeln} in einem Fach \alert{spielt} eine \alert{Rolle}, da die Kugeln \alert{nicht unterscheidbar} sind
                 \end{itemize}
               \end{minipage}
@@ -460,61 +457,16 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \alert{Menge möglicher Relationen:}\\ $U = \{\{(1, x), (2, x)\}, \{(2, x), (3, x)\}, \{(1, x), (3, x)\},$\\
+                  \item $\Omega = \{\{(1, x), (2, x)\}, \{(2, x), (3, x)\}, \{(1, x), (3, x)\},$\\
                     $\{(1, x)\}, \{(2, x)\}, \{(3, x)\}\}$
-                   \item \alert{Kombinationen:} $\{(1, 2), (2, 3), (1, 3), (1, 1), (2, 2), (3, 3)\}$
-                    \begin{itemize}
-                      \item man kann anstelle von Tupelklammern $()$ auch Mengenklammern $\{\}$ verwenden, da die Reihenfolge egal ist. Man muss eine Menge mit nur einem Element $\{x\}$ dann nur korrekt als $(x, x)$ interpretieren
-                    \end{itemize}
-                   \item $|U| = \dfrac{(3+2-1)!}{2!(3-1)!} = \dfrac{4\cdot 3}{2} = 6$
+                   \item $|\Omega| = \dfrac{(3+2-1)!}{2!(3-1)!} = \dfrac{4\cdot 3}{2} = 6$
                  \end{itemize}
               \end{minipage}
             }
           }
         }
       }
-    }
-    child {
-      node {Allgemeines Zählprinzip
-        \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{14cm}
-            \begin{itemize}
-              \item auch \alert{Produktregel der Kombinatorik}
-              \item ist weder eine Anordnung noch eine Auswahl, da das Kartesische Produkt zweier potentiel unterschiedlicher Mengen berechnet wird. Für die Anzahl ist die Reihenfolge in der das Kartesische Produkt zwischen jeweils zwei der Mengen angewandt wird egal, nur werden sich jedes mal andere Tupel ergeben
-              \item bei $k$ Mengen $M_1, M_2, \ldots, M_k$, die jeweils $n_1, n_2, \ldots, n_k$ Elemente enthalten, lassen sich $n_1\cdot n_2\cdot \ldots \cdot n_k$ verschiedene $k$-Tupel $(x_1, x_2,\ldots, x_k)$ zusammenstellen
-            \end{itemize}
-            \vspace{-3cm}
-            \begin{resettikz}
-              \ctikzfig{./figures/combinatorics}
-            \end{resettikz}
-            \vspace{-2cm}
-            \begin{itemize}
-              \item die Anzahl \textcolor{PrimaryColor}{blauer} Blätter im oberen Teilbauem ist gleich der Anzahl verschiedener 2er Tupel aus $\{1, 2\}$ und $\{1, 2\}$ und der Anzahl verschiedener Pfade im oberen Teilbaum. Die Anzahl \textcolor{SecondaryColor}{roter} Blätter ist gleich der Anzahl verschiedener 2er Tupel aus $\{3, 4\}$ und $\{1, 2, 3\}$ und der Anzahl verschiedener Pfade im oberen Teilbaum
-              \begin{itemize}
-                \item wenn zwei Teilbäume \alert{identisch} sind, kann man deren gemeinsame Blätteranzahl mithilfe der \alert{Produktregel der Kombinatorik} berechnen
-                \item wenn zwei Teilbäume \alert{unterschiedlich} sind, muss man deren Blätteranzahl \alert{seperat berechnen} und dann \alert{addieren}
-              \end{itemize}               
-            \end{itemize}
-            % TODO Reihenfolge spielt keine Rolle
-          \end{minipage}
-        }
-      }
-      child {
-        node {Potenzieren
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{14cm}
-                \begin{itemize}
-                  \item haben alle Knoten in $b$ Teilbäumen \alert{gleich viele Nachfolgerknoten} $b$ kann man die Anzahl der Blätter im allen Teilbäumen mithilfe der \alert{Tiefe} aller Teilbäume zusammen $k$ und der \alert{Anzahl Nachfolgeknoten} $b$ berechnen als $b^k = 2^3 = 8$
-                \end{itemize}
-                \vspace{-2cm}
-                \begin{resettikz}
-                  \ctikzfig{./figures/combinatoricspower}
-                \end{resettikz}
-              \end{minipage}
-          }
-        }
-      }
-    }               ;
+    };
   \end{mindmapcontent}
   % \begin{edges}
   %   \edge{lc}{bc}

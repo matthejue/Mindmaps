@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle with border primary, align=center] (0) at (-4, 0) {2\\2};
+		\node [style=circle with border primary, align=center] (1) at (0, 4) {1\\2};
+		\node [style=circle with border primary, align=center] (2) at (0, -4) {2\\1};
+		\node [style=circle with border primary, align=center] (4) at (4, 6) {0\\2};
+		\node [style=circle with border primary, align=center] (5) at (4, -2) {1\\1};
+		\node [style=circle with border primary, align=center] (6) at (4, -6) {2\\0};
+		\node [style=none, align=center] (12) at (-4, -8) {};
+		\node [style=none, align=center] (13) at (0, -8) {};
+		\node [style=none, align=center] (14) at (4, -8) {$0.5\cdot 1 + 0.5\cdot 2$\\$= 1.5$};
+		\node [style=none, align=center] (16) at (-4, -8) {$2$};
+		\node [style=none, align=center] (17) at (0, -8) {$2$};
+		\node [style=circle with border primary, align=center] (18) at (4, 2) {1\\1};
+		\node [style=circle with border primary, align=center] (19) at (8, -6) {1\\0};
+		\node [style=circle with border primary, align=center] (20) at (12, -6) {0\\0};
+		\node [style=circle with border primary, align=center] (21) at (8, -3) {1\\0};
+		\node [style=circle with border primary, align=center] (22) at (8, -1) {0\\1};
+		\node [style=circle with border primary, align=center] (23) at (8, 1) {1\\0};
+		\node [style=circle with border primary, align=center] (24) at (8, 3) {0\\1};
+		\node [style=circle with border primary, align=center] (25) at (8, 6) {0\\1};
+		\node [style=circle with border primary, align=center] (26) at (12, 6) {0\\0};
+		\node [style=circle with border primary, align=center] (27) at (12, -3) {0\\0};
+		\node [style=circle with border primary, align=center] (28) at (12, -1) {0\\0};
+		\node [style=circle with border primary, align=center] (29) at (12, 1) {0\\0};
+		\node [style=circle with border primary, align=center] (30) at (12, 3) {0\\0};
+		\node [style=none, align=center] (31) at (8, -8) {$1$};
+		\node [style=none, align=center] (32) at (12, -8) {};
+		\node [style=none, align=center] (33) at (12, -8) {$= 2\cdot 2\cdot 1.5\cdot 1$\\$=6$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (1);
+		\draw (0) to (2);
+		\draw (2) to (6);
+		\draw (2) to (5);
+		\draw (1) to (4);
+		\draw (1) to (18);
+		\draw (5) to (21);
+		\draw (23) to (18);
+		\draw (18) to (24);
+		\draw (4) to (25);
+		\draw (25) to (26);
+		\draw (24) to (30);
+		\draw (23) to (29);
+		\draw (5) to (22);
+		\draw (22) to (28);
+		\draw (21) to (27);
+		\draw (6) to (19);
+		\draw (19) to (20);
+	\end{pgfonlayer}
+\end{tikzpicture}

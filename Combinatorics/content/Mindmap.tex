@@ -29,17 +29,13 @@
             % \begin{itemize}
             %   \item auch geordnete Stichprobe 
             % \end{itemize}
-                \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_urn_problem_order_important}
                 \end{resettikz}
-                \vspace{-2cm} 
               \item \underline{Fächermodell:} Bälle sind \alert{unterscheidbar}
-                \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_box_problem_destinguishable}
                 \end{resettikz}
-                \vspace{-2cm}
             \end{itemize}
           \end{minipage}
         }
@@ -166,17 +162,13 @@
           \begin{minipage}[t]{12cm}
             \begin{itemize}
               \item \underline{Urnenmodell:} \alert{Anordnung} aller Bälle aus der Urne auf einem Podium bei dem die \alert{Reihenfolge} ($\approx$ Tupel) \alert{aller} Podiumsplätze  \alert{berücksichtigt} wird (ohne Wiederholung) oder die \alert{Reihenfolge} mancher \alert{Gruppen von Podiumsplätzen nicht berücksichtigt} wird (mit Wiederholung)
-                \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_urn_problem_order_important_permutations}
                 \end{resettikz}
-                \vspace{-2cm} 
               \item \underline{Fächermodell:} Neu-\alert{Anordnung} der Bälle, die \alert{alle unterscheidbar} sind (ohne Wiederholung) oder bei denen \alert{Gruppen von Bällen nicht unterscheidbar} sind (mit Wiederholung)
-                \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_box_problem_destinguishable_permutations}
                 \end{resettikz}
-                \vspace{-2cm}
             \end{itemize}
           \end{minipage}
         }
@@ -187,22 +179,25 @@
             \begin{minipage}[t]{12cm}
               \begin{itemize}
                 \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell. Der Urne werden alle Bälle entnommen. Im Gegensatz zu Variationen und Kombinationen mit Wiederholung bezieht sich das \enquote{mit Wiederholung} hier darauf, dass Gruppen von Bällen identisch sind oder Gruppen von Podiumsplätze nicht unterschieden werden
-                % \begin{itemize}
-                  \item es ist garnicht möglich Zurücklegen wie bei Variationen und Kombinationen mit Wiederholung zu haben, da Zurücklegen auch impliziert, dass ein Ball jedes mal aufs neue zurückgelegt und dann wieder gezogen werden kann, aber beim Multinomialkoeffzienten gibt es eine Beschränkung wie oft ein Ball wieder gezogen werden dürfte. Es ist daher einfacher es darauf zu beziehen, dass Gruppen von Bällen identisch sind oder Gruppen von Podiumsplätze nicht unterschieden werden
-                % \end{itemize}
+                \begin{itemize}
+                  \item es ist garnicht möglich Zurücklegen wie bei Variationen und Kombinationen mit Wiederholung zu haben, da Zurücklegen auch impliziert, dass ein Ball jedes mal aufs neue zurückgelegt und dann wieder gezogen werden kann, aber beim Multinomialkoeffizienten gibt es eine Beschränkung wie oft ein Ball wieder gezogen werden dürfte. Es ist daher einfacher es darauf zu beziehen, dass Gruppen von Bällen identisch sind oder Gruppen von Podiumsplätze nicht unterschieden werden
+                \end{itemize}
                 \item \alert{Anzahl:} $\dbinom{n}{k_1, k_2, \ldots, k_m} = \dfrac{n!}{k_1! \cdot k_2! \cdot \ldots \cdot k_m!}$, $\displaystyle \sum_{i=1}^{m} k_i = n$
+                \begin{itemize}
+                  \item \alert{Multinomialkoeffizient} für die Anzahl Tupel der Länge $n$ mit $m$ verschiedenen Gruppen von identischen Objekten, die jeweils $k_i>0$ mal im Tupel vorkommen
+                  \item \alert{Herleitung:}
+                  \begin{itemize}
+                    \item mit dem Produkt der Fakultäten $k_1!$ bis $k_m$! im Nenner sorgt man dafür, dass die verschiedenen Permutationen eines $k_i$ mal im Tuppel vorkommenden Objektes, die von $n!$ mitgezählt werden als eine Kombination gezählt werden
+                    \item da die verschiedenen Permutationen eines $k_i$ mal im Tupel vorkommenden Objektes untereinander auch nochmal verschieden kombiniert werden k˝nnen, werden nach der Produktregel der Kombinatorik im Nenner die $k_i$ multipliziert
+                    \item hat man nur zwei verschiedene Objekte ($m=2$) in einem Tupel, kann man einfach den üblichen Binomialkoeffizienten $\dbinom{n}{k}$ verwenden, wobei $k!$ für das eine Objekt steht und $(n-k)!$ für das andere Objekt, dass $n-k$ mal im Tupel vorkommt, welches die Länge $n$ hat: $\dbinom{n}{k_1, k_2} = \dbinom{n}{k_1, n-k_1} = \dfrac{n!}{k_1!(n-k_1)!} = \dbinom{n}{k_1}$
+                  \end{itemize}
+                \end{itemize}
         %         \begin{itemize}
         %           \begin{itemize}
-                  % \item z.B. Worte der Länge $n$ mit $m$ verschiedenen Symbolen, die jeweils $k_i$ mal im Wort vorkommen herausbekommen. Die nichtnegative Indices $k_1$ bis $k_m$ ergeben in Summe $n$: $\displaystyle \sum_{i=1}^{m} k_i = n$, da man immer die Anzahl Permutationen herausbekommen will, also die Länge $k$ der Permutationen gleich ist, wie die Länge $n$ des ursprünglichen Wortes: $k=n$.  % TODO: korrekt?
         %             % TODO: wieso Multiplikation im Nenner?
-        %             % \item Ein $k_i$ gibt an, wie oft ein bestimmtes Symbol eines Wortes im Wort vorkommt 
-        %             \item \alert{Herleitung:} 
         %             \begin{itemize}
-        %               % \item im Gegensatz zum Binomialkoeffizienten ist das $(n-k)!$ nicht notwenig, da man immer die Anzahl Permutationen in diesem Spezialfall herausbekommen will, bei denen $k=n$ ist und somit keine Faktoren von $n!$ rausgekürzt werden müssen
-        %               \item mit dem Produkt der Fakultäten $k_1!$ bis $k_m$! im Nenner sorgt man dafür, dass die verschiedenen Permutationen eines $k_i$ mal im Wort vorkommenden Symbols, die von $n!$ mitgezählt werden als eine Kombination gezählt werden
-        %               \item da die verschiedenen Permutationen eines Symbols mit den Permutationen eines anderen Symbols weitere Permutationen bildet, wird multipliziert
+                    % \item im Gegensatz zum Binomialkoeffizienten ist das $(n-k)!$ nicht notwenig, da man immer die Anzahl Permutationen in diesem Spezialfall herausbekommen will, bei denen $k=n$ ist und somit keine Faktoren von $n!$ rausgekürzt werden müssen
         %             \end{itemize}
-        %           \item hat man nur zwei verschiedene Symbole in einem Wort, kann man einfach den üblichen Binomialkoeffizienten $\dbinom{n}{k}$ verwenden, wobei $k!$ für das eine Symbol steht und $(n-k)!$ für das andere Symbol, dass $n-k$ mal im Wort vorkommt, welches die Länge $n$ hat: $\dbinom{n}{k_1, k_2} = \dbinom{n}{k_1, n-k_1} = \dfrac{n!}{k_1!(n-k_1)!} = \dbinom{n}{k_1}$
         %           \end{itemize}
         %         \end{itemize}
               \end{itemize}
@@ -234,6 +229,17 @@
                   \item $|F| = \dfrac{3!}{1!2!} = \dfrac{6}{2} = 3$
                 \end{itemize}
               \end{minipage}
+            }
+          }
+          child {
+            node {Mit Produktregel der Kombinatorik
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{resettikz}
+                    \ctikzfig{./figures/permutationtree}
+                  \end{resettikz}
+                \end{minipage}
+              }
             }
           }
         }
@@ -309,17 +315,13 @@
               % \begin{itemize}
               %   \item auch ungeordnete Stichprobe 
               % \end{itemize}
-                \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_urn_problem_order_unimportant}
                 \end{resettikz}
-                \vspace{-2cm} 
               \item \underline{Fächermodell:} Bälle sind \alert{nicht unterscheidbar}
-                \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{example_box_problem_indestinguishable}
                 \end{resettikz}
-                \vspace{-2cm}
             \end{itemize}
           \end{minipage}
         }
@@ -334,7 +336,7 @@
                 \begin{itemize}
                   \item \alert{Binomialkoeffizient} für Anzahl \alert{gewöhnlicher Untermengen} mit $k$ Elementen
                   \item \alert{Herleitung:} $(n-k)!$ ist wie bei der Herleitung der Anzahl von Variationen ohne Wiederholung nur dazu da von $n!$ die $n-k$ Faktoren $(n-k)\cdot \ldots \cdot 1$ herauszukürzen, sodass da nur noch die Faktoren $n\cdot (n-1) \cdot \ldots \cdot (n-k+1)$ für die $k$ Stellen übrig bleiben. Das $k!$ im Nenner ist die Anzahl der verschiedenen Permutationen einer Variation / Permutation mit $k$ Stellen und hat die Aufgabe dafür zu sorgen, dass alle $k!$ verschiedenen Permutationen einer Variation / Permutation, die in $n!$ gezählt werden als nur eine Kombination zählen.
-                  % \item \alert{Alternative Herleitung für $(n-k)!$}: Man will die Anzahl Permutationen eines Wortes der Länge $n$ herausfinden, welches nur $2$ Symbole hat. Wenn das eine Symbol $k$ mal vorkommt, kommt das andere Symbol $n-k$ mal vor. Die Anzahl Permutationen ist folglich: $\dfrac{n!}{k!(n-k)!}$ (siehe Herleitung Multinomialkoeffzient). Die Anzahl Permutationen in einem Wort der Länge $n$ bei nur $2$ Symbolen, die jeweils $k$ und $n-k$ mal im Wort vorkommen ist gleich der Anzahl gewöhnlicher Untermengen mit $k$ Elementen in einer Menge mit $n$ Elementen, da $asdf$ %TODO
+                  \item \alert{Alternative Herleitung}: Der Binomialkoeffizient berechnet ebenfalls die Anzahl Permutationen mit Wiederholung mit nur $2$ Gruppen von identischen Objekten. Die eine Gruppe entspricht der Auswahl der Länge $k$, die man bei Kombinationen mit Wiederholung trifft und die anderen Gruppe ergibt sich automatisch aus allen anderen $n-k$ identischen Objekten, die es braucht um auf die Länge $n$ aufzufüllen. Die Anzahl Permutationen mit Wiederholung mit nur $2$ Gruppen von identischen Objekten ist daher immer gleich der Anzahl Untermengen der Länge $k$, was man auch darin sieht, dass deren Formel zur Berechnung der Anzahl gleichgesetzt werden können, wenn es beim Multinomialkoeffizient nur $2$ Gruppen von identischen Objekten gibt: $\dbinom{n}{k_1, k_2} = \dbinom{n}{k_1}$, da $\displaystyle\sum_{i=1}^{2}k_i = n \Leftrightarrow k_2 = n-k_1$. Für alles genauere siehe Permutationen mit Wiederholung.
                   \item $\dbinom{n}{n} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot(n-n)!} = \dfrac{n!}{n!\cdot 1} = 1$, $k=n$
                 \end{itemize}
               \end{itemize}
@@ -480,14 +482,12 @@
           \begin{minipage}[t]{14cm}
             \begin{itemize}
               \item auch \alert{Produktregel der Kombinatorik}
-              \item ist weder eine Anordnung noch eine Auswahl, da das Kartesische Produkt zweier potentiel unterschiedlicher Mengen berechnet wird. Für die Anzahl ist die Reihenfolge in der das Kartesische Produkt zwischen jeweils zwei der Mengen angewandt wird egal, nur werden sich jedes mal andere Tupel ergeben
+              \item ist weder eine Anordnung noch eine Auswahl, da das Kartesische Produkt zweier potentiel unterschiedlicher Mengen berechnet wird. Für die Anzahl ist die Reihenfolge in der das Kartesische Produkt zwischen jeweils zwei der Mengen angewandt wird egal, nur werden sich bei jeder unterschiedlichen Reihenfolge andere Tupel ergeben
               \item bei $k$ Mengen $M_1, M_2, \ldots, M_k$, die jeweils $n_1, n_2, \ldots, n_k$ Elemente enthalten, lassen sich $n_1\cdot n_2\cdot \ldots \cdot n_k$ verschiedene $k$-Tupel $(x_1, x_2,\ldots, x_k)$ zusammenstellen
             \end{itemize}
-            \vspace{-3cm}
             \begin{resettikz}
               \ctikzfig{./figures/combinatorics}
             \end{resettikz}
-            \vspace{-2cm}
             \begin{itemize}
               \item die Anzahl \textcolor{PrimaryColor}{blauer} Blätter im oberen Teilbauem ist gleich der Anzahl verschiedener 2er Tupel aus $\{1, 2\}$ und $\{1, 2\}$ und der Anzahl verschiedener Pfade im oberen Teilbaum. Die Anzahl \textcolor{SecondaryColor}{roter} Blätter ist gleich der Anzahl verschiedener 2er Tupel aus $\{3, 4\}$ und $\{1, 2, 3\}$ und der Anzahl verschiedener Pfade im oberen Teilbaum
               \begin{itemize}
@@ -506,7 +506,6 @@
                 \begin{itemize}
                   \item haben alle Knoten in $b$ Teilbäumen \alert{gleich viele Nachfolgerknoten} $b$ kann man die Anzahl der Blätter im allen Teilbäumen mithilfe der \alert{Tiefe} aller Teilbäume zusammen $k$ und der \alert{Anzahl Nachfolgeknoten} $b$ berechnen als $b^k = 2^3 = 8$
                 \end{itemize}
-                \vspace{-2cm}
                 \begin{resettikz}
                   \ctikzfig{./figures/combinatoricspower}
                 \end{resettikz}

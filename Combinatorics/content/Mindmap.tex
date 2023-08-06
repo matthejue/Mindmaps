@@ -12,10 +12,44 @@
   \begin{mindmapcontent}
     \node (co) at (current page.center) {Kombinatorik (combinatorics)
       \resizebox{\textwidth}{!}{
-        \begin{minipage}[t]{12cm}
+        \begin{minipage}[t]{20cm}
           \begin{itemize}
             \item \alert{Anordnung:} (auch Permutation) alle Elemente der Grundmenge werden betrachtet
             \item \alert{Auswahl:} (auch Variation oder Kombination) eine Stichprobe der Grundmenge wird betrachtet
+            \item es wird immer die Anzahl möglicher Relationen zwischen der Menge mit $k$ Elementen und der Menge mit $n$ Elementen mit den entsprechenden Beschränkungen für Urnen-, Fächermodell und (ohne) Wiederholung berechnet
+            \item \alert{Auswahl (Variationen und Kombinationen):}
+            \begin{itemize}
+              \item \alert{Urnenmodell:} 
+                \begin{itemize}
+                  \item jede Relation muss \alert{bijektiv} sein
+                  \item \alert{ohne Wiederholung:} 
+                    \begin{itemize}
+                      \item jede Relation muss \alert{rechtseindeutig} sein (ein Ball darf \alert{nicht} an mehreren Stellen des Podiums stehen)
+                      \item \alert{\enquote{ohne Wiederholung}} entspricht \alert{\enquote{ohne Zurücklegen}} 
+                      \item \alert{\enquote{mit Wiederholung}} entspricht \alert{\enquote{mit Zurücklegen}} 
+                    \end{itemize}
+                \end{itemize}
+              \item \alert{Fächermodell:} 
+                \begin{itemize}
+                  \item jede Relation muss eine \alert{Funktion} sein
+                  \item \alert{ohne Wiederholung:} 
+                    \begin{itemize}
+                      \item jede Relation muss \alert{injektiv} / linkseindeutig sein (mehrere unterschiedliche Bälle dürfen \alert{nicht} ins gleiche Fach)
+                    \end{itemize}
+                \end{itemize}
+            \end{itemize}
+            \item \alert{Anordnung (Permutationen):}
+            \begin{itemize}
+              \item \alert{Urnenmodell:}
+              \begin{itemize}
+                \item jede Relation muss eine bijektive Funktion sein
+                \item \alert{mit Wiederholung:}
+                \begin{itemize}
+                  \item \underline{Sonderregelung zur Vereinfachung:} \alert{ohne Zurücklegen}. Man könnte es alternativ mit Zurücklegen machen und beschränken, dass man jedes unterscheidbare Objekt nur $k_i$ mal zurücklegen darf. Dies ist allerdings schwierig als Relationseigenschafft zu formulieren. Daher gibt man anstelle des $k_i$ maligen Zurücklegens die Grundmenge bereits mit $k_i$ mal identisch enthaltenten Objekten an und tauscht diese nur bijektiv an neue Positionen.
+                  \item dieses Problem fällt etwas aus dem üblichen Schema raus, da man normalerweise von einer Grundmenge aus $n$ untescheidbaren Objekten ausgeht, aber dann landet man einfach nur bei Variationen mit Wiederholung mit $n=k$ und das stellt keinen besonderen Spezialfall da. Daher wird hier ein spezielles neues Problem betrachtet, bei dem man Gruppen von identischen Objekten hat. Dieses Problem lässt sich sich eigentlich für beliebige Auswahlen mit Wiederholung formulieren, sodass Auswahlen möglich sind bei denen die verschiendene Gruppen von identischen Objekten sich nicht genau zu $n$ aufsummieren, aber man beschränkt sich hier auf den einfachsten Fall von \enquote{Permutationen mit Wiederholung} mit $\sum_{i=1}^{m} k_i = n$, da nur dieser ein relevantes häufiges Problem darstellt. Das $n$ ist jetzt nicht mehr die Anzahl Elemente einer Grundmenge von unterscheidbaren Objekten wie sonst üblich, sondern eine Grundmenge von verschiedenen Gruppen identischer Objekte. Dieses Problem bei dem $n$ die Anzahl unterscheidbarer Objekte ist und man diese unterscheidbaren Objekte nur $k_i$ mal zurücklegen kann stellt nämlich kein relevantes, häufiges Problem dar.
+                \end{itemize}
+              \end{itemize}
+            \end{itemize}
           \end{itemize}
         \end{minipage}
       }
@@ -45,11 +79,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $n^k$, $k$ beliebig ($k>n$ ist erlaubt)
-                  % \begin{itemize}
-                  %   \item Anzahl \alert{Folgen}, wobei Folgenglieder sich \alert{nicht unterscheiden} müssen
-                  % \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -117,7 +147,6 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dfrac{n!}{(n-k)!}$, $k \le n$
                 \begin{itemize}
                   \item \alert{Herleitung:} für die erste Stelle gibt es $n$ Möglichkeiten, für die zweite $n-1$ Möglichkeiten, also $n!$, wenn man bis 1 runtergeht. Allerdings gibt es nur $k\le n$ Stellen, daher muss man 1 bis $n-k$, also $(n-k)!$ in den Nenner schreiben, damit sich $1$ bis $n-k$ im Zähler damit rauskürzen
@@ -162,6 +191,9 @@
           \begin{minipage}[t]{12cm}
             \begin{itemize}
               \item \underline{Urnenmodell:} \alert{Anordnung} aller Bälle aus der Urne auf einem Podium bei dem die \alert{Reihenfolge} ($\approx$ Tupel) \alert{aller} Podiumsplätze  \alert{berücksichtigt} wird (ohne Wiederholung) oder die \alert{Reihenfolge} mancher \alert{Gruppen von Podiumsplätzen nicht berücksichtigt} wird (mit Wiederholung)
+                \begin{itemize}
+                  \item der Urne werden alle Bälle entnommen
+                \end{itemize}
                 \begin{resettikz}
                   \ctikzfig{example_urn_problem_order_important_permutations}
                 \end{resettikz}
@@ -176,20 +208,16 @@
       child {
         node {Permutationen mit Wiederholung
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{12cm}
+            \begin{minipage}[t]{14cm}
               \begin{itemize}
-                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell. Der Urne werden alle Bälle entnommen. Im Gegensatz zu Variationen und Kombinationen mit Wiederholung bezieht sich das \enquote{mit Wiederholung} hier darauf, dass Gruppen von Bällen identisch sind oder Gruppen von Podiumsplätze nicht unterschieden werden
-                \begin{itemize}
-                  \item es ist garnicht möglich Zurücklegen wie bei Variationen und Kombinationen mit Wiederholung zu haben, da Zurücklegen auch impliziert, dass ein Ball jedes mal aufs neue zurückgelegt und dann wieder gezogen werden kann, aber beim Multinomialkoeffizienten gibt es eine Beschränkung wie oft ein Ball wieder gezogen werden dürfte. Es ist daher einfacher es darauf zu beziehen, dass Gruppen von Bällen identisch sind oder Gruppen von Podiumsplätze nicht unterschieden werden
-                \end{itemize}
                 \item \alert{Anzahl:} $\dbinom{n}{k_1, k_2, \ldots, k_m} = \dfrac{n!}{k_1! \cdot k_2! \cdot \ldots \cdot k_m!}$, $\displaystyle \sum_{i=1}^{m} k_i = n$
                 \begin{itemize}
                   \item \alert{Multinomialkoeffizient} für die Anzahl Tupel der Länge $n$ mit $m$ verschiedenen Gruppen von identischen Objekten, die jeweils $k_i>0$ mal im Tupel vorkommen
                   \item \alert{Herleitung:}
                   \begin{itemize}
-                    \item mit dem Produkt der Fakultäten $k_1!$ bis $k_m$! im Nenner sorgt man dafür, dass die verschiedenen Permutationen eines $k_i$ mal im Tuppel vorkommenden Objektes, die von $n!$ mitgezählt werden als eine Kombination gezählt werden
+                    \item mit dem Produkt der Fakultäten $k_1!$ bis $k_m$! im Nenner sorgt man dafür, dass die verschiedenen Permutationen eines $k_i$ mal im Tupel vorkommenden Objektes, die von $n!$ mitgezählt werden als eine Kombination gezählt werden
                     \item da die verschiedenen Permutationen eines $k_i$ mal im Tupel vorkommenden Objektes untereinander auch nochmal verschieden kombiniert werden k˝nnen, werden nach der Produktregel der Kombinatorik im Nenner die $k_i$ multipliziert
-                    \item hat man nur zwei verschiedene Objekte ($m=2$) in einem Tupel, kann man einfach den üblichen Binomialkoeffizienten $\dbinom{n}{k}$ verwenden, wobei $k!$ für das eine Objekt steht und $(n-k)!$ für das andere Objekt, dass $n-k$ mal im Tupel vorkommt, welches die Länge $n$ hat: $\dbinom{n}{k_1, k_2} = \dbinom{n}{k_1, n-k_1} = \dfrac{n!}{k_1!(n-k_1)!} = \dbinom{n}{k_1}$
+.                    \item hat man nur zwei verschiedene Objekte ($m=2$) in einem Tupel, kann man einfach den üblichen Binomialkoeffizienten $\dbinom{n}{k}$ verwenden, wobei $k!$ für das eine Objekt steht und $(n-k)!$ für das andere Objekt, dass $n-k$ mal im Tupel vorkommt, welches die Länge $n$ hat: $\dbinom{n}{k_1, k_2} = \dbinom{n}{k_1, n-k_1} = \dfrac{n!}{k_1!(n-k_1)!} = \dbinom{n}{k_1}$
                   \end{itemize}
                 \end{itemize}
         %         \begin{itemize}
@@ -234,10 +262,20 @@
           child {
             node {Mit Produktregel der Kombinatorik
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
+                \begin{minipage}[t]{12cm}
                   \begin{resettikz}
                     \ctikzfig{./figures/permutationtree}
                   \end{resettikz}
+                  \begin{itemize}
+                    \item \alert{Permutationen:} 1122, 1212, 1221, 2112, 2211, 2121
+                    \item wenn $k_1! \cdot k_2!$ nicht im Nenner stehen würde, dann würde man davon ausgehen, dass die zwei $1$er und zwei $2$er unterscheidbar sind (hier durch jeweils $1$, $2$ und $3$, $4$ dargestellt) und auch nocch gegenseitig weiter kombiniert werden können:
+                    \begin{itemize}
+                      \item 1233, 1324, 1342, 3124, 3412, 3141
+                      \item 1243, 1423, 1432, 4123, 4312, 4131
+                      \item 2134, 2314, 2341, 3214, 3421, 3241
+                      \item 2143, 2413, 2431, 4213, 4321, 4231
+                    \end{itemize}
+                  \end{itemize}
                 \end{minipage}
               }
             }
@@ -272,7 +310,6 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell. Der Urne werden alle Bälle entnommen
                 \item \alert{Anzahl:} $\dfrac{n!}{(n-n)!} = \dfrac{n!}{1} = n!$
               \end{itemize}
             \end{minipage}
@@ -331,7 +368,6 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{ohne Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dbinom{n}{k} = \dfrac{n!}{k!\cdot(n-k)!} = \dfrac{n\cdot (n-1) \cdot \ldots \cdot (n-k+1)}{k!}$, $k\le n$
                 \begin{itemize}
                   \item \alert{Binomialkoeffizient} für Anzahl \alert{gewöhnlicher Untermengen} mit $k$ Elementen
@@ -430,7 +466,6 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{mit Zurücklegen} in Bezug auf Urnenmodell
                 \item \alert{Anzahl:} $\dbinom{n+k-1}{k} = \dfrac{(n+k-1)!}{k!\cdot(n+k-1-k)!} = \dfrac{(n+k-1)!}{k!\cdot(n-1)!} = \dfrac{n\cdot (n+1)\cdot \ldots \cdot (n+k-1)}{k!}$, $k$ beliebig ($k>n$ ist erlaubt) 
                 \begin{itemize}
                   \item spezieller \alert{Binomialkoeffizient} $\left(\!\!\dbinom{n}{k}\!\!\right) = \dbinom{n + k - 1}{k} = \dbinom{n+k-1}{n-1}$ für Anzahl \alert{Multimengen} mit $k$ Elementen
@@ -495,7 +530,6 @@
                 \item wenn zwei Teilbäume \alert{unterschiedlich} sind, muss man deren Blätteranzahl \alert{seperat berechnen} und dann \alert{addieren}
               \end{itemize}               
             \end{itemize}
-            % TODO Reihenfolge spielt keine Rolle
           \end{minipage}
         }
       }

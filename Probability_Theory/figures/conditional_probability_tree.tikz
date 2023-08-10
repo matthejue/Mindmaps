@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle with border] (1) at (-1, 5) {$B$};
+		\node [style=circle with border] (2) at (-1, -3) {$ B^C$};
+		\node [style=circle with border] (3) at (5, 3) {$ A^C\cap B$};
+		\node [style=circle with border] (4) at (5, 7) {$A\cap B$};
+		\node [style=circle with border] (5) at (5, -1) {$A\cap  B^C$};
+		\node [style=circle with border] (6) at (5, -5.25) {$ A^C\cap B^C$};
+		\node [style=none] (7) at (-7, 1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+    \draw (1) to node [above, yshift=-0.8cm] {$P(A \;|\; B)$} (4);
+		\draw (1) to node [above, yshift=-0.8cm] {$P( A^C \;|\; B)$} (3);
+		\draw (5) to node [above, yshift=-0.8cm] {$P(A \;|\;  B^C)$} (2);
+		\draw (2) to node [above, yshift=-0.8cm] {$P( A^C \;|\;  B^C)$} (6);
+		\draw (7.center) to node [above, yshift=-0.8cm] {$P( B^C)$} (2);
+		\draw (7.center) to node [above, yshift=-0.8cm] {$P(B)$} (1);
+	\end{pgfonlayer}
+\end{tikzpicture}

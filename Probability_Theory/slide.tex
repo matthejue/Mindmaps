@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage[landscape]{geometry}
+
+\usepackage{pdfpages}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}% clear all header and footer fields
+  \fancyhead[C]{\href{/tmp/current.pdf}{Go back}} % except the center
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\begin{document}
+% \includepdf[fitpaper, pagecommand={\href{/tmp/current.pdf}{Go back}}, pages=-]{/home/areo/Documents/Studium/Master_Vorbereitung/Machine_Learning/Slides/05. Decision Trees.pdf}
+% \includepdf[fitpaper, pagecommand={\thispagestyle{plain}}, pages=-]{/home/areo/Documents/Studium/Master_Vorbereitung/Machine_Learning/Slides/05. Decision Trees.pdf}
+\includepdf[pagecommand={\thispagestyle{plain}}, pages=-]{/home/areo/Documents/Studium/Master_Vorbereitung/Machine_Learning/Slides/05. Decision Trees.pdf}
+% , templatesize={10cm}{10cm}
+\end{document}

@@ -1,0 +1,435 @@
+%!Tex Root = ../main.tex
+% ./Packete.tex
+% ./Design.tex
+% ./Vorbereitung.tex
+% ./Aufgabe1.tex
+% ./Aufgabe2.tex
+% ./Aufgabe3.tex
+% ./Aufgabe4.tex
+% ./Appendix.tex
+
+\begin{mindmap}
+  \begin{mindmapcontent}
+    \node (pt) at (current page.center) {Stochastik (probability theory)}
+    child {
+      node {Wahrscheinlichkeitsraum
+        % manchmal auch Massenfunktion
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item $(\Omega, \mathcal{P}(\Omega), \mathbb{P})$
+                \begin{itemize}
+                  \item Ergebnisraum/menge / Grundraum/menge $\Omega$, $\omega\in \Omega$ wird \alert{Ergebnis} genannt
+                  \item \alert{Wahrscheinlichkeitsmaß / Wahrscheinlichkeitsverteilung} $\mathbb{P}: \mathcal{P}(\Omega)\rightarrow [0, 1]$
+                \end{itemize}
+              \item \alert{Ereignis} $A\in \mathcal{P}(\Omega)$, \alert{Elementarereignis} $\{\omega\}$, $\omega\in\Omega$
+                % \begin{itemize}
+                %   \item $\displaystyle\mathbb{P}(A)=\sum_{\omega_{k} \in A} \mathbb{P}\left(\left\{\omega_{k}\right\}\right)$
+                % \end{itemize}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+        child {
+          node {Bedingte Wahrscheinlichkeiten
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item $\displaystyle\mathbb{P}(A \;|\; B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}$
+                  \begin{itemize}
+                    \item $\mathbb{P}(A|B)$ oder $\mathbb{P}_B(A)$
+                    \item $\mathbb{P}(\cdot|B) : \mathcal{P}(\Omega) \rightarrow [0, 1]$ ist ein auf $B$ konzentriertes Wahrscheinlichkeitsmaß
+                    \item \alert{mögliche Fälle:}
+                    \begin{itemize}
+                      \item $\mathbb{P}(B | A)>\mathbb{P}(B)$ $\Rightarrow$ $A$ begünstigt $B$ 
+                      \item $\mathbb{P}(B | A)<\mathbb{P}(B)$ $\Rightarrow$ $A$ beeinträchtigt $B$
+                      \item $\mathbb{P}(B | A)=\mathbb{P}(B)$ $\Rightarrow$ $B$ unahbängig von $A$
+                    \end{itemize}
+                    \item \alert{Spezialfälle:}
+                    \begin{itemize}
+                      \item $\displaystyle A \supseteq B$ $\Rightarrow$ $\mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(B)}{\mathbb{P}(B)}=1$
+                      \item $\displaystyle A \subseteq B^c$ $\Rightarrow$ $\mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(\emptyset)}{\mathbb{P}(B)}=0$
+                      \item $\displaystyle B=\Omega$ $\Rightarrow$ $\mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(A)}{\mathbb{P}(\Omega)}=\mathbb{P}(A)$
+                    \end{itemize}
+                    \item $\mathbb{P}(\Omega) = \mathbb{P}(A\;|\;B) + \mathbb{P}(A^C\;|\;B)$
+                  \end{itemize}
+                \end{itemize}
+                \begin{resettikz}
+                  \ctikzfig{./figures/conditional_probability_tree}
+                \end{resettikz}
+              \end{minipage}
+            }
+          }
+        child {
+          node {Satz von der Totalen Wahrscheinlichkeit
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item $\displaystyle\mathbb{P}(A)=\mathbb{P}\left(\bigcup_{i \geq 1}\left(A \cap B_{i}\right)\right)=\sum_{i \geq 1} \mathbb{P}\left(A \cap B_{i}\right)=\sum_{i \geq 1} \mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)$
+                  \begin{itemize}
+                    \item \alert{für $B$ mit zwei Zerlegungen:} $\mathbb{P}(A) = \mathbb{P}(A\cap B) + \mathbb{P}(A\cap B^C) = \mathbb{P}(A|B) \cdot \mathbb{P}(B) + \mathbb{P}(A|B^C) \cdot \mathbb{P}(B^C)$
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Kontingenztafel
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  % \usepackage{color}
+                  % \usepackage{tabularray}
+                  % \definecolor{Silver}{rgb}{0.752,0.752,0.752}
+                  % \definecolor{WebOrange}{rgb}{1,0.647,0}
+                  \begin{table}
+                  \centering
+                  \begin{tblr}{
+                    cells = {BoxColor},
+                    row{1} = {PrimaryColorDimmed},
+                    column{1} = {PrimaryColorDimmed},
+                    vline{4} = {-}{},
+                    hline{4} = {-}{},
+                  }
+                        & $A$            & $A^C$           & $\sum$   \\
+                  $B$    & $P(A\cap B)$   & $P(A^C\cap B)$  & $P(B)$   \\
+                  $B^C$  & $P(A\cap B^C)$ & $P(A^C\cap B^C)$ & $P(B^C)$ \\
+                  $\sum$ & $P(A)$         & $P(A^C)$        & $P(\Omega)=1$      
+                  \end{tblr}
+                  \end{table}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Satz von Bayes
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{10cm}
+                \begin{itemize}
+                  \item $\displaystyle\mathbb{P}\left(B_{i} | A\right)
+=\frac{\mathbb{P}(B_i \cap A)}{\mathbb{P}(A)}
+=\frac{\mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)}{\mathbb{P}(A)}
+=\frac{\mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)}{\sum_{j \geq 1} \mathbb{P}\left(A | B_{j}\right) \cdot \mathbb{P}\left(B_{j}\right)}$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+          child {
+            node {Unabhängigkeit
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{10cm}
+                  \begin{itemize}
+                    \item zwei Ereignisse $A, B$ sind unabhängig \alert{gdw.}
+                     $\mathbb{P}(A\cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$
+                    \begin{itemize}
+                      \item drei Ereignisse $A, B, C$ sind unabhängig \alert{gdw.} $\mathbb{P}(A\cap B) = \mathbb{P}(A)\cdot \mathbb{P}(B)$ und $\mathbb{P}(A\cap C) = \mathbb{P}(A)\cdot \mathbb{P}(C)$ und $\mathbb{P}(B\cap C) = \mathbb{P}(B)\cdot \mathbb{P}(C)$ und $\mathbb{P}(A\cap B\cap C) = \mathbb{P}(A)\cdot \mathbb{P}(B)\cdot \mathbb{P}(C)$
+                      \item eine endliche oder abzählbare Folge von Ereignissen $(A_n)_{n\ge 1}\subset \mathcal{P}(\Omega)$ heißt unabhängig, falls für jede endliche Teilmenge $T\subset \mathbb{N}$ gilt, dass $\mathbb{P}(\bigcap_{j\in T}A_j) = \prod_{j\in T}\mathbb{P}(A_j)$
+                      \item \alert{Beweis:}
+                        \begin{flalign*}
+                      & \boxed{\mathbb{P}(A | B)=\mathbb{P}\left(A | B^{c}\right)}\\
+                      & \Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\dfrac{\mathbb{P}\left(A \cap B^{c}\right)}{\mathbb{P}\left(B^{c}\right)}=\dfrac{\mathbb{P}(A)-\mathbb{P}(A \cap B)}{\mathbb{P}\left(B^{c}\right)}\\
+                      & \Leftrightarrow\dfrac{\mathbb{P}(A \cap B)\cdot \mathbb{P}\left(B^{c}\right)}{\mathbb{P}(B)}=\mathbb{P}(A)-\mathbb{P}(A \cap B)\\
+                      & \Leftrightarrow\mathbb{P}(A \cap B)\cdot (1-\mathbb{P}(B))=\mathbb{P}(A)\mathbb{P}(B)-\mathbb{P}(A \cap B)\mathbb{P}(B)\\
+                      & \Leftrightarrow\mathbb{P}(A \cap B)-\mathbb{P}(A \cap B)\mathbb{P}(B)=\mathbb{P}(A)\mathbb{P}(B)-\mathbb{P}(A \cap B)\mathbb{P}(B)\\
+                      & \overset{!}{\Leftrightarrow} \boxed{\mathbb{P}(A \cap B)=\mathbb{P}(A)\mathbb{P}(B)}\\
+                      & \overset{1.}\Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)}=\mathbb{P}(B)\Leftrightarrow\boxed{\mathbb{P}(B | A)=\mathbb{P}(B)}\\
+                      & \overset{2.}\Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\mathbb{P}(A)\Leftrightarrow\boxed{\mathbb{P}(A | B)=\mathbb{P}(A)}\\
+                      % >  - und genauso $\mathbb{P}(A | B)=\mathbb{P}\left(A | B^{c}\right)\Leftrightarrow \mathbb{P}(B | A)=\mathbb{P}\left(B | A^{c}\right)$, wenn man $\mathbb{P}(A \cap B)\mathbb{P}(B)$ bzw. $\mathbb{P}(A \cap B)\mathbb{P}(A)$ auf beiden Seiten der Gleichung subtrahiert
+                            \end{flalign*}
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+      child {
+        node {Zufallsvariablen
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item $X: \Omega \rightarrow \mathbb{R}$, Ergebnissen eines Zufallsexperimentes werden reelle Zahlen zugeordnet
+                \begin{itemize}
+                  \item man sagt Variable, weil die Zahl, die man am Ende erhält variabel ist
+                \end{itemize}
+                \item \alert{Wertebereich von $X$:} $X(\Omega) = \{x_1, x_2, \ldots\}$
+                \item \underline{für Zufallsvariable:} $(X(\Omega), \mathcal{P}({X(\Omega)}), \mathbb{P}_X)$
+                  \begin{itemize}
+                    % \item  Wahrscheinlichkeitsmaß / Verteilung von $X$: $\mathbb{P}_X(A) = \mathbb{P}(X^{-1}(A)) = \mathbb{P}(\{w\in \Omega | X(\omega) \in A,\})$ auf dem Wertebereich $(X(\Omega), \mathcal{P}(X(\Omega)))$ von $X$
+                    \item  \alert{Wahrscheinlichkeitsmaß / Verteilung von $X$:}\\ $\mathbb{P}_X(A) = \mathbb{P}(X^{-1}(A)) = \mathbb{P}(\{w\in \Omega | X(\omega) \in A,\})$, $A\in\mathcal{P}(X(\Omega))$, $X^{-1}: \mathcal{P}(\mathbb{R})\rightarrow \mathcal{P}(\Omega)$
+                    % \item \alert{stetiges Wahrscheinlichkeitsmaß / stetige Wahrscheinlichkeitsverteilung:}\\
+                    %   $\displaystyle\mathbb{P}_X(B) = \mathbb{P}(X\in B) = \int_B f_X(y) dy = \int_{\mathbb{R}} \mathbb{1}_{\mathbb{B}}(y) f_X(y)dy$\hspace{0.5cm} für alle $B \in \mathcal{P}(X(\Omega))$
+                  \end{itemize}
+                \item \alert{spezielle Schreibweisen:}
+                  \begin{itemize}
+                    \item $\{X\, \operatorname{rel}\, t\} = \{w\in\Omega: X(\omega)\, \operatorname{rel}\, t\},\, rel \in \{=, \ne, <, \le, >, \ge, \in, \ldots\}$
+                      \begin{itemize}
+                        \item wobei z.B. $\{X = t\} = X^{-1}(\{t\})$, $\{X\le t\} = X^{-1}((-\infty, t])$ und $X^{-1}(M) = \{\omega \in \Omega | X(\omega)\in M\} = \{X\in M\}$ für $M\subseteq \mathbb{R}$ % mit $X^{-1}: \mathcal{P}(\mathbb{R}) \rightarrow \mathcal{P}(\Omega)$
+                        \item \alert{auch zwei Zufallsvariablen möglich:}\\
+                          z.B. Augensumme zweifacher Wurf mit $\Omega = \{(1, \ldots, 6)\}^2$, $X(a_1, a_2) = a_1$, $Y(a_1, a_2) = a_2$: $\{X-2Y > 0\} = \{\omega\in \Omega | X(\omega) > 2Y(\omega)\} = \{(6, 2), (6, 1), (5, 2), (5, 1), (4, 1), (3, 1)\}$
+                      \end{itemize}
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Diskrete Zufallsvariablen
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item nehmen endlich viele oder abzählbar unendlich viele Werte an
+                  \item \alert{Wahrscheinlichkeitsfunktion:}\\ 
+                    $f_X: \mathbb{R} \rightarrow [0, 1]$, $\displaystyle \sum_{x\in dom(f_X)} f_X(x) = 1$, jedem $x_i$ einer Zufallsvariable $X$ wird genau ein $p_i$  aus $[0, 1]$ zugeordnet
+                    \begin{itemize}
+                      % \item $f(x) = \mathbb{P}(X = x) = \mathbb{P}_X(x) = p$
+                      \item $\mathbb{P}(X = x) = f(x) = \begin{cases}
+                        p_i  & \text{für } x=x_i, i\in\{1, \ldots, n\}\\
+                        0  & \text{sonst}
+                        \end{cases}$, nur den Realisationen $x_1, \ldots, x_n$ von $X$ kann eine konkrette Wahrscheinlichkeit zugeordnet werden, die Wahrscheinlichkeit für alle übrigen Werte ist jeweils $0$ %, jedem Wert von $X$ kann eine konkrette Wahrscheinlichkeit zugeordnet werden
+                      \item Werte $x_1, x_2, \ldots, x_n$, welche die Zufallsvariable $X$ annimmt, werden als \alert{Realisationen} bezeichnet. Die dazugehörigen Wahrscheinlichkeiten sind $p_1, p_2, \ldots, p_n$
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Stetige Zufallsvariablen 
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item nehmen überabzählbar unendlich viele Werte an
+                  \item \alert{Dichtefunktion / Wahrscheinlichkeitsdichte:}\\ 
+                    % $f: \mathbb{R}\rightarrow [0, \infty)$, $\displaystyle \int_{\mathbb{R}} f(y)dy = 1$
+                    $f_X: \mathbb{R}\rightarrow [0, \infty)$, $\displaystyle \int_{-\infty}^{+\infty} f_X(x)dx = 1$
+                    \begin{itemize}
+                      \item $\displaystyle\mathbb{P}(a\le X\le b) = \int_a^b f_X(x)dx = F(b) - F(a)$
+                      \item \alert{Wahrscheinlichkeit nur für Intervalle und nicht für einzelne Werte:}
+                        \begin{flalign}
+                          \mathbb{P}(X = x) = \int_x^x f(u)du = F(x) - F(x) = 0 && %\quad \text{für alle } x\in\mathbb{R}
+                          \label{eq:interval}
+                        \end{flalign}
+                        % https://tex.stackexchange.com/questions/145657/align-equation-left
+                      % \item $\mathbb{P}(a\le X\le b) = \mathbb{P}(a< X\le b) = \mathbb{P}(a\le X< b) = \mathbb{P}(a < X < b)$
+                    \item Wahrscheinlichkeitsmaß $\mathbb{P}_X$ auf $X(\Omega)$ lässt sich nicht mehr über Elementarwahrscheinlichkeiten festlegen, da $X(\Omega)$ überabzählbar ist. Der Grundraum $\Omega$ müsste daher bereits überabzählbar sein, weil es sonst mehr Bilder als Urbilder gäbe und $X$ somit keine Funktion mehr wäre. Aus diesem Grund muss man eine Dichte verwenden
+                    \end{itemize}             
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Verteilungsfunktion
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item $F_X: \mathbb{R} \rightarrow [0, 1]$%, $x\mapsto \mathbb{P}(X\le x)$
+                  \begin{itemize}
+                    % \item $F_X(z) = \mathbb{P}_X((-\infty, z]) = \mathbb{P}(X\le z)$
+                    \item $F_X(z) = \mathbb{P}(X\le z)$
+                  \end{itemize}
+                  \item \alert{Eigenschaften von Verteilungsfunktionen:}
+                  \begin{itemize}
+                    \item monoton wachsend
+                    \item rechtsseitig stetig
+                    \item $\displaystyle lim_{z\rightarrow -\infty} F_X(z) = 0$ 
+                    \item $\displaystyle lim_{z\rightarrow +\infty} F_X(z) = 1$
+                  \end{itemize}
+                  % \item jede Verteilungsfunktion besitzt höchstens abzählbar viele Sprungstellen.
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {für diskrete Verteilungen
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item $\displaystyle F(z) = \mathbb{P}(X\le z) = \sum_{x\le z} f(x)$
+                    \begin{itemize}
+                      \item \alert{über Fallunterschiedung definieren:}\\
+                        $F(z) = \mathbb{P}(X\le z) = \begin{cases}
+                          0 & \text{für } z < x_1\\
+                          p_1 & \text{für } x_1 \le z < x_2\\
+                          p_1 + p_2 & \text{für } x_2 \le z < x_3\\
+                          1 & \text{für } z \ge x_3
+                        \end{cases}$
+                    \end{itemize}
+                    % \item $\displaystyle F_X(z) = \sum_{x_k < z} \mathbb{P}_X(\{x_k\}) = \sum_{k=0}^{k^*} \mathbb{P}(X = x_k)$
+                    %   \begin{itemize}
+                    %     \item wobei: $k^* = max\{k \ge 0 | x_k \le z\}$
+                    %   \end{itemize}
+                    \item \alert{Wahrscheinlichkeiten berechnen:}
+                      \begin{itemize}
+                        \item $\mathbb{P}(X \leq a)=F(a)$
+                        \item $\mathbb{P}(X<a)=F(a)-P(X=a)$
+                        \item $\mathbb{P}(X>a)=1-F(a)$
+                        \item $\mathbb{P}(X \geq a)=1-F(a)+P(X=a)$
+                        \item $\mathbb{P}(a<X \leq b)=F(b)-F(a)$
+                        \item $\mathbb{P}(a \leq X \leq b)=F(b)-F(a)+P(X=a)$
+                        \item $\mathbb{P}(a<X<b)=F(b)-F(a)-P(X=b)$
+                        \item $\mathbb{P}(a \leq X<b)=F(b)-F(a)+P(X=a)-P(X=b)$
+                        \item $\mathbb{P}(X=x_i) = F(x_i) - F(x_{i-1})$
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {für stetige Verteilungen
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item $\displaystyle F(z) = \mathbb{P}(X\le z) = \int_{-\infty}^{z} f(x)dx$
+                    % \item \underline{ergibt sich aus der Integration der Dichtefunktion:}\\ $\displaystyle F_X(z) = \int^z_{-\infty} f_X(y)dy$
+                    \item \alert{Wahrscheinlichkeiten berechnen:}
+                    \begin{itemize}
+                      \item $P(X \leq a)=P(X<a)=F(a)$
+                      \item $P(a \leq X \leq b)=P(a<X<b)=P(a \leq X<b)=P(a<X \leq b)=F(b)-F(a)$
+                      \item $P(X>a)=P(X \geq a)=1-P(X<a)=1-P(X \leq a)=1-F(a)$
+                      \begin{itemize}
+                        \item folgen alle aus \ref{eq:interval}
+                      \end{itemize}
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Indikatorfunktion
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{10cm}
+                \begin{itemize}
+                  \item $\mathbb{1}_A(\omega) = \begin{cases}
+                      1, & \text{falls } \omega\in A\\
+                      0, & \text{falls } \omega\not\in A
+                  \end{cases},\quad A\subseteq\Omega$
+                  \begin{itemize}
+                    \item auch $\mathbb{1}\{A\}(\omega)$, falls Indizes auftreten
+                    \item \alert{Rechenregeln:}                    
+                    \begin{itemize}
+                      \item $\mathbf{1}_{\emptyset} \equiv 0, \quad \mathbf{1}_{\Omega} \equiv 1$
+                      \item $\mathbf{1}_A^2=\mathbf{1}_A$
+                      \item $\mathbf{1}_{A^c}=1-\mathbf{1}_A$, $\mathbf{1}_{A \cap B}=\mathbf{1}_A \mathbf{1}_B$, $\mathbf{1}_{A \cup B}=\mathbf{1}_A+\mathbf{1}_B-\mathbf{1}_{A \cap B}$
+                      \item $A \subseteq B \Longleftrightarrow \mathbf{1}_A \leq \mathbf{1}_B$
+                    \end{itemize}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Indikatorsumme, Zählvariable
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item $\displaystyle X = \sum^{n}_{j=1} \mathbb{1}_{A_j},\quad A_1,\ldots,A_n\subseteq \Omega$
+                    \begin{itemize}
+                      \item gibt an, wie viele der $A_j$ eintreten
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+      }
+      % child {
+      %   node {Quantilfunktion}
+      % }
+      child {
+        node {Faltung von Verteilungen
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item asdf
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Gemeinsame Verteilungen
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item asdf
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Additionstheorem
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item $\mathbb{P}(A\cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)$
+                \begin{itemize}
+                  \item $\mathbb{P}(A_1\cup A_2\cup A_3) = \mathbb{P}(A_1) + \mathbb{P}(A_2) + \mathbb{P}(A_3) - \mathbb{P}(A_1\cap A_2) - \mathbb{P}(A_2\cap A_3)  - \mathbb{P}(A_1\cap A_3) + \mathbb{P}(A_1\cap A_2\cap A_3)$
+                  \item \underline{für paarweise disjunkte Mengen $A_1, \ldots, A_n \in \mathcal{P}(\Omega)$:} $\mathbb{P}\left(\bigcup_{i=1}^n A_i\right)=\sum_{i=1}^n \mathbb{P}\left(A_i\right)$
+                  \item für größere $n$ \href[page=13]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{Siebformel} und bei austauschbaren Ereignissen die \href[page=35]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{Siebformel für austauschbare Ereignisse}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Multiplikationstheorem
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item $\mathbb{P}(A\cap B) = \mathbb{P}(A)\cdot \mathbb{P}(B\;|\;A) = \mathbb{P}(B)\cdot \mathbb{P}(A\;|\;B) = \mathbb{P}(B\cap A)$
+                \begin{itemize}
+                  \item $\mathbb{P}\left(A_{1} \cap \ldots \cap A_{n}\right)=\mathbb{P}\left(A_{1}\right) \cdot \mathbb{P}\left(A_{2} | A_{1}\right) \cdot \mathbb{P}\left(A_{3} | A_{1} \cap A_{2}\right) \cdot \ldots \cdot \mathbb{P}\left(A_{n} | A_{1} \cap \ldots \cap A_{n-1}\right)$
+                  \item \underline{$(A_n)_{n>1}$ unabhängig:} $\mathbb{P}\left(A_{1} \cap \ldots \cap A_{n}\right)=\mathbb{P}\left(A_{1}\right) \cdot \mathbb{P}\left(A_{2}\right) \cdot \mathbb{P}\left(A_{3}\right) \cdot \ldots \cdot \mathbb{P}\left(A_{n}\right)$
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+    }
+    child {
+      node {Kenngrößen von Zufallsvariablen}
+      child {
+        node {Erwartungswert}
+      }
+      child {
+        node {Varianz und Standardabweichung}
+      }
+      child {
+        node {Kovarianz}
+        child {
+          node {Korrelationskoeffizient}
+        }
+      }
+    }
+    child {
+      node {Wahrscheinlichkeitsverteilungen}
+      child {
+        node {Diskrete Wahrscheinlichkeitsverteilungen}
+      }
+      child {
+        node {Stetige Wahrscheinlichkeitsverteilungen}
+      }
+    }
+    child {
+      node {Schätzprobleme und Tests}
+    };
+  \end{mindmapcontent}
+  % \begin{edges}
+  %   \edge{pt}{bc}
+  % \end{edges}
+  \annotation{pt.south}{This mindmap is provided without guarantee of correctness and completeness!};
+\end{mindmap}
+
+% P_X nimmt nur Mengen entgegen, f_X nimmt nur einzelne Realisationen entgegen
+% F ist f integriert (Stammfunktion oder wie das heißt) und f ist F abgeleitet
+% wie man X definiert mit omegas

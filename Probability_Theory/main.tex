@@ -1,0 +1,62 @@
+\documentclass{standalone}
+\usepackage[english]{babel}
+
+\usepackage{unicode-math}
+
+% \usepackage{amsmath}
+% \usepackage{amssymb} % for black triangleright
+\usepackage[export]{adjustbox}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage{pseudo}
+\usepackage{float}
+\usepackage{xparse}
+
+\usepackage{tabularray}
+
+\usepackage{tikzit}
+\input{graph_theory.tikzstyles}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,theorems}
+
+\usepackage{fontspec}
+% https://dejavu-fonts.github.io/Download.html
+\newfontfamily\gyre{DejaVu Math TeX Gyre}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{graphs}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadings}
+\usetikzlibrary{mindmap, shadows, backgrounds} % , calc
+
+% \usepackage[style=authortitle]{biblatex}
+% \addbibresource{./Library/library.bib}
+
+% \definecolor{SwitchColor}{HTML}{FFFFFF}
+\definecolor{PrimaryColor}{HTML}{262686}
+\definecolor{PrimaryColorDimmed}{HTML}{DAE8FC}
+\definecolor{SecondaryColor}{HTML}{CC0000}
+\definecolor{SecondaryColorDimmed}{HTML}{F8CECC}
+\colorlet{BoxColor}{gray!10!white}
+\definecolor{SwitchColor}{named}{PrimaryColor}
+
+% \usepackage[colorlinks=true, allcolors=PrimaryColor]{hyperref}
+\usepackage[allbordercolors=PrimaryColor, pdfborder={0 0 .2}]{hyperref}
+
+\newcommand\alert[1]{\textcolor{SwitchColor}{#1}}
+\newcommand{\ma}[1]{$\mathcal{#1}$}
+\renewcommand{\tt}[1]{{\small\texttt{#1}}}
+\renewcommand{\labelitemi}{$\textcolor{SwitchColor}{\bullet}$}
+\renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
+% https://tex.stackexchange.com/questions/528831/why-doesnt-the-bm-package-work-with-the-unicode-math-package
+% \blacksquare from \usepackage{amssymb} not needed anymore because already defnined in unicode-math
+\renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blockfull}$}
+
+\input{./content/Deklarationen_Mindmap}
+\input{./content/Schnipsel}
+
+\begin{document}
+  \input{./content/Mindmap}
+\end{document}

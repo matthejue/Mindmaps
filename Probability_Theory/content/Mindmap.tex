@@ -33,12 +33,14 @@
         child {
           node {Bedingte Wahrscheinlichkeiten
             \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
+              \begin{minipage}[t]{14cm}
                 \begin{itemize}
                   \item $\displaystyle\mathbb{P}(A \;|\; B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}$
                   \begin{itemize}
                     \item $\mathbb{P}(A|B)$ oder $\mathbb{P}_B(A)$
-                    \item $\mathbb{P}(\cdot|B) : \mathcal{P}(\Omega) \rightarrow [0, 1]$ ist ein auf $B$ konzentriertes Wahrscheinlichkeitsmaß
+                    \item $\mathbb{P}(\cdot|B) : \mathcal{P}(\Omega) \rightarrow [0, 1]$ ist ein auf $B$ konzentriertes Wahrscheinlichkeitsmaß ($\displaystyle \mathbb{P}(A\;|\;B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}$)
+                    \item \alert{bedingte Wahrscheinlichkeitsfunktion für diskrete Zufallsvariablen:}\\ $\displaystyle \mathbb{P}(X=x\;|\;Y=y) = \frac{\mathbb{P}(X=x, Y=y)}{\mathbb{P}(Y=y)}$
+                    \item \alert{bedingte Dichtefunktion für stetige Zufallsvariablen:}\\ $\displaystyle f_{X\;|\;Y=y}(x) = \frac{f_{(X,Y)}(x, y)}{f_Y(y)}$
                     \item \alert{mögliche Fälle:}
                     \begin{itemize}
                       \item $\mathbb{P}(B | A)>\mathbb{P}(B)$ $\Rightarrow$ $A$ begünstigt $B$ 
@@ -47,21 +49,42 @@
                     \end{itemize}
                     \item \alert{Spezialfälle:}
                     \begin{itemize}
-                      \item $\displaystyle A \supseteq B$ $\Rightarrow$ $\mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(B)}{\mathbb{P}(B)}=1$
-                      \item $\displaystyle A \subseteq B^c$ $\Rightarrow$ $\mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(\emptyset)}{\mathbb{P}(B)}=0$
-                      \item $\displaystyle B=\Omega$ $\Rightarrow$ $\mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(A)}{\mathbb{P}(\Omega)}=\mathbb{P}(A)$
+                      \item $A \supseteq B$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(B)}{\mathbb{P}(B)}=1$
+                      \item $A \subseteq B^c$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(\emptyset)}{\mathbb{P}(B)}=0$
+                      \item $B=\Omega$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(A)}{\mathbb{P}(\Omega)}=\mathbb{P}(A)$
                     \end{itemize}
                     \item $\mathbb{P}(\Omega) = \mathbb{P}(A\;|\;B) + \mathbb{P}(A^C\;|\;B)$
                   \end{itemize}
                 \end{itemize}
-                \begin{resettikz}
-                  \ctikzfig{./figures/conditional_probability_tree}
-                \end{resettikz}
+                \vspace{-2cm}
+                \begin{minipage}{0.5\textwidth}
+                  \begin{table}
+                    \centering
+                    \begin{tblr}{
+                      cells = {c, BoxColor},
+                      row{1} = {PrimaryColor, fg=white},
+                      row{4} = {PrimaryColorDimmed},
+                      row{5} = {PrimaryColorDimmed},
+                    }
+                      $X$   & $Y$   &                                                             \\
+                      $x_1$ & $y_1$ &                                                             \\
+                      $x_1$ & $y_3$ & $P(Y=y_3|X=x_1) = \dfrac{1}{2} \ne \dfrac{1}{4} = P(Y=y_3)$ \\
+                      $x_2$ & $y_1$ & $P(Y=y_1|X=x_2) = \dfrac{1}{2} = \dfrac{2}{4} = P(Y=y_1)$   \\
+                      $x_2$ & $y_2$ &
+                    \end{tblr}
+                    \caption{$P(\cdot\;|\;X=x_2)$ blendet alle Zeilen ohne $x_2$ aus}
+                  \end{table}
+                \end{minipage}
+                \begin{minipage}{0.5\textwidth}
+                  \begin{resettikz}
+                    \ctikzfig{./figures/conditional_probability_tree}
+                  \end{resettikz}
+                \end{minipage}
               \end{minipage}
             }
           }
         child {
-          node {Satz von der Totalen Wahrscheinlichkeit
+          node (tw) {Satz von der Totalen Wahrscheinlichkeit
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -71,33 +94,6 @@
                   \end{itemize}
                 \end{itemize}
               \end{minipage}
-            }
-          }
-          child {
-            node {Kontingenztafel
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  % \usepackage{color}
-                  % \usepackage{tabularray}
-                  % \definecolor{Silver}{rgb}{0.752,0.752,0.752}
-                  % \definecolor{WebOrange}{rgb}{1,0.647,0}
-                  \begin{table}
-                  \centering
-                  \begin{tblr}{
-                    cells = {BoxColor},
-                    row{1} = {PrimaryColorDimmed},
-                    column{1} = {PrimaryColorDimmed},
-                    vline{4} = {-}{},
-                    hline{4} = {-}{},
-                  }
-                        & $A$            & $A^C$           & $\sum$   \\
-                  $B$    & $P(A\cap B)$   & $P(A^C\cap B)$  & $P(B)$   \\
-                  $B^C$  & $P(A\cap B^C)$ & $P(A^C\cap B^C)$ & $P(B^C)$ \\
-                  $\sum$ & $P(A)$         & $P(A^C)$        & $P(\Omega)=1$      
-                  \end{tblr}
-                  \end{table}
-                \end{minipage}
-              }
             }
           }
         }
@@ -170,18 +166,19 @@
                           z.B. Augensumme zweifacher Wurf mit $\Omega = \{(1, \ldots, 6)\}^2$, $X(a_1, a_2) = a_1$, $Y(a_1, a_2) = a_2$: $\{X-2Y > 0\} = \{\omega\in \Omega | X(\omega) > 2Y(\omega)\} = \{(6, 2), (6, 1), (5, 2), (5, 1), (4, 1), (3, 1)\}$
                       \end{itemize}
                   \end{itemize}
+                \item \alert{Diskrete Zufallsvariablen:} Nehmen endlich viele oder abzählbar unendlich viele Werte an
+                \item \alert{Stetige Zufallsvariablen:} Nehmen überabzählbar unendlich viele Werte an
               \end{itemize}
             \end{minipage}
           }
         }
         child {
-          node {Diskrete Zufallsvariablen
+          node {Wahrscheinlichkeitsfunktion / Probability mass function (PMF)
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item nehmen endlich viele oder abzählbar unendlich viele Werte an
-                  \item \alert{Wahrscheinlichkeitsfunktion:}\\ 
-                    $f_X: \mathbb{R} \rightarrow [0, 1]$, $\displaystyle \sum_{x\in dom(f_X)} f_X(x) = 1$, jedem $x_i$ einer Zufallsvariable $X$ wird genau ein $p_i$  aus $[0, 1]$ zugeordnet
+                  \item beschränkt auf diskrete Zufallsvariablen
+                  \item $f_X: \mathbb{R} \rightarrow [0, 1]$, $\displaystyle \sum_{x\in dom(f_X)} f_X(x) = 1$, jedem $x_i$ einer Zufallsvariable $X$ wird genau ein $p_i$  aus $[0, 1]$ zugeordnet
                     \begin{itemize}
                       % \item $f(x) = \mathbb{P}(X = x) = \mathbb{P}_X(x) = p$
                       \item $\mathbb{P}(X = x) = f(x) = \begin{cases}
@@ -196,19 +193,18 @@
           }
         }
         child {
-          node {Stetige Zufallsvariablen 
+          node {Dichtefunktion / Wahrscheinlichkeitsdichte / Probability density function (PDF)
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item nehmen überabzählbar unendlich viele Werte an
-                  \item \alert{Dichtefunktion / Wahrscheinlichkeitsdichte:}\\ 
+                  \item beschränkt auf stetige Zufallsvariablen
+                  \item $f_X: \mathbb{R}\rightarrow [0, \infty)$, $\displaystyle \int_{-\infty}^{+\infty} f_X(x)dx = 1$
                     % $f: \mathbb{R}\rightarrow [0, \infty)$, $\displaystyle \int_{\mathbb{R}} f(y)dy = 1$
-                    $f_X: \mathbb{R}\rightarrow [0, \infty)$, $\displaystyle \int_{-\infty}^{+\infty} f_X(x)dx = 1$
                     \begin{itemize}
                       \item $\displaystyle\mathbb{P}(a\le X\le b) = \int_a^b f_X(x)dx = F(b) - F(a)$
                       \item \alert{Wahrscheinlichkeit nur für Intervalle und nicht für einzelne Werte:}
                         \begin{flalign}
-                          \mathbb{P}(X = x) = \int_x^x f(u)du = F(x) - F(x) = 0 && %\quad \text{für alle } x\in\mathbb{R}
+                          \mathbb{P}(X = x) = \int_x^x f(u)du = F(x) - F(x) = 0 && % ,\quad x\in\mathbb{R} \quad \text{für alle } x\in\mathbb{R}
                           \label{eq:interval}
                         \end{flalign}
                         % https://tex.stackexchange.com/questions/145657/align-equation-left
@@ -221,7 +217,7 @@
           }
         }
         child {
-          node {Verteilungsfunktion
+          node {Kumulative Verteilungsfunktion / Cumulative distribution function (CDF)
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -247,7 +243,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item $\displaystyle F(z) = \mathbb{P}(X\le z) = \sum_{x\le z} f(x)$
+                    \item $\displaystyle F(z) = \mathbb{P}(X\le z) = \sum_{k: x_k\le z} \mathbb{P}(X = x_k)$% = \sum_{k: x_k\le z} f(x_k)$
                     \begin{itemize}
                       \item \alert{über Fallunterschiedung definieren:}\\
                         $F(z) = \mathbb{P}(X\le z) = \begin{cases}
@@ -324,7 +320,7 @@
             }
           }
           child {
-            node {Indikatorsumme, Zählvariable
+            node {Indikatorsumme / Zählvariable
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
@@ -354,15 +350,110 @@
         }
       }
       child {
-        node {Gemeinsame Verteilungen
+        node {Gemeinsame Verteilungen (joint distributions)
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
+            \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item asdf
+                \item Verteilung mit Mehrdimensionalen Zufallsvariablen / Zufallsvektoren (Multivariate random variables / random vector)
+                % \item $2$ Variablen $\rightarrow$ $2$-Dimensional, $3$ Variablen $\rightarrow$ $3$-Dimensional usw. 
+                \item \alert{gemeinsame Wahrscheinlichkeitverteilung von diskreten Zufallsvariablen:}\\ 
+                  $\displaystyle \mathbb{P}_{(X, Y)}(\{(x_i, y_j)\}) = \mathbb{P}(X = x_i, Y = y_i) = \mathbb{P}(\{X = x_i\}\cap\{Y = y_j\})$
+                \begin{itemize}
+                  \item \alert{Unabhängigkeit:} $\mathbb{P}(X = x, Y = y) = \mathbb{P}(X = x)\cdot \mathbb{P}(Y = y)$
+                \end{itemize}
+                \item \alert{gemeinsame kumulative Verteilungsfunktion von diskreten Zufallsvariablen:}\\
+                  $\displaystyle F_{X, Y}(x, y) = \mathbb{P}(X\le x, Y\le y)$
+                \item \alert{Randverteilung / Marginalverteilung (marginal distribution) von diskreten Zufallsvariablen:}\\ 
+                  $\displaystyle \mathbb{P}_X({x_i}) = \mathbb{P}(X = x) = \sum_{j\ge 1} \mathbb{P}_{(X, Y)}(\{(x_i, y_j)\}) = \sum_{j\ge 1} \mathbb{P}(X = x_i, Y = y_j)$
+                \item \alert{gemeinsame Wahrscheinlichkeitsdichte von stetigen Zufallsvariablen:}\\ 
+                  $f_{(X, Y)}(x, y)$
+                \begin{itemize}
+                  \item \alert{Wahrscheinlichkeit Intervalle:}\\ $\displaystyle \mathbb{P}(a\le X\le b, c\le Y\le d) = \int_a^b\int_c^d f_{X, Y}(x, y)dy dx = \int_c^d\int_a^b f_{X, Y}(x, y)dx dy$
+                  \item \alert{Unabhängigkeit:}\\ $\displaystyle f_{(X,Y)}(x, y) = f_{X}(x)\cdot f_{Y}(y)$
+                  \begin{itemize}
+                    \item \alert{Wahrscheinlichkeit Intervalle:}\\ $\displaystyle \mathbb{P}(a\le X\le b, c\le Y\le d) = \int_c^d\int_a^b  f_{X}(x)\cdot f_{Y}(y) dx dy$ 
+                  \end{itemize}
+                \end{itemize}
+              \item \alert{gemeinsame kumulative Verteilungsfunktion von diskreten Zufallsvariablen:}\\ 
+                $F_{(X, Y)(x, y)}$
+                \item \alert{Randdichte von Zufallsvariablen:}\\ 
+                  $\displaystyle f_X(x) = \int_{-\infty}^{\infty} f_{X, Y}(x, y) dy$
               \end{itemize}
             \end{minipage}
           }
         }
+          child {
+            node (kt) {Kontingenztafel / Kreuztabelle
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  % \usepackage{color}
+                  % \usepackage{tabularray}
+                  % \definecolor{Silver}{rgb}{0.752,0.752,0.752}
+                  % \definecolor{WebOrange}{rgb}{1,0.647,0}
+                  \begin{table}
+                  \centering
+                  \begin{tblr}{
+                    cells = {c, BoxColor},
+                    row{1} = {SecondaryColorDimmed},
+                    column{1} = {SecondaryColorDimmed},
+                    vline{4} = {-}{},
+                    hline{5} = {-}{},
+                  }
+                        & $A$            & $A^C$           & $P(B_i)$   \\
+                  $B_1$    & $P(A\cap B_1)$   & $P(A^C\cap B_1)$  & $P(B_1)$   \\
+                  $B_2$  & $P(A\cap B_2)$ & $P(A^C\cap B_2)$ & $P(B_2)$ \\
+                  $B_3$  & $P(A\cap B_3)$ & $P(A^C\cap B_3)$ & $P(B_3)$ \\
+                  $\sum$ & $P(A)$         & $P(A^C)$        & \diagbox{$P(\Omega)=1$}{$P(\Omega)=1$}      
+                  \end{tblr}
+                  \end{table}
+                  \begin{itemize}
+                    \item $\begin{aligned}[t]
+                      \mathbb{P}(A\cup B_2) &= (\mathbb{P}(A\cup B_1) + \mathbb{P}(A\cup B_2) + \mathbb{P}(A\cup B_3)) + (\mathbb{P}(A\cup B_2) + \mathbb{P}(A^C\cup B_2)) - \mathbb{P}(A\cup B_2)\\
+                                            &= \mathbb{P}(A\cup B_1) + \mathbb{P}(A\cup B_2) + \mathbb{P}(A\cup B_3) + \mathbb{P}(A^C\cup B_2)\end{aligned}$
+                    \item $\begin{aligned}[t]
+                        \mathbb{P}(A\cup B_2) &= 1 - (\mathbb{P}(A^C\cup B_1) + \mathbb{P}(A^C\cup B_3))\end{aligned}$
+                    \item $\mathbb{P}(A\cap B_2) = \mathbb{P}(A \;|\; B_2) \cdot \mathbb{P}(B_2)$
+                    \item $\mathbb{P}(B_2) = \mathbb{P}(A\cap B_2) + \mathbb{P}(A^C\cap B_2) = \mathbb{P}(B_2 \;|\; A)\cdot \mathbb{P}(A) + \mathbb{P}(B_2 \;|\; A^C)\cdot \mathbb{P}(A^C)$
+                    \item $\mathbb{P}(B_2) = 1 - (\mathbb{P}(B_1) + \mathbb{P}(B_3))$
+                    \item \alert{mit Zufallsvariablen:}
+                      \begin{table}
+                      \centering
+                      \begin{tblr}{
+                        cells = {c, BoxColor},
+                        row{1} = {SecondaryColorDimmed},
+                        column{1} = {SecondaryColorDimmed},
+                        vline{4} = {-}{},
+                        hline{5} = {-}{},
+                      }
+                            & $1$            & $2$           & $P_Y$   \\
+                      $1$    & $P(X=x_1, Y=y_1)$   & $P(X=x_2, Y=y_1)$  & $P(Y=y_1)$ \\
+                      $2$  & $P(X=x_1, Y=y_2)$ & $P(X=x_2, Y=y_2)$ & $P(Y=y_2)$ \\
+                      $3$  & $P(X=x_1, Y=y_3)$ & $P(X=x_2, Y=y_3)$ & $P(Y=y_3)$ \\
+                      $P_X$ & $P(X=x_1)$         & $P(X=x_2)$        & \diagbox{$1$}{$1$}      
+                      \end{tblr}
+                      \end{table}
+                    % \item \alert{Beispiel mit Zufallsvariablen:}\\ $\Omega = \{(1, 1), (1, 2), (1, 3), (2, 1), (2, 1), (2, 3)\}$, $X(\omega) = a_1$, $Y(\omega) = a_2$
+                    %   \begin{table}
+                    %   \centering
+                    %   \begin{tblr}{
+                    %     cells = {c, BoxColor},
+                    %     row{1} = {SecondaryColorDimmed},
+                    %     column{1} = {SecondaryColorDimmed},
+                    %     vline{4} = {-}{},
+                    %     hline{5} = {-}{},
+                    %   }
+                    %        & $1$ & $2$ & $P_Y$   \\
+                    %   $1$  & $asdf$  & $asdf$  & $asdf$   \\
+                    %   $2$  & $asdf$  & $asdf$  & $asdf$ \\
+                    %   $3$  & $asdf$  & $asdf$  & $asdf$ \\
+                    %   $P_X$ & $asdf$         & $asdf$        & \diagbox{$1$}{$1$}      
+                    %   \end{tblr}
+                    %   \end{table}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
       }
       child {
         node {Additionstheorem
@@ -399,15 +490,103 @@
     child {
       node {Kenngrößen von Zufallsvariablen}
       child {
-        node {Erwartungswert}
-      }
-      child {
-        node {Varianz und Standardabweichung}
-      }
-      child {
-        node {Kovarianz}
+        node {Erwartungswert
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{diskret:} $\displaystyle E(X) = \sum_{\omega\in\Omega} X(\omega) \cdot \mathbb{P}(\{\omega\}) = \sum_{k\ge 1} x_k\cdot \mathbb{P}(X = x_k)$
+                \item \alert{stetig:} $\displaystyle E(X) = \int_{-\infty}^{\infty} x\cdot f_X(x) \cdot dx$
+                \item \alert{Rechenregeln:}
+                \begin{itemize}
+                  \item $E(X + Y) = E(X) + E(Y)$
+                  \item falls $X$ und $Y$ unabhängig, gilt $E(X \cdot Y) = E(X) \cdot E(Y)$ (Beweis ist \href[page=150]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden)
+                  \item $E(c \cdot X) = c\cdot E(X)$
+                  \item $E(c) = c$
+                  \item $E(\mathbb{1}_{A}) = \mathbb{P}(A)$
+                  \item Beweise sind \href[page=128]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
         child {
-          node {Korrelationskoeffizient}
+          node (stdzv) {Standardisierung von Zufallsvariablen
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $X$ ist \alert{standartisiert}, falls $E(X) = 0$ und $Var(X)=1$. 
+                  \item  jede Zufallsvariable $X$ mit $Var(X) > 0$ kann standardisiert werden durch: $\displaystyle X^* = \frac{X - E(X)}{\sqrt{Var(X)}} = \frac{X - E(X)}{\sigma_X}$
+                  \item Herleitung ist \href[page=147]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node (varianz) {Varianz und Standardabweichung
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{diskret:} $\displaystyle Var(X) = \sum_{k\ge 1} (x_k - E(X))^2 \cdot \mathbb{P}(X = x_k)$
+                \item \alert{stetig:} $\displaystyle Var(X) = \int_{-\infty}^{\infty} (x - E(X))^2 \cdot f_X(x)\cdot dx$
+                \item \alert{andere Schreibweisen:} $Var(X) =  E[(X - E(X))^2] = E(X^2) - E(X)^2$
+                \item \alert{Rechenregeln:}
+                \begin{itemize}
+                  \item $Var(X+Y) = Var(X) + Var(Y) + 2\cdot Cov(X, Y)$
+                  \begin{itemize}
+                    \item falls $X$ und $Y$ paarweise unkorreliert (folgt aus Unabhängigkeit), gilt $Var(X + Y) = Var(X) + Var(Y)$
+                    \item $\displaystyle Var(X_1 + \ldots + X_n) = \sum_{i=1}^n Var(X_i) + 2\cdot \sum_{i,j=1,i<j}^n Cov(X_i, X_j)$
+                    \begin{itemize}
+                      \item falls $X_i$ paarweise unkorreliert, gilt $\displaystyle Var(X_1 + \ldots +  X_n) = \sum_{i=1}^{n} Var(X_i)$ (Bienaymé-Gleichung)
+                    \end{itemize}
+                  \end{itemize}       
+                  \item $Var(X + c) = Var(X)$
+                  \item $Var(c\cdot X) = c^2 \cdot Var(X)$
+                  \item $Var(c) = 0$
+                  \item Beweise sind \href[page=131]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                \end{itemize}
+              \item \alert{Standardabweichung:} $\sigma_X = \sqrt{Var(X)}$
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Kovarianz
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{diskret:} $\displaystyle Cov(X, Y) = \sum_{i = 1}^n \sum_{j = 1}^m (x_i - E(X))\cdot (y_j - E(Y)) \cdot \mathbb{P}(X = x_i, Y = y_j)$
+                \item \alert{stetig:} $\displaystyle Cov(X, Y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x - E(X))\cdot (y - E(Y))\cdot f(x, y)\cdot dx\cdot dy$
+                \item \alert{andere Schreibweisen:} $E[(X-E(X))\cdot (Y-E(Y))] = E(X\cdot Y) - E(X)\cdot E(Y)$
+                \item $X$ und $Y$ sind unkorreliert, falls $Cov(X, Y) = 0$
+                \begin{itemize}
+                  \item unabhängig $\rightarrow$ unkorreliert
+                  \item unkorreliert $\not\rightarrow$ unabhängig (Gegenbeispiel ist \href[page=152]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden)
+                \end{itemize}
+                \item \alert{Rechenregeln:}
+                \begin{itemize}
+                  \item $Cov(X, Y) = Cov(Y, X)$
+                  \item $Cov(X, X) = Var(X)$
+                  \item $Cov(X + a, Y + b) = Cov(X, Y)$
+                  \item Beweise sind \href[page=152]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                \end{itemize}
+                % \item falls $X$ und $Y$ unabhängig sind, ist $Cov(X, Y) = 0$ und $f_{XY} = 0$, Gegenrichtung gilt nicht
+              \end{itemize}                                       
+            \end{minipage}
+          }
+        }
+        child {
+          node {Korrelationskoeffizient
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                \item $\displaystyle \frac{Cov(X, Y)}{\sqrt{Var(X)Var(Y)}} = \frac{Cov(X, Y)}{\sqrt{Var(X)}\cdot \sqrt{Var(Y)}} = \frac{Cov(X, Y)}{\sigma_X\cdot \sigma_Y}$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
         }
       }
     }
@@ -424,12 +603,18 @@
       node {Schätzprobleme und Tests}
     };
   \end{mindmapcontent}
-  % \begin{edges}
-  %   \edge{pt}{bc}
-  % \end{edges}
+  \begin{edges}
+    \edge{tw}{kt}
+    \edge{varianz}{stdzv}
+  \end{edges}
   \annotation{pt.south}{This mindmap is provided without guarantee of correctness and completeness!};
 \end{mindmap}
 
 % P_X nimmt nur Mengen entgegen, f_X nimmt nur einzelne Realisationen entgegen
 % F ist f integriert (Stammfunktion oder wie das heißt) und f ist F abgeleitet
 % wie man X definiert mit omegas
+% besser Zählsatz aus den Folien da, mit bijektiv gleich groß
+% Zufallsexperiment, Laplace
+% das Zeug aus Gimp
+% Transformationssatz/regel
+% Kovarianz stetige Formel

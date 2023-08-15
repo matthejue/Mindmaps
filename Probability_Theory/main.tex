@@ -13,6 +13,7 @@
 \usepackage{xparse}
 
 \usepackage{tabularray}
+\UseTblrLibrary{diagbox}
 
 \usepackage{tikzit}
 \input{graph_theory.tikzstyles}
@@ -53,6 +54,7 @@
 % https://tex.stackexchange.com/questions/528831/why-doesnt-the-bm-package-work-with-the-unicode-math-package
 % \blacksquare from \usepackage{amssymb} not needed anymore because already defnined in unicode-math
 \renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blockfull}$}
+\renewcommand{\labelitemiv}{$\textcolor{SwitchColor}{\blockfull}$}
 
 \input{./content/Deklarationen_Mindmap}
 \input{./content/Schnipsel}

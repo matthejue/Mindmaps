@@ -4,11 +4,11 @@
 % \tikzstyle{NAME}=[PROPERTY LIST]
 
 % Node styles
-\tikzstyle{circle node}=[minimum size=0.5cm, inner sep=0pt, fill=SecondaryColor, draw=none, shape=circle, tikzit fill=SecondaryColor, tikzit shape=circle]
-\tikzstyle{rectangle node}=[minimum size=0.5cm, inner sep=0pt, fill=SecondaryColor, draw=none, shape=rectangle, tikzit fill=SecondaryColor, tikzit shape=rectangle]
-\tikzstyle{circle with border}=[fill=SecondaryColor, draw=none, shape=circle, tikzit fill=SecondaryColor, minimum size=1cm, inner sep=0pt]
-\tikzstyle{circle with border primary}=[fill=PrimaryColor, draw=black, shape=circle, tikzit fill=PrimaryColor, tikzit draw=black]
-\tikzstyle{circle node alternative}=[fill=PrimaryColor, draw=none, shape=circle, tikzit fill={rgb,255: red,255; green,178; blue,123}, minimum size=0.5cm, inner sep=0pt]
+\tikzstyle{circle node}=[minimum size=0.5cm, inner sep=0pt, fill=SecondaryColorDimmed, draw=none, shape=circle, tikzit fill=SecondaryColorDimmed, tikzit shape=circle]
+\tikzstyle{rectangle node}=[minimum size=0.5cm, inner sep=0pt, fill=SecondaryColorDimmed, draw=none, shape=rectangle, tikzit fill=SecondaryColorDimmed, tikzit shape=rectangle]
+\tikzstyle{circle with border}=[fill=SecondaryColorDimmed, draw=none, shape=circle, tikzit fill=SecondaryColorDimmed, minimum size=1cm, inner sep=0pt]
+\tikzstyle{circle with border primary}=[fill=PrimaryColorDimmed, draw=black, shape=circle, tikzit fill=PrimaryColorDimmed, tikzit draw=black]
+\tikzstyle{circle node alternative}=[fill=PrimaryColorDimmed, draw=none, shape=circle, tikzit fill={rgb,255: red,255; green,178; blue,123}, minimum size=1.2cm, inner sep=0pt]
 \tikzstyle{empty}=[fill=none, draw=none, shape=circle]
 \tikzstyle{rectangle node primary}=[fill={rgb,255: red,253; green,176; blue,121}, draw=none, shape=rectangle, tikzit fill={rgb,255: red,253; green,176; blue,121}, minimum size=0.5cm]
 \tikzstyle{new style 0}=[fill=none, draw=black, shape=circle, dashed, minimum size=1cm]

@@ -136,7 +136,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{10cm}
               \begin{itemize}
-                \item FIFO datastructure (stack) gets replaced by \alert{priority queue} 
+                \item FIFO datastructure (FIFO-queue) gets replaced by \alert{priority queue} 
                 \item expands node $v$ from the frontier with \alert{lowest path costs} $g(v)$
                 \item generalization of \alert{Breadth-First Search}, where edge weights can have \alert{different values}
                 \item special case of \alert{Best-First Search}, where $f(v) = g(v)$
@@ -177,7 +177,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{10cm}
                 \begin{itemize}
-                  \item \alert{FIFO} datastructure (\alert{stack})
+                  \item \alert{FIFO} datastructure (FIFO-\alert{queue})
                   \item expands node $v$ from the frontier with \alert{lowest depth} $d(v)$
                   \item special case of \alert{Uniform-Cost Search} where all edge weights have \alert{no value}
                   \item special case of \alert{Best-First Search}, where $f(v) = d(v)$
@@ -212,7 +212,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{10cm}
               \begin{itemize}
-                \item \alert{LIFO} datastracture (LIFO-\alert{queue})
+                \item \alert{LIFO} datastracture (\alert{stack})
                 \item expands node $v$ from the frontier with \alert{greatest depth} $d(v)$
                 \item special case of \alert{Best-First Search}, where $f(v) = -d(v)$
                 \item in general, the path found is \alert{not optimal} and \alert{completeness} can be guaranteed \alert{only for graph-based search} and \alert{finite graphs}

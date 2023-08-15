@@ -11,6 +11,7 @@
 \tikzstyle{circle node alternative}=[fill={rgb,255: red,255; green,178; blue,123}, draw=none, shape=circle, tikzit fill={rgb,255: red,255; green,178; blue,123}, minimum size=0.5cm, inner sep=0pt]
 \tikzstyle{empty}=[fill=none, draw=none, shape=circle]
 \tikzstyle{rectangle node primary}=[fill={rgb,255: red,253; green,176; blue,121}, draw=none, shape=rectangle, tikzit fill={rgb,255: red,253; green,176; blue,121}, minimum size=0.5cm]
+\tikzstyle{new style 0}=[fill=none, draw=black, shape=circle, dashed, minimum size=1cm]
 
 % Edge styles
 \tikzstyle{graph_theory_directed_left}=[<-]

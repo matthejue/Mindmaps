@@ -39,12 +39,14 @@
 \definecolor{SecondaryColorDimmed}{HTML}{CEEAF9}
 \colorlet{BoxColor}{gray!10!white}
 
+\usepackage[allbordercolors=PrimaryColor, pdfborder={0 0 .2}]{hyperref}
+
 % colored bold
 % \newcommand\alert[1]{\textcolor{SwitchColor}{\textbf{#1}}}
 \newcommand\alert[1]{\textcolor{SwitchColor}{#1}}
 
 \newlength{\leveldistance}
-\setlength{\leveldistance}{25cm}
+\setlength{\leveldistance}{20cm}
 
 \begin{document}
   \begin{tikzpicture}[
@@ -324,12 +326,17 @@
                           \end{tblr}
                         \end{table}
                     \end{itemize}
+                    \item Probleme:
+                    \begin{itemize}
+                      \item keine ganz großen bzw. kleinen Zahlen darstellbar
+                      \item weitere Probleme \href[page=152]{./Technische_Informatik_all_in_one_with_go_back.pdf}{hier} erklärt
+                    \end{itemize}
                 \end{itemize}
                 \begin{figure}
                   \begin{subfigure}{0.4\textwidth}
                     \centering
                     \includegraphics[width=0.8\linewidth]{figures/binary_fraction}
-                    \caption{Binärerbrüche}
+                    \caption{Binärbrüche}
                     \label{fig:binaryfraction}
                   \end{subfigure}
                   \begin{subfigure}{0.4\textwidth}
@@ -348,6 +355,10 @@
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
                     \item mehrere mögliche Darstellungen für \alert{negative Festkommazahlen}, wobei $d=d_{n}d_{n-1}\ldots d_0\ldots d_{-k}$ mit $\forall i\langle n:d_i\in Z$ und $d_n\in\{0, 1\}$:
+                    \begin{itemize}
+                      \item $n+1$ \alert{Vorkommastellen}, wovon allderings ein Bit ein \alert{Vorzeichenbit} ist und $n$ Bits \alert{Nicht-Vorzichenbits} sind
+                      \item $k$ \alert{Nachkommastellen}
+                    \end{itemize}
                     \item ein Vorteil von Einerkomplement- und Zweierkomplement-Darstellung ist, dass sie \alert{zyklisch} sind:
                       \begin{align*}
                         [01.1]_2 + 0.5 &= [10.0]_2 &\text{(nach } 1.5 \text{ geht es mit } {-}2 \text{ weiter)}\\
@@ -371,8 +382,8 @@
                                   cells = {c, BoxColor},
                                   column{1} = {PrimaryColor,fg=white},
                                 }
-                                $d$        &  11.1  & 11.0 & 10.1 & 10.0 & 00.0 & 00.1 & 01.0 & 01.1 \\
-                                $[d]_{BV}$ & -1.5 & -1.0 & -0.5 & 0.0 & 0.0   & 0.5 & 1.0  & 1.5 \\
+                                $d$        &  11.1  & 11.0 & 10.1 & 10.0 / 00.0 & 00.1 & 01.0 & 01.1 \\
+                                $[d]_{BV}$ & -1.5 & -1.0 & -0.5 & 0.0 & 0.5 & 1.0  & 1.5 \\
                               \end{tblr}
                             \end{table}
                         \end{itemize}
@@ -395,8 +406,8 @@
                                   cells = {c, BoxColor},
                                   column{1} = {PrimaryColor,fg=white},
                                 }
-                                $d$                & 10.0 & 10.1 & 11.0 & 11.1 & 00.0 & 00.1 & 01.0 & 01.1 \\
-                                $[d]_1$ & -1.5  & -1.0 & -0.5  & 0.0 & 0.0  & 0.5 & 1.0  & 1.5 \\
+                                $d$     & 10.0 & 10.1 & 11.0 & 11.1 / 00.0 & 00.1 & 01.0 & 01.1 \\
+                                $[d]_1$ & -1.5  & -1.0 & -0.5  & 0.0 & 0.5 & 1.0  & 1.5 \\
                               \end{tblr}
                             \end{table}
                         \end{itemize}
@@ -413,7 +424,15 @@
                 }
               }
               child {
-                node {Inversion}
+                node {Inversion
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item $[a']_1 = -[a]_1$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
               }
             }
             child {
@@ -421,6 +440,7 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
+                      \item man springt einen kleisten Zahlenabstand weiter wenn das Vorzeichenbit $1$ ist als beim Einerkomplement
                       \item \alert{potentiell negativer Wert} $\displaystyle[d]_{2} = \sum_{i=0}^{n-1}\delta(d_i)2^i - \delta(d_n)2^n$ in \alert{Zweierkomplement-Darstellung}
                         \begin{itemize}
                           \item Beispiel 3-Bit Festkommazahlen mit Vorzeichenbit, $n=1$ und $k=1$:
@@ -449,7 +469,15 @@
                 }
               }
               child {
-                node {Inversion}
+                node {Inversion
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item $[a']_2 + 1 = -[a]_2$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
               }
             }
           }
@@ -633,7 +661,99 @@
       }
     }
     child {
-      node {Mathematische Grundlagen}
+      node {Mathematische Grundlagen
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Groß-O-Notation
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item Man will Funktionen irendwie vergleichen und das einzige sinnvolle was man vergleichen kann ist die \alert{Wachstumsrate}, denn für zwei Funktionen kann gleichzeitig gelten: $g = O(f)$, also $g$ wächst nicht stärker als $f$ und $g > f$, also $g$ ist überall echt größer als $f$
+                \item Konstate Faktoren und Summanden $c \cdot x$ und $c + x$ sollen keine Rolle, aber es geht um \alert{Wachstumsrate}, Konstante Faktoren und Summanden spielen keine Rolle
+                \item man interessiert sich meist nur für die kleinste/größtere untere/obere Grenze, z.B. wenn $f\in O(n)$ dann gilt automatisch auch $f\in O(n^2)$, aber man interessiert sich nur für die kleinste untere Grenze $f\in \Omega(n)$
+                \begin{itemize}
+                  \item man sagt die \enquote{Laufzeit eines Algorihmus ist: $\Omega(n\cdot log(n))$}, man sagt \alert{NICHT}, dass ein \enquote{Algorithmus Laufzeit mindestens $O(n\cdot log(n))$ hat}
+                \end{itemize}
+                \item Die Operatoren $O, \Omega, \Theta, o, \omega$ sind auf Funktionen, was die Operatoren $\le, \ge, =, <, >$ auf Zahlen sind
+                \item $f= O(g)$ wird gesprochen als \enquote{$f$ ist Groß-O von $g$}, wobei eigentlich $f\in O(g)$ mathematisch korrekt ist
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Landau-Symbole
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{16cm}
+            \begin{itemize}
+              \item \alert{formal:}
+              \begin{itemize}
+                \item $O(g)= \{h: \mathbb{N}\to\mathbb{R} \;|\; \exists n_0\in\mathbb{N}, \exists c > 0, \forall n\ge n_0, h(n)\le c \cdot g(n)\}$
+                  \begin{itemize}
+                    \item $f\in O(g)$ bedeutet \enquote{$f$ wächst \alert{höchstens} so stark wie $g$}
+                  \end{itemize}
+                \item $\Omega(g)= \{h: \mathbb{N}\to\mathbb{R} \;|\; \exists n_0\in\mathbb{N}, \exists c > 0, \forall n\ge n_0, h(n)\ge c \cdot g(n)\}$
+                  \begin{itemize}
+                    \item $f\in \Omega(g)$ bedeutet \enquote{$f$ wächst \alert{mindestens} so stark wie $g$}
+                  \end{itemize}
+                \item $\Theta(g)= \{h: \mathbb{N}\to\mathbb{R} \;|\; \exists n_0\in\mathbb{N}, \exists c_1 > 0, \exists c_2 > 0, \forall n\ge n_0, c_1 \cdot g(n) \le h(n)\le c_2 \cdot g(n)\}$
+                  \begin{itemize}
+                    \item $f\in \Theta(g)$ bedeutet \enquote{$f$ wächst \alert{genauso} stark wie $g$}
+                  \end{itemize}
+                \item $o(g)= \{h: \mathbb{N}\to\mathbb{R} \;|\; \forall c > 0, \exists n_0\in\mathbb{N}, \forall n\ge n_0, h(n)\le c \cdot g(n)\}$
+                  \begin{itemize}
+                    \item $f\in o(g)$ bedeutet \enquote{$f$ wächst \alert{(strikt) langsamer} als $g$}
+                  \end{itemize}
+                \item $\omega(g)= \{h: \mathbb{N}\to\mathbb{R} \;|\; \forall c > 0, \exists n_0\in\mathbb{N}, \forall n\ge n_0, h(n)\ge c \cdot g(n)\}$
+                  \begin{itemize}
+                    \item $f\in \omega(g)$ bedeutet \enquote{$f$ wächst \alert{(strikt) schneller} als $g$}
+                  \end{itemize}
+              \end{itemize}
+            \end{itemize}
+            \begin{itemize}
+              \item $o(g)\cap\omega(g)=\emptyset$,
+              \item $\Theta(g) = O(g)\cap\Omega(g)$
+              \item $f(n)\in\Theta(g(n))$ $\Leftrightarrow$ $f(n)\in O(g(n))$ and $f(n)\in \Omega(g(n))$
+            \end{itemize}
+            \begin{itemize}
+              \item \alert{Transpose symmetry:}
+              \begin{itemize}
+                \item $f(n)=O(g(n))$ $\Leftrightarrow$ $g(n)=\Omega(f(n))$
+                \item $f(n)=o(g(n))$ $\Leftrightarrow$ $g(n)=\omega(f(n))$
+              \end{itemize}
+              \item \alert{Bestimmung über Grenzwerte:}
+              \begin{enumerate}
+                \item $\displaystyle f=O(g) \Leftrightarrow \operatorname{lim}_{n\to\infty}\frac{f(n)}{g(n)} < \infty$
+                \item $\displaystyle f=\Omega(g) \Leftrightarrow \operatorname{lim}_{n\to\infty}\frac{f(n)}{g(n)} > 0$
+                \item $\displaystyle f=\Theta(g) \Leftrightarrow \operatorname{lim}_{n\to\infty}\frac{f(n)}{g(n)} > 0$ und $\displaystyle\operatorname{lim}_{n\to\infty}\frac{f(n)}{g(n)} < \infty$
+                \item $\displaystyle f=o(g) \Leftrightarrow \operatorname{lim}_{n\to\infty}\frac{f(n)}{g(n)} = 0$
+                \item $\displaystyle f=\omega(g) \Leftrightarrow \operatorname{lim}_{n\to\infty}\frac{f(n)}{g(n)} = \infty$
+              \end{enumerate}
+            \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Regel von L'Hopital
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item $\displaystyle \operatorname*{lim}_{x\to c}{\frac{f(x)}{g(x)}}=\operatorname*{lim}_{x\to c}{\frac{f^{\prime}(x)}{g^{\prime}(x)}}$
+                  \begin{itemize}
+                    \item wird verwendet bei Grenzwertbetrachtung bei der man bei Zähler und Nenner entweder den Fall $\frac{0}{0}$ oder $\frac{\pm\infty}{\pm\infty}$ hat und beide Ableitungen differenzierbar % und $g(x)\ne 0$ für $x\ne y$ für den Fall $\frac{0}{0}$ und $g(x)'\ne 0$ für den Fall $\frac{\infty}{\infty}$ 
+                    \item dann Zähler und Nenner des Bruches getrennt voneinander ableiten und dann nochmal Grenwertbetrachtung
+                    \item wenn nochmal unbestimmter Ausdruck rauskommt und wieder entweder der Fall $\frac{0}{0}$ oder $\frac{\infty}{\infty}$ und beide Ableitungen differenzierbar, dann nochmal anwenden oder sonst Pech gehabt
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
     }
     child {
       node {RETI-Maschine}

@@ -6,6 +6,7 @@
 \renewcommand{\labelitemi}{$\textcolor{SwitchColor}{\bullet}$}
 \renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
 \renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blacksquare}$}
+\renewcommand{\labelitemiv}{$\textcolor{SwitchColor}{\blacksquare}$}
 
 % https://tex.stackexchange.com/questions/525959/prevent-latex-from-stretching-math
 \setlength{\thinmuskip}{1\thinmuskip}
@@ -753,6 +754,56 @@
             }
           }
         }
+      }
+      child {
+        node {Aussagenlogik}
+      }
+      child {
+        node {Mengenlehre
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{Menge:} Zusammenfassung von paarweise verschiedenen Objekten zu einem Ganzen
+                \begin{itemize}
+                  \item die Objekte nennt man \alert{Elemente} $a_i\in M$ der Menge
+                \end{itemize}
+                \item \underline{\alert{Spezifikation} einer Menge, Beispiele:}
+                \begin{itemize}
+                  \item z.B. $\mathbb{Z} = \{z, -z \;|\; z\in\mathbb{N}\}$
+                  \item z.B. $\mathbb{Q} = \{p/q \;|\; p\in\mathbb{Z}, q\in\mathbb{N}, q\ne 0, p, q\text{ teilerfremd}\}$
+                \end{itemize}
+                \item \alert{Potenzmenge:} $\mathcal{P}(M)=\{m\;|\;m\subseteq M\}$
+                \item \alert{Mächtigkeit / Kardinalität:} Anzahl $|M|$ der Elemente einer Mengen $M$
+                \item \alert{Operationen:}
+                \begin{itemize}
+                  \item \alert{Mengendifferenz:}\\ 
+                    $M_1 \setminus M_2 = \{m \;|\; m\in M_1 \text{ und } m\not\in M_2\}$
+                  \item \alert{Mengenschnitt:}\\
+                    $M_1 \cap M_2 = \{m \;|\; m\in M_1 \text{ und } m\in M_2\}$
+                  \item \alert{Mengenvereinigung:}\\
+                    $M_1 \cup M_2 = \{m \;|\; m\in M_1 \text{ oder } m\in M_2\}$
+                  \item \alert{Kartesisches Produkt:}\\
+                    $M_1 \times M_2 = \{(m_1, m_2) \;|\; m_1\in M_1 \text{ und } m_2\in M_2\}$
+                  \begin{itemize}
+                    \item \alert{Notation:} $M^n = \overbrace{M\times \ldots \times M}^{n\text{ mal}}$
+                    \item bei einem Tupel $(m_1, m_2)$ ist im Gegensatz zu einer Menge $\{m_1, m_2\}$ die Reihenfolge wichtig
+                    \item \alert{Relation:} $R\subseteq A\times B$
+                    \begin{itemize}
+                      \item statt $(x, y)\in \mathbb{R}$ schreibt man $xRy$
+                      \item \alert{Spezifikation} gleich wie bei Mengen, da eine Relation eine Menge von Tupeln ist, z.B.:\\ $R = \{(a, b)\;|\; a,b\in \mathbb{N}, a + b\text{ ungerade}\}$
+                    \end{itemize}
+                  \end{itemize}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {}
+        }
+      }
+      child {
+        node {Beweise}
       }
     }
     child {

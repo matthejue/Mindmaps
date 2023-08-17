@@ -110,7 +110,7 @@
       every node/.style = {concept, circular drop shadow}, % draw=none
       every child/.style={concept},
     ]
-  \node (ca) at (current page.center) {Technische Informatik}
+  \node (ti) at (current page.center) {Technische Informatik}
     child {
       node {Kodierung von Zeichen}
       child {
@@ -756,7 +756,15 @@
         }
       }
       child {
-        node {Aussagenlogik}
+        node {Aussagenlogik
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item mehr zu Aussagenlogik \href{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{hier}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
       }
       child {
         node {Mengenlehre
@@ -789,8 +797,8 @@
                     \item bei einem Tupel $(m_1, m_2)$ ist im Gegensatz zu einer Menge $\{m_1, m_2\}$ die Reihenfolge wichtig
                     \item \alert{Relation:} $R\subseteq A\times B$
                     \begin{itemize}
-                      \item statt $(x, y)\in \mathbb{R}$ schreibt man $xRy$
                       \item \alert{Spezifikation} gleich wie bei Mengen, da eine Relation eine Menge von Tupeln ist, z.B.:\\ $R = \{(a, b)\;|\; a,b\in \mathbb{N}, a + b\text{ ungerade}\}$
+                      \item mehr zu Relationen \href{/home/areo/Documents/Studium/Summaries/Relations/main.pdf}{hier}
                     \end{itemize}
                   \end{itemize}
                 \end{itemize}
@@ -798,16 +806,36 @@
             \end{minipage}
           }
         }
-        child {
-          node {}
-        }
       }
       child {
-        node {Beweise}
+        node {Beweise
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item mehr zu Beweisen \href{/home/areo/Documents/Studium/Summaries/Beweisen/main.pdf}{hier}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
       }
     }
     child {
-      node {RETI-Maschine}
+      node {Kombinatorische Logik}
+      child {
+        node {Normalformen}
+      }
+      child {
+        node {Minimalpolynom}
+      }
+      child {
+        node {Schaltungen}
+      }
+    }
+    child {
+      node {Sequentielle Logik}
+    }
+    child {
+      node {Timing}
     };
   \end{scope}
   % ┌───────────────────┐
@@ -821,6 +849,7 @@
   % │ Annotationen │
   % └──────────────┘
   % https://tex.stackexchange.com/questions/302976/node-positioning-middle-point-mind-map-connection-bar
-  \node [annotation, below] at (ca.south) {This mindmap is provided without guarantee of correctness and completeness!};
+  \node [annotation, below] at (ti.south) {This mindmap is provided without guarantee of correctness and completeness!};
+  \node [annotation, below] at (ti.north) {\href{/tmp/current.pdf}{go back}};
   \end{tikzpicture}
 \end{document}

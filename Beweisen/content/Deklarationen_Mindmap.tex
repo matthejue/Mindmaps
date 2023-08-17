@@ -1,0 +1,93 @@
+%!Tex Root = ../main.tex
+% ./Packete.tex
+% ./Design.tex
+% ./Vorbereitung.tex
+% ./Aufgabe1.tex
+% ./Aufgabe2.tex
+% ./Aufgabe3.tex
+% ./Aufgabe4.tex
+% ./Appendix.tex
+
+\newlength{\leveldistance}
+\setlength{\leveldistance}{17cm}
+
+\newcounter{algorithm}
+\setcounter{algorithm}{0}
+\newtcbtheorem[use counter=algorithm]{algorithm}{\color{SecondaryColor}Algorithm}{pseudo/ruled}{alg}
+
+\newenvironment{mindmap}{
+  \begin{tikzpicture}[
+      auto,
+      huge mindmap,
+      fill opacity=0.6,
+      draw opacity=0.8,
+      concept color = PrimaryColorDimmed,
+      every annotation/.style={fill=BoxColor, draw=none, align=center, fill = BoxColor, text width = 2cm},
+      grow cyclic,
+      level 1/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance,
+        sibling angle=360/\the\tikznumberofchildren,
+        % https://tex.stackexchange.com/questions/501240/trying-to-use-the-array-environment-inside-a-tikz-node-with-execute-at-begin-no
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 2/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 2,
+        % sibling angle=60,
+        sibling angle=360/\the\tikznumberofchildren,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      level 3/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance / 3,
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 4/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 4,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      level 5/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance / 5,
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 6/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 6,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      level 7/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance / 7,
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 8/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 8,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      concept connection/.append style = {
+        color = BoxColor,
+      },
+  ]
+  % damit Annotationen nicht auch eine Drop Shadow erhalten
+}{
+\end{tikzpicture}
+}
+
+\newenvironment{mindmapcontent}{
+  \begin{scope}[
+      every node/.style = {concept, circular drop shadow}, % draw=none
+      every child/.style={concept},
+    ]
+}{
+  \end{scope}
+}
+
+\newenvironment{edges}{\begin{pgfonlayer}{background}\draw [concept connection]}{;\end{pgfonlayer}}
+\newcommand{\edge}[2]{(#1) edge (#2)}
+\newcommand{\annotation}[2]{\path (#1) -- node[annotation, above, align=center, pos=0.03] {#2} (be);}
+
+\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0}}}{}

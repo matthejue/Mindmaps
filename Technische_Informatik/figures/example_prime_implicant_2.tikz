@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (8) at (-1.25, 6.75) {};
+		\node [style=none] (9) at (4.5, 6.5) {};
+		\node [style=none] (10) at (2.25, 3.5) {};
+		\node [style=none] (11) at (-3.5, 3.75) {};
+		\node [style=none] (12) at (-3.5, -1.25) {};
+		\node [style=none] (13) at (2.25, -1.25) {};
+		\node [style=none] (14) at (2.5, 4.5) {};
+		\node [style=none] (15) at (-3.5, 4.5) {};
+		\node [style=new style 0] (0) at (-3, 4) {010};
+		\node [style=new style 0] (1) at (2, 4) {110};
+		\node [style=new style 0] (2) at (-3, -1) {000};
+		\node [style=new style 0] (3) at (2, -1) {100};
+		\node [style=new style 0] (4) at (4, 6) {111};
+		\node [style=circle node] (5) at (4, 1) {101};
+		\node [style=new style 0] (6) at (-1, 6) {011};
+		\node [style=circle node] (7) at (-1, 1) {001};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=area 2] (8.center)
+			 to (11.center)
+			 to (10.center)
+			 to (9.center)
+			 to cycle;
+		\draw [style=area 1] (14.center)
+			 to (13.center)
+			 to (12.center)
+			 to (15.center)
+			 to cycle;
+		\draw (0) to (1);
+		\draw (1) to (3);
+		\draw (2) to (3);
+		\draw (0) to (2);
+		\draw (0) to (6);
+		\draw (1) to (4);
+		\draw (6) to (4);
+		\draw (7) to (5);
+		\draw (5) to (4);
+		\draw (3) to (5);
+		\draw (2) to (7);
+		\draw (7) to (6);
+	\end{pgfonlayer}
+\end{tikzpicture}

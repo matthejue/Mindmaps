@@ -10,60 +10,132 @@
 
 \begin{mindmap}
   \begin{mindmapcontent}
-    \node (lo) at (current page.center) {Logic}
+    \node (lo) at (current page.center) {Logic
+      \resizebox{\textwidth}{!}{
+        \begin{minipage}[t]{16cm}
+          \begin{itemize}
+            \item Logic defines \href[page=223]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{Syntax and Semantics}
+            \begin{itemize}
+              \item sentence (germ. Aussage)
+            \end{itemize}
+          \end{itemize}
+        \end{minipage}
+      }
+    }
+    child {
+      node {Predicate Logic / Prädikatenlogik}
+    }
     child {
       node {Propositional Logic / Aussagenlogik
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
-            \begin{itemize} 
-              \item \alert{countable alphabet} of \alert{atomic propositions}: e.g. $\Sigma = \{$P, Q, R, \dots$\}$
+            \begin{itemize}
+              \item \href[page=230]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{Syntax and operator precedence}
+              \item \alert{logic formula:} e.g. $P \vee Q$, \alert{atomic formula / atomic proposition / atom:} e.g. $P$
               \begin{itemize}
                 \item atomic propositions can be \alert{true} (T) or \alert{false} (F)
-                \item the truth of a formula follows from the truth of its atomic propositions (\alert{truth assignment} or \alert{interpretation}) and the connectives.
-              \end{itemize}
-              \item \alert{logic formula:} e.g. $P \vee Q$, \alert{atomic formula / atom:} e.g. $P$
-              \begin{itemize}
-                \item \alert{operator precedence:} $\neg > \wedge > \vee > \Rightarrow > \Leftrightarrow$
+                \item the truth of a formula follows from the truth of its atomic propositions (\alert{truth assignment} or \alert{interpretation}) and the connectives
               \end{itemize}
               \item \alert{literal:} (possibly negated) atomic formula
               \item \alert{clause:} disjunction of literals
             \end{itemize}
+            % \begin{itemize}
+            %   \item \alert{countable alphabet} of \alert{atomic propositions}: e.g. $\Sigma = \{$P, Q, R, \dots$\}$
+            %   \begin{itemize}
+            %     \item atomic propositions can be \alert{true} (T) or \alert{false} (F)
+            %     \item the truth of a formula follows from the truth of its atomic propositions (\alert{truth assignment} or \alert{interpretation}) and the connectives.
+            %   \end{itemize}
+            %   \item \alert{logic formula:} e.g. $P \vee Q$, \alert{atomic formula / atom:} e.g. $P$
+            %   \begin{itemize}
+            %     \item \alert{operator precedence:} $\neg > \wedge > \vee > \Rightarrow > \Leftrightarrow$
+            %   \end{itemize}
+            %   \item \alert{literal:} (possibly negated) atomic formula
+            %   \item \alert{clause:} disjunction of literals
+            % \end{itemize}
           \end{minipage}
         }
       }
       child {
-        node {Syntax and Semantics
+        node {Boolesche Algebra
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{12cm}
+            \begin{minipage}[t]{8cm}
               \begin{itemize}
-                \item \alert{Sentences} are expressed according to the syntax of the representation language
-                \begin{itemize}
-                  \item \alert{Syntax} specifies all the sentences that are well-formed
-                  \begin{itemize}
-                    \item $x + y = 4$ is a well-formed sentence 
-                    \item $x4y+ =$ is not a well-formed sentence
-                  \end{itemize}
-                  \item A logic also defines the \alert{semantics} (meaning) of sentences
-                  \begin{itemize}
-                    \item Defines the \alert{truth} of a sentence with respect to each possible world
-                    \item E.g., specifies that the sentence $x + y = 4$ is true in a world in which $x = 2$ and $y = 2$, but not in a world in which $x = 1$ and $y = 1$
-                  \end{itemize}
-                \end{itemize}
+                \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition, Axiome}
+                \item \href[page=15]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Konventionen, Präzidenzregeln}
+                \item aus den Axiomen \href[page=231]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{ableitbare Rechenregeln}
               \end{itemize}
             \end{minipage}
           }
         }
+        child {
+          node {Boolesche Algebra der Funktionen in n Variablen $(\mathbb{B}_n, \cdot, +, \neg)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=228]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Boolesche Algebra der Teilmengen von S $(Pot(S), \cap, \cup, \neg)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=229]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Dualitätsprinzip bei booleschen Algebren
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=233]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
       }
+      % child {
+      %   node {Syntax and Semantics
+      %     \resizebox{\textwidth}{!}{
+      %       \begin{minipage}[t]{12cm}
+      %         \begin{itemize}
+      %           \item \alert{Sentences} are expressed according to the syntax of the representation language
+      %           \begin{itemize}
+      %             \item \alert{Syntax} specifies all the sentences that are well-formed
+      %             \begin{itemize}
+      %               \item $x + y = 4$ is a well-formed sentence
+      %               \item $x4y+ =$ is not a well-formed sentence
+      %             \end{itemize}
+      %             \item A logic also defines the \alert{semantics} (meaning) of sentences
+      %             \begin{itemize}
+      %               \item Defines the \alert{truth} of a sentence with respect to each possible world
+      %               \item E.g., specifies that the sentence $x + y = 4$ is true in a world in which $x = 2$ and $y = 2$, but not in a world in which $x = 1$ and $y = 1$
+      %             \end{itemize}
+      %           \end{itemize}
+      %         \end{itemize}
+      %       \end{minipage}
+      %     }
+      %   }
+      % }
       child {
         node {Logical Entailment / Logische Ableitung bzw. Deduktion
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{8cm}
               \begin{itemize}
-                \item $\alpha \models \beta$ \alert{iff} $M(\alpha) \subseteq M(\beta)$ \alert{iff} in every model in which $\alpha$ is true, $\beta$ is also true 
+                \item $\alpha \models \beta$ \alert{iff} $M(\alpha) \subseteq M(\beta)$ \alert{iff} in every model in which $\alpha$ is true, $\beta$ is also true
                 \begin{itemize}
                   \item when a sentence $\beta$ \alert{\enquote{logically follows}} from another sentence $\alpha$, $\alpha$ \alert{\enquote{entails}} $\beta$
-                  \item $I \models \varphi$: Interpretation $I$ \alert{\enquote{satisfies}} a formula $\varphi$ or $\varphi$ \alert{\enquote{is true under}} $I$ when $I(\varphi) = T$
+                  \item \alert{semantic relation} between models of a theorie (set of sentences) or a single sentence and models of a sentence
+                  \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference 1} and \href[page=226]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference 2}
                 \end{itemize}
+                  \item $I \models \varphi$: Interpretation $I$ \alert{\enquote{satisfies}} a formula $\varphi$ or $\varphi$ \alert{\enquote{is true under}} $I$ when $I(\varphi) = T$
               \end{itemize}
             \end{minipage}
           }
@@ -75,7 +147,7 @@
                   \begin{itemize}
                     \item If a sentence $\alpha$ is true in a possible \alert{world} $m$, we say that $m$ \alert{satisfies} $\alpha$ or $m$ is a \alert{model} of $\alpha$
                     \begin{itemize}
-                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ $\hat=$ On-Menge
+                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ ($\hat=$ On-Menge)
                     \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -87,9 +159,22 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item \alert{truth assignment} of the atoms in $\sigma$
+                    \item \alert{truth assignment} of the atoms in $\Sigma$, corresponds to semantics
                     \item $I: \Sigma \mapsto \{T, F\}$
-                    \item $I\models$, $I\not\models $, $I\models P iff P^I = $, $I\not\models \neg \varphi iff I\models \varphi$
+                    \item \href[page=232]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{inductive definition} of the interpretation function
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Inference
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item $theorie \vdash_i \alpha$: generate / derive a sentence $\alpha$ with an inference method $i$
+                    \item \href[page=226]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
+                    \item like to have inference algorithms that derive only sentences that are entailed (\alert{soundness}) and all of them (\alert{completeness})
                   \end{itemize}
                 \end{minipage}
               }
@@ -99,7 +184,8 @@
     };
   \end{mindmapcontent}
   \begin{edges}
-    \edge{lo}{models} % just test
+    % \edge{lo}{models} % just test
   \end{edges}
   \annotation{lo.south}{This mindmap is provided without guarantee of correctness and completeness!}
+  \annotation{lo.north}{\href{/tmp/current.pdf}{go back}}
 \end{mindmap}

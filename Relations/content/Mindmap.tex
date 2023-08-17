@@ -25,8 +25,8 @@
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
             \begin{itemize}
-              \item a binary relation, a subset of a Cartesian product $A\times B$, where $A$ and $B$ are possibly distinct sets
-              \item for all examples in the child nodes the following relation $R\subseteq A\times B$ is assumed
+              \item a binary relation $R\subseteq A\times B$, where $A$ and $B$ are possibly distinct sets
+              \item $x R y$ is true $\Leftrightarrow (x,y) \in R$ is true $\Leftrightarrow$ an edge from $x$ to $y$ exists in the directed graph representing $R$
               \item \alert{left-unique} and \alert{right-total} both describe relationships focusing on the \alert{codomain} $B$ while their correspondings counterparts for functions \alert{right-unique } and \alert{left-total } focus on the \alert{domain} $A$             
             \end{itemize}
           \end{minipage}
@@ -57,23 +57,30 @@
                       \item \alert{image of subset} M under $f$ (germ. Bildmenge einer Teilmenge $M$ unter $f$):\\ $im(f) = f(M) = \{f(x) \;|\; x\in M\}\subseteq Y, f: X\rightarrow Y, M\subseteq X$ (for the example below $A = X$, $B = Y$) 
                       \begin{itemize}
                         \item \alert{image of a function} (germ. Bildmenge einer Funktion) if $M = X$, it then is the set of all output values that the function can produce
-                        \item \alert{image of an element} $x\in X$ under $f$ (germ. Funktionswert) is dentoed $f(x)$
+                        \item \alert{image of an element} $x\in X$ under $f$ (germ. Funktionswert) is denoted $f(x)$
                       \end{itemize}
+                    \end{itemize}
+                    \item \alert{function evaluation:} $y = f(x) \Leftrightarrow (x, y)\in f \Leftrightarrow$ an edge from $x$ to $y$ exists in the directed graph representing $R$
+                    \begin{itemize}
+                      \item delivers the value of a function $f$ at an element $x$ of its domain, e.g. $f(2)$ delivers $12$ for the function $f = \{(1, 11), (2, 12), (3, 13)\}$
+                    \end{itemize}
+                    \begin{itemize}
+                      \item only works for right unique relations, because $x$ is uniquely mapped to $y$ in right direction when looking at $(x, y)$
                     \end{itemize}
                     \item \alert{notations:}
                     \begin{itemize}
                       \item \alert{functional notation:} $f(x, y) = x + 2y$
-                      \item \alert{arrow notation:} $f: X\times Y \rightarrow Z: (x, y)\mapsto x + 2y$ stands for a function in two variables
-                      \begin{itemize}
-                        \item $x\mapsto f(x, y_0)$ refers to a partially applied function produced by fixing the second argument to the value $y_0$ without introducing a new function name
-                        \item $f(x_0, y_0)$ refers to the value of the function $f$ at the point $(x_0, y_0)$
-                      \end{itemize}
+                      \item \alert{arrow notation:} $f: X\times Y \rightarrow Z: (x, y)\mapsto x + 2y$% stands for a function in two variables
+                      % \begin{itemize}
+                      %   \item $x\mapsto f(x, y_0)$ refers to a partially applied function produced by fixing the second argument to the value $y_0$ without introducing a new function name
+                      %   \item $f(x_0, y_0)$ refers to the value of the function $f$ at the point $(x_0, y_0)$
+                      % \end{itemize}
                       \item \alert{index notation:} $f_t (x) = x + 2t$
                       \begin{itemize}
                         \item for distinguishing some variables called paramters from the \enquote{true variables}, parameters are considered as being fixed during the study of a problem
-                        \item for functions whose domain is the set of the natural numbers, $f_i$ is called the $i$th element of the sequence $(f_i)_{i\in\mathbb{N}}$ with $f_i = i + 2$, standing for the function $f(i) = i  + 2$
+                        \item for functions whose domain is the set of the natural numbers, $f_i$ is called the $i$th element of the sequence $(f_i)_{i\in\mathbb{N}}$ with $f_i = i + 2$ standing for the function $f(i) = i  + 2$
                       \end{itemize}
-                      \item \alert{dot notation:} $(\cdot) + 2$ stands for $x\rightarrow x + 2$, this may be useful for distinguishing the function $f(\cdot)$ from its value $f(x)$ at $x$
+                      % \item \alert{dot notation:} $(\cdot) + 2$ stands for $x\rightarrow x + 2$, this may be useful for distinguishing the function $f(\cdot)$ from its value $f(x)$ at $x$
                       \item \alert{as relation:} $f = \{((x, y), x + 2y)\;|\; (x, y)\in X\times Y\} = \{((1, 1), 3), ((1, 2), 5), \ldots\}$
                     \end{itemize}
                   \end{itemize}
@@ -398,4 +405,5 @@
   %   \edge{test}{re}
   % \end{edges}
   \annotation{re.south}{This mindmap is provided without guarantee of correctness and completeness!};
+  \annotation{re.north}{\href{/tmp/current.pdf}{go back}}
 \end{mindmap}

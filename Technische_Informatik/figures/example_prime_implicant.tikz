@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node alternative] (0) at (-3, 4) {010};
+		\node [style=circle node alternative] (1) at (2, 4) {110};
+		\node [style=circle node alternative] (2) at (-3, -1) {000};
+		\node [style=circle node alternative] (3) at (2, -1) {100};
+		\node [style=circle node alternative] (4) at (4, 6) {111};
+		\node [style=circle node] (5) at (4, 1) {101};
+		\node [style=circle node alternative] (6) at (-1, 6) {011};
+		\node [style=circle node] (7) at (-1, 1) {001};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw (0) to (1);
+		\draw (1) to (3);
+		\draw (2) to (3);
+		\draw (0) to (2);
+		\draw (0) to (6);
+		\draw (1) to (4);
+		\draw (6) to (4);
+		\draw (7) to (5);
+		\draw (5) to (4);
+		\draw (3) to (5);
+		\draw (2) to (7);
+		\draw (7) to (6);
+	\end{pgfonlayer}
+\end{tikzpicture}

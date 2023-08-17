@@ -14,23 +14,46 @@
       \resizebox{\textwidth}{!}{
         \begin{minipage}[t]{16cm}
           \begin{itemize}
-            \item Logic defines \href[page=223]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{Syntax and Semantics}
+            \item logic defines \href[page=223]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{syntax and semantics}
             \begin{itemize}
-              \item sentence (germ. Aussage)
+              \item TODO sentence (germ. Aussage) (\href{https://math.stackexchange.com/a/48984}{reference})
             \end{itemize}
           \end{itemize}
         \end{minipage}
       }
     }
     child {
-      node {Predicate Logic / Prädikatenlogik}
+      node {Predicate Logic / Prädikatenlogik
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \alert{overview over terms:}\\ \includegraphics[width=\textwidth]{./figures/predicate_logic_overview_terms.png}\\ (\href[page=26]{/home/areo/Documents/Studium/Semester_5_Unterlagen/Mathematische_Logik/literature/Design_Patterns_fuer_Mathematische_Beweise_with_go_back.pdf}{reference})
+              \item \href[page=27]{/home/areo/Documents/Studium/Semester_5_Unterlagen/Mathematische_Logik/literature/Design_Patterns_fuer_Mathematische_Beweise_with_go_back.pdf}{all rules}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Quantors
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{rules for combinations of quantors:}\\
+                  \includegraphics[width=\textwidth]{/home/areo/Documents/Studium/Summaries/Logic/figures/Rechenregeln_fuer_Kombinationen_mit_Quantoren.png}\\ (\href[page=28]{/home/areo/Documents/Studium/Semester_5_Unterlagen/Mathematische_Logik/literature/Design_Patterns_fuer_Mathematische_Beweise_with_go_back.pdf}{reference})
+                \item \alert{visualisation for combinations of quantors:}\\
+                  \includegraphics[width=\textwidth]{/home/areo/Documents/Studium/Summaries/Logic/figures/visualisation_of_combinations_of_qunators.png}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
     }
     child {
       node {Propositional Logic / Aussagenlogik
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
             \begin{itemize}
-              \item \href[page=230]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{Syntax and operator precedence}
+              \item \href[page=230]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{extended syntax and operator precedence} and \href[page=238]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{syntax of boolean expressions}
               \item \alert{logic formula:} e.g. $P \vee Q$, \alert{atomic formula / atomic proposition / atom:} e.g. $P$
               \begin{itemize}
                 \item atomic propositions can be \alert{true} (T) or \alert{false} (F)
@@ -56,13 +79,40 @@
         }
       }
       child {
-        node {Boolesche Algebra
+        node {Normal Forms
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item a formula is in \alert{conjunctive normal form} (CNF) if it consists of a conjunction of disjunctions of literals $l_{i,j}$:
+                  \[
+                     \bigwedge^n_{i=1} (\bigvee^{m_i}_{j=1} l_{i,j}) 
+                  \]
+                \begin{itemize}
+                  \item a formula in CNF is \alert{valid} iff \alert{every conjunct} is \alert{valid} (check conjunct if there's a $l\vee \neg l$), thus checking only takes linear time
+                \end{itemize}
+                \item a formula is in \alert{disjunctive normal form} (DNF) if it consists of a disjunction of conjunctions of literals $l_{i,j}$:
+                  \[
+                    \bigvee^n_{i=1} (\bigwedge^{m_i}_{j=1} l_{i,j}) 
+                  \]
+                \begin{itemize}
+                  \item a formula in DNF is \alert{satisfiable} iff \alert{one disjunct} is \alert{satisfiable} (check disjunct if there's no $l\wedge \neg l$), thus checking only takes linear time
+                \end{itemize}
+                \item for every formula, there exists at least one equivalent formula in CNF and one in DNF
+                \item \href[page=239]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{Algorithm to produce CNF or DNF}
+                \item \href[page=238]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Boolean Algebra
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{8cm}
               \begin{itemize}
-                \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition, Axiome}
-                \item \href[page=15]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Konventionen, Präzidenzregeln}
-                \item aus den Axiomen \href[page=231]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{ableitbare Rechenregeln}
+                \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition, axioms}
+                \item \href[page=15]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{conventions, precedence rulese}
+                \item aus den Axiomen \href[page=231]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{derivable rules}
               \end{itemize}
             \end{minipage}
           }
@@ -72,7 +122,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \href[page=228]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=228]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition}
                 \end{itemize}
               \end{minipage}
             }
@@ -83,7 +133,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \href[page=229]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=229]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition}
                 \end{itemize}
               \end{minipage}
             }
@@ -94,7 +144,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \href[page=233]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=233]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition}
                 \end{itemize}
               \end{minipage}
             }
@@ -127,15 +177,38 @@
       child {
         node {Logical Entailment / Logische Ableitung bzw. Deduktion
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
+            \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item $\alpha \models \beta$ \alert{iff} $M(\alpha) \subseteq M(\beta)$ \alert{iff} in every model in which $\alpha$ is true, $\beta$ is also true
+                \item $\alpha \models \beta$ \alert{if} $M(\alpha) \subseteq M(\beta)$ \alert{iff} in every model in which $\alpha$ is true, $\beta$ is also true
                 \begin{itemize}
+                  \item $\approx $ \href[page=269]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{less equal} for boolean functions $f, g\in\mathbb{B}_n$: $f\le g$ \alert{if} $\forall\alpha\in\mathbb{B}^n: f(\alpha)\le g(\alpha)$ \alert{iff} $ON(f)\subseteq ON(g)$
                   \item when a sentence $\beta$ \alert{\enquote{logically follows}} from another sentence $\alpha$, $\alpha$ \alert{\enquote{entails}} $\beta$
-                  \item \alert{semantic relation} between models of a theorie (set of sentences) or a single sentence and models of a sentence
                   \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference 1} and \href[page=226]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference 2}
                 \end{itemize}
+                  \item the formula $\varphi$ \alert{follows logically} from a theory if $\varphi$ is true in all models of the theory (symbolically $theory \models \varphi$): $theory \models \varphi$ \alert{iff} $I \models \varphi$ for all models $I$ of $theory$
+                  \begin{itemize}
+                    \item \href[page=241]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
+                  \end{itemize}
                   \item $I \models \varphi$: Interpretation $I$ \alert{\enquote{satisfies}} a formula $\varphi$ or $\varphi$ \alert{\enquote{is true under}} $I$ when $I(\varphi) = T$
+                  \begin{itemize}
+                    \item an interpretation is a model of a \alert{theory} if it satisfies all formulae of the set
+                    \item a formula $\varphi$ is
+                    \begin{itemize}
+                      \item \alert{satisfiable} if there exists $I$ that satisfies $\varphi$
+                      \item \alert{unsatisfiable} if $\varphi$ is not satisfiable
+                      \item \alert{falsifiable} if there exists $I$ that doesn't satisfy $\varphi$
+                      \item \alert{valid} (a \alert{tautology}) if $I\models \varphi$ holds for all $I$
+                    \end{itemize}
+                    \item two formulae are
+                    \begin{itemize}
+                      \item \alert{logically equivalent} ($\varphi \equiv \psi$) if $I\models \varphi$ \alert{iff} $I\models \psi$ holds for all $I$
+                    \end{itemize}
+                    \item \href[page=235]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
+                  \end{itemize}
+                  \item the \enquote{$\models$} symbol is a meta symbol, a meta version of \enquote{$\Rightarrow$}
+                  \begin{itemize}
+                    \item \alert{semantic relation} between models of a theory or a single sentence and models of a sentence
+                  \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -145,10 +218,22 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item If a sentence $\alpha$ is true in a possible \alert{world} $m$, we say that $m$ \alert{satisfies} $\alpha$ or $m$ is a \alert{model} of $\alpha$
+                    \item if a sentence $\alpha$ is true in a possible \alert{world} $m$, we say that $m$ \alert{satisfies} $\alpha$ or $m$ is a \alert{model} of $\alpha$
                     \begin{itemize}
-                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ ($\hat=$ On-Menge)
+                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ ($\hat=$ \href[page=249]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{On-Menge})
                     \end{itemize}
+                    \item an \alert{interpretation} $I$ is called a model of $\varphi$ if $I\models \varphi$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Theory
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a \alert{set of sentences} in a formal language
                   \end{itemize}
                 \end{minipage}
               }
@@ -159,9 +244,9 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item \alert{truth assignment} of the atoms in $\Sigma$, corresponds to semantics
+                    \item \alert{truth assignment} of the atoms in $\Sigma$, corresponds to \alert{semantics} (\href[page=237]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{reference})
                     \item $I: \Sigma \mapsto \{T, F\}$
-                    \item \href[page=232]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{inductive definition} of the interpretation function
+                    \item \href[page=232]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{extended inductive definition} and \href[page=240]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{inductive definition with regard to boolean expressions} of the interpretation function
                   \end{itemize}
                 \end{minipage}
               }
@@ -172,9 +257,9 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item $theorie \vdash_i \alpha$: generate / derive a sentence $\alpha$ with an inference method $i$
-                    \item \href[page=226]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
+                    \item $theory \vdash_i \alpha$: generate / derive a sentence $\alpha$ with an inference method $i$
                     \item like to have inference algorithms that derive only sentences that are entailed (\alert{soundness}) and all of them (\alert{completeness})
+                    \item \href[page=226]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
                   \end{itemize}
                 \end{minipage}
               }

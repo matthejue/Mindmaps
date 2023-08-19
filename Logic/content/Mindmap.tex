@@ -89,6 +89,17 @@
           }
         }
         child {
+          node {Boolesche Algebra $(\{0, 1\}, \wedge, \vee, \neg)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=225]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
           node {Boolesche Algebra der Funktionen in n Variablen $(\mathbb{B}_n, \cdot, +, \neg)$
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
@@ -127,13 +138,28 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{\href[page=230]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{literal}:} (possibly negated) atomic formula or \href[page=244]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{alternative definition}
-                \item \alert{\href[page=230]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{clause} (germ. Klausel / \href{https://de.wikipedia.org/wiki/Disjunktionsterm}{Disjunktionsterm}):} disjunction of literals
-                \item \alert{product term (germ. \href[page=245]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Monom} / \href{https://de.wikipedia.org/wiki/Konjunktionsterm}{Konjunktionterm}):} Konjunktion von Literalen, in der kein Literal mehr als einmal vorkommt und zu keiner Variable sowohl das positive als auch das negative Literal vorkommt. Außerdem ist \enquote{1} ein Monom
+                \item \alert{literal:} (possibly negated) atomic formula or \href[page=244]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{alternative definition}
+                \item \alert{product term (germ. Monom / Konjunktionterm):} Konjunktion von Literalen, in der kein Literal mehr als einmal vorkommt und zu keiner Variable sowohl das positive als auch das negative Literal vorkommt. Außerdem ist \enquote{1} ein Monom
                 \begin{itemize}
-                  \item \alert{minterm (germ. Minterm / vollständiges Monom / \href{https://de.wikipedia.org/wiki/Vollkonjunktion}{Vollkonjunktion}):} Monom indem jede Variable entweder als positives oder als negatives Literal vorkommt
+                  \item \alert{minterm (germ. Minterm / vollständiges Monom / Vollkonjunktion):} Monom indem jede Variable entweder als positives oder als negatives Literal vorkommt
                   \begin{itemize}
                     \item \href[page=245]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{zu $\alpha\in \mathbb{B}^n$ gehörender Minterm} $m(\alpha)$
+                    \item \underline{possible name origin:} only one truth assignment can make a minterm true, all other make it false, so it has mininmum satisfiability (\href{https://qr.ae/pyqNLP}{reference})
+                    % \begin{itemize}
+                    %   \item only one truth assignment can make a minterm true, all other make it false, so it has mininmum satisfiability (\href{https://qr.ae/pyqNLP}{reference})
+                    %   \item in SoP \alert{only one} of the minterms must be true for the expression to be true
+                    % \end{itemize}
+                  \end{itemize}
+                \end{itemize}
+                \item \alert{clause (germ. Klausel / Disjunktionsterm):} disjunction of literals
+                \begin{itemize}
+                  \item \alert{maxterm (germ. Maxterm / Volldisjunktion):} analogous to minterms
+                  \begin{itemize}
+                    \item \underline{possible name origin:} all except one truth assignment make a maxterm true, so it has a maximum satisfiability
+                    % \begin{itemize}
+                    %   \item all except one truth assignment make a maxterm true, so it has a maximum satisfiability
+                    %   % \item in PoS \alert{all} the maxterms must be true for the expression to be true
+                    % \end{itemize}
                   \end{itemize}
                 \end{itemize}
               \end{itemize}
@@ -145,14 +171,14 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item a formula is in \alert{\href[page=238]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{disjunctive normal form (DNF)}} if it consists of a disjunction of conjunctions of literals $l_{i,j}$:
+                  \item a formula is in \alert{disjunctive normal form (DNF)} if it consists of a disjunction of conjunctions of literals $l_{i,j}$:
                     \[
                       \bigvee^n_{i=1} (\bigwedge^{m_i}_{j=1} l_{i,j}) 
                     \]
                   \begin{itemize}
                     \item a formula in DNF is \alert{satisfiable} iff \alert{one disjunct} is \alert{satisfiable} (check disjunct if there's no $l\wedge \neg l$), thus checking only takes linear time
-                    \item aka \alert{sum of products (SoP) (germ. \href[page=247]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Polynom}):} Disjunktion von paarweise verschiedenen Monomen. Außerdem ist „0” ein Polynom. Ein Polynom für f heißt auch disjunktive Normalform (DNF) von f
-                    \item \alert{canonical disjunctive normal form (CDNF) (germ. vollständiges Polynom):} Polynom indem alle Monome des Polynoms vollständig sind. Ein vollständiges Polynom für f heißt auch \alert{\href[page=248]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{kanonische disjunktive Normalform (KDNF)}} von f
+                    \item aka \alert{sum of products (SoP) (germ. Polynom):} Disjunktion von paarweise verschiedenen Monomen. Außerdem ist „0” ein Polynom. Ein Polynom für f heißt auch disjunktive Normalform (DNF) von f
+                    \item \alert{canonical disjunctive normal form (CDNF) (germ. vollständiges Polynom):} Polynom indem alle Monome des Polynoms vollständig sind. Ein vollständiges Polynom für f heißt auch \alert{kanonische disjunktive Normalform (KDNF)} von f
                   \end{itemize}
                   \item a formula is in \alert{conjunctive normal form (CNF)} if it consists of a conjunction of disjunctions of literals $l_{i,j}$:
                     \[
@@ -204,12 +230,8 @@
                 \begin{itemize}
                   \item $\approx $ \href[page=269]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{less equal} for boolean functions $f, g\in\mathbb{B}_n$: $f\le g$ \alert{if} $\forall\alpha\in\mathbb{B}^n: f(\alpha)\le g(\alpha)$ \alert{iff} $ON(f)\subseteq ON(g)$
                   \item when a sentence $\beta$ \alert{\enquote{logically follows}} from another sentence $\alpha$, $\alpha$ \alert{\enquote{entails}} $\beta$
-                  \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference 1} and \href[page=226]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference 2}
                 \end{itemize}
                   \item the formula $\varphi$ \alert{follows logically} from a theory if $\varphi$ is true in all models of the theory (symbolically $theory \models \varphi$): $theory \models \varphi$ \alert{iff} $I \models \varphi$ for all models $I$ of $theory$
-                  \begin{itemize}
-                    \item \href[page=241]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
-                  \end{itemize}
                   \item $I \models \varphi$: Interpretation $I$ \alert{\enquote{satisfies}} a formula $\varphi$ or $\varphi$ \alert{\enquote{is true under}} $I$ when $I(\varphi) = T$
                   \begin{itemize}
                     \item an interpretation is a model of a \alert{theory} if it satisfies all formulae of the set
@@ -224,7 +246,6 @@
                     \begin{itemize}
                       \item \alert{logically equivalent} ($\varphi \equiv \psi$) if $I\models \varphi$ \alert{iff} $I\models \psi$ holds for all $I$
                     \end{itemize}
-                    \item \href[page=235]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
                   \end{itemize}
                   \item the \enquote{$\models$} symbol is a meta symbol, a meta version of \enquote{$\Rightarrow$}
                   \begin{itemize}
@@ -280,12 +301,33 @@
                   \begin{itemize}
                     \item $theory \vdash_i \alpha$: generate / derive a sentence $\alpha$ with an inference method $i$
                     \item like to have inference algorithms that derive only sentences that are entailed (\alert{soundness}) and all of them (\alert{completeness})
-                    \item \href[page=226]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
                   \end{itemize}
                 \end{minipage}
               }
             }
           }
+      }
+      child {
+        node {Logikfunktionen
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item asdf
+                \item Anzahl \alert{Zeilen in Wahrheitstabelle:} $2^{\text{\#Variablen}}$
+                \item Anzahl \alert{Aussagenlogische Formeln:} $2^{\text{\#Zeilen}} = 2^{\left(2^{\text{\#Variablen}}\right)}$
+                  \begin{itemize}
+                    \item bei z.B. $3$ \alert{Aussagenlogischen Variablen} gibt es $2^3=8$ Zeilen in der Wahrheitstabelle und damit $2^{(2^3)}=256$ verschiedenen Aussagenlogische Formeln
+                    \item \underline{zweimal \href{/home/areo/Documents/Studium/Summaries/Combinatorics/main.pdf}{Anzahl Variationen mit Wiederholung}:}
+                    \begin{itemize}
+                      \item für die Anzahl Zeilen sind es $n=2$ Objekte entweder $0$ oder $1$ und die Auswahl $k$ ist die Anzahl Variablen, da jede Variable entweder $0$ oder $1$ sein kann
+                      \item für die Anzahl Aussagenlogische Formeln sind es $n=2$ Objekte, entweder $0$ oder $1$ und die Auswahl $k$ ist die Anzahl Zeilen, die man zuvor rausbekommen hat, da jede Zeile die eine Eingabe / Interpretation darstellt als Ergebnis entweder $0$ oder $1$ haben kann
+                    \end{itemize}
+                  \end{itemize}
+              \end{itemize}
+              \includegraphics[width=\textwidth, center]{./figures/_2021-11-22-18-01-18.png}
+            \end{minipage}
+          }
+        }
       }
     };
   \end{mindmapcontent}

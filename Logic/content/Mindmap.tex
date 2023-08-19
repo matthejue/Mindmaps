@@ -197,6 +197,48 @@
             }
           }
         }
+        child {
+          node {Anwendung von Minterme, Maxterme, KNF, DNF
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{16cm}
+                \begin{itemize}
+                  \item $16$ mögliche \alert{Logikfunktionen} für $2$ \alert{Aussagenlosche Variablen}\\
+                    \includegraphics[width=\linewidth]{figures/_2021-11-22-18-01-18.png}
+                  \item $f1$, $f2$, $f4$ und $f8$ sind \alert{Minterme} (für genau eine Variation der Eingabewerte den Wert $1$)
+                  \item $f7$, $f11$, $f13$ und $f14$ sind \alert{Maxterme} (für genau eine Variation der Eingabewerte den Wert $0$)
+                  \item die $4$ \alert{Minterme} können als \alert{Konjunktionen} dargestellt werden:
+                    $m_{0}(a, b)=\bar{a} \cdot \bar{b}, m_{1}(a, b)=\bar{a} \cdot b, m_{2}(a, b)=a \cdot \bar{b}, m_{3}(a, b)=a \cdot b$
+                  \item die $4$ \alert{Maxterme} können als \alert{Disjunktionen} dargestellt werden:
+                    $M_{0}(a, b)=\bar{a} + \bar{b}, M_{1}(a, b)=\bar{a} + b, M_{2}(a, b)=a + \bar{b}, M_{3}(a, b)=a + b$
+                  \item \alert{Vergleich:}
+                    \[
+                      \begin{array}{|c|c||c|c|}
+                        \hline a & b & \neg a \cdot b & a + \neg b\\
+                        \hline 0 & 0 & 0 & 1\\
+                        0 & 1 & 1 & 0 \\
+                        1 & 0 & 0 & 1 \\
+                        1 & 1 & 0 & 1 \\
+                        \hline
+                      \end{array}
+                    \]
+                  \item $\neg(\neg a \wedge b) = a \vee \neg b$: \enquote{alles außer} $\neg a \wedge b$ ist $1$ $\rightarrow$ ($a=0, b=1$) ist als einziges $0$
+                  \item aus zwei \alert{Basistypen} (Disjunktion / Konjunktion und Negation) lassen sich alle anderen \alert{Logikfunktion} erzeugen
+                  \item jede Logikfunktion $f: \mathbb{B}^{2} \rightarrow \mathbb{B}$ lässt sich in \alert{Disjunktiver Normalform (DNF)}:
+                    $f(a, b)=f(0,0) \cdot \bar{a} \cdot \bar{b}+f(0,1) \cdot \bar{a} \cdot b+f(1,0) \cdot a \cdot \bar{b}+f(1,1) \cdot a \cdot b$
+                  \item als auch in \alert{konjunktiver Normalform (KNF)} darstellen:
+                    $f(a, b)=(f(0,0)+a+b) \cdot(f(0,1)+a+\bar{b}) \cdot(f(1,0)+\bar{a}+b) \cdot(f(1,1)+\bar{a}+\bar{b})$
+                  \item man möchte \alert{Logische Funktion} (Wertetabelle) mit möglichst wenig Schaltelementen realisieren $\rightarrow$ schauen, ob \alert{DNF} oder \alert{KNF} kürzer ist:\\
+                    \includegraphics[height=0.4\textwidth, center]{./figures/knf_dnf.png}
+                  \item \alert{Beispiel:} \enquote{\alert{höchstens} 2 wahre aussagenlogische Variablen}
+                    \begin{itemize}
+                      \item \alert{DNF:} $(\neg a\cdot \neg b\cdot \neg c)+(\neg a\cdot \neg b\cdot c)+(\neg a\cdot b\cdot \neg c)+(\neg a\cdot b\cdot c)+(a\cdot \neg b\cdot \neg c)+(a\cdot \neg b\cdot c)+(a\cdot b\cdot \neg c)$
+                      \item \alert{KNF:} $(\neg a+\neg b+\neg c)$
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
       }
       % child {
       %   node {Syntax and Semantics
@@ -308,19 +350,19 @@
           }
       }
       child {
-        node {Logikfunktionen
+        node {Boolean functions (germ. Logikfunktionen, Boolesche Funktionen)
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item asdf
+                \item \href[page=177]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition}
                 \item Anzahl \alert{Zeilen in Wahrheitstabelle:} $2^{\text{\#Variablen}}$
                 \item Anzahl \alert{Aussagenlogische Formeln:} $2^{\text{\#Zeilen}} = 2^{\left(2^{\text{\#Variablen}}\right)}$
                   \begin{itemize}
                     \item bei z.B. $3$ \alert{Aussagenlogischen Variablen} gibt es $2^3=8$ Zeilen in der Wahrheitstabelle und damit $2^{(2^3)}=256$ verschiedenen Aussagenlogische Formeln
                     \item \underline{zweimal \href{/home/areo/Documents/Studium/Summaries/Combinatorics/main.pdf}{Anzahl Variationen mit Wiederholung}:}
                     \begin{itemize}
-                      \item für die Anzahl Zeilen sind es $n=2$ Objekte entweder $0$ oder $1$ und die Auswahl $k$ ist die Anzahl Variablen, da jede Variable entweder $0$ oder $1$ sein kann
-                      \item für die Anzahl Aussagenlogische Formeln sind es $n=2$ Objekte, entweder $0$ oder $1$ und die Auswahl $k$ ist die Anzahl Zeilen, die man zuvor rausbekommen hat, da jede Zeile die eine Eingabe / Interpretation darstellt als Ergebnis entweder $0$ oder $1$ haben kann
+                      \item für die Anzahl Zeilen sind es $n=2$ Objekte entweder $0$ oder $1$ und die Auswahl $k=m$ ist die Anzahl Variablen $m$, da jede Variable entweder $0$ oder $1$ sein kann
+                      \item für die Anzahl Aussagenlogische Formeln sind es $n=2$ Objekte, entweder $0$ oder $1$ und die Auswahl $k=\#Zeilen$ ist die Anzahl Zeilen, die man zuvor rausbekommen hat, da jede Zeile die eine Eingabe / Interpretation darstellt als Ergebnis entweder $0$ oder $1$ haben kann
                     \end{itemize}
                   \end{itemize}
               \end{itemize}

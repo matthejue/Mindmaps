@@ -59,8 +59,6 @@
                 \item atomic propositions can be \alert{true} (T) or \alert{false} (F)
                 \item the truth of a formula follows from the truth of its atomic propositions (\alert{truth assignment} or \alert{interpretation}) and the connectives
               \end{itemize}
-              \item \alert{literal:} (possibly negated) atomic formula
-              \item \alert{clause:} disjunction of literals
             \end{itemize}
             % \begin{itemize}
             %   \item \alert{countable alphabet} of \alert{atomic propositions}: e.g. $\Sigma = \{$P, Q, R, \dots$\}$
@@ -79,40 +77,13 @@
         }
       }
       child {
-        node {Normal Forms
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{12cm}
-              \begin{itemize}
-                \item a formula is in \alert{conjunctive normal form} (CNF) if it consists of a conjunction of disjunctions of literals $l_{i,j}$:
-                  \[
-                     \bigwedge^n_{i=1} (\bigvee^{m_i}_{j=1} l_{i,j}) 
-                  \]
-                \begin{itemize}
-                  \item a formula in CNF is \alert{valid} iff \alert{every conjunct} is \alert{valid} (check conjunct if there's a $l\vee \neg l$), thus checking only takes linear time
-                \end{itemize}
-                \item a formula is in \alert{disjunctive normal form} (DNF) if it consists of a disjunction of conjunctions of literals $l_{i,j}$:
-                  \[
-                    \bigvee^n_{i=1} (\bigwedge^{m_i}_{j=1} l_{i,j}) 
-                  \]
-                \begin{itemize}
-                  \item a formula in DNF is \alert{satisfiable} iff \alert{one disjunct} is \alert{satisfiable} (check disjunct if there's no $l\wedge \neg l$), thus checking only takes linear time
-                \end{itemize}
-                \item for every formula, there exists at least one equivalent formula in CNF and one in DNF
-                \item \href[page=239]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{Algorithm to produce CNF or DNF}
-                \item \href[page=238]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
-              \end{itemize}
-            \end{minipage}
-          }
-        }
-      }
-      child {
         node {Boolean Algebra
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{8cm}
               \begin{itemize}
-                \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition, axioms}
+                \item \href[page=224]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition, axioms}. If a sentence is directly derivable fromt the axioms, then it applies in all boolean algebras. Using properties of a concrete boolean algebra to prove a sentence is not allowed, one has to use the axioms
                 \item \href[page=15]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{conventions, precedence rulese}
-                \item aus den Axiomen \href[page=231]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{derivable rules}
+                \item \href[page=231]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{rules} derived from the axioms
               \end{itemize}
             \end{minipage}
           }
@@ -145,6 +116,56 @@
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
                   \item \href[page=233]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Terminology
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{\href[page=230]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{literal}:} (possibly negated) atomic formula or \href[page=244]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{alternative definition}
+                \item \alert{\href[page=230]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{clause} (germ. Klausel / \href{https://de.wikipedia.org/wiki/Disjunktionsterm}{Disjunktionsterm}):} disjunction of literals
+                \item \alert{product term (germ. \href[page=245]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Monom} / \href{https://de.wikipedia.org/wiki/Konjunktionsterm}{Konjunktionterm}):} Konjunktion von Literalen, in der kein Literal mehr als einmal vorkommt und zu keiner Variable sowohl das positive als auch das negative Literal vorkommt. Außerdem ist \enquote{1} ein Monom
+                \begin{itemize}
+                  \item \alert{minterm (germ. Minterm / vollständiges Monom / \href{https://de.wikipedia.org/wiki/Vollkonjunktion}{Vollkonjunktion}):} Monom indem jede Variable entweder als positives oder als negatives Literal vorkommt
+                  \begin{itemize}
+                    \item \href[page=245]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{zu $\alpha\in \mathbb{B}^n$ gehörender Minterm} $m(\alpha)$
+                  \end{itemize}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Normal Forms
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item a formula is in \alert{\href[page=238]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{disjunctive normal form (DNF)}} if it consists of a disjunction of conjunctions of literals $l_{i,j}$:
+                    \[
+                      \bigvee^n_{i=1} (\bigwedge^{m_i}_{j=1} l_{i,j}) 
+                    \]
+                  \begin{itemize}
+                    \item a formula in DNF is \alert{satisfiable} iff \alert{one disjunct} is \alert{satisfiable} (check disjunct if there's no $l\wedge \neg l$), thus checking only takes linear time
+                    \item aka \alert{sum of products (SoP) (germ. \href[page=247]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Polynom}):} Disjunktion von paarweise verschiedenen Monomen. Außerdem ist „0” ein Polynom. Ein Polynom für f heißt auch disjunktive Normalform (DNF) von f
+                    \item \alert{canonical disjunctive normal form (CDNF) (germ. vollständiges Polynom):} Polynom indem alle Monome des Polynoms vollständig sind. Ein vollständiges Polynom für f heißt auch \alert{\href[page=248]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{kanonische disjunktive Normalform (KDNF)}} von f
+                  \end{itemize}
+                  \item a formula is in \alert{conjunctive normal form (CNF)} if it consists of a conjunction of disjunctions of literals $l_{i,j}$:
+                    \[
+                      \bigwedge^n_{i=1} (\bigvee^{m_i}_{j=1} l_{i,j}) 
+                    \]
+                  \begin{itemize}
+                    \item a formula in CNF is \alert{valid} iff \alert{every conjunct} is \alert{valid} (check conjunct if there's a $l\vee \neg l$), thus checking only takes linear time
+                    \item aka \alert{product of sums (PoS)}
+                    \item \alert{canonical conjunctive normal form (CCNF)} does also exist like the CDNF for the DNF
+                  \end{itemize}
+                  \item for every formula, there exists at least one equivalent formula in CNF and one in DNF
+                  \item \href[page=239]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{Algorithm to produce CNF or DNF}
+                  \item \href[page=238]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{reference}
                 \end{itemize}
               \end{minipage}
             }

@@ -167,7 +167,7 @@
           }
         }
         child {
-          node {Normal Forms
+          node (nf) {Normal Forms
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -279,17 +279,17 @@
                     \item an interpretation is a model of a \alert{theory} if it satisfies all formulae of the set
                     \item a formula $\varphi$ is
                     \begin{itemize}
-                      \item \alert{satisfiable} if there exists $I$ that satisfies $\varphi$
-                      \item \alert{unsatisfiable} if $\varphi$ is not satisfiable
-                      \item \alert{falsifiable} if there exists $I$ that doesn't satisfy $\varphi$
-                      \item \alert{valid} (a \alert{tautology}) if $I\models \varphi$ holds for all $I$
+                      \item \alert{satisfiable (germ. erfüllbar, konsistent, widerspruchsfrei)} if there exists $I$ that satisfies $\varphi$
+                      \item \alert{unsatisfiable (germ. unerfüllbar, inkonsistent, widersprüchlich)} if $\varphi$ is not satisfiable
+                      \item \alert{falsifiable (germ. widerlegbar)} if there exists $I$ that doesn't satisfy $\varphi$
+                      \item \alert{valid (germ. allgemeingültig)} (a \alert{tautology}) if $I\models \varphi$ holds for all $I$
                     \end{itemize}
                     \item two formulae are
                     \begin{itemize}
                       \item \alert{logically equivalent} ($\varphi \equiv \psi$) if $I\models \varphi$ \alert{iff} $I\models \psi$ holds for all $I$
                     \end{itemize}
                   \end{itemize}
-                  \item the \enquote{$\models$} symbol is a meta symbol, a meta version of \enquote{$\Rightarrow$}
+                  \item the \enquote{$\models$} symbol is a meta symbol, a meta version of \enquote{$\Rightarrow$}: $\alpha \models \beta$ \alert{iff} $\alpha \Rightarrow \beta$ is \alert{valid}
                   \begin{itemize}
                     \item \alert{semantic relation} between models of a theory or a single sentence and models of a sentence
                   \end{itemize}
@@ -297,6 +297,35 @@
             \end{minipage}
           }
         }
+          child {
+            node {Ways to interpet implication
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{enumerate}
+                    \item \alert{If-Statement:}
+                      \begin{itemize}
+                        \item $a \rightarrow b \Leftrightarrow \neg a \vee b \Leftrightarrow \mathtt{if(} a\mathtt{)\{}b\mathtt{\}}$, d.h. Lazy Evaluation, $b$ wird nur ausgewertet, wenn $\psi(a)(\omega)=1$ bzw. $\psi(\neg a)(\omega)=0$, da $0$ der \alert{Non-Controlling Value} der \alert{ODER-Operation} ist und daher das Ergebnis erst feststeht, sobald der zweite Operand ausgewertet ist
+                      \end{itemize}
+                    \item \alert{Subset $\subseteq$:}
+                      \begin{table}
+                        \centering
+                        \begin{tblr}{
+                            cells = {c, BoxColor},
+                            row{1} = {SecondaryColor,fg=white},
+                            vline{3,6} = {-}{},
+                          }
+                          $a$ & $b$ & $f$ & $g$ & $h$ & $f \rightarrow h$ & $g \rightarrow h$ \\
+                          0   & 0   & 1   & 1   & 1   & 1                 & 1                 \\
+                          0   & 1   &     & 1   &     & 1                 & 0                 \\
+                          1   & 0   & 1   & 1   & 1   & 1                 & 1                 \\
+                          1   & 1   &     &     & 1   & 1                 & 1                 
+                        \end{tblr}
+                      \end{table}
+                    \end{enumerate}
+                    \end{minipage}
+              }
+            }
+          }
           child {
             node (models) {Models
               \resizebox{\textwidth}{!}{
@@ -378,4 +407,11 @@
   \end{edges}
   \annotation{lo.south}{This mindmap is provided without guarantee of correctness and completeness!}
   \annotation{lo.north}{\href{/tmp/current.pdf}{go back}}
+  \annotation{nf.north}{
+    \resizebox{\textwidth}{!}{
+      \begin{minipage}[t]{6cm}
+        canonical roughly means \href{https://qr.ae/pyqs39}{\enquote{without any arbitrary choices}}
+      \end{minipage}
+    }
+}
 \end{mindmap}

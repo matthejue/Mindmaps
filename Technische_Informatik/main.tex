@@ -13,6 +13,10 @@
 \setlength{\medmuskip}{1\medmuskip}
 \setlength{\thickmuskip}{1\thickmuskip}
 
+\usepackage{tikzit}
+\input{graph_theory.tikzstyles}
+\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0}}}{}
+
 \usepackage{array}
 \usepackage{booktabs}
 \usepackage{boldline}
@@ -39,6 +43,9 @@
 \definecolor{SecondaryColor}{HTML}{6FC1EC}
 \definecolor{SecondaryColorDimmed}{HTML}{CEEAF9}
 \colorlet{BoxColor}{gray!10!white}
+
+\usepackage[style=numeric]{biblatex}
+\addbibresource{./My Library.bib}
 
 \usepackage[allbordercolors=PrimaryColor, pdfborder={0 0 .2}]{hyperref}
 
@@ -394,89 +401,134 @@
               }
             }
             child {
-              node {Einer-Komplement Darstellung
+              node {Radixkomplement
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item \alert{potentiell negativer Wert} $\displaystyle[d]_{1} = \sum_{i=0}^{n-1}\delta(d_i) 2^i - \delta(d_n)(2^n-2^{-k})$ in \alert{Einerkomplement-Darstellung}
-                        \begin{itemize}
-                          \item Beispiel 3-Bit Festkommazahlen mit Vorzeichenbit, $n=1$ und $k=1$:
-                            \begin{table}
-                              \raggedright
-                              \begin{tblr}{
-                                  cells = {c, BoxColor},
-                                  column{1} = {PrimaryColor,fg=white},
-                                }
-                                $d$     & 10.0 & 10.1 & 11.0 & 11.1 / 00.0 & 00.1 & 01.0 & 01.1 \\
-                                $[d]_1$ & -1.5  & -1.0 & -0.5  & 0.0 & 0.5 & 1.0  & 1.5 \\
-                              \end{tblr}
-                            \end{table}
-                        \end{itemize}
-                    \end{itemize}
-                    \begin{itemize}
-                      \item im Negativen hat eine Folge mit mehr $1$en anders als im Positiven betragsmäßig eine kleineren Wert, denn umso mehr $1$en da sind, umso größer wird die Summe $\sum_{i=0}^{n-1}\delta(d_i)2^i$ und umso mehr kann von der subtrahierten größten positiven Zahl $2^n-1$ ausgeglichen werden
-                      \item um den Wert einer negativen Dezimalzahl binär darzustellen gibt es 2 Methoden:
-                        \begin{itemize}
-                          \item mit größtmöglichen positven Zahl anfangen $-(2^n-1)$ und überlegen, welche $2$er Potenzen (Stellenwerte) man draufaddieren muss, um die gewünschte Zahl zu erhalten und an den entsprechenden Bits, die diesen $2$er Potenzen entsprechen $1$en setzen
-                          \item die passende Ziffernfolge wie gewohnt erstellen, aber mit vertauschten $1$en und $0$en und das Vorzeichenbit ist eine $1$
-                        \end{itemize}
+                      \item Das \alert{Radix-Komplement} (r's Komplement) von einer Zahl y mit $n-$Ziffern mit Radix $b$:
+                        \begin{equation*}
+                          b^n-y
+                        \end{equation*}
+                      \item Es gibt auch ein \alert{verringertes Radix-Komplement} ((r-1)'s Komplement), und zwar:
+                        \begin{equation*}
+                          (b^n-1)-y
+                        \end{equation*}
+                        \cite{OnlineRechnerNumerischeKomplemente}
+                      \item Das \alert{verringerte Radix-Komplement} kann man leicht erhalten, indem man einfach die Ziffern einer Zahl mit den Ziffern, die man benötigt um $Radix - 1$ zu erhalten, ersetzt. Zum Beispiel, dass verringerte Radix-Komplement für die 2-Ziffern Dezimalzahl $56$ ist $43$. Man kann das \alert{Radix-Komplement} einfach erhalten, indem man Eins zu dem verringerten Radix-Komplement addiert $43+1=44$
+                      \item Im Dezimalzahlensystem ist das Radix-Komplement auch als \alert{Zehnerkomplement} (10'er Komplement) und das verringerte Radix-Komplement als \alert{Neunerkomplement} (9'er Komplement) bekannt
+                      \item Im Binärsystem ist das Radix-Komplement als \alert{Zweierkomplement} (2'er Komplement) und das verringerte Radix-Komplement als \alert{Einerkomplement} (1'er Komplement) bekannt. Ein Einerkomplement kann man einfach durch das Umkehren von Bits einer Zahl erhalten. Zweierkomplemente werden in Computern für die Darstellung von negativen Ganzzahlen verwendet
                     \end{itemize}
                   \end{minipage}
                 }
               }
               child {
-                node {Inversion
+                node {Komplementärverfahren (engl. Method of complements\cite{MethodComplements2023})
                   \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{8cm}
+                    \begin{minipage}[t]{12cm}
                       \begin{itemize}
-                        \item $[a']_1 = -[a]_1$
+                        \item Subtraktion als Addition berechnen. Beispiele:
+                          \begin{align*}
+                    &\begin{aligned}
+                      622_{10} - 451_{10} \text{ ist } 622_{10} + (1000_{10} - 451_{10}) - 1000_{10} &= 622_{10} + (999_{10} - 451_{10} + 1) - 1000_{10}\\
+                                                                                                     &= 622_{10} + 549_{10} - 1000_{10}\\
+                                                                                                     &= 1171_{10} - 1000_{10} = 171_{10}
+                    \end{aligned}\\[0.25cm]
+                    &\begin{aligned}
+                      110_{2} - 011_{2} \text{ ist } 110_{2} + (1000_{2} - 011_{2}) - 1000_{2} &= 110_{2} + (999_{2} - 011_{2} + 1) - 1000_{2}\\
+                                                                                               &= 110_{2} + 101_{2} - 1000_{2}\\ 
+                                                                                               &= 1011_{2} - 1000_{2} = 11_{2}
+                    \end{aligned}
+                          \end{align*}
                       \end{itemize}
                     \end{minipage}
                   }
                 }
               }
-            }
-            child {
-              node {Zweier-Komplement Darstellung
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item man springt einen kleisten Zahlenabstand weiter wenn das Vorzeichenbit $1$ ist als beim Einerkomplement
-                      \item \alert{potentiell negativer Wert} $\displaystyle[d]_{2} = \sum_{i=0}^{n-1}\delta(d_i)2^i - \delta(d_n)2^n$ in \alert{Zweierkomplement-Darstellung}
+              child {
+                node {Einer-Komplement Darstellung
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{14cm}
+                      \begin{itemize}
+                        \item \alert{potentiell negativer Wert} $\displaystyle[d]_{1} = \sum_{i=0}^{n-1}\delta(d_i) 2^i - \delta(d_n)(2^n-2^{-k})$ in \alert{Einerkomplement-Darstellung}
+                          \begin{itemize}
+                            \item Beispiel 3-Bit Festkommazahlen mit Vorzeichenbit, $n=1$ und $k=1$:
+                              \begin{table}
+                                \raggedright
+                                \begin{tblr}{
+                                    cells = {c, BoxColor},
+                                    column{1} = {PrimaryColor,fg=white},
+                                  }
+                                  $d$     & 10.0 & 10.1 & 11.0 & 11.1 / 00.0 & 00.1 & 01.0 & 01.1 \\
+                                  $[d]_1$ & -1.5  & -1.0 & -0.5  & 0.0 & 0.5 & 1.0  & 1.5 \\
+                                \end{tblr}
+                              \end{table}
+                          \end{itemize}
+                      \end{itemize}
+                      \begin{itemize}
+                        \item im Negativen hat eine Folge mit mehr $1$en anders als im Positiven betragsmäßig eine kleineren Wert, denn umso mehr $1$en da sind, umso größer wird die Summe $\sum_{i=0}^{n-1}\delta(d_i)2^i$ und umso mehr kann von der subtrahierten größten positiven Zahl $2^n-1$ ausgeglichen werden
+                        \item um den Wert einer negativen Dezimalzahl binär darzustellen gibt es 2 Methoden:
+                          \begin{itemize}
+                            \item mit größtmöglichen positven Zahl anfangen $-(2^n-1)$ und überlegen, welche $2$er Potenzen (Stellenwerte) man draufaddieren muss, um die gewünschte Zahl zu erhalten und an den entsprechenden Bits, die diesen $2$er Potenzen entsprechen $1$en setzen
+                            \item die passende Ziffernfolge wie gewohnt erstellen, aber mit vertauschten $1$en und $0$en und das Vorzeichenbit ist eine $1$
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Inversion
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
                         \begin{itemize}
-                          \item Beispiel 3-Bit Festkommazahlen mit Vorzeichenbit, $n=1$ und $k=1$:
-                            \begin{table}
-                              \raggedright
-                              \begin{tblr}{
-                                  cells = {c, BoxColor},
-                                  column{1} = {PrimaryColor,fg=white},
-                                }
-                                $d$                & 10.0 & 10.1 & 11.0 & 11.1 & 00.0 & 00.1 & 01.0 & 01.1 \\
-                                $[d]_2$ & -2  & -1.5 & -1.0  & -0.5 & 0.0  & 0.5 & 1.0  & 1.5 \\
-                              \end{tblr}
-                            \end{table}
+                          \item $[a']_1 = -[a]_1$
                         \end{itemize}
-                    \end{itemize}
-                    \begin{itemize}
-                      \item genauso wie beim Einerkomplment bedeuten mehr $1$en im Negativen einen betragsmäßig kleineren Wert
-                      \item um den Wert einer negativen Dezimalzahl binär darzustellen gibt es 2 Methoden
-                        \begin{itemize}
-                          \item mit der größtmöglichen positven Zahl + kleinmöglichen positven Zahl ungleich $0$ anfangen $-(2^n)$ und überlegen, welche $2$er Potenzen (Stellenwerte) man draufaddieren muss, um die gewünschte Zahl zu erhalten und an den entsprechenden Bits, die diesen $2$er Potenzen entsprechen $1$en setzen
-                          \item die passende Ziffernfolge wie gewohnt erstellen, aber die kleinstmögliche positve Zahl ungleich $0$ wird als Startwert genommen und die $1$en und $0$en sind vertauscht, sowie das Vorzeichenbit ist eine $1$
-                        \end{itemize}
-                      \item wenn man die kleinste negative Zahl komplementiert: $[10.0]_2' = [01.1]_1 + 0.5 = [10.0]_2$, dann erhält man erneut die kleinste negative Zahl. Das passt auch ganz gut, da die kleinste negative Zahl im Zweierkomplement keine komplementäre positive Zahl hat. Folglich auch hier: $[a]_2 + [a']_2 + 2^{-k} = [1.00]_2 + [0.11]_2 + 0.5 = -2 + 1.5 + 0.5 = 0$ für $a$ kleinste Zweierkomplement-Zahl
-                    \end{itemize}
-                  \end{minipage}
+                      \end{minipage}
+                    }
+                  }
                 }
               }
               child {
-                node {Inversion
+                node {Zweier-Komplement Darstellung
                   \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{8cm}
+                    \begin{minipage}[t]{14cm}
                       \begin{itemize}
-                        \item $[a']_2 + 1 = -[a]_2$
+                        \item man springt einen kleisten Zahlenabstand weiter wenn das Vorzeichenbit $1$ ist als beim Einerkomplement
+                        \item \alert{potentiell negativer Wert} $\displaystyle[d]_{2} = \sum_{i=0}^{n-1}\delta(d_i)2^i - \delta(d_n)2^n$ in \alert{Zweierkomplement-Darstellung}
+                          \begin{itemize}
+                            \item Beispiel 3-Bit Festkommazahlen mit Vorzeichenbit, $n=1$ und $k=1$:
+                              \begin{table}
+                                \raggedright
+                                \begin{tblr}{
+                                    cells = {c, BoxColor},
+                                    column{1} = {PrimaryColor,fg=white},
+                                  }
+                                  $d$                & 10.0 & 10.1 & 11.0 & 11.1 & 00.0 & 00.1 & 01.0 & 01.1 \\
+                                  $[d]_2$ & -2  & -1.5 & -1.0  & -0.5 & 0.0  & 0.5 & 1.0  & 1.5 \\
+                                \end{tblr}
+                              \end{table}
+                          \end{itemize}
+                      \end{itemize}
+                      \begin{itemize}
+                        \item genauso wie beim Einerkomplment bedeuten mehr $1$en im Negativen einen betragsmäßig kleineren Wert
+                        \item um den Wert einer negativen Dezimalzahl binär darzustellen gibt es 2 Methoden
+                          \begin{itemize}
+                            \item mit der größtmöglichen positven Zahl + kleinmöglichen positven Zahl ungleich $0$ anfangen $-(2^n)$ und überlegen, welche $2$er Potenzen (Stellenwerte) man draufaddieren muss, um die gewünschte Zahl zu erhalten und an den entsprechenden Bits, die diesen $2$er Potenzen entsprechen $1$en setzen
+                            \item die passende Ziffernfolge wie gewohnt erstellen, aber die kleinstmögliche positve Zahl ungleich $0$ wird als Startwert genommen und die $1$en und $0$en sind vertauscht, sowie das Vorzeichenbit ist eine $1$
+                          \end{itemize}
+                        \item wenn man die kleinste negative Zahl komplementiert: $[10.0]_2' = [01.1]_1 + 0.5 = [10.0]_2$, dann erhält man erneut die kleinste negative Zahl. Das passt auch ganz gut, da die kleinste negative Zahl im Zweierkomplement keine komplementäre positive Zahl hat. Folglich auch hier: $[a]_2 + [a']_2 + 2^{-k} = [1.00]_2 + [0.11]_2 + 0.5 = -2 + 1.5 + 0.5 = 0$ für $a$ kleinste Zweierkomplement-Zahl
                       \end{itemize}
                     \end{minipage}
+                  }
+                }
+                child {
+                  node {Inversion
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
+                        \begin{itemize}
+                          \item $[a']_2 + 1 = -[a]_2$
+                        \end{itemize}
+                      \end{minipage}
+                    }
                   }
                 }
               }
@@ -822,15 +874,319 @@
     child {
       node {Kombinatorische Logik}
       child {
-        node {Normalformen}
+        node {Berechnung eines Minimalpolynom
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{Implikant} von $f$: Ein Monom $q$ mit $q \le f\Leftrightarrow On(q)\subseteq On(f)$
+                \begin{itemize}
+                  \item \underline{anders ausgedrückt:} Ein Monom, welches \href{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{Modell} von $f$ ist
+                  \item kommt von \enquote{implizieren}, da bei $q \le f$ gdw. $q \Rightarrow f$ allgemeingültig das $q$ die Funktion $f$ \enquote{impliziert}
+                \end{itemize}
+                \item \alert{Primimplikantent} von $f$: Maximaler Implikant $q$ von $f$, d.h. es gibt keinen Implikanten $s$ ($s\ne q$) von $f$ (also gilt: $s\le f\Leftrightarrow On(s)\subseteq On(f)$) mit $q\le s\Leftrightarrow On(q)\subseteq On(s)$
+                \item Implikanten und Primimplikanten können durch n-dimensionale Würfel \href[page=270]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{veranschaulicht} werden
+                \item Die Monome eines Polynoms $p$ von $f$ sind alle Implikanten von $f$ (\href[page=275]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beweis})
+                \item \alert{Minimalpolynom} $p$ einer booleschen Funktion $f$: Ein Polynom von $f$ mit minimalen Kosten, d.h. mit der Eigenschaft $cost(p) \le cost(p')$ für jedes andere Polynom $p'$ von $f$
+                \begin{itemize}
+                  \item Jedes Minimalpolynom $p$ einer booleschen Funktion $f$ besteht ausschließlich aus Primimplikanten von $f$ (\href[page=278]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beweis})
+                \end{itemize}
+              \item \underline{\href[page=279]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Lemmas} zur Berechnung von Implikanten:}
+                \begin{itemize}
+                  \item Ist $m$ ein Implikant von $f$, so auch $m \cdot x$ und $m \cdot x'$ für jede Variable $x$, die in $m$ weder als positives, noch als negatives Literal vorkommt
+                  \item Sind $m \cdot x$ und $m \cdot x'$ Implikanten von $f$, so auch $m$
+                \end{itemize}
+            \item \underline{\href[page=280]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Satz} zur Charakterisierung von Implikanten:}\\ 
+              \begin{equation}
+                m \in \operatorname{Implikant}(f) \Leftrightarrow (m \in \operatorname{Minterm}(f)) \vee\left(m \cdot x, m \cdot x^{\prime} \in \operatorname{Implikant}(f)\right)
+                \label{eq:implikant}
+              \end{equation}
+                % \item Ein Monom $m$ ist genau dann ein Implikant von $f$, wenn entweder
+                % \begin{itemize}
+                %   \item $m$ ein Minterm von $f$ ist, oder
+                %   \item $m \cdot x$ und $m \cdot x'$ Implikanten von $f$ sind für eine Variable $x$, die nicht in $m$ vorkommt
+                % \end{itemize}
+                \item \alert{Tool, um Minimalpolynom zu berechnen:}\\ \url{https://www.boolean-algebra.com/}
+      \item \alert{Häufiger Verständnisfehler:}\\
+      \begin{minipage}{0.5\textwidth}
+        \begin{itemize}
+          \item $ON(f) = \{000, 100, 010, 011, 110, 111\}$
+          \item $f = \neg a\neg b\neg c \vee a\neg b\neg c \vee \neg ab\neg c \vee \neg abc \vee ab\neg c \vee abc$
+          \item $f_{red} = b \vee\neg c$
+          \item Warum nicht $f_{red} = bc \vee \neg c$?
+          \item Weniger Literale bedeutet geringere Kosten
+        \end{itemize}
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{table}
+            \centering
+            \begin{tblr}{
+              cells = {c, BoxColor},
+              row{1} = {PrimaryColor,fg=white},
+              vline{4,7} = {-}{},
+            }
+            $a$ & $b$ & $c$ &$b$ &$bc$ &$\neg c$ & $bc \vee \neg c$ & $b\vee \neg c$ \\
+            0   & 0   & 0   &      0          &      0          &      1          &       1          &      1         \\
+            0   & 0   & 1   &      0          &      0          &      0          &       0          &      0         \\
+            0   & 1   & 0   &      1          &      0          &      1          &       1          &      1         \\
+            0   & 1   & 1   &      1          &      1          &      0          &       1          &      1         \\
+            1   & 0   & 0   &      0          &      0          &      1          &       1          &      1         \\
+            1   & 0   & 1   &      0          &      0          &      0          &       0          &      0         \\
+            1   & 1   & 0   &      1          &      0          &      1          &       1          &      1         \\
+            1   & 1   & 1   &      1          &      1          &      0          &       1          &      1         
+            \end{tblr}
+            \end{table}
+          \end{minipage}
+        }
+      \end{minipage}
+      \begin{minipage}{0.5\textwidth}
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{resettikz}
+              \ctikzfig{example_prime_implicant}
+            \end{resettikz}
+          \end{minipage}
+        }
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{resettikz}
+              \ctikzfig{example_prime_implicant_2}
+            \end{resettikz}
+          \end{minipage}
+        }
+      \end{minipage}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Schritt 1: Quine-McCluskey
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  % \item \href[page=283]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Verbesserungen} von 
+                  \item Verbesserung des Verfahren von Quine 
+                  \item Vergleiche nur Monome untereinander
+                    \begin{itemize}
+                      \item welche die gleichen Variablen enthalten (Paritionierung von $L_i$ in Klassen $L_i^{M_j}$) und
+                      \item bei denen sich die Anzahl der positiven Literale nur um $1$ unterscheidet (Anordnung der Monome in $L_i^{M_j}$ gemäß der Anzahl der positiven Literale)
+                    \end{itemize}
+                  \item \alert{Notationen:}
+                    \begin{itemize}
+                      \item $L_i^{M_j}$, Menge aller Implikanten aus $L_i$, deren Variablen alle aus $M_j\subseteq \{x_1, \ldots, x_n\}$ mit $|M_j|=n-i$ sind
+                        \begin{itemize}
+                          \item $L_i$, Menge aller Implikanten von $f$ der Länge $n - i$
+                        \end{itemize}
+                      \item $Prime(f)$ Menge der Primimplikanten von $f$
+                      \item z.B. $1001$ steht für den Implikanten $x_1x_2'x_3'x_4$
+                    \end{itemize}
+                  \item \href[page=284]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                  \item \href[page=295]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Korrektheit}
+                  \item \href[page=297]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Verfahren von Quine
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=282]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Algorithmus} der \ref{eq:implikant} anwendet
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Schritt 2: Primimplikantentafel
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{14cm}
+                \begin{itemize}
+                  \item Disjunktion aller Primimplikanten, die man mithilfe von \alert{Quine-McCluskey} erhalten hat ist im Allgemeinen \alert{kein Minimalpolynom} von $f$
+                  \begin{itemize}
+                    \item benötigen eine kostenminimale Teilmenge $M$ von $Prim(f)$, so dass die Monome von $M$ $f$ überdecken (\alert{Matrix-Überdeckungsproblem})
+                  \end{itemize}
+                  \item \underline{\alert{Primimplikantentafel} von $f$:} $PIT(f)$
+                  \begin{itemize}
+                    \item die \alert{Zeilen} entsprechen den \alert{Primimplikanten von $f$}
+                    \item die \alert{Spalten} entsprechen den \alert{Mintermen von $f$} oder den \alert{Warheitswertzuweisungen} von $On(f)$
+                    \item \href[page=303]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{weitere Spezifkationen}
+                    % \item sei $min(\alpha)$ ein beliebiger Minterm von $f$ bzw. ein bel. $\alpha\in On(f)$. Dann gilt für \alert{Primimplikant $m$}: $PIT(f)[m, min(\alpha)] = 1 \Leftrightarrow m(\alpha) = 1$%. Der Eintrag an der Stelle $[m, min(\alpha)]$ ist genau dann $1$, wenn $min(\alpha)$ eine Ecke des Würfels $m$ beschreibt
+                    % \item Gesucht: Eine kostenminimale Teilmenge M von Prim(f), so dass jede Spalte von $PIT(f)$ überdeckt ist, d.h. ∀α ∈ ON(f ) ∃m ∈ M mit PIT (f )[m, min(α)] = 1.
+                  \end{itemize}
+                  \item \alert{1. Reduktionsregel:} Entferne alle wesentlichen Primimplikanten und alle Minterme, die von diesen überdeckt werden
+                  \begin{itemize}
+                    \item \alert{wesentlicher Primimplikant:} Wenn es ein $\alpha \in ON(f)$ gibt, das nur von diesem Primimplikanten \alert{überdeckt} wird (\href[page=306]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{genauer})%, also: $PIT(f)[m, min(\alpha)] = 1$ und $PIT(f)[m', min(\alpha)] = 0$ für jeden anderen Primimplikanten $m'$ von $f$
+                    \item jedes Minimalpolynom von $f$ enthält \alert{alle wesentlichen Primimplikanten} von $f$
+                    \item \href[page=307]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                    \item da es nur darum geht, dass alle Minterme vom Anfang abgedeckt sind und die wesentlichen Minterme auf jeden Fall genommen werden müssen, werden auch die Minterme, die sie abdecken auf jeden Fall genommen. Aus diesem Grund ist es nicht mehr notwendig diese Minterme in der Primimplikantentafel miteinzubeziehen, da man Minterme nur in der Primimplikantentafel miteinbezieht, wenn man noch eine Abdeckung für diese Minterme sucht.
+                  \end{itemize}
+                  \item \alert{2. Reduktionsregel:} Entferne alle Minterme, die einen anderen Minterm dominieren
+                  \begin{itemize}
+                    \item Sei $A$ eine boolesche Matrix. Spalte $j$ von $A$ dominiert Spalte $i$ von $A$, wenn für jede Zeile $k$ gilt: $A[k, i] \le A[k, j]$
+                    \item \href[page=311]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                    \item eines der Momome, das den Minterm abdeckt der dominiert wird, wird irgendwann aufgrund weiterer Reduktionen mit der ersten und dritten Reduktionsregel wesentlich und wird dann genommen. Sobald dieses Monom genommen wird ist es aufgrund der Teilmengenbeziehung sicher, dass dieses Monom auch den Minterm der den ersteren Minterm dominiert hat abdeckt. Der zweitere Minterm ist somit nicht mehr von Interesse für die Primimplikantentafel, weil man bereits eine Abdeckung für diesen Minterm gefunden hat und es nur darum geht, dass man alle Minterme vom Anfang abgedeckt hat.
+                  \end{itemize}
+                  \item \alert{3. Reduktionsregel:} Entferne alle Primimplikanten, die durch einen anderen, nicht teureren Primimplikanten dominiert werden
+                  \begin{itemize}
+                    \item Sei $A$ eine boolesche Matrix. Zeile $i$ von $A$ dominiert Zeile $j$ von $A$, wenn für jede Spalte $k$ gilt: $A[i, k] \ge A[j, k]$.
+                    \item \href[page=313]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                    \item Wenn die On-Menge eines Monoms Teilmenge der On-Menge eines anderen Monoms ist, dann nimmt das Monom mit der größeren On-Menge, da größere ON-Menge weniger Literale bedeutet und somit weniger Kosten. Mit einer größeren On-Menge kann man mehr Minterme auf einmal abdecken und es geht nur darum, dass man am Ende alle Minterme vom Anfang irgendwie abgedeckt hat.
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Petrick’s Methode
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \alert{reduzierte Primimplikantentafel:} Primimplikantentafel bei der keine der drei Reduktionsregeln anwendbar ist
+                      \begin{itemize}
+                        \item Ist eine reduzierte Tafel \alert{nicht-leer}, spricht man von einem \alert{zyklischen Überdeckungsproblem}. Lösung mit z.B. Petrick’s Methode
+                      \end{itemize}
+                    \item \underline{Verfahren:}
+                      \begin{enumerate}
+                        % \item Übersetze die PIT in ein Produkt von Summen, d.h. in ein (OR, AND)-Polynom, das alle Möglichkeiten der Überdeckung enthält (für jede Spalte schauen wo $1$ steht und die Primimplikanten als \alert{Summe} schreiben, \enquote{entweder} Primimplikant $1$ \alert{oder} Primimplikant $2$ usw. ist für diesen Minterm zuständig und am Ende müssen alle Minterme abgedeckt sein, daher \alert{Produkt})
+                        \item Übersetze die PIT in ein Produkt von Summen, das alle Möglichkeiten der Überdeckung enthält (für jede Spalte schauen wo $1$ steht und die Primimplikanten als \alert{Summe} schreiben, Primimplikant $1$ \alert{oder} Primimplikant $2$ usw. ist für diesen Minterm zuständig und am Ende müssen alle Minterme abgedeckt sein, daher \alert{Produkt})
+                        \item Multipliziere das (OR, AND)-Polynom aus, so dass ein (AND-OR)-Polynom entsteht
+                          \begin{itemize}
+                            \item minimieren durch Anwendung von Absorption $X+XY=X$, Adempotenz: $X + X = X$ und Kommutativität $X \cdot Y = Y \cdot X$ 
+                          \end{itemize}
+                        \item Die gesuchte minimale Überdeckung ist gegeben durch das Monom, das einer Primimplikanten-Auswahl mit minimalen Kosten entspricht. Muss nicht zwangsweise das Monom mit den wenigsten Literalen sein. Das minimale Polynom erhält man indem man das Monom zu einer Klausel macht und die Variablen, die bestimmte Primpimplikanten repräsentieren durch die korrekten Monome dieser Primimplikanten ersetzt. Diese Klausel wird dadurch zu einer Summe von Produkten
+                      \end{enumerate}
+                    \item \href[page=319]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
       }
       child {
-        node {Minimalpolynom}
+        node {Kombinatorische Schaltkreise}
+        child {
+          node {Arithmetische Schaltungen}
+          child {
+            node {Halbaddierer
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{minipage}{0.5\textwidth}
+                    \begin{table}
+                      \centering
+                      \begin{tblr}{
+                          cells = {c},
+                          hline{3} = {-}{},
+                        }
+        &           & $a$ \\
+                      $+$ &           & $b$ \\
+                          & $c_{out}$ & $s$ 
+                    \end{tblr}
+                  \end{table}
+                \end{minipage}
+                \begin{minipage}{0.5\textwidth}
+                  \begin{table}
+                    \centering
+                    \begin{tblr}{
+                        cells = {c, BoxColor},
+                        row{1} = {SecondaryColor,fg=white},
+                        vline{3} = {-}{},
+                      }
+                      $a$ & $b$ & $c_{out}$ & $s$ \\
+                      0  &  0  &     0     &  0  \\
+                      0  &  1  &     0     &  1  \\
+                      1  &  0  &     0     &  1  \\
+                      1  &  1  &     1     &  0  
+                    \end{tblr}
+                  \end{table}
+                \end{minipage}
+                \begin{itemize}
+                  \item der HA kann 2 Inputs zusammenrechen, daher sind die möglichen Outputs $00$, $01$ und $10$
+                  \item ein HA ist einfach nur die direkte Umsetzung von $a + b = c_{out} \cdot 2^1 + s \cdot 2^0$ nach der obigen Tabelle:
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Volladdierer
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{minipage}{0.5\textwidth}
+                  \begin{table}
+                    \centering
+                    \begin{tblr}{
+                        cells = {c},
+                        hline{4} = {-}{},
+                      }
+          &           & $a$      \\
+          &           & $b$      \\
+                    $+$ &           & $c_{in}$ \\
+                        & $c_{out}$ & $s$      
+                  \end{tblr}
+                \end{table}
+              \end{minipage}
+              \begin{minipage}{0.5\textwidth}
+                \begin{table}
+                  \centering
+                  \begin{tblr}{
+                      cells = {c, BoxColor},
+                      row{1} = {SecondaryColor, fg=white},
+                      vline{4} = {-}{},
+                    }
+                    $c_{in}$ & $a$ & $b$ & $c_{out}$ & $s$ \\
+                    0   &  0  &  0  &     0     &  0  \\
+                    0   &  0  &  1  &     0     &  1  \\
+                    0   &  1  &  0  &     0     &  1  \\
+                    0   &  1  &  1  &     1     &  0  \\
+                    1   &  0  &  0  &     0     &  1  \\
+                    1   &  0  &  1  &     1     &  0  \\
+                    1   &  1  &  0  &     1     &  0  \\
+                    1   &  1  &  1  &     1     &  1  
+                  \end{tblr}
+                \end{table}
+              \end{minipage}
+              \begin{itemize}
+                \item der FA kann 3 Inputs zusammenrechnen, daher sind die möglichen Outputs $00$, $01$ $10$ und $11$
+                \item ein FA ist einfach nur die Umsetzung von $a+b+c_{in} = c_{out} \cdot 2^1 + s \cdot 2^0$, ein HA übernimmt $a + b$ und der andere HA übernimmt $s_{a+b} + c_{in}$, wobei es entweder beim ersten HA oder beim zweiten HA die Möglichkeit gibt, dass ein Übertrag entsteht
+                \item ob die beiden Überträge am Ende ge$\oplus$rt oder ge$\vee$rt werden spielt keine Rolle, da es sowieso niemals vorkommen kann, dass beide HA einen Übertrag haben
+                  \begin{itemize}
+                    \item beim ersten HA kommt es zu einem Übertrag, wenn $a$ und $b$ beide $1$ sind
+                    \item beim zweiten HA kommt es zu einem Übertrag, wenn $s$ und $c_{in}$ beide $1$ sind
+                    \item wenn der erste HA einen Übertrag hat, bedeutet es für den zweiten, dass $s = 0$ sein muss es somit beim zweiten zu keinem Übertrag kommen kann. Bei HA kann es nicht vorkommen, dass $c_{out}=1$ und $s=1$
+                    \item wenn der zweite HA einen Übertrag hat, bedeutet es für den ersten, dass bei diesem $s = 1$ ist und dieser daher keinen Übertrag haben kann
+                  \end{itemize}
+              \end{itemize}
+              \includegraphics[width=0.8\textwidth, center]{./figures/HA_and_FA.png}
+              \begin{itemize}
+                \item es spielt beim FA bei der Verwendung keine Rolle, welches der 3 Inputs eigentlich für das Carry vorgesehen ist
+              \end{itemize}
+            \end{minipage}
+          }
+        }
       }
       child {
-        node {Schaltungen}
+        node {Carry-Ripple-Addierer
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{minipage}{0.3\textwidth}
+                \includegraphics[width=\textwidth, center]{./figures/addition.png}
+              \end{minipage}
+              \begin{minipage}{0.7\textwidth}
+                \includegraphics[width=\textwidth, center]{./figures/4_adder_substractor.png}
+              \end{minipage}
+              \begin{itemize}
+                \item FA FA FA HA, wobei man allerdings meistens FA FA FA FA herstellt und das carry vom letzten FA unberührt lässt aber theoretisch Addierer zu größeren Addierern zusammenfügen kann
+              \end{itemize}
+            \end{minipage}
+          }
+        }
       }
     }
+    }
+  }
     child {
       node {Sequentielle Logik}
     }

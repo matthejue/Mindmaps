@@ -15,9 +15,6 @@
         \begin{minipage}[t]{16cm}
           \begin{itemize}
             \item logic defines \href[page=223]{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{syntax and semantics}
-            \begin{itemize}
-              \item TODO sentence (germ. Aussage) (\href{https://math.stackexchange.com/a/48984}{reference})
-            \end{itemize}
           \end{itemize}
         \end{minipage}
       }
@@ -29,6 +26,8 @@
             \begin{itemize}
               \item \alert{overview over terms:}\\ \includegraphics[width=\textwidth]{./figures/predicate_logic_overview_terms.png}\\ (\href[page=26]{/home/areo/Documents/Studium/Semester_5_Unterlagen/Mathematische_Logik/literature/Design_Patterns_fuer_Mathematische_Beweise_with_go_back.pdf}{reference})
               \item \href[page=27]{/home/areo/Documents/Studium/Semester_5_Unterlagen/Mathematische_Logik/literature/Design_Patterns_fuer_Mathematische_Beweise_with_go_back.pdf}{all rules}
+              \item TODO sentence (germ. Aussage) (\href{https://math.stackexchange.com/a/48984}{reference})
+              \item TODO statement
             \end{itemize}
           \end{minipage}
         }
@@ -143,7 +142,7 @@
                 \begin{itemize}
                   \item \alert{minterm (germ. Minterm / vollständiges Monom / Vollkonjunktion):} Monom indem jede Variable entweder als positives oder als negatives Literal vorkommt
                   \begin{itemize}
-                    \item \href[page=245]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{zu $\alpha\in \mathbb{B}^n$ gehörender Minterm} $m(\alpha)$
+                    \item \href[page=245]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{zu $\alpha\in \mathbb{B}^n$ gehörender Minterm}: $m(\alpha)$
                     \item \underline{possible name origin:} only one truth assignment can make a minterm true, all other make it false, so it has mininmum satisfiability (\href{https://qr.ae/pyqNLP}{reference})
                     % \begin{itemize}
                     %   \item only one truth assignment can make a minterm true, all other make it false, so it has mininmum satisfiability (\href{https://qr.ae/pyqNLP}{reference})
@@ -177,8 +176,8 @@
                     \]
                   \begin{itemize}
                     \item a formula in DNF is \alert{satisfiable} iff \alert{one disjunct} is \alert{satisfiable} (check disjunct if there's no $l\wedge \neg l$), thus checking only takes linear time
-                    \item aka \alert{sum of products (SoP) (germ. Polynom):} Disjunktion von paarweise verschiedenen Monomen. Außerdem ist „0” ein Polynom. Ein Polynom für f heißt auch disjunktive Normalform (DNF) von f
-                    \item \alert{canonical disjunctive normal form (CDNF) (germ. vollständiges Polynom):} Polynom indem alle Monome des Polynoms vollständig sind. Ein vollständiges Polynom für f heißt auch \alert{kanonische disjunktive Normalform (KDNF)} von f
+                    \item aka \alert{sum of products (SoP) (germ. Polynom):} Disjunktion von paarweise verschiedenen Monomen. Außerdem ist \enquote{0} ein Polynom. Ein Polynom für $f$ heißt auch disjunktive Normalform (DNF) von $f$
+                    \item \alert{canonical disjunctive normal form (CDNF) (germ. vollständiges Polynom):} Polynom indem alle Monome des Polynoms vollständig sind. Ein vollständiges Polynom für $f$ heißt auch \alert{kanonische disjunktive Normalform (KDNF)} von $f$. Die KDNF ist gegeben durch $\displaystyle f = \sum_{\alpha\in ON(f)} m(\alpha)$. Die KDNF ist (bis auf Anordnung von Literalen in Mintermen und von Monomen im Polynom) \alert{eindeutig}
                   \end{itemize}
                   \item a formula is in \alert{conjunctive normal form (CNF)} if it consists of a conjunction of disjunctions of literals $l_{i,j}$:
                     \[
@@ -329,11 +328,15 @@
           child {
             node (models) {Models
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
+                \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item if a sentence $\alpha$ is true in a possible \alert{world} $m$, we say that $m$ \alert{satisfies} $\alpha$ or $m$ is a \alert{model} of $\alpha$
                     \begin{itemize}
-                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ ($\hat=$ \href[page=249]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{On-Menge})
+                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ 
+                      \begin{itemize}
+                        \item $\hat=$ \href[page=249]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{\alert{ON-Menge / Erfüllbarkeitsmenge}}: $ON(f) = \{\alpha\in \mathbb{B}^n \;|\; f(\alpha) = 1\}, f:\mathbb{B}^n\rightarrow \mathbb{B}$
+                        \item there's also \alert{OFF-Menge / Unerfüllbarkeitsmenge}: $OFF(f) = \{\alpha\in \mathbb{B}^n\;|\; f(\alpha)=0\}$
+                      \end{itemize}
                     \end{itemize}
                     \item an \alert{interpretation} $I$ is called a model of $\varphi$ if $I\models \varphi$
                   \end{itemize}

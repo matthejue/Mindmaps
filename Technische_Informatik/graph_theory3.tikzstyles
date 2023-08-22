@@ -4,17 +4,15 @@
 % \tikzstyle{NAME}=[PROPERTY LIST]
 
 % Node styles
-\tikzstyle{circle node}=[minimum size=0.6cm, inner sep=0pt, fill={rgb,255: red,206; green,234; blue,249}, draw=none, shape=circle, tikzit shape=circle, tikzit fill={rgb,255: red,206; green,234; blue,249}]
+\tikzstyle{circle node}=[inner sep=0pt, fill={rgb,255: red,206; green,234; blue,249}, draw=none, shape=circle, tikzit shape=circle, tikzit fill={rgb,255: red,206; green,234; blue,249}, minimum size=0.6cm]
 \tikzstyle{rectangle node}=[minimum size=0.6cm, inner sep=0pt, fill=PrimaryColorDimmed, draw=none, shape=rectangle, tikzit shape=rectangle, tikzit fill={rgb,255: red,206; green,234; blue,249}]
 \tikzstyle{circle node alternative}=[fill={rgb,255: red,162; green,215; blue,243}, draw=none, shape=circle, tikzit fill={rgb,255: red,162; green,215; blue,243}, minimum size=0.6cm, tikzit shape=circle, inner sep=0pt]
-\tikzstyle{new style 0}=[fill={rgb,255: red,195; green,211; blue,221}, draw=none, shape=rectangle, minimum size=0.4cm]
-\tikzstyle{circle node small}=[fill={rgb,255: red,206; green,234; blue,249}, draw=none, shape=circle, inner sep=0pt, minimum size=0.4cm]
-\tikzstyle{new style 1}=[fill={rgb,255: red,162; green,215; blue,243}, draw=none, shape=circle, inner sep=0pt, minimum size=0.4cm]
+\tikzstyle{new style 0}=[fill={rgb,255: red,162; green,215; blue,243}, draw=black, shape=circle, minimum size=0.6cm, inner sep=0pt, tikzit fill={rgb,255: red,162; green,215; blue,243}, line width=0.05cm]
+\tikzstyle{new style 1}=[fill={rgb,255: red,206; green,234; blue,249}, draw=black, shape=circle, minimum size=0.6cm, inner sep=0pt, tikzit fill={rgb,255: red,206; green,234; blue,249}, line width=0.05cm]
 
 % Edge styles
 \tikzstyle{graph_theory_directed_left}=[<-]
 \tikzstyle{dotted}=[dashed, ->]
 \tikzstyle{graph_theory_directed_right}=[->]
-\tikzstyle{dotted}=[-, dashed]
 \tikzstyle{area 1}=[-, draw=none, fill={rgb,255: red,162; green,215; blue,243}]
 \tikzstyle{area 2}=[-, draw=none, fill={rgb,255: red,206; green,234; blue,249}]

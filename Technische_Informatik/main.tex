@@ -15,7 +15,8 @@
 
 \usepackage{tikzit}
 \input{graph_theory.tikzstyles}
-\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0}}}{}
+% \newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0}}}{}
+\newenvironment{resettikz}{\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0}}}{}
 
 \usepackage{array}
 \usepackage{booktabs}
@@ -874,16 +875,74 @@
     child {
       node {Kombinatorische Logik}
       child {
-        node {Berechnung eines Minimalpolynom
+        node {Programmierbare logische Felder (PLA)
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \alert{Implikant} von $f$: Ein Monom $q$ mit $q \le f\Leftrightarrow On(q)\subseteq On(f)$
+                \item \href[page=252]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \item \alert{Achtung:} Die Variablen $x_1, \ldots, x_n$ im Und-Feld sind alle low und werden durch den Invertierer high.
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Kosten
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \alert{primäre Kosten:} Anzahl \alert{Zeilen} im PLA, d.h. Anzahl \alert{Monome} im Polynom
+                  \item \alert{sekundäre Kosten:} Anzahl der benötigten \alert{Transistoren} im PLA, d.h. Anzahl \alert{Literale} + Anzahl \alert{Monome}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Logikgatter
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=182]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Übersicht über Logikgatter}
+                \item \href[page=183]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Verschiedene Notationen}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Transistoren
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=184]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{p-Kanal und n-Kanal Transistor}
+                  \begin{itemize}
+                    \item \underline{Eselsbrücke:} Der Kreis im \enquote{p} und der Kreis im Schaltsymbols des p-Kanal Transistor
+                  \end{itemize}
+                \item Beispiel \href[page=185]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{CMOS-Inverter} und \href[page=204]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{CMOS-NAND-Gatter}
+                \item es wird sichergestellt, dass es zu keinem Kurzschluss kommen kann, weil immer nur entweder die eine oder anderen Seite ein Signal $0$ (Ground) oder $1$ ($Vdd$) zu $out$ durchlässt, aber niemals beide, da die Seite mit den P-Kanal-Transistoren die Modelle wahr ist, für die der andere Seite mit den N-Kanal-Transistoren falsch ist, weil diese genau den negierten Ausdruck umsetzt, der auf der Seite mit den P-Kanal-Transistoren umgesetzt wird
+                \item es müssen unterschiedliche Transistoren verwendent werden, weil die n-Kanal Transistoren nur die $0$ und die p-Kanal-Transistoren nur die $1$ zuverlässig durchleiten können (Stichwort Schwellenspannung). Aus diesem Grund kann man ein AND-Gatter nur realisieren indem man ein NAND-Gatter und einen Inverter aneinanderhängt
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Berechnung eines Minimalpolynom
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{14cm}
+              \begin{itemize}
+                \item \alert{Implikant} von $f$: Ein Monom $q$ mit $q \le f\Leftrightarrow ON(q)\subseteq ON(f)$
                 \begin{itemize}
                   \item \underline{anders ausgedrückt:} Ein Monom, welches \href{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{Modell} von $f$ ist
                   \item kommt von \enquote{implizieren}, da bei $q \le f$ gdw. $q \Rightarrow f$ allgemeingültig das $q$ die Funktion $f$ \enquote{impliziert}
+                  \item \underline{weniger Literale bedeuten eine größere ON-Menge:}\\ $L(m') \subseteq L(m) \Leftrightarrow ON(m) \subseteq ON(m')$, wobei $m$ ein Monom ist und $m' = mx_i$, wobei $x_i$ nicht in $m$ vorkommt\\
+                    \begin{resettikz}
+                      \ctikzfig{2_hypercubes}
+                    \end{resettikz}
+                    \vspace{-1cm}
                 \end{itemize}
-                \item \alert{Primimplikantent} von $f$: Maximaler Implikant $q$ von $f$, d.h. es gibt keinen Implikanten $s$ ($s\ne q$) von $f$ (also gilt: $s\le f\Leftrightarrow On(s)\subseteq On(f)$) mit $q\le s\Leftrightarrow On(q)\subseteq On(s)$
+                \item \alert{Primimplikantent} von $f$: Maximaler Implikant $q$ von $f$, d.h. es gibt keinen Implikanten $s$ ($s\ne q$) von $f$ (also gilt: $s\le f\Leftrightarrow ON(s)\subseteq ON(f)$) mit $q\le s\Leftrightarrow ON(q)\subseteq ON(s)$
                 \item Implikanten und Primimplikanten können durch n-dimensionale Würfel \href[page=270]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{veranschaulicht} werden
                 \item Die Monome eines Polynoms $p$ von $f$ sind alle Implikanten von $f$ (\href[page=275]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beweis})
                 \item \alert{Minimalpolynom} $p$ einer booleschen Funktion $f$: Ein Polynom von $f$ mit minimalen Kosten, d.h. mit der Eigenschaft $cost(p) \le cost(p')$ für jedes andere Polynom $p'$ von $f$
@@ -1010,9 +1069,9 @@
                   \item \underline{\alert{Primimplikantentafel} von $f$:} $PIT(f)$
                   \begin{itemize}
                     \item die \alert{Zeilen} entsprechen den \alert{Primimplikanten von $f$}
-                    \item die \alert{Spalten} entsprechen den \alert{Mintermen von $f$} oder den \alert{Warheitswertzuweisungen} von $On(f)$
+                    \item die \alert{Spalten} entsprechen den \alert{Mintermen von $f$} oder den \alert{Warheitswertzuweisungen} von $ON(f)$
                     \item \href[page=303]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{weitere Spezifkationen}
-                    % \item sei $min(\alpha)$ ein beliebiger Minterm von $f$ bzw. ein bel. $\alpha\in On(f)$. Dann gilt für \alert{Primimplikant $m$}: $PIT(f)[m, min(\alpha)] = 1 \Leftrightarrow m(\alpha) = 1$%. Der Eintrag an der Stelle $[m, min(\alpha)]$ ist genau dann $1$, wenn $min(\alpha)$ eine Ecke des Würfels $m$ beschreibt
+                    % \item sei $min(\alpha)$ ein beliebiger Minterm von $f$ bzw. ein bel. $\alpha\in ON(f)$. Dann gilt für \alert{Primimplikant $m$}: $PIT(f)[m, min(\alpha)] = 1 \Leftrightarrow m(\alpha) = 1$%. Der Eintrag an der Stelle $[m, min(\alpha)]$ ist genau dann $1$, wenn $min(\alpha)$ eine Ecke des Würfels $m$ beschreibt
                     % \item Gesucht: Eine kostenminimale Teilmenge M von Prim(f), so dass jede Spalte von $PIT(f)$ überdeckt ist, d.h. ∀α ∈ ON(f ) ∃m ∈ M mit PIT (f )[m, min(α)] = 1.
                   \end{itemize}
                   \item \alert{1. Reduktionsregel:} Entferne alle wesentlichen Primimplikanten und alle Minterme, die von diesen überdeckt werden
@@ -1032,7 +1091,7 @@
                   \begin{itemize}
                     \item Sei $A$ eine boolesche Matrix. Zeile $i$ von $A$ dominiert Zeile $j$ von $A$, wenn für jede Spalte $k$ gilt: $A[i, k] \ge A[j, k]$.
                     \item \href[page=313]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
-                    \item Wenn die On-Menge eines Monoms Teilmenge der On-Menge eines anderen Monoms ist, dann nimmt das Monom mit der größeren On-Menge, da größere ON-Menge weniger Literale bedeutet und somit weniger Kosten. Mit einer größeren On-Menge kann man mehr Minterme auf einmal abdecken und es geht nur darum, dass man am Ende alle Minterme vom Anfang irgendwie abgedeckt hat.
+                    \item Wenn die ON-Menge eines Monoms Teilmenge der ON-Menge eines anderen Monoms ist, dann nimmt das Monom mit der größeren ON-Menge, da größere ON-Menge weniger Literale bedeutet und somit weniger Kosten. Mit einer größeren ON-Menge kann man mehr Minterme auf einmal abdecken und es geht nur darum, dass man am Ende alle Minterme vom Anfang irgendwie abgedeckt hat.
                   \end{itemize}
                 \end{itemize}
               \end{minipage}
@@ -1067,6 +1126,43 @@
       }
       child {
         node {Kombinatorische Schaltkreise}
+        child {
+          node {Formeln zu Binärbäumen, wobei $n=2^k$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{minipage}{0.6\textwidth}
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item \alert{Anzahl Blätter (vollständiger Binärbaum):} $n = 2^d = 2^3 = 8$
+                        \item \alert{Anzahl Knoten:}  $\displaystyle k = \sum_{i=0}^{d} 2^i = \frac{2^{d+1}-1}{2-1} = 2^{d+1}-1 = 2^{3+1}-1 = 1 + 2 + 4 + 8 = 15$
+                        \item \alert{Tiefe mithilfe Anzahl Blätter:} $d = log_2(n) = log_2(8) = 3$
+                        \item \alert{Tiefe mithilfe Anzahl Knoten (vollständiger Baum):} $d = log_2(k + 1) - 1 = log_2(15 + 1) - 1 = 4 - 1 = 3$
+                          \begin{itemize}
+                            \item \alert{Herleitung:} $2^{d+1}-1 = k \Leftrightarrow 2^{d+1} = k + 1\Leftrightarrow log_2(2^{d+1}) = log_2(k + 1) \Leftrightarrow d+1 = log_2(k + 1) \Leftrightarrow d = log_2(k + 1) - 1$
+                          \end{itemize}
+                        \item  \alert{Tiefe mithilfe Anzahl Knoten:} $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(10)\rfloor = 3$
+                          \begin{itemize}
+                            \item $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(8)\rfloor = 3$
+                            \item $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(7)\rfloor = 2$
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                \end{minipage}
+                \begin{minipage}{0.4\textwidth}
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{6cm}
+                      \begin{resettikz}
+                        \ctikzfig{./figures/binarytree}
+                      \end{resettikz}
+                    \end{minipage}
+                  }
+                \end{minipage}
+              \end{minipage}
+            }
+          }
+        }
         child {
           node {Arithmetische Schaltungen}
           child {

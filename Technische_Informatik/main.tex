@@ -522,6 +522,29 @@
                   }
                 }
                 child {
+                  node {Addition von Zweierkomplementzahlen
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \href[page=359]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{reference}
+                          \item \href[page=360]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Überlauftest}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node {Subtraktion von Zweierkomplementzahlen
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \href[page=363]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{reference}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
                   node {Inversion
                     \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{8cm}
@@ -930,7 +953,7 @@
       child {
         node {Berechnung eines Minimalpolynom
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{14cm}
+            \begin{minipage}[t]{16cm}
               \begin{itemize}
                 \item \alert{Implikant} von $f$: Ein Monom $q$ mit $q \le f\Leftrightarrow ON(q)\subseteq ON(f)$
                 \begin{itemize}
@@ -1127,38 +1150,68 @@
       child {
         node {Kombinatorische Schaltkreise}
         child {
-          node {Formeln zu Binärbäumen, wobei $n=2^k$
+          node {Kosten und Tiefe von Schaltkreisen
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
-                \begin{minipage}{0.6\textwidth}
-                  \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{8cm}
-                      \begin{itemize}
-                        \item \alert{Anzahl Blätter (vollständiger Binärbaum):} $n = 2^d = 2^3 = 8$
-                        \item \alert{Anzahl Knoten:}  $\displaystyle k = \sum_{i=0}^{d} 2^i = \frac{2^{d+1}-1}{2-1} = 2^{d+1}-1 = 2^{3+1}-1 = 1 + 2 + 4 + 8 = 15$
-                        \item \alert{Tiefe mithilfe Anzahl Blätter:} $d = log_2(n) = log_2(8) = 3$
-                        \item \alert{Tiefe mithilfe Anzahl Knoten (vollständiger Baum):} $d = log_2(k + 1) - 1 = log_2(15 + 1) - 1 = 4 - 1 = 3$
-                          \begin{itemize}
-                            \item \alert{Herleitung:} $2^{d+1}-1 = k \Leftrightarrow 2^{d+1} = k + 1\Leftrightarrow log_2(2^{d+1}) = log_2(k + 1) \Leftrightarrow d+1 = log_2(k + 1) \Leftrightarrow d = log_2(k + 1) - 1$
-                          \end{itemize}
-                        \item  \alert{Tiefe mithilfe Anzahl Knoten:} $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(10)\rfloor = 3$
-                          \begin{itemize}
-                            \item $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(8)\rfloor = 3$
-                            \item $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(7)\rfloor = 2$
-                          \end{itemize}
-                      \end{itemize}
-                    \end{minipage}
-                  }
+                \begin{itemize}
+                  \item Die Kosten $C(SK)$ eines Schaltkreises SK sind durch die Anzahl seiner Gatter gegeben
+                  \begin{itemize}
+                    \item deutet auf die Fläche und den Energieverbrauch der resultierenden Hardware-Blöcke hin
+                  \end{itemize}
+                  \item Die Tiefe $depth(SK)$ eines Schaltkreises ist die maximale Anzahl von Gattern auf einem Pfad von einem beliebigen Eingang zu einem beliebigen Ausgang von SK 
+                  \begin{itemize}
+                    \item deutet auf die Signallaufzeit durch SK und somit die maximal mögliche Taktfrequenz (Geschwindigkeit) des Schaltkreises hin
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Formeln zu Binärbäumen, wobei $n=2^k$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{minipage}{0.6\textwidth}
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
+                        \begin{itemize}
+                          \item \alert{Anzahl Blätter (vollständiger Binärbaum):} $n = 2^d = 2^3 = 8$
+                          \item \alert{Anzahl Knoten:}  $\displaystyle k = \sum_{i=0}^{d} 2^i = \frac{2^{d+1}-1}{2-1} = 2^{d+1}-1 = 2^{3+1}-1 = 1 + 2 + 4 + 8 = 15$
+                          \item \alert{Tiefe mithilfe Anzahl Blätter:} $d = log_2(n) = log_2(8) = 3$
+                          \item \alert{Tiefe mithilfe Anzahl Knoten (vollständiger Baum):} $d = log_2(k + 1) - 1 = log_2(15 + 1) - 1 = 4 - 1 = 3$
+                            \begin{itemize}
+                              \item \alert{Herleitung:} $2^{d+1}-1 = k \Leftrightarrow 2^{d+1} = k + 1\Leftrightarrow log_2(2^{d+1}) = log_2(k + 1) \Leftrightarrow d+1 = log_2(k + 1) \Leftrightarrow d = log_2(k + 1) - 1$
+                            \end{itemize}
+                          \item  \alert{Tiefe mithilfe Anzahl Knoten:} $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(10)\rfloor = 3$
+                            \begin{itemize}
+                              \item $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(8)\rfloor = 3$
+                              \item $d = \lfloor(log_2(k_{real}))\rfloor = \lfloor log_2(7)\rfloor = 2$
+                            \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  \end{minipage}
+                  \begin{minipage}{0.4\textwidth}
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{6cm}
+                        \begin{resettikz}
+                          \ctikzfig{./figures/binarytree}
+                        \end{resettikz}
+                      \end{minipage}
+                    }
+                  \end{minipage}
                 \end{minipage}
-                \begin{minipage}{0.4\textwidth}
-                  \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{6cm}
-                      \begin{resettikz}
-                        \ctikzfig{./figures/binarytree}
-                      \end{resettikz}
-                    \end{minipage}
-                  }
-                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {n-Bit-Multiplexer
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=350]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=352]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+                \end{itemize}
               \end{minipage}
             }
           }
@@ -1166,38 +1219,102 @@
         child {
           node {Arithmetische Schaltungen}
           child {
+            node {n-Bit-Inkrementer
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=349]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Subtrahierer
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=364]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {n-Bit-Addierer
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=331]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{n-Bit-Addierer} berechnet boolesche Funktion:\\
+                      $\begin{aligned}[t] & +_n: \mathbb{B}^{2 n+1} \rightarrow \mathbb{B}^{n+1} \\ & +_n:\left(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c\right)=\left(s_n, \ldots, s_0\right) \\ & \text { mit }\langle s\rangle=\left\langle s_n \ldots s_0\right\rangle=\left\langle a_{n-1} \ldots a_0\right\rangle+\left\langle b_{n-1} \ldots b_0\right\rangle+c \end{aligned}$
+                    \item \href[page=353]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Untere Schranken}
+                    \begin{itemize}
+                      \item \href[page=358]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Carry-Lookahead-Addierer (CLA), Ladner-Fischer-Addierer}
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          child {
+            node {Addierer mit Überlauftest
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=361]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltbild}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Conditional-Sum-Addierer (CSA)
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=354]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    \item \href[page=357]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten} und \href[page=356]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Tiefe}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
             node {Halbaddierer
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
-                  \begin{minipage}{0.5\textwidth}
-                    \begin{table}
-                      \centering
-                      \begin{tblr}{
-                          cells = {c},
-                          hline{3} = {-}{},
-                        }
+                  \begin{itemize}
+                    \item \href[page=334]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    \item \href[page=335]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+                  \end{itemize}
+                      \begin{minipage}{0.5\textwidth}
+                        \begin{table}
+                          \centering
+                          \begin{tblr}{
+                              cells = {c},
+                              hline{3} = {-}{},
+                            }
         &           & $a$ \\
-                      $+$ &           & $b$ \\
-                          & $c_{out}$ & $s$ 
-                    \end{tblr}
-                  \end{table}
-                \end{minipage}
-                \begin{minipage}{0.5\textwidth}
-                  \begin{table}
-                    \centering
-                    \begin{tblr}{
-                        cells = {c, BoxColor},
-                        row{1} = {SecondaryColor,fg=white},
-                        vline{3} = {-}{},
-                      }
-                      $a$ & $b$ & $c_{out}$ & $s$ \\
-                      0  &  0  &     0     &  0  \\
-                      0  &  1  &     0     &  1  \\
-                      1  &  0  &     0     &  1  \\
-                      1  &  1  &     1     &  0  
-                    \end{tblr}
-                  \end{table}
-                \end{minipage}
+                          $+$ &           & $b$ \\
+                              & $c_{out}$ & $s$
+                        \end{tblr}
+                      \end{table}
+                    \end{minipage}
+                    \begin{minipage}{0.5\textwidth}
+                      \begin{table}
+                        \centering
+                        \begin{tblr}{
+                            cells = {c, BoxColor},
+                            row{1} = {SecondaryColor,fg=white},
+                            vline{3} = {-}{},
+                          }
+                          $a$ & $b$ & $c_{out}$ & $s$ \\
+                          0  &  0  &     0     &  0  \\
+                          0  &  1  &     0     &  1  \\
+                          1  &  0  &     0     &  1  \\
+                          1  &  1  &     1     &  0
+                        \end{tblr}
+                      \end{table}
+                    \end{minipage}
                 \begin{itemize}
                   \item der HA kann 2 Inputs zusammenrechen, daher sind die möglichen Outputs $00$, $01$ und $10$
                   \item ein HA ist einfach nur die direkte Umsetzung von $a + b = c_{out} \cdot 2^1 + s \cdot 2^0$ nach der obigen Tabelle:
@@ -1210,6 +1327,10 @@
           node {Volladdierer
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=337]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=338]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+                \end{itemize}
                 \begin{minipage}{0.5\textwidth}
                   \begin{table}
                     \centering
@@ -1220,7 +1341,7 @@
           &           & $a$      \\
           &           & $b$      \\
                     $+$ &           & $c_{in}$ \\
-                        & $c_{out}$ & $s$      
+                        & $c_{out}$ & $s$
                   \end{tblr}
                 \end{table}
               \end{minipage}
@@ -1240,7 +1361,7 @@
                     1   &  0  &  0  &     0     &  1  \\
                     1   &  0  &  1  &     1     &  0  \\
                     1   &  1  &  0  &     1     &  0  \\
-                    1   &  1  &  1  &     1     &  1  
+                    1   &  1  &  1  &     1     &  1
                   \end{tblr}
                 \end{table}
               \end{minipage}
@@ -1267,6 +1388,10 @@
         node {Carry-Ripple-Addierer
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=341]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \item \href[page=346]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+              \end{itemize}
               \begin{minipage}{0.3\textwidth}
                 \includegraphics[width=\textwidth, center]{./figures/addition.png}
               \end{minipage}
@@ -1280,7 +1405,8 @@
           }
         }
       }
-    }
+          }
+        }
     }
   }
     child {

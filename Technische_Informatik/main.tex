@@ -237,11 +237,12 @@
                       \begin{enumerate}
                         \item Baue binären Baum, indem die beiden kleinsten Häufigkeiten jeweils zu einem neuen Knoten addiert werden
                         \item Markiere die linken Kanten mit $0$ und die rechten Kanten mit $1$
+                        \item Die Codezeichen auf den Kanten des Pfades von der Wurzel des Baumes zu den Blättern ergeben das zugehörige Codewort
                       \end{enumerate}
+                      \includegraphics[width=0.8\textwidth, center]{./figures/huffman_codierung.png}
                       \item Huffman-Code ist ein bzgl. mittlerer Codelänge optimaler \alert{Präfixcode} (unter Voraussetzung einer bekannten Häufigkeitsverteilung)
                       \item Kommt als Teilschritt z.B. in MP3 oder JPEG vor.
                     \end{itemize}
-                    \includegraphics[width=0.8\textwidth, center]{./figures/huffman_codierung.png}
                   \end{minipage}
                 }
               }
@@ -446,7 +447,7 @@
                 }
               }
               child {
-                node {Einer-Komplement Darstellung
+                node (ekd) {Einer-Komplement Darstellung
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{14cm}
                       \begin{itemize}
@@ -522,15 +523,25 @@
                   }
                 }
                 child {
-                  node {Addition von Zweierkomplementzahlen
+                  node {Addition von Binär- und Zweierkomplementzahlen
                     \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{12cm}
                         \begin{itemize}
-                          \item \href[page=359]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{reference}
-                          \item \href[page=360]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Überlauftest}
+                          \item \href[page=370]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Addition von Binärzahl und Zweierkomplementzahl}
+                          \item \href[page=369]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Addition von verschieden langen Zweierkomplementzahlen (Sign Extension)} 
                         \end{itemize}
                       \end{minipage}
                     }
+                  }
+                  child {
+                    node {Überlauftest
+                      \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \href[page=360]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{2 mögliche Tests}
+                        \end{itemize}
+                      \end{minipage}
+                    }}
                   }
                 }
                 child {
@@ -538,7 +549,7 @@
                     \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{12cm}
                         \begin{itemize}
-                          \item \href[page=363]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{reference}
+                          \item \href[page=363]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
                         \end{itemize}
                       \end{minipage}
                     }
@@ -550,6 +561,17 @@
                       \begin{minipage}[t]{8cm}
                         \begin{itemize}
                           \item $[a']_2 + 1 = -[a]_2$
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node (se) {Sign Extension
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \href[page=263]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back}{Beweis}
                         \end{itemize}
                       \end{minipage}
                     }
@@ -896,7 +918,16 @@
       }
     }
     child {
-      node {Kombinatorische Logik}
+      node {Kombinatorische Logik
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \href[page=213]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltkreis}
+              \item \href[page=383]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Belegung für Eingangsbelegung $a = (a_1, \ldots, a_n)\in\mathbb{B}^n$}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
       child {
         node {Programmierbare logische Felder (PLA)
           \resizebox{\textwidth}{!}{
@@ -1215,6 +1246,17 @@
               \end{minipage}
             }
           }
+          child {
+            node {Verallgemeinerter Multiplexer
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=375]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltbild}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
         }
         child {
           node {Arithmetische Schaltungen}
@@ -1260,7 +1302,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=361]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltbild}
+                    \item \href[page=361]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1410,18 +1452,399 @@
     }
   }
     child {
-      node {Sequentielle Logik}
+      node {Sequentielle Logik
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \href[page=381]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltplan}, verglichen mit Schaltkreis \href[page=380]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{azyklisch aus Graphen entfernt}
+              \item \href[page=383]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Belegung für Eingangsbelegung $a = (a_1, \ldots, a_n)\in\mathbb{B}^n$} (the $Q$ function for the \enquote{Quelle} of an edge \href[page=210]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{here})
+              \begin{itemize}
+                \item \alert{Stabile Belegung:} Falls bei einem Schaltplan zu einer Eingangsbelegung eine Belegung definiert ist
+                \item es kann zu einer Eingangsbelegung $a$ keine stabile Signalbelegung $\varphi_{SP, a}$ oder mehrere stabile Signalbelegungen $\varphi_{SP, a}^{(1)}, \ldots, \varphi_{SP, a}^{(k)}$ geben
+                \item \href[page=385]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiele}
+              \end{itemize}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Sequentielle Schaltkreise
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=422]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kombinatorischer Kern}
+                \item \href[page=423]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Primäre Eingänge / Ausgänge, Sekundäre Eingänge / Ausgänge}
+                \begin{itemize}
+                  \item \href[page=424]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Visualized}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Zähler
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=409]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Treiber
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=448]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    % TODO: not ist theoretisch ein negierter Treiber vom Symbol her
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Tristate-Treiber
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=449]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    \item \href[page=450]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Zustand hoher Impedanz, \enquote{Treiber ist disabled} }
+                    \item \href[page=451]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{n-Bit-Treiber}
+                    \item \href[page=452]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{$k$ Tristate-Treiber + Bus vs. $k$-fach-Multiplexer}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Schaltwerke / (synchrone) sequentielle Schaltkreise
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=415]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=416]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel Zähleer}
+                  \item \href[page=436]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel für Entwurf}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Endliche Zustandsautomaten
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item Schaltwerke entsprechen endlichen Zustandsautomaten
+                    \item \href[page=418]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Deterministischer, endlicher Halbautomat}
+                    \item \href[page=417]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Begriffsabgrenzung}
+                    \item \href[page=419]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Mealy- und Moore-Automat}
+                    \begin{itemize}
+                      \item \href[page=420]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Unterschied Mealy und Moore}
+                      \item \href[page=425]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Umsetung als Sequentielle Schaltung}
+                    \end{itemize}
+                    \item \href[page=421]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Unterschiedliche Darstellungen von endlichen Zustandsautomaten}:  Zustands- und Ausgangstafel, Zustandsdiagramm, Sequentieller Schaltkreis
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Zustandsminimierung
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}:
+                    \begin{itemize}
+                      \item  \alert{Äquivalente Zustände:} Wenn der Automat von diesen zwei Zuständen aus bei gleichen Eingabefolgen stets die gleichen Ausgabefolgen produziert
+                      \begin{itemize}
+                        \item Äquivalente Zustände können durch einen einzigen Zustand ersetzt werden
+                      \end{itemize}
+                      \item \alert{Hinreichende Bedingung:} Wenn bei zwei Zuständen bei gleicher Eingabe auch die gleiche Ausgabe erzeugt wird und der gleiche Folgezustand angenommen wird, dann sind die Zustände sicherlich äquivalent. Äquivalente Zustände können durch einen einzigen Zustand ersetzt werden
+                      \begin{itemize}
+                        \item \href[page=431]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                      \end{itemize}
+                      \item \href[page=435]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Zustandskodierung}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+        }
+        child {
+          node {Register
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=407]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{n-Bit Register}
+                  \item \href[page=408]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schieberegister}
+                  \item \href[page=467]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Verfeinerung wegen Designrule}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node (rsflipflop) {RS-Flip-Flop
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=388]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{NAND-RS-Flipflop}
+                  \item \href[page=280]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}{NOR-RS-Flipflop}
+                  \item \href[page=330]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}{NOR-RS-Flipflop}
+                  \item \href[page=401]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Pulsweite}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Taktflankengesteuertes D-Flipflop
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=403]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node (dlatch) {D-Latch
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=397]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Grund für D-Latch}
+                    \item \href[page=398]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    \item \href[page=400]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Setup- und Hold-Zeit}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+      }
     }
     child {
-      node {Timing}
+      node (timing) {Timing
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \href[page=545]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Konventionen}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Spikefreies Umschalten von Gattern
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=562]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{AND und NAND}
+                \item \href[page=330]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}{OR}
+                \item \href[page=565]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Timing für AND} und \href[page=566]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Timing für NAND}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Physikalische Signale und Logische Signale
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=529]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{$V_{IL}$, $V_{IH}$, $V_{OL}$, $V_{OH}$}
+                  \begin{itemize}
+                    \item Wenn man den Ausgang eines Gatters $u$ mit dem Eingang eines Gatters $v$ verbinden will, muss gelten: $V_{OL}(u)\le V_{IL}(v)$ und $V_{OH}(u)\ge V_{IH}(v)$
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Verzögerungszeit (Propagation Delay) $t_p$
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=534]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \begin{itemize}
+                    \item \href[page=535]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{verschiedene Verzögerungszeiten für Übergänge am \alert{Ausgang}, $t_{PLH}$, $t_{PHL}$}
+                  \end{itemize}
+                \item \href[page=546]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Einfluss auf Verzögerungszeiten}
+                  \begin{itemize}
+                    \item Wegen Abhängigkeit der Verzögerungszeit von weiteren Faktoren werden vom Hersteller keine festen Zeiten $t_{PLH} /t_{PHL}$ angegeben, sondern \href[page=547]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{3 Werte}
+                    \item \href[page=548]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Bedingungen für Termperaturbereich und kapazitive Last}
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Intervallarithmetik
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=550]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Intervall}
+                  \item \href[page=551]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Operatoren}
+                  \item \href[page=554]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Fall 1: Alle anderen Eingännge fest}
+                  \item \href[page=556]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Fall 2: Weitere Eingänge können sich auch zum Zeitpunkt $t_0$ ändern}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node (kette) {Kette von n Gattern
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=543]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Zeit bis letzter Ausgang sich zu logisch $0$ oder $1$ ändert}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node (anab) {Anstiegs- und Abfallzeiten
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=538]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \begin{itemize}
+                    \item \href[page=539]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beschränkung dieser Zeiten mit $\delta$}
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+    }
+    child {
+      node {RETI
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \href[page=459]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Exerne Sicht, 3-Bus-Architektur}
+              \item \href[page=460]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Interne Sicht}
+              \begin{itemize}
+                \item \href[page=461]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Interner Aufbau ohne SRAM}, \href[page=463]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{SRAM}, \href[page=471]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Interner Aufbau mit SRAM}
+                \item \href[page=462]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Namenskonvention für Treiber}
+                \item \href[page=465]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Instruktionsregister $I$} und \href[page=466]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Sign Extension mithilfe des Kontrollsignal $sext$}
+              \end{itemize}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {ALU
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=371]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \item \href[page=372]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Select-Eingang}
+                \item \underline{Realisierungsmöglichkeiten:}
+                \begin{enumerate}
+                  \item \href[page=374]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Realisierung durch einen verallgemeinerten Multiplexer}
+                  \item \href[page=377]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Gemeinsame Behandlung ähnlicher Funktionen}
+                \end{enumerate}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Befehlssatz
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=99]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Befehle und ihre Wirkung}
+                \begin{itemize}
+                  \item \href[page=159]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Befehlsformate}
+                \end{itemize}
+                \item \href[page=157]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Wort}
+                \item \href[page=158]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Notation for Interpretation von Zeichenfolgen ($\langle A\rangle$, $[A]$)}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Kontrolllogik
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=506]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{active low, active high, pre-Signale}
+                \item \href[page=507]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Aufbau}
+                \item \href[page=508]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiele}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Idealisierte Timing-Diagramme
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item Grobe Ablaufplanung. Vereinfachende Annahme: Verzögerungszeit aller Bausteine $= 0$ (exakte Analyse mit Verzögerungszeiten zu einem späteren Zeitpunkt)
+                  \item \href[page=503]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Idealisiertes Timing-Diagramm der RETI}
+                  \item \href[page=505]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Entwurfsziele}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Kontrollsignale
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=499]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Übersicht}
+                  \item \href[page=501]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Takte, Benennungskonventionen, Phasensignale, Kontrollsignale}
+                    \begin{itemize}
+                      \item Befehlsabarbeitung ist unterteilt in Takte (= Folge von Taktsignalen high, low)
+                      \item \href[page=502]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Erzeugung der Phasensignale}
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Programmabarbeitung
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=470]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Fetch- und Execute-Phase}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {SRAM
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=445]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \item \href[page=453]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{SRAM mit Bus}, \href[page=463]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{SRAM mit finalen Treiberbezeichnern}
+                \item \href[page=447]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{N$\times$s-Bit-SRAM}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
     };
   \end{scope}
   % ┌───────────────────┐
   % │ Verbindungslinien │
   % └───────────────────┘
   \begin{pgfonlayer}{background}
-  % \draw [concept connection]
+  \draw [concept connection]
   %     (datahazardsforbranches) edge (forwarding);
+      (timing) edge (dlatch)
+      (timing) edge (rsflipflop)
+      (anab) edge (kette)
+      (se) edge (ekd);
   \end{pgfonlayer}
   % ┌──────────────┐
   % │ Annotationen │

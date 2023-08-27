@@ -54,6 +54,17 @@
 % \newcommand\alert[1]{\textcolor{SwitchColor}{\textbf{#1}}}
 \newcommand\alert[1]{\textcolor{SwitchColor}{#1}}
 
+\usepackage{etoolbox}
+
+\newtoggle{absolute}
+% \toggletrue{absolute}
+\togglefalse{absolute}
+
+\newcommand{\lpathti}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Technische_Informatik/}{./}#1}
+\newcommand{\lpathlogic}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{./Logic.pdf}}
+\newcommand{\lpathbeweisen}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Beweisen/main.pdf}{./Beweisen.pdf}}
+\newcommand{\lpathrelations}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Relations/main.pdf}{./Relations.pdf}}
+
 \newlength{\leveldistance}
 \setlength{\leveldistance}{20cm}
 
@@ -339,7 +350,7 @@
                     \item Probleme:
                     \begin{itemize}
                       \item keine ganz großen bzw. kleinen Zahlen darstellbar
-                      \item weitere Probleme \href[page=152]{./Technische_Informatik_all_in_one_with_go_back.pdf}{hier} erklärt
+                      \item weitere Probleme \href[page=152]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{hier} erklärt
                     \end{itemize}
                 \end{itemize}
                 \begin{figure}
@@ -527,8 +538,8 @@
                     \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{12cm}
                         \begin{itemize}
-                          \item \href[page=370]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Addition von Binärzahl und Zweierkomplementzahl}
-                          \item \href[page=369]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Addition von verschieden langen Zweierkomplementzahlen (Sign Extension)} 
+                          \item \href[page=370]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Addition von Binärzahl und Zweierkomplementzahl}
+                          \item \href[page=369]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Addition von verschieden langen Zweierkomplementzahlen (Sign Extension)} 
                         \end{itemize}
                       \end{minipage}
                     }
@@ -538,7 +549,7 @@
                       \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{12cm}
                         \begin{itemize}
-                          \item \href[page=360]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{2 mögliche Tests}
+                          \item \href[page=360]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{2 mögliche Tests}
                         \end{itemize}
                       \end{minipage}
                     }}
@@ -549,7 +560,7 @@
                     \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{12cm}
                         \begin{itemize}
-                          \item \href[page=363]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                          \item \href[page=363]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                         \end{itemize}
                       \end{minipage}
                     }
@@ -571,7 +582,7 @@
                     \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{12cm}
                         \begin{itemize}
-                          \item \href[page=263]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back}{Beweis}
+                          \item \href[page=263]{\lpathti{Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back}}{Beweis}
                         \end{itemize}
                       \end{minipage}
                     }
@@ -858,7 +869,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{8cm}
               \begin{itemize}
-                \item mehr zu Aussagenlogik \href{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{hier}
+                \item mehr zu Aussagenlogik \href{\lpathlogic}{hier}
               \end{itemize}
             \end{minipage}
           }
@@ -896,7 +907,7 @@
                     \item \alert{Relation:} $R\subseteq A\times B$
                     \begin{itemize}
                       \item \alert{Spezifikation} gleich wie bei Mengen, da eine Relation eine Menge von Tupeln ist, z.B.:\\ $R = \{(a, b)\;|\; a,b\in \mathbb{N}, a + b\text{ ungerade}\}$
-                      \item mehr zu Relationen \href{/home/areo/Documents/Studium/Summaries/Relations/main.pdf}{hier}
+                      \item mehr zu Relationen \href{\lpathrelations}{hier}
                     \end{itemize}
                   \end{itemize}
                 \end{itemize}
@@ -910,7 +921,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{8cm}
               \begin{itemize}
-                \item mehr zu Beweisen \href{/home/areo/Documents/Studium/Summaries/Beweisen/main.pdf}{hier}
+                \item mehr zu Beweisen \href{\lpathbeweisen}{hier}
               \end{itemize}
             \end{minipage}
           }
@@ -922,8 +933,8 @@
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
             \begin{itemize}
-              \item \href[page=213]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltkreis}
-              \item \href[page=383]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Belegung für Eingangsbelegung $a = (a_1, \ldots, a_n)\in\mathbb{B}^n$}
+              \item \href[page=213]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Schaltkreis}
+              \item \href[page=383]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Belegung für Eingangsbelegung $a = (a_1, \ldots, a_n)\in\mathbb{B}^n$}
             \end{itemize}
           \end{minipage}
         }
@@ -933,7 +944,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=252]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \item \href[page=252]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                 \item \alert{Achtung:} Die Variablen $x_1, \ldots, x_n$ im Und-Feld sind alle low und werden durch den Invertierer high.
               \end{itemize}
             \end{minipage}
@@ -957,8 +968,8 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=182]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Übersicht über Logikgatter}
-                \item \href[page=183]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Verschiedene Notationen}
+                \item \href[page=182]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Übersicht über Logikgatter}
+                \item \href[page=183]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Verschiedene Notationen}
               \end{itemize}
             \end{minipage}
           }
@@ -968,11 +979,11 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=184]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{p-Kanal und n-Kanal Transistor}
+                  \item \href[page=184]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{p-Kanal und n-Kanal Transistor}
                   \begin{itemize}
                     \item \underline{Eselsbrücke:} Der Kreis im \enquote{p} und der Kreis im Schaltsymbols des p-Kanal Transistor
                   \end{itemize}
-                \item Beispiel \href[page=185]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{CMOS-Inverter} und \href[page=204]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{CMOS-NAND-Gatter}
+                \item Beispiel \href[page=185]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{CMOS-Inverter} und \href[page=204]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{CMOS-NAND-Gatter}
                 \item es wird sichergestellt, dass es zu keinem Kurzschluss kommen kann, weil immer nur entweder die eine oder anderen Seite ein Signal $0$ (Ground) oder $1$ ($Vdd$) zu $out$ durchlässt, aber niemals beide, da die Seite mit den P-Kanal-Transistoren die Modelle wahr ist, für die der andere Seite mit den N-Kanal-Transistoren falsch ist, weil diese genau den negierten Ausdruck umsetzt, der auf der Seite mit den P-Kanal-Transistoren umgesetzt wird
                 \item es müssen unterschiedliche Transistoren verwendent werden, weil die n-Kanal Transistoren nur die $0$ und die p-Kanal-Transistoren nur die $1$ zuverlässig durchleiten können (Stichwort Schwellenspannung). Aus diesem Grund kann man ein AND-Gatter nur realisieren indem man ein NAND-Gatter und einen Inverter aneinanderhängt
                 \end{itemize}
@@ -988,7 +999,7 @@
               \begin{itemize}
                 \item \alert{Implikant} von $f$: Ein Monom $q$ mit $q \le f\Leftrightarrow ON(q)\subseteq ON(f)$
                 \begin{itemize}
-                  \item \underline{anders ausgedrückt:} Ein Monom, welches \href{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{Modell} von $f$ ist
+                \item \underline{anders ausgedrückt:} Ein Monom, welches \href{\lpathlogic}{Modell} von $f$ ist
                   \item kommt von \enquote{implizieren}, da bei $q \le f$ gdw. $q \Rightarrow f$ allgemeingültig das $q$ die Funktion $f$ \enquote{impliziert}
                   \item \underline{weniger Literale bedeuten eine größere ON-Menge:}\\ $L(m') \subseteq L(m) \Leftrightarrow ON(m) \subseteq ON(m')$, wobei $m$ ein Monom ist und $m' = mx_i$, wobei $x_i$ nicht in $m$ vorkommt\\
                     \begin{resettikz}
@@ -997,18 +1008,18 @@
                     \vspace{-1cm}
                 \end{itemize}
                 \item \alert{Primimplikantent} von $f$: Maximaler Implikant $q$ von $f$, d.h. es gibt keinen Implikanten $s$ ($s\ne q$) von $f$ (also gilt: $s\le f\Leftrightarrow ON(s)\subseteq ON(f)$) mit $q\le s\Leftrightarrow ON(q)\subseteq ON(s)$
-                \item Implikanten und Primimplikanten können durch n-dimensionale Würfel \href[page=270]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{veranschaulicht} werden
-                \item Die Monome eines Polynoms $p$ von $f$ sind alle Implikanten von $f$ (\href[page=275]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beweis})
+                \item Implikanten und Primimplikanten können durch n-dimensionale Würfel \href[page=270]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{veranschaulicht} werden
+                \item Die Monome eines Polynoms $p$ von $f$ sind alle Implikanten von $f$ (\href[page=275]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beweis})
                 \item \alert{Minimalpolynom} $p$ einer booleschen Funktion $f$: Ein Polynom von $f$ mit minimalen Kosten, d.h. mit der Eigenschaft $cost(p) \le cost(p')$ für jedes andere Polynom $p'$ von $f$
                 \begin{itemize}
-                  \item Jedes Minimalpolynom $p$ einer booleschen Funktion $f$ besteht ausschließlich aus Primimplikanten von $f$ (\href[page=278]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beweis})
+                  \item Jedes Minimalpolynom $p$ einer booleschen Funktion $f$ besteht ausschließlich aus Primimplikanten von $f$ (\href[page=278]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beweis})
                 \end{itemize}
-              \item \underline{\href[page=279]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Lemmas} zur Berechnung von Implikanten:}
+              \item \underline{\href[page=279]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Lemmas} zur Berechnung von Implikanten:}
                 \begin{itemize}
                   \item Ist $m$ ein Implikant von $f$, so auch $m \cdot x$ und $m \cdot x'$ für jede Variable $x$, die in $m$ weder als positives, noch als negatives Literal vorkommt
                   \item Sind $m \cdot x$ und $m \cdot x'$ Implikanten von $f$, so auch $m$
                 \end{itemize}
-            \item \underline{\href[page=280]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Satz} zur Charakterisierung von Implikanten:}\\ 
+            \item \underline{\href[page=280]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Satz} zur Charakterisierung von Implikanten:}\\ 
               \begin{equation}
                 m \in \operatorname{Implikant}(f) \Leftrightarrow (m \in \operatorname{Minterm}(f)) \vee\left(m \cdot x, m \cdot x^{\prime} \in \operatorname{Implikant}(f)\right)
                 \label{eq:implikant}
@@ -1076,7 +1087,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  % \item \href[page=283]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Verbesserungen} von 
+                  % \item \href[page=283]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Verbesserungen} von 
                   \item Verbesserung des Verfahren von Quine 
                   \item Vergleiche nur Monome untereinander
                     \begin{itemize}
@@ -1092,9 +1103,9 @@
                       \item $Prime(f)$ Menge der Primimplikanten von $f$
                       \item z.B. $1001$ steht für den Implikanten $x_1x_2'x_3'x_4$
                     \end{itemize}
-                  \item \href[page=284]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
-                  \item \href[page=295]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Korrektheit}
-                  \item \href[page=297]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten}
+                  \item \href[page=284]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel}
+                  \item \href[page=295]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Korrektheit}
+                  \item \href[page=297]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Kosten}
                 \end{itemize}
               \end{minipage}
             }
@@ -1104,7 +1115,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=282]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Algorithmus} der \ref{eq:implikant} anwendet
+                    \item \href[page=282]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Algorithmus} der \ref{eq:implikant} anwendet
                   \end{itemize}
                 \end{minipage}
               }
@@ -1124,27 +1135,27 @@
                   \begin{itemize}
                     \item die \alert{Zeilen} entsprechen den \alert{Primimplikanten von $f$}
                     \item die \alert{Spalten} entsprechen den \alert{Mintermen von $f$} oder den \alert{Warheitswertzuweisungen} von $ON(f)$
-                    \item \href[page=303]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{weitere Spezifkationen}
+                    \item \href[page=303]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{weitere Spezifkationen}
                     % \item sei $min(\alpha)$ ein beliebiger Minterm von $f$ bzw. ein bel. $\alpha\in ON(f)$. Dann gilt für \alert{Primimplikant $m$}: $PIT(f)[m, min(\alpha)] = 1 \Leftrightarrow m(\alpha) = 1$%. Der Eintrag an der Stelle $[m, min(\alpha)]$ ist genau dann $1$, wenn $min(\alpha)$ eine Ecke des Würfels $m$ beschreibt
                     % \item Gesucht: Eine kostenminimale Teilmenge M von Prim(f), so dass jede Spalte von $PIT(f)$ überdeckt ist, d.h. ∀α ∈ ON(f ) ∃m ∈ M mit PIT (f )[m, min(α)] = 1.
                   \end{itemize}
                   \item \alert{1. Reduktionsregel:} Entferne alle wesentlichen Primimplikanten und alle Minterme, die von diesen überdeckt werden
                   \begin{itemize}
-                    \item \alert{wesentlicher Primimplikant:} Wenn es ein $\alpha \in ON(f)$ gibt, das nur von diesem Primimplikanten \alert{überdeckt} wird (\href[page=306]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{genauer})%, also: $PIT(f)[m, min(\alpha)] = 1$ und $PIT(f)[m', min(\alpha)] = 0$ für jeden anderen Primimplikanten $m'$ von $f$
+                    \item \alert{wesentlicher Primimplikant:} Wenn es ein $\alpha \in ON(f)$ gibt, das nur von diesem Primimplikanten \alert{überdeckt} wird (\href[page=306]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{genauer})%, also: $PIT(f)[m, min(\alpha)] = 1$ und $PIT(f)[m', min(\alpha)] = 0$ für jeden anderen Primimplikanten $m'$ von $f$
                     \item jedes Minimalpolynom von $f$ enthält \alert{alle wesentlichen Primimplikanten} von $f$
-                    \item \href[page=307]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                    \item \href[page=307]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel}
                     \item da es nur darum geht, dass alle Minterme vom Anfang abgedeckt sind und die wesentlichen Minterme auf jeden Fall genommen werden müssen, werden auch die Minterme, die sie abdecken auf jeden Fall genommen. Aus diesem Grund ist es nicht mehr notwendig diese Minterme in der Primimplikantentafel miteinzubeziehen, da man Minterme nur in der Primimplikantentafel miteinbezieht, wenn man noch eine Abdeckung für diese Minterme sucht.
                   \end{itemize}
                   \item \alert{2. Reduktionsregel:} Entferne alle Minterme, die einen anderen Minterm dominieren
                   \begin{itemize}
                     \item Sei $A$ eine boolesche Matrix. Spalte $j$ von $A$ dominiert Spalte $i$ von $A$, wenn für jede Zeile $k$ gilt: $A[k, i] \le A[k, j]$
-                    \item \href[page=311]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                    \item \href[page=311]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel}
                     \item eines der Momome, das den Minterm abdeckt der dominiert wird, wird irgendwann aufgrund weiterer Reduktionen mit der ersten und dritten Reduktionsregel wesentlich und wird dann genommen. Sobald dieses Monom genommen wird ist es aufgrund der Teilmengenbeziehung sicher, dass dieses Monom auch den Minterm der den ersteren Minterm dominiert hat abdeckt. Der zweitere Minterm ist somit nicht mehr von Interesse für die Primimplikantentafel, weil man bereits eine Abdeckung für diesen Minterm gefunden hat und es nur darum geht, dass man alle Minterme vom Anfang abgedeckt hat.
                   \end{itemize}
                   \item \alert{3. Reduktionsregel:} Entferne alle Primimplikanten, die durch einen anderen, nicht teureren Primimplikanten dominiert werden
                   \begin{itemize}
                     \item Sei $A$ eine boolesche Matrix. Zeile $i$ von $A$ dominiert Zeile $j$ von $A$, wenn für jede Spalte $k$ gilt: $A[i, k] \ge A[j, k]$.
-                    \item \href[page=313]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                    \item \href[page=313]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel}
                     \item Wenn die ON-Menge eines Monoms Teilmenge der ON-Menge eines anderen Monoms ist, dann nimmt das Monom mit der größeren ON-Menge, da größere ON-Menge weniger Literale bedeutet und somit weniger Kosten. Mit einer größeren ON-Menge kann man mehr Minterme auf einmal abdecken und es geht nur darum, dass man am Ende alle Minterme vom Anfang irgendwie abgedeckt hat.
                   \end{itemize}
                 \end{itemize}
@@ -1170,7 +1181,7 @@
                           \end{itemize}
                         \item Die gesuchte minimale Überdeckung ist gegeben durch das Monom, das einer Primimplikanten-Auswahl mit minimalen Kosten entspricht. Muss nicht zwangsweise das Monom mit den wenigsten Literalen sein. Das minimale Polynom erhält man indem man das Monom zu einer Klausel macht und die Variablen, die bestimmte Primpimplikanten repräsentieren durch die korrekten Monome dieser Primimplikanten ersetzt. Diese Klausel wird dadurch zu einer Summe von Produkten
                       \end{enumerate}
-                    \item \href[page=319]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                    \item \href[page=319]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1240,8 +1251,8 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=350]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                  \item \href[page=352]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+                  \item \href[page=350]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                  \item \href[page=352]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Kosten und Tiefe}
                 \end{itemize}
               \end{minipage}
             }
@@ -1251,7 +1262,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=375]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltbild}
+                    \item \href[page=375]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Schaltbild}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1265,7 +1276,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=349]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    \item \href[page=349]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1276,7 +1287,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=364]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    \item \href[page=364]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1287,11 +1298,11 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=331]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{n-Bit-Addierer} berechnet boolesche Funktion:\\
+                    \item \href[page=331]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{n-Bit-Addierer} berechnet boolesche Funktion:\\
                       $\begin{aligned}[t] & +_n: \mathbb{B}^{2 n+1} \rightarrow \mathbb{B}^{n+1} \\ & +_n:\left(a_{n-1}, \ldots, a_0, b_{n-1}, \ldots, b_0, c\right)=\left(s_n, \ldots, s_0\right) \\ & \text { mit }\langle s\rangle=\left\langle s_n \ldots s_0\right\rangle=\left\langle a_{n-1} \ldots a_0\right\rangle+\left\langle b_{n-1} \ldots b_0\right\rangle+c \end{aligned}$
-                    \item \href[page=353]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Untere Schranken}
+                    \item \href[page=353]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Untere Schranken}
                     \begin{itemize}
-                      \item \href[page=358]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Carry-Lookahead-Addierer (CLA), Ladner-Fischer-Addierer}
+                      \item \href[page=358]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Carry-Lookahead-Addierer (CLA), Ladner-Fischer-Addierer}
                     \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -1302,7 +1313,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=361]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                    \item \href[page=361]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1313,8 +1324,8 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=354]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                    \item \href[page=357]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten} und \href[page=356]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Tiefe}
+                    \item \href[page=354]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                    \item \href[page=357]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Kosten} und \href[page=356]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Tiefe}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1325,8 +1336,8 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=334]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                    \item \href[page=335]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+                    \item \href[page=334]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                    \item \href[page=335]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Kosten und Tiefe}
                   \end{itemize}
                       \begin{minipage}{0.5\textwidth}
                         \begin{table}
@@ -1370,8 +1381,8 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=337]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                  \item \href[page=338]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+                  \item \href[page=337]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                  \item \href[page=338]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Kosten und Tiefe}
                 \end{itemize}
                 \begin{minipage}{0.5\textwidth}
                   \begin{table}
@@ -1431,8 +1442,8 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=341]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                \item \href[page=346]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kosten und Tiefe}
+                \item \href[page=341]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                \item \href[page=346]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Kosten und Tiefe}
               \end{itemize}
               \begin{minipage}{0.3\textwidth}
                 \includegraphics[width=\textwidth, center]{./figures/addition.png}
@@ -1456,12 +1467,12 @@
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
             \begin{itemize}
-              \item \href[page=381]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schaltplan}, verglichen mit Schaltkreis \href[page=380]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{azyklisch aus Graphen entfernt}
-              \item \href[page=383]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Belegung für Eingangsbelegung $a = (a_1, \ldots, a_n)\in\mathbb{B}^n$} (the $Q$ function for the \enquote{Quelle} of an edge \href[page=210]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{here})
+              \item \href[page=381]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Schaltplan}, verglichen mit Schaltkreis \href[page=380]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{azyklisch aus Graphen entfernt}
+              \item \href[page=383]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Belegung für Eingangsbelegung $a = (a_1, \ldots, a_n)\in\mathbb{B}^n$} (the $Q$ function for the \enquote{Quelle} of an edge \href[page=210]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{here})
               \begin{itemize}
                 \item \alert{Stabile Belegung:} Falls bei einem Schaltplan zu einer Eingangsbelegung eine Belegung definiert ist
                 \item es kann zu einer Eingangsbelegung $a$ keine stabile Signalbelegung $\varphi_{SP, a}$ oder mehrere stabile Signalbelegungen $\varphi_{SP, a}^{(1)}, \ldots, \varphi_{SP, a}^{(k)}$ geben
-                \item \href[page=385]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiele}
+                \item \href[page=385]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiele}
               \end{itemize}
             \end{itemize}
           \end{minipage}
@@ -1472,10 +1483,10 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=422]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Kombinatorischer Kern}
-                \item \href[page=423]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Primäre Eingänge / Ausgänge, Sekundäre Eingänge / Ausgänge}
+                \item \href[page=422]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Kombinatorischer Kern}
+                \item \href[page=423]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Primäre Eingänge / Ausgänge, Sekundäre Eingänge / Ausgänge}
                 \begin{itemize}
-                  \item \href[page=424]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Visualized}
+                  \item \href[page=424]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Visualized}
                 \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -1486,7 +1497,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=409]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=409]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                 \end{itemize}
               \end{minipage}
             }
@@ -1497,7 +1508,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=448]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                  \item \href[page=448]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                     % TODO: not ist theoretisch ein negierter Treiber vom Symbol her
                 \end{itemize}
               \end{minipage}
@@ -1508,10 +1519,10 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=449]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                    \item \href[page=450]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Zustand hoher Impedanz, \enquote{Treiber ist disabled} }
-                    \item \href[page=451]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{n-Bit-Treiber}
-                    \item \href[page=452]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{$k$ Tristate-Treiber + Bus vs. $k$-fach-Multiplexer}
+                    \item \href[page=449]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                    \item \href[page=450]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Zustand hoher Impedanz, \enquote{Treiber ist disabled} }
+                    \item \href[page=451]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{n-Bit-Treiber}
+                    \item \href[page=452]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{$k$ Tristate-Treiber + Bus vs. $k$-fach-Multiplexer}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1523,27 +1534,27 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=415]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                  \item \href[page=416]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel Zähleer}
-                  \item \href[page=436]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel für Entwurf}
+                  \item \href[page=415]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                  \item \href[page=416]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel Zähleer}
+                  \item \href[page=436]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel für Entwurf}
                 \end{itemize}
               \end{minipage}
             }
           }
           child {
-            node {Endliche Zustandsautomaten
+            node (ez) {Endliche Zustandsautomaten
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item Schaltwerke entsprechen endlichen Zustandsautomaten
-                    \item \href[page=418]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Deterministischer, endlicher Halbautomat}
-                    \item \href[page=417]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Begriffsabgrenzung}
-                    \item \href[page=419]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Mealy- und Moore-Automat}
+                    \item \href[page=418]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Deterministischer, endlicher Halbautomat}
+                    \item \href[page=417]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Begriffsabgrenzung}
+                    \item \href[page=419]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Mealy- und Moore-Automat}
                     \begin{itemize}
-                      \item \href[page=420]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Unterschied Mealy und Moore}
-                      \item \href[page=425]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Umsetung als Sequentielle Schaltung}
+                      \item \href[page=420]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Unterschied Mealy und Moore}
+                      \item \href[page=425]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Umsetung als Sequentielle Schaltung}
                     \end{itemize}
-                    \item \href[page=421]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Unterschiedliche Darstellungen von endlichen Zustandsautomaten}:  Zustands- und Ausgangstafel, Zustandsdiagramm, Sequentieller Schaltkreis
+                    \item \href[page=421]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Unterschiedliche Darstellungen von endlichen Zustandsautomaten}:  Zustands- und Ausgangstafel, Zustandsdiagramm, Sequentieller Schaltkreis
                   \end{itemize}
                 \end{minipage}
               }
@@ -1559,9 +1570,9 @@
                       \end{itemize}
                       \item \alert{Hinreichende Bedingung:} Wenn bei zwei Zuständen bei gleicher Eingabe auch die gleiche Ausgabe erzeugt wird und der gleiche Folgezustand angenommen wird, dann sind die Zustände sicherlich äquivalent. Äquivalente Zustände können durch einen einzigen Zustand ersetzt werden
                       \begin{itemize}
-                        \item \href[page=431]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiel}
+                        \item \href[page=431]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiel}
                       \end{itemize}
-                      \item \href[page=435]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Zustandskodierung}
+                      \item \href[page=435]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Zustandskodierung}
                     \end{itemize}
                   \end{minipage}
                 }
@@ -1574,9 +1585,9 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=407]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{n-Bit Register}
-                  \item \href[page=408]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Schieberegister}
-                  \item \href[page=467]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Verfeinerung wegen Designrule}
+                  \item \href[page=407]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{n-Bit Register}
+                  \item \href[page=408]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Schieberegister}
+                  \item \href[page=467]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Verfeinerung wegen Designrule}
                 \end{itemize}
               \end{minipage}
             }
@@ -1587,10 +1598,10 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=388]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{NAND-RS-Flipflop}
-                  \item \href[page=280]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}{NOR-RS-Flipflop}
-                  \item \href[page=330]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}{AND-OR-Flipflop}
-                  \item \href[page=401]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Pulsweite}
+                  \item \href[page=388]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{NAND-RS-Flipflop}
+                  \item \href[page=280]{\lpathti{Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}}{NOR-RS-Flipflop}
+                  \item \href[page=330]{\lpathti{Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}}{AND-OR-Flipflop}
+                  \item \href[page=401]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Pulsweite}
                 \end{itemize}
               \end{minipage}
             }
@@ -1600,8 +1611,8 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=403]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                    \item \href[page=287]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}{Herleitung}
+                    \item \href[page=403]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                    \item \href[page=287]{\lpathti{Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}}{Herleitung}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1612,9 +1623,9 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=397]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Grund für D-Latch}
-                    \item \href[page=398]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                    \item \href[page=400]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Setup- und Hold-Zeit}
+                    \item \href[page=397]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Grund für D-Latch}
+                    \item \href[page=398]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                    \item \href[page=400]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Setup- und Hold-Zeit}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1628,7 +1639,7 @@
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
             \begin{itemize}
-              \item \href[page=545]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Konventionen}
+              \item \href[page=545]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Konventionen}
             \end{itemize}
           \end{minipage}
         }
@@ -1638,9 +1649,9 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=562]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{AND und NAND}
-                \item \href[page=330]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}{OR}
-                \item \href[page=565]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Timing für AND} und \href[page=566]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Timing für NAND}
+                \item \href[page=562]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{AND und NAND}
+                \item \href[page=330]{\lpathti{Technische_Informatik_Tutoratsfolien_all_in_one_with_go_back.pdf}}{OR}
+                \item \href[page=565]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Timing für AND} und \href[page=566]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Timing für NAND}
               \end{itemize}
             \end{minipage}
           }
@@ -1651,7 +1662,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=529]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{$V_{IL}$, $V_{IH}$, $V_{OL}$, $V_{OH}$}
+                \item \href[page=529]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{$V_{IL}$, $V_{IH}$, $V_{OL}$, $V_{OH}$}
                   \begin{itemize}
                     \item Wenn man den Ausgang eines Gatters $u$ mit dem Eingang eines Gatters $v$ verbinden will, muss gelten: $V_{OL}(u)\le V_{IL}(v)$ und $V_{OH}(u)\ge V_{IH}(v)$
                   \end{itemize}
@@ -1665,14 +1676,14 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=534]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \item \href[page=534]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                   \begin{itemize}
-                    \item \href[page=535]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{verschiedene Verzögerungszeiten für Übergänge am \alert{Ausgang}, $t_{PLH}$, $t_{PHL}$}
+                    \item \href[page=535]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{verschiedene Verzögerungszeiten für Übergänge am \alert{Ausgang}, $t_{PLH}$, $t_{PHL}$}
                   \end{itemize}
-                \item \href[page=546]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Einfluss auf Verzögerungszeiten}
+                \item \href[page=546]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Einfluss auf Verzögerungszeiten}
                   \begin{itemize}
-                    \item Wegen Abhängigkeit der Verzögerungszeit von weiteren Faktoren werden vom Hersteller keine festen Zeiten $t_{PLH} /t_{PHL}$ angegeben, sondern \href[page=547]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{3 Werte}
-                    \item \href[page=548]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Bedingungen für Termperaturbereich und kapazitive Last}
+                    \item Wegen Abhängigkeit der Verzögerungszeit von weiteren Faktoren werden vom Hersteller keine festen Zeiten $t_{PLH} /t_{PHL}$ angegeben, sondern \href[page=547]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{3 Werte}
+                    \item \href[page=548]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Bedingungen für Termperaturbereich und kapazitive Last}
                   \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -1683,10 +1694,10 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=550]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Intervall}
-                  \item \href[page=551]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Operatoren}
-                  \item \href[page=554]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Fall 1: Alle anderen Eingännge fest}
-                  \item \href[page=556]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Fall 2: Weitere Eingänge können sich auch zum Zeitpunkt $t_0$ ändern}
+                  \item \href[page=550]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Intervall}
+                  \item \href[page=551]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Operatoren}
+                  \item \href[page=554]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Fall 1: Alle anderen Eingännge fest}
+                  \item \href[page=556]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Fall 2: Weitere Eingänge können sich auch zum Zeitpunkt $t_0$ ändern}
                 \end{itemize}
               \end{minipage}
             }
@@ -1697,7 +1708,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=543]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Zeit bis letzter Ausgang sich zu logisch $0$ oder $1$ ändert}
+                  \item \href[page=543]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Zeit bis letzter Ausgang sich zu logisch $0$ oder $1$ ändert}
                 \end{itemize}
               \end{minipage}
             }
@@ -1709,9 +1720,9 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=538]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
+                \item \href[page=538]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
                   \begin{itemize}
-                    \item \href[page=539]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beschränkung dieser Zeiten mit $\delta$}
+                    \item \href[page=539]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beschränkung dieser Zeiten mit $\delta$}
                   \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -1724,12 +1735,12 @@
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
             \begin{itemize}
-              \item \href[page=459]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Exerne Sicht, 3-Bus-Architektur}
-              \item \href[page=460]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Interne Sicht}
+              \item \href[page=459]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Exerne Sicht, 3-Bus-Architektur}
+              \item \href[page=460]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Interne Sicht}
               \begin{itemize}
-                \item \href[page=461]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Interner Aufbau ohne SRAM}, \href[page=463]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{SRAM}, \href[page=471]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Interner Aufbau mit SRAM}
-                \item \href[page=462]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Namenskonvention für Treiber}
-                \item \href[page=465]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Instruktionsregister $I$} und \href[page=466]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Sign Extension mithilfe des Kontrollsignal $sext$}
+                \item \href[page=461]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Interner Aufbau ohne SRAM}, \href[page=463]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{SRAM}, \href[page=471]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Interner Aufbau mit SRAM}
+                \item \href[page=462]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Namenskonvention für Treiber}
+                \item \href[page=465]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Instruktionsregister $I$} und \href[page=466]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Sign Extension mithilfe des Kontrollsignal $sext$}
               \end{itemize}
             \end{itemize}
           \end{minipage}
@@ -1740,12 +1751,12 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=371]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                \item \href[page=372]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Select-Eingang}
+                \item \href[page=371]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                \item \href[page=372]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Select-Eingang}
                 \item \underline{Realisierungsmöglichkeiten:}
                 \begin{enumerate}
-                  \item \href[page=374]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Realisierung durch einen verallgemeinerten Multiplexer}
-                  \item \href[page=377]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Gemeinsame Behandlung ähnlicher Funktionen}
+                  \item \href[page=374]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Realisierung durch einen verallgemeinerten Multiplexer}
+                  \item \href[page=377]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Gemeinsame Behandlung ähnlicher Funktionen}
                 \end{enumerate}
               \end{itemize}
             \end{minipage}
@@ -1757,25 +1768,25 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=99]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Befehle und ihre Wirkung}
+                \item \href[page=99]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Befehle und ihre Wirkung}
                 \begin{itemize}
-                  \item \href[page=159]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Befehlsformate}
+                  \item \href[page=159]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Befehlsformate}
                 \end{itemize}
-                \item \href[page=157]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Wort}
-                \item \href[page=158]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Notation for Interpretation von Zeichenfolgen ($\langle A\rangle$, $[A]$)}
+                \item \href[page=157]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Wort}
+                \item \href[page=158]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Notation for Interpretation von Zeichenfolgen ($\langle A\rangle$, $[A]$)}
               \end{itemize}
             \end{minipage}
           }
         }
       }
       child {
-        node {Kontrolllogik
+        node (kl) {Kontrolllogik
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=506]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{active low, active high, pre-Signale}
-                \item \href[page=507]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Aufbau}
-                \item \href[page=508]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Beispiele}
+                \item \href[page=506]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{active low, active high, pre-Signale}
+                \item \href[page=507]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Aufbau}
+                \item \href[page=508]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Beispiele}
               \end{itemize}
             \end{minipage}
           }
@@ -1786,8 +1797,8 @@
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item Grobe Ablaufplanung. Vereinfachende Annahme: Verzögerungszeit aller Bausteine $= 0$ (exakte Analyse mit Verzögerungszeiten zu einem späteren Zeitpunkt)
-                  \item \href[page=503]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Idealisiertes Timing-Diagramm der RETI}
-                  \item \href[page=505]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Entwurfsziele}
+                  \item \href[page=503]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Idealisiertes Timing-Diagramm der RETI}
+                  \item \href[page=505]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Entwurfsziele}
                 \end{itemize}
               \end{minipage}
             }
@@ -1798,11 +1809,11 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \href[page=499]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Übersicht}
-                  \item \href[page=501]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Takte, Benennungskonventionen, Phasensignale, Kontrollsignale}
+                  \item \href[page=499]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Übersicht}
+                  \item \href[page=501]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Takte, Benennungskonventionen, Phasensignale, Kontrollsignale}
                     \begin{itemize}
                       \item Befehlsabarbeitung ist unterteilt in Takte (= Folge von Taktsignalen high, low)
-                      \item \href[page=502]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Erzeugung der Phasensignale}
+                      \item \href[page=502]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Erzeugung der Phasensignale}
                     \end{itemize}
                 \end{itemize}
               \end{minipage}
@@ -1815,7 +1826,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=470]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Fetch- und Execute-Phase}
+                \item \href[page=470]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Fetch- und Execute-Phase}
               \end{itemize}
             \end{minipage}
           }
@@ -1826,9 +1837,9 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \href[page=445]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{Definition}
-                \item \href[page=453]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{SRAM mit Bus}, \href[page=463]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{SRAM mit finalen Treiberbezeichnern}
-                \item \href[page=447]{/home/areo/Documents/Studium/Summaries/Technische_Informatik/Technische_Informatik_all_in_one_with_go_back.pdf}{N$\times$s-Bit-SRAM}
+                \item \href[page=445]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{Definition}
+                \item \href[page=453]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{SRAM mit Bus}, \href[page=463]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{SRAM mit finalen Treiberbezeichnern}
+                \item \href[page=447]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{N$\times$s-Bit-SRAM}
               \end{itemize}
             \end{minipage}
           }
@@ -1842,6 +1853,7 @@
   \begin{pgfonlayer}{background}
   \draw [concept connection]
   %     (datahazardsforbranches) edge (forwarding);
+      (kl) edge (ez)
       (timing) edge (dlatch)
       (timing) edge (rsflipflop)
       (anab) edge (kette)
@@ -1851,7 +1863,8 @@
   % │ Annotationen │
   % └──────────────┘
   % https://tex.stackexchange.com/questions/302976/node-positioning-middle-point-mind-map-connection-bar
-  \node [annotation, below] at (ti.south) {This mindmap is provided without guarantee of correctness and completeness!};
-  \node [annotation, below] at (ti.north) {\href{/tmp/current.pdf}{go back}};
+  \node [annotation, below] at (ti.south) {Diese Mindmap wird ohne Garantie auf Vollständigkeit oder Korrektheit zur Verfügung gestellt!};
+  % \node [annotation, below] at (ti.north) {\href{/tmp/current.pdf}{go back}};
+  \node [annotation, below] at (ti.north) {\href{https://www.youtube.com/playlist?list=PLmsC317bB1b0T198lvGTddbqThQ6gDDG2}{Aufzeichnungen} in denen die Themen dieser Mindmap erklärt werden\\\href{/tmp/current.pdf}{go back}};
   \end{tikzpicture}
 \end{document}

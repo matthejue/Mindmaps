@@ -10,7 +10,22 @@
 
 \begin{mindmap}
   \begin{mindmapcontent}
-    \node (be) at (current page.center) {Beweisen}
+    \node (be) at (current page.center) {Beweisen
+      \resizebox{\textwidth}{!}{
+        \begin{minipage}[t]{16cm}
+          \begin{itemize}
+            \item Ein Satz oder Theorem ist in der Mathematik eine widerspruchsfreie logische Aussage, die mittels eines Beweises als wahr erkannt, das heißt, aus Axiomen, Definitionen und bereits bekannten Sätzen hergeleitet werden kann
+            \item Ein Satz wird nach seiner Rolle, seiner Bedeutung oder seinem Kontext oft auch anders bezeichnet:
+            \begin{itemize}
+              \item Lemma (oder Hilfssatz) für eine Aussage, die nur im Beweis anderer Sätze im gleichen Werk verwendet wird und unabhängig davon keine Bedeutung hat,
+              \item Proposition für eine ebenfalls hauptsächlich lokal bedeutsame Aussage, etwa einen Hilfssatz, der in mehr als einem Beweis verwendet wird,
+              \item Satz (oder Theorem) für eine wesentliche Erkenntnis, die im Werk dargestellt wird, und
+              \item Korollar (oder Folgesatz) für eine triviale Folgerung, die sich aus einem Satz oder einer Definition ohne großen Aufwand ergibt.
+            \end{itemize}
+          \end{itemize}
+        \end{minipage}
+      }
+    }
     child {
       node {Induktion}
       child {

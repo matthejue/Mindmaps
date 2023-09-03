@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+copy_sections_from_one_file_to_other_file /home/areo/Documents/Studium/Summaries/Logic/main.tex LOGICSTART LOGICEND /home/areo/Documents/Studium/Summaries/Technische_Informatik/main.tex

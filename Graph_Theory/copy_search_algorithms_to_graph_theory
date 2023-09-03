@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-copy_sections_from_one_file_to_other_file /home/areo/Documents/Studium/Summaries/Search_Algorithms/content/Mindmap.tex START END /home/areo/Documents/Studium/Summaries/Graph_Theory/main.tex
+copy_sections_from_one_file_to_other_file /home/areo/Documents/Studium/Summaries/Search_Algorithms/content/Mindmap.tex SEARCHSTART SEARCHEND /home/areo/Documents/Studium/Summaries/Graph_Theory/main.tex
 cp /home/areo/Documents/Studium/Summaries/Search_Algorithms/content/Schnipsel.tex /home/areo/Documents/Studium/Summaries/Graph_Theory/content/Schnipsel.tex

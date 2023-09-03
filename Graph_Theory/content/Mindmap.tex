@@ -1,0 +1,88 @@
+    child {
+      node (generalsearch) {General Search
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item distinction between tree search and graph search is not rooted in the fact whether the problem graph is a tree or a general graph. It is \alert{always assumed} you're dealing with a \alert{general graph}
+              \item The \alert{distinction} lies in the \alert{traversal pattern} that is used to search through the graph, which can be graph-shaped or tree-shaped
+              \begin{itemize}
+                \item If one is dealing with a \alert{tree-shaped problem}, both algorithm variants lead to equivalent results. So one would pick the simpler tree search variant.
+              \end{itemize}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node (ts) {Tree-based search
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item nodes are possibly \alert{visited multiple times} (if there are multiple directed paths to a node rooting in the start node), possible leading even to \alert{infinite loops}
+                % \item It will visit a state of the underlying problem graph multiple times, if there are multiple directed paths to it rooting in the start state
+                % \item It is even possible to visit a state an infinite number of times if it lies on a directed loop
+                \begin{itemize}
+                  \item but each of this multiple visits would correspond to a different node if one would generate a tree by the nodes visited by the algorithm
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+          % \resizebox{\textwidth}{!}{
+          %   \begin{minipage}[t]{11cm}
+          %     \begin{algorithm}[H]
+          %       \caption{\pr{Tree-Search}(problem)}
+          %       % \begin{pseudo}[kw]
+          %       % \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
+          %       % As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
+          %       % \fn{choose} \tn{a} \tt{leaf node} $v$ \tn{and remove it from the} \tt{frontier}\\
+          %       %   if \tt{v} \tn{contains a} \cn{goal state} then\\+
+          %       %     return \cn{True}\\-
+          %       %     \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\--
+          %       % return \cn{False}
+          %       % \end{pseudo}
+          %       \begin{pseudo}[kw]
+          %       \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
+          %       As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
+          %       \fn{choose} \tn{a} \tt{leaf node} \tn{and remove it from the} \tt{frontier}\\
+          %         if \tt{node} \tn{contains a} \cn{goal state} then\\+
+          %           return \cn{Solution}\\-
+          %           \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\--
+          %       return \cn{Failure}
+          %       \end{pseudo}
+          %     \end{algorithm}
+          %     \sourcesone
+          %   \end{minipage}
+          % }
+        }
+      }
+      child {
+        node (gs) {Graph-based search
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item Keeps a \alert{explored set} and avoids the problem of tree-based search
+                \item \alert{exponential memory requirements} in the worst case
+              \end{itemize}
+            \end{minipage}
+          }
+          % \resizebox{\textwidth}{!}{
+          %   \begin{minipage}[t]{12cm}
+          %     \begin{algorithm}[H]
+          %       \caption{\pr{Graph-Search}(problem)}
+          %       \begin{pseudo}[kw]
+          %       \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
+          %       \fn{initialize} \tn{the} \tt{explored set} \tn{to be empty}\\
+          %       As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
+          %       \fn{choose} \tn{a} \tt{leaf node} \tn{and remove it from the} \tt{frontier}\\
+          %         if \tt{node} \tn{contains a} \cn{goal state} then\\+
+          %           return \cn{True}\\-
+          %           \fn{add} \tn{the node to the} \tt{explored set}\\
+          %           if \tt{node} \tn{not in the} \tt{frontier} \tn{or} \tt{explored set} then \\+
+          %             \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\---
+          %       return \cn{False}
+          %       \end{pseudo}
+          %     \end{algorithm}
+          %   \end{minipage}
+          % }
+        }
+      }
+    }

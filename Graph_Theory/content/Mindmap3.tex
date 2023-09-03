@@ -1,0 +1,191 @@
+    child {
+      node {Informed Search Algorithms
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item Knowledge of the worth of expanding a node $v$ is given in the form of an \alert{evaluation function} $f(v)$, which assigns a real number to each node
+              \item Often $f(v)$ includes a \alert{heuristic function} $h(v)$ as a component, which estimates the costs of the cheapest path from $v$ to the goal
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+      node {Local Search Algorithms
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item if it is unimportant how the goal is reached, \alert{only the goal itself matters} and if in addition a \alert{quality} measure for nodes is given
+              \item it operates using a \alert{single current node} (rather than multiple paths)
+              \item requires little memory
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Hill Climbing
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item Begin with a randomly-chosen configuration and \alert{improve} on it \alert{step by step}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Simulated Annealing
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \enquote{noise} is injected systematically, first a lot, then gradually less
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Gradient Descent}
+        }
+      }
+    }
+    child {
+      node {Genetic Algorithms
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item Similar to \alert{evolution}, we search for solutions by three operators: \alert{mutation}, \alert{crossover}, and \alert{selection}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+    }
+      child {
+        node (bfs) {Best-First Search 
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item informed search procedure that expands the node with the \enquote{\alert{best}} $f$-value first
+                \item is an instance of the general \alert{Tree-Search} algorithm in which frontier is a \alert{priority queue} ordered by an \alert{evaluation function} $f$
+                \begin{itemize}
+                  \item when $f$ is always correct, ones does not need to search
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Greedy Search
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item A \alert{best-first} search using the \alert{heuristic function} $h(v)$ as the \alert{evaluation function}, i.e. $f(v) = h(v)$ is called a \alert{greedy search}
+                  \begin{itemize}
+                    % \item judge the \enquote{worth} of a node by estimating its path costs to the target node
+                    \item $h(v) =$ estimated path-costs from $v$ to the target node
+                    \item the only real restriction is that $h(v) = 0$ if $v$ is the target node
+                  \end{itemize}
+                  \item is generally \alert{incomplete} and \alert{not optimal}
+                  \begin{itemize}
+                    \item \alert{graph-search} version is complete only in finite graphs
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node (hf) {Heuristic function
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item or simply a \alert{heuristic}
+                    \item the evaluation function $f$ in \alert{greedy searches} is a heuristic function $h$ 
+                    \item the heuristic is \alert{problem-specific} and \alert{focuses} the search
+                    \item \alert{In AI it has two meanings:}
+                    \begin{itemize}
+                      \item Heuristics are \alert{fast} but in certain situations \alert{incomplete} methods for problem-solving
+                      \item Heuristics are methods that \alert{improve the search} in the \alert{average-case}
+                    \end{itemize}
+                    \item The word heuristic is derived from the Greek word {\gyre ευρισκειν} (note also: {\gyre ευρηκα!})
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node (astar) {A$^*$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item A$^*$ combines \alert{greedy search} with the \alert{uniform-cost search}
+                  \item Always expands node with lowest \alert{evaluation function} $f(v)$ first, where:
+                  \begin{itemize}
+                    \item $g(v) =$ actual cost from the start node to $v$
+                    \item $h(v) =$ estimated cost from $v$ to the nearest target node
+                    \item $f(v) = g(v) + h(v) =$ the estimated cost of the cheapest path through $v$
+                  \end{itemize}
+                  \item We require that for A$^*$, that $h$ is admissible (e.g. straight-line distance is admissible)
+                  \begin{itemize}
+                    \item $h$ is an \alert{optimistic estimate} of the costs that actually occur
+                  \end{itemize}
+                  \item \alert{complete}, provided that every node has a finite number of successor nodes and there exists a positive constant $\delta > 0$ such that every edge has at least weight $\delta$ and \alert{optimal}, provided that one uses the \alert{tree-based} variant
+                  \begin{itemize}
+                    \item for the \alert{graph-based} variant, one:
+                    \begin{itemize}
+                      \item either needs to consider re-opening nodes from the explored set, when a better estimate becomes known, or
+                      \item one needs needs to require stronger restrictions on the heuristic estimate: it needs to be \alert{consistent}
+                      \item $A^*$ can still be applied if heuristic is not consistent, but \alert{optimality is lost} in this case
+                    \end{itemize}
+                  \end{itemize}
+                  \item \alert{Time complexity:} $O(b^d)$, exponential in the path length of the solution. More refined complexity results depend on the assumptions made, e.g. on the quality of the heuristic function
+                  \item \alert{Space complexity:} $O(b^d)$, exponential in the path length of the solution. Roughly the same as that of all other graph search algorithms, as it keeps all generated nodes in memory
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Iterative-Deepening A$^*$ (IDA$^*$)
+          %     \resizebox{\textwidth}{!}{
+          %       \begin{minipage}[t]{8cm}
+          %         \begin{itemize}
+          %           \item the $f$-costs are used to define the cutoff (rather than the depth of the search tree)
+          %         \end{itemize}
+          %       \end{minipage}
+          %     }
+            }
+          }
+          child {
+            node {Recursive Best First Search (RBFS)}
+          }
+          child {
+            node {Memory-bounded A$^*$ (MA$^*$) and Simplified MA$^*$ (SMA$^*$)}
+          }
+          child {
+            node {Admissible
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item $h$ is admissible if the following holds for all $v$: $h(v) \le h^*(v)$
+                    \begin{itemize}
+                      \item $h^*(v)$ are the actual cost of the optimal path from $v$ to the target node
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Consistent
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item A heuristic $h$ is called consistent \alert{iff} for all edges $v$ leading from $s$ to $s'\colon h(s) - h(s') \le c(v)$, where $c(v)$ denotes the weight of edge $v$
+                    \item Consistent heuristics prevent the need to re-open nodes from the explored set
+                    \item Consistency implies \alert{admissibility}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+      }
+    } 

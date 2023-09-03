@@ -1,0 +1,134 @@
+    child {
+      node {Uninformed Search Algorithms
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{8cm}
+            \begin{itemize}
+              \item  Rigid procedure with no knowledge of the cost of a given node to the goal (e.g. \alert{no heuristic function} $h(v)$), only uses other currently available knowledge (e.g. \alert{path-cost function} $g(v)$ or e.g. \alert{depth function} $d(v)$)
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node (ucs) {Uniform-Cost Search
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{10cm}
+              \begin{itemize}
+                \item FIFO datastructure (FIFO-queue) gets replaced by \alert{priority queue} 
+                \item expands node $v$ from the frontier with \alert{lowest path costs} $g(v)$
+                \item generalization of \alert{Breadth-First Search}, where edge weights can have \alert{different values}
+                \item special case of \alert{Best-First Search}, where $f(v) = g(v)$
+                \item special case of \alert{A$^*$ Search}, where $h(v) = 0$ and thus $f(v) = g(v) + h(v) = g(v)$
+                \begin{itemize}
+                  \item if all edge weights would be $1$, then a node would have depth $k$ exactly when it's path costs would be $k$. 
+                  \item then the expansion criteria would therefore be the same as for BFS, beacuse a node would have minimal depth exactly when it would have minimum path costs
+                \end{itemize}
+                \item is a modification of \alert{Dijkstra's Algorithm} which is focused on searching a \alert{single shortest path} in terms of \alert{cost} from the \alert{root node} to a \alert{target node} rather than finding the shortest path to every node
+                \begin{itemize}
+                  \item it does this by stopping as soon as the target node is found
+                  \item it is applicable for both \alert{explicit graphs} and \alert{implicit graphs}, it doesn't need the entire graph as input
+                \end{itemize}
+                \item is \alert{complete}, provided that the branching factor is finite and \alert{optimal}
+                \item \alert{Time complexity:} $O(b^{1+\left\lfloor \frac{C}{\epsilon}\right\rfloor})$
+                \item \alert{Space complexity:} $O(b^{1+\left\lfloor\frac{C}{\epsilon}\right\rfloor})$, priority queue is filled gradually
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node (dijkstra) {Dijkstra's Algorithm
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item determines the \alert{shortest path} in terms of \alert{cost} from the \alert{root node} to \alert{every other node}
+                  \item there is \alert{no target node}, processing continues until all nodes have been removed from the priority queue, i.e. until shortest paths to all nodes (not just a target node) have been determined
+                  \item is only applicable in \alert{explicit graphs} where the entire graph is given as input
+                  \item \alert{Time complexity:} always more time consuming than UCS
+                  \item \alert{Space complexity:} adds all nodes to the priority queue at the beginnging with infinite cost
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node (rbfs) {Breadth-First Search
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{10cm}
+                \begin{itemize}
+                  \item \alert{FIFO} datastructure (FIFO-\alert{queue})
+                  \item expands node $v$ from the frontier with \alert{lowest depth} $d(v)$
+                  \item special case of \alert{Uniform-Cost Search} where all edge weights have \alert{no value}
+                  \item special case of \alert{Best-First Search}, where $f(v) = d(v)$
+                  \item \alert{complete}, provided that the branching factor is finite and \alert{optimal}, provided every edge has identical, non-negative weights
+                  \item \alert{Time complexity:} $O({\mid} V{\mid}+{\mid} E{\mid})$, $b + b^2 + \ldots + b^d\in O(b^d)$ is the maximal number of nodes expanded
+                  \begin{itemize}
+                    \item If the algorithm were to apply the goal test to nodes when selected for expansion rather than when generated, the whole layer of nodes at depth $d$ would be expanded before the goal was detected and the time complexity would be $O(b^{d+1})$
+                  \end{itemize}
+                  \item \alert{Space complexity:}
+                  \begin{itemize}
+                    \item \alert{tree based:} $O({\mid} V{\mid}) = O(b^d)$ for the frontier%, every explored node is kept in memory
+                    \item \alert{graph based:} $O(b^d)$ for the frontier and $O(b^{d-1})$ for the explored set
+                  \end{itemize}
+                  % \item \alert{Time complexity:} the maximal number of nodes expanded is $b+b^{2}+b^{3}+\ldots +b^{d}\in O(b^{d})$
+                  % \item \alert{Space complexity:} Every node generated is \alert{kept in memory}. Therefore space needed for the \alert{frontier} is $O(b^d)$ and for the \alert{explored set} $O(b^{d-1})$
+                \end{itemize}
+              \end{minipage}
+            }
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{10.5cm}
+                \bfs
+              \end{minipage}
+            }
+          }
+          child {
+            node (bidirectional) {Bidirectional Search}
+          }
+        }
+      }
+      child {
+        node (dfs) {Depth-First Search
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{10cm}
+              \begin{itemize}
+                \item \alert{LIFO} datastracture (\alert{stack})
+                \item expands node $v$ from the frontier with \alert{greatest depth} $d(v)$
+                \item special case of \alert{Best-First Search}, where $f(v) = -d(v)$
+                \item in general, the path found is \alert{not optimal} and \alert{completeness} can be guaranteed \alert{only for graph-based search} and \alert{finite graphs}
+                \item \alert{Time complexity:}
+                  \begin{itemize}
+                    \item \alert{graph-based:} $O({\mid} V{\mid}+{\mid} E{\mid})$, search bounded by the number of nodes (might be infinite)
+                    \item \alert{tree-based:} algorithm might generate $O(b^m)$ nodes in the search tree which might be much larger than the number of nodes
+                      %   \begin{itemize}
+                      %     \item $m$ is the maximum length of a path in the state space
+                      %   \end{itemize}
+                  \end{itemize}
+                  \item \alert{Space complexity:} 
+                    \begin{itemize}
+                      \item \alert{graph-based:} $O({\mid} V{\mid})$, in worst case, all nodes need to be stored in the explored set (no advantage over breadth-first)
+                      \item \alert{tree-based:} $O(b\cdot m)$, needs to store only the nodes along the path from the root to the leaf node. Once a node has been expanded, it can be removed from memory as soon as all its descendants have been fully explored
+                    \end{itemize}
+                \end{itemize}
+            \end{minipage}
+          }
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{11cm}
+              \dfs
+            \end{minipage}
+          }
+        }
+        child {
+          node {Recursive Depth-First Search
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{11cm}
+                \dfsrec
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Depth-Limited Search}
+          child {
+            node {Iterative-Deepening Search}
+          }
+        }
+      }
+    }

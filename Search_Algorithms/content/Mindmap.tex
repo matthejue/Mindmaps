@@ -15,20 +15,28 @@
         \begin{minipage}[t]{10cm}
           \tiny
           \begin{itemize}
+            % SEARCHOVERVIEWSTART
             \item \alert{Notations:}
+              \begin{itemize}
+                \item \alert{Node expansion:} Look up successor nodes that are added to the frontier % considering the available incident edges
+                  % generating all successor nodes considering the available edges
+                \item \alert{Frontier:} Set of all nodes available for expansion (e.g. datastructures like (priority) queue or stack)
+                \item \alert{Search strategy:} Defines which node is expanded next
+                \item \alert{Explored set:} Set of already visited nodes %(e.g. also markings on nodes)
+              \end{itemize}
+            \item \alert{Criteria for search strategies:}
+              \begin{itemize}
+                \item \alert{Optimality:} If the strategy finds the best path (with the lowest path cost)
+                \item \alert{Completeness:} If the strategy is guaranteed to find a path to a target node when there is one
+                \item \alert{Time complexity} and \alert{Space complexity}
+              \end{itemize}
+            \item \alert{States of nodes:}
             \begin{itemize}
-              \item \alert{Node expansion:} look up adjacent nodes that can be added to the frontier % considering the available incident edges
-                % generating all successor nodes considering the available edges
-              \item \alert{Frontier:} set of all nodes available for expansion (e.g. datastructures like (priority) queue or stack)
-              \item \alert{Search strategy:} defines which node is expanded next
-              \item \alert{Explored set:} set of already visited nodes (e.g. also markings on nodes)
+              \item \alert{not marked}, nodes not seen by the algorithm
+              \item \alert{marked}, nodes get marked as soon as they
+              \item \alert{visited}, as soon as a node gets taken out of a 
             \end{itemize}
-          \item \alert{Criteria for search strategies:}
-          \begin{itemize}
-            \item \alert{Optimality:} If the strategy finds the best path (with the lowest path cost)
-            \item \alert{Completeness:} If the strategy is guaranteed to find a path to a target node when there is one
-            \item \alert{Time complexity} and \alert{Space complexity}
-          \end{itemize}
+            % SEARCHOVERVIEWEND
           \end{itemize}
         \end{minipage}
       }
@@ -214,7 +222,7 @@
       child {
         node (dfs) {Depth-First Search
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{10cm}
+            \begin{minipage}[t]{14cm}
               \begin{itemize}
                 \item \alert{LIFO} datastracture (\alert{stack})
                 \item expands node $v$ from the frontier with \alert{greatest depth} $d(v)$

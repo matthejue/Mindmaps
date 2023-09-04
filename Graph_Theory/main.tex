@@ -25,6 +25,7 @@
 % \togglefalse{absolute}
 
 \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Graph_Theory/}{./}#1}
+\newcommand{\lpathsearch}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Search_Algorithms/main.pdf}{./Search_Algorithms.pdf}}
 
 \usepackage{csquotes}
 \usepackage{xcolor}
@@ -153,7 +154,17 @@
         }
       }
       child {
-        node {Search Algorithms}
+        node {Search Algorithms
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item more about search algorithms \href{\lpathsearch}{here}
+                  % SEARCHOVERVIEWEND
+                  % SEARCHOVERVIEWSTART
+              \end{itemize}
+            \end{minipage}
+          }
+        }
         % SEARCHSTART
     child {
       node (generalsearch) {General Search

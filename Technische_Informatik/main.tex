@@ -57,13 +57,17 @@
 \usepackage{etoolbox}
 
 \newtoggle{absolute}
-% \toggletrue{absolute}
-\togglefalse{absolute}
+\toggletrue{absolute}
+% \togglefalse{absolute}
 
 \newcommand{\lpathti}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Technische_Informatik/}{./}#1}
 \newcommand{\lpathlogic}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{./Logic.pdf}}
 \newcommand{\lpathbeweisen}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Beweisen/main.pdf}{./Beweisen.pdf}}
 \newcommand{\lpathrelations}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Relations/main.pdf}{./Relations.pdf}}
+
+% necessary to add in new mindmap start
+\newcommand{\lpathai}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{./Foundations_of_AI_all_in_one_with_go_back.pdf}}
+% necessary to add in new mindmap end
 
 \newlength{\leveldistance}
 \setlength{\leveldistance}{20cm}
@@ -87,7 +91,7 @@
       level 2/.append style = {
         concept color=PrimaryColorDimmed,
         level distance=\leveldistance / 2,
-        sibling angle=30,
+        sibling angle=35,
         execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
       },
       level 3/.append style = {
@@ -864,18 +868,365 @@
           }
         }
       }
+      % \item mehr zu Aussagenlogik \href{\lpathlogic}{hier}
+      % LOGICSTART
+    child {
+      node {Propositional Logic / Aussagenlogik
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \href[page=230]{\lpathai}{extended syntax and operator precedence} and \href[page=238]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{syntax of boolean expressions}
+              \item \alert{logic formula:} e.g. $P \vee Q$, \alert{atomic formula / atomic proposition / atom:} e.g. $P$
+              \begin{itemize}
+                \item atomic propositions can be \alert{true} (T) or \alert{false} (F)
+                \item the truth of a formula follows from the truth of its atomic propositions (\alert{truth assignment} or \alert{interpretation}) and the connectives
+              \end{itemize}
+            \end{itemize}
+            % \begin{itemize}
+            %   \item \alert{countable alphabet} of \alert{atomic propositions}: e.g. $\Sigma = \{$P, Q, R, \dots$\}$
+            %   \begin{itemize}
+            %     \item atomic propositions can be \alert{true} (T) or \alert{false} (F)
+            %     \item the truth of a formula follows from the truth of its atomic propositions (\alert{truth assignment} or \alert{interpretation}) and the connectives.
+            %   \end{itemize}
+            %   \item \alert{logic formula:} e.g. $P \vee Q$, \alert{atomic formula / atom:} e.g. $P$
+            %   \begin{itemize}
+            %     \item \alert{operator precedence:} $\neg > \wedge > \vee > \Rightarrow > \Leftrightarrow$
+            %   \end{itemize}
+            %   \item \alert{literal:} (possibly negated) atomic formula
+            %   \item \alert{clause:} disjunction of literals
+            % \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Boolean Algebra
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item \href[page=224]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{definition, axioms}. If a sentence is directly derivable fromt the axioms, then it applies in all boolean algebras. Using properties of a concrete boolean algebra to prove a sentence is not allowed, one has to use the axioms
+                \item \href[page=15]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{conventions, precedence rulese}
+                \item \href[page=231]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{rules} derived from the axioms
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Boolesche Algebra $(\{0, 1\}, \wedge, \vee, \neg)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=225]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Boolesche Algebra der Funktionen in n Variablen $(\mathbb{B}_n, \cdot, +, \neg)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=228]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Boolesche Algebra der Teilmengen von S $(Pot(S), \cap, \cup, \neg)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=229]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Dualitätsprinzip bei booleschen Algebren
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \href[page=233]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Terminology
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{literal:} (possibly negated) atomic formula or \href[page=244]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{alternative definition}
+                \item \alert{product term (germ. Monom / Konjunktionterm):} Konjunktion von Literalen, in der kein Literal mehr als einmal vorkommt und zu keiner Variable sowohl das positive als auch das negative Literal vorkommt. Außerdem ist \enquote{1} ein Monom
+                \begin{itemize}
+                  \item \alert{minterm (germ. Minterm / vollständiges Monom / Vollkonjunktion):} Monom indem jede Variable entweder als positives oder als negatives Literal vorkommt
+                  \begin{itemize}
+                    \item \href[page=245]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{zu $\alpha\in \mathbb{B}^n$ gehörender Minterm}: $m(\alpha)$
+                    \item \underline{possible name origin:} only one truth assignment can make a minterm true, all other make it false, so it has mininmum satisfiability (\href{https://qr.ae/pyqNLP}{reference})
+                    % \begin{itemize}
+                    %   \item only one truth assignment can make a minterm true, all other make it false, so it has mininmum satisfiability (\href{https://qr.ae/pyqNLP}{reference})
+                    %   \item in SoP \alert{only one} of the minterms must be true for the expression to be true
+                    % \end{itemize}
+                  \end{itemize}
+                \end{itemize}
+                \item \alert{clause (germ. Klausel / Disjunktionsterm):} disjunction of literals
+                \begin{itemize}
+                  \item \alert{maxterm (germ. Maxterm / Volldisjunktion):} analogous to minterms
+                  \begin{itemize}
+                    \item \underline{possible name origin:} all except one truth assignment make a maxterm true, so it has a maximum satisfiability
+                    % \begin{itemize}
+                    %   \item all except one truth assignment make a maxterm true, so it has a maximum satisfiability
+                    %   % \item in PoS \alert{all} the maxterms must be true for the expression to be true
+                    % \end{itemize}
+                  \end{itemize}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node (nf) {Normal Forms
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item a formula is in \alert{disjunctive normal form (DNF)} if it consists of a disjunction of conjunctions of literals $l_{i,j}$:
+                    \[
+                      \bigvee^n_{i=1} (\bigwedge^{m_i}_{j=1} l_{i,j}) 
+                    \]
+                  \begin{itemize}
+                    \item a formula in DNF is \alert{satisfiable} iff \alert{one disjunct} is \alert{satisfiable} (check disjunct if there's no $l\wedge \neg l$), thus checking only takes linear time
+                    \item aka \alert{sum of products (SoP) (germ. Polynom):} Disjunktion von paarweise verschiedenen Monomen. Außerdem ist \enquote{0} ein Polynom. Ein Polynom für $f$ heißt auch disjunktive Normalform (DNF) von $f$
+                    \item \alert{canonical disjunctive normal form (CDNF) (germ. vollständiges Polynom):} Polynom indem alle Monome des Polynoms vollständig sind. Ein vollständiges Polynom für $f$ heißt auch \alert{kanonische disjunktive Normalform (KDNF)} von $f$. Die KDNF ist gegeben durch $\displaystyle f = \sum_{\alpha\in ON(f)} m(\alpha)$. Die KDNF ist (bis auf Anordnung von Literalen in Mintermen und von Monomen im Polynom) \alert{eindeutig}
+                  \end{itemize}
+                  \item a formula is in \alert{conjunctive normal form (CNF)} if it consists of a conjunction of disjunctions of literals $l_{i,j}$:
+                    \[
+                      \bigwedge^n_{i=1} (\bigvee^{m_i}_{j=1} l_{i,j}) 
+                    \]
+                  \begin{itemize}
+                    \item a formula in CNF is \alert{valid} iff \alert{every conjunct} is \alert{valid} (check conjunct if there's a $l\vee \neg l$), thus checking only takes linear time
+                    \item aka \alert{product of sums (PoS)}
+                    \item \alert{canonical conjunctive normal form (CCNF)} does also exist like the CDNF for the DNF
+                  \end{itemize}
+                  \item for every formula, there exists at least one equivalent formula in CNF and one in DNF
+                  \item \href[page=239]{\lpathai}{Algorithm to produce CNF or DNF}
+                  % \item \href[page=238]{\lpathai}{reference}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Anwendung von Minterme, Maxterme, KNF, DNF
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{16cm}
+                \begin{itemize}
+                  \item $16$ mögliche \alert{Logikfunktionen} für $2$ \alert{Aussagenlosche Variablen}\\
+                    \includegraphics[width=\linewidth]{figures/_2021-11-22-18-01-18.png}
+                  \item $f1$, $f2$, $f4$ und $f8$ sind \alert{Minterme} (für genau eine Variation der Eingabewerte den Wert $1$)
+                  \item $f7$, $f11$, $f13$ und $f14$ sind \alert{Maxterme} (für genau eine Variation der Eingabewerte den Wert $0$)
+                  \item die $4$ \alert{Minterme} können als \alert{Konjunktionen} dargestellt werden:
+                    $m_{0}(a, b)=\bar{a} \cdot \bar{b}, m_{1}(a, b)=\bar{a} \cdot b, m_{2}(a, b)=a \cdot \bar{b}, m_{3}(a, b)=a \cdot b$
+                  \item die $4$ \alert{Maxterme} können als \alert{Disjunktionen} dargestellt werden:
+                    $M_{0}(a, b)=\bar{a} + \bar{b}, M_{1}(a, b)=\bar{a} + b, M_{2}(a, b)=a + \bar{b}, M_{3}(a, b)=a + b$
+                  \item \alert{Vergleich:}
+                    \[
+                      \begin{array}{|c|c||c|c|}
+                        \hline a & b & \neg a \cdot b & a + \neg b\\
+                        \hline 0 & 0 & 0 & 1\\
+                        0 & 1 & 1 & 0 \\
+                        1 & 0 & 0 & 1 \\
+                        1 & 1 & 0 & 1 \\
+                        \hline
+                      \end{array}
+                    \]
+                  \item $\neg(\neg a \wedge b) = a \vee \neg b$: \enquote{alles außer} $\neg a \wedge b$ ist $1$ $\rightarrow$ ($a=0, b=1$) ist als einziges $0$
+                  \item aus zwei \alert{Basistypen} (Disjunktion / Konjunktion und Negation) lassen sich alle anderen \alert{Logikfunktion} erzeugen
+                  \item jede Logikfunktion $f: \mathbb{B}^{2} \rightarrow \mathbb{B}$ lässt sich in \alert{Disjunktiver Normalform (DNF)}:
+                    $f(a, b)=f(0,0) \cdot \bar{a} \cdot \bar{b}+f(0,1) \cdot \bar{a} \cdot b+f(1,0) \cdot a \cdot \bar{b}+f(1,1) \cdot a \cdot b$
+                  \item als auch in \alert{konjunktiver Normalform (KNF)} darstellen:
+                    $f(a, b)=(f(0,0)+a+b) \cdot(f(0,1)+a+\bar{b}) \cdot(f(1,0)+\bar{a}+b) \cdot(f(1,1)+\bar{a}+\bar{b})$
+                  \item man möchte \alert{Logische Funktion} (Wertetabelle) mit möglichst wenig Schaltelementen realisieren $\rightarrow$ schauen, ob \alert{DNF} oder \alert{KNF} kürzer ist:\\
+                    \includegraphics[height=0.4\textwidth, center]{./figures/knf_dnf.png}
+                  \item \alert{Beispiel:} \enquote{\alert{höchstens} 2 wahre aussagenlogische Variablen}
+                    \begin{itemize}
+                      \item \alert{DNF:} $(\neg a\cdot \neg b\cdot \neg c)+(\neg a\cdot \neg b\cdot c)+(\neg a\cdot b\cdot \neg c)+(\neg a\cdot b\cdot c)+(a\cdot \neg b\cdot \neg c)+(a\cdot \neg b\cdot c)+(a\cdot b\cdot \neg c)$
+                      \item \alert{KNF:} $(\neg a+\neg b+\neg c)$
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
       % child {
-      %   node {Aussagenlogik
+      %   node {Syntax and Semantics
       %     \resizebox{\textwidth}{!}{
-      %       \begin{minipage}[t]{8cm}
+      %       \begin{minipage}[t]{12cm}
       %         \begin{itemize}
-      %           \item mehr zu Aussagenlogik \href{\lpathlogic}{hier}
+      %           \item \alert{Sentences} are expressed according to the syntax of the representation language
+      %           \begin{itemize}
+      %             \item \alert{Syntax} specifies all the sentences that are well-formed
+      %             \begin{itemize}
+      %               \item $x + y = 4$ is a well-formed sentence
+      %               \item $x4y+ =$ is not a well-formed sentence
+      %             \end{itemize}
+      %             \item A logic also defines the \alert{semantics} (meaning) of sentences
+      %             \begin{itemize}
+      %               \item Defines the \alert{truth} of a sentence with respect to each possible world
+      %               \item E.g., specifies that the sentence $x + y = 4$ is true in a world in which $x = 2$ and $y = 2$, but not in a world in which $x = 1$ and $y = 1$
+      %             \end{itemize}
+      %           \end{itemize}
       %         \end{itemize}
       %       \end{minipage}
       %     }
       %   }
       % }
-      % LOGICSTART
+      child {
+        node {Logical Entailment / Logische Ableitung bzw. Deduktion
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item $\alpha \models \beta$ \alert{if} $M(\alpha) \subseteq M(\beta)$ \alert{iff} in every model in which $\alpha$ is true, $\beta$ is also true
+                \begin{itemize}
+                  \item $\approx $ \href[page=269]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{less equal} for boolean functions $f, g\in\mathbb{B}_n$: $f\le g$ \alert{if} $\forall\alpha\in\mathbb{B}^n: f(\alpha)\le g(\alpha)$ \alert{iff} $ON(f)\subseteq ON(g)$
+                  \item when a sentence $\beta$ \alert{\enquote{logically follows}} from another sentence $\alpha$, $\alpha$ \alert{\enquote{entails}} $\beta$
+                \end{itemize}
+                  \item the formula $\varphi$ \alert{follows logically} from a theory if $\varphi$ is true in all models of the theory (symbolically $theory \models \varphi$): $theory \models \varphi$ \alert{iff} $I \models \varphi$ for all models $I$ of $theory$
+                  \item $I \models \varphi$: Interpretation $I$ \alert{\enquote{satisfies}} a formula $\varphi$ or $\varphi$ \alert{\enquote{is true under}} $I$ when $I(\varphi) = T$
+                  \begin{itemize}
+                    \item an interpretation is a model of a \alert{theory} if it satisfies all formulae of the set
+                    \item a formula $\varphi$ is
+                    \begin{itemize}
+                      \item \alert{satisfiable (germ. erfüllbar, konsistent, widerspruchsfrei)} if there exists $I$ that satisfies $\varphi$
+                      \item \alert{unsatisfiable (germ. unerfüllbar, inkonsistent, widersprüchlich)} if $\varphi$ is not satisfiable
+                      \item \alert{falsifiable (germ. widerlegbar)} if there exists $I$ that doesn't satisfy $\varphi$
+                      \item \alert{valid (germ. allgemeingültig)} (a \alert{tautology}) if $I\models \varphi$ holds for all $I$
+                    \end{itemize}
+                    \item two formulae are
+                    \begin{itemize}
+                      \item \alert{logically equivalent} ($\varphi \equiv \psi$) if $I\models \varphi$ \alert{iff} $I\models \psi$ holds for all $I$
+                    \end{itemize}
+                  \end{itemize}
+                  \item the \enquote{$\models$} symbol is a meta symbol, a meta version of \enquote{$\Rightarrow$}: $\alpha \models \beta$ \alert{iff} $\alpha \Rightarrow \beta$ is \alert{valid}
+                  \begin{itemize}
+                    \item \alert{semantic relation} between models of a theory or a single sentence and models of a sentence
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+          child {
+            node {Ways to interpet implication
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{enumerate}
+                    \item \alert{If-Statement:}
+                      \begin{itemize}
+                        \item $a \rightarrow b \Leftrightarrow \neg a \vee b \Leftrightarrow \mathtt{if(} a\mathtt{)\{}b\mathtt{\}}$, d.h. Lazy Evaluation, $b$ wird nur ausgewertet, wenn $\psi(a)(\omega)=1$ bzw. $\psi(\neg a)(\omega)=0$, da $0$ der \alert{Non-Controlling Value} der \alert{ODER-Operation} ist und daher das Ergebnis erst feststeht, sobald der zweite Operand ausgewertet ist
+                      \end{itemize}
+                    \item \alert{Subset $\subseteq$:}
+                      \begin{table}
+                        \centering
+                        \begin{tblr}{
+                            cells = {c, BoxColor},
+                            row{1} = {SecondaryColor,fg=white},
+                            vline{3,6} = {-}{},
+                          }
+                          $a$ & $b$ & $f$ & $g$ & $h$ & $f \rightarrow h$ & $g \rightarrow h$ \\
+                          0   & 0   & 1   & 1   & 1   & 1                 & 1                 \\
+                          0   & 1   &     & 1   &     & 1                 & 0                 \\
+                          1   & 0   & 1   & 1   & 1   & 1                 & 1                 \\
+                          1   & 1   &     &     & 1   & 1                 & 1                 
+                        \end{tblr}
+                      \end{table}
+                    \end{enumerate}
+                    \end{minipage}
+              }
+            }
+          }
+          child {
+            node (models) {Models
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item if a sentence $\alpha$ is true in a possible \alert{world} $m$, we say that $m$ \alert{satisfies} $\alpha$ or $m$ is a \alert{model} of $\alpha$
+                    \begin{itemize}
+                      \item We denote the set of all models of $\alpha$ by $M(\alpha)$ 
+                      \begin{itemize}
+                        \item $\hat=$ \href[page=249]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{\alert{ON-Menge / Erfüllbarkeitsmenge}}: $ON(f) = \{\alpha\in \mathbb{B}^n \;|\; f(\alpha) = 1\}, f:\mathbb{B}^n\rightarrow \mathbb{B}$
+                        \item there's also \alert{OFF-Menge / Unerfüllbarkeitsmenge}: $OFF(f) = \{\alpha\in \mathbb{B}^n\;|\; f(\alpha)=0\}$
+                      \end{itemize}
+                    \end{itemize}
+                    \item an \alert{interpretation} $I$ is called a model of $\varphi$ if $I\models \varphi$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Theory
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a \alert{set of sentences} in a formal language
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Interpretation
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item \alert{truth assignment} of the atoms in $\Sigma$, corresponds to \alert{semantics} (\href[page=237]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{reference})
+                    \item $I: \Sigma \mapsto \{T, F\}$
+                    \item \href[page=232]{\lpathai}{extended inductive definition} and \href[page=240]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{inductive definition with regard to boolean expressions} of the interpretation function
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Inference
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item $theory \vdash_i \alpha$: generate / derive a sentence $\alpha$ with an inference method $i$
+                    \item like to have inference algorithms that derive only sentences that are entailed (\alert{soundness}) and all of them (\alert{completeness})
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+      }
+      child {
+        node {Boolean functions (germ. Logikfunktionen, Boolesche Funktionen)
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \href[page=177]{\lpathti{Technische_Informatik_all_in_one_with_go_back.pdf}}{definition}
+                \item Anzahl \alert{Zeilen in Wahrheitstabelle:} $2^{\text{\#Variablen}}$
+                \item Anzahl \alert{Aussagenlogische Formeln:} $2^{\text{\#Zeilen}} = 2^{\left(2^{\text{\#Variablen}}\right)}$
+                  \begin{itemize}
+                    \item bei z.B. $3$ \alert{Aussagenlogischen Variablen} gibt es $2^3=8$ Zeilen in der Wahrheitstabelle und damit $2^{(2^3)}=256$ verschiedenen Aussagenlogische Formeln
+                    \item \underline{zweimal \href{/home/areo/Documents/Studium/Summaries/Combinatorics/main.pdf}{Anzahl Variationen mit Wiederholung}:}
+                    \begin{itemize}
+                      \item für die Anzahl Zeilen sind es $n=2$ Objekte entweder $0$ oder $1$ und die Auswahl $k=m$ ist die Anzahl Variablen $m$, da jede Variable entweder $0$ oder $1$ sein kann
+                      \item für die Anzahl Aussagenlogische Formeln sind es $n=2$ Objekte, entweder $0$ oder $1$ und die Auswahl $k=\#Zeilen$ ist die Anzahl Zeilen, die man zuvor rausbekommen hat, da jede Zeile die eine Eingabe / Interpretation darstellt als Ergebnis entweder $0$ oder $1$ haben kann
+                    \end{itemize}
+                  \end{itemize}
+              \end{itemize}
+              \includegraphics[width=\textwidth, center]{./figures/_2021-11-22-18-01-18.png}
+            \end{minipage}
+          }
+        }
+      }
+    }
       % LOGICEND
       child {
         node {Mengenlehre
@@ -929,8 +1280,93 @@
           }
         }
         % PROOFSTART
+    child {
+      node {Induktion}
+      child {
+        node {Vollständige Induktion
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{16cm}
+              \begin{itemize}
+                \item für \alert{Allbehauptungen}: $\forall n\in\mathbb{N}:\mathcal{E}(n)$ (Eigenschaft $\mathcal{E}$)
+                \item die allgemeine Form wird als \alert{Strukturelle Induktion} bezeichnet, \alert{Vollständige Induktion} ist zum Beweis von Aussagen für alle Natürlichen Zahlen
+                \begin{itemize}
+                  \item Menge der \alert{natürlichen Zahlen} $\mathbb{N}$ weißt geignete Struktur auf, da auf ihnen die Nachfolgerbeziehung besteht
+                \end{itemize}
+                \item man führt Teilbewise für $2$ Fälle: 
+                \begin{itemize}
+                  \item \alert{Basisfall:} ${\mathcal{E}}(0)$, d.h. die natürliche Zahl $0$ hat die Eigenschaft $\epsilon$
+                  \item \alert{Induktionsfall:} $\forall i\in\mathbb{N} \left(\mathcal{E}(i)\Rightarrow\mathcal{E}(i+1)\right)$, d.h. die Eigenschaft $\epsilon$ überträgt sich von jeder natürlichen Zahl $i$ auf ihren Nachfolger $i + 1$
+                \end{itemize}
+                \item bei beweisender Allbehauptung für den Induktionsfall wird Implikation: Sei $i\in\mathbb{N}$ beliebig. Zu zeigen: $\epsilon(i)\Rightarrow\epsilon(i+1)$ zerlegt in: Sei $i\in\mathbb{N}$ beliebig. Es gelte: $\epsilon(i)$. Zu zeigen: $\epsilon(i+1)$
+                \item Diese Darstellung des Induktionsfalls legt seine Zerlegung in die üblichen drei Bestandteile \alert{Induktionsannahme}, \alert{Induktionsbehauptung}, \alert{Induktionsschritt} nahe:
+              \includegraphics[width=\linewidth]{./figures/vollstaendige_induktion.png}
+              \end{itemize}
+              \begin{itemize}
+                \item Induktionsfall beweist Allbehauptung mit darin enthaltener Implikationsbehauptung 
+                \item Wenn für Eigenschaft $\epsilon$ Basisfall und Induktionsfall bewiesen sind, gilt, dass jede natürliche Zahl die Eigenschaft $\epsilon$ hat, denn:
+                \begin{enumerate}
+                  \setcounter{enumi}{-1}
+                  \item Wegen des Basisfalls gilt $\epsilon(0)$.
+                  \item Mit $\epsilon(0)$ gilt wegen des Induktionsfalls auch $\epsilon(1)$.
+                  \item Mit $\epsilon(1)$ gilt wegen des Induktionsfalls auch $\epsilon(2)$.
+                  \item Mit $\epsilon(2)$ gilt wegen des Induktionsfalls auch $\epsilon(3)$.
+                  \item $\ldots$
+                \end{enumerate}
+              \end{itemize}
+              \includegraphics[width=0.6\textwidth]{./figures/vollständige_induktion_1.png}\\
+              \includegraphics[width=0.8\textwidth]{./figures/vollständige_induktion_2.png}
+            \end{minipage}
+          }
+        }
+      }
+    }
         % PROOFEND
         % PROOFSTART
+    child {
+      node {Indirekter Beweis}
+      child {
+        node {Beweis durch Widerspruch
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{16cm}
+              \begin{itemize}
+                \item anstatt einen mathematischen Satz $S$ direkt zu beweisen, kann man seine Negation $\neg S$ durch logische Schlussfolgerungen zu einem Widerspruch führen.
+                \item Wenn man die Widerspruchsanahme $\neg S$ zu einem Widerspruch geführt hat, weiß man, dass $\neg S$ immer falsch sein muss. Damit ist die doppelte Negation $\neg\neg S$ von $S$ wahr. Da $\neg\neg S \Leftrightarrow S$ eine Tautologie ist, ist $\neg\neg S$ genau dann wahr, wenn $S$ wahr ist. Damit muss $S$ wahr sein.
+                \item \alert{Zerlegung der Implikation:}
+                \begin{align*}
+                  &V o r a u s s e t z u n g_{1}\wedge\cdot\cdot\cdot\wedge\;V o r a u s s e t z u n g_{n}\rightarrow B e h a u p t u n g\\
+                  &\Leftrightarrow \neg\left(V o r a u s s e t z u n g_{1}\wedge\cdot\cdot\cdot\wedge\ V o r a u s s e t z u n g_{n}\right)\vee B e h a u p t u n g\\
+                  &\Leftrightarrow \neg\left(\left(V o r a u s s e t z u n g_{1}\wedge\cdot\cdot\cdot\wedge\;V o r a u s s e t z u n g_{n}\right)\wedge\neg B e h a u p t u n g\right)\\
+                  &\Leftrightarrow V o r a u s s e t z u n g_{1}\wedge\cdot\cdot\cdot\wedge\ V o r a u s s e t z u n g_{n}\wedge\lnot B e h a u p t u n g \rightarrow \perp
+                \end{align*}
+                \begin{itemize}
+                  \item \alert{Anders gesagt:} Aus den Vorraussetzungen folgt logisch die Behauptung \textit{genau dann wenn} $V o r a u s s e t z u n g_{1}\wedge\cdot\cdot\cdot\wedge\ V o r a u s s e t z u n g_{n}\wedge\lnot B e h a u p t u n g$ \textit{NICHT} gilt.
+                \end{itemize}
+              \end{itemize}
+              \begin{itemize}
+                \item es gibt neben \alert{expliziten Voraussetzungen} auch \alert{implizite Voraussetzungen}, die nicht ausdrücklich genannt werden (Rechenregeln und Standard-Definitionen)
+                \item In der \alert{Behauptung} steht immer eine \alert{wahre Aussage}. Hat man eine Aussage, die \alert{nicht wahr} ist, muss man sie \alert{negiert} in die Behauptung schreiben.
+              \end{itemize}
+              \includegraphics[width=\textwidth, center]{./figures/beweis_durch_widerspruch.png}\\
+              \includegraphics[width=0.7\textwidth, center]{./figures/beweis_durch_widerspruch_beispiel.png}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Beweis durch Kontraposition
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{8cm}
+              \begin{itemize}
+                \item $\mathcal{F}\rightarrow\mathcal{G}\Leftrightarrow\neg\mathcal{F}\vee\mathcal{G}\Leftrightarrow\neg\neg\mathcal{G}\vee¬\mathcal{F}\Leftrightarrow\neg\mathcal{G}\rightarrow\neg\mathcal{F}$
+                \item Konstraposition der Behauptung, die eine Implikation ist wird bewiesen. Immer mit Beweismuster für Implikation kombiniert, da Kontraposition der Behauptung auch eine Implikation ist
+              \end{itemize}
+              \includegraphics[width=0.6\textwidth, center]{./figures/kontraposition.png}\\
+              \includegraphics[width=0.8\textwidth, center]{./figures/kontraposition_example.png}
+            \end{minipage}
+          }
+        }
+      }
+    }
         % PROOFEND
       }
     }

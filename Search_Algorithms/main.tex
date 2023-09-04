@@ -44,6 +44,14 @@
 \renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
 \renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blacksquare}$}
 
+\usepackage{etoolbox}
+
+\newtoggle{absolute}
+\toggletrue{absolute}
+% \togglefalse{absolute}
+
+\newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Graph_Theory/}{./}#1}
+
 \input{./content/Deklarationen_Mindmap}
 \input{./content/Schnipsel}
 

@@ -18,6 +18,14 @@
 \setlength{\medmuskip}{1\medmuskip}
 \setlength{\thickmuskip}{1\thickmuskip}
 
+\usepackage{etoolbox}
+
+\newtoggle{absolute}
+\toggletrue{absolute}
+% \togglefalse{absolute}
+
+\newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Graph_Theory/}{./}#1}
+
 \usepackage{csquotes}
 \usepackage{xcolor}
 % \usepackage{anyfontsize}
@@ -309,6 +317,7 @@
                   \end{itemize}
                   % \item \alert{Time complexity:} the maximal number of nodes expanded is $b+b^{2}+b^{3}+\ldots +b^{d}\in O(b^{d})$
                   % \item \alert{Space complexity:} Every node generated is \alert{kept in memory}. Therefore space needed for the \alert{frontier} is $O(b^d)$ and for the \alert{explored set} $O(b^{d-1})$
+                  \item \href[page=98]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
                 \end{itemize}
               \end{minipage}
             }
@@ -345,6 +354,7 @@
                       \item \alert{graph-based:} $O({\mid} V{\mid})$, in worst case, all nodes need to be stored in the explored set (no advantage over breadth-first)
                       \item \alert{tree-based:} $O(b\cdot m)$, needs to store only the nodes along the path from the root to the leaf node. Once a node has been expanded, it can be removed from memory as soon as all its descendants have been fully explored
                     \end{itemize}
+                  \item \href[page=102]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
                 \end{itemize}
             \end{minipage}
           }
@@ -807,7 +817,7 @@
                 \item \alert{relation}, e.g. $R(G) = \{(e_1, \{v_1, v_2\}), \ldots\}$ that associates with each \alert{edge} a set of two vertices, called its \alert{endpoints}
                 \item a \alert{loop} is an edge with equal endpoints 
                 \item \alert{multiple edges} are edges with same pair of endpoints                       
-                \item \underline{\href[page=37]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{interesting properties}:}
+                \item \underline{\href[page=37]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
                   \begin{itemize}
                     \item $\displaystyle \sum_{v\in V(G)} d(v) = 2\cdot e(G)$
                     \item in a graph $G$ the average vertex degree is $\displaystyle \frac{\sum_{v\in V(G)} d(v)}{\mathrm{n}(\mathrm{G})}$ and hence $\displaystyle \delta(G) \leq \frac{2 \cdot e(G)}{n(G)} \leq \Delta(G)$
@@ -830,7 +840,7 @@
                   \item a \alert{forest} is an acyclic graph
                   \item a \alert{tree} is a connected acyclic graph
                   \item a \alert{leaf} is a vertex of degree $1$
-                  \item \underline{\href[page=59]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{interesting properties}}
+                  \item \underline{\href[page=59]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}}
                     \begin{itemize}
                       \item every tree with at least two vertices has at least two leaves
                       \item deleting a leaf from an $n$-vertex tree produces a tree with $n-1$ vertices
@@ -855,7 +865,7 @@
                   \begin{itemize}
                     \item a \alert{spanning subgraph} of $G$ is a subgraph with vertex set $V(G)$
                     \item a \alert{spanning tree} is a spanning subgraph that is a tree
-                    \item \underline{\href[page=69]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{interesting properties}:}
+                    \item \underline{\href[page=69]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
                       \begin{itemize}
                         \item every connected graph contains a spanning tree
                         \item if $T, T'$ are spanning trees of a connected graph $G$ and $e\in E(T) - E(T')$ then there is a edge $e'\in E(T') - E(T)$ such that $T-e+e'$ is a spanning tree of $G$
@@ -883,7 +893,7 @@
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
                       \item in a connected weighted graph $G$ Kruskal’s algorithm constructs a minimum-weight spanning tree
-                      \item \href[page=75]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{algorithm}
+                      \item \href[page=75]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{algorithm}
                     \end{itemize}
                   \end{minipage}
                 }
@@ -966,7 +976,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=24]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{list of special graphs}
+                    \item \href[page=24]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{list of special graphs}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1110,7 +1120,7 @@
                       \item $E(H)\subseteq E(G)$
                       \item the assignment of endpoints to edges in $H$ is the same as in $G$
                     \end{itemize}
-                  \item \href[page=29]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{other definition for subgraph}
+                  \item \href[page=29]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{other definition for subgraph}
                 \end{itemize}
               \end{minipage}
             }
@@ -1352,7 +1362,7 @@
                     \item $u$ is the \alert{predecessor} of $v$
                   \end{itemize}
                 \item we write $u \rightarrow v$ for an edge from $u$ to $v$
-                \item \underline{\href[page=50]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{interesting properties}:}
+                \item \underline{\href[page=50]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
                   \begin{itemize}
                     \item $\displaystyle \sum_{v\in V(G)} d^+(v) = e(G) = \sum_{v\in V(G)} d^-(v)$
                     \item if $G$ is a digraph with $\delta^+(G)\ge 1$ or $\delta^-(G)\ge 1$ then $G$ contains a cycle
@@ -1413,14 +1423,14 @@
                     \item rooted tree described by the root vertex $r$ and the edges described by $u \operatorname{idom} v$
                     \item for a flowgraph $G=(V,E,r)$ a vertex $v$ \alert{dominates} a vertex $w \ne v$: ($v \operatorname{dom} w$) if every path in $G$ from $r$ to $w$ contains $v$
                     \item for a flowgraph $G=(V,E,r)$ a vertex $v$ is an \alert{immediate dominator} of $w$: ($v \operatorname{idom} w$) if ($v \operatorname{dom} w$) and there is no vertex $u$ such that ($v \operatorname{dom} u$) and ($u \operatorname{dom} w$)
-                    \item \href[page=93]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{Lemma}:
+                    \item \href[page=93]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Lemma}:
                       \begin{itemize}
                         \item $(u \operatorname{dom} v) \operatorname{and} (v \operatorname{dom} w) \Rightarrow (u \operatorname{dom} w)$
                         \item $(u \operatorname{dom} w) \operatorname{and} (v \operatorname{dom} w) \Rightarrow (u \operatorname{dom} v) \operatorname{or} (v \operatorname{dom} u)$
                         \item $(u \operatorname{dom} v) \Rightarrow \neg (v \operatorname{dom} u)$
                         \item $\forall v \ne r: \exists! u: (u \operatorname{idom} v)$
                       \end{itemize}
-                    \item \href[page=96]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{algorithm}
+                    \item \href[page=96]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{algorithm}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1478,8 +1488,8 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=83]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{definition}
-                    \item example \href[page=84]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{Huffman Coding}
+                    \item \href[page=83]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{definition}
+                    \item example \href[page=84]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Huffman Coding}
                   \end{itemize}
                 \end{minipage}
               }

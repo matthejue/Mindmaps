@@ -684,6 +684,11 @@
                         \item the vertices incident to the edges of a matching M are \alert{$M$-saturated}
                         \item the other vertices are \alert{$M$-unsaturated}
                         \item a \alert{perfect matching} saturates every vertex
+                        \item \underline{perfect matching in complete graphs:}
+                        \begin{itemize}
+                          \item \underline{even number of vertices:} $K_{2n+1}$ has no perfect matching because the number of vertices is odd
+                          \item \underline{odd number of vertices:} $K_{2n}$ has  $f_n = (2n-1) \cdot f_{n-1} = (2n-1) \cdot \ldots \cdot 5 \cdot 3 \cdot 1$ perfect matchings for $n = \dfrac{|V(G)|}{2}$ (because the edges are undirected, there are $2n-1$ choices for the first pairing of a given node, as there are $2n$ nodes, but a node can't pair with himself, so $2n-1$)
+                        \end{itemize}
                         \item the \alert{size} of a matching is given by the \alert{number of edges}
                         \item a \alert{maximal matching} in a graph is a matching that cannot be enlarged by adding an edge
                         \item a \alert{maximum matching} is a matching of maximum size (among all matchings in a graph)
@@ -730,7 +735,7 @@
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{8cm}
                       \begin{itemize}
-                        \item given a matching $M$ in $G$, an \alert{$M$-alternating path} is a path that alternates between edges in $M$ and edges not in $M$
+                        \item given a matching $M$ in $G$, an \alert{$M$-alternating path} is a path that alternates between edges in $M$ and edges not in $M$ ($E(G)-M$)
                         \item an $M$-alternating path whose endpoints are unsaturated by $M$ is an \alert{$M$-augmenting path}
                       \end{itemize}
                     \end{minipage}
@@ -743,7 +748,7 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
-                      \item An $X$, $Y$-bigraph has a matching that saturates $X$ if and only if $|N(S)| \ge |S|$ for all $S \subseteq X$
+                      \item an $X$, $Y$-bigraph has a matching that saturates $X$ \alert{iff} $|N(S)| \ge |S|$ for all $S \subseteq X$
                     \end{itemize}
                   \end{minipage}
                 }
@@ -776,7 +781,7 @@
               }
             }
             child {
-              node {Regular Bipartite graphs
+              node {Regular bipartite graphs
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
@@ -789,11 +794,15 @@
             child {
               node {Symmetric Differences of Matchings
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
+                  \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item  Every component of the symmetric difference of two matchings
+                      \item for graphs $G$ and $H$ with the same vertex set $V$ the \alert{symmetric difference $G \triangle H$} is the graph with vertex set $V$ whose edges are in $G$ or $H$, but not in both
+                      \begin{itemize}
+                        \item if $M$ and $M’$ are sets of edges in graphs $G$ und $H$, then we get as edge set: $M \triangle M’ = (M – M') \cup (M' – M)$
+                      \end{itemize}
+                      \item every component of the symmetric difference of two matchings of $G$ is
                         \begin{itemize}
-                          \item is a path or
+                          \item a path or
                           \item an even cycle
                         \end{itemize}
                     \end{itemize}
@@ -1121,6 +1130,17 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item $G$ is regular if $\Delta(G) = \delta(G)$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {$X, Y$-bigraph
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item is a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
                   \end{itemize}
                 \end{minipage}
               }

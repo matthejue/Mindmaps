@@ -1,0 +1,36 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=circle node] (0) at (-7, 8) {s};
+		\node [style=circle node] (1) at (-2, 8) {a};
+		\node [style=circle node] (2) at (-4.5, 4) {b};
+		\node [style=circle node alternative] (3) at (-7, 2) {s};
+		\node [style=circle node alternative] (4) at (-2, 2) {a};
+		\node [style=circle node alternative] (5) at (-4.5, -2) {b};
+		\node [style=circle node alternative] (6) at (0, 2) {s};
+		\node [style=circle node alternative] (7) at (3, 2) {a};
+		\node [style=circle node alternative] (8) at (6, 2) {b};
+		\node [style=circle node alternative] (9) at (3, -1) {s};
+		\node [style=circle node alternative] (10) at (6, 0) {a};
+		\node [style=circle node alternative] (11) at (6, -2) {b};
+		\node [style=circle node] (12) at (0, 6) {s};
+		\node [style=circle node] (13) at (3, 6) {a};
+		\node [style=circle node] (14) at (6, 6) {b};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={graph_theory_directed_right}] (0) to (1);
+		\draw [style={graph_theory_directed_right}] (1) to (2);
+		\draw [style=new edge style 3] (2) to (0);
+		\draw [style={graph_theory_directed_right}] (3) to (4);
+		\draw [style=new edge style 1] (4) to (5);
+		\draw [style=new edge style 1] (3) to (5);
+		\draw [style={graph_theory_directed_right}] (12) to (13);
+		\draw [style={graph_theory_directed_right}] (13) to (14);
+		\draw [style=new edge style 3, in=330, out=210] (14) to node [below] {\tiny Backward Edge} (12);
+		\draw [style={graph_theory_directed_right}] (6) to (7);
+		\draw [style={graph_theory_directed_right}] (7) to (8);
+		\draw [style=new edge style 1, bend right] (6) to node [below] {\tiny Forward Edge} (8);
+		\draw [style={graph_theory_directed_right}] (9) to (10);
+		\draw [style={graph_theory_directed_right}] (9) to (11);
+		\draw [style=new edge style 1, in=90, out=-90] (10) to node [left, align=center] {\tiny Cross\\[-0.25cm]\tiny Edge} (11);
+	\end{pgfonlayer}
+\end{tikzpicture}

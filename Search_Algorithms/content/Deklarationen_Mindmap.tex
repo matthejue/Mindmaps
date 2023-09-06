@@ -9,7 +9,7 @@
 % ./Appendix.tex
 
 \newlength{\leveldistance}
-\setlength{\leveldistance}{17cm}
+\setlength{\leveldistance}{25cm}
 
 \newcounter{algorithm}
 \setcounter{algorithm}{0}
@@ -90,4 +90,4 @@
 \newcommand{\edge}[2]{(#1) edge (#2)}
 \newcommand{\annotation}[2]{\path (#1) -- node[annotation, above, align=center, pos=0.03] {#2} (sa);}
 
-\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0}}}{}
+\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0, minimum size=0cm, inner sep=0pt}}}{}

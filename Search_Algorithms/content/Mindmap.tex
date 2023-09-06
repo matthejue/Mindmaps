@@ -33,8 +33,8 @@
             \item \alert{States of nodes:}
             \begin{itemize}
               \item \alert{not marked}, nodes not seen by the algorithm
-              \item \alert{marked}, nodes get marked as soon as they
-              \item \alert{visited}, as soon as a node gets taken out of a 
+              \item \alert{marked}, nodes get marked as soon as they get added to the frontier
+              \item \alert{visited}, nodes are visited as soon as they get taken out of the frontier
             \end{itemize}
             % SEARCHOVERVIEWEND
           \end{itemize}
@@ -222,7 +222,7 @@
       child {
         node (dfs) {Depth-First Search
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{14cm}
+            \begin{minipage}[t]{18cm}
               \begin{itemize}
                 \item \alert{LIFO} datastracture (\alert{stack})
                 \item expands node $v$ from the frontier with \alert{greatest depth} $d(v)$
@@ -242,7 +242,38 @@
                       \item \alert{tree-based:} $O(b\cdot m)$, needs to store only the nodes along the path from the root to the leaf node. Once a node has been expanded, it can be removed from memory as soon as all its descendants have been fully explored
                     \end{itemize}
                   \item \href[page=102]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
+                  \item \underline{For every node $v$ two points in time are defined:}
+                    \begin{itemize}
+                      \item \alert{$t_{v,1}$:} Point in time, when $v$ gets in the marked state
+                      \item \alert{$t_{v,2}$:} Point in time, when $v$ gets in the visited state
+                    \end{itemize}
+                  \item in the DFS-Search-Tree a node $v$ is in the subtree of a node $u$ \alert{iff} the intervall $[t_{v,1}$, $t_{v,2}]$ is fully contained in the intervall $[t_{u,1}, t_{u,2}]$
+                  \item \alert{Classification of edges:} $uv$ is 
+                    \begin{itemize}
+                      \item a \alert{tree edge}, if $v$ was discovered from $u$
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in not marked state when looking at $uv$
+                        \end{itemize}
+                      \item a \alert{backward edge}, if $v$ is a predecessor node of $u$
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in marked state when looking at $uv$
+                          \item $t_{v,1}<t_{u,1}<t_{u,2}<t_{v,2}$
+                        \end{itemize}
+                      \item a \alert{forward edge}, if $v$ is a successor node of $u$ 
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
+                          \item $t_{u,1}<t_{v,1}<t_{v,2}<t_{u,2}$, $\boxed{t_{u,1}<t_{v,1}}$
+                        \end{itemize}
+                      \item a \alert{cross edge}, if it is neither of all above
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
+                          \item $t_{v,1}<t_{v,2}<t_{u,1}<t_{u,2}$, $\boxed{t_{v,1}<t_{u,1}}$
+                        \end{itemize}
+                      \item \href[page=34]{\lpathdfssearch}{example}
+                    \end{itemize}
+                    \item more about DFS-Search-Trees \href[page=35]{\lpathdfssearch}{here}
                 \end{itemize}
+                \includegraphics[width=0.5\textwidth, center]{./figures/dfs.pdf}
             \end{minipage}
           }
           \resizebox{\textwidth}{!}{

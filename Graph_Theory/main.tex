@@ -26,6 +26,7 @@
 
 \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Graph_Theory/}{./}#1}
 \newcommand{\lpathsearch}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Search_Algorithms/main.pdf}{./Search_Algorithms.pdf}}
+\newcommand{\lpathdfssearch}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Search_Algorithms/AD_Vorlesung08_with_go_back.pdf}{./AD_Vorlesung08_with_go_back.pdf}}
 
 \usepackage{csquotes}
 \usepackage{xcolor}
@@ -160,6 +161,26 @@
               \begin{itemize}
                 \item more about search algorithms \href{\lpathsearch}{here}
                   % SEARCHOVERVIEWSTART
+            \item \alert{Notations:}
+              \begin{itemize}
+                \item \alert{Node expansion:} Look up successor nodes that are added to the frontier % considering the available incident edges
+                  % generating all successor nodes considering the available edges
+                \item \alert{Frontier:} Set of all nodes available for expansion (e.g. datastructures like (priority) queue or stack)
+                \item \alert{Search strategy:} Defines which node is expanded next
+                \item \alert{Explored set:} Set of already visited nodes %(e.g. also markings on nodes)
+              \end{itemize}
+            \item \alert{Criteria for search strategies:}
+              \begin{itemize}
+                \item \alert{Optimality:} If the strategy finds the best path (with the lowest path cost)
+                \item \alert{Completeness:} If the strategy is guaranteed to find a path to a target node when there is one
+                \item \alert{Time complexity} and \alert{Space complexity}
+              \end{itemize}
+            \item \alert{States of nodes:}
+            \begin{itemize}
+              \item \alert{not marked}, nodes not seen by the algorithm
+              \item \alert{marked}, nodes get marked as soon as they get added to the frontier
+              \item \alert{visited}, nodes are visited as soon as they get taken out of the frontier
+            \end{itemize}
                   % SEARCHOVERVIEWEND
               \end{itemize}
             \end{minipage}
@@ -346,7 +367,7 @@
       child {
         node (dfs) {Depth-First Search
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{10cm}
+            \begin{minipage}[t]{18cm}
               \begin{itemize}
                 \item \alert{LIFO} datastracture (\alert{stack})
                 \item expands node $v$ from the frontier with \alert{greatest depth} $d(v)$
@@ -366,7 +387,38 @@
                       \item \alert{tree-based:} $O(b\cdot m)$, needs to store only the nodes along the path from the root to the leaf node. Once a node has been expanded, it can be removed from memory as soon as all its descendants have been fully explored
                     \end{itemize}
                   \item \href[page=102]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
+                  \item \underline{For every node $v$ two points in time are defined:}
+                    \begin{itemize}
+                      \item \alert{$t_{v,1}$:} Point in time, when $v$ gets in the marked state
+                      \item \alert{$t_{v,2}$:} Point in time, when $v$ gets in the visited state
+                    \end{itemize}
+                  \item in the DFS-Tree a node $v$ is in the subtree of a node $u$ \alert{iff} the intervall $[t_{v,1}$, $t_{v,2}]$ is fully contained in the intervall $[t_{u,1}, t_{u,2}]$
+                  \item \alert{Classification of edges:} $uv$ is 
+                    \begin{itemize}
+                      \item a \alert{tree edge}, if $v$ was discovered from $u$
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in not marked state when looking at $uv$
+                        \end{itemize}
+                      \item a \alert{backward edge}, if $v$ is a predecessor node of $u$
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in marked state when looking at $uv$
+                          \item $t_{v,1}<t_{u,1}<t_{u,2}<t_{v,2}$
+                        \end{itemize}
+                      \item a \alert{forward edge}, if $v$ is a successor node of $u$ 
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
+                          \item $t_{u,1}<t_{v,1}<t_{v,2}<t_{u,2}$, $\boxed{t_{u,1}<t_{v,1}}$
+                        \end{itemize}
+                      \item a \alert{cross edge}, if it is neither of all above
+                        \begin{itemize}
+                          \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
+                          \item $t_{v,1}<t_{v,2}<t_{u,1}<t_{u,2}$, $\boxed{t_{v,1}<t_{u,1}}$
+                        \end{itemize}
+                      \item \href[page=34]{\lpathdfssearch}{example}
+                    \end{itemize}
+                    \item more about DFS-Trees \href[page=35]{\lpathdfssearch}{here}
                 \end{itemize}
+                \includegraphics[width=0.5\textwidth, center]{./figures/dfs.pdf}
             \end{minipage}
           }
           \resizebox{\textwidth}{!}{
@@ -833,13 +885,89 @@
                     \item $\displaystyle \sum_{v\in V(G)} d(v) = 2\cdot e(G)$
                     \item in a graph $G$ the average vertex degree is $\displaystyle \frac{\sum_{v\in V(G)} d(v)}{\mathrm{n}(\mathrm{G})}$ and hence $\displaystyle \delta(G) \leq \frac{2 \cdot e(G)}{n(G)} \leq \Delta(G)$
                     \item every graph has an even number of vertices of odd degree
-                    \item a $k$-regular graph with $n$ vertices has $\frac{n\cdot k}{2}$ edges
+                    \item a $k$-regular graph with $n$ vertices has $\dfrac{n\cdot k}{2}$ edges
                     \item the maximum number of edges in a simple graph is $\dbinom{n}{2}$
                     \item the minimum number of edges in a connected graph with $n$ vertices is $n-1$
                     \item if $G$ is a simple $n$-vertex graph with $\delta(G) \ge \dfrac{n-1}{2}$ then $G$ is connected
                   \end{itemize}
               \end{itemize}
             \end{minipage}
+          }
+        }
+        child {
+          node (connectivity) {Connectivity (germ. Zusammenhang)
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \alert{Theorem [Whiney]:} For simple graphs it applies that $\kappa(G) \le \kappa'(G) \le \delta(G)$
+                    \begin{itemize}
+                      \item $G = K_m + K_m$
+                      \begin{itemize}
+                        \item $\kappa(G) = \kappa’(G) = 0$
+                        \item $\delta(G) = m-1$
+                      \end{itemize}
+                      \item $G$ is two $m$-cliques sharing a single vertex
+                      \begin{itemize}
+                        \item $\kappa(G) = 1$
+                        \item $\kappa’(G) = \delta(G)$
+                      \end{itemize}
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {(Vertex-) Connectivity
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item a \alert{separating set} or \alert{vertex cut} of a graph $G$ is a set $S \subseteq V(G)$ such that $G-S$ has more than one component
+                    \item the \alert{connectivity} of $G$, \alert{$\kappa(G)$}, is the minimum size of $S \subseteq V(G)$ such that $G-S$ is disconnected or has only one vertex
+                    \item a graph is \alert{k-connected} if its connectivity is at least $k$
+                    \item a \alert{complete graph $K_n$} has connectivity $n-1$, i.e. $\kappa(K_n) = n − 2$
+                      \begin{itemize}
+                        \item $n-1$ vertex cut leaves only a single vertex after removal
+                      \end{itemize}
+                    \item for \alert{every non-complete graph} $G \ne K_n$ it applies that: $\kappa(G) \le n − 2$ 
+                      \begin{itemize}
+                        \item consider one vertex $v$ with at most $n-2$ neighbors 
+                        \item the removal of the neighbors produces at least two components
+                      \end{itemize}
+                    \item for \alert{bipartite complete graphs} $\kappa(K_{n,m}) = min\{n, m\}$
+                      \begin{itemize}
+                        \item only the removal of the left or right bipartition cuts the graph
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Edge-Connectivity
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item a \alert{disconnecting set of edges} is a set $F \subseteq E(G)$
+                      \begin{itemize}
+                        \item such that $G – F$ has more than one component
+                      \end{itemize}
+                    \item a graph is \alert{k-edge-connected}
+                      \begin{itemize}
+                        \item if every disconnected set of edges has at least $k$ edges
+                      \end{itemize}
+                    \item the \alert{edge-connectivity} of $G, \kappa’(G)$,
+                      \begin{itemize}
+                        \item is the minimum size of a disconnecting set of edges
+                      \end{itemize}
+                    \item given $S, T \subseteq E[G]$ define $[S, T]$
+                      \begin{itemize}
+                        \item as the set of edges having one endpoint in $S$ and one endpoint in $T$
+                      \end{itemize}
+                    \item a \alert{edge cut} is an edge set of the form $[S, \overline{S}]$ where $S \subsetneq V(G)$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
           }
         }
         child {
@@ -955,6 +1083,22 @@
         }
         child {
           node {Types of graphs}
+          child {
+            node (hypercube) {Hypercube $Q_k$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item The $k$-dimensional cube or hypercube $Q_k$, is the simple graph for which
+                    \begin{itemize}
+                      \item vertices are bit-strings of length $k$
+                      \item edges are between the pairs of bit-strings differing in exactly one position
+                    \end{itemize}
+                    \item $\kappa(Q_k) = k$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
           child {
             node (simple graph) {Simple Graph
               \resizebox{\textwidth}{!}{
@@ -1123,7 +1267,7 @@
         child {
           node {Subgraph
             \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
+              \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item a \alert{subgraph }of a graph $G$ is a graph $H$ such that:
                     \begin{itemize}
@@ -1131,7 +1275,18 @@
                       \item $E(H)\subseteq E(G)$
                       \item the assignment of endpoints to edges in $H$ is the same as in $G$
                     \end{itemize}
-                  \item \href[page=29]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{other definition for subgraph}
+                  % \item \href[page=29]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{other definition for subgraph}
+                    \item the \alert{subgraph $G - S$} is obtained by deleting a set of vertices $S$
+                    \begin{itemize}
+                      \item Edges are preserved \alert{iff} both endpoints are in $V(G)-S$
+                    \end{itemize}
+                    \item for $v \in V(G)$ let \alert{$G - v := G - \{v\}$}
+                    \item the \alert{induced subgraph} $G[T] = G − \overline{T}$
+                    \begin{itemize}
+                      \item where $\overline{T} = V(G) − T$
+                      \item is obtained by deleting all vertices of $\overline{T}$ while preserving all edges with both endpoints in $T$
+                    \end{itemize}
+                    \item $G − e$ denotes the graph, where the edge $e$ is removed but all vertices and other edges remain
                 \end{itemize}
               \end{minipage}
             }
@@ -1217,6 +1372,24 @@
                       \item a vertex whose deletion increases the number of components
                     \end{itemize}
                   \end{minipage}
+                }
+              }
+              child {
+                node {Blocks
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item A \alert{block of a graph} G is a \alert{maximal connected subgraph} of G that has \alert{no cut-vertex}
+                        \item If G itself is \alert{connected} and has \alert{no cut-vertex}, then G is a \alert{block}
+                        \item If a block has more than two vertices then it is $2$-connected
+                        \item If $H$ is a block of $G$, then $H$ as a graph has no cut-vertex, but $H$ may contain vertices that are cut-vertices of $G$
+                        \item a node $u$ is a cut-vertex \alert{iff} there is \alert{no backward edge} from a descendant of $u$ to an ancestor of $u$ in the DFS tree B
+                        \item \href[page=111]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{algorithm}
+                        \item \href[page=112]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{block-cutpoint graph}
+                        % \item Ein Knoten u ist genau dann ein Schnittknoten, wenn es im DFS-Baum keine Rückwärtskante von den Nachfolgern in B von u zu seinem Vorgängern im Baum B gibt.
+                      \end{itemize}
+                    \end{minipage}
+                  }
                 }
               }
             }
@@ -1759,6 +1932,7 @@
       (vc) edge (apa)
       (regular graphs) edge (degree)
       (gt) edge (degree)
+      (connectivity) edge (hypercube)
       (ec) edge (mec);
   \end{pgfonlayer}
   % ┌──────────────┐

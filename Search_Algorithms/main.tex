@@ -17,6 +17,9 @@
 % https://dejavu-fonts.github.io/Download.html
 \newfontfamily\gyre{DejaVu Math TeX Gyre}
 
+\usepackage{tikzit}
+\input{graph_theory.tikzstyles}
+
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
 \usetikzlibrary{graphs}
@@ -51,6 +54,7 @@
 % \togglefalse{absolute}
 
 \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Graph_Theory/}{./}#1}
+\newcommand{\lpathdfssearch}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Search_Algorithms/AD_Vorlesung08_with_go_back.pdf}{./AD_Vorlesung08_with_go_back.pdf}}
 
 \input{./content/Deklarationen_Mindmap}
 \input{./content/Schnipsel}

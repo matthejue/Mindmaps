@@ -28,6 +28,9 @@
 \newcommand{\lpathsearch}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Search_Algorithms/main.pdf}{./Search_Algorithms.pdf}}
 \newcommand{\lpathdfssearch}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Search_Algorithms/AD_Vorlesung08_with_go_back.pdf}{./AD_Vorlesung08_with_go_back.pdf}}
 
+\usepackage[style=numeric]{biblatex}
+\addbibresource{./Graph_Theory.bib}
+
 \usepackage{csquotes}
 \usepackage{xcolor}
 % \usepackage{anyfontsize}
@@ -639,8 +642,274 @@
     } 
         % SEARCHEND
       }
+        child {
+          node {Trees
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item a graph with no cycle is \alert{acyclic}
+                  \item a \alert{forest} is an acyclic graph
+                  \item a \alert{tree} is a connected acyclic graph
+                  \item a \alert{leaf} is a vertex of degree $1$
+                  \item \underline{\href[page=59]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}}
+                    \begin{itemize}
+                      \item every tree with at least two vertices has at least two leaves
+                      \item deleting a leaf from an $n$-vertex tree produces a tree with $n-1$ vertices
+                      \item for an $n$-vertex simple graph $G$ (with $n\ge 1$) the following are equivalent:
+                        \begin{enumerate}
+                          \item $G$ is connected and has no cycles
+                          \item $G$ is connected and has $n-1$ edges
+                          \item $G$ has $n-1$ edges and no cycles
+                          \item for $u, v \in V(G)$, $G$ has exactly one $u, v$-path
+                        \end{enumerate}
+                      \item every edge of a tree is a cut-edge
+                      \item adding one edge to a tree forms exactly one cycle
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Directed Trees
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item a \alert{rooted tree} $T$ is a simple digraph with a vertex $r$ chosen as root such that for each vertex $v\in V(T)$ there's a unique path \alert{$P(v)$}  from $r$ to $v$
+                    \item the \alert{parent} of $v\ne r$ is the predecessor in $P(v)$
+                    \item the \alert{children} of $v$ are the \alert{sucessor set} $N^+(v)$ of $v$
+                    \item the \alert{ancestors} of $v$ are all vertices of $P(v) - v$
+                    \item the \alert{descendants} of $v$ are all vertices $u\ne v$ such that $P(u)$ contains the vertex $v$
+                    \item the \alert{leaves} are vertices with no children
+                    \item a \alert{rooted plane tree} or \alert{planted tree} is a rooted tree with a given (left/right) ordering or labeling specified for all children of each vertex
+                  \end{itemize}
+                  \includegraphics[width=0.6\textwidth, center]{./figures/directed_tree.png}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Binary Tree
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a \alert{binary tree} is
+                        \begin{itemize}
+                          \item a rooted plane tree
+                          \item where each vertex has at most two children
+                          \item and each child of a vertex is designated as its
+                            \begin{itemize}
+                              \item \alert{left child} or
+                              \item \alert{right child}
+                            \end{itemize}
+                        \end{itemize}
+                      \item the subtrees rooted at the root are
+                        \begin{itemize}
+                          \item the \alert{left subtree} and
+                          \item the \alert{right subtree}
+                        \end{itemize}
+                      \item a \alert{$k$-ary tree} allows each vertex up to $k$ children
+                    \end{itemize}
+                    \includegraphics[width=0.6\textwidth, center]{./figures/binary_tree.png}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Dominator Tree
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item rooted tree described by the root vertex $r$ and the edges described by $u \operatorname{idom} v$
+                      \item for a flowgraph $G=(V,E,r)$ a vertex $v$ \alert{dominates} a vertex $w \ne v$: ($v \operatorname{dom} w$) if every path in $G$ from $r$ to $w$ contains $v$
+                      \item for a flowgraph $G=(V,E,r)$ a vertex $v$ is an \alert{immediate dominator} of $w$: ($v \operatorname{idom} w$) if ($v \operatorname{dom} w$) and there is no vertex $u$ such that ($v \operatorname{dom} u$) and ($u \operatorname{dom} w$)
+                      \item \href[page=93]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Lemma}:
+                        \begin{itemize}
+                          \item $(u \operatorname{dom} v) \operatorname{and} (v \operatorname{dom} w) \Rightarrow (u \operatorname{dom} w)$
+                          \item $(u \operatorname{dom} w) \operatorname{and} (v \operatorname{dom} w) \Rightarrow (u \operatorname{dom} v) \operatorname{or} (v \operatorname{dom} u)$
+                          \item $(u \operatorname{dom} v) \Rightarrow \neg (v \operatorname{dom} u)$
+                          \item $\forall v \ne r: \exists! u: (u \operatorname{idom} v)$
+                        \end{itemize}
+                      \item \href[page=96]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{algorithm}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Flowgraph
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item a \alert{flowgraph} $G=(V,E,r)$ is 
+                          \begin{itemize}
+                            \item a digraph $(V, E)$
+                            \item with start vertex $r$
+                            \item such that for any vertex $v \in V$
+                            \item there is a path from $r$ to $v$
+                          \end{itemize}
+                        \item a \alert{program flowgraph} is
+                          \begin{itemize}
+                            \item a flowgraph with maximum outdegree $2$
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Control Flow Graph (CFG)
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \alert{Control Flow Graph (CFG):}
+                          \begin{itemize}
+                            \item Given a program code $P$
+                            \item each reachable line represents a vertex in the flowgraph
+                            \item the first executed line is $r$ of the flowgraph
+                            \item edge $(u,v)$ is in the flowgraph
+                              \begin{itemize}
+                                \item if and only if the control can jump from line $u$ to line $v$
+                              \end{itemize}
+                            \item alia for determining \alert{dominators}, i.e. Code lines guaranteed to be executed before other code
+                          \end{itemize}
+                        \item \alert{well structured / reducible CFG:} edges are either forward edges or back edges
+                          \begin{itemize}
+                            \item \alert{forward edges} form an acyclic graph reached from the entry node
+                            \item \alert{back edges} consist only of edges whose targets dominate their sources
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+            }
+            child {
+              node {Code Tree
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \href[page=83]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{definition}
+                      \item example \href[page=84]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Huffman Coding}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Spanning Trees
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item a \alert{spanning subgraph} of $G$ is a subgraph with vertex set $V(G)$
+                    \item a \alert{spanning tree} is a spanning subgraph that is a tree
+                    \item \underline{\href[page=69]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
+                      \begin{itemize}
+                        \item every connected graph contains a spanning tree
+                        \item if $T, T'$ are spanning trees of a connected graph $G$ and $e\in E(T) - E(T')$ then there is a edge $e'\in E(T') - E(T)$ such that $T-e+e'$ is a spanning tree of $G$
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Minimum Spanning Trees
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a \alert{spanning tree} whose sum of \alert{edge weights} is as \alert{small as possible}
+                      \item for minimum spanning trees we consider only \alert{non-negative edge weights}
+                        % \item \alert{weighted graph}: a graph with numerical labels on the edges, so-called edge weights
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Kruskal’s Algorithm
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item in a connected weighted graph $G$ Kruskal’s algorithm constructs a minimum-weight spanning tree
+                      \item \href[page=75]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{algorithm}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Distance, Diameter, Eccentricity, Radius and Center
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \alert{distance} $d_G(u, v)$: the least (shortest) length of a $u, v$-path (if $G$ has a $u, v$-path)
+                      \begin{itemize}
+                        \item if $G$ has no such path then $d_G(u, v) = \infty$
+                      \end{itemize}
+                    \item \alert{diameter}: $diam(G) := max_{u, v\in V(G)} d(u, v)$
+                      \begin{itemize}
+                        \item for a simple graph $G$: $diam(G)\ge 3 \Rightarrow diam(\overline{G}) \le 3$
+                      \end{itemize}
+                    \item \alert{eccentricity}: $\epsilon(u) := max_{v\in V(G)} d(u, v)$
+                      % \item \alert{radius}: $rad(G) := min_{u\in V(G)} \epsilon(u, v)$
+                    \item \alert{radius}: $rad(G) := min_{u\in V(G)} \epsilon(u)$
+                    \item the \alert{center} of a graph $G$ is the subgraph induced by the vertices of minimum eccentricity
+                      \begin{itemize}
+                        \item the \alert{center of a tree} is a vertex or an edge
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
       child {
-        node {Dual Problems}
+        node {(Undirected) Eulerian graphs
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item  a graph is Eulerian if it has a closed trail (i.e. circuit) containing all edges
+                \item  a graph $G$ is Eulerian \alert{iff}:
+                  \begin{itemize}
+                    \item it has at most one nontrivial component
+                    \item and its vertices all have even degree
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Directed Eulerian graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item an \alert{Eulerian trail} in a digraph (or graph) is a trail containing all edges
+                  \item an \alert{Eulerian circuit} is a closed trail containing all edges
+                  \item a digraph is Eulerian \alert{if} it has an Eulerian circuit
+                  \item a digraph is Eulerian \alert{iff} 
+                    \begin{itemize}
+                      \item $d^+(v) = d^-(v)$ for all nodes $v$
+                      \item the underlying graph has at most one non-trivial component
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Dual Problems
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{Min-max relation:} States
+                \begin{itemize}
+                  \item the equality of the solution of a minimization problem and a maximization problem
+                  \item the optimality of both solutions
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
         child {
           node {Chromatic number $\chi(G)$
             \resizebox{\textwidth}{!}{
@@ -653,7 +922,7 @@
           }
         }
         child {
-          node {Min-Cut and Maximum-Flow
+          node {Minimum-Cut and Maximum-Flow
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
@@ -662,14 +931,89 @@
               \end{minipage}
             }
           }
+          child {
+            node {Cut
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item asdf
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Flow
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item asdf
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Ford-Fulkerson Labeling Algorithm}
+          }
+        }
+        child {
+          node {Weighted Matching and Weighted Vertex Cover
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item assdf
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Weighted Matching
+              \begin{itemize}
+                \item Maximum Weighted Matching problem
+                \item a \alert{transversal} $M$ of an $n \times n$ matrix consists of $n$ positions, one in each row and each column
+                \item find a transversal M (perfect matching M in Kn,n) with maximum sum w(M)
+              \end{itemize}
+            }
+          }
+          child {
+            node {Weighted Vertex Cover
+              \begin{itemize}
+                \item Minimum Weighted Cover problem
+              \end{itemize}
+            }
+          }
+          child {
+            node {Hungarian Algorithm
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item the \alert{Hungarian Algorithm} finds a \alert{maximum weight matching} and a \alert{minimum cost cover}
+                    \item \alert{excess matrix} $c_{i,j} = u_{i }+ v_{j} - w_{i,j}$
+                    \item stop \enquote{production:} $u_{i}+v_{j}>w_{i,j}$ and at the same time minimize $\sum_{i}u_{i}+\sum_{j}\nu_{j}$
+                    \item \alert{equality subgraph} $G_{u,v}$ for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $x_iy_j$ such that $u_i + v_j = w_{i,j}$
+                    \item if $G_{u,v}$ has a \alert{perfect matching} then its weight $\displaystyle\sum_{u_{i},v_{j}in M}w_{i,j}$ is equal to $\displaystyle\sum_{i}u_{i}+{{\sum_{j}}}\;\nu_{j}$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
         }
         child {
           node {Matching and Vertex cover
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item the  size of a \alert{vertex cover} is always at least as big as the size of a \alert{matching}
-                  \item \alert{Theorem (König und Egerváry):} For any bipartite graph $G$ the size of maximum matching equals the size of minimum vertex cover
+                  \item the size of a \alert{vertex cover} is always \alert{at least as big as} the size of a \alert{matching} (Size of vertex cover $\ge$ Size of matching)
+                  \begin{itemize}
+                    \item each edge of a matching has at least one covering vertex
+                    \item no vertex can cover two edges of a matching because edges are not incident in matchings
+                      % Jede Kante eines Matchings hat mindestens einen überdeckenden
+                      % Knoten
+                      % • Kein Knoten kann zwei Kanten eines Matchings abdecken
+                      % • weil Kanten in Matchings nicht inzidieren
+                  \end{itemize}
+                  \item \alert{Theorem of König and Egerváry:} For any bipartite graph $G$ the size of maximum matching equals the size of minimum vertex cover
                 \end{itemize}
               \end{minipage}
             }
@@ -692,7 +1036,7 @@
                         \item the \alert{size} of a matching is given by the \alert{number of edges}
                         \item a \alert{maximal matching} in a graph is a matching that cannot be enlarged by adding an edge
                         \item a \alert{maximum matching} is a matching of maximum size (among all matchings in a graph)
-                        \item $\alpha'(G)$ is the maximum size of matching of edges in $G$
+                        \item \alert{$\alpha'(G)$:} Is the maximum size of matching of edges in $G$
                       \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -703,7 +1047,7 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
-                      \item \alert{Theorem(Gallai):} If G is a graph without isolated vertices, then $\alpha'(G) + \beta'(G) = n(G)$
+                      \item \alert{Theorem (Gallai):} If G is a graph without isolated vertices (without edges), then $\alpha'(G) + \beta'(G) = n(G)$
                     \end{itemize}
                   \end{minipage}
                 }
@@ -724,7 +1068,8 @@
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{8cm}
                       \begin{itemize}
-                        \item  Repeatedly applying the Augmenting Path Algorithm to a bipartite graph produces a \alert{matching} and a \alert{vertex cover} of equal size
+                        \item \href[page=140]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{algorithm}
+                        \item \underline{Theorem:} Repeatedly applying the Augmenting Path Algorithm to a bipartite graph produces a \alert{matching} and a \alert{vertex cover} of equal size
                       \end{itemize}
                     \end{minipage}
                   }
@@ -753,17 +1098,17 @@
                   \end{minipage}
                 }
               }
-              child {
-                node {X,Y-Bigraph
-                  \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{8cm}
-                      \begin{itemize}
-                        \item a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
-                      \end{itemize}
-                    \end{minipage}
-                  }
-                }
-              }
+              % child {
+              %   node {X,Y-Bigraph
+              %     \resizebox{\textwidth}{!}{
+              %       \begin{minipage}[t]{8cm}
+              %         \begin{itemize}
+              %           \item a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
+              %         \end{itemize}
+              %       \end{minipage}
+              %     }
+              %   }
+              % }
             }
             child {
               node {Complete Graphs
@@ -792,14 +1137,10 @@
               }
             }
             child {
-              node {Symmetric Differences of Matchings
+              node (symmetricdifferencematching) {Symmetric Differences of Matchings
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item for graphs $G$ and $H$ with the same vertex set $V$ the \alert{symmetric difference $G \triangle H$} is the graph with vertex set $V$ whose edges are in $G$ or $H$, but not in both
-                      \begin{itemize}
-                        \item if $M$ and $M’$ are sets of edges in graphs $G$ und $H$, then we get as edge set: $M \triangle M’ = (M – M') \cup (M' – M)$
-                      \end{itemize}
                       \item every component of the symmetric difference of two matchings of $G$ is
                         \begin{itemize}
                           \item a path or
@@ -812,15 +1153,16 @@
             }
           }
           child {
-            node (vc) {Vertex cover
+            node (vc) {Vertex cover (germ. Knotenüberdeckung)
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
+                \begin{minipage}[t]{10cm}
                   \begin{itemize}
                     \item a set $Q \subseteq V(G)$ that contains at least one endpoint of every edge
-                    \item the vertices $Q$ cover $E(G)$
                       \begin{itemize}
-                        \item $\beta(G)$ is the minimum size of vertex cover in $G$
+                        \item the vertices $Q$ \enquote{cover} (germ. \enquote{überdecken}) $E(G)$
+                        \item \alert{$\beta(G)$:} Is the minimum size of vertex cover of vertices in $G$ % Minimize the number of vertices $Q$ of a cover of $E(G)$
                       \end{itemize}
+                    \item \href[page=129]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{examples}
                   \end{itemize}
                 \end{minipage}
               }
@@ -828,26 +1170,41 @@
           }
         }
         child {
-          node {Independence number and edge cover
+          node {Independant Set and Edge cover
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item content
+                  \item the size of a (minimal) edge cover is at least the size of a maximal independed set
+                  \begin{itemize}
+                    \item because no edge can cover more than one vertex of such a set\cite{ravskyAnswerRelationIndependent2017}
+                  \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
           }
           child {
-            node {Independence number
+            node (independant set) {Independant Set
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item Vertices are \alert{independent}, if they are not connected via an edge
+                    \item vertices are \alert{independent}, if they are not connected via an edge
+                    \item a set of pairwise nonadjacent vertices
                       \begin{itemize}
-                        \item $\alpha(G)$ is the maximum size of independent set of vertices in $G$
+                        \item \alert{$\alpha(G)$:} Is the maximum size of independent set of vertices in $G$
                       \end{itemize} 
                   \end{itemize}
                 \end{minipage}
+              }
+            }
+            child {
+              node {Clique
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item a set of \alert{pairwise adjacent vertices}
+                    \end{itemize}
+                  \end{minipage}
+                }
               }
             }
             child {
@@ -870,7 +1227,7 @@
                   \begin{itemize}
                     \item a set $L$ of edges such that every vertex of $G$ is incident to some edge of $L$
                       \begin{itemize}
-                        \item $\beta'(G)$ is the minimum size of edge cover in $G$
+                        \item \alert{$\beta'(G)$:} Is the minimum size of edge cover of edges in $G$
                       \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -901,6 +1258,23 @@
                   \end{itemize}
               \end{itemize}
             \end{minipage}
+          }
+        }
+        child {
+          node {Operations on Graphs}
+          child {
+            node (symmetricgraphdifference) {Symmetric Graph Difference
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item for graphs $G$ and $H$ with the same vertex set $V$ the \alert{symmetric difference $G \triangle H$} is the graph with vertex set $V$ whose edges are in $G$ or $H$, but not in both
+                      \begin{itemize}
+                        \item if $M$ and $M’$ are sets of edges in graphs $G$ und $H$, then we get as edge set: $M \triangle M’ = (M – M') \cup (M' – M)$
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
           }
         }
         child {
@@ -976,117 +1350,6 @@
                   \end{itemize}
                 \end{minipage}
               }
-            }
-          }
-        }
-        child {
-          node {Trees
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item a graph with no cycle is \alert{acyclic}
-                  \item a \alert{forest} is an acyclic graph
-                  \item a \alert{tree} is a connected acyclic graph
-                  \item a \alert{leaf} is a vertex of degree $1$
-                  \item \underline{\href[page=59]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}}
-                    \begin{itemize}
-                      \item every tree with at least two vertices has at least two leaves
-                      \item deleting a leaf from an $n$-vertex tree produces a tree with $n-1$ vertices
-                      \item for an $n$-vertex simple graph $G$ (with $n\ge 1$) the following are equivalent:
-                        \begin{enumerate}
-                          \item $G$ is connected and has no cycles
-                          \item $G$ is connected and has $n-1$ edges
-                          \item $G$ has $n-1$ edges and no cycles
-                          \item for $u, v \in V(G)$, $G$ has exactly one $u, v$-path
-                        \end{enumerate}
-                      \item every edge of a tree is a cut-edge
-                      \item adding one edge to a tree forms exactly one cycle
-                    \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node {Spanning Trees
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item a \alert{spanning subgraph} of $G$ is a subgraph with vertex set $V(G)$
-                    \item a \alert{spanning tree} is a spanning subgraph that is a tree
-                    \item \underline{\href[page=69]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
-                      \begin{itemize}
-                        \item every connected graph contains a spanning tree
-                        \item if $T, T'$ are spanning trees of a connected graph $G$ and $e\in E(T) - E(T')$ then there is a edge $e'\in E(T') - E(T)$ such that $T-e+e'$ is a spanning tree of $G$
-                      \end{itemize}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-            child {
-              node {Minimum Spanning Trees
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item a \alert{spanning tree} whose sum of \alert{edge weights} is as \alert{small as possible}
-                      \item for minimum spanning trees we consider only \alert{non-negative edge weights}
-                        % \item \alert{weighted graph}: a graph with numerical labels on the edges, so-called edge weights
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Kruskal’s Algorithm
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item in a connected weighted graph $G$ Kruskal’s algorithm constructs a minimum-weight spanning tree
-                      \item \href[page=75]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{algorithm}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-          }
-          child {
-            node {Distance, Diameter, Eccentricity, Radius and Center
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item \alert{distance} $d_G(u, v)$: the least (shortest) length of a $u, v$-path (if $G$ has a $u, v$-path)
-                      \begin{itemize}
-                        \item if $G$ has no such path then $d_G(u, v) = \infty$
-                      \end{itemize}
-                    \item \alert{diameter}: $diam(G) := max_{u, v\in V(G)} d(u, v)$
-                      \begin{itemize}
-                        \item for a simple graph $G$: $diam(G)\ge 3 \Rightarrow diam(\overline{G}) \le 3$
-                      \end{itemize}
-                    \item \alert{eccentricity}: $\epsilon(u) := max_{v\in V(G)} d(u, v)$
-                      % \item \alert{radius}: $rad(G) := min_{u\in V(G)} \epsilon(u, v)$
-                    \item \alert{radius}: $rad(G) := min_{u\in V(G)} \epsilon(u)$
-                    \item the \alert{center} of a graph $G$ is the subgraph induced by the vertices of minimum eccentricity
-                      \begin{itemize}
-                        \item the \alert{center of a tree} is a vertex or an edge
-                      \end{itemize}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
-        child {
-          node {Eulerian graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item  a graph is Eulerian if it has a closed trail (i.e. circuit) containing all edges
-                  \item  a graph $G$ is Eulerian \alert{iff}:
-                    \begin{itemize}
-                      \item it has at most one nontrivial component
-                      \item and its vertices all have even degree
-                    \end{itemize}
-                \end{itemize}
-              \end{minipage}
             }
           }
         }
@@ -1323,28 +1586,6 @@
               }
             }
           }
-          child {
-            node {Clique
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item a set of \alert{pairwise adjacent vertices}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (independant set) {Independant (stable) set
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item a set of pairwise nonadjacent vertices
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
         }
         child {
           node {Connected / Disconnected
@@ -1404,8 +1645,8 @@
                         \item If a block has more than two vertices then it is $2$-connected
                         \item If $H$ is a block of $G$, then $H$ as a graph has no cut-vertex, but $H$ may contain vertices that are cut-vertices of $G$
                         \item a node $u$ is a cut-vertex \alert{iff} there is \alert{no backward edge} from a descendant of $u$ to an ancestor of $u$ in the DFS tree B
-                        \item \href[page=111]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{algorithm}
-                        \item \href[page=112]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{block-cutpoint graph}
+                        \item \href[page=111]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm}
+                        \item \href[page=112]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{block-cutpoint graph}
                         % \item Ein Knoten u ist genau dann ein Schnittknoten, wenn es im DFS-Baum keine Rückwärtskante von den Nachfolgern in B von u zu seinem Vorgängern im Baum B gibt.
                       \end{itemize}
                     \end{minipage}
@@ -1573,149 +1814,6 @@
                   \end{itemize}
               \end{itemize}
             \end{minipage}
-          }
-        }
-        child {
-          node {Directed Trees
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item a \alert{rooted tree} $T$ is a simple digraph with a vertex $r$ chosen as root such that for each vertex $v\in V(T)$ there's a unique path \alert{$P(v)$}  from $r$ to $v$
-                  \item the \alert{parent} of $v\ne r$ is the predecessor in $P(v)$
-                  \item the \alert{children} of $v$ are the \alert{sucessor set} $N^+(v)$ of $v$
-                  \item the \alert{ancestors} of $v$ are all vertices of $P(v) - v$
-                  \item the \alert{descendants} of $v$ are all vertices $u\ne v$ such that $P(u)$ contains the vertex $v$
-                  \item the \alert{leaves} are vertices with no children
-                  \item a \alert{rooted plane tree} or \alert{planted tree} is a rooted tree with a given (left/right) ordering or labeling specified for all children of each vertex
-                \end{itemize}
-                \includegraphics[width=0.6\textwidth, center]{./figures/directed_tree.png}
-              \end{minipage}
-            }
-          }
-          child {
-            node {Binary Tree
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item a \alert{binary tree} is
-                      \begin{itemize}
-                        \item a rooted plane tree
-                        \item where each vertex has at most two children
-                        \item and each child of a vertex is designated as its
-                          \begin{itemize}
-                            \item \alert{left child} or
-                            \item \alert{right child}
-                          \end{itemize}
-                      \end{itemize}
-                    \item the subtrees rooted at the root are
-                      \begin{itemize}
-                        \item the \alert{left subtree} and
-                        \item the \alert{right subtree}
-                      \end{itemize}
-                    \item a \alert{$k$-ary tree} allows each vertex up to $k$ children
-                  \end{itemize}
-                  \includegraphics[width=0.6\textwidth, center]{./figures/binary_tree.png}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node {Dominator Tree
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item rooted tree described by the root vertex $r$ and the edges described by $u \operatorname{idom} v$
-                    \item for a flowgraph $G=(V,E,r)$ a vertex $v$ \alert{dominates} a vertex $w \ne v$: ($v \operatorname{dom} w$) if every path in $G$ from $r$ to $w$ contains $v$
-                    \item for a flowgraph $G=(V,E,r)$ a vertex $v$ is an \alert{immediate dominator} of $w$: ($v \operatorname{idom} w$) if ($v \operatorname{dom} w$) and there is no vertex $u$ such that ($v \operatorname{dom} u$) and ($u \operatorname{dom} w$)
-                    \item \href[page=93]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Lemma}:
-                      \begin{itemize}
-                        \item $(u \operatorname{dom} v) \operatorname{and} (v \operatorname{dom} w) \Rightarrow (u \operatorname{dom} w)$
-                        \item $(u \operatorname{dom} w) \operatorname{and} (v \operatorname{dom} w) \Rightarrow (u \operatorname{dom} v) \operatorname{or} (v \operatorname{dom} u)$
-                        \item $(u \operatorname{dom} v) \Rightarrow \neg (v \operatorname{dom} u)$
-                        \item $\forall v \ne r: \exists! u: (u \operatorname{idom} v)$
-                      \end{itemize}
-                    \item \href[page=96]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{algorithm}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-            child {
-              node {Flowgraph
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item a \alert{flowgraph} $G=(V,E,r)$ is 
-                        \begin{itemize}
-                          \item a digraph $(V, E)$
-                          \item with start vertex $r$
-                          \item such that for any vertex $v \in V$
-                          \item there is a path from $r$ to $v$
-                        \end{itemize}
-                      \item a \alert{program flowgraph} is
-                        \begin{itemize}
-                          \item a flowgraph with maximum outdegree $2$
-                        \end{itemize}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Control Flow Graph (CFG)
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item \alert{Control Flow Graph (CFG):}
-                        \begin{itemize}
-                          \item Given a program code $P$
-                          \item each reachable line represents a vertex in the flowgraph
-                          \item the first executed line is $r$ of the flowgraph
-                          \item edge $(u,v)$ is in the flowgraph
-                            \begin{itemize}
-                              \item if and only if the control can jump from line $u$ to line $v$
-                            \end{itemize}
-                          \item alia for determining \alert{dominators}, i.e. Code lines guaranteed to be executed before other code
-                        \end{itemize}
-                      \item \alert{well structured / reducible CFG:} edges are either forward edges or back edges
-                        \begin{itemize}
-                          \item \alert{forward edges} form an acyclic graph reached from the entry node
-                          \item \alert{back edges} consist only of edges whose targets dominate their sources
-                        \end{itemize}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-          }
-          child {
-            node {Code Tree
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item \href[page=83]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{definition}
-                    \item example \href[page=84]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Huffman Coding}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
-        child {
-          node {Eulerian graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item an \alert{Eulerian trail} in a digraph (or graph) is a trail containing all edges
-                  \item an \alert{Eulerian circuit} is a closed trail containing all edges
-                  \item a digraph is Eulerian \alert{if} it has an Eulerian circuit
-                  \item a digraph is Eulerian \alert{iff} 
-                    \begin{itemize}
-                      \item $d^+(v) = d^-(v)$ for all nodes $v$
-                      \item the underlying graph has at most one non-trivial component
-                    \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
           }
         }
         child {
@@ -1952,6 +2050,7 @@
       (vc) edge (apa)
       (regular graphs) edge (degree)
       (gt) edge (degree)
+      (symmetricdifferencematching) edge (symmetricgraphdifference)
       (connectivity) edge (hypercube)
       (ec) edge (mec);
   \end{pgfonlayer}

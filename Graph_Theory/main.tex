@@ -21,8 +21,8 @@
 \usepackage{etoolbox}
 
 \newtoggle{absolute}
-\toggletrue{absolute}
-% \togglefalse{absolute}
+% \toggletrue{absolute}
+\togglefalse{absolute}
 
 \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Graph_Theory/}{./}#1}
 \newcommand{\lpathsearch}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Search_Algorithms/main.pdf}{./Search_Algorithms.pdf}}
@@ -799,8 +799,8 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item a \alert{spanning subgraph} of $G$ is a subgraph with vertex set $V(G)$
-                    \item a \alert{spanning tree} is a spanning subgraph that is a tree
+                    \item a \alert{spanning subgraph} of $G$ is a connected subgraph with vertex set $V(G)$
+                    \item a \alert{spanning tree} is a spanning subgraph of a given graph $G$ that is a tree
                     \item \underline{\href[page=69]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
                       \begin{itemize}
                         \item every connected graph contains a spanning tree
@@ -911,13 +911,35 @@
           }
         }
         child {
-          node {Chromatic number $\chi(G)$
+          node {Coloring and Cliques
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item is the \alert{minimum} number of colors such that \alert{adjacent vertices} receive \alert{different colors}
+                  \item \alert{Chromatic number $\chi(G)$}: Is the \alert{minimum} number of colors such that \alert{adjacent vertices} receive \alert{different colors}
                 \end{itemize}
               \end{minipage}
+            }
+          }
+          child {
+            node {Coloring
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item asdf
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Cliques
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item asdf
+                  \end{itemize}
+                \end{minipage}
+              }
             }
           }
         }
@@ -962,15 +984,21 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item for a perfect matching $M$ and weighted cover $(u,v)$ in a weighted bipartite graph $G$ it applies that: $c(u,v) \ge w(M)$
-                  \item $c(u,v) = w(M)$ \alert{iff} $M$ consists of edges $x_i y_j$ such that $u_i + v_j = w_{i,j}$
-                  \item Equality subgraph G u,v for a weighted cover (u,v) is the spanning subgraph of K n,n having the edges x i y j such that u i + v j = w i,j
-                  \item If G u,v has a perfect matching - then its weight is ∑ u i + ∑ v j i j
-- and by Lemma 3.2.7 we have
-the optimal solution
-- Otherwise we find a matching M
-and a vertex cover Q of the
-same size
+                  \item for a \alert{perfect matching $M$} and \alert{weighted cover $(u,v)$} in a weighted bipartite graph $G$ it applies that: $c(u,v) \ge w(M)$
+                  \item $c(u,v) = w(M)$ \alert{iff} $M$ consists of edges $ij$ such that $u_i + v_j = w_{i,j}$
+                  % \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $x_iy_j$ such that $u_i + v_j = w_{i,j}$
+                  \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $ij$ such that $u_i + v_j = w_{i,j}$
+                  \item $G_{u,v}$ has a \alert{perfect matching $M$} if the weight $\displaystyle\sum_{u_iv_j\in M} w_{i,j}$ is equal to $\displaystyle\sum_i u_i + \sum_j v_j$
+                  % \begin{itemize}
+                  %   \item and by the Lemma above that is a optimal solution
+                  %   \item otherwise we find a matching $M$ and a vertex cover $Q$ of the same size
+                  % \end{itemize} makes no sense
+                  % \item if $G_{u,v}$ has a \alert{perfect matching} then its weight is $\displaystyle\sum_i u_i + \sum_j v_j$
+                  %   \begin{itemize}
+                  %     \item and by Lemma 3.2.7 we have the optimal solution
+                  %     \item otherwise we find a matching $M$ and a vertex cover $Q$ of the same size
+                  %   \end{itemize}
+                  % \item if $G_{u,v}$ has a \alert{perfect matching} then its weight $\displaystyle\sum_{u_{i},v_{j}in M}w_{i,j}$ is equal to $\displaystyle\sum_{i}u_{i}+{{\sum_{j}}}\;\nu_{j}$
                 \end{itemize}
               \end{minipage}
             }
@@ -981,7 +1009,7 @@ same size
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item known in form of the \alert{Maximum Weighted Matching Problem} or \alert{Assignment Problem}
-                    \item find a transversal $M$ (perfect matching $M$ in $K_{n,n}$) with maximum sum $w(M)$
+                    \item find a transversal $M$ (perfect matching $M$ in $K_{n,n}$) with maximum sum $\displaystyle w(M) = \sum_{ij\in M} w_{ij}$
                   \end{itemize}
                 \end{minipage}
               }
@@ -1008,7 +1036,7 @@ same size
                     \item find a weighted cover $(u,v)$ of minimum cost
                     \begin{itemize}
                       \item (weighted) \alert{$(u,v)$-Cover} is a choice of labels $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ such that $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
-                      \item \alert{$\operatorname{cost} c(u,v)$} of a cover $(u,v)$ is $\displaystyle \sum_i u_i + \sum_j v_j$
+                      \item \alert{cost} of a cover $(u,v)$ is $\displaystyle c(u,v) = \sum_i u_i + \sum_j v_j$
                     \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -1020,12 +1048,11 @@ same size
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=163]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{algorithm with example} and \href[page=122]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_exercise_class_slides_all_in_one_with_go_back.pdf}{another example}
-                    \item the \alert{Hungarian Algorithm} finds a \alert{maximum weight matching} and a \alert{minimum cost cover}
-                    \item \alert{excess matrix} $c_{i,j} = u_{i }+ v_{j} - w_{i,j}$
+                    \item \href[page=163]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm with example} and \href[page=122]{\lpathgraph{Graphentheorie_exercise_class_slides_all_in_one_with_go_back.pdf}}{another example}
+                    % \item the \alert{Hungarian Algorithm} finds a \alert{maximum weight matching} and a \alert{minimum cost cover}
+                    \item the \alert{Hungarian Algorithm} finds a \alert{maximum weighted matching} and a \alert{minimum weighted vertex cover}
+                    \item for the weighted cover $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ and weights $w_{i, j} \ge 0$ the \alert{excess matrix} is $c_{i,j} = u_{i}+ v_{j} - w_{i,j}$
                     \item stop \enquote{production:} $u_{i}+v_{j}>w_{i,j}$ and at the same time minimize $\sum_{i}u_{i}+\sum_{j}\nu_{j}$
-                    \item \alert{equality subgraph} $G_{u,v}$ for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $x_iy_j$ such that $u_i + v_j = w_{i,j}$
-                    \item if $G_{u,v}$ has a \alert{perfect matching} then its weight $\displaystyle\sum_{u_{i},v_{j}in M}w_{i,j}$ is equal to $\displaystyle\sum_{i}u_{i}+{{\sum_{j}}}\;\nu_{j}$
                   \end{itemize}
                 \end{minipage}
               }
@@ -1295,6 +1322,49 @@ same size
         }
         child {
           node {Operations on Graphs}
+          child {
+            node {Disjoint Union $G+H$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item for graphs $G$ and $H$ with disjoint sets of vertices is the union $(V(G) \cup V(H), E(G \cup E(H))$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Join $G\vee H$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item of simple graphs $G$ and $H$ is the graph obtained from the disjoint union $G+H$ by adding the edges $\{xy : x \in V(G), y \in V(H)\}$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Cartesian Product $G \square H$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item the cartesian product of $G$ and $H$, is the graph with
+                        \begin{itemize}
+                          \item vertex set $V(G) \times V(H)$
+                          \item $(u,v)$ is adjacent to $(u',v')$ \alert{iff} $u=u'$, $vv' \in E(H)$ or $v=v', uu' \in E(G)$
+                        \end{itemize}
+                      \item the cartesian operation is symmetric $G \square H \overset{\sim}{=} H\square G$
+                      \item \href[page=218]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{examples}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                \end{minipage}
+              }
+            }
+          }
           child {
             node (symmetricgraphdifference) {Symmetric Graph Difference
               \resizebox{\textwidth}{!}{

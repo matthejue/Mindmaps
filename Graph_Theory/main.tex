@@ -962,25 +962,57 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item assdf
+                  \item for a perfect matching $M$ and weighted cover $(u,v)$ in a weighted bipartite graph $G$ it applies that: $c(u,v) \ge w(M)$
+                  \item $c(u,v) = w(M)$ \alert{iff} $M$ consists of edges $x_i y_j$ such that $u_i + v_j = w_{i,j}$
+                  \item Equality subgraph G u,v for a weighted cover (u,v) is the spanning subgraph of K n,n having the edges x i y j such that u i + v j = w i,j
+                  \item If G u,v has a perfect matching - then its weight is ∑ u i + ∑ v j i j
+- and by Lemma 3.2.7 we have
+the optimal solution
+- Otherwise we find a matching M
+and a vertex cover Q of the
+same size
                 \end{itemize}
               \end{minipage}
             }
           }
           child {
             node {Weighted Matching
-              \begin{itemize}
-                \item Maximum Weighted Matching problem
-                \item a \alert{transversal} $M$ of an $n \times n$ matrix consists of $n$ positions, one in each row and each column
-                \item find a transversal M (perfect matching M in Kn,n) with maximum sum w(M)
-              \end{itemize}
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item known in form of the \alert{Maximum Weighted Matching Problem} or \alert{Assignment Problem}
+                    \item find a transversal $M$ (perfect matching $M$ in $K_{n,n}$) with maximum sum $w(M)$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Transversal
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a \alert{transversal} $M$ of an $n \times n$ matrix consists of $n$ positions, one in each row and each column
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
             }
           }
           child {
             node {Weighted Vertex Cover
-              \begin{itemize}
-                \item Minimum Weighted Cover problem
-              \end{itemize}
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item known in form of the \alert{Minimum Weighted Cover} problem
+                    % \item for $u = (u_1, \ldots u_n)$, $v = (v_1, \ldots, v_n)$ is (weighted) \alert{$(u,v)$-Cover} of $w$, if $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
+                    \item find a weighted cover $(u,v)$ of minimum cost
+                    \begin{itemize}
+                      \item (weighted) \alert{$(u,v)$-Cover} is a choice of labels $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ such that $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
+                      \item \alert{$\operatorname{cost} c(u,v)$} of a cover $(u,v)$ is $\displaystyle \sum_i u_i + \sum_j v_j$
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
             }
           }
           child {
@@ -988,6 +1020,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
+                    \item \href[page=163]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{algorithm with example} and \href[page=122]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_exercise_class_slides_all_in_one_with_go_back.pdf}{another example}
                     \item the \alert{Hungarian Algorithm} finds a \alert{maximum weight matching} and a \alert{minimum cost cover}
                     \item \alert{excess matrix} $c_{i,j} = u_{i }+ v_{j} - w_{i,j}$
                     \item stop \enquote{production:} $u_{i}+v_{j}>w_{i,j}$ and at the same time minimize $\sum_{i}u_{i}+\sum_{j}\nu_{j}$

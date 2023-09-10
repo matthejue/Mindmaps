@@ -20,6 +20,8 @@
 
 \usepackage{etoolbox}
 
+\usepackage{mathtools}
+
 \newtoggle{absolute}
 % \toggletrue{absolute}
 \togglefalse{absolute}
@@ -984,9 +986,14 @@
         child {
           node {Minimum-Cut and Maximum-Flow
             \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
+              \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item coming later in the lecture
+                  \item \alert{weak duality:} if $f$ is a \alert{feasible flow} and $[S,T]$ is a \alert{source/sink cut} then $val(f) = f^+(S) - f^-(S) \le f^+(S) \le cap(S, T)$
+                    \begin{itemize}
+                      \item \alert{total flow on edges leaving $U$:} $\displaystyle f^{+}(U)=\sum_{\mathclap{\substack{u \in U, v \in V \backslash U, u v \in E}}} f(u v)$
+                      \item \alert{total flow on edges entering $U$:} $\displaystyle f^{-}(U)=\sum_{\mathclap{\substack{u \in V\backslash U, u \in U , v u \in E}}} f(v u)$
+                    \end{itemize}
+                  \item \alert{Max-Flow Min-Cut Theorem:}  $\displaystyle \max_{f} val(f) = \min_{S, T} cap(S, T)$
                 \end{itemize}
               \end{minipage}
             }
@@ -996,7 +1003,8 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item asdf
+                    \item \alert{source/sink cut [S, T]} are the \alert{edges} from source set $S$ to sink set $T$
+                    \item \alert{capacity} of the \alert{cut} $[S, T]$: $\displaystyle cap(S, T) = \sum_{\mathclap{\substack{u\in S, v\in T}}} c((u, v))$, edges from $T$ to $S$ do not affect the capacity of the cut
                   \end{itemize}
                 \end{minipage}
               }
@@ -1007,14 +1015,37 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item asdf
+                    \item \alert{flow network} is a \alert{digraph} $N = (V, E, c, f, s, t)$ with \alert{nodes/vertices} $V$, \alert{edges} $E$, \alert{capacity} $c(e)\ge 0$ for every edge $e\in E$, \alert{flow} $f(e)$, \alert{source vertex} $s\in V$ and \alert{sink vertex} $t\in V$
+                      % network / 
+                    \item flow is \alert{feasible} if $\forall e\in E:0\leq f(e)\leq c(e)$ and $\forall\nu\in V\setminus\{s,t\}:f^{+}(\nu)=f^{-}(\nu)$
+                    \item \alert{flow value} $val(f) = f^-(t) - f^+(t) = f^+(s) - f^-(s)$ 
+                    \item flow \alert{from} the node $v$: $\displaystyle f^+(v) = \sum_{vw\in E} f((v,w))$ 
+                    \item flow \alert{into} the node $v$: $\displaystyle f^-(v) = \sum_{wv\in E} f((w,v))$
                   \end{itemize}
                 \end{minipage}
               }
             }
           }
           child {
-            node {Ford-Fulkerson Labeling Algorithm}
+            node {Ford-Fulkerson Labeling Algorithm
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \alert{f-augmenting path} $P$ is a source-to-sink path $P$ in the underlying graph $G$ such that for each $e\in E(P)$: 
+                      \begin{itemize}
+                        % \item  paths are considered in the undirected version of the network $N$
+                        \item $P$ follows $e$ forward, then $f(e) < c(e)$
+                        \item $P$ follows $e$ backward, then $f(e) > 0$
+                      \end{itemize}
+                    \item \alert{tolerance} of $\displaystyle\epsilon(P) = \min_{e\in E(P)} \epsilon(e)$
+                      \begin{itemize}
+                        \item $\epsilon(e) = c(e) - f(e)$ if $e$ is followed \alert{forward}
+                        \item $\epsilon(e) = f(e)$ if $e$ is followed \alert{backward}
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
           }
         }
         child {

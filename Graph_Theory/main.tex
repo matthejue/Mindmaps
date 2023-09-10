@@ -942,7 +942,7 @@
                       \item $k$-colorable and \alert{$k$-partite} have the same meaning
                       \item graphs with \alert{loops} are \alert{uncolorable}
                       \item \alert{multiple edges} are \alert{irrelevant}
-                      \item \href[page=212]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{Test for $2$-colorability}
+                      \item \href[page=212]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Test for $2$-colorability}
                     \end{itemize}
                     \item \alert{Chromatic number $X(G)$:} is the least $k$ such that $G$ is $k$-colorable
                     \begin{itemize}
@@ -988,12 +988,20 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \alert{weak duality:} if $f$ is a \alert{feasible flow} and $[S,T]$ is a \alert{source/sink cut} then $val(f) = f^+(S) - f^-(S) \le f^+(S) \le cap(S, T)$
+                  \item a \alert{network} is a \alert{digraph} $G = (V, E)$ with \alert{capacity} $c(e)\ge 0$ on each edge $e\in E$, a \alert{source vertex} $s\in V$ and a \alert{sink vertex} $t\in V$
+                  \item \alert{weak duality:} If $f$ is a \alert{feasible flow} and $[S,T]$ is a \alert{source/sink cut} then $val(f) = f^+(S) - f^-(S) \le f^+(S) \le cap(S, T)$
                     \begin{itemize}
-                      \item \alert{total flow on edges leaving $U$:} $\displaystyle f^{+}(U)=\sum_{\mathclap{\substack{u \in U, v \in V \backslash U, u v \in E}}} f(u v)$
-                      \item \alert{total flow on edges entering $U$:} $\displaystyle f^{-}(U)=\sum_{\mathclap{\substack{u \in V\backslash U, u \in U , v u \in E}}} f(v u)$
+                      \item the total flow on edges \alert{leaving} $U$ is $\displaystyle f^{+}(U)=\sum_{\mathclap{\substack{u \in U, v \in V \backslash U, u v \in E}}} f(u v)$
+                      \item the total flow on edges \alert{entering} $U$ is $\displaystyle f^{-}(U)=\sum_{\mathclap{\substack{v \in V\backslash U, u \in U , v u \in E}}} f(v u)$
+                      \item the \alert{net flow} of $U$ is $f^+(U) − f^−(U)$
+                    \item if $U$ is a set of nodes in a network then the net flow out of $U$ is the sum of net flows out of the nodes in $U$, i.e. $\displaystyle f^+(U) − f^−(U) = \sum_{v\in U} (f^+(v) − f^−(v))$
+                      \item in particular if $f$ is a feasible flow and $[S,T]$ is a source/sink cut then the net flow out of $S$ and net flow into $T$ equal $val(f)$
                     \end{itemize}
-                  \item \alert{Max-Flow Min-Cut Theorem:}  $\displaystyle \max_{f} val(f) = \min_{S, T} cap(S, T)$
+                  \item \alert{Max-Flow Min-Cut Theorem:}  $\displaystyle \max_{f} val(f) = \min_{S, T} cap(S, T)$, in every network, the maximum value of a feasible flow equals the minimum capacity of a source/sink cut
+                    \begin{itemize}
+                      \item Max flow and Min cut problems on a network are a dual optimization problem. Given a flow with value $\alpha$ and a cut with capacity $\alpha$, the weak duality above proves that the cut is minimum cut and the flow is maximum flow. If every instance has solutions with the same value to both the max problem and the min problem (\enquote{strong duality}), then a short proof of optimality always exists
+                      \item the \href[page=201]{\lpathgraph{Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}}{proof} requires rational capacities otherwise the algorithm may yield augmenting path forever
+                    \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -1003,8 +1011,15 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \alert{source/sink cut [S, T]} are the \alert{edges} from source set $S$ to sink set $T$
-                    \item \alert{capacity} of the \alert{cut} $[S, T]$: $\displaystyle cap(S, T) = \sum_{\mathclap{\substack{u\in S, v\in T}}} c((u, v))$, edges from $T$ to $S$ do not affect the capacity of the cut
+                    \item a \alert{source/sink cut $[S, T]$} consists of the \alert{edges} from a \alert{source set $S$} to a \alert{sink set $T$}
+                    \begin{itemize}
+                      \item partition $S$, $T$ with $s \in S$, $t \in T$ of the node set $V$ of a network $G=(V,E)$
+                    \end{itemize}
+                    \item the \alert{capacity} of the cut $[S, T]$ is $\displaystyle cap(S, T) = \sum_{\mathclap{\substack{u\in S, v\in T}}} c(uv)$
+                    \begin{itemize}
+                      \item edges from $T$ to $S$ do not affect the capacity of the cut
+                    \end{itemize}
+                    \item \alert{Minimum Cut Problem}: Given a network problem find a minimum cut $(S,T)$ which minimizes $cap(S,T)$
                   \end{itemize}
                 \end{minipage}
               }
@@ -1015,14 +1030,32 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \alert{flow network} is a \alert{digraph} $N = (V, E, c, f, s, t)$ with \alert{nodes/vertices} $V$, \alert{edges} $E$, \alert{capacity} $c(e)\ge 0$ for every edge $e\in E$, \alert{flow} $f(e)$, \alert{source vertex} $s\in V$ and \alert{sink vertex} $t\in V$
-                      % network / 
-                    \item flow is \alert{feasible} if $\forall e\in E:0\leq f(e)\leq c(e)$ and $\forall\nu\in V\setminus\{s,t\}:f^{+}(\nu)=f^{-}(\nu)$
-                    \item \alert{flow value} $val(f) = f^-(t) - f^+(t) = f^+(s) - f^-(s)$ 
-                    \item flow \alert{from} the node $v$: $\displaystyle f^+(v) = \sum_{vw\in E} f((v,w))$ 
-                    \item flow \alert{into} the node $v$: $\displaystyle f^-(v) = \sum_{wv\in E} f((w,v))$
+                    \item a \alert{flow $f$} assigns a \alert{value $f(e)$} to each edge $e$ 
+                    \item $\displaystyle f^+(v) = \sum_{vw\in E} f(vw)$ is the flow \alert{leaving} vertex $v$ 
+                    \item $\displaystyle f^−(v) = \sum_{wv\in E} f(wv)$ is the flow \alert{entering} a vertex $v$ 
+                    \item the \alert{net flow} of $v$ is $f^−(v) − f^+(v)$
+                    \item a flow $f$ is \alert{feasible} if it satisfies the \alert{capacity constraints} $\forall e\in E:0\leq f(e)\leq c(e)$ and the \alert{conservation constraints} $\forall\nu\in V\setminus\{s,t\}:f^{+}(\nu)=f^{-}(\nu)$
+                    \item \alert{flow value} $val(f) = f^-(t) - f^+(t) = f^+(s) - f^-(s)$ is the network flow into the sink
+                    \item \alert{Max-Flow-Problem:} For a network find a feasible flow $f$ with maximum flow value
+                    % \item flow \alert{from} the node $v$: $\displaystyle f^+(v) = \sum_{vw\in E} f((v,w))$ 
+                    % \item flow \alert{into} the node $v$: $\displaystyle f^-(v) = \sum_{wv\in E} f((w,v))$
                   \end{itemize}
                 \end{minipage}
+              }
+            }
+            child {
+              node {Integral Flow
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item An \alert{integral flow} is a flow using only integer capacites
+                      \item \alert{Integrality Theorem:} If all capacities in a network are integers, then there is a maximum flow assigning integral flow to each edge
+                      \begin{itemize}
+                        \item Furthermore, some maximum flow can be partitioned into flows of unit value along paths from source to sink
+                      \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
               }
             }
           }
@@ -1031,7 +1064,11 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \alert{f-augmenting path} $P$ is a source-to-sink path $P$ in the underlying graph $G$ such that for each $e\in E(P)$: 
+                    \item \href[page=193]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm with example}
+                    \begin{itemize}
+                      \item modifications by \href[page=204]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{Edmonds und Karp}
+                    \end{itemize}
+                    \item \alert{f-augmenting path $P$} is a source-to-sink path $P$ in the underlying graph $G$ such that for each $e\in E(P)$: 
                       \begin{itemize}
                         % \item  paths are considered in the undirected version of the network $N$
                         \item $P$ follows $e$ forward, then $f(e) < c(e)$
@@ -1039,8 +1076,24 @@
                       \end{itemize}
                     \item \alert{tolerance} of $\displaystyle\epsilon(P) = \min_{e\in E(P)} \epsilon(e)$
                       \begin{itemize}
-                        \item $\epsilon(e) = c(e) - f(e)$ if $e$ is followed \alert{forward}
-                        \item $\epsilon(e) = f(e)$ if $e$ is followed \alert{backward}
+                        \item $\epsilon(e) = c(e) - f(e)$ if $e$ is \alert{forward} in $P$
+                        \item $\epsilon(e) = f(e)$ if $e$ is \alert{backward} in $P$
+                      \end{itemize}
+                    \item an $f$-augmenting path leads to a flow with larger value, \alert{Lemma:}
+                      \begin{itemize}
+                        \item If $P$ is an $f$-augmenting path with tolerance $z$
+                          \begin{itemize}
+                            \item then change flow by $+z$ on forward edges of $P$
+                            \item and change flow by $-z$ on backward edges of $P$
+                          \end{itemize}
+                        \item produces a feasible flow $f’$ with $val(f’)= val(f) + z$
+                      \end{itemize}
+                    \item \alert{Remarks:}
+                      \begin{itemize}
+                        \item adding a path does not always lead to the maximum flow
+                        \item flow on backward edges does not disappear, it is redirected
+                        \item augmentation cuts the flow and extends each portion to become a new flow path
+                        \item a flow is a maximal flow if there is a \enquote{bottleneck} described by the capacity from $s$ to $t$
                       \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -1979,10 +2032,10 @@
                     then $n − e + f = 2$
                   \item \alert{other terms:}
                     \begin{itemize}
-                      \item \href[page=234]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{curve, polygonal curve, drawing, crossing}
-                      \item \href[page=235]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{closed curve, simple curve}
-                      \item \href[page=237]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{open set, region, faces}
-                      \item \href[page=238]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{Jordan Curve Theorem}
+                      \item \href[page=234]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{curve, polygonal curve, drawing, crossing}
+                      \item \href[page=235]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{closed curve, simple curve}
+                      \item \href[page=237]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{open set, region, faces}
+                      \item \href[page=238]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Jordan Curve Theorem}
                     \end{itemize}
                 \end{itemize}
               \end{minipage}
@@ -1993,8 +2046,8 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \href[page=241]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{definition}
-                    \item \href[page=243]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{two embeddings of a planar graph may have non-isomorphic duals}
+                    \item \href[page=241]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{definition}
+                    \item \href[page=243]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{two embeddings of a planar graph may have non-isomorphic duals}
                   \end{itemize}
                 \end{minipage}
               }

@@ -916,27 +916,65 @@
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
                   \item \alert{Chromatic number $\chi(G)$}: Is the \alert{minimum} number of colors such that \alert{adjacent vertices} receive \alert{different colors}
+                  \item for every graph $G$: $\chi(G)\ge \omega(G)$
                 \end{itemize}
               \end{minipage}
             }
           }
           child {
-            node {Coloring
+            node (coloring) {Coloring
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item asdf
+                    \item \alert{k-coloring} of a graph is a labeling $f : V(G) \rightarrow S$ where $|S| = k$
+                    \begin{itemize}
+                      \item the labels are \alert{colors}
+                    \end{itemize}
+                    \item vertices of one color form a \alert{color class}
+                    \begin{itemize}
+                      \item each color class is an \alert{independent set}
+                    \end{itemize}
+                    \item a graph is \alert{$k$-colorable} if it has a proper $k$-coloring
+                    \begin{itemize}
+                      \item a $k$-coloring is \alert{proper} if adjacent vertices have different labels
+                      \item $k$-colorable and \alert{$k$-partite} have the same meaning
+                      \item graphs with \alert{loops} are \alert{uncolorable}
+                      \item \alert{multiple edges} are \alert{irrelevant}
+                      \item \href[page=212]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{Test for $2$-colorability}
+                    \end{itemize}
+                    \item \alert{Chromatic number $X(G)$:} is the least $k$ such that $G$ is $k$-colorable
+                    \begin{itemize}
+                      \item a graph is \alert{$k$-chromatic} if $\chi(G) = k$
+                      \item a proper $k$-coloring of a $k$-chromatic graph is an \alert{optimal coloring}
+                      \item every $k$-chromatic graph with n vertices has at least $\displaystyle \binom{k}{2} = \sum^{k-1}_{i=0} i$ edges. Equality holds for a complete graph plus isolated vertices
+                      \item for \alert{disjoint union:} $\chi(G+H) = max\{\chi(G), \chi(H)\}$
+                      \item for \alert{join:} $\chi(G\vee H) = \chi(G) + \chi(H)$
+                      \item for \alert{cartesian:} $\chi(G\square H) = max\{\chi(G), \chi(H)\}$
+                    \end{itemize}
+                    \item if $\chi(H) < \chi(G) = k$ for every proper subgraph $H$ of $G$, then $G$ is \alert{color-critical} or \alert{$k$-critical}
+                    \begin{itemize}
+                      \item properly coloring a graph needs at least $2$ colors \alert{iff} the graph has an edge
+                      \item $K_2$ is the only $2$-critical graph
+                      \item since $2$-colorable is the same as bipartite characterization of bipartite graphs implies: $3$-critical graphs are the odd cycles
+                      \item every $k$-critical graph is $k-1$-edge-connected
+                    \end{itemize}
+                    \item \href[page=222]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{greedy coloring algorithm} and \href[page=223]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{improvements}
+                    \item \alert{upper bound:} $\chi(G)\le \Delta(G) + 1$
+                    \item \alert{Lemma (Kainen):} Let $G$ be a graph with $\chi(G) > k$. Let $X$, $Y$ be a partition of $V(G)$. If $G[X]$ and $G[Y]$ are $k$-colorable \alert{then} the edge cut $[X,Y]$ has at least $k$ edges
                   \end{itemize}
                 \end{minipage}
               }
             }
           }
           child {
-            node {Cliques
+            node (clique) {Clique
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item asdf
+                    \item is a set of \alert{pairwise adjacent vertices}
+                    \begin{itemize}
+                      \item \alert{Clique number $\omega(G)$:} Size (number of vertices) of the largest clique
+                    \end{itemize}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1068,6 +1106,7 @@
                   \begin{itemize}
                     \item each edge of a matching has at least one covering vertex
                     \item no vertex can cover two edges of a matching because edges are not incident in matchings
+                    % \item no vertex can cover two edges of a matching edge because matched edges are not adjacent
                       % Jede Kante eines Matchings hat mindestens einen überdeckenden
                       % Knoten
                       % • Kein Knoten kann zwei Kanten eines Matchings abdecken
@@ -1250,30 +1289,23 @@
                     \item vertices are \alert{independent}, if they are not connected via an edge
                     \item a set of pairwise nonadjacent vertices
                       \begin{itemize}
-                        \item \alert{$\alpha(G)$:} Is the maximum size of independent set of vertices in $G$
+                        \item \alert{Independence number $\alpha(G)$:} Is the maximum size of independent set of vertices in $G$
                       \end{itemize} 
                   \end{itemize}
                 \end{minipage}
               }
             }
             child {
-              node {Clique
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
-                    \begin{itemize}
-                      \item a set of \alert{pairwise adjacent vertices}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node (isvc) {Other Connections
+              node (isvccqcl) {Other Connections
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
                       \item in a graph $G$ the set $S$ is an independent set \alert{iff} $\overline{S}$ is a vertex cover
-                      \item $\alpha(G) + \beta(G) = n(G)$
+                        \begin{itemize}
+                          \item $\alpha(G) + \beta(G) = n(G)$
+                        \end{itemize}
+                      \item $\alpha(G) = \omega(\overline{G})$
+                      \item $\chi(G) \ge \dfrac{n(G)}{\alpha(G)} $
                     \end{itemize}
                   \end{minipage}
                 }
@@ -1323,7 +1355,7 @@
         child {
           node {Operations on Graphs}
           child {
-            node {Disjoint Union $G+H$
+            node (disjointunion) {Disjoint Union $G+H$
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
@@ -1334,7 +1366,7 @@
             }
           }
           child {
-            node {Join $G\vee H$
+            node (join) {Join $G\vee H$
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
@@ -1345,7 +1377,7 @@
             }
           }
           child {
-            node {Cartesian Product $G \square H$
+            node (cartesian) {Cartesian Product $G \square H$
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \resizebox{\textwidth}{!}{
@@ -1356,7 +1388,7 @@
                           \item vertex set $V(G) \times V(H)$
                           \item $(u,v)$ is adjacent to $(u',v')$ \alert{iff} $u=u'$, $vv' \in E(H)$ or $v=v', uu' \in E(G)$
                         \end{itemize}
-                      \item the cartesian operation is symmetric $G \square H \overset{\sim}{=} H\square G$
+                      \item the cartesian operation is \alert{symmetric}: $G \square H \overset{\sim}{=} H\square G$
                       \item \href[page=218]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{examples}
                       \end{itemize}
                     \end{minipage}
@@ -1452,97 +1484,6 @@
                     \item a \alert{edge cut} is an edge set of the form $[S, \overline{S}]$ where $S \subsetneq V(G)$
                   \end{itemize}
                 \end{minipage}
-              }
-            }
-          }
-        }
-        child {
-          node {Types of graphs}
-          child {
-            node (hypercube) {Hypercube $Q_k$
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item The $k$-dimensional cube or hypercube $Q_k$, is the simple graph for which
-                    \begin{itemize}
-                      \item vertices are bit-strings of length $k$
-                      \item edges are between the pairs of bit-strings differing in exactly one position
-                    \end{itemize}
-                    \item $\kappa(Q_k) = k$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (simple graph) {Simple Graph
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item \alert{has:}
-                      \begin{itemize}
-                        \item no loops
-                        \item no multiple edges
-                      \end{itemize}
-                    \item one writes $e = uv$ (or $vu$) for an edge e with \alert{endpoints} $u$ and $v$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (regular graphs) {Regular graphs
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item $G$ is regular if $\Delta(G) = \delta(G)$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node {$X, Y$-bigraph
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item is a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node {Special graphs
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item \href[page=24]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{list of special graphs}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (bipartite graphs) {Bipartite Graphs
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item a graph $G$ is \alert{bipartite} if $V(G)$ is the union of two disjoint independent sets
-                    \item \alert{Theorem of König:} A graph is bipartite \alert{iff} it has no odd cycle
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-            child {
-              node {k-partite Graph
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
-                    \begin{itemize}
-                      \item a graph $G$ is \alert{k-partite} if $V(G)$ can be expressed as the union of $k$ independent sets
-                    \end{itemize}
-                  \end{minipage}
-                }
               }
             }
           }
@@ -1893,6 +1834,206 @@
         }
       }
       child {
+        node {Types of (undirected) graphs}
+        child {
+          node (hypercube) {Hypercube $Q_k$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item The $k$-dimensional cube or hypercube $Q_k$, is the simple graph for which
+                    \begin{itemize}
+                      \item vertices are bit-strings of length $k$
+                      \item edges are between the pairs of bit-strings differing in exactly one position
+                    \end{itemize}
+                  \item $\kappa(Q_k) = k$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node (simple graph) {Simple Graph
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item \alert{has:}
+                    \begin{itemize}
+                      \item no loops
+                      \item no multiple edges
+                    \end{itemize}
+                  \item one writes $e = uv$ (or $vu$) for an edge e with \alert{endpoints} $u$ and $v$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node (regular graphs) {Regular graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item $G$ is regular if $\Delta(G) = \delta(G)$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {$X, Y$-bigraph
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item is a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Special graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \href[page=24]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{list of special graphs}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node (bipartite graphs) {Bipartite Graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
+                \begin{itemize}
+                  \item a graph $G$ is \alert{bipartite} if $V(G)$ is the union of two disjoint independent sets
+                  \item \alert{Theorem of König:} A graph is bipartite \alert{iff} it has no odd cycle
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {k-partite Graph
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a graph $G$ is \alert{k-partite} if $V(G)$ can be expressed as the union of $k$ independent sets
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Planar graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \alert{Remark:} We use the same name for a graph and its drawing
+                  \item a graph is \alert{planar} if it has a drawing without crossings
+                    \begin{itemize}
+                      \item $K_{5}$ and $K_{3,3}$ are not planar 
+                    \end{itemize}
+                  \item such a drawing is a \alert{planar embedding} of $G$
+                  \item a \alert{plane graph} is a particular planar embedding of a planar graph
+                  \item a planar embedding of a graph cuts the plane into pieces, called \alert{faces}
+                    \begin{itemize}
+                      \item a finite plane graph $G$ has one unbounded face called the \alert{outer face}
+                    \end{itemize}
+                  \item \alert{Theorem (Euler):} If a connected plane graph has exactly
+                    \begin{itemize}
+                      \item $n$ vertices,
+                      \item $e$ edges and
+                      \item $f$ faces,
+                    \end{itemize}
+                    then $n − e + f = 2$
+                  \item \alert{other terms:}
+                    \begin{itemize}
+                      \item \href[page=234]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{curve, polygonal curve, drawing, crossing}
+                      \item \href[page=235]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{closed curve, simple curve}
+                      \item \href[page=237]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{open set, region, faces}
+                      \item \href[page=238]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{Jordan Curve Theorem}
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Dual Graphs
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=241]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{definition}
+                    \item \href[page=243]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_english_all_in_one_with_go_back.pdf}{two embeddings of a planar graph may have non-isomorphic duals}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Contraction
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item in a graph $G$ a \alert{contraction} of edge $e$, $G \cdot e$, with endpoints $u$, $v$ is the replacement of $u$ and $v$ with a single vertex
+                      \begin{itemize}
+                        \item whose incident edges are the edges other than $e$
+                        \item that were incident to $u$ or $v$
+                      \end{itemize}
+                    \item $G \cdot e$
+                      \begin{itemize}
+                        \item has one edge less than $G$
+                        \item has one vertex less than $G$ if $e$ is not a loop
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Subdivisions
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item an edge \alert{subdivision} can be obtained by replacing the edge with a path with new vertices
+                    \item an \alert{$H$-subdivision} (of subdivision of $H$) is a graph obtained from a graph H by successive edge subdivisions, i.e. a graph obtained from H by replacing edges with pairwise internally disjoint paths
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Kuratowski’s Theorem
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a graph is planar \alert{iff} it does not contain a subdivision of $K_5$ or $K_{3,3}$
+                      \begin{itemize}
+                        \item \underline{or the other way round:} A graph is not planar \alert{iff} it does contain a subdivision of $K_5$ or $K_{3,3}$
+                      \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+        }
+        child {
+          node {Interval graphs
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item an \alert{interval representation} of a graph is a family of intervals assigned to the vertices so that: 
+                    \begin{itemize}
+                      \item vertices are adjacent \alert{iff} the corresponding intervals intersect
+                    \end{itemize}
+                  \item a graph having such a representation is an \alert{interval graph}
+                  \item if $G$ is an interval graph then $\chi(G) = \omega(G)$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
         node {Directed Graphs / Digraphs $G = (V, E, f)$
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{14cm}
@@ -2149,7 +2290,12 @@
   %     (branchpredictionbuffer) edge (2bitpredictor)
   %     (loadusedatahazard) edge (forwarding)
       (bipartite graphs) edge (independant set)
-      (vc) edge (isvc)
+      (disjointunion) edge (coloring)
+      (join) edge (coloring)
+      (cartesian) edge (coloring)
+      (vc) edge (isvccqcl)
+      (clique) edge (isvccqcl)
+      (coloring) edge (isvccqcl)
       (vc) edge (apa)
       (regular graphs) edge (degree)
       (gt) edge (degree)

@@ -89,60 +89,60 @@
 % to input other file end
 
 \begin{document}
-  \begin{tikzpicture}[
-      auto,
-      huge mindmap,
-      fill opacity=0.6,
-      draw opacity=0.8,
-      concept color = PrimaryColorDimmed,
-      every annotation/.style={fill=BoxColor, draw=none, align=center, fill = BoxColor, text width = 2cm},
-      grow cyclic,
-      level 1/.append style = {
-        concept color=SecondaryColorDimmed,
-        level distance=\leveldistance,
-        sibling angle=360/\the\tikznumberofchildren,
-        % https://tex.stackexchange.com/questions/501240/trying-to-use-the-array-environment-inside-a-tikz-node-with-execute-at-begin-no
-        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
-      },
-      level 2/.append style = {
-        concept color=PrimaryColorDimmed,
-        level distance=\leveldistance / 2,
-        sibling angle=30,
-        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
-      },
-      level 3/.append style = {
-        concept color=SecondaryColorDimmed,
-        level distance=\leveldistance / 3,
-        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
-      },
-      level 4/.append style = {
-        concept color=PrimaryColorDimmed,
-        level distance=\leveldistance / 4,
-        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
-      },
-      level 5/.append style = {
-        concept color=SecondaryColorDimmed,
-        level distance=\leveldistance / 5,
-        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
-      },
-      level 6/.append style = {
-        concept color=PrimaryColorDimmed,
-        level distance=\leveldistance / 6,
-        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
-      },
-      level 7/.append style = {
-        concept color=SecondaryColorDimmed,
-        level distance=\leveldistance / 7,
-        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
-      },
-      level 8/.append style = {
-        concept color=PrimaryColorDimmed,
-        level distance=\leveldistance / 8,
-        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
-      },
-      concept connection/.append style = {
-        color = BoxColor,
-      },
+\begin{tikzpicture}[
+  auto,
+  huge mindmap,
+  fill opacity=0.6,
+  draw opacity=0.8,
+  concept color = PrimaryColorDimmed,
+  every annotation/.style={fill=BoxColor, draw=none, align=center, fill = BoxColor, text width = 2cm},
+  grow cyclic,
+  level 1/.append style = {
+    concept color=SecondaryColorDimmed,
+    level distance=\leveldistance,
+    sibling angle=360/\the\tikznumberofchildren,
+    % https://tex.stackexchange.com/questions/501240/trying-to-use-the-array-environment-inside-a-tikz-node-with-execute-at-begin-no
+    execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+  },
+  level 2/.append style = {
+    concept color=PrimaryColorDimmed,
+    level distance=\leveldistance / 2,
+    sibling angle=25,
+    execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+  },
+  level 3/.append style = {
+    concept color=SecondaryColorDimmed,
+    level distance=\leveldistance / 3,
+    execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+  },
+  level 4/.append style = {
+    concept color=PrimaryColorDimmed,
+    level distance=\leveldistance / 4,
+    execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+  },
+  level 5/.append style = {
+    concept color=SecondaryColorDimmed,
+    level distance=\leveldistance / 5,
+    execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+  },
+  level 6/.append style = {
+    concept color=PrimaryColorDimmed,
+    level distance=\leveldistance / 6,
+    execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+  },
+  level 7/.append style = {
+    concept color=SecondaryColorDimmed,
+    level distance=\leveldistance / 7,
+    execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+  },
+  level 8/.append style = {
+    concept color=PrimaryColorDimmed,
+    level distance=\leveldistance / 8,
+    execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+  },
+  concept connection/.append style = {
+    color = BoxColor,
+  },
   ]
   % damit Annotationen nicht auch eine Drop Shadow erhalten
   \begin{scope}[
@@ -166,484 +166,484 @@
               \begin{itemize}
                 \item more about search algorithms \href{\lpathsearch}{here}
                   % SEARCHOVERVIEWSTART
-            \item \alert{Notations:}
-              \begin{itemize}
-                \item \alert{Node expansion:} Look up successor nodes that are added to the frontier % considering the available incident edges
-                  % generating all successor nodes considering the available edges
-                \item \alert{Frontier:} Set of all nodes available for expansion (e.g. datastructures like (priority) queue or stack)
-                \item \alert{Search strategy:} Defines which node is expanded next
-                \item \alert{Explored set:} Set of already visited nodes %(e.g. also markings on nodes)
-              \end{itemize}
-            \item \alert{Criteria for search strategies:}
-              \begin{itemize}
-                \item \alert{Optimality:} If the strategy finds the best path (with the lowest path cost)
-                \item \alert{Completeness:} If the strategy is guaranteed to find a path to a target node when there is one
-                \item \alert{Time complexity} and \alert{Space complexity}
-              \end{itemize}
-            \item \alert{States of nodes:}
-            \begin{itemize}
-              \item \alert{not marked}, nodes not seen by the algorithm
-              \item \alert{marked}, nodes get marked as soon as they get added to the frontier
-              \item \alert{visited}, nodes are visited as soon as they get taken out of the frontier
-            \end{itemize}
+                \item \alert{Notations:}
+                  \begin{itemize}
+                    \item \alert{Node expansion:} Look up successor nodes that are added to the frontier % considering the available incident edges
+                      % generating all successor nodes considering the available edges
+                    \item \alert{Frontier:} Set of all nodes available for expansion (e.g. datastructures like (priority) queue or stack)
+                    \item \alert{Search strategy:} Defines which node is expanded next
+                    \item \alert{Explored set:} Set of already visited nodes %(e.g. also markings on nodes)
+                  \end{itemize}
+                \item \alert{Criteria for search strategies:}
+                  \begin{itemize}
+                    \item \alert{Optimality:} If the strategy finds the best path (with the lowest path cost)
+                    \item \alert{Completeness:} If the strategy is guaranteed to find a path to a target node when there is one
+                    \item \alert{Time complexity} and \alert{Space complexity}
+                  \end{itemize}
+                \item \alert{States of nodes:}
+                  \begin{itemize}
+                    \item \alert{not marked}, nodes not seen by the algorithm
+                    \item \alert{marked}, nodes get marked as soon as they get added to the frontier
+                    \item \alert{visited}, nodes are visited as soon as they get taken out of the frontier
+                  \end{itemize}
                   % SEARCHOVERVIEWEND
               \end{itemize}
             \end{minipage}
           }
         }
         % SEARCHSTART
-    child {
-      node (generalsearch) {General Search
-        \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{8cm}
-            \begin{itemize}
-              \item distinction between tree search and graph search is not rooted in the fact whether the problem graph is a tree or a general graph. It is \alert{always assumed} you're dealing with a \alert{general graph}
-              \item The \alert{distinction} lies in the \alert{traversal pattern} that is used to search through the graph, which can be graph-shaped or tree-shaped
-              \begin{itemize}
-                \item If one is dealing with a \alert{tree-shaped problem}, both algorithm variants lead to equivalent results. So one would pick the simpler tree search variant.
-              \end{itemize}
-            \end{itemize}
-          \end{minipage}
-        }
-      }
-      child {
-        node (ts) {Tree-based search
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
-              \begin{itemize}
-                \item nodes are possibly \alert{visited multiple times} (if there are multiple directed paths to a node rooting in the start node), possible leading even to \alert{infinite loops}
-                % \item It will visit a state of the underlying problem graph multiple times, if there are multiple directed paths to it rooting in the start state
-                % \item It is even possible to visit a state an infinite number of times if it lies on a directed loop
+        child {
+          node (generalsearch) {General Search
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item but each of this multiple visits would correspond to a different node if one would generate a tree by the nodes visited by the algorithm
+                  \item distinction between tree search and graph search is not rooted in the fact whether the problem graph is a tree or a general graph. It is \alert{always assumed} you're dealing with a \alert{general graph}
+                  \item The \alert{distinction} lies in the \alert{traversal pattern} that is used to search through the graph, which can be graph-shaped or tree-shaped
+                    \begin{itemize}
+                      \item If one is dealing with a \alert{tree-shaped problem}, both algorithm variants lead to equivalent results. So one would pick the simpler tree search variant.
+                    \end{itemize}
                 \end{itemize}
-              \end{itemize}
-            \end{minipage}
+              \end{minipage}
+            }
           }
-          % \resizebox{\textwidth}{!}{
-          %   \begin{minipage}[t]{11cm}
-          %     \begin{algorithm}[H]
-          %       \caption{\pr{Tree-Search}(problem)}
-          %       % \begin{pseudo}[kw]
-          %       % \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
-          %       % As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
-          %       % \fn{choose} \tn{a} \tt{leaf node} $v$ \tn{and remove it from the} \tt{frontier}\\
-          %       %   if \tt{v} \tn{contains a} \cn{goal state} then\\+
-          %       %     return \cn{True}\\-
-          %       %     \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\--
-          %       % return \cn{False}
-          %       % \end{pseudo}
-          %       \begin{pseudo}[kw]
-          %       \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
-          %       As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
-          %       \fn{choose} \tn{a} \tt{leaf node} \tn{and remove it from the} \tt{frontier}\\
-          %         if \tt{node} \tn{contains a} \cn{goal state} then\\+
-          %           return \cn{Solution}\\-
-          %           \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\--
-          %       return \cn{Failure}
-          %       \end{pseudo}
-          %     \end{algorithm}
-          %     \sourcesone
-          %   \end{minipage}
-          % }
-        }
-      }
-      child {
-        node (gs) {Graph-based search
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
-              \begin{itemize}
-                \item Keeps a \alert{explored set} and avoids the problem of tree-based search
-                \item \alert{exponential memory requirements} in the worst case
-              \end{itemize}
-            \end{minipage}
+          child {
+            node (ts) {Tree-based search
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item nodes are possibly \alert{visited multiple times} (if there are multiple directed paths to a node rooting in the start node), possible leading even to \alert{infinite loops}
+                      % \item It will visit a state of the underlying problem graph multiple times, if there are multiple directed paths to it rooting in the start state
+                      % \item It is even possible to visit a state an infinite number of times if it lies on a directed loop
+                      \begin{itemize}
+                        \item but each of this multiple visits would correspond to a different node if one would generate a tree by the nodes visited by the algorithm
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+              % \resizebox{\textwidth}{!}{
+              %   \begin{minipage}[t]{11cm}
+              %     \begin{algorithm}[H]
+              %       \caption{\pr{Tree-Search}(problem)}
+              %       % \begin{pseudo}[kw]
+              %       % \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
+              %       % As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
+              %       % \fn{choose} \tn{a} \tt{leaf node} $v$ \tn{and remove it from the} \tt{frontier}\\
+              %       %   if \tt{v} \tn{contains a} \cn{goal state} then\\+
+              %       %     return \cn{True}\\-
+              %       %     \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\--
+              %       % return \cn{False}
+              %       % \end{pseudo}
+              %       \begin{pseudo}[kw]
+              %       \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
+              %       As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
+              %       \fn{choose} \tn{a} \tt{leaf node} \tn{and remove it from the} \tt{frontier}\\
+              %         if \tt{node} \tn{contains a} \cn{goal state} then\\+
+              %           return \cn{Solution}\\-
+              %           \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\--
+              %       return \cn{Failure}
+              %       \end{pseudo}
+              %     \end{algorithm}
+              %     \sourcesone
+              %   \end{minipage}
+              % }
+            }
           }
-          % \resizebox{\textwidth}{!}{
-          %   \begin{minipage}[t]{12cm}
-          %     \begin{algorithm}[H]
-          %       \caption{\pr{Graph-Search}(problem)}
-          %       \begin{pseudo}[kw]
-          %       \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
-          %       \fn{initialize} \tn{the} \tt{explored set} \tn{to be empty}\\
-          %       As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
-          %       \fn{choose} \tn{a} \tt{leaf node} \tn{and remove it from the} \tt{frontier}\\
-          %         if \tt{node} \tn{contains a} \cn{goal state} then\\+
-          %           return \cn{True}\\-
-          %           \fn{add} \tn{the node to the} \tt{explored set}\\
-          %           if \tt{node} \tn{not in the} \tt{frontier} \tn{or} \tt{explored set} then \\+
-          %             \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\---
-          %       return \cn{False}
-          %       \end{pseudo}
-          %     \end{algorithm}
-          %   \end{minipage}
-          % }
+          child {
+            node (gs) {Graph-based search
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item Keeps a \alert{explored set} and avoids the problem of tree-based search
+                    \item \alert{exponential memory requirements} in the worst case
+                  \end{itemize}
+                \end{minipage}
+              }
+              % \resizebox{\textwidth}{!}{
+              %   \begin{minipage}[t]{12cm}
+              %     \begin{algorithm}[H]
+              %       \caption{\pr{Graph-Search}(problem)}
+              %       \begin{pseudo}[kw]
+              %       \fn{initialize} \tn{the} \tt{frontier} \tn{using the initial state of problem}\\
+              %       \fn{initialize} \tn{the} \tt{explored set} \tn{to be empty}\\
+              %       As long as \tt{frontier} \tn{is not} \cn{empty} do\\+
+              %       \fn{choose} \tn{a} \tt{leaf node} \tn{and remove it from the} \tt{frontier}\\
+              %         if \tt{node} \tn{contains a} \cn{goal state} then\\+
+              %           return \cn{True}\\-
+              %           \fn{add} \tn{the node to the} \tt{explored set}\\
+              %           if \tt{node} \tn{not in the} \tt{frontier} \tn{or} \tt{explored set} then \\+
+              %             \fn{expand} \tn{the} \tt{node}\tn{, adding the resulting nodes to the} \tt{frontier}\\---
+              %       return \cn{False}
+              %       \end{pseudo}
+              %     \end{algorithm}
+              %   \end{minipage}
+              % }
+            }
+          }
         }
-      }
-    }
         % SEARCHEND
         % SEARCHSTART
-    child {
-      node {Uninformed Search Algorithms
-        \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{8cm}
-            \begin{itemize}
-              \item  Rigid procedure with no knowledge of the cost of a given node to the goal (e.g. \alert{no heuristic function} $h(v)$), only uses other currently available knowledge (e.g. \alert{path-cost function} $g(v)$ or e.g. \alert{depth function} $d(v)$)
-            \end{itemize}
-          \end{minipage}
-        }
-      }
-      child {
-        node (ucs) {Uniform-Cost Search
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{10cm}
-              \begin{itemize}
-                \item FIFO datastructure (FIFO-queue) gets replaced by \alert{priority queue} 
-                \item expands node $v$ from the frontier with \alert{lowest path costs} $g(v)$
-                \item generalization of \alert{Breadth-First Search}, where edge weights can have \alert{different values}
-                \item special case of \alert{Best-First Search}, where $f(v) = g(v)$
-                \item special case of \alert{A$^*$ Search}, where $h(v) = 0$ and thus $f(v) = g(v) + h(v) = g(v)$
-                \begin{itemize}
-                  \item if all edge weights would be $1$, then a node would have depth $k$ exactly when it's path costs would be $k$. 
-                  \item then the expansion criteria would therefore be the same as for BFS, beacuse a node would have minimal depth exactly when it would have minimum path costs
-                \end{itemize}
-                \item is a modification of \alert{Dijkstra's Algorithm} which is focused on searching a \alert{single shortest path} in terms of \alert{cost} from the \alert{root node} to a \alert{target node} rather than finding the shortest path to every node
-                \begin{itemize}
-                  \item it does this by stopping as soon as the target node is found
-                  \item it is applicable for both \alert{explicit graphs} and \alert{implicit graphs}, it doesn't need the entire graph as input
-                \end{itemize}
-                \item is \alert{complete}, provided that the branching factor is finite and \alert{optimal}
-                \item \alert{Time complexity:} $O(b^{1+\left\lfloor \frac{C}{\epsilon}\right\rfloor})$
-                \item \alert{Space complexity:} $O(b^{1+\left\lfloor\frac{C}{\epsilon}\right\rfloor})$, priority queue is filled gradually
-              \end{itemize}
-            \end{minipage}
-          }
-        }
         child {
-          node (dijkstra) {Dijkstra's Algorithm
+          node {Uninformed Search Algorithms
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item determines the \alert{shortest path} in terms of \alert{cost} from the \alert{root node} to \alert{every other node}
-                  \item there is \alert{no target node}, processing continues until all nodes have been removed from the priority queue, i.e. until shortest paths to all nodes (not just a target node) have been determined
-                  \item is only applicable in \alert{explicit graphs} where the entire graph is given as input
-                  \item \alert{Time complexity:} always more time consuming than UCS
-                  \item \alert{Space complexity:} adds all nodes to the priority queue at the beginnging with infinite cost
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node (rbfs) {Breadth-First Search
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{10cm}
-                \begin{itemize}
-                  \item \alert{FIFO} datastructure (FIFO-\alert{queue})
-                  \item expands node $v$ from the frontier with \alert{lowest depth} $d(v)$
-                  \item special case of \alert{Uniform-Cost Search} where all edge weights have \alert{no value}
-                  \item special case of \alert{Best-First Search}, where $f(v) = d(v)$
-                  \item \alert{complete}, provided that the branching factor is finite and \alert{optimal}, provided every edge has identical, non-negative weights
-                  \item \alert{Time complexity:} $O({\mid} V{\mid}+{\mid} E{\mid})$, $b + b^2 + \ldots + b^d\in O(b^d)$ is the maximal number of nodes expanded
-                  \begin{itemize}
-                    \item If the algorithm were to apply the goal test to nodes when selected for expansion rather than when generated, the whole layer of nodes at depth $d$ would be expanded before the goal was detected and the time complexity would be $O(b^{d+1})$
-                  \end{itemize}
-                  \item \alert{Space complexity:}
-                  \begin{itemize}
-                    \item \alert{tree based:} $O({\mid} V{\mid}) = O(b^d)$ for the frontier%, every explored node is kept in memory
-                    \item \alert{graph based:} $O(b^d)$ for the frontier and $O(b^{d-1})$ for the explored set
-                  \end{itemize}
-                  % \item \alert{Time complexity:} the maximal number of nodes expanded is $b+b^{2}+b^{3}+\ldots +b^{d}\in O(b^{d})$
-                  % \item \alert{Space complexity:} Every node generated is \alert{kept in memory}. Therefore space needed for the \alert{frontier} is $O(b^d)$ and for the \alert{explored set} $O(b^{d-1})$
-                  \item \href[page=98]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
-                \end{itemize}
-              \end{minipage}
-            }
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{10.5cm}
-                \bfs
-              \end{minipage}
-            }
-          }
-          child {
-            node (bidirectional) {Bidirectional Search}
-          }
-        }
-      }
-      child {
-        node (dfs) {Depth-First Search
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{18cm}
-              \begin{itemize}
-                \item \alert{LIFO} datastracture (\alert{stack})
-                \item expands node $v$ from the frontier with \alert{greatest depth} $d(v)$
-                \item special case of \alert{Best-First Search}, where $f(v) = -d(v)$
-                \item in general, the path found is \alert{not optimal} and \alert{completeness} can be guaranteed \alert{only for graph-based search} and \alert{finite graphs}
-                \item \alert{Time complexity:}
-                  \begin{itemize}
-                    \item \alert{graph-based:} $O({\mid} V{\mid}+{\mid} E{\mid})$, search bounded by the number of nodes (might be infinite)
-                    \item \alert{tree-based:} algorithm might generate $O(b^m)$ nodes in the search tree which might be much larger than the number of nodes
-                      %   \begin{itemize}
-                      %     \item $m$ is the maximum length of a path in the state space
-                      %   \end{itemize}
-                  \end{itemize}
-                  \item \alert{Space complexity:} 
-                    \begin{itemize}
-                      \item \alert{graph-based:} $O({\mid} V{\mid})$, in worst case, all nodes need to be stored in the explored set (no advantage over breadth-first)
-                      \item \alert{tree-based:} $O(b\cdot m)$, needs to store only the nodes along the path from the root to the leaf node. Once a node has been expanded, it can be removed from memory as soon as all its descendants have been fully explored
-                    \end{itemize}
-                  \item \href[page=102]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
-                  \item \underline{For every node $v$ two points in time are defined:}
-                    \begin{itemize}
-                      \item \alert{$t_{v,1}$:} Point in time, when $v$ gets in the marked state
-                      \item \alert{$t_{v,2}$:} Point in time, when $v$ gets in the visited state
-                    \end{itemize}
-                  \item in the DFS-Tree a node $v$ is in the subtree of a node $u$ \alert{iff} the intervall $[t_{v,1}$, $t_{v,2}]$ is fully contained in the intervall $[t_{u,1}, t_{u,2}]$
-                  \item \alert{Classification of edges:} $uv$ is 
-                    \begin{itemize}
-                      \item a \alert{tree edge}, if $v$ was discovered from $u$
-                        \begin{itemize}
-                          \item $u$ is in marked state, $v$ is in not marked state when looking at $uv$
-                        \end{itemize}
-                      \item a \alert{backward edge}, if $v$ is a predecessor node of $u$
-                        \begin{itemize}
-                          \item $u$ is in marked state, $v$ is in marked state when looking at $uv$
-                          \item $t_{v,1}<t_{u,1}<t_{u,2}<t_{v,2}$
-                        \end{itemize}
-                      \item a \alert{forward edge}, if $v$ is a successor node of $u$ 
-                        \begin{itemize}
-                          \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
-                          \item $t_{u,1}<t_{v,1}<t_{v,2}<t_{u,2}$, $\boxed{t_{u,1}<t_{v,1}}$
-                        \end{itemize}
-                      \item a \alert{cross edge}, if it is neither of all above
-                        \begin{itemize}
-                          \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
-                          \item $t_{v,1}<t_{v,2}<t_{u,1}<t_{u,2}$, $\boxed{t_{v,1}<t_{u,1}}$
-                        \end{itemize}
-                      \item \href[page=34]{\lpathdfssearch}{example}
-                    \end{itemize}
-                    \item more about DFS-Trees \href[page=35]{\lpathdfssearch}{here}
-                \end{itemize}
-                \includegraphics[width=0.5\textwidth, center]{./figures/dfs.pdf}
-            \end{minipage}
-          }
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{11cm}
-              \dfs
-            \end{minipage}
-          }
-        }
-        child {
-          node {Recursive Depth-First Search
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{11cm}
-                \dfsrec
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {Depth-Limited Search}
-          child {
-            node {Iterative-Deepening Search}
-          }
-        }
-      }
-    }
-        % SEARCHEND
-        % SEARCHSTART
-    child {
-      node {Informed Search Algorithms
-        \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{8cm}
-            \begin{itemize}
-              \item Knowledge of the worth of expanding a node $v$ is given in the form of an \alert{evaluation function} $f(v)$, which assigns a real number to each node
-              \item Often $f(v)$ includes a \alert{heuristic function} $h(v)$ as a component, which estimates the costs of the cheapest path from $v$ to the goal
-            \end{itemize}
-          \end{minipage}
-        }
-      }
-      child {
-      node {Local Search Algorithms
-        \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{8cm}
-            \begin{itemize}
-              \item if it is unimportant how the goal is reached, \alert{only the goal itself matters} and if in addition a \alert{quality} measure for nodes is given
-              \item it operates using a \alert{single current node} (rather than multiple paths)
-              \item requires little memory
-            \end{itemize}
-          \end{minipage}
-        }
-      }
-      child {
-        node {Hill Climbing
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
-              \begin{itemize}
-                \item Begin with a randomly-chosen configuration and \alert{improve} on it \alert{step by step}
-              \end{itemize}
-            \end{minipage}
-          }
-        }
-        child {
-          node {Simulated Annealing
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item \enquote{noise} is injected systematically, first a lot, then gradually less
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {Gradient Descent}
-        }
-      }
-    }
-    child {
-      node {Genetic Algorithms
-        \resizebox{\textwidth}{!}{
-          \begin{minipage}[t]{8cm}
-            \begin{itemize}
-              \item Similar to \alert{evolution}, we search for solutions by three operators: \alert{mutation}, \alert{crossover}, and \alert{selection}
-            \end{itemize}
-          \end{minipage}
-        }
-      }
-    }
-      child {
-        node (bfs) {Best-First Search 
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{8cm}
-              \begin{itemize}
-                \item informed search procedure that expands the node with the \enquote{\alert{best}} $f$-value first
-                \item is an instance of the general \alert{Tree-Search} algorithm in which frontier is a \alert{priority queue} ordered by an \alert{evaluation function} $f$
-                \begin{itemize}
-                  \item when $f$ is always correct, ones does not need to search
-                \end{itemize}
-              \end{itemize}
-            \end{minipage}
-          }
-        }
-        child {
-          node {Greedy Search
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item A \alert{best-first} search using the \alert{heuristic function} $h(v)$ as the \alert{evaluation function}, i.e. $f(v) = h(v)$ is called a \alert{greedy search}
-                  \begin{itemize}
-                    % \item judge the \enquote{worth} of a node by estimating its path costs to the target node
-                    \item $h(v) =$ estimated path-costs from $v$ to the target node
-                    \item the only real restriction is that $h(v) = 0$ if $v$ is the target node
-                  \end{itemize}
-                  \item is generally \alert{incomplete} and \alert{not optimal}
-                  \begin{itemize}
-                    \item \alert{graph-search} version is complete only in finite graphs
-                  \end{itemize}
+                  \item  Rigid procedure with no knowledge of the cost of a given node to the goal (e.g. \alert{no heuristic function} $h(v)$), only uses other currently available knowledge (e.g. \alert{path-cost function} $g(v)$ or e.g. \alert{depth function} $d(v)$)
                 \end{itemize}
               \end{minipage}
             }
           }
           child {
-            node (hf) {Heuristic function
+            node (ucs) {Uniform-Cost Search
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
+                \begin{minipage}[t]{10cm}
                   \begin{itemize}
-                    \item or simply a \alert{heuristic}
-                    \item the evaluation function $f$ in \alert{greedy searches} is a heuristic function $h$ 
-                    \item the heuristic is \alert{problem-specific} and \alert{focuses} the search
-                    \item \alert{In AI it has two meanings:}
-                    \begin{itemize}
-                      \item Heuristics are \alert{fast} but in certain situations \alert{incomplete} methods for problem-solving
-                      \item Heuristics are methods that \alert{improve the search} in the \alert{average-case}
-                    \end{itemize}
-                    \item The word heuristic is derived from the Greek word {\gyre ευρισκειν} (note also: {\gyre ευρηκα!})
+                    \item FIFO datastructure (FIFO-queue) gets replaced by \alert{priority queue} 
+                    \item expands node $v$ from the frontier with \alert{lowest path costs} $g(v)$
+                    \item generalization of \alert{Breadth-First Search}, where edge weights can have \alert{different values}
+                    \item special case of \alert{Best-First Search}, where $f(v) = g(v)$
+                    \item special case of \alert{A$^*$ Search}, where $h(v) = 0$ and thus $f(v) = g(v) + h(v) = g(v)$
+                      \begin{itemize}
+                        \item if all edge weights would be $1$, then a node would have depth $k$ exactly when it's path costs would be $k$. 
+                        \item then the expansion criteria would therefore be the same as for BFS, beacuse a node would have minimal depth exactly when it would have minimum path costs
+                      \end{itemize}
+                    \item is a modification of \alert{Dijkstra's Algorithm} which is focused on searching a \alert{single shortest path} in terms of \alert{cost} from the \alert{root node} to a \alert{target node} rather than finding the shortest path to every node
+                      \begin{itemize}
+                        \item it does this by stopping as soon as the target node is found
+                        \item it is applicable for both \alert{explicit graphs} and \alert{implicit graphs}, it doesn't need the entire graph as input
+                      \end{itemize}
+                    \item is \alert{complete}, provided that the branching factor is finite and \alert{optimal}
+                    \item \alert{Time complexity:} $O(b^{1+\left\lfloor \frac{C}{\epsilon}\right\rfloor})$
+                    \item \alert{Space complexity:} $O(b^{1+\left\lfloor\frac{C}{\epsilon}\right\rfloor})$, priority queue is filled gradually
                   \end{itemize}
                 \end{minipage}
               }
             }
-          }
-        }
-        child {
-          node (astar) {A$^*$
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item A$^*$ combines \alert{greedy search} with the \alert{uniform-cost search}
-                  \item Always expands node with lowest \alert{evaluation function} $f(v)$ first, where:
-                  \begin{itemize}
-                    \item $g(v) =$ actual cost from the start node to $v$
-                    \item $h(v) =$ estimated cost from $v$ to the nearest target node
-                    \item $f(v) = g(v) + h(v) =$ the estimated cost of the cheapest path through $v$
-                  \end{itemize}
-                  \item We require that for A$^*$, that $h$ is admissible (e.g. straight-line distance is admissible)
-                  \begin{itemize}
-                    \item $h$ is an \alert{optimistic estimate} of the costs that actually occur
-                  \end{itemize}
-                  \item \alert{complete}, provided that every node has a finite number of successor nodes and there exists a positive constant $\delta > 0$ such that every edge has at least weight $\delta$ and \alert{optimal}, provided that one uses the \alert{tree-based} variant
-                  \begin{itemize}
-                    \item for the \alert{graph-based} variant, one:
+            child {
+              node (dijkstra) {Dijkstra's Algorithm
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
                     \begin{itemize}
-                      \item either needs to consider re-opening nodes from the explored set, when a better estimate becomes known, or
-                      \item one needs needs to require stronger restrictions on the heuristic estimate: it needs to be \alert{consistent}
-                      \item $A^*$ can still be applied if heuristic is not consistent, but \alert{optimality is lost} in this case
+                      \item determines the \alert{shortest path} in terms of \alert{cost} from the \alert{root node} to \alert{every other node}
+                      \item there is \alert{no target node}, processing continues until all nodes have been removed from the priority queue, i.e. until shortest paths to all nodes (not just a target node) have been determined
+                      \item is only applicable in \alert{explicit graphs} where the entire graph is given as input
+                      \item \alert{Time complexity:} always more time consuming than UCS
+                      \item \alert{Space complexity:} adds all nodes to the priority queue at the beginnging with infinite cost
                     \end{itemize}
-                  \end{itemize}
-                  \item \alert{Time complexity:} $O(b^d)$, exponential in the path length of the solution. More refined complexity results depend on the assumptions made, e.g. on the quality of the heuristic function
-                  \item \alert{Space complexity:} $O(b^d)$, exponential in the path length of the solution. Roughly the same as that of all other graph search algorithms, as it keeps all generated nodes in memory
-                \end{itemize}
-              \end{minipage}
+                  \end{minipage}
+                }
+              }
             }
-          }
-          child {
-            node {Iterative-Deepening A$^*$ (IDA$^*$)
-          %     \resizebox{\textwidth}{!}{
-          %       \begin{minipage}[t]{8cm}
-          %         \begin{itemize}
-          %           \item the $f$-costs are used to define the cutoff (rather than the depth of the search tree)
-          %         \end{itemize}
-          %       \end{minipage}
-          %     }
-            }
-          }
-          child {
-            node {Recursive Best First Search (RBFS)}
-          }
-          child {
-            node {Memory-bounded A$^*$ (MA$^*$) and Simplified MA$^*$ (SMA$^*$)}
-          }
-          child {
-            node {Admissible
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item $h$ is admissible if the following holds for all $v$: $h(v) \le h^*(v)$
+            child {
+              node (rbfs) {Breadth-First Search
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{10cm}
                     \begin{itemize}
-                      \item $h^*(v)$ are the actual cost of the optimal path from $v$ to the target node
+                      \item \alert{FIFO} datastructure (FIFO-\alert{queue})
+                      \item expands node $v$ from the frontier with \alert{lowest depth} $d(v)$
+                      \item special case of \alert{Uniform-Cost Search} where all edge weights have \alert{no value}
+                      \item special case of \alert{Best-First Search}, where $f(v) = d(v)$
+                      \item \alert{complete}, provided that the branching factor is finite and \alert{optimal}, provided every edge has identical, non-negative weights
+                      \item \alert{Time complexity:} $O({\mid} V{\mid}+{\mid} E{\mid})$, $b + b^2 + \ldots + b^d\in O(b^d)$ is the maximal number of nodes expanded
+                        \begin{itemize}
+                          \item If the algorithm were to apply the goal test to nodes when selected for expansion rather than when generated, the whole layer of nodes at depth $d$ would be expanded before the goal was detected and the time complexity would be $O(b^{d+1})$
+                        \end{itemize}
+                      \item \alert{Space complexity:}
+                        \begin{itemize}
+                          \item \alert{tree based:} $O({\mid} V{\mid}) = O(b^d)$ for the frontier%, every explored node is kept in memory
+                          \item \alert{graph based:} $O(b^d)$ for the frontier and $O(b^{d-1})$ for the explored set
+                        \end{itemize}
+                        % \item \alert{Time complexity:} the maximal number of nodes expanded is $b+b^{2}+b^{3}+\ldots +b^{d}\in O(b^{d})$
+                        % \item \alert{Space complexity:} Every node generated is \alert{kept in memory}. Therefore space needed for the \alert{frontier} is $O(b^d)$ and for the \alert{explored set} $O(b^{d-1})$
+                      \item \href[page=98]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
                     \end{itemize}
-                  \end{itemize}
-                \end{minipage}
+                  \end{minipage}
+                }
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{10.5cm}
+                    \bfs
+                  \end{minipage}
+                }
+              }
+              child {
+                node (bidirectional) {Bidirectional Search}
               }
             }
           }
           child {
-            node {Consistent
+            node (dfs) {Depth-First Search
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{18cm}
+                  \begin{itemize}
+                    \item \alert{LIFO} datastracture (\alert{stack})
+                    \item expands node $v$ from the frontier with \alert{greatest depth} $d(v)$
+                    \item special case of \alert{Best-First Search}, where $f(v) = -d(v)$
+                    \item in general, the path found is \alert{not optimal} and \alert{completeness} can be guaranteed \alert{only for graph-based search} and \alert{finite graphs}
+                    \item \alert{Time complexity:}
+                      \begin{itemize}
+                        \item \alert{graph-based:} $O({\mid} V{\mid}+{\mid} E{\mid})$, search bounded by the number of nodes (might be infinite)
+                        \item \alert{tree-based:} algorithm might generate $O(b^m)$ nodes in the search tree which might be much larger than the number of nodes
+                          %   \begin{itemize}
+                          %     \item $m$ is the maximum length of a path in the state space
+                          %   \end{itemize}
+                      \end{itemize}
+                      \item \alert{Space complexity:} 
+                        \begin{itemize}
+                          \item \alert{graph-based:} $O({\mid} V{\mid})$, in worst case, all nodes need to be stored in the explored set (no advantage over breadth-first)
+                          \item \alert{tree-based:} $O(b\cdot m)$, needs to store only the nodes along the path from the root to the leaf node. Once a node has been expanded, it can be removed from memory as soon as all its descendants have been fully explored
+                        \end{itemize}
+                      \item \href[page=102]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{example}
+                      \item \underline{For every node $v$ two points in time are defined:}
+                        \begin{itemize}
+                          \item \alert{$t_{v,1}$:} Point in time, when $v$ gets in the marked state
+                          \item \alert{$t_{v,2}$:} Point in time, when $v$ gets in the visited state
+                        \end{itemize}
+                      \item in the DFS-Tree a node $v$ is in the subtree of a node $u$ \alert{iff} the intervall $[t_{v,1}$, $t_{v,2}]$ is fully contained in the intervall $[t_{u,1}, t_{u,2}]$
+                      \item \alert{Classification of edges:} $uv$ is 
+                        \begin{itemize}
+                          \item a \alert{tree edge}, if $v$ was discovered from $u$
+                            \begin{itemize}
+                              \item $u$ is in marked state, $v$ is in not marked state when looking at $uv$
+                            \end{itemize}
+                          \item a \alert{backward edge}, if $v$ is a predecessor node of $u$
+                            \begin{itemize}
+                              \item $u$ is in marked state, $v$ is in marked state when looking at $uv$
+                              \item $t_{v,1}<t_{u,1}<t_{u,2}<t_{v,2}$
+                            \end{itemize}
+                          \item a \alert{forward edge}, if $v$ is a successor node of $u$ 
+                            \begin{itemize}
+                              \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
+                              \item $t_{u,1}<t_{v,1}<t_{v,2}<t_{u,2}$, $\boxed{t_{u,1}<t_{v,1}}$
+                            \end{itemize}
+                          \item a \alert{cross edge}, if it is neither of all above
+                            \begin{itemize}
+                              \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
+                              \item $t_{v,1}<t_{v,2}<t_{u,1}<t_{u,2}$, $\boxed{t_{v,1}<t_{u,1}}$
+                            \end{itemize}
+                          \item \href[page=34]{\lpathdfssearch}{example}
+                        \end{itemize}
+                      \item more about DFS-Trees \href[page=35]{\lpathdfssearch}{here}
+                    \end{itemize}
+                    \includegraphics[width=0.5\textwidth, center]{./figures/dfs.pdf}
+                  \end{minipage}
+                }
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{11cm}
+                    \dfs
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Recursive Depth-First Search
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{11cm}
+                      \dfsrec
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Depth-Limited Search}
+                child {
+                  node {Iterative-Deepening Search}
+                }
+              }
+            }
+          }
+          % SEARCHEND
+          % SEARCHSTART
+          child {
+            node {Informed Search Algorithms
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item A heuristic $h$ is called consistent \alert{iff} for all edges $v$ leading from $s$ to $s'\colon h(s) - h(s') \le c(v)$, where $c(v)$ denotes the weight of edge $v$
-                    \item Consistent heuristics prevent the need to re-open nodes from the explored set
-                    \item Consistency implies \alert{admissibility}
+                    \item Knowledge of the worth of expanding a node $v$ is given in the form of an \alert{evaluation function} $f(v)$, which assigns a real number to each node
+                    \item Often $f(v)$ includes a \alert{heuristic function} $h(v)$ as a component, which estimates the costs of the cheapest path from $v$ to the goal
                   \end{itemize}
                 \end{minipage}
               }
             }
-          }
+            child {
+              node {Local Search Algorithms
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item if it is unimportant how the goal is reached, \alert{only the goal itself matters} and if in addition a \alert{quality} measure for nodes is given
+                      \item it operates using a \alert{single current node} (rather than multiple paths)
+                      \item requires little memory
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Hill Climbing
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item Begin with a randomly-chosen configuration and \alert{improve} on it \alert{step by step}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Simulated Annealing
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
+                        \begin{itemize}
+                          \item \enquote{noise} is injected systematically, first a lot, then gradually less
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node {Gradient Descent}
+                }
+              }
+            }
+            child {
+              node {Genetic Algorithms
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item Similar to \alert{evolution}, we search for solutions by three operators: \alert{mutation}, \alert{crossover}, and \alert{selection}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node (bfs) {Best-First Search 
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item informed search procedure that expands the node with the \enquote{\alert{best}} $f$-value first
+                      \item is an instance of the general \alert{Tree-Search} algorithm in which frontier is a \alert{priority queue} ordered by an \alert{evaluation function} $f$
+                        \begin{itemize}
+                          \item when $f$ is always correct, ones does not need to search
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Greedy Search
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item A \alert{best-first} search using the \alert{heuristic function} $h(v)$ as the \alert{evaluation function}, i.e. $f(v) = h(v)$ is called a \alert{greedy search}
+                          \begin{itemize}
+                            % \item judge the \enquote{worth} of a node by estimating its path costs to the target node
+                            \item $h(v) =$ estimated path-costs from $v$ to the target node
+                            \item the only real restriction is that $h(v) = 0$ if $v$ is the target node
+                          \end{itemize}
+                        \item is generally \alert{incomplete} and \alert{not optimal}
+                          \begin{itemize}
+                            \item \alert{graph-search} version is complete only in finite graphs
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node (hf) {Heuristic function
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
+                        \begin{itemize}
+                          \item or simply a \alert{heuristic}
+                          \item the evaluation function $f$ in \alert{greedy searches} is a heuristic function $h$ 
+                          \item the heuristic is \alert{problem-specific} and \alert{focuses} the search
+                          \item \alert{In AI it has two meanings:}
+                            \begin{itemize}
+                              \item Heuristics are \alert{fast} but in certain situations \alert{incomplete} methods for problem-solving
+                              \item Heuristics are methods that \alert{improve the search} in the \alert{average-case}
+                            \end{itemize}
+                          \item The word heuristic is derived from the Greek word {\gyre ευρισκειν} (note also: {\gyre ευρηκα!})
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
+              child {
+                node (astar) {A$^*$
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item A$^*$ combines \alert{greedy search} with the \alert{uniform-cost search}
+                        \item Always expands node with lowest \alert{evaluation function} $f(v)$ first, where:
+                          \begin{itemize}
+                            \item $g(v) =$ actual cost from the start node to $v$
+                            \item $h(v) =$ estimated cost from $v$ to the nearest target node
+                            \item $f(v) = g(v) + h(v) =$ the estimated cost of the cheapest path through $v$
+                          \end{itemize}
+                        \item We require that for A$^*$, that $h$ is admissible (e.g. straight-line distance is admissible)
+                          \begin{itemize}
+                            \item $h$ is an \alert{optimistic estimate} of the costs that actually occur
+                          \end{itemize}
+                        \item \alert{complete}, provided that every node has a finite number of successor nodes and there exists a positive constant $\delta > 0$ such that every edge has at least weight $\delta$ and \alert{optimal}, provided that one uses the \alert{tree-based} variant
+                          \begin{itemize}
+                            \item for the \alert{graph-based} variant, one:
+                              \begin{itemize}
+                                \item either needs to consider re-opening nodes from the explored set, when a better estimate becomes known, or
+                                \item one needs needs to require stronger restrictions on the heuristic estimate: it needs to be \alert{consistent}
+                                \item $A^*$ can still be applied if heuristic is not consistent, but \alert{optimality is lost} in this case
+                              \end{itemize}
+                          \end{itemize}
+                        \item \alert{Time complexity:} $O(b^d)$, exponential in the path length of the solution. More refined complexity results depend on the assumptions made, e.g. on the quality of the heuristic function
+                        \item \alert{Space complexity:} $O(b^d)$, exponential in the path length of the solution. Roughly the same as that of all other graph search algorithms, as it keeps all generated nodes in memory
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Iterative-Deepening A$^*$ (IDA$^*$)
+                    %     \resizebox{\textwidth}{!}{
+                    %       \begin{minipage}[t]{8cm}
+                    %         \begin{itemize}
+                    %           \item the $f$-costs are used to define the cutoff (rather than the depth of the search tree)
+                    %         \end{itemize}
+                    %       \end{minipage}
+                    %     }
+                  }
+                }
+                child {
+                  node {Recursive Best First Search (RBFS)}
+                }
+                child {
+                  node {Memory-bounded A$^*$ (MA$^*$) and Simplified MA$^*$ (SMA$^*$)}
+                }
+                child {
+                  node {Admissible
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
+                        \begin{itemize}
+                          \item $h$ is admissible if the following holds for all $v$: $h(v) \le h^*(v)$
+                            \begin{itemize}
+                              \item $h^*(v)$ are the actual cost of the optimal path from $v$ to the target node
+                            \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node {Consistent
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
+                        \begin{itemize}
+                          \item A heuristic $h$ is called consistent \alert{iff} for all edges $v$ leading from $s$ to $s'\colon h(s) - h(s') \le c(v)$, where $c(v)$ denotes the weight of edge $v$
+                          \item Consistent heuristics prevent the need to re-open nodes from the explored set
+                          \item Consistency implies \alert{admissibility}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
+            }
+          } 
+          % SEARCHEND
         }
-      }
-    } 
-        % SEARCHEND
-      }
         child {
           node {Trees
             \resizebox{\textwidth}{!}{
@@ -865,49 +865,15 @@
           }
         }
       child {
-        node {(Undirected) Eulerian graphs
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{12cm}
-              \begin{itemize}
-                \item  a graph is Eulerian if it has a closed trail (i.e. circuit) containing all edges
-                \item  a graph $G$ is Eulerian \alert{iff}:
-                  \begin{itemize}
-                    \item it has at most one nontrivial component
-                    \item and its vertices all have even degree
-                  \end{itemize}
-              \end{itemize}
-            \end{minipage}
-          }
-        }
-        child {
-          node {Directed Eulerian graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item an \alert{Eulerian trail} in a digraph (or graph) is a trail containing all edges
-                  \item an \alert{Eulerian circuit} is a closed trail containing all edges
-                  \item a digraph is Eulerian \alert{if} it has an Eulerian circuit
-                  \item a digraph is Eulerian \alert{iff} 
-                    \begin{itemize}
-                      \item $d^+(v) = d^-(v)$ for all nodes $v$
-                      \item the underlying graph has at most one non-trivial component
-                    \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-      }
-      child {
         node {Dual Problems
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
                 \item \alert{Min-max relation:} States
-                \begin{itemize}
-                  \item the equality of the solution of a minimization problem and a maximization problem
-                  \item the optimality of both solutions
-                \end{itemize}
+                  \begin{itemize}
+                    \item the equality of the solution of a minimization problem and a maximization problem
+                    \item the optimality of both solutions
+                  \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -964,37 +930,37 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \alert{k-coloring} of a graph is a labeling $f : V(G) \rightarrow S$ where $|S| = k$
-                    \begin{itemize}
-                      \item the labels are \alert{colors}
-                    \end{itemize}
+                      \begin{itemize}
+                        \item the labels are \alert{colors}
+                      \end{itemize}
                     \item vertices of one color form a \alert{color class}
-                    \begin{itemize}
-                      \item each color class is an \alert{independent set}
-                    \end{itemize}
+                      \begin{itemize}
+                        \item each color class is an \alert{independent set}
+                      \end{itemize}
                     \item a graph is \alert{$k$-colorable} if it has a proper $k$-coloring
-                    \begin{itemize}
-                      \item a $k$-coloring is \alert{proper} if adjacent vertices have different labels
-                      \item $k$-colorable and \alert{$k$-partite} have the same meaning
-                      \item graphs with \alert{loops} are \alert{uncolorable}
-                      \item \alert{multiple edges} are \alert{irrelevant}
-                      \item \href[page=212]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Test for $2$-colorability}
-                    \end{itemize}
+                      \begin{itemize}
+                        \item a $k$-coloring is \alert{proper} if adjacent vertices have different labels
+                        \item $k$-colorable and \alert{$k$-partite} have the same meaning
+                        \item graphs with \alert{loops} are \alert{uncolorable}
+                        \item \alert{multiple edges} are \alert{irrelevant}
+                        \item \href[page=212]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Test for $2$-colorability}
+                      \end{itemize}
                     \item \alert{Chromatic number $X(G)$:} is the least $k$ such that $G$ is $k$-colorable
-                    \begin{itemize}
-                      \item a graph is \alert{$k$-chromatic} if $\chi(G) = k$
-                      \item a proper $k$-coloring of a $k$-chromatic graph is an \alert{optimal coloring}
-                      \item every $k$-chromatic graph with n vertices has at least $\displaystyle \binom{k}{2} = \sum^{k-1}_{i=0} i$ edges. Equality holds for a complete graph plus isolated vertices
-                      \item for \alert{disjoint union:} $\chi(G+H) = max\{\chi(G), \chi(H)\}$
-                      \item for \alert{join:} $\chi(G\vee H) = \chi(G) + \chi(H)$
-                      \item for \alert{cartesian:} $\chi(G\square H) = max\{\chi(G), \chi(H)\}$
-                    \end{itemize}
+                      \begin{itemize}
+                        \item a graph is \alert{$k$-chromatic} if $\chi(G) = k$
+                        \item a proper $k$-coloring of a $k$-chromatic graph is an \alert{optimal coloring}
+                        \item every $k$-chromatic graph with n vertices has at least $\displaystyle \binom{k}{2} = \sum^{k-1}_{i=0} i$ edges. Equality holds for a complete graph plus isolated vertices
+                        \item for \alert{disjoint union:} $\chi(G+H) = max\{\chi(G), \chi(H)\}$
+                        \item for \alert{join:} $\chi(G\vee H) = \chi(G) + \chi(H)$
+                        \item for \alert{cartesian:} $\chi(G\square H) = max\{\chi(G), \chi(H)\}$
+                      \end{itemize}
                     \item if $\chi(H) < \chi(G) = k$ for every proper subgraph $H$ of $G$, then $G$ is \alert{color-critical} or \alert{$k$-critical}
-                    \begin{itemize}
-                      \item properly coloring a graph needs at least $2$ colors \alert{iff} the graph has an edge
-                      \item $K_2$ is the only $2$-critical graph
-                      \item since $2$-colorable is the same as bipartite characterization of bipartite graphs implies: $3$-critical graphs are the odd cycles
-                      \item every $k$-critical graph is $k-1$-edge-connected
-                    \end{itemize}
+                      \begin{itemize}
+                        \item properly coloring a graph needs at least $2$ colors \alert{iff} the graph has an edge
+                        \item $K_2$ is the only $2$-critical graph
+                        \item since $2$-colorable is the same as bipartite characterization of bipartite graphs implies: $3$-critical graphs are the odd cycles
+                        \item every $k$-critical graph is $k-1$-edge-connected
+                      \end{itemize}
                     \item \href[page=222]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{greedy coloring algorithm} and \href[page=223]{/home/areo/Documents/Studium/Summaries/Graph_Theory/Graphentheorie_all_in_one_with_go_back.pdf}{improvements}
                     \item \alert{upper bound:} $\chi(G)\le \Delta(G) + 1$
                     \item \alert{Lemma (Kainen):} Let $G$ be a graph with $\chi(G) > k$. Let $X$, $Y$ be a partition of $V(G)$. If $G[X]$ and $G[Y]$ are $k$-colorable \alert{then} the edge cut $[X,Y]$ has at least $k$ edges
@@ -1009,9 +975,9 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item is a set of \alert{pairwise adjacent vertices}
-                    \begin{itemize}
-                      \item \alert{Clique number $\omega(G)$:} Size (number of vertices) of the largest clique
-                    \end{itemize}
+                      \begin{itemize}
+                        \item \alert{Clique number $\omega(G)$:} Size (number of vertices) of the largest clique
+                      \end{itemize}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1029,7 +995,7 @@
                       \item the total flow on edges \alert{leaving} $U$ is $\displaystyle f^{+}(U)=\sum_{\mathclap{\substack{u \in U, v \in V \backslash U, u v \in E}}} f(u v)$
                       \item the total flow on edges \alert{entering} $U$ is $\displaystyle f^{-}(U)=\sum_{\mathclap{\substack{v \in V\backslash U, u \in U , v u \in E}}} f(v u)$
                       \item the \alert{net flow} of $U$ is $f^+(U) − f^−(U)$
-                    \item if $U$ is a set of nodes in a network then the net flow out of $U$ is the sum of net flows out of the nodes in $U$, i.e. $\displaystyle f^+(U) − f^−(U) = \sum_{v\in U} (f^+(v) − f^−(v))$
+                      \item if $U$ is a set of nodes in a network then the net flow out of $U$ is the sum of net flows out of the nodes in $U$, i.e. $\displaystyle f^+(U) − f^−(U) = \sum_{v\in U} (f^+(v) − f^−(v))$
                       \item in particular if $f$ is a feasible flow and $[S,T]$ is a source/sink cut then the net flow out of $S$ and net flow into $T$ equal $val(f)$
                     \end{itemize}
                   \item \alert{Max-Flow Min-Cut Theorem:}  $\displaystyle \max_{f} val(f) = \min_{S, T} cap(S, T)$, in every network, the maximum value of a feasible flow equals the minimum capacity of a source/sink cut
@@ -1047,13 +1013,13 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item a \alert{source/sink cut $[S, T]$} consists of the \alert{edges} from a \alert{source set $S$} to a \alert{sink set $T$}
-                    \begin{itemize}
-                      \item partition $S$, $T$ with $s \in S$, $t \in T$ of the node set $V$ of a network $G=(V,E)$
-                    \end{itemize}
+                      \begin{itemize}
+                        \item partition $S$, $T$ with $s \in S$, $t \in T$ of the node set $V$ of a network $G=(V,E)$
+                      \end{itemize}
                     \item the \alert{capacity} of the cut $[S, T]$ is $\displaystyle cap(S, T) = \sum_{\mathclap{\substack{u\in S, v\in T}}} c(uv)$
-                    \begin{itemize}
-                      \item edges from $T$ to $S$ do not affect the capacity of the cut
-                    \end{itemize}
+                      \begin{itemize}
+                        \item edges from $T$ to $S$ do not affect the capacity of the cut
+                      \end{itemize}
                     \item \alert{Minimum Cut Problem}: Given a network problem find a minimum cut $(S,T)$ which minimizes $cap(S,T)$
                   \end{itemize}
                 \end{minipage}
@@ -1072,8 +1038,8 @@
                     \item a flow $f$ is \alert{feasible} if it satisfies the \alert{capacity constraints} $\forall e\in E:0\leq f(e)\leq c(e)$ and the \alert{conservation constraints} $\forall\nu\in V\setminus\{s,t\}:f^{+}(\nu)=f^{-}(\nu)$
                     \item \alert{flow value} $val(f) = f^-(t) - f^+(t) = f^+(s) - f^-(s)$ is the network flow into the sink
                     \item \alert{Max-Flow-Problem:} For a network find a feasible flow $f$ with maximum flow value
-                    % \item flow \alert{from} the node $v$: $\displaystyle f^+(v) = \sum_{vw\in E} f((v,w))$ 
-                    % \item flow \alert{into} the node $v$: $\displaystyle f^-(v) = \sum_{wv\in E} f((w,v))$
+                      % \item flow \alert{from} the node $v$: $\displaystyle f^+(v) = \sum_{vw\in E} f((v,w))$ 
+                      % \item flow \alert{into} the node $v$: $\displaystyle f^-(v) = \sum_{wv\in E} f((w,v))$
                   \end{itemize}
                 \end{minipage}
               }
@@ -1085,9 +1051,9 @@
                     \begin{itemize}
                       \item An \alert{integral flow} is a flow using only integer capacites
                       \item \alert{Integrality Theorem:} If all capacities in a network are integers, then there is a maximum flow assigning integral flow to each edge
-                      \begin{itemize}
-                        \item Furthermore, some maximum flow can be partitioned into flows of unit value along paths from source to sink
-                      \end{itemize}
+                        \begin{itemize}
+                          \item Furthermore, some maximum flow can be partitioned into flows of unit value along paths from source to sink
+                        \end{itemize}
                     \end{itemize}
                   \end{minipage}
                 }
@@ -1100,9 +1066,9 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \href[page=193]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm with example}
-                    \begin{itemize}
-                      \item modifications by \href[page=204]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{Edmonds und Karp}
-                    \end{itemize}
+                      \begin{itemize}
+                        \item modifications by \href[page=204]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{Edmonds und Karp}
+                      \end{itemize}
                     \item \alert{f-augmenting path $P$} is a source-to-sink path $P$ in the underlying graph $G$ such that for each $e\in E(P)$: 
                       \begin{itemize}
                         % \item  paths are considered in the undirected version of the network $N$
@@ -1143,19 +1109,19 @@
                 \begin{itemize}
                   \item for a \alert{perfect matching $M$} and \alert{weighted cover $(u,v)$} in a weighted bipartite graph $G$ it applies that: $c(u,v) \ge w(M)$
                   \item $c(u,v) = w(M)$ \alert{iff} $M$ consists of edges $ij$ such that $u_i + v_j = w_{i,j}$
-                  % \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $x_iy_j$ such that $u_i + v_j = w_{i,j}$
+                    % \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $x_iy_j$ such that $u_i + v_j = w_{i,j}$
                   \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $ij$ such that $u_i + v_j = w_{i,j}$
                   \item $G_{u,v}$ has a \alert{perfect matching $M$} if the weight $\displaystyle\sum_{u_iv_j\in M} w_{i,j}$ is equal to $\displaystyle\sum_i u_i + \sum_j v_j$
-                  % \begin{itemize}
-                  %   \item and by the Lemma above that is a optimal solution
-                  %   \item otherwise we find a matching $M$ and a vertex cover $Q$ of the same size
-                  % \end{itemize} makes no sense
-                  % \item if $G_{u,v}$ has a \alert{perfect matching} then its weight is $\displaystyle\sum_i u_i + \sum_j v_j$
-                  %   \begin{itemize}
-                  %     \item and by Lemma 3.2.7 we have the optimal solution
-                  %     \item otherwise we find a matching $M$ and a vertex cover $Q$ of the same size
-                  %   \end{itemize}
-                  % \item if $G_{u,v}$ has a \alert{perfect matching} then its weight $\displaystyle\sum_{u_{i},v_{j}in M}w_{i,j}$ is equal to $\displaystyle\sum_{i}u_{i}+{{\sum_{j}}}\;\nu_{j}$
+                    % \begin{itemize}
+                    %   \item and by the Lemma above that is a optimal solution
+                    %   \item otherwise we find a matching $M$ and a vertex cover $Q$ of the same size
+                    % \end{itemize} makes no sense
+                    % \item if $G_{u,v}$ has a \alert{perfect matching} then its weight is $\displaystyle\sum_i u_i + \sum_j v_j$
+                    %   \begin{itemize}
+                    %     \item and by Lemma 3.2.7 we have the optimal solution
+                    %     \item otherwise we find a matching $M$ and a vertex cover $Q$ of the same size
+                    %   \end{itemize}
+                    % \item if $G_{u,v}$ has a \alert{perfect matching} then its weight $\displaystyle\sum_{u_{i},v_{j}in M}w_{i,j}$ is equal to $\displaystyle\sum_{i}u_{i}+{{\sum_{j}}}\;\nu_{j}$
                 \end{itemize}
               \end{minipage}
             }
@@ -1189,12 +1155,12 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item known in form of the \alert{Minimum Weighted Cover} problem
-                    % \item for $u = (u_1, \ldots u_n)$, $v = (v_1, \ldots, v_n)$ is (weighted) \alert{$(u,v)$-Cover} of $w$, if $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
+                      % \item for $u = (u_1, \ldots u_n)$, $v = (v_1, \ldots, v_n)$ is (weighted) \alert{$(u,v)$-Cover} of $w$, if $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
                     \item find a weighted cover $(u,v)$ of minimum cost
-                    \begin{itemize}
-                      \item (weighted) \alert{$(u,v)$-Cover} is a choice of labels $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ such that $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
-                      \item \alert{cost} of a cover $(u,v)$ is $\displaystyle c(u,v) = \sum_i u_i + \sum_j v_j$
-                    \end{itemize}
+                      \begin{itemize}
+                        \item (weighted) \alert{$(u,v)$-Cover} is a choice of labels $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ such that $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
+                        \item \alert{cost} of a cover $(u,v)$ is $\displaystyle c(u,v) = \sum_i u_i + \sum_j v_j$
+                      \end{itemize}
                   \end{itemize}
                 \end{minipage}
               }
@@ -1206,7 +1172,7 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \href[page=163]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm with example} and \href[page=122]{\lpathgraph{Graphentheorie_exercise_class_slides_all_in_one_with_go_back.pdf}}{another example}
-                    % \item the \alert{Hungarian Algorithm} finds a \alert{maximum weight matching} and a \alert{minimum cost cover}
+                      % \item the \alert{Hungarian Algorithm} finds a \alert{maximum weight matching} and a \alert{minimum cost cover}
                     \item the \alert{Hungarian Algorithm} finds a \alert{maximum weighted matching} and a \alert{minimum weighted vertex cover}
                     \item for the weighted cover $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ and weights $w_{i, j} \ge 0$ the \alert{excess matrix} is $c_{i,j} = u_{i}+ v_{j} - w_{i,j}$
                     \item stop \enquote{production:} $u_{i}+v_{j}>w_{i,j}$ and at the same time minimize $\sum_{i}u_{i}+\sum_{j}\nu_{j}$
@@ -1222,15 +1188,15 @@
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
                   \item the size of a \alert{vertex cover} is always \alert{at least as big as} the size of a \alert{matching} (Size of vertex cover $\ge$ Size of matching)
-                  \begin{itemize}
-                    \item each edge of a matching has at least one covering vertex
-                    \item no vertex can cover two edges of a matching because edges are not incident in matchings
-                    % \item no vertex can cover two edges of a matching edge because matched edges are not adjacent
-                      % Jede Kante eines Matchings hat mindestens einen überdeckenden
-                      % Knoten
-                      % • Kein Knoten kann zwei Kanten eines Matchings abdecken
-                      % • weil Kanten in Matchings nicht inzidieren
-                  \end{itemize}
+                    \begin{itemize}
+                      \item each edge of a matching has at least one covering vertex
+                      \item no vertex can cover two edges of a matching because edges are not incident in matchings
+                        % \item no vertex can cover two edges of a matching edge because matched edges are not adjacent
+                        % Jede Kante eines Matchings hat mindestens einen überdeckenden
+                        % Knoten
+                        % • Kein Knoten kann zwei Kanten eines Matchings abdecken
+                        % • weil Kanten in Matchings nicht inzidieren
+                    \end{itemize}
                   \item \alert{Theorem of König and Egerváry:} For any bipartite graph $G$ the size of maximum matching equals the size of minimum vertex cover
                 \end{itemize}
               \end{minipage}
@@ -1247,10 +1213,10 @@
                         \item the other vertices are \alert{$M$-unsaturated}
                         \item a \alert{perfect matching} saturates every vertex
                         \item \underline{perfect matching in complete graphs:}
-                        \begin{itemize}
-                          \item \underline{even number of vertices:} $K_{2n+1}$ has no perfect matching because the number of vertices is odd
-                          \item \underline{odd number of vertices:} $K_{2n}$ has  $f_n = (2n-1) \cdot f_{n-1} = (2n-1) \cdot \ldots \cdot 5 \cdot 3 \cdot 1$ perfect matchings for $n = \dfrac{|V(G)|}{2}$ (because the edges are undirected, there are $2n-1$ choices for the first pairing of a given node, as there are $2n$ nodes, but a node can't pair with himself, so $2n-1$)
-                        \end{itemize}
+                          \begin{itemize}
+                            \item \underline{even number of vertices:} $K_{2n+1}$ has no perfect matching because the number of vertices is odd
+                            \item \underline{odd number of vertices:} $K_{2n}$ has  $f_n = (2n-1) \cdot f_{n-1} = (2n-1) \cdot \ldots \cdot 5 \cdot 3 \cdot 1$ perfect matchings for $n = \dfrac{|V(G)|}{2}$ (because the edges are undirected, there are $2n-1$ choices for the first pairing of a given node, as there are $2n$ nodes, but a node can't pair with himself, so $2n-1$)
+                          \end{itemize}
                         \item the \alert{size} of a matching is given by the \alert{number of edges}
                         \item a \alert{maximal matching} in a graph is a matching that cannot be enlarged by adding an edge
                         \item a \alert{maximum matching} is a matching of maximum size (among all matchings in a graph)
@@ -1393,9 +1359,9 @@
               \begin{minipage}[t]{8cm}
                 \begin{itemize}
                   \item the size of a (minimal) edge cover is at least the size of a maximal independed set
-                  \begin{itemize}
-                    \item because no edge can cover more than one vertex of such a set\cite{ravskyAnswerRelationIndependent2017}
-                  \end{itemize}
+                    \begin{itemize}
+                      \item because no edge can cover more than one vertex of such a set\cite{ravskyAnswerRelationIndependent2017}
+                    \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -1447,160 +1413,34 @@
           }
         }
       }
-      child {
-        node {(Undirected) Graphs $G = (V, E, R)$
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{10cm}
-              \begin{itemize}
-                \item \alert{vertex set}, e.g. $V(G) = \{v_1, v_2, \ldots\}$
-                \item \alert{edge set}, e.g. $E(G) = \{e_1, e_2, \ldots\}$
-                \item \alert{relation}, e.g. $R(G) = \{(e_1, \{v_1, v_2\}), \ldots\}$ that associates with each \alert{edge} a set of two vertices, called its \alert{endpoints}
-                \item a \alert{loop} is an edge with equal endpoints 
-                \item \alert{multiple edges} are edges with same pair of endpoints                       
-                \item \underline{\href[page=37]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
-                  \begin{itemize}
-                    \item $\displaystyle \sum_{v\in V(G)} d(v) = 2\cdot e(G)$
-                    \item in a graph $G$ the average vertex degree is $\displaystyle \frac{\sum_{v\in V(G)} d(v)}{\mathrm{n}(\mathrm{G})}$ and hence $\displaystyle \delta(G) \leq \frac{2 \cdot e(G)}{n(G)} \leq \Delta(G)$
-                    \item every graph has an even number of vertices of odd degree
-                    \item a $k$-regular graph with $n$ vertices has $\dfrac{n\cdot k}{2}$ edges
-                    \item the maximum number of edges in a simple graph is $\dbinom{n}{2}$
-                    \item the minimum number of edges in a connected graph with $n$ vertices is $n-1$
-                    \item if $G$ is a simple $n$-vertex graph with $\delta(G) \ge \dfrac{n-1}{2}$ then $G$ is connected
-                  \end{itemize}
-              \end{itemize}
-            \end{minipage}
-          }
-        }
         child {
-          node {Operations on Graphs}
-          child {
-            node (disjointunion) {Disjoint Union $G+H$
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item for graphs $G$ and $H$ with disjoint sets of vertices is the union $(V(G) \cup V(H), E(G \cup E(H))$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (join) {Join $G\vee H$
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item of simple graphs $G$ and $H$ is the graph obtained from the disjoint union $G+H$ by adding the edges $\{xy : x \in V(G), y \in V(H)\}$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (cartesian) {Cartesian Product $G \square H$
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{12cm}
-                      \begin{itemize}
-                        \item the cartesian product of $G$ and $H$, is the graph with
-                        \begin{itemize}
-                          \item vertex set $V(G) \times V(H)$
-                          \item $(u,v)$ is adjacent to $(u',v')$ \alert{iff} $u=u'$, $vv' \in E(H)$ or $v=v', uu' \in E(G)$
-                        \end{itemize}
-                      \item the cartesian operation is \alert{symmetric}: $G \square H \overset{\sim}{=} H\square G$
-                      \item \href[page=218]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{examples}
-                      \end{itemize}
-                    \end{minipage}
-                  }
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (symmetricgraphdifference) {Symmetric Graph Difference
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item for graphs $G$ and $H$ with the same vertex set $V$ the \alert{symmetric difference $G \triangle H$} is the graph with vertex set $V$ whose edges are in $G$ or $H$, but not in both
-                      \begin{itemize}
-                        \item if $M$ and $M’$ are sets of edges in graphs $G$ und $H$, then we get as edge set: $M \triangle M’ = (M – M') \cup (M' – M)$
-                      \end{itemize}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
-        child {
-          node (connectivity) {Connectivity (germ. Zusammenhang)
+          node {(Undirected) Eulerian graphs
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \alert{Theorem [Whiney]:} For simple graphs it applies that $\kappa(G) \le \kappa'(G) \le \delta(G)$
+                  \item  a graph is Eulerian if it has a closed trail (i.e. circuit) containing all edges
+                  \item  a graph $G$ is Eulerian \alert{iff}:
                     \begin{itemize}
-                      \item $G = K_m + K_m$
-                      \begin{itemize}
-                        \item $\kappa(G) = \kappa’(G) = 0$
-                        \item $\delta(G) = m-1$
-                      \end{itemize}
-                      \item $G$ is two $m$-cliques sharing a single vertex
-                      \begin{itemize}
-                        \item $\kappa(G) = 1$
-                        \item $\kappa’(G) = \delta(G)$
-                      \end{itemize}
+                      \item it has at most one nontrivial component
+                      \item and its vertices all have even degree
                     \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
           }
           child {
-            node {(Vertex-) Connectivity
+            node {Directed Eulerian graphs
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item a \alert{separating set} or \alert{vertex cut} of a graph $G$ is a set $S \subseteq V(G)$ such that $G-S$ has more than one component
-                    \item the \alert{connectivity} of $G$, \alert{$\kappa(G)$}, is the minimum size of $S \subseteq V(G)$ such that $G-S$ is disconnected or has only one vertex
-                    \item a graph is \alert{k-connected} if its connectivity is at least $k$
-                    \item a \alert{complete graph $K_n$} has connectivity $n-1$, i.e. $\kappa(K_n) = n − 2$
+                    \item an \alert{Eulerian trail} in a digraph (or graph) is a trail containing all edges
+                    \item an \alert{Eulerian circuit} is a closed trail containing all edges
+                    \item a digraph is Eulerian \alert{if} it has an Eulerian circuit
+                    \item a digraph is Eulerian \alert{iff} 
                       \begin{itemize}
-                        \item $n-1$ vertex cut leaves only a single vertex after removal
+                        \item $d^+(v) = d^-(v)$ for all nodes $v$
+                        \item the underlying graph has at most one non-trivial component
                       \end{itemize}
-                    \item for \alert{every non-complete graph} $G \ne K_n$ it applies that: $\kappa(G) \le n − 2$ 
-                      \begin{itemize}
-                        \item consider one vertex $v$ with at most $n-2$ neighbors 
-                        \item the removal of the neighbors produces at least two components
-                      \end{itemize}
-                    \item for \alert{bipartite complete graphs} $\kappa(K_{n,m}) = min\{n, m\}$
-                      \begin{itemize}
-                        \item only the removal of the left or right bipartition cuts the graph
-                      \end{itemize}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node (edgeconnectivity) {Edge-Connectivity
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item a \alert{disconnecting set of edges} is a set $F \subseteq E(G)$
-                      \begin{itemize}
-                        \item such that $G – F$ has more than one component
-                      \end{itemize}
-                    \item a graph is \alert{k-edge-connected}
-                      \begin{itemize}
-                        \item if every disconnected set of edges has at least $k$ edges
-                      \end{itemize}
-                    \item the \alert{edge-connectivity} of $G, \kappa’(G)$,
-                      \begin{itemize}
-                        \item is the minimum size of a disconnecting set of edges
-                      \end{itemize}
-                    \item given $S, T \subseteq E[G]$ define $[S, T]$
-                      \begin{itemize}
-                        \item as the set of edges having one endpoint in $S$ and one endpoint in $T$
-                      \end{itemize}
-                    \item a \alert{edge cut} is an edge set of the form $[S, \overline{S}]$ where $S \subsetneq V(G)$
                   \end{itemize}
                 \end{minipage}
               }
@@ -1608,40 +1448,89 @@
           }
         }
         child {
-          node {Matrix representation
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item a \alert{loopless} graph $G$
-                    \begin{itemize}
-                      \item $V(G) = \{v_1, \ldots, v_n\}$
-                      \item $E(G) = \{e_1, \ldots e_m\}$
-                    \end{itemize}
-                    used as example graph for the child nodes
-                \end{itemize}
-                \includegraphics[width=0.3\textwidth, center]{./figures/matrix_representation.png}
-              \end{minipage}
+          node {Types of (undirected) graphs}
+          child {
+            node (hypercube) {Hypercube $Q_k$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item The $k$-dimensional cube or hypercube $Q_k$, is the simple graph for which
+                      \begin{itemize}
+                        \item vertices are bit-strings of length $k$
+                        \item edges are between the pairs of bit-strings differing in exactly one position
+                      \end{itemize}
+                    \item $\kappa(Q_k) = k$
+                  \end{itemize}
+                \end{minipage}
+              }
             }
           }
           child {
-            node {Adjacency matrix $A(G)$
+            node (simple graph) {Simple Graph
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item a $n\times n$ matrix with entries $a_{i,j}$
-                    \item where $a_{i,j}$ is the number of edges with endpoints $\{v_i, v_j\}$
+                    \item \alert{has:}
+                      \begin{itemize}
+                        \item no loops
+                        \item no multiple edges
+                      \end{itemize}
+                    \item one writes $e = uv$ (or $vu$) for an edge e with \alert{endpoints} $u$ and $v$
                   \end{itemize}
-                  \includegraphics[width=0.3\textwidth, center]{./figures/adjacency_matrix.png}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node (regular graphs) {Regular graphs
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item $G$ is regular if $\Delta(G) = \delta(G)$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {$X, Y$-bigraph
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item is a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Special graphs
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \href[page=24]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{list of special graphs}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node (bipartite graphs) {Bipartite Graphs
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a graph $G$ is \alert{bipartite} if $V(G)$ is the union of two disjoint independent sets
+                    \item \alert{Theorem of König:} A graph is bipartite \alert{iff} it has no odd cycle
+                  \end{itemize}
                 \end{minipage}
               }
             }
             child {
-              node {Adjacency
+              node {k-partite Graph
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
-                      \item if $u$ and $v$ are endpoints of an edge they are \alert{adjacent} and \alert{neighbors}
-                      \item one writes: $u\leftrightarrow v$
+                      \item a graph $G$ is \alert{k-partite} if $V(G)$ can be expressed as the union of $k$ independent sets
                     \end{itemize}
                   \end{minipage}
                 }
@@ -1649,793 +1538,904 @@
             }
           }
           child {
-            node {Incidence matrix $M(G)$
+            node {Planar graphs
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
+                \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item a $n\times m$ matrix with entries $m_{i,j}$ (that means the $m$ columns are edges)
-                    \item where $m_{i,j}$ is 
+                    \item \alert{Remark:} We use the same name for a graph and its drawing
+                    \item a graph is \alert{planar} if it has a drawing without crossings
                       \begin{itemize}
-                        \item $1$ if $v_i$ is an endpoint of $e_j$ and
-                        \item $0$ otherwise
+                        \item $K_{5}$ and $K_{3,3}$ are not planar 
+                      \end{itemize}
+                    \item such a drawing is a \alert{planar embedding} of $G$
+                    \item a \alert{plane graph} is a particular planar embedding of a planar graph
+                    \item a planar embedding of a graph cuts the plane into pieces, called \alert{faces}
+                      \begin{itemize}
+                        \item a finite plane graph $G$ has one unbounded face called the \alert{outer face}
+                      \end{itemize}
+                    \item \alert{Theorem (Euler):} If a connected plane graph has exactly
+                      \begin{itemize}
+                        \item $n$ vertices,
+                        \item $e$ edges and
+                        \item $f$ faces,
+                      \end{itemize}
+                      then $n − e + f = 2$
+                    \item \alert{other terms:}
+                      \begin{itemize}
+                        \item \href[page=234]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{curve, polygonal curve, drawing, crossing}
+                        \item \href[page=235]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{closed curve, simple curve}
+                        \item \href[page=237]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{open set, region, faces}
+                        \item \href[page=238]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Jordan Curve Theorem}
                       \end{itemize}
                   \end{itemize}
-                  \includegraphics[width=0.3\textwidth, center]{./figures/incidence_matrix.png}
                 \end{minipage}
               }
             }
             child {
-              node {Incidence
+              node {Dual Graphs
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
+                  \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item $v$ and $e$ are \alert{incident} if $v$ is an endpoint of $e$
+                      \item \href[page=241]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{definition}
+                      \item \href[page=243]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{two embeddings of a planar graph may have non-isomorphic duals}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Contraction
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item in a graph $G$ a \alert{contraction} of edge $e$, $G \cdot e$, with endpoints $u$, $v$ is the replacement of $u$ and $v$ with a single vertex
+                        \begin{itemize}
+                          \item whose incident edges are the edges other than $e$
+                          \item that were incident to $u$ or $v$
+                        \end{itemize}
+                      \item $G \cdot e$
+                        \begin{itemize}
+                          \item has one edge less than $G$
+                          \item has one vertex less than $G$ if $e$ is not a loop
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Subdivisions
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item an edge \alert{subdivision} can be obtained by replacing the edge with a path with new vertices
+                      \item an \alert{$H$-subdivision} (of subdivision of $H$) is a graph obtained from a graph H by successive edge subdivisions, i.e. a graph obtained from H by replacing edges with pairwise internally disjoint paths
                     \end{itemize}
                   \end{minipage}
                 }
               }
               child {
-                node (degree) {Degree $d(v)$ or $d_G(v)$
+                node {Kuratowski’s Theorem
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item a graph is planar \alert{iff} it does not contain a subdivision of $K_5$ or $K_{3,3}$
+                          \begin{itemize}
+                            \item \underline{or the other way round:} A graph is not planar \alert{iff} it does contain a subdivision of $K_5$ or $K_{3,3}$
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+            }
+          }
+          child {
+            node {Interval graphs
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item an \alert{interval representation} of a graph is a family of intervals assigned to the vertices so that: 
+                      \begin{itemize}
+                        \item vertices are adjacent \alert{iff} the corresponding intervals intersect
+                      \end{itemize}
+                    \item a graph having such a representation is an \alert{interval graph}
+                    \item if $G$ is an interval graph then $\chi(G) = \omega(G)$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Types of Directed graphs}
+            child {
+              node {Underlying Graph
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item The underlying graph of a digraph $D$ is the graph $G$
+                        \begin{itemize}
+                          \item with $V(G) = V(D)$
+                          \item $E(G) = E(D)$
+                          \item each ordered pairs of an edge become an unordered pair
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Simple Graph
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a digraph is simple
+                        \begin{itemize}
+                          \item if each ordered pair is the head and tail of at most one edge
+                          \item one loop may be present at each vertex
+                        \end{itemize}
+                      \item in a simple digraph $uv$ denotes an edge with tail $u$ and head $v$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+        }
+        child {
+          node {Directed Graphs / Digraphs $G = (V, E, f)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{14cm}
+                \begin{itemize}
+                  \item \alert{vertex set}, e.g. $V(G) = \{v_1, v_2, \ldots\}$
+                  \item \alert{edge set}, e.g. $E(G) = \{e_1, e_2, \ldots\}$
+                  \item a \alert{function}, .e.g. $f = \{e_1 \mapsto (v_1, v_2), \ldots\}$ assigning each edge an ordered pair of vertices
+                  \item the first vertex of the ordered pair is called \alert{tail}, the second vertex is called \alert{head}, together they are called the \alert{endpoints}
+                  \item when a digraph \alert{models a relation} each ordered pair is the pair for at most one edge. Like simple graphs we then treat the pair of endpoints as the edge
+                  \item in a digraph a \alert{loop} is an edge with equal endpoints
+                  \item \alert{multiple edges} have the same ordered pair of endpoints
+                  \item in an edge from $u$ to $v$
+                    \begin{itemize}
+                      \item $v$ is the \alert{successor} of $u$
+                      \item $u$ is the \alert{predecessor} of $v$
+                    \end{itemize}
+                  \item we write $u \rightarrow v$ for an edge from $u$ to $v$
+                  \item \underline{\href[page=50]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
+                    \begin{itemize}
+                      \item $\displaystyle \sum_{v\in V(G)} d^+(v) = e(G) = \sum_{v\in V(G)} d^-(v)$
+                      \item if $G$ is a digraph with $\delta^+(G)\ge 1$ or $\delta^-(G)\ge 1$ then $G$ contains a cycle
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Subgraphs, Isomorphism, decomposition, union
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item are like in (undirected) graphs
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Matrix representation}
+            child {
+              node {Incidence matrix $M(G)$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item loopless digraph $G$
+                      \item $m_{i,j} = +1$ if $v_i$ is the tail of $e_j$
+                      \item $m_{i,j} = -1$ if $v_i$ is the head of $e_j$
+                    \end{itemize}
+                    \includegraphics[width=0.8\textwidth, center]{./figures/incidence_matrix_dir.png}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Degree
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item the \alert{outdegree} $d^+(v)$ is the number of edges with tail $v$
+                        \item the \alert{indegree} $d^-(v)$ is the number of edges with head $v$
+                        \item the \alert{out-neighborhood (successor set)} $N^+(v) := \{x \in V(G) : v \rightarrow x\}$
+                        \item the \alert{in-neighborhood (predecessor set)} $N^-(v) := \{x \in V(G) : x \rightarrow v\}$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+            }
+            child {
+              node {Adjacency matrix $A(G)$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item digraph $G$
+                      \item the entry in position $a_{i,j}$ is the number of edges from $v_i$ to $v_j$
+                    \end{itemize}
+                    \includegraphics[width=0.8\textwidth, center]{./figures/adjacence_matrix_dir.png}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Paths, Walks, Cycles, Circuits
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item the \alert{length} is its \alert{number of edges}
+                    \item trail, walk and circuit are the same in (undirected) graphs and digraphs
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Path
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a \alert{simple digraph} whose vertices can be linearly ordered so that: 
+                        \begin{itemize}
+                          \item there is an edge with tail $u$ and head $v$ \alert{iff} $v$ immediately follows $u$
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {u,v-path 
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item a path whose only vertex of \alert{indegree} $0$ is $u$ and \alert{outdegree} $0$ is $v$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Cycle
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item a simple digraph whose vertices can be arranged on a circle such that: 
+                          \begin{itemize}
+                            \item edges exist \alert{iff} nodes follow each other according to the (without loss of generality) clockwise orientation
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+            }
+            % child {
+            %   node {Walk
+            %     \resizebox{\textwidth}{!}{
+            %       \begin{minipage}[t]{12cm}
+            %         \begin{itemize}
+            %           \item a list $v_0, e_1, v_1, \ldots, e_k, v_k$ of vertices and edges 
+            %           \begin{itemize}
+            %             \item for $1 \le i \le k$ the edge $e_i$ has tail (from) $v_{i-1}$ and head (to) $v_i$
+            %           \end{itemize}
+            %         \end{itemize}
+            %       \end{minipage}
+            %     }
+            %   }
+            %   child {
+            %     node {Closed walk
+            %       \resizebox{\textwidth}{!}{
+            %         \begin{minipage}[t]{12cm}
+            %           \begin{itemize}
+            %             \item a walk with \alert{equal first} and \alert{last vertex}
+            %           \end{itemize}
+            %         \end{minipage}
+            %       }
+            %     }
+            %   }
+            %   child {
+            %     node {Trail
+            %       \resizebox{\textwidth}{!}{
+            %         \begin{minipage}[t]{12cm}
+            %           \begin{itemize}
+            %             \item a walk \alert{without repeating edges}
+            %           \end{itemize}
+            %         \end{minipage}
+            %       }
+            %     }
+            %     child {
+            %       node {Circuit
+            %         \resizebox{\textwidth}{!}{
+            %           \begin{minipage}[t]{12cm}
+            %             \begin{itemize}
+            %               \item a \alert{closed trail}, i.e. the \alert{first} and the \alert{last vertex} are \alert{equal}
+            %               \item like a circuit in computer engineering
+            %             \end{itemize}
+            %           \end{minipage}
+            %         }
+            %       }
+            %     }
+            %   }
+            %   child {
+            %     node {u,v-walk
+            %       \resizebox{\textwidth}{!}{
+            %         \begin{minipage}[t]{12cm}
+            %           \begin{itemize}
+            %             \item has \alert{first vertex} $u$ and \alert{last vertex} $v$
+            %             % \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
+            %           \end{itemize}
+            %         \end{minipage}
+            %       }
+            %     }
+            %   }
+            % }
+          }
+          child {
+            node {(Strongly) Connected
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item a digraph is \alert{weakly connected}
+                      \begin{itemize}
+                        \item if its underlying graph is connected
+                      \end{itemize}
+                    \item a digraph is \alert{strongly connected}
+                      \begin{itemize}
+                        \item if for each ordered pair $u$, $v$ there is a path from $u$ to $v$
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {(Undirected) Graphs $G = (V, E, R)$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{10cm}
+                \begin{itemize}
+                  \item \alert{vertex set}, e.g. $V(G) = \{v_1, v_2, \ldots\}$
+                  \item \alert{edge set}, e.g. $E(G) = \{e_1, e_2, \ldots\}$
+                  \item \alert{relation}, e.g. $R(G) = \{(e_1, \{v_1, v_2\}), \ldots\}$ that associates with each \alert{edge} a set of two vertices, called its \alert{endpoints}
+                  \item a \alert{loop} is an edge with equal endpoints 
+                  \item \alert{multiple edges} are edges with same pair of endpoints                       
+                  \item \underline{\href[page=37]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
+                    \begin{itemize}
+                      \item $\displaystyle \sum_{v\in V(G)} d(v) = 2\cdot e(G)$
+                      \item in a graph $G$ the average vertex degree is $\displaystyle \frac{\sum_{v\in V(G)} d(v)}{\mathrm{n}(\mathrm{G})}$ and hence $\displaystyle \delta(G) \leq \frac{2 \cdot e(G)}{n(G)} \leq \Delta(G)$
+                      \item every graph has an even number of vertices of odd degree
+                      \item a $k$-regular graph with $n$ vertices has $\dfrac{n\cdot k}{2}$ edges
+                      \item the maximum number of edges in a simple graph is $\dbinom{n}{2}$
+                      \item the minimum number of edges in a connected graph with $n$ vertices is $n-1$
+                      \item if $G$ is a simple $n$-vertex graph with $\delta(G) \ge \dfrac{n-1}{2}$ then $G$ is connected
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Operations on Graphs}
+            child {
+              node (disjointunion) {Disjoint Union $G+H$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item for graphs $G$ and $H$ with disjoint sets of vertices is the union $(V(G) \cup V(H), E(G \cup E(H))$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node (join) {Join $G\vee H$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item of simple graphs $G$ and $H$ is the graph obtained from the disjoint union $G+H$ by adding the edges $\{xy : x \in V(G), y \in V(H)\}$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node (cartesian) {Cartesian Product $G \square H$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item the cartesian product of $G$ and $H$, is the graph with
+                            \begin{itemize}
+                              \item vertex set $V(G) \times V(H)$
+                              \item $(u,v)$ is adjacent to $(u',v')$ \alert{iff} $u=u'$, $vv' \in E(H)$ or $v=v', uu' \in E(G)$
+                            \end{itemize}
+                          \item the cartesian operation is \alert{symmetric}: $G \square H \overset{\sim}{=} H\square G$
+                          \item \href[page=218]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{examples}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node (symmetricgraphdifference) {Symmetric Graph Difference
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item for graphs $G$ and $H$ with the same vertex set $V$ the \alert{symmetric difference $G \triangle H$} is the graph with vertex set $V$ whose edges are in $G$ or $H$, but not in both
+                        \begin{itemize}
+                          \item if $M$ and $M’$ are sets of edges in graphs $G$ und $H$, then we get as edge set: $M \triangle M’ = (M – M') \cup (M' – M)$
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node (connectivity) {Connectivity (germ. Zusammenhang)
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \alert{Theorem [Whiney]:} For simple graphs it applies that $\kappa(G) \le \kappa'(G) \le \delta(G)$
+                      \begin{itemize}
+                        \item $G = K_m + K_m$
+                          \begin{itemize}
+                            \item $\kappa(G) = \kappa’(G) = 0$
+                            \item $\delta(G) = m-1$
+                          \end{itemize}
+                        \item $G$ is two $m$-cliques sharing a single vertex
+                          \begin{itemize}
+                            \item $\kappa(G) = 1$
+                            \item $\kappa’(G) = \delta(G)$
+                          \end{itemize}
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {(Vertex-) Connectivity
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a \alert{separating set} or \alert{vertex cut} of a graph $G$ is a set $S \subseteq V(G)$ such that $G-S$ has more than one component
+                      \item the \alert{connectivity} of $G$, \alert{$\kappa(G)$}, is the minimum size of $S \subseteq V(G)$ such that $G-S$ is disconnected or has only one vertex
+                      \item a graph is \alert{k-connected} if its connectivity is at least $k$
+                      \item a \alert{complete graph $K_n$} has connectivity $n-1$, i.e. $\kappa(K_n) = n − 2$
+                        \begin{itemize}
+                          \item $n-1$ vertex cut leaves only a single vertex after removal
+                        \end{itemize}
+                      \item for \alert{every non-complete graph} $G \ne K_n$ it applies that: $\kappa(G) \le n − 2$ 
+                        \begin{itemize}
+                          \item consider one vertex $v$ with at most $n-2$ neighbors 
+                          \item the removal of the neighbors produces at least two components
+                        \end{itemize}
+                      \item for \alert{bipartite complete graphs} $\kappa(K_{n,m}) = min\{n, m\}$
+                        \begin{itemize}
+                          \item only the removal of the left or right bipartition cuts the graph
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node (edgeconnectivity) {Edge-Connectivity
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a \alert{disconnecting set of edges} is a set $F \subseteq E(G)$
+                        \begin{itemize}
+                          \item such that $G – F$ has more than one component
+                        \end{itemize}
+                      \item a graph is \alert{k-edge-connected}
+                        \begin{itemize}
+                          \item if every disconnected set of edges has at least $k$ edges
+                        \end{itemize}
+                      \item the \alert{edge-connectivity} of $G, \kappa’(G)$,
+                        \begin{itemize}
+                          \item is the minimum size of a disconnecting set of edges
+                        \end{itemize}
+                      \item given $S, T \subseteq E[G]$ define $[S, T]$
+                        \begin{itemize}
+                          \item as the set of edges having one endpoint in $S$ and one endpoint in $T$
+                        \end{itemize}
+                      \item a \alert{edge cut} is an edge set of the form $[S, \overline{S}]$ where $S \subsetneq V(G)$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Matrix representation
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a \alert{loopless} graph $G$
+                      \begin{itemize}
+                        \item $V(G) = \{v_1, \ldots, v_n\}$
+                        \item $E(G) = \{e_1, \ldots e_m\}$
+                      \end{itemize}
+                      used as example graph for the child nodes
+                  \end{itemize}
+                  \includegraphics[width=0.3\textwidth, center]{./figures/matrix_representation.png}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Adjacency matrix $A(G)$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item a $n\times n$ matrix with entries $a_{i,j}$
+                      \item where $a_{i,j}$ is the number of edges with endpoints $\{v_i, v_j\}$
+                    \end{itemize}
+                    \includegraphics[width=0.3\textwidth, center]{./figures/adjacency_matrix.png}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Adjacency
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{8cm}
                       \begin{itemize}
-                        \item the \alert{degree} of vertex $v$ is the number of incident edges
-                          \begin{itemize}
-                            \item except for loops then the edge counts twice
-                          \end{itemize}
-                        \item \alert{maximum degree} is $\Delta(G)$
-                        \item \alert{minimum degree} is $\delta(G)$
-                        \item the number of $1$'s in a row of the incidence matrix
+                        \item if $u$ and $v$ are endpoints of an edge they are \alert{adjacent} and \alert{neighbors}
+                        \item one writes: $u\leftrightarrow v$
                       \end{itemize}
                     \end{minipage}
                   }
                 }
               }
             }
-          }
-        }
-        child {
-          % https://latex.org/forum/viewtopic.php?t=8650
-          node {Complement $\overline{G}$
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item of a simple graph $G$ is the simple graph with:
+            child {
+              node {Incidence matrix $M(G)$
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
                     \begin{itemize}
-                      \item vertex set $V(G)$
-                      \item edge set $uv \in E(\overline{G}) \Leftrightarrow uv\not\in E(G)$
+                      \item a $n\times m$ matrix with entries $m_{i,j}$ (that means the $m$ columns are edges)
+                      \item where $m_{i,j}$ is 
+                        \begin{itemize}
+                          \item $1$ if $v_i$ is an endpoint of $e_j$ and
+                          \item $0$ otherwise
+                        \end{itemize}
                     \end{itemize}
-                \end{itemize}
-              \end{minipage}
+                    \includegraphics[width=0.3\textwidth, center]{./figures/incidence_matrix.png}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Incidence
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item $v$ and $e$ are \alert{incident} if $v$ is an endpoint of $e$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node (degree) {Degree $d(v)$ or $d_G(v)$
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{8cm}
+                        \begin{itemize}
+                          \item the \alert{degree} of vertex $v$ is the number of incident edges
+                            \begin{itemize}
+                              \item except for loops then the edge counts twice
+                            \end{itemize}
+                          \item \alert{maximum degree} is $\Delta(G)$
+                          \item \alert{minimum degree} is $\delta(G)$
+                          \item the number of $1$'s in a row of the incidence matrix
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
             }
           }
-        }
-        child {
-          node {Subgraph
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item a \alert{subgraph }of a graph $G$ is a graph $H$ such that:
-                    \begin{itemize}
-                      \item $V(H)\subseteq V(G)$
-                      \item $E(H)\subseteq E(G)$
-                      \item the assignment of endpoints to edges in $H$ is the same as in $G$
-                    \end{itemize}
-                  % \item \href[page=29]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{other definition for subgraph}
+          child {
+            % https://latex.org/forum/viewtopic.php?t=8650
+            node {Complement $\overline{G}$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item of a simple graph $G$ is the simple graph with:
+                      \begin{itemize}
+                        \item vertex set $V(G)$
+                        \item edge set $uv \in E(\overline{G}) \Leftrightarrow uv\not\in E(G)$
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Subgraph
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item a \alert{subgraph }of a graph $G$ is a graph $H$ such that:
+                      \begin{itemize}
+                        \item $V(H)\subseteq V(G)$
+                        \item $E(H)\subseteq E(G)$
+                        \item the assignment of endpoints to edges in $H$ is the same as in $G$
+                      \end{itemize}
+                      % \item \href[page=29]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{other definition for subgraph}
                     \item the \alert{subgraph $G - S$} is obtained by deleting a set of vertices $S$
-                    \begin{itemize}
-                      \item Edges are preserved \alert{iff} both endpoints are in $V(G)-S$
-                    \end{itemize}
+                      \begin{itemize}
+                        \item Edges are preserved \alert{iff} both endpoints are in $V(G)-S$
+                      \end{itemize}
                     \item for $v \in V(G)$ let \alert{$G - v := G - \{v\}$}
                     \item the \alert{induced subgraph} $G[T] = G − \overline{T}$
-                    \begin{itemize}
-                      \item where $\overline{T} = V(G) − T$
-                      \item is obtained by deleting all vertices of $\overline{T}$ while preserving all edges with both endpoints in $T$
-                    \end{itemize}
+                      \begin{itemize}
+                        \item where $\overline{T} = V(G) − T$
+                        \item is obtained by deleting all vertices of $\overline{T}$ while preserving all edges with both endpoints in $T$
+                      \end{itemize}
                     \item $G − e$ denotes the graph, where the edge $e$ is removed but all vertices and other edges remain
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node {Decomposition of a graph
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item germ. Kantenzerlegung (Dekomposition)
-                    \item a \alert{list of subgraphs} such that \alert{a edge} appears in \alert{exactly one subgraph} in the list 
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
-        child {
-          node {Connected / Disconnected
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item a graph $G$ is \alert{connected} if each pair of vertices in G belongs to a path
-                  \item otherwise $G$ is \alert{disconnected}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node {Components
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item the (connected) \alert{components} of a graph $G$ are its maximal connected subgraphs
-                    \item a component is \alert{trivial} if it has no edges
-                    \item an \alert{isolated} vertex is a vertex of degree $0$
-                    \item every graph with $n$ vertices and k edges has at least $n-k$ components
                   \end{itemize}
                 \end{minipage}
               }
             }
             child {
-              node {Cut-edge
+              node {Decomposition of a graph
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
+                  \begin{minipage}[t]{8cm}
                     \begin{itemize}
-                      \item an edge whose deletion increases the number of components
-                        \begin{itemize}
-                          \item an edge is a cut-edge if and only if it belongs to no cycle
-                        \end{itemize}
+                      \item germ. Kantenzerlegung (Dekomposition)
+                      \item a \alert{list of subgraphs} such that \alert{a edge} appears in \alert{exactly one subgraph} in the list 
                     \end{itemize}
                   \end{minipage}
                 }
               }
             }
+          }
+          child {
+            node {Connected / Disconnected
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item a graph $G$ is \alert{connected} if each pair of vertices in G belongs to a path
+                    \item otherwise $G$ is \alert{disconnected}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
             child {
-              node {Cut-vertex
+              node {Components
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item a vertex whose deletion increases the number of components
+                      \item the (connected) \alert{components} of a graph $G$ are its maximal connected subgraphs
+                      \item a component is \alert{trivial} if it has no edges
+                      \item an \alert{isolated} vertex is a vertex of degree $0$
+                      \item every graph with $n$ vertices and k edges has at least $n-k$ components
                     \end{itemize}
                   \end{minipage}
                 }
               }
               child {
-                node {Blocks
+                node {Cut-edge
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{12cm}
                       \begin{itemize}
-                        \item A \alert{block of a graph} G is a \alert{maximal connected subgraph} of G that has \alert{no cut-vertex}
-                        \item If G itself is \alert{connected} and has \alert{no cut-vertex}, then G is a \alert{block}
-                        \item If a block has more than two vertices then it is $2$-connected
-                        \item If $H$ is a block of $G$, then $H$ as a graph has no cut-vertex, but $H$ may contain vertices that are cut-vertices of $G$
-                        \item a node $u$ is a cut-vertex \alert{iff} there is \alert{no backward edge} from a descendant of $u$ to an ancestor of $u$ in the DFS tree B
-                        \item \href[page=111]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm}
-                        \item \href[page=112]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{block-cutpoint graph}
-                        % \item Ein Knoten u ist genau dann ein Schnittknoten, wenn es im DFS-Baum keine Rückwärtskante von den Nachfolgern in B von u zu seinem Vorgängern im Baum B gibt.
+                        \item an edge whose deletion increases the number of components
+                          \begin{itemize}
+                            \item an edge is a cut-edge if and only if it belongs to no cycle
+                          \end{itemize}
                       \end{itemize}
                     \end{minipage}
                   }
                 }
               }
-            }
-          }
-        }
-        child {
-          node {Paths, Walks, Cycles, Circuits
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item the \alert{length} is its \alert{number of edges}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node {Walk
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item a list $v_0, e_1, v_1, \ldots, e_k, v_k$ of \alert{vertices} and \alert{edges}
-                      \begin{itemize}
-                        \item for $1 \le i \le k$ the \alert{edge} $e_i$ has \alert{endpoints} $v_{i-1}$ and $v_i$
-                      \end{itemize}
-                    \item a \enquote{\alert{walk $W$ contains a path $P$}} if the vertices and edges of $P$ occur as a sublist of the vertices and edges of $W$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-            child {
-              node {u,v-walk
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
-                    \begin{itemize}
-                      \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Closed walk
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
-                    \begin{itemize}
-                      \item a walk with \alert{equal first} and \alert{last vertex}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Trail
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
-                    \begin{itemize}
-                      \item a walk \alert{without repeating edges}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
               child {
-                node {Circuit
+                node {Cut-vertex
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{12cm}
                       \begin{itemize}
-                        \item a \alert{closed trail}, i.e. the \alert{first} and the \alert{last vertex} are \alert{equal}
+                        \item a vertex whose deletion increases the number of components
                       \end{itemize}
                     \end{minipage}
+                  }
+                }
+                child {
+                  node {Blocks
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item A \alert{block of a graph} G is a \alert{maximal connected subgraph} of G that has \alert{no cut-vertex}
+                          \item If G itself is \alert{connected} and has \alert{no cut-vertex}, then G is a \alert{block}
+                          \item If a block has more than two vertices then it is $2$-connected
+                          \item If $H$ is a block of $G$, then $H$ as a graph has no cut-vertex, but $H$ may contain vertices that are cut-vertices of $G$
+                          \item a node $u$ is a cut-vertex \alert{iff} there is \alert{no backward edge} from a descendant of $u$ to an ancestor of $u$ in the DFS tree B
+                          \item \href[page=111]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm}
+                          \item \href[page=112]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{block-cutpoint graph}
+                            % \item Ein Knoten u ist genau dann ein Schnittknoten, wenn es im DFS-Baum keine Rückwärtskante von den Nachfolgern in B von u zu seinem Vorgängern im Baum B gibt.
+                        \end{itemize}
+                      \end{minipage}
+                    }
                   }
                 }
               }
             }
           }
           child {
-            node {Path
+            node {Paths, Walks, Cycles, Circuits
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
+                \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item a \alert{simple graph} whose vertices can be ordered such that:
-                      \begin{itemize}
-                        \item two vertices are adjacent \alert{iff} they are consecutive in the list
-                      \end{itemize}
+                    \item the \alert{length} is its \alert{number of edges}
                   \end{itemize}
-                  \includegraphics[width=0.3\textwidth, center]{./figures/path.png}
                 \end{minipage}
               }
             }
             child {
-              node {u,v-path
+              node {Walk
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
-                      \item a path whose vertices of \alert{degree} $1$ are $u$ and $v$ if $u\ne v$
-                      \item if $u=v$ then the $u,v$-path consists only of vertex $u$ and has no edges
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Cycle
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{8cm}
-                    \begin{itemize}
-                      \item a simple graph
-                        \begin{enumerate}
-                          \item with an \alert{equal} number of \alert{vertices} and \alert{edges}
-                          \item whose \alert{vertices} can be placed around a \alert{circle} such that:
-                            \begin{itemize}
-                              \item two vertices are adjacent \alert{iff} they are consecutive in the circle
-                            \end{itemize}
-                        \end{enumerate}
-                    \end{itemize}
-                    \includegraphics[width=0.3\textwidth, center]{./figures/cycle.png}
-                  \end{minipage}
-                }
-              }
-            }
-          }
-        }
-        child {
-          node {Isomorphism
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item an \alert{isomorphism} from a \alert{simple graph} $G$ to a \alert{simple graph} $H$ is a \alert{bijection} $f: V(G) \rightarrow V(H)$ such that
-                    \begin{itemize}
-                      \item $uv\in E(G)$ \alert{iff} $f(u)f(v)\in E(H)$
-                    \end{itemize}
-                  \item one says \enquote{\alert{$G$ is isomorphic to $H$}} if there is an \alert{isomorphism} from $G$ to $H$ 
-                  \item one writes: $G \cong H$
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-      }
-      child {
-        node {Types of (undirected) graphs}
-        child {
-          node (hypercube) {Hypercube $Q_k$
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item The $k$-dimensional cube or hypercube $Q_k$, is the simple graph for which
-                    \begin{itemize}
-                      \item vertices are bit-strings of length $k$
-                      \item edges are between the pairs of bit-strings differing in exactly one position
-                    \end{itemize}
-                  \item $\kappa(Q_k) = k$
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node (simple graph) {Simple Graph
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item \alert{has:}
-                    \begin{itemize}
-                      \item no loops
-                      \item no multiple edges
-                    \end{itemize}
-                  \item one writes $e = uv$ (or $vu$) for an edge e with \alert{endpoints} $u$ and $v$
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node (regular graphs) {Regular graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item $G$ is regular if $\Delta(G) = \delta(G)$
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {$X, Y$-bigraph
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item is a bipartite graph with vertex sets $X$ and $Y$ and edges only between $X$ and $Y$
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {Special graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item \href[page=24]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{list of special graphs}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node (bipartite graphs) {Bipartite Graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{8cm}
-                \begin{itemize}
-                  \item a graph $G$ is \alert{bipartite} if $V(G)$ is the union of two disjoint independent sets
-                  \item \alert{Theorem of König:} A graph is bipartite \alert{iff} it has no odd cycle
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node {k-partite Graph
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
-                  \begin{itemize}
-                    \item a graph $G$ is \alert{k-partite} if $V(G)$ can be expressed as the union of $k$ independent sets
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
-        child {
-          node {Planar graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item \alert{Remark:} We use the same name for a graph and its drawing
-                  \item a graph is \alert{planar} if it has a drawing without crossings
-                    \begin{itemize}
-                      \item $K_{5}$ and $K_{3,3}$ are not planar 
-                    \end{itemize}
-                  \item such a drawing is a \alert{planar embedding} of $G$
-                  \item a \alert{plane graph} is a particular planar embedding of a planar graph
-                  \item a planar embedding of a graph cuts the plane into pieces, called \alert{faces}
-                    \begin{itemize}
-                      \item a finite plane graph $G$ has one unbounded face called the \alert{outer face}
-                    \end{itemize}
-                  \item \alert{Theorem (Euler):} If a connected plane graph has exactly
-                    \begin{itemize}
-                      \item $n$ vertices,
-                      \item $e$ edges and
-                      \item $f$ faces,
-                    \end{itemize}
-                    then $n − e + f = 2$
-                  \item \alert{other terms:}
-                    \begin{itemize}
-                      \item \href[page=234]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{curve, polygonal curve, drawing, crossing}
-                      \item \href[page=235]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{closed curve, simple curve}
-                      \item \href[page=237]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{open set, region, faces}
-                      \item \href[page=238]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Jordan Curve Theorem}
-                    \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node {Dual Graphs
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item \href[page=241]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{definition}
-                    \item \href[page=243]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{two embeddings of a planar graph may have non-isomorphic duals}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node {Contraction
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item in a graph $G$ a \alert{contraction} of edge $e$, $G \cdot e$, with endpoints $u$, $v$ is the replacement of $u$ and $v$ with a single vertex
-                      \begin{itemize}
-                        \item whose incident edges are the edges other than $e$
-                        \item that were incident to $u$ or $v$
-                      \end{itemize}
-                    \item $G \cdot e$
-                      \begin{itemize}
-                        \item has one edge less than $G$
-                        \item has one vertex less than $G$ if $e$ is not a loop
-                      \end{itemize}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-          child {
-            node {Subdivisions
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item an edge \alert{subdivision} can be obtained by replacing the edge with a path with new vertices
-                    \item an \alert{$H$-subdivision} (of subdivision of $H$) is a graph obtained from a graph H by successive edge subdivisions, i.e. a graph obtained from H by replacing edges with pairwise internally disjoint paths
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-            child {
-              node {Kuratowski’s Theorem
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item a graph is planar \alert{iff} it does not contain a subdivision of $K_5$ or $K_{3,3}$
-                      \begin{itemize}
-                        \item \underline{or the other way round:} A graph is not planar \alert{iff} it does contain a subdivision of $K_5$ or $K_{3,3}$
-                      \end{itemize}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-          }
-        }
-        child {
-          node {Interval graphs
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item an \alert{interval representation} of a graph is a family of intervals assigned to the vertices so that: 
-                    \begin{itemize}
-                      \item vertices are adjacent \alert{iff} the corresponding intervals intersect
-                    \end{itemize}
-                  \item a graph having such a representation is an \alert{interval graph}
-                  \item if $G$ is an interval graph then $\chi(G) = \omega(G)$
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-      }
-      child {
-        node {Directed Graphs / Digraphs $G = (V, E, f)$
-          \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{14cm}
-              \begin{itemize}
-                \item \alert{vertex set}, e.g. $V(G) = \{v_1, v_2, \ldots\}$
-                \item \alert{edge set}, e.g. $E(G) = \{e_1, e_2, \ldots\}$
-                \item a \alert{function}, .e.g. $f = \{e_1 \mapsto (v_1, v_2), \ldots\}$ assigning each edge an ordered pair of vertices
-                \item the first vertex of the ordered pair is called \alert{tail}, the second vertex is called \alert{head}, together they are called the \alert{endpoints}
-                \item when a digraph \alert{models a relation} each ordered pair is the pair for at most one edge. Like simple graphs we then treat the pair of endpoints as the edge
-                \item in a digraph a \alert{loop} is an edge with equal endpoints
-                \item \alert{multiple edges} have the same ordered pair of endpoints
-                \item in an edge from $u$ to $v$
-                  \begin{itemize}
-                    \item $v$ is the \alert{successor} of $u$
-                    \item $u$ is the \alert{predecessor} of $v$
-                  \end{itemize}
-                \item we write $u \rightarrow v$ for an edge from $u$ to $v$
-                \item \underline{\href[page=50]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
-                  \begin{itemize}
-                    \item $\displaystyle \sum_{v\in V(G)} d^+(v) = e(G) = \sum_{v\in V(G)} d^-(v)$
-                    \item if $G$ is a digraph with $\delta^+(G)\ge 1$ or $\delta^-(G)\ge 1$ then $G$ contains a cycle
-                  \end{itemize}
-              \end{itemize}
-            \end{minipage}
-          }
-        }
-        child {
-          node {Subgraphs, Isomorphism, decomposition, union
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item are like in (undirected) graphs
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {Matrix representation}
-          child {
-            node {Incidence matrix $M(G)$
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item loopless digraph $G$
-                    \item $m_{i,j} = +1$ if $v_i$ is the tail of $e_j$
-                    \item $m_{i,j} = -1$ if $v_i$ is the head of $e_j$
-                  \end{itemize}
-                  \includegraphics[width=0.8\textwidth, center]{./figures/incidence_matrix_dir.png}
-                \end{minipage}
-              }
-            }
-            child {
-              node {Degree
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item the \alert{outdegree} $d^+(v)$ is the number of edges with tail $v$
-                      \item the \alert{indegree} $d^-(v)$ is the number of edges with head $v$
-                      \item the \alert{out-neighborhood (successor set)} $N^+(v) := \{x \in V(G) : v \rightarrow x\}$
-                      \item the \alert{in-neighborhood (predecessor set)} $N^-(v) := \{x \in V(G) : x \rightarrow v\}$
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-          }
-          child {
-            node {Adjacency matrix $A(G)$
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item digraph $G$
-                    \item the entry in position $a_{i,j}$ is the number of edges from $v_i$ to $v_j$
-                  \end{itemize}
-                  \includegraphics[width=0.8\textwidth, center]{./figures/adjacence_matrix_dir.png}
-                \end{minipage}
-              }
-            }
-          }
-        }
-        child {
-          node {Paths, Walks, Cycles, Circuits
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item the \alert{length} is its \alert{number of edges}
-                  \item trail, walk and circuit are the same in (undirected) graphs and digraphs
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node {Path
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item a \alert{simple digraph} whose vertices can be linearly ordered so that: 
-                      \begin{itemize}
-                        \item there is an edge with tail $u$ and head $v$ \alert{iff} $v$ immediately follows $u$
-                      \end{itemize}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-            child {
-              node {u,v-path 
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item a path whose only vertex of \alert{indegree} $0$ is $u$ and \alert{outdegree} $0$ is $v$
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Cycle
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item a simple digraph whose vertices can be arranged on a circle such that: 
+                      \item a list $v_0, e_1, v_1, \ldots, e_k, v_k$ of \alert{vertices} and \alert{edges}
                         \begin{itemize}
-                          \item edges exist \alert{iff} nodes follow each other according to the (without loss of generality) clockwise orientation
+                          \item for $1 \le i \le k$ the \alert{edge} $e_i$ has \alert{endpoints} $v_{i-1}$ and $v_i$
+                        \end{itemize}
+                      \item a \enquote{\alert{walk $W$ contains a path $P$}} if the vertices and edges of $P$ occur as a sublist of the vertices and edges of $W$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {u,v-walk
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Closed walk
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item a walk with \alert{equal first} and \alert{last vertex}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Trail
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item a walk \alert{without repeating edges}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Circuit
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item a \alert{closed trail}, i.e. the \alert{first} and the \alert{last vertex} are \alert{equal}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
+            }
+            child {
+              node {Path
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{8cm}
+                    \begin{itemize}
+                      \item a \alert{simple graph} whose vertices can be ordered such that:
+                        \begin{itemize}
+                          \item two vertices are adjacent \alert{iff} they are consecutive in the list
                         \end{itemize}
                     \end{itemize}
+                    \includegraphics[width=0.3\textwidth, center]{./figures/path.png}
                   \end{minipage}
+                }
+              }
+              child {
+                node {u,v-path
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item a path whose vertices of \alert{degree} $1$ are $u$ and $v$ if $u\ne v$
+                        \item if $u=v$ then the $u,v$-path consists only of vertex $u$ and has no edges
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Cycle
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{8cm}
+                      \begin{itemize}
+                        \item a simple graph
+                          \begin{enumerate}
+                            \item with an \alert{equal} number of \alert{vertices} and \alert{edges}
+                            \item whose \alert{vertices} can be placed around a \alert{circle} such that:
+                              \begin{itemize}
+                                \item two vertices are adjacent \alert{iff} they are consecutive in the circle
+                              \end{itemize}
+                          \end{enumerate}
+                      \end{itemize}
+                      \includegraphics[width=0.3\textwidth, center]{./figures/cycle.png}
+                    \end{minipage}
+                  }
                 }
               }
             }
           }
-          % child {
-          %   node {Walk
-          %     \resizebox{\textwidth}{!}{
-          %       \begin{minipage}[t]{12cm}
-          %         \begin{itemize}
-          %           \item a list $v_0, e_1, v_1, \ldots, e_k, v_k$ of vertices and edges 
-          %           \begin{itemize}
-          %             \item for $1 \le i \le k$ the edge $e_i$ has tail (from) $v_{i-1}$ and head (to) $v_i$
-          %           \end{itemize}
-          %         \end{itemize}
-          %       \end{minipage}
-          %     }
-          %   }
-          %   child {
-          %     node {Closed walk
-          %       \resizebox{\textwidth}{!}{
-          %         \begin{minipage}[t]{12cm}
-          %           \begin{itemize}
-          %             \item a walk with \alert{equal first} and \alert{last vertex}
-          %           \end{itemize}
-          %         \end{minipage}
-          %       }
-          %     }
-          %   }
-          %   child {
-          %     node {Trail
-          %       \resizebox{\textwidth}{!}{
-          %         \begin{minipage}[t]{12cm}
-          %           \begin{itemize}
-          %             \item a walk \alert{without repeating edges}
-          %           \end{itemize}
-          %         \end{minipage}
-          %       }
-          %     }
-          %     child {
-          %       node {Circuit
-          %         \resizebox{\textwidth}{!}{
-          %           \begin{minipage}[t]{12cm}
-          %             \begin{itemize}
-          %               \item a \alert{closed trail}, i.e. the \alert{first} and the \alert{last vertex} are \alert{equal}
-          %               \item like a circuit in computer engineering
-          %             \end{itemize}
-          %           \end{minipage}
-          %         }
-          %       }
-          %     }
-          %   }
-          %   child {
-          %     node {u,v-walk
-          %       \resizebox{\textwidth}{!}{
-          %         \begin{minipage}[t]{12cm}
-          %           \begin{itemize}
-          %             \item has \alert{first vertex} $u$ and \alert{last vertex} $v$
-          %             % \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
-          %           \end{itemize}
-          %         \end{minipage}
-          %       }
-          %     }
-          %   }
-          % }
-        }
-        child {
-          node {(Strongly) Connected
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item a digraph is \alert{weakly connected}
-                    \begin{itemize}
-                      \item if its underlying graph is connected
-                    \end{itemize}
-                  \item a digraph is \alert{strongly connected}
-                    \begin{itemize}
-                      \item if for each ordered pair $u$, $v$ there is a path from $u$ to $v$
-                    \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {Types of graphs}
           child {
-            node {Underlying Graph
+            node {Isomorphism
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
+                \begin{minipage}[t]{8cm}
                   \begin{itemize}
-                    \item The underlying graph of a digraph $D$ is the graph $G$
+                    \item an \alert{isomorphism} from a \alert{simple graph} $G$ to a \alert{simple graph} $H$ is a \alert{bijection} $f: V(G) \rightarrow V(H)$ such that
                       \begin{itemize}
-                        \item with $V(G) = V(D)$
-                        \item $E(G) = E(D)$
-                        \item each ordered pairs of an edge become an unordered pair
+                        \item $uv\in E(G)$ \alert{iff} $f(u)f(v)\in E(H)$
                       \end{itemize}
+                    \item one says \enquote{\alert{$G$ is isomorphic to $H$}} if there is an \alert{isomorphism} from $G$ to $H$ 
+                    \item one writes: $G \cong H$
                   \end{itemize}
                 \end{minipage}
               }
             }
           }
-          child {
-            node {Simple Graph
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item a digraph is simple
-                      \begin{itemize}
-                        \item if each ordered pair is the head and tail of at most one edge
-                        \item one loop may be present at each vertex
-                      \end{itemize}
-                    \item in a simple digraph $uv$ denotes an edge with tail $u$ and head $v$
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
-      };
-    \end{scope}
-  % ┌───────────────────┐
-  % │ Verbindungslinien │
-  % └───────────────────┘
-  \begin{pgfonlayer}{background}
-    \draw [concept connection]
-  %     (commoncasefast) edge (amdahl)
-  %     (branchpredictionbuffer) edge (2bitpredictor)
-  %     (loadusedatahazard) edge (forwarding)
-      (bipartite graphs) edge (independant set)
-      (disjointunion) edge (coloring)
-      (join) edge (coloring)
-      (cartesian) edge (coloring)
-      (vc) edge (isvccqcl)
-      (clique) edge (isvccqcl)
-      (coloring) edge (isvccqcl)
-      (vc) edge (apa)
-      (regular graphs) edge (degree)
-      (gt) edge (degree)
-      (symmetricdifferencematching) edge (symmetricgraphdifference)
-      (connectivity) edge (hypercube)
-      (edgecut) edge (edgeconnectivity)
-      (edgecut) edge (cut)
-      (ec) edge (mec);
-  \end{pgfonlayer}
-  % ┌──────────────┐
-  % │ Annotationen │
-  % └──────────────┘
-  % https://tex.stackexchange.com/questions/302976/node-positioning-middle-point-mind-map-connection-bar
-  \node [annotation, below] at (gt.south) {This mindmap is provided without guarantee of correctness and completeness!};
-  \node [annotation, below] at (gt.north) {\href{https://www.youtube.com/playlist?list=PLmsC317bB1b0m9-ZCKGNR6iM6UTPUO__r}{Recordings} where the different topics of this mindmap get explained\\\href{/tmp/current.pdf}{go back}};
-  % \path (measuringexecutiontime) -- node[annotation, above, align=center, pos=0.01] {Similiar to \textbf{Response Time:} How long it takes to do a task} (ca);
-  % \path (performance) -- node[annotation, above, align=center, pos=0.01] {Similiar to \textbf{Throughput}: Total work done per time unit (e.g. tasks, transactions\ldots / per hour)} (ca);
-  % \path (elapsedtime) -- node[annotation, above, align=center, pos=0.01] {Also called \textbf{Wall Clock Time} or \textbf{Real Time}} (ca);
-  % \path (cputime) -- node[annotation, above, align=center, pos=0.01] {Also called \textbf{User Time}} (ca);
-  % % \path (branchpredictionbuffer) -- node[annotation, below, align=center, pos=-0.06] {Also called Branch History Table} (ca);
-  % \path (multicycle) -- node[annotation, above, align=center, pos=0.01] {Optimize space} (ca);
-  % \path (pipelining) -- node[annotation, above, align=center, pos=0.01] {Optimize time} (ca);
-  \end{tikzpicture}
-\end{document}
+        };
+      \end{scope}
+      % ┌───────────────────┐
+      % │ Verbindungslinien │
+      % └───────────────────┘
+      \begin{pgfonlayer}{background}
+        \draw [concept connection]
+        %     (commoncasefast) edge (amdahl)
+        %     (branchpredictionbuffer) edge (2bitpredictor)
+        %     (loadusedatahazard) edge (forwarding)
+        (bipartite graphs) edge (independant set)
+        (disjointunion) edge (coloring)
+        (join) edge (coloring)
+        (cartesian) edge (coloring)
+        (vc) edge (isvccqcl)
+        (clique) edge (isvccqcl)
+        (coloring) edge (isvccqcl)
+        (vc) edge (apa)
+        (regular graphs) edge (degree)
+        (gt) edge (degree)
+        (symmetricdifferencematching) edge (symmetricgraphdifference)
+        (connectivity) edge (hypercube)
+        (edgecut) edge (edgeconnectivity)
+        (edgecut) edge (cut)
+        (ec) edge (mec);
+      \end{pgfonlayer}
+      % ┌──────────────┐
+      % │ Annotationen │
+      % └──────────────┘
+      % https://tex.stackexchange.com/questions/302976/node-positioning-middle-point-mind-map-connection-bar
+      \node [annotation, below] at (gt.south) {This mindmap is provided without guarantee of correctness and completeness!};
+      \node [annotation, below] at (gt.north) {\href{https://www.youtube.com/playlist?list=PLmsC317bB1b0m9-ZCKGNR6iM6UTPUO__r}{Recordings} where the different topics of this mindmap get explained\\\href{/tmp/current.pdf}{go back}};
+      % \path (measuringexecutiontime) -- node[annotation, above, align=center, pos=0.01] {Similiar to \textbf{Response Time:} How long it takes to do a task} (ca);
+      % \path (performance) -- node[annotation, above, align=center, pos=0.01] {Similiar to \textbf{Throughput}: Total work done per time unit (e.g. tasks, transactions\ldots / per hour)} (ca);
+      % \path (elapsedtime) -- node[annotation, above, align=center, pos=0.01] {Also called \textbf{Wall Clock Time} or \textbf{Real Time}} (ca);
+      % \path (cputime) -- node[annotation, above, align=center, pos=0.01] {Also called \textbf{User Time}} (ca);
+      % % \path (branchpredictionbuffer) -- node[annotation, below, align=center, pos=-0.06] {Also called Branch History Table} (ca);
+      % \path (multicycle) -- node[annotation, above, align=center, pos=0.01] {Optimize space} (ca);
+      % \path (pipelining) -- node[annotation, above, align=center, pos=0.01] {Optimize time} (ca);
+    \end{tikzpicture}
+    \end{document}

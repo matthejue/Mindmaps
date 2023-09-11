@@ -913,6 +913,41 @@
           }
         }
         child {
+          node {$x,y$-edge-cut and pairwise edge-disjoint $x,y$-paths
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item $\kappa'_D(x, y) \ge \lambda'_D(x, y)$
+                  \item \alert{Menger’s Theorem:} If $x\ne y$ then $\lambda'(x, y) = \kappa'(x, y)$
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node (edgecut)  {$x,y$-edge-cut or $x,y$ edge-separator
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item a set $E' \subseteq E$ is an \alert{$x,y$ edge-separator} or \alert{$x,y$-edge-cut} if $G - E'$ has no $x,y$-path
+                    \item $\kappa'(x, y)$ is the minimum number of edges whose deletion make $y$ unreachable from $x$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Pairwise edge-disjoint $x,y$-paths
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item $\lambda'(x, y)$ is the maximum size of a set of \alert{pairwise edge-disjoint $x,y$-paths}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
           node {Coloring and Cliques
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{8cm}
@@ -1007,7 +1042,7 @@
             }
           }
           child {
-            node {Cut
+            node (cut) {Cut
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
@@ -1545,7 +1580,7 @@
             }
           }
           child {
-            node {Edge-Connectivity
+            node (edgeconnectivity) {Edge-Connectivity
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
@@ -2385,6 +2420,8 @@
       (gt) edge (degree)
       (symmetricdifferencematching) edge (symmetricgraphdifference)
       (connectivity) edge (hypercube)
+      (edgecut) edge (edgeconnectivity)
+      (edgecut) edge (cut)
       (ec) edge (mec);
   \end{pgfonlayer}
   % ┌──────────────┐

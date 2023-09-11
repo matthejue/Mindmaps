@@ -400,21 +400,21 @@
                       \item in the DFS-Tree a node $v$ is in the subtree of a node $u$ \alert{iff} the intervall $[t_{v,1}$, $t_{v,2}]$ is fully contained in the intervall $[t_{u,1}, t_{u,2}]$
                       \item \alert{Classification of edges:} $uv$ is 
                         \begin{itemize}
-                          \item a \alert{tree edge}, if $v$ was discovered from $u$
+                          \item a \alert{tree edge (germ. Baumkanten)}, if $v$ was discovered from $u$
                             \begin{itemize}
                               \item $u$ is in marked state, $v$ is in not marked state when looking at $uv$
                             \end{itemize}
-                          \item a \alert{backward edge}, if $v$ is a predecessor node of $u$
+                          \item a \alert{backward edge (germ. Rückwärtskanten)}, if $v$ is a predecessor node of $u$
                             \begin{itemize}
                               \item $u$ is in marked state, $v$ is in marked state when looking at $uv$
                               \item $t_{v,1}<t_{u,1}<t_{u,2}<t_{v,2}$
                             \end{itemize}
-                          \item a \alert{forward edge}, if $v$ is a successor node of $u$ 
+                          \item a \alert{forward edge (germ. Vorwärtskanten)}, if $v$ is a successor node of $u$ 
                             \begin{itemize}
                               \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
                               \item $t_{u,1}<t_{v,1}<t_{v,2}<t_{u,2}$, $\boxed{t_{u,1}<t_{v,1}}$
                             \end{itemize}
-                          \item a \alert{cross edge}, if it is neither of all above
+                          \item a \alert{cross edge (germ. Querkanten)}, if it is neither of all above
                             \begin{itemize}
                               \item $u$ is in marked state, $v$ is in visited state when looking at $uv$
                               \item $t_{v,1}<t_{v,2}<t_{u,1}<t_{u,2}$, $\boxed{t_{v,1}<t_{u,1}}$
@@ -676,13 +676,13 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item a \alert{rooted tree} $T$ is a simple digraph with a vertex $r$ chosen as root such that for each vertex $v\in V(T)$ there's a unique path \alert{$P(v)$}  from $r$ to $v$
+                    \item a \alert{rooted tree (germ. gewurzelter Baum)} $T$ is a simple digraph with a vertex $r$ chosen as root such that for each vertex $v\in V(T)$ there's a unique path \alert{$P(v)$}  from $r$ to $v$
                     \item the \alert{parent} of $v\ne r$ is the predecessor in $P(v)$
                     \item the \alert{children} of $v$ are the \alert{sucessor set} $N^+(v)$ of $v$
                     \item the \alert{ancestors} of $v$ are all vertices of $P(v) - v$
                     \item the \alert{descendants} of $v$ are all vertices $u\ne v$ such that $P(u)$ contains the vertex $v$
                     \item the \alert{leaves} are vertices with no children
-                    \item a \alert{rooted plane tree} or \alert{planted tree} is a rooted tree with a given (left/right) ordering or labeling specified for all children of each vertex
+                    \item a \alert{rooted plane tree} or \alert{planted tree (germ. gewurzelter Baum mit Kantenorientierung/Kantenbeschriftung)} is a rooted tree with a given (left/right) ordering or labeling specified for all children of each vertex
                   \end{itemize}
                   \includegraphics[width=0.6\textwidth, center]{./figures/directed_tree.png}
                 \end{minipage}
@@ -757,7 +757,7 @@
                 }
               }
               child {
-                node {Control Flow Graph (CFG)
+                node {Control Flow Graphs (CFG's) (germ. Kontrollflussgraphen)
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{12cm}
                       \begin{itemize}
@@ -797,12 +797,12 @@
             }
           }
           child {
-            node {Spanning Trees
+            node {Spanning Trees (germ. Spannbäume)
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item a \alert{spanning subgraph} of $G$ is a connected subgraph with vertex set $V(G)$
-                    \item a \alert{spanning tree} is a spanning subgraph of a given graph $G$ that is a tree
+                    \item a \alert{spanning subgraph (germ. spannender Teilgraph)} of $G$ is a connected subgraph with vertex set $V(G)$
+                    \item a \alert{spanning tree (germ. Spannbaum)} is a spanning subgraph of a given graph $G$ that is a tree
                     \item \underline{\href[page=69]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
                       \begin{itemize}
                         \item every connected graph contains a spanning tree
@@ -1205,7 +1205,7 @@
           child {
             node {Matching
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{8cm}
+                \begin{minipage}[t]{10cm}
                   \begin{itemize}
                     \item a \alert{matching $M$} in a graph $G$ is a set of non-loop edges with no shared endpoints
                       \begin{itemize}
@@ -1218,8 +1218,8 @@
                             \item \underline{odd number of vertices:} $K_{2n}$ has  $f_n = (2n-1) \cdot f_{n-1} = (2n-1) \cdot \ldots \cdot 5 \cdot 3 \cdot 1$ perfect matchings for $n = \dfrac{|V(G)|}{2}$ (because the edges are undirected, there are $2n-1$ choices for the first pairing of a given node, as there are $2n$ nodes, but a node can't pair with himself, so $2n-1$)
                           \end{itemize}
                         \item the \alert{size} of a matching is given by the \alert{number of edges}
-                        \item a \alert{maximal matching} in a graph is a matching that cannot be enlarged by adding an edge
-                        \item a \alert{maximum matching} is a matching of maximum size (among all matchings in a graph)
+                        \item a \alert{maximal matching (germ. nicht erweiterbares)} in a graph is a matching that cannot be enlarged by adding an edge
+                        \item a \alert{maximum matching (germ. größtmögliches / maximales)} is a matching of maximum size (among all matchings in a graph)
                         \item \alert{$\alpha'(G)$:} Is the maximum size of matching of edges in $G$
                       \end{itemize}
                   \end{itemize}
@@ -1344,7 +1344,7 @@
                     \item a set $Q \subseteq V(G)$ that contains at least one endpoint of every edge
                       \begin{itemize}
                         \item the vertices $Q$ \enquote{cover} (germ. \enquote{überdecken}) $E(G)$
-                        \item \alert{$\beta(G)$:} Is the minimum size of vertex cover of vertices in $G$ % Minimize the number of vertices $Q$ of a cover of $E(G)$
+                        \item \alert{Minimum Vertex Cover (germ. Minimale Knotenüberdeckung) $\beta(G)$:} Is the minimum size of vertex cover of vertices in $G$ % Minimize the number of vertices $Q$ of a cover of $E(G)$
                       \end{itemize}
                     \item \href[page=129]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{examples}
                   \end{itemize}
@@ -1367,14 +1367,14 @@
             }
           }
           child {
-            node (independant set) {Independant Set
+            node (independant set) {Independant Set (germ. Unabhängige Menge)
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
                     \item vertices are \alert{independent}, if they are not connected via an edge
                     \item a set of pairwise nonadjacent vertices
                       \begin{itemize}
-                        \item \alert{Independence number $\alpha(G)$:} Is the maximum size of independent set of vertices in $G$
+                        \item \alert{Independence number (germ. Unabhängigkeitszahl) $\alpha(G)$:} Is the maximum size of independent set of vertices in $G$
                       \end{itemize} 
                   \end{itemize}
                 \end{minipage}
@@ -1398,7 +1398,7 @@
             }
           }
           child {
-            node (ec) {Edge cover 
+            node (ec) {Edge cover (germ. Kantenüberdeckung) 
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
@@ -1418,12 +1418,15 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item  a graph is Eulerian if it has a closed trail (i.e. circuit) containing all edges
-                  \item  a graph $G$ is Eulerian \alert{iff}:
+                  \item a graph is \alert{Eulerian} if it has a closed trail (i.e. circuit) containing all edges
+                  \item a graph $G$ is Eulerian \alert{iff}:
                     \begin{itemize}
                       \item it has at most one nontrivial component
                       \item and its vertices all have even degree
                     \end{itemize}
+                  % \item an \alert{Eulerian Circuit (germ. Eulerzug)} is a closed trail containing all edges (germ. \enquote{Ist ein Zyklus, der alle Kanten des Graphen genau einmal beinhaltet})
+                  \item an \alert{Eulerian trail} is a trail containing all edges
+                  \item an \alert{Eulerian circuit (germ. Eulerzug)} is a closed trail containing all edges (germ. \enquote{Ist ein Zyklus, der alle Kanten des Graphen genau einmal beinhaltet})
                 \end{itemize}
               \end{minipage}
             }
@@ -1433,13 +1436,12 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item an \alert{Eulerian trail} in a digraph (or graph) is a trail containing all edges
-                    \item an \alert{Eulerian circuit} is a closed trail containing all edges
+                    \item \alert{Eulerian trail} and \alert{Eulerian circuit (germ. Eulerzug)} have the same definition in (undirected) graphs and digraphs
                     \item a digraph is Eulerian \alert{if} it has an Eulerian circuit
                     \item a digraph is Eulerian \alert{iff} 
                       \begin{itemize}
                         \item $d^+(v) = d^-(v)$ for all nodes $v$
-                        \item the underlying graph has at most one non-trivial component
+                        \item and the underlying graph has at most one non-trivial component
                       \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -1466,7 +1468,7 @@
             }
           }
           child {
-            node (simple graph) {Simple Graph
+            node (simple graph) {Simple Graph (germ. Einfacher Graph)
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{8cm}
                   \begin{itemize}
@@ -1702,6 +1704,7 @@
                   \item we write $u \rightarrow v$ for an edge from $u$ to $v$
                   \item \underline{\href[page=50]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
                     \begin{itemize}
+                      \item if $G$ is a digraph with $\delta^+(G)\ge 1$ or $\delta^-(G)\ge 1$ then $G$ contains a cycle
                       \item $\displaystyle \sum_{v\in V(G)} d^+(v) = e(G) = \sum_{v\in V(G)} d^-(v)$
                       \item if $G$ is a digraph with $\delta^+(G)\ge 1$ or $\delta^-(G)\ge 1$ then $G$ contains a cycle
                     \end{itemize}
@@ -1765,18 +1768,17 @@
             }
           }
           child {
-            node {Paths, Walks, Cycles, Circuits
+            node {Paths, Walks, Trails, Cycles, Circuits
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item the \alert{length} is its \alert{number of edges}
-                    \item trail, walk and circuit are the same in (undirected) graphs and digraphs
                   \end{itemize}
                 \end{minipage}
               }
             }
             child {
-              node {Path
+              node {Path (germ. Weg / Pfad)
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
@@ -1789,7 +1791,7 @@
                 }
               }
               child {
-                node {u,v-path 
+                node {u,v-path (u,v-Pfad/-Weg)
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{12cm}
                       \begin{itemize}
@@ -1800,7 +1802,7 @@
                 }
               }
               child {
-                node {Cycle
+                node {Cycle (germ. Kreis)
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{12cm}
                       \begin{itemize}
@@ -1814,66 +1816,67 @@
                 }
               }
             }
-            % child {
-            %   node {Walk
-            %     \resizebox{\textwidth}{!}{
-            %       \begin{minipage}[t]{12cm}
-            %         \begin{itemize}
-            %           \item a list $v_0, e_1, v_1, \ldots, e_k, v_k$ of vertices and edges 
-            %           \begin{itemize}
-            %             \item for $1 \le i \le k$ the edge $e_i$ has tail (from) $v_{i-1}$ and head (to) $v_i$
-            %           \end{itemize}
-            %         \end{itemize}
-            %       \end{minipage}
-            %     }
-            %   }
-            %   child {
-            %     node {Closed walk
-            %       \resizebox{\textwidth}{!}{
-            %         \begin{minipage}[t]{12cm}
-            %           \begin{itemize}
-            %             \item a walk with \alert{equal first} and \alert{last vertex}
-            %           \end{itemize}
-            %         \end{minipage}
-            %       }
-            %     }
-            %   }
-            %   child {
-            %     node {Trail
-            %       \resizebox{\textwidth}{!}{
-            %         \begin{minipage}[t]{12cm}
-            %           \begin{itemize}
-            %             \item a walk \alert{without repeating edges}
-            %           \end{itemize}
-            %         \end{minipage}
-            %       }
-            %     }
-            %     child {
-            %       node {Circuit
-            %         \resizebox{\textwidth}{!}{
-            %           \begin{minipage}[t]{12cm}
-            %             \begin{itemize}
-            %               \item a \alert{closed trail}, i.e. the \alert{first} and the \alert{last vertex} are \alert{equal}
-            %               \item like a circuit in computer engineering
-            %             \end{itemize}
-            %           \end{minipage}
-            %         }
-            %       }
-            %     }
-            %   }
-            %   child {
-            %     node {u,v-walk
-            %       \resizebox{\textwidth}{!}{
-            %         \begin{minipage}[t]{12cm}
-            %           \begin{itemize}
-            %             \item has \alert{first vertex} $u$ and \alert{last vertex} $v$
-            %             % \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
-            %           \end{itemize}
-            %         \end{minipage}
-            %       }
-            %     }
-            %   }
-            % }
+            child {
+              node {Walk (germ. Kantenzug)
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item a list $v_0, e_1, v_1, \ldots, e_k, v_k$ of vertices and edges
+                        \begin{itemize}
+                          \item for $1 \le i \le k$ the edge $e_i$ has tail (from) $v_{i-1}$ and head (to) $v_i$
+                        \end{itemize}
+                      \item trail and circuit (germ. Eulerzug) are the same in (undirected) graphs and digraphs, walk (germ. Kantenzug) is almost the same
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              % child {
+              %   node {Closed walk
+              %     \resizebox{\textwidth}{!}{
+              %       \begin{minipage}[t]{12cm}
+              %         \begin{itemize}
+              %           \item a walk with \alert{equal first} and \alert{last vertex}
+              %         \end{itemize}
+              %       \end{minipage}
+              %     }
+              %   }
+              % }
+              % child {
+              %   node {Trail
+              %     \resizebox{\textwidth}{!}{
+              %       \begin{minipage}[t]{12cm}
+              %         \begin{itemize}
+              %           \item a walk \alert{without repeating edges}
+              %         \end{itemize}
+              %       \end{minipage}
+              %     }
+              %   }
+              %   child {
+              %     node {Circuit
+              %       \resizebox{\textwidth}{!}{
+              %         \begin{minipage}[t]{12cm}
+              %           \begin{itemize}
+              %             \item a \alert{closed trail}, i.e. the \alert{first} and the \alert{last vertex} are \alert{equal}
+              %             \item like a circuit in computer engineering
+              %           \end{itemize}
+              %         \end{minipage}
+              %       }
+              %     }
+              %   }
+              % }
+              % child {
+              %   node {u,v-walk
+              %     \resizebox{\textwidth}{!}{
+              %       \begin{minipage}[t]{12cm}
+              %         \begin{itemize}
+              %           \item has \alert{first vertex} $u$ and \alert{last vertex} $v$
+              %           % \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
+              %         \end{itemize}
+              %       \end{minipage}
+              %     }
+              %   }
+              % }
+            }
           }
           child {
             node {(Strongly) Connected
@@ -1906,6 +1909,7 @@
                   \item \alert{multiple edges} are edges with same pair of endpoints                       
                   \item \underline{\href[page=37]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{interesting properties}:}
                     \begin{itemize}
+                      \item if every vertex of a graph $G$ has degree at least $2$ then $G$ contains a cycle
                       \item $\displaystyle \sum_{v\in V(G)} d(v) = 2\cdot e(G)$
                       \item in a graph $G$ the average vertex degree is $\displaystyle \frac{\sum_{v\in V(G)} d(v)}{\mathrm{n}(\mathrm{G})}$ and hence $\displaystyle \delta(G) \leq \frac{2 \cdot e(G)}{n(G)} \leq \Delta(G)$
                       \item every graph has an even number of vertices of odd degree
@@ -2005,9 +2009,9 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item a \alert{separating set} or \alert{vertex cut} of a graph $G$ is a set $S \subseteq V(G)$ such that $G-S$ has more than one component
-                      \item the \alert{connectivity} of $G$, \alert{$\kappa(G)$}, is the minimum size of $S \subseteq V(G)$ such that $G-S$ is disconnected or has only one vertex
-                      \item a graph is \alert{k-connected} if its connectivity is at least $k$
+                      \item a \alert{separating set (germ. trennende Menge)} or \alert{vertex cut (germ. Knotenschnitt)} of a graph $G$ is a set $S \subseteq V(G)$ such that $G-S$ has more than one component
+                      \item the \alert{connectivity (germ. Zusammenhang)} of $G$, \alert{$\kappa(G)$}, is the minimum size of $S \subseteq V(G)$ such that $G-S$ is disconnected or has only one vertex
+                      \item a graph is \alert{k-connected (germ. k-zusammenhängend)} if its connectivity is at least $k$
                       \item a \alert{complete graph $K_n$} has connectivity $n-1$, i.e. $\kappa(K_n) = n − 2$
                         \begin{itemize}
                           \item $n-1$ vertex cut leaves only a single vertex after removal
@@ -2031,15 +2035,15 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item a \alert{disconnecting set of edges} is a set $F \subseteq E(G)$
+                      \item a \alert{disconnecting set of edges (germ. trennende Menge von Kanten)} is a set $F \subseteq E(G)$
                         \begin{itemize}
                           \item such that $G – F$ has more than one component
                         \end{itemize}
-                      \item a graph is \alert{k-edge-connected}
+                      \item a graph is \alert{k-edge-connected (germ. $k$-kanten-zusammenhängend)}
                         \begin{itemize}
                           \item if every disconnected set of edges has at least $k$ edges
                         \end{itemize}
-                      \item the \alert{edge-connectivity} of $G, \kappa’(G)$,
+                      \item the \alert{edge-connectivity (germ. Kantenzusammenhang)} of $G, \kappa’(G)$,
                         \begin{itemize}
                           \item is the minimum size of a disconnecting set of edges
                         \end{itemize}
@@ -2047,7 +2051,7 @@
                         \begin{itemize}
                           \item as the set of edges having one endpoint in $S$ and one endpoint in $T$
                         \end{itemize}
-                      \item a \alert{edge cut} is an edge set of the form $[S, \overline{S}]$ where $S \subsetneq V(G)$
+                      \item a \alert{edge cut (germ. Kantenschnitt)} is an edge set of the form $[S, \overline{S}]$ where $S \subsetneq V(G)$
                     \end{itemize}
                   \end{minipage}
                 }
@@ -2267,7 +2271,7 @@
             }
           }
           child {
-            node {Paths, Walks, Cycles, Circuits
+            node {Paths, Walks, Trails, Cycles, Circuits
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
@@ -2277,7 +2281,7 @@
               }
             }
             child {
-              node {Walk
+              node {Walk (germ. Kantenzug)
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
@@ -2291,18 +2295,18 @@
                 }
               }
               child {
-                node {u,v-walk
+                node {u,v-walk (germ. u,v-Kantenzug)
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{8cm}
                       \begin{itemize}
-                        \item \alert a {walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
+                        \item a \alert{walk} with \alert{first vertex} $u$ and \alert{last vertex} $v$
                       \end{itemize}
                     \end{minipage}
                   }
                 }
               }
               child {
-                node {Closed walk
+                node {Closed walk (germ. Zyklus / geschlossener Kantenzug)
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{8cm}
                       \begin{itemize}
@@ -2336,7 +2340,7 @@
               }
             }
             child {
-              node {Path
+              node {Path (germ. Weg/Pfad)
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{8cm}
                     \begin{itemize}
@@ -2350,7 +2354,7 @@
                 }
               }
               child {
-                node {u,v-path
+                node {u,v-path (germ. u,v-Pfad/-Weg)
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{8cm}
                       \begin{itemize}
@@ -2362,7 +2366,7 @@
                 }
               }
               child {
-                node {Cycle
+                node {Cycle (germ. Kreis)
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{8cm}
                       \begin{itemize}

@@ -895,7 +895,9 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item a set $E' \subseteq E$ is an \alert{$x,y$ edge-separator} or \alert{$x,y$-edge-cut} if $G - E'$ has no $x,y$-path
-                    \item $\kappa'(x, y)$ is the minimum number of edges whose deletion make $y$ unreachable from $x$
+                    \begin{itemize}
+                      \item $\kappa'(x, y)$ is the minimum number of edges whose deletion make $y$ unreachable from $x$
+                    \end{itemize}
                   \end{itemize}
                 \end{minipage}
               }
@@ -944,15 +946,15 @@
                         \item graphs with \alert{loops} are \alert{uncolorable}
                         \item \alert{multiple edges} are \alert{irrelevant}
                         \item \href[page=212]{\lpathgraph{Graphentheorie_english_all_in_one_with_go_back.pdf}}{Test for $2$-colorability}
-                      \end{itemize}
-                    \item \alert{Chromatic number $X(G)$:} is the least $k$ such that $G$ is $k$-colorable
-                      \begin{itemize}
-                        \item a graph is \alert{$k$-chromatic} if $\chi(G) = k$
-                        \item a proper $k$-coloring of a $k$-chromatic graph is an \alert{optimal coloring}
-                        \item every $k$-chromatic graph with n vertices has at least $\displaystyle \binom{k}{2} = \sum^{k-1}_{i=0} i$ edges. Equality holds for a complete graph plus isolated vertices
-                        \item for \alert{disjoint union:} $\chi(G+H) = max\{\chi(G), \chi(H)\}$
-                        \item for \alert{join:} $\chi(G\vee H) = \chi(G) + \chi(H)$
-                        \item for \alert{cartesian:} $\chi(G\square H) = max\{\chi(G), \chi(H)\}$
+                        \item \alert{Chromatic number $X(G)$:} is the least $k$ such that $G$ is $k$-colorable
+                          \begin{itemize}
+                            \item a graph is \alert{$k$-chromatic} if $\chi(G) = k$
+                            \item a proper $k$-coloring of a $k$-chromatic graph is an \alert{optimal coloring}
+                            \item every $k$-chromatic graph with n vertices has at least $\displaystyle \binom{k}{2} = \sum^{k-1}_{i=0} i$ edges. Equality holds for a complete graph plus isolated vertices
+                            \item for \alert{disjoint union:} $\chi(G+H) = max\{\chi(G), \chi(H)\}$
+                            \item for \alert{join:} $\chi(G\vee H) = \chi(G) + \chi(H)$
+                            \item for \alert{cartesian:} $\chi(G\square H) = max\{\chi(G), \chi(H)\}$
+                          \end{itemize}
                       \end{itemize}
                     \item if $\chi(H) < \chi(G) = k$ for every proper subgraph $H$ of $G$, then $G$ is \alert{color-critical} or \alert{$k$-critical}
                       \begin{itemize}
@@ -976,7 +978,7 @@
                   \begin{itemize}
                     \item is a set of \alert{pairwise adjacent vertices}
                       \begin{itemize}
-                        \item \alert{Clique number $\omega(G)$:} Size (number of vertices) of the largest clique
+                        \item \alert{Clique number (germ. Cliquenzahl) $\omega(G)$:} Size (number of vertices) of the largest clique
                       \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -1107,11 +1109,15 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item for a \alert{perfect matching $M$} and \alert{weighted cover $(u,v)$} in a weighted bipartite graph $G$ it applies that: $c(u,v) \ge w(M)$
-                  \item $c(u,v) = w(M)$ \alert{iff} $M$ consists of edges $ij$ such that $u_i + v_j = w_{i,j}$
-                    % \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $x_iy_j$ such that $u_i + v_j = w_{i,j}$
-                  \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $ij$ such that $u_i + v_j = w_{i,j}$
+                  % \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $x_iy_j$ such that $u_i + v_j = w_{i,j}$
                   \item $G_{u,v}$ has a \alert{perfect matching $M$} if the weight $\displaystyle\sum_{u_iv_j\in M} w_{i,j}$ is equal to $\displaystyle\sum_i u_i + \sum_j v_j$
+                    \begin{itemize}
+                      \item \underline{we then have a optimal solution because of the following lemma:}
+                      \begin{itemize}
+                        \item for a \alert{perfect matching $M$} and \alert{weighted cover $(u,v)$} in a weighted bipartite graph $G$ it applies that: $c(u,v) \ge w(M)$
+                        \item $c(u,v) = w(M)$ \alert{iff} $M$ consists of edges $ij$ such that $u_i + v_j = w_{i,j}$
+                      \end{itemize}
+                    \end{itemize}
                     % \begin{itemize}
                     %   \item and by the Lemma above that is a optimal solution
                     %   \item otherwise we find a matching $M$ and a vertex cover $Q$ of the same size
@@ -1127,38 +1133,29 @@
             }
           }
           child {
-            node {Weighted Matching
+            node {Maximum Weighted Matching Problem / Assignment Problem
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item known in form of the \alert{Maximum Weighted Matching Problem} or \alert{Assignment Problem}
-                    \item find a transversal $M$ (perfect matching $M$ in $K_{n,n}$) with maximum sum $\displaystyle w(M) = \sum_{ij\in M} w_{ij}$
+                    % \item find a transversal $M$ (perfect matching $M$ in $K_{n,n}$) with maximum sum $\displaystyle w(M) = \sum_{ij\in M} w_{ij}$
+                    \item find a transversal $M$ (perfect matching) with maximum sum $\displaystyle w(M) = \sum_{ij\in M} w_{ij}$
+                    \begin{itemize}
+                      \item a \alert{transversal} $M$ of an $n \times n$ matrix consists of $n$ positions, one in each row and each column
+                    \end{itemize}
                   \end{itemize}
                 \end{minipage}
               }
             }
-            child {
-              node {Transversal
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item a \alert{transversal} $M$ of an $n \times n$ matrix consists of $n$ positions, one in each row and each column
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
           }
           child {
-            node {Weighted Vertex Cover
+            node {Minimum Weighted Vertex Cover Problem
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item known in form of the \alert{Minimum Weighted Cover} problem
                       % \item for $u = (u_1, \ldots u_n)$, $v = (v_1, \ldots, v_n)$ is (weighted) \alert{$(u,v)$-Cover} of $w$, if $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
                     \item find a weighted cover $(u,v)$ of minimum cost
                       \begin{itemize}
-                        \item (weighted) \alert{$(u,v)$-Cover} is a choice of labels $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ such that $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
+                        \item \alert{(weighted) $(u,v)$-Cover} is a choice of labels $u = (u_1, \ldots, u_n)$, $v = (v_1, \ldots, v_n)$ such that $u_i + v_j \ge w_{i,j}$ for all $i$, $j$
                         \item \alert{cost} of a cover $(u,v)$ is $\displaystyle c(u,v) = \sum_i u_i + \sum_j v_j$
                       \end{itemize}
                   \end{itemize}
@@ -1174,8 +1171,9 @@
                     \item \href[page=163]{\lpathgraph{Graphentheorie_all_in_one_with_go_back.pdf}}{algorithm with example} and \href[page=122]{\lpathgraph{Graphentheorie_exercise_class_slides_all_in_one_with_go_back.pdf}}{another example}
                       % \item the \alert{Hungarian Algorithm} finds a \alert{maximum weight matching} and a \alert{minimum cost cover}
                     \item the \alert{Hungarian Algorithm} finds a \alert{maximum weighted matching} and a \alert{minimum weighted vertex cover}
+                    \item \alert{equality subgraph (germ. Gleichheitsteilgraph) $G_{u,v}$} for a weighted cover $(u,v)$ is the spanning subgraph of $K_{n,n}$ having the edges $ij$ such that $u_i + v_j = w_{i,j}$
                     \item for the weighted cover $u_1, \ldots, u_n$, $v_1, \ldots, v_n$ and weights $w_{i, j} \ge 0$ the \alert{excess matrix} is $c_{i,j} = u_{i}+ v_{j} - w_{i,j}$
-                    \item stop \enquote{production:} $u_{i}+v_{j}>w_{i,j}$ and at the same time minimize $\sum_{i}u_{i}+\sum_{j}\nu_{j}$
+                    % \item stop \enquote{production:} $u_{i}+v_{j}>w_{i,j}$ and at the same time minimize $\sum_{i}u_{i}+\sum_{j}\nu_{j}$
                   \end{itemize}
                 \end{minipage}
               }
@@ -1586,7 +1584,7 @@
               }
             }
             child {
-              node {Contraction
+              node {Edge Contraction (germ. Kantenkontraktion)
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
@@ -1925,7 +1923,7 @@
           child {
             node {Operations on Graphs}
             child {
-              node (disjointunion) {Disjoint Union $G+H$
+              node (disjointunion) {Disjoint Union (germ. Disjunkte Vereinigung) $G+H$
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
@@ -1936,7 +1934,7 @@
               }
             }
             child {
-              node (join) {Join $G\vee H$
+              node (join) {Join (germ. Join/Zusammenschluss) $G\vee H$
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
@@ -1947,7 +1945,7 @@
               }
             }
             child {
-              node (cartesian) {Cartesian Product $G \square H$
+              node (cartesian) {Cartesian Product (germ. Kartesische Produkt) $G \square H$
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \resizebox{\textwidth}{!}{

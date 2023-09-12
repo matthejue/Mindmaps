@@ -5,5 +5,6 @@ $lualatex = "lualatex -shell-escape -file-line-error -halt-on-error";
 $pdf_mode = 4;
 
 END {
-  system("pdftocairo -png -rx 300 -ry 300 -singlefile main.pdf")
+   # system("pdftocairo -png -rx 300 -ry 300 -singlefile main.pdf")
+  system("pdftocairo -png -rx 50 -ry 50 -singlefile main.pdf")
 }

@@ -88,6 +88,12 @@
 \input{./content/Schnipsel.tex}
 % to input other file end
 
+\newenvironment{edges}{\begin{pgfonlayer}{background}\draw [concept connection]}{;\end{pgfonlayer}}
+\newcommand{\edge}[2]{(#1) edge (#2)}
+\newcommand{\annotation}[2]{\path (#1) -- node[annotation, above, align=center, pos=0.03] {#2} (sa);}
+
+\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0, minimum size=0cm, inner sep=0pt}}}{}
+
 \begin{document}
 \begin{tikzpicture}[
   auto,
@@ -2405,31 +2411,37 @@
       % ┌───────────────────┐
       % │ Verbindungslinien │
       % └───────────────────┘
-      \begin{pgfonlayer}{background}
-        \draw [concept connection]
+      \begin{edges}
+      % \begin{pgfonlayer}{background}
+        % \draw [concept connection]
         %     (commoncasefast) edge (amdahl)
         %     (branchpredictionbuffer) edge (2bitpredictor)
         %     (loadusedatahazard) edge (forwarding)
-        (bipartite graphs) edge (independant set)
-        (disjointunion) edge (coloring)
-        (join) edge (coloring)
-        (cartesian) edge (coloring)
-        (vc) edge (isvccqcl)
-        (clique) edge (isvccqcl)
-        (coloring) edge (isvccqcl)
-        (vc) edge (apa)
-        (regular graphs) edge (degree)
-        (gt) edge (degree)
-        (symmetricdifferencematching) edge (symmetricgraphdifference)
-        (connectivity) edge (hypercube)
-        (edgecut) edge (edgeconnectivity)
-        (edgecut) edge (cut)
-        (ec) edge (mec);
-      \end{pgfonlayer}
+        \edge{bipartite graphs}{independant set}
+        \edge{disjointunion}{coloring}
+        \edge{join}{coloring}
+        \edge{cartesian}{coloring}
+        \edge{vc}{isvccqcl}
+        \edge{clique}{isvccqcl}
+        \edge{coloring}{isvccqcl}
+        \edge{vc}{apa}
+        \edge{regular graphs}{degree}
+        \edge{gt}{degree}
+        \edge{symmetricdifferencematching}{symmetricgraphdifference}
+        \edge{connectivity}{hypercube}
+        \edge{edgecut}{edgeconnectivity}
+        \edge{edgecut}{cut}
+        % SEARCHCONNECTIONSSTART
+        % SEARCHCONNECTIONSEND
+        \edge{ec}{mec}
+      \end{edges}
+      % \end{pgfonlayer}
       % ┌──────────────┐
       % │ Annotationen │
       % └──────────────┘
       % https://tex.stackexchange.com/questions/302976/node-positioning-middle-point-mind-map-connection-bar
+      % SEARCHANNOTATIONSSTART
+      % SEARCHANNOTATIONSEND
       \node [annotation, below] at (gt.south) {This mindmap is provided without guarantee of correctness and completeness!};
       \node [annotation, below] at (gt.north) {\href{https://www.youtube.com/playlist?list=PLmsC317bB1b0m9-ZCKGNR6iM6UTPUO__r}{Recordings} where the different topics of this mindmap get explained\\\href{/tmp/current.pdf}{go back}};
       % \path (measuringexecutiontime) -- node[annotation, above, align=center, pos=0.01] {Similiar to \textbf{Response Time:} How long it takes to do a task} (ca);

@@ -57,8 +57,8 @@
 \usepackage{etoolbox}
 
 \newtoggle{absolute}
-\toggletrue{absolute}
-% \togglefalse{absolute}
+% \toggletrue{absolute}
+\togglefalse{absolute}
 
 \newcommand{\lpathti}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Technische_Informatik/}{./}#1}
 \newcommand{\lpathlogic}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{./Logic.pdf}}
@@ -67,6 +67,7 @@
 
 % necessary to add in new mindmap start
 \newcommand{\lpathai}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Logic/Foundations_of_AI_all_in_one_with_go_back.pdf}{./Foundations_of_AI_all_in_one_with_go_back.pdf}}
+\newcommand{\lpathcombinatorics}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Combinatorics/main.pdf}{./Combinatorics.pdf}}
 % necessary to add in new mindmap end
 
 \newlength{\leveldistance}
@@ -1214,7 +1215,7 @@
                 \item Anzahl \alert{Aussagenlogische Formeln:} $2^{\text{\#Zeilen}} = 2^{\left(2^{\text{\#Variablen}}\right)}$
                   \begin{itemize}
                     \item bei z.B. $3$ \alert{Aussagenlogischen Variablen} gibt es $2^3=8$ Zeilen in der Wahrheitstabelle und damit $2^{(2^3)}=256$ verschiedenen Aussagenlogische Formeln
-                    \item \underline{zweimal \href{/home/areo/Documents/Studium/Summaries/Combinatorics/main.pdf}{Anzahl Variationen mit Wiederholung}:}
+                    \item \underline{zweimal \href{\lpathcombinatorics}{Anzahl Variationen mit Wiederholung}:}
                     \begin{itemize}
                       \item für die Anzahl Zeilen sind es $n=2$ Objekte entweder $0$ oder $1$ und die Auswahl $k=m$ ist die Anzahl Variablen $m$, da jede Variable entweder $0$ oder $1$ sein kann
                       \item für die Anzahl Aussagenlogische Formeln sind es $n=2$ Objekte, entweder $0$ oder $1$ und die Auswahl $k=\#Zeilen$ ist die Anzahl Zeilen, die man zuvor rausbekommen hat, da jede Zeile die eine Eingabe / Interpretation darstellt als Ergebnis entweder $0$ oder $1$ haben kann

@@ -30,116 +30,6 @@
           \end{minipage}
         }
       }
-        child {
-          node {Bedingte Wahrscheinlichkeiten
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{14cm}
-                \begin{itemize}
-                  \item $\displaystyle\mathbb{P}(A \;|\; B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}$
-                  \begin{itemize}
-                    \item $\mathbb{P}(A|B)$ oder $\mathbb{P}_B(A)$
-                    \item $\mathbb{P}(\cdot|B) : \mathcal{P}(\Omega) \rightarrow [0, 1]$ ist ein auf $B$ konzentriertes Wahrscheinlichkeitsmaß ($\displaystyle \mathbb{P}(A\;|\;B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}$)
-                    \item \alert{bedingte Wahrscheinlichkeitsfunktion für diskrete Zufallsvariablen:}\\ $\displaystyle \mathbb{P}(X=x\;|\;Y=y) = \frac{\mathbb{P}(X=x, Y=y)}{\mathbb{P}(Y=y)}$
-                    \item \alert{bedingte Dichtefunktion für stetige Zufallsvariablen:}\\ $\displaystyle f_{X\;|\;Y=y}(x) = \frac{f_{(X,Y)}(x, y)}{f_Y(y)}$
-                    \item \alert{mögliche Fälle:}
-                    \begin{itemize}
-                      \item $\mathbb{P}(B | A)>\mathbb{P}(B)$ $\Rightarrow$ $A$ begünstigt $B$ 
-                      \item $\mathbb{P}(B | A)<\mathbb{P}(B)$ $\Rightarrow$ $A$ beeinträchtigt $B$
-                      \item $\mathbb{P}(B | A)=\mathbb{P}(B)$ $\Rightarrow$ $B$ unahbängig von $A$
-                    \end{itemize}
-                    \item \alert{Spezialfälle:}
-                    \begin{itemize}
-                      \item $A \supseteq B$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(B)}{\mathbb{P}(B)}=1$
-                      \item $A \subseteq B^c$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(\emptyset)}{\mathbb{P}(B)}=0$
-                      \item $B=\Omega$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(A)}{\mathbb{P}(\Omega)}=\mathbb{P}(A)$
-                    \end{itemize}
-                    \item $\mathbb{P}(\Omega) = \mathbb{P}(A\;|\;B) + \mathbb{P}(A^C\;|\;B)$
-                  \end{itemize}
-                \end{itemize}
-                \vspace{-2cm}
-                \begin{minipage}{0.5\textwidth}
-                  \begin{table}
-                    \centering
-                    \begin{tblr}{
-                      cells = {c, BoxColor},
-                      row{1} = {PrimaryColor, fg=white},
-                      row{4} = {PrimaryColorDimmed},
-                      row{5} = {PrimaryColorDimmed},
-                    }
-                      $X$   & $Y$   &                                                             \\
-                      $x_1$ & $y_1$ &                                                             \\
-                      $x_1$ & $y_3$ & $P(Y=y_3|X=x_1) = \dfrac{1}{2} \ne \dfrac{1}{4} = P(Y=y_3)$ \\
-                      $x_2$ & $y_1$ & $P(Y=y_1|X=x_2) = \dfrac{1}{2} = \dfrac{2}{4} = P(Y=y_1)$   \\
-                      $x_2$ & $y_2$ &
-                    \end{tblr}
-                    \caption{$P(\cdot\;|\;X=x_2)$ blendet alle Zeilen ohne $x_2$ aus}
-                  \end{table}
-                \end{minipage}
-                \begin{minipage}{0.5\textwidth}
-                  \begin{resettikz}
-                    \ctikzfig{./figures/conditional_probability_tree}
-                  \end{resettikz}
-                \end{minipage}
-              \end{minipage}
-            }
-          }
-        child {
-          node (tw) {Satz von der Totalen Wahrscheinlichkeit
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item $\displaystyle\mathbb{P}(A)=\mathbb{P}\left(\bigcup_{i \geq 1}\left(A \cap B_{i}\right)\right)=\sum_{i \geq 1} \mathbb{P}\left(A \cap B_{i}\right)=\sum_{i \geq 1} \mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)$
-                  \begin{itemize}
-                    \item \alert{für $B$ mit zwei Zerlegungen:} $\mathbb{P}(A) = \mathbb{P}(A\cap B) + \mathbb{P}(A\cap B^C) = \mathbb{P}(A|B) \cdot \mathbb{P}(B) + \mathbb{P}(A|B^C) \cdot \mathbb{P}(B^C)$
-                  \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {Satz von Bayes
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{10cm}
-                \begin{itemize}
-                  \item $\displaystyle\mathbb{P}\left(B_{i} | A\right)
-=\frac{\mathbb{P}(B_i \cap A)}{\mathbb{P}(A)}
-=\frac{\mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)}{\mathbb{P}(A)}
-=\frac{\mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)}{\sum_{j \geq 1} \mathbb{P}\left(A | B_{j}\right) \cdot \mathbb{P}\left(B_{j}\right)}$
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-          child {
-            node {Unabhängigkeit
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{10cm}
-                  \begin{itemize}
-                    \item zwei Ereignisse $A, B$ sind unabhängig \alert{gdw.}
-                     $\mathbb{P}(A\cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$
-                    \begin{itemize}
-                      \item drei Ereignisse $A, B, C$ sind unabhängig \alert{gdw.} $\mathbb{P}(A\cap B) = \mathbb{P}(A)\cdot \mathbb{P}(B)$ und $\mathbb{P}(A\cap C) = \mathbb{P}(A)\cdot \mathbb{P}(C)$ und $\mathbb{P}(B\cap C) = \mathbb{P}(B)\cdot \mathbb{P}(C)$ und $\mathbb{P}(A\cap B\cap C) = \mathbb{P}(A)\cdot \mathbb{P}(B)\cdot \mathbb{P}(C)$
-                      \item eine endliche oder abzählbare Folge von Ereignissen $(A_n)_{n\ge 1}\subset \mathcal{P}(\Omega)$ heißt unabhängig, falls für jede endliche Teilmenge $T\subset \mathbb{N}$ gilt, dass $\mathbb{P}(\bigcap_{j\in T}A_j) = \prod_{j\in T}\mathbb{P}(A_j)$
-                      \item \alert{Beweis:}
-                        \begin{flalign*}
-                      & \boxed{\mathbb{P}(A | B)=\mathbb{P}\left(A | B^{c}\right)}\\
-                      & \Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\dfrac{\mathbb{P}\left(A \cap B^{c}\right)}{\mathbb{P}\left(B^{c}\right)}=\dfrac{\mathbb{P}(A)-\mathbb{P}(A \cap B)}{\mathbb{P}\left(B^{c}\right)}\\
-                      & \Leftrightarrow\dfrac{\mathbb{P}(A \cap B)\cdot \mathbb{P}\left(B^{c}\right)}{\mathbb{P}(B)}=\mathbb{P}(A)-\mathbb{P}(A \cap B)\\
-                      & \Leftrightarrow\mathbb{P}(A \cap B)\cdot (1-\mathbb{P}(B))=\mathbb{P}(A)\mathbb{P}(B)-\mathbb{P}(A \cap B)\mathbb{P}(B)\\
-                      & \Leftrightarrow\mathbb{P}(A \cap B)-\mathbb{P}(A \cap B)\mathbb{P}(B)=\mathbb{P}(A)\mathbb{P}(B)-\mathbb{P}(A \cap B)\mathbb{P}(B)\\
-                      & \overset{!}{\Leftrightarrow} \boxed{\mathbb{P}(A \cap B)=\mathbb{P}(A)\mathbb{P}(B)}\\
-                      & \overset{1.}\Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)}=\mathbb{P}(B)\Leftrightarrow\boxed{\mathbb{P}(B | A)=\mathbb{P}(B)}\\
-                      & \overset{2.}\Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\mathbb{P}(A)\Leftrightarrow\boxed{\mathbb{P}(A | B)=\mathbb{P}(A)}\\
-                      % >  - und genauso $\mathbb{P}(A | B)=\mathbb{P}\left(A | B^{c}\right)\Leftrightarrow \mathbb{P}(B | A)=\mathbb{P}\left(B | A^{c}\right)$, wenn man $\mathbb{P}(A \cap B)\mathbb{P}(B)$ bzw. $\mathbb{P}(A \cap B)\mathbb{P}(A)$ auf beiden Seiten der Gleichung subtrahiert
-                            \end{flalign*}
-                    \end{itemize}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
       child {
         node {Zufallsvariablen
           \resizebox{\textwidth}{!}{
@@ -173,7 +63,7 @@
           }
         }
         child {
-          node {Wahrscheinlichkeitsfunktion / Probability mass function (PMF)
+          node {Wahrscheinlichkeitsfunktion (engl. Probability mass function (PMF))
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -193,7 +83,7 @@
           }
         }
         child {
-          node {Dichtefunktion / Wahrscheinlichkeitsdichte / Probability density function (PDF)
+          node {Dichtefunktion / Wahrscheinlichkeitsdichte (engl. Probability density function (PDF))
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -217,7 +107,7 @@
           }
         }
         child {
-          node {Kumulative Verteilungsfunktion / Cumulative distribution function (CDF)
+          node {Kumulative Verteilungsfunktion(engl. Cumulative distribution function (CDF))
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -350,7 +240,7 @@
         }
       }
       child {
-        node {Gemeinsame Verteilungen (joint distributions)
+        node {Gemeinsame Verteilungen (engl. joint distributions)
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
@@ -400,10 +290,10 @@
                     hline{5} = {-}{},
                   }
                         & $A$            & $A^C$           & $P(B_i)$   \\
-                  $B_1$    & $P(A\cap B_1)$   & $P(A^C\cap B_1)$  & $P(B_1)$   \\
-                  $B_2$  & $P(A\cap B_2)$ & $P(A^C\cap B_2)$ & $P(B_2)$ \\
-                  $B_3$  & $P(A\cap B_3)$ & $P(A^C\cap B_3)$ & $P(B_3)$ \\
-                  $\sum$ & $P(A)$         & $P(A^C)$        & \diagbox{$P(\Omega)=1$}{$P(\Omega)=1$}      
+                      $B_1$  & {$P(A\cap B_1)$\\ $a$}                   & {$P(A^C\cap B_1)$\\ $b$}          & {$P(B_1)$\\ $a + b$}   \\
+                  $B_2$      & {$P(A\cap B_2)$\\ $c$}                   & {$P(A^C\cap B_2)$\\ $d$}          & {$P(B_2)$\\ $c + d$}   \\
+                  $B_3$      & {$P(A\cap B_3)$\\ $e$}                   & {$P(A^C\cap B_3)$\\ $f$}          & {$P(B_3)$\\ $e + f$}   \\
+                  $\sum$     & {$P(A)$\\ $a + c + e$}                   & {$P(A^C)$\\ $b + d + f$}          & {$P(\Omega)=1$\\$a + b + c + d + e + f$} % \diagbox{$P(\Omega)=1$\\$a + b + c + d + e + f$}{$P(\Omega)=1$\\$a + b + c + d + e + f$}      
                   \end{tblr}
                   \end{table}
                   \begin{itemize}
@@ -454,6 +344,174 @@
               }
             }
           }
+          child {
+            node {Bedingte Wahrscheinlichkeiten (engl. conditional probability)
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{14cm}
+                  \begin{itemize}
+                    \item $\displaystyle\mathbb{P}(A \;|\; B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}$
+                      \begin{itemize}
+                        \item $\mathbb{P}(A|B)$ oder $\mathbb{P}_B(A)$
+                        \item $\mathbb{P}(\cdot|B) : \mathcal{P}(\Omega) \rightarrow [0, 1]$ ist ein auf $B$ konzentriertes Wahrscheinlichkeitsmaß ($\displaystyle \mathbb{P}(A\;|\;B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}$)
+                        \item \alert{bedingte Wahrscheinlichkeitsfunktion für diskrete Zufallsvariablen:}\\ $\displaystyle \mathbb{P}(X=x\;|\;Y=y) = \frac{\mathbb{P}(X=x, Y=y)}{\mathbb{P}(Y=y)}$
+                        \item \alert{bedingte Dichtefunktion für stetige Zufallsvariablen:}\\ $\displaystyle f_{X\;|\;Y=y}(x) = \frac{f_{(X,Y)}(x, y)}{f_Y(y)}$
+                        \item \alert{mögliche Fälle:}
+                          \begin{itemize}
+                            \item $\mathbb{P}(B | A)>\mathbb{P}(B)$ $\Rightarrow$ $A$ begünstigt $B$ 
+                            \item $\mathbb{P}(B | A)<\mathbb{P}(B)$ $\Rightarrow$ $A$ beeinträchtigt $B$
+                            \item $\mathbb{P}(B | A)=\mathbb{P}(B)$ $\Rightarrow$ $B$ unahbängig von $A$
+                          \end{itemize}
+                        \item \alert{Spezialfälle:}
+                          \begin{itemize}
+                            \item $A \supseteq B$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(B)}{\mathbb{P}(B)}=1$
+                            \item $A \subseteq B^c$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(\emptyset)}{\mathbb{P}(B)}=0$
+                            \item $B=\Omega$ $\Rightarrow$ $\displaystyle \mathbb{P}(A \mid B)=\frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\frac{\mathbb{P}(A)}{\mathbb{P}(\Omega)}=\mathbb{P}(A)$
+                          \end{itemize}
+                        \item $\mathbb{P}(\Omega) = \mathbb{P}(A\;|\;B) + \mathbb{P}(A^C\;|\;B)$
+                      \end{itemize}
+                  \end{itemize}
+                  \vspace{-2cm}
+                  \begin{minipage}{0.5\textwidth}
+                    \begin{table}
+                      \centering
+                      \begin{tblr}{
+                          cells = {c, BoxColor},
+                          row{1} = {SecondaryColor, fg=white},
+                          row{4} = {SecondaryColorDimmed},
+                          row{5} = {SecondaryColorDimmed},
+                        }
+                        $X$   & $Y$   &                                                             \\
+                        $x_1$ & $y_1$ &                                                             \\
+                        $x_1$ & $y_3$ & $P(Y=y_3|X=x_1) = \dfrac{1}{2} \ne \dfrac{1}{4} = P(Y=y_3)$ \\
+                        $x_2$ & $y_1$ & $P(Y=y_1|X=x_2) = \dfrac{1}{2} = \dfrac{2}{4} = P(Y=y_1)$   \\
+                        $x_2$ & $y_2$ &
+                      \end{tblr}
+                      \caption{$P(\cdot\,|\,X=x_2)$ blendet alle Zeilen ohne $x_2$ aus}
+                    \end{table}
+                  \end{minipage}
+                  \begin{minipage}{0.5\textwidth}
+                    \begin{resettikz}
+                      \ctikzfig{./figures/conditional_probability_tree}
+                    \end{resettikz}
+                  \end{minipage}
+                \end{minipage}
+              }
+            }
+            child {
+              node (tw) {Satz von der Totalen Wahrscheinlichkeit
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item $\displaystyle\mathbb{P}(A)=\mathbb{P}\left(\bigcup_{i \geq 1}\left(A \cap B_{i}\right)\right)=\sum_{i \geq 1} \mathbb{P}\left(A \cap B_{i}\right)=\sum_{i \geq 1} \mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)$
+                        \begin{itemize}
+                          \item \alert{für $B$ mit zwei Zerlegungen:} $\mathbb{P}(A) = \mathbb{P}(A\cap B) + \mathbb{P}(A\cap B^C) = \mathbb{P}(A|B) \cdot \mathbb{P}(B) + \mathbb{P}(A|B^C) \cdot \mathbb{P}(B^C)$
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Satz von Bayes
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{10cm}
+                    \begin{itemize}
+                      \item $\displaystyle\mathbb{P}\left(B_{i} | A\right)
+                        =\frac{\mathbb{P}(B_i \cap A)}{\mathbb{P}(A)}
+                        =\frac{\mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)}{\mathbb{P}(A)}
+                        =\frac{\mathbb{P}\left(A | B_{i}\right) \cdot \mathbb{P}\left(B_{i}\right)}{\sum_{j \geq 1} \mathbb{P}\left(A | B_{j}\right) \cdot \mathbb{P}\left(B_{j}\right)}$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Unabhängigkeit
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item zwei Ereignisse $A, B$ sind unabhängig \alert{gdw.}
+                        $\mathbb{P}(A\cap B) = \mathbb{P}(A) \cdot \mathbb{P}(B)$
+                        \begin{itemize}
+                          \item drei Ereignisse $A, B, C$ sind unabhängig \alert{gdw.} $\mathbb{P}(A\cap B) = \mathbb{P}(A)\cdot \mathbb{P}(B)$ und $\mathbb{P}(A\cap C) = \mathbb{P}(A)\cdot \mathbb{P}(C)$ und $\mathbb{P}(B\cap C) = \mathbb{P}(B)\cdot \mathbb{P}(C)$ und $\mathbb{P}(A\cap B\cap C) = \mathbb{P}(A)\cdot \mathbb{P}(B)\cdot \mathbb{P}(C)$
+                          \item eine endliche oder abzählbare Folge von Ereignissen $(A_n)_{n\ge 1}\subset \mathcal{P}(\Omega)$ heißt unabhängig, falls für jede endliche Teilmenge $T\subset \mathbb{N}$ gilt, dass $\mathbb{P}(\bigcap_{j\in T}A_j) = \prod_{j\in T}\mathbb{P}(A_j)$
+                          \item \alert{Beweis:}
+                            \begin{flalign*}
+                      & \boxed{\mathbb{P}(A | B)=\mathbb{P}\left(A | B^{c}\right)}\\
+                      & \Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\dfrac{\mathbb{P}\left(A \cap B^{c}\right)}{\mathbb{P}\left(B^{c}\right)}=\dfrac{\mathbb{P}(A)-\mathbb{P}(A \cap B)}{\mathbb{P}\left(B^{c}\right)}\\
+                      & \Leftrightarrow\dfrac{\mathbb{P}(A \cap B)\cdot \mathbb{P}\left(B^{c}\right)}{\mathbb{P}(B)}=\mathbb{P}(A)-\mathbb{P}(A \cap B)\\
+                      & \Leftrightarrow\mathbb{P}(A \cap B)\cdot (1-\mathbb{P}(B))=\mathbb{P}(A)\mathbb{P}(B)-\mathbb{P}(A \cap B)\mathbb{P}(B)\\
+                      & \Leftrightarrow\mathbb{P}(A \cap B)-\mathbb{P}(A \cap B)\mathbb{P}(B)=\mathbb{P}(A)\mathbb{P}(B)-\mathbb{P}(A \cap B)\mathbb{P}(B)\\
+                      & \overset{!}{\Leftrightarrow} \boxed{\mathbb{P}(A \cap B)=\mathbb{P}(A)\mathbb{P}(B)}\\
+                      & \overset{1.}\Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)}=\mathbb{P}(B)\Leftrightarrow\boxed{\mathbb{P}(B | A)=\mathbb{P}(B)}\\
+                      & \overset{2.}\Leftrightarrow\dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)}=\mathbb{P}(A)\Leftrightarrow\boxed{\mathbb{P}(A | B)=\mathbb{P}(A)}\\
+                      % >  - und genauso $\mathbb{P}(A | B)=\mathbb{P}\left(A | B^{c}\right)\Leftrightarrow \mathbb{P}(B | A)=\mathbb{P}\left(B | A^{c}\right)$, wenn man $\mathbb{P}(A \cap B)\mathbb{P}(B)$ bzw. $\mathbb{P}(A \cap B)\mathbb{P}(A)$ auf beiden Seiten der Gleichung subtrahiert
+                            \end{flalign*}
+                        \end{itemize}
+                      \item \alert{Beispiel für Abhängigkeit in Kontingenztafeln:}
+                      \begin{itemize}
+                      \item $dom(X) = \{0, 1\} , X \sim B(1, 0.5)$ and $dom(Y) = \{0, 1, 2\},  Y \sim B(2, 0.5)$
+                        \item $f_{X, Y} = \begin{cases}
+                          c\cdot(2f_X(x) + 3f_Y(y)) & 0 \le x\le 1, 0\le y\le 2 \\
+                          0 &
+                        \end{cases}$
+                      \item $\begin{aligned}[t]\displaystyle 1 &= \sum_{x\in dom(f_X)} \sum_{y\in dom(f_Y)} f_{XY}(x, y) = \sum_{x\in dom(f_X)} \sum_{y\in dom(f_Y)} c\cdot(2f_X(x) + 3f_Y(y))\\
+                          &= \sum_{x\in dom(f_X)} \sum_{y\in dom(f_Y)} c\cdot(2f_X(x) + 3f_Y(y)) = \sum_{x\in dom(f_X)} 2\cdot c\cdot(2f_X(x) + 3(\frac{1}{4})) + c\cdot(2f_X(x) + 6(\frac{1}{4}))\\ 
+                          &= \sum_{x\in dom(f_X)} 2\cdot c\cdot(4f_X(x) + 12(\frac{1}{8})) = 2\cdot c \cdot(4(\frac{1}{8}) + 12(\frac{1}{8})) + 2\cdot c \cdot(8(\frac{1}{8}) + 12(\frac{1}{8})) + 2\cdot c \cdot(4(\frac{1}{8}) + 12(\frac{1}{8}))\\ 
+                          &= 2\cdot c\cdot (2\cdot (4(\frac{1}{4}) + 12(\frac{1}{8})) + 8(\frac{1}{4}) + 12(\frac{1}{8})) = 2\cdot c\cdot (2 + \frac{6}{2} + 2 + \frac{3}{2} ))) = (2\cdot 8.5) \cdot c \Leftrightarrow c = \frac{1}{17} 
+                        \end{aligned}$
+                      \end{itemize}               
+                        \begin{table}
+                          \centering
+                          \begin{tblr}{
+                              cells = {c, BoxColor},
+                              row{1} = {PrimaryColorDimmed},
+                              column{1} = {PrimaryColorDimmed},
+                              vline{4} = {-}{},
+                              hline{5} = {-}{},
+                            }
+                                 & $1$            & $2$           & $P_Y$   \\
+                          $1$    & $P(X=x_1, Y=y_1)$   & $P(X=x_2, Y=y_1)$  & $P(Y=y_1)$ \\
+                          $2$    & $P(X=x_1, Y=y_2)$ & $P(X=x_2, Y=y_2)$ & $P(Y=y_2)$ \\
+                          $3$    & $P(X=x_1, Y=y_3)$ & $P(X=x_2, Y=y_3)$ & $P(Y=y_3)$ \\
+                          $P_X$  & $P(X=x_1)$         & $P(X=x_2)$        & 1
+                        \end{tblr}
+                      \end{table}
+                      \item \alert{Beispiel für Unabhängigkeit in Kontingenztafeln:}
+                        \begin{itemize}
+                          \item $dom(X) = \{0, 1, 2\} , X \sim B(2, 0.5)$ and $dom(Y) = \{0, 1, 2, 3\},  Y \sim B(3, 0.5)$
+                          \item $f_{X, Y} = \begin{cases}
+                              c\cdot(2f_X(x) + 3f_Y(y)) & 0 \le x\le 2, 0\le y\le 3 \\
+                              0 &
+                            \end{cases}$
+                          \item $\begin{aligned}[t]\displaystyle 1 &= \sum_{x\in dom(f_X)} \sum_{y\in dom(f_Y)} f_{XY}(x, y) = \sum_{x\in dom(f_X)} \sum_{y\in dom(f_Y)} c\cdot(2f_X(x) + 3f_Y(y))\\
+                          &= \sum_{x\in dom(f_X)} \sum_{y\in dom(f_Y)} c\cdot(2f_X(x) + 3f_Y(y)) = \sum_{x\in dom(f_X)} 2\cdot c\cdot(2f_X(x) + 3(\frac{1}{8})) + 2\cdot c\cdot(2f_X(x) + 9(\frac{1}{8}))\\ 
+                          &= \sum_{x\in dom(f_X)} 2\cdot c\cdot(4f_X(x) + 12(\frac{1}{8})) = 2\cdot c \cdot(4(\frac{1}{8}) + 12(\frac{1}{8})) + 2\cdot c \cdot(8(\frac{1}{8}) + 12(\frac{1}{8})) + 2\cdot c \cdot(4(\frac{1}{8}) + 12(\frac{1}{8}))\\ 
+                          &= 2\cdot c\cdot (2\cdot (4(\frac{1}{4}) + 12(\frac{1}{8})) + (8(\frac{1}{4}) + 12(\frac{1}{8})))) = 17 \Leftrightarrow c = \frac{1}{17} 
+                            \end{aligned}$
+                          \end{itemize}               
+                        \begin{table}
+                          \centering
+                          \begin{tblr}{
+                              cells = {c, BoxColor},
+                              row{1} = {PrimaryColorDimmed},
+                              column{1} = {PrimaryColorDimmed},
+                              vline{4} = {-}{},
+                              hline{5} = {-}{},
+                            }
+                            & $1$            & $2$           & $P_Y$   \\
+                          $1$    & $P(X=x_1, Y=y_1)$   & $P(X=x_2, Y=y_1)$  & $P(Y=y_1)$ \\
+                          $2$  & $P(X=x_1, Y=y_2)$ & $P(X=x_2, Y=y_2)$ & $P(Y=y_2)$ \\
+                          $3$  & $P(X=x_1, Y=y_3)$ & $P(X=x_2, Y=y_3)$ & $P(Y=y_3)$ \\
+                          $P_X$ & $P(X=x_1)$         & $P(X=x_2)$        & 1
+                        \end{tblr}
+                      \end{table}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
       }
       child {
         node {Additionstheorem
@@ -464,7 +522,7 @@
                 \begin{itemize}
                   \item $\mathbb{P}(A_1\cup A_2\cup A_3) = \mathbb{P}(A_1) + \mathbb{P}(A_2) + \mathbb{P}(A_3) - \mathbb{P}(A_1\cap A_2) - \mathbb{P}(A_2\cap A_3)  - \mathbb{P}(A_1\cap A_3) + \mathbb{P}(A_1\cap A_2\cap A_3)$
                   \item \underline{für paarweise disjunkte Mengen $A_1, \ldots, A_n \in \mathcal{P}(\Omega)$:} $\mathbb{P}\left(\bigcup_{i=1}^n A_i\right)=\sum_{i=1}^n \mathbb{P}\left(A_i\right)$
-                  \item für größere $n$ \href[page=13]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{Siebformel} und bei austauschbaren Ereignissen die \href[page=35]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{Siebformel für austauschbare Ereignisse}
+                  \item für größere $n$ \href[page=13]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Siebformel} und bei austauschbaren Ereignissen die \href[page=35]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Siebformel für austauschbare Ereignisse}
                 \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -499,11 +557,11 @@
                 \item \alert{Rechenregeln:}
                 \begin{itemize}
                   \item $E(X + Y) = E(X) + E(Y)$
-                  \item falls $X$ und $Y$ unabhängig, gilt $E(X \cdot Y) = E(X) \cdot E(Y)$ (Beweis ist \href[page=150]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden)
+                  \item falls $X$ und $Y$ unabhängig, gilt $E(X \cdot Y) = E(X) \cdot E(Y)$ (Beweis ist \href[page=150]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden)
                   \item $E(c \cdot X) = c\cdot E(X)$
                   \item $E(c) = c$
                   \item $E(\mathbb{1}_{A}) = \mathbb{P}(A)$
-                  \item Beweise sind \href[page=128]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                  \item Beweise sind \href[page=128]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
                 \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -516,7 +574,7 @@
                 \begin{itemize}
                   \item $X$ ist \alert{standartisiert}, falls $E(X) = 0$ und $Var(X)=1$. 
                   \item  jede Zufallsvariable $X$ mit $Var(X) > 0$ kann standardisiert werden durch: $\displaystyle X^* = \frac{X - E(X)}{\sqrt{Var(X)}} = \frac{X - E(X)}{\sigma_X}$
-                  \item Herleitung ist \href[page=147]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                  \item Herleitung ist \href[page=147]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
                 \end{itemize}
               \end{minipage}
             }
@@ -544,7 +602,7 @@
                   \item $Var(X + c) = Var(X)$
                   \item $Var(c\cdot X) = c^2 \cdot Var(X)$
                   \item $Var(c) = 0$
-                  \item Beweise sind \href[page=131]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                  \item Beweise sind \href[page=131]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
                 \end{itemize}
               \item \alert{Standardabweichung:} $\sigma_X = \sqrt{Var(X)}$
               \end{itemize}
@@ -563,14 +621,14 @@
                 \item $X$ und $Y$ sind unkorreliert, falls $Cov(X, Y) = 0$
                 \begin{itemize}
                   \item unabhängig $\rightarrow$ unkorreliert
-                  \item unkorreliert $\not\rightarrow$ unabhängig (Gegenbeispiel ist \href[page=152]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden)
+                  \item unkorreliert $\not\rightarrow$ unabhängig (Gegenbeispiel ist \href[page=152]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden)
                 \end{itemize}
                 \item \alert{Rechenregeln:}
                 \begin{itemize}
                   \item $Cov(X, Y) = Cov(Y, X)$
                   \item $Cov(X, X) = Var(X)$
                   \item $Cov(X + a, Y + b) = Cov(X, Y)$
-                  \item Beweise sind \href[page=152]{/home/areo/Documents/Studium/Semester_4_Unterlagen/Stochastik/skript/Stochastik_all_in_one_reference.pdf}{hier} zu finden
+                  \item Beweise sind \href[page=152]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
                 \end{itemize}
                 % \item falls $X$ und $Y$ unabhängig sind, ist $Cov(X, Y) = 0$ und $f_{XY} = 0$, Gegenrichtung gilt nicht
               \end{itemize}                                       

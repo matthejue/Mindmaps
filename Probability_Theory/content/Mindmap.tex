@@ -764,6 +764,7 @@
                                  \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
+                                      % \item \alert{sinnvoller Wertebereich:} $0, 1, \ldots, n$
                                       \item $\displaystyle \mathbb{P}(X=k) = \binom{n}{k} p^k\cdot (1-p)^{n-k}$
                                       \item $\displaystyle E(X) = n\cdot p$
                                       \item $\displaystyle V(X) = n(1-p)p$
@@ -776,7 +777,11 @@
                                   \resizebox{\textwidth}{!}{
                                     \begin{minipage}[t]{12cm}
                                       \begin{itemize}
-                                        \item $\displaystyle \mathbb{P}(X=1) = p, \mathbb{P}(X=0) = 1-p$
+                                        % \item \alert{sinnvoller Wertebereich:} $0, 1$
+                                        \item $\displaystyle \mathbb{P}(X=i) = \begin{cases}
+                                            p   & i=1 \\
+                                            1-p & i=0
+                                        \end{cases}$
                                       \item $\displaystyle E(X) = p$
                                       \item $\displaystyle V(X) = p(1-p)$
                                       \end{itemize}
@@ -789,6 +794,7 @@
                                   \resizebox{\textwidth}{!}{
                                     \begin{minipage}[t]{12cm}
                                       \begin{itemize}
+                                        % \item \alert{sinnvoller Wertebereich:} $0, 1, 2, \ldots$
                                         \item $\displaystyle \mathbb{P}(X=k) = \binom{r + k - 1}{k} p^r(1-p)^k = \binom{-r}{k} p^r(p-1)^k$
                                         \item $\displaystyle E(X) = r\frac{1-p}{p} $
                                         \item $\displaystyle V(X) = r\frac{1-p}{p^2}$
@@ -803,6 +809,7 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
+                                      % \item \alert{sinnvoller Wertebereich:} $max\{0, n - (N − r)\} \le k \le min\{n, r\}$
                                       \item $\displaystyle \mathbb{P}(X=k) = \dfrac{\binom{r}{k}\binom{N-r}{n-k}}{\binom{N}{n}}$
                                       \item $\displaystyle E(X) = n\frac{r}{N}$
                                       \item $\displaystyle V(X) = n\frac{r}{N}\frac{N-r}{N}\frac{N-n}{N-1}$
@@ -816,6 +823,7 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
+                                      % \item \alert{sinnvoller Wertebereich:} $0, 1, 2, \ldots$
                                       \item $\displaystyle \mathbb{P}(X=k) = \dfrac{\lambda^k}{k!} e^{-\lambda}$
                                       \item $\displaystyle E(X) = \lambda$
                                       \item $\displaystyle V(X) = \lambda$
@@ -829,6 +837,7 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
+                                      % \item \alert{sinnvoller Wertebereich:} $0, 1, 2, \ldots$
                                       \item $\displaystyle \mathbb{P}(X=k) = p(1-p)^k$
                                       \item $\displaystyle E(X) = \frac{1-p}{p}$
                                       \item $\displaystyle V(X) = \frac{1-p}{p^2}$
@@ -845,6 +854,7 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
+                                      % \item \alert{sinnvoller Wertebereich:} $(a, b)$
                                       \item $\displaystyle f(x) = \frac{1}{b-a} \mathbf{1}_{[a, b]}(y)$
                                       \item $F_{U([a, b])}(z)=\begin{cases}
                                           0 & z < a\\
@@ -863,8 +873,13 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
-                                      \item $\displaystyle f(x) = \frac{e^{-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2}}{\sqrt{2\pi}\sigma} = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{(y - \mu)^2}{2\sigma^2}}$
-                                      \item $F()$
+                                      % \item \alert{sinnvoller Wertebereich:} $\mathbb{R}$
+                                      \item $\displaystyle f(x) = \frac{e^{-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2}}{\sqrt{2\pi}\sigma} = \frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{(y - \mu)^2}{2\sigma^2}} = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$
+                                      \item $\displaystyle F(z) = \frac{1}{\sigma\sqrt{2\pi}} \int_{-\infty}^{z} e^{-\frac{1}{2}(\frac{t-\mu}{\sigma})^2} dt$
+                                      \begin{itemize}
+                                        \item \alert{Substitution:} $\displaystyle t=\sigma z+\mu$, $\displaystyle z = \frac{t-\mu}{\sigma}$
+                                        \item $F(t) = \displaystyle\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\frac{t-\mu}{\sigma}} e^{-\frac{1}{2}z^2} dz = \phi\left(\frac{t-\mu}{\sigma}\right)$
+                                      \end{itemize}
                                       \item $\displaystyle E(X) = \mu$
                                       \item $\displaystyle V(X) = \sigma^2$
                                     \end{itemize}
@@ -876,8 +891,9 @@
                                   \resizebox{\textwidth}{!}{
                                     \begin{minipage}[t]{12cm}
                                       \begin{itemize}
+                                        % \item \alert{sinnvoller Wertebereich:} $\mathbb{R}$
                                         \item $\displaystyle \varphi(y) = \frac{1}{\sqrt{2\pi}} e^{-\frac{y^2}{2}}$
-                                      \item $\displaystyle \phi(z) = \int_{-\infty}^{z} \varphi(y)dy = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{z} e^{-\frac{t^2}{2}}dt$
+                                      \item $\displaystyle \phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{z} e^{-\frac{t^2}{2}}dt$
                                       \end{itemize}
                                     \end{minipage}
                                   }
@@ -889,6 +905,7 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
+                                      % \item \alert{sinnvoller Wertebereich:} $(0, \infty)$
                                       \item $f(x) = \lambda e^{-\lambda y}\mathbf{1}_{[0, \infty)}(y)$
                                       \item $F_{Exp(\lambda)}(z) = 1 - e^{-\lambda z}$
                                       \item $\displaystyle E(X) = \frac{1}{\lambda} $
@@ -903,25 +920,45 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
-                                      \item $\displaystyle f(x) = \frac{\beta^\alpha x^{\alpha-1}e^{-\beta x}}{\Gamma(\alpha)}\mathbf{1}_{[0, \infty)}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}\mathbf{1}_{[0, \infty)}(x)$
+                                      % \item \alert{sinnvoller Wertebereich:} $(0, \infty)$
+                                      % \item $\displaystyle f(x) = \frac{\beta^\alpha x^{\alpha-1}e^{-\beta x}}{\Gamma(\alpha)}\mathbf{1}_{[0, \infty)}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}\mathbf{1}_{[0, \infty)}(x)$
+                                      \item $\displaystyle f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}\mathbf{1}_{[0, \infty)}(x)$
                                       \begin{itemize}
                                         \item $\displaystyle\Gamma(x) = \int_{0}^{\infty} t^{x-1}e^{-t} dt, x > 0$
                                       \end{itemize}
+                                      \item $\displaystyle F(z) = \frac{1}{\Gamma(\alpha)} \gamma(\alpha, \beta x)$
                                       \item $\displaystyle E(X) = \frac{\alpha}{\beta}$
                                       \item $\displaystyle V(X) = \frac{\alpha}{\beta^2}$
                                     \end{itemize}
                                   \end{minipage}
                                 }
                               }
+                              child {
+                                node {$\chi^2$-Verteilung $\chi^2(n) = \Gamma(\frac{n}{2}                                     , \frac{1}{2})$
+                                  \resizebox{\textwidth}{!}{
+                                    \begin{minipage}[t]{12cm}
+                                      \begin{itemize}
+                                        % \item \alert{sinnvoller Wertebereich:} $(0, \infty)$
+                                        % \item $\displaystyle f(x) = \frac{x^{\frac{n}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} = \frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{-\frac{x}{2}}$
+                                        \item $\displaystyle f(x) = \frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{-\frac{x}{2}}$
+                                      \item $\displaystyle F(z) = \frac{1}{\Gamma(\frac{n}{2})} \gamma\left(\frac{n}{2}, \frac{z}{2}\right)$
+                                        \item $\displaystyle E(X) = n$
+                                        \item $\displaystyle V(X) = 2n$
+                                      \end{itemize}
+                                    \end{minipage}
+                                  }
+                                }
+                              }
                             }
                             child {
-                              node {$\chi^2$-Verteilung $\chi^2(k)$
+                              node {t-Verteilung
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
-                                      \item $\displaystyle f(x) = \frac{x^{\frac{k}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{k}{2}}\Gamma(\frac{k}{2})} = \frac{1}{2^{\frac{k}{2}}\Gamma(\frac{k}{2})}\cdot x^{\frac{k}{2}-1}e^{-\frac{x}{2}}$
-                                      \item $\displaystyle E(X) = k$
-                                      \item $\displaystyle V(X) = 2k$
+                                      % \item \alert{sinnvoller Wertebereich:} $(-\infty, \infty)$
+                                      \item $\displaystyle f(x) = \frac{1}{\sqrt{n\pi}}\frac{\Gamma(\frac{n+1}{2})}{\Gamma(\frac{n}{2})}\frac{1}{(1+\frac{x^2}{n})^{\frac{n+1}{2}})}$
+                                      \item $\displaystyle E(X) = 0, n > 1$
+                                      \item $\displaystyle V(X) = \frac{n}{n-2}, n>2$
                                     \end{itemize}
                                   \end{minipage}
                                 }
@@ -948,3 +985,5 @@
 % das Zeug aus Gimp
 % Transformationssatz/regel
 % Kovarianz stetige Formel
+% Gauß-Verteilung
+% bei chi^2 ist noch was falsch

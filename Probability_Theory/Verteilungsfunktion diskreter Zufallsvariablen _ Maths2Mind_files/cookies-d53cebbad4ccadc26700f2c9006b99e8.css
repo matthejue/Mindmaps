@@ -1,0 +1,25 @@
+.cookiesjsr-banner {
+  background-color: white;
+  color: black;
+}
+.cookiesjsr-banner a,
+.cookiesjsr-btn {
+  border-color: black;
+  color: black;
+  background-color: white;
+}
+.cookiesjsr-btn.important {
+  border-color: #b22222;
+  color: #b22222;
+}
+
+.cookiesjsr-banner--info {
+  max-height: 20vh;
+}
+.cookiesjsr-banner button.denyAll {
+  display: flex;
+}
+.cookiesjsr-banner--action {
+  display: flex;
+  flex-wrap: wrap;
+}

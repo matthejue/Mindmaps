@@ -1,0 +1,275 @@
+\documentclass{standalone}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\begin{mindmap}
+  \begin{mindmapcontent}
+    \node (middle) at (current page.center) {Verification of Digital Circuits
+      \resizebox{\textwidth}{!}{
+        \begin{minipage}[t]{18cm}
+        \end{minipage}
+      }
+    }
+    child {
+      node {Basics}
+      child {
+        node {Essential Definitions
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \underline{essential definitions:}
+                  \begin{itemize}
+                    \item \alert{verification method:} check equivalence between specification and implementation
+                    \item \alert{formal verification:} mathematical proofs of correctness
+                      \begin{itemize}
+                        \item one uses \alert{formal methods} to avoid and detect design errors
+                        \item because validation by simulation can never cover the complete system behavior
+                      \end{itemize}
+                    \item \alert{security:} a system should not leak information that should be kept secret
+                    \item \alert{safety:} system does what it should do, implementation behaves as said in the specification (in this lecture)
+                    \item \alert{canonical:} exactly one representation
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Design of integrated circuits
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \underline{\script{22}{design of integrated circuits}:} 
+                  \begin{itemize}
+                    \item start with abstract specification and make it more and more concrete
+                    \item implementation of the level before is the specification of the next level
+                    \item equivalence checking for single steps easier than between initial specification and final implementation, similiarity is much higher
+                    % \item more abstract SystemC Specification can be above Register-Transfer-Level
+                    \item \alert{Initial Specification:} Usually in natural language
+                      % \begin{itemize}
+                      %   \item would need a specification in formal language e.g. specification by properties, on high level called design properties
+                      % \end{itemize}
+                  \end{itemize}
+                  \begin{enumerate}[label=\color{PrimaryColor}\arabic*.]
+                    \item \alert{Register-Transfer-Level:} Registers, Operations, Memory, no exact implementation for e.g. multiplier, don't fix the details
+                      % \begin{itemize}
+                      %   \item[$\textcolor{SwitchColor}{\blacksquare}$] Implementation in Hardware Description Language e.g. VHDL, Verilog
+                      % \end{itemize}
+                    \item \alert{Gate-Level:} Gates (AND, OR, etc.)
+                    \item \alert{Layout-Level:} Placement (fix places of different components / gates) and routing (fix where connections go)
+                  \end{enumerate}
+                  \begin{itemize}
+                    \item \alert{Final implementation:} Design data for producing the chip
+                  \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+    }
+    child {
+      node {Basic technologies}
+      child {
+        node {Binary decision diagrams (BDDs)
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{6cm}
+              \begin{itemize}
+                \item \script{41}{Syntax}
+                \item \script{42}{Semantic}
+                \item \script{45}{Example}
+                \item \script{46}{Drawbacks}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Reduced Ordered Binary Decision Diagrams (ROBDDs)
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item A BDD G is a Reduced Ordered Binary Decision Diagram iff it is ordered and reduced
+                    \begin{itemize}
+                      \item In this context, reduced means that none of the reduction rules above (\enquote{isomorphism} and \enquote{Shannon}) can be applied (anymore).
+                    \end{itemize}
+                  \item \script{57}{Example}
+                  \item (\script{62}{Remark})
+                  \item \script{65}{Proof of the Canonicity of ROBDDs}
+                  \begin{itemize}
+                    \item \script{64}{Definition Isomorphism}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Reduction Rules
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item OBDDs can be reduced to ROBDDs in layers starting from the terminal nodes
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {\enquote{Isomorphism} reduction
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{51}{Definition}
+                      \item \script{52}{Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {\enquote{Shannon} reduction
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{53}{Definition and Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Ordered BDDs (OBDDs)
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item A BDD G over the set of variables $X_n = {x_1, \ldots, x_n}$ is ordered, iff it is \alert{free} and the \alert{variables on every path} from the root to a terminal node occur in the \alert{same order}
+                    \item \script{48}{information about variable order}
+                    \item \script{49}{example}
+                    \item This is still not enough, there can be redundancy in the OBDD
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Free BDDs
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item A BDD G is free, iff each variable along every path from the root to a terminal node occurs at most once.
+                      \item \script{47}{Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+        }
+        child {
+          node {Decomposition rule / Shannon theorem
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{6cm}
+                \begin{itemize}
+                  \item \script{43}{Definition}
+                  \item \script{44}{Proof}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Satisfiability solvers (SAT / QBF)
+        }
+      }
+      child {
+        node {And-inverter graphs (AIGs)
+        }
+      }
+    }
+    child {
+      node (test) {Property checking
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item Prove that a system specifies a set of properties
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Specification of properties with temporal logics}
+      }
+      child {
+        node {Algorithms for checking properties of circuits}
+      }
+      child {
+        node {Bounded model checking using SAT solvers}
+      }
+      child {
+        node {Unbounded model checking}
+        child {
+          node {K-Induktion}
+        }
+        child {
+          node {Craig interpolation}
+        }
+        child {
+          node {Property directed reachability (PDR)}
+        }
+      }
+    }
+    child {
+      node {Equivalence checking
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item Prove that two designs have the same (functional) behavior
+              \item Given two combinational circuits (i.e., without memory), do they compute the same boolean function?
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Combinational circuits}
+        child {
+          node {Application of BDDs and SAT for equivalence checking
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \alert{Equivalence Checking Method:} Convert each circuit into a datastructure that has exactly one representation of each Boolean function. Then compare these representations
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Exploitation of structural information}
+        }
+      }
+      child {
+        node {Sequential circuits}
+        child {
+          node {Product automata}
+        }
+        child {
+          node {Characteristic functions}
+        }
+        child {
+          node {Image and pre-image computations}
+        }
+        child {
+          node {BDD-based methods for proving equivalence of two sequential circuits}
+        }
+        child {
+          node {Generation of counterexamples}
+        }
+      }
+    }
+  \end{mindmapcontent}
+  \begin{edges}
+    \edge{test}{middle}
+  \end{edges}
+  \annotation{test}{annotation}
+\end{mindmap}
+\end{document}

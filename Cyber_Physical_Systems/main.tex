@@ -1,0 +1,42 @@
+\documentclass{standalone}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\begin{mindmap}
+  \begin{mindmapcontent}
+    \node (middle) at (current page.center) {Topic}
+    child {
+      node (test) {Subtopic
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \alert{total flow on edges leaving $U$:} $\displaystyle f^{+}(U)=\sum_{\mathclap{\substack{u \in U, v \in V \backslash U, u v \in E}}} f(u v)$
+            \end{itemize}
+            \begin{figure}
+              \begin{subfigure}{0.5\textwidth}
+                \begin{resettikz}
+                  \ctikzfig{test}
+                \end{resettikz}
+                \caption{a line}
+              \end{subfigure}
+              \begin{subfigure}{0.5\textwidth}
+                \begin{resettikz}
+                  \ctikzfig{test}
+                \end{resettikz}
+                \caption{another line}
+              \end{subfigure}
+            \end{figure}
+          \end{minipage}
+        }
+      }
+    }
+  \end{mindmapcontent}
+  \begin{edges}
+    \edge{test}{middle}
+  \end{edges}
+  \annotation{test}{annotation}
+\end{mindmap}
+\end{document}

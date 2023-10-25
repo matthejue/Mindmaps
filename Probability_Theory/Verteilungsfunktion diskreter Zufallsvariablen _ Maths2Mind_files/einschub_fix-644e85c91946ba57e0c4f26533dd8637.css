@@ -1,0 +1,10 @@
+.node--type-einschub img {
+  width: 100% !important;
+}
+
+.einschub-headerbar .node__content {
+  padding-bottom: 0;
+}
+.einschub-headerbar .node--view-mode-teaser .field {
+  margin-bottom: 8px;
+}

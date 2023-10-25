@@ -1,0 +1,38 @@
+.iru-tiny-player .icon {
+        height: 40px;
+        width: 32px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+}
+.iru-tiny-player .icon.fa-play {
+            background-image: url(/themes/maths2mind/images/tinyaudioplayer/play_icon.png)
+}
+.iru-tiny-player .icon.fa-pause {
+            background-image: url(/themes/maths2mind/images/tinyaudioplayer/pause_icon.png)
+}
+.iru-tiny-player .icon.fa-stop {
+            background-image: url(/themes/maths2mind/images/tinyaudioplayer/stop_icon.png)
+}
+.iru-tiny-player .icon.fa-volume-up {
+            background-image: url(/themes/maths2mind/images/tinyaudioplayer/volume_icon.png)
+}
+.iru-tiny-player .icon.fa-times {
+            background-image: url(/themes/maths2mind/images/tinyaudioplayer/close_icon.png)
+}
+.iru-tiny-player .icon:hover {
+            cursor: pointer;
+}
+
+.view-search-api-schluesselwoerter .iru-tiny-player .song-main-info .song-title {
+  display: none;
+}
+.view-search-api-schluesselwoerter .iru-tiny-player .song-volume-bar#bg,
+.view-search-api-schluesselwoerter .iru-tiny-player .song-volume-bar#fg,
+.view-search-api-schluesselwoerter .iru-tiny-player .song-volume-bar#fgg {
+  left: 10%;
+  width: 50%;
+}
+.view-search-api-schluesselwoerter .iru-tiny-player .song-volume-dot {
+  left: 60%;
+}

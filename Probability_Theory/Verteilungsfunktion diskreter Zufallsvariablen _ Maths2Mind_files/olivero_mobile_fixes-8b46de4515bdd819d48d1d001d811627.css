@@ -1,0 +1,47 @@
+@media screen and (max-width: 768px) {
+  [dir="ltr"] .mobile-buttons {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  [dir="ltr"] .site-branding {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .view-elemente-des-kapitels .views-row {
+    margin-bottom: 0;
+  }
+  .view-elemente-des-kapitels .views-row .field-content {
+    min-height: initial;
+    padding: 0.5rem;
+  }
+  .view-elemente-des-kapitels .views-row a.counter-label, .view-elemente-des-kapitels .views-row div.counter-label,
+  .view-elemente-des-kapitels .views-row a.counter-outer, .view-elemente-des-kapitels .views-row div.counter-outer {
+    font-size: large;
+  }
+  .view-eva-anrissbuttons .views-row {
+    width: 100%;
+  }
+  #main-wrapper .button--small, #main-wrapper .button {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: small;
+    min-height: initial;
+  }
+  .field-group-tabs-wrapper .horizontal-tabs {
+    border: none;
+  }
+  .field-group-tabs-wrapper .horizontal-tabs-pane {
+    padding: 0;
+  }
+  .field-group-tabs-wrapper .horizontal-tabs-pane .details-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .views-exposed-form form {
+    justify-content: center;
+  }
+}

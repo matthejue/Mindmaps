@@ -1,0 +1,32 @@
+/**
+ * Admin toolbar icon.
+ */
+.toolbar-icon-quiz-admin:before {
+  background-image: url(../images/icon.svg);
+}
+
+.toolbar-icon-quiz-admin.is-active:before {
+  background-image: url(../images/icon-active.svg);
+}
+
+/* Score box */
+div.quiz-report-score-container {
+  border-right: solid 1px gray;
+  border-left: solid 1px gray;
+  border-bottom: solid 1px gray;
+  border-top: solid 1px gray;
+  float: right;
+  padding: 4px 6px;
+}
+
+.q-correct {
+  background-color: #ddffdd;
+}
+
+.q-wrong {
+  background-color: #ffcccc;
+}
+
+.q-waiting {
+  background-color: #ffffdd;
+}

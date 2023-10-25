@@ -1,0 +1,8 @@
+@media screen and (min-width: 62.5rem) {
+  .sidebar-grid > .site-main {
+    grid-column: 1 /11;
+  }
+  .sidebar-grid .region--sidebar {
+    grid-column: 11 /15;
+  }
+}

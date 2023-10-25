@@ -1,0 +1,33 @@
+.primary-nav__menu-link,
+.primary-nav__menu-link--level-2,
+.primary-nav__button-toggle {
+  color: #b22222;
+  font-weight: normal;
+}
+.primary-nav__menu-link:hover,
+.primary-nav__menu-link--level-2:hover,
+.primary-nav__button-toggle:hover {
+  color: rgb(49, 54, 55);
+}
+.primary-nav__button-toggle {
+  margin-top: 0;
+}
+.primary-nav__menu-item label {
+  max-width: calc(100% - 40px);
+}
+.primary-nav__menu--level-3.is-active-menu-parent {
+    margin-top: 0.5125rem;
+    margin-bottom: 1.6875rem;
+}
+.node--type-gutenberg-seite .block-menu a.primary-nav__menu-link--link {
+  height: auto;
+}
+.node--type-gutenberg-seite .block-menu .primary-nav__button-toggle .menu-item-label {
+    padding-right: 0px;
+    max-width: calc(100% - 50px);
+    display: inline-block;
+}
+
+.layout-main-wrapper {
+  z-index: 0;
+}

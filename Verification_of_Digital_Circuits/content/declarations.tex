@@ -1,0 +1,106 @@
+%!Tex Root = ../main.tex
+
+% ┌─────────┐
+% │ Mindmap │
+% └─────────┘
+\newlength{\leveldistance}
+\setlength{\leveldistance}{25cm}
+
+\newenvironment{edges}{\begin{pgfonlayer}{background}\draw [concept connection]}{;\end{pgfonlayer}}
+\newcommand{\edge}[2]{(#1) edge (#2)}
+\newcommand{\annotation}[2]{\path (#1) -- node[annotation, above, align=center, pos=0.03] {#2} (middle);}
+
+\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0, minimum size=0cm, inner sep=0pt}}}{}
+
+\newenvironment{mindmap}{
+  \begin{tikzpicture}[
+      auto,
+      huge mindmap,
+      fill opacity=0.6,
+      draw opacity=0.8,
+      concept color = PrimaryColorDimmed,
+      every annotation/.style={fill=BoxColor, draw=none, align=center, fill = BoxColor, text width = 2cm},
+      grow cyclic,
+      level 1/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance,
+        sibling angle=360/\the\tikznumberofchildren,
+        % https://tex.stackexchange.com/questions/501240/trying-to-use-the-array-environment-inside-a-tikz-node-with-execute-at-begin-no
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 2/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 2,
+        % sibling angle=60,
+        sibling angle=360/\the\tikznumberofchildren,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      level 3/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance / 3,
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 4/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 4,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      level 5/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance / 5,
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 6/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 6,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      level 7/.append style = {
+        concept color=SecondaryColorDimmed,
+        level distance=\leveldistance / 7,
+        execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+      },
+      level 8/.append style = {
+        concept color=PrimaryColorDimmed,
+        level distance=\leveldistance / 8,
+        execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+      },
+      concept connection/.append style = {
+        color = BoxColor,
+      },
+  ]
+}{
+\end{tikzpicture}
+}
+
+\newenvironment{mindmapcontent}{
+  \begin{scope}[
+      every node/.style = {concept, circular drop shadow}, % draw=none
+      every child/.style={concept},
+    ]
+}{
+  ;\end{scope}
+}
+
+% ┌───────┐
+% │ Boxes │
+% └───────┘
+\DeclareTotalTCBox{\inlinebox}{ s m }
+{standard jigsaw,opacityback=0,colframe=SwitchColor,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
+  right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
+{\IfBooleanTF{#1}%
+{\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}#2}%
+{#2}}
+
+% ┌──────────────────┐
+% │ Case distinction │
+% └──────────────────┘
+% \newtoggle{absolute}
+% % \toggletrue{absolute}
+% \togglefalse{absolute}
+% \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/x/}{./}#1}
+
+% ┌───────┐
+% │ Paths │
+% └───────┘
+\newcommand{\script}[2]{\href[page=#1]{/home/areo/Documents/Studium/Semester_1_Master/Verification_of_Digital_Circuits/slides/annotated/Verification_of_Digital_Circuits_all_in_one_with_go_back.pdf}{\inlinebox{#2}}}

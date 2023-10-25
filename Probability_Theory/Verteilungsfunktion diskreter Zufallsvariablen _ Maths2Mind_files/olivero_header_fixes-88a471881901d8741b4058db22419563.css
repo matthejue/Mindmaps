@@ -1,0 +1,30 @@
+header.site-header {
+  min-height: 72px;
+}
+.sticky-header-toggle {
+  height: 72px;
+}
+.site-branding__inner {
+  height: 72px;
+}
+#site-header__inner .form-actions .button,
+#site-header__inner .form-actions,
+#site-header__inner .form-item {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+@media screen and (max-width: 1000px) {
+  #header .views-exposed-form .js-form-type-textfield {
+    width: calc(100% - 100px);
+  }
+  #header .views-exposed-form .js-form-type-textfield input.form-text {
+    width: 100%;
+  }
+  #header .views-exposed-form input.button {
+    width: 100px;
+  }
+  header .header__left, header .site-header__initial, header .site-header__inner {
+    margin-bottom: 54px;
+    padding-left: 0;
+  }
+}

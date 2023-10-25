@@ -114,7 +114,8 @@
                   \item $F_X: \mathbb{R} \rightarrow [0, 1]$%, $x\mapsto \mathbb{P}(X\le x)$
                     \begin{itemize}
                       % \item $F_X(z) = \mathbb{P}_X((-\infty, z]) = \mathbb{P}(X\le z)$
-                      \item $F_X(z) = \mathbb{P}(X\le z)$
+                      \item \alert{diskrete Zufallsvariable:} $\displaystyle F_X(z) = \mathbb{P}(X\le z) = \sum_{x_i \le x} f(x_i)$
+                      \item \alert{stetige Zufallsvariable:} $\displaystyle F_X(z) = \mathbb{P}(X\le z) = \int_{-\infty}^{z} f(x) dx$
                     \end{itemize}
                   \item \alert{Eigenschaften von Verteilungsfunktionen:}
                     \begin{itemize}
@@ -663,12 +664,13 @@
                                     \item \alert{stetig:} $\displaystyle E(X) = \int_{-\infty}^{\infty} x\cdot f_X(x) \cdot dx$
                                     \item \alert{Rechenregeln:}
                                       \begin{itemize}
-                                        \item $E(X + Y) = E(X) + E(Y)$
-                                        \item falls $X$ und $Y$ unabhängig, gilt $E(X \cdot Y) = E(X) \cdot E(Y)$ (Beweis ist \href[page=150]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden)
-                                        \item $E(c \cdot X) = c\cdot E(X)$
-                                        \item $E(c) = c$
-                                        \item $E(\mathbb{1}_{A}) = \mathbb{P}(A)$
-                                        \item Beweise sind \href[page=128]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
+                                        \item $E[(X, Y)] = (E[X], E[Y])$
+                                        \item $E[X + Y] = E[X] + E[Y]$
+                                        \item falls $X$ und $Y$ unabhängig, gilt $E[X \cdot Y] = E[X] \cdot E[Y]$ (Beweis ist \href[page=150]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden)
+                                        \item $E[c \cdot X] = c\cdot E[X]$
+                                        \item $E[c] = c$
+                                        \item $E[\mathbb{1}_{A}] = \mathbb{P}(A)$
+                                        \item \href[page=80]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Beweise}
                                       \end{itemize}
                                   \end{itemize}
                                 \end{minipage}
@@ -677,11 +679,11 @@
                             child {
                               node (stdzv) {Standardisierung von Zufallsvariablen
                                 \resizebox{\textwidth}{!}{
-                                  \begin{minipage}[t]{8cm}
+                                  \begin{minipage}[t]{12cm}
                                     \begin{itemize}
                                       \item $X$ ist \alert{standartisiert}, falls $E(X) = 0$ und $Var(X)=1$. 
-                                      \item  jede Zufallsvariable $X$ mit $Var(X) > 0$ kann standardisiert werden durch: $\displaystyle X^* = \frac{X - E(X)}{\sqrt{Var(X)}} = \frac{X - E(X)}{\sigma_X}$
-                                      \item Herleitung ist \href[page=147]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
+                                      \item jede nicht-standardisierte Zufallsvariable $X$ mit $Var(X) > 0$ kann standardisiert werden durch: $\displaystyle X^* = \frac{X - E(X)}{\sigma_X} = \frac{X - E(X)}{\sqrt{Var(X)}}$
+                                      \item \href[page=99]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Herleitung}
                                     \end{itemize}
                                   \end{minipage}
                                 }
@@ -693,23 +695,24 @@
                               \resizebox{\textwidth}{!}{
                                 \begin{minipage}[t]{12cm}
                                   \begin{itemize}
-                                    \item \alert{diskret:} $\displaystyle Var(X) = \sum_{k\ge 1} (x_k - E(X))^2 \cdot \mathbb{P}(X = x_k)$
-                                    \item \alert{stetig:} $\displaystyle Var(X) = \int_{-\infty}^{\infty} (x - E(X))^2 \cdot f_X(x)\cdot dx$
-                                    \item \alert{andere Schreibweisen:} $Var(X) =  E[(X - E(X))^2] = E(X^2) - E(X)^2$
+                                    \item \alert{diskret:} $\displaystyle Var[X] = \sum_{k\ge 1} (x_k - E(X))^2 \cdot \mathbb{P}(X = x_k)$
+                                    \item \alert{stetig:} $\displaystyle Var[X] = \int_{-\infty}^{\infty} (x - E(X))^2 \cdot f_X(x)\cdot dx$
+                                    \item \alert{andere Schreibweisen:} $Var[X] =  E[(X - E[X])^2] = E[X^2] - E[X]^2$
                                     \item \alert{Rechenregeln:}
                                       \begin{itemize}
-                                        \item $Var(X+Y) = Var(X) + Var(Y) + 2\cdot Cov(X, Y)$
+                                        \item $Var[X+Y] = Var[X] + Var[Y] + 2\cdot Cov[X, Y]$
                                           \begin{itemize}
-                                            \item falls $X$ und $Y$ paarweise unkorreliert (folgt aus Unabhängigkeit), gilt $Var(X + Y) = Var(X) + Var(Y)$
-                                            \item $\displaystyle Var(X_1 + \ldots + X_n) = \sum_{i=1}^n Var(X_i) + 2\cdot \sum_{i,j=1,i<j}^n Cov(X_i, X_j)$
+                                            \item \href[page=105]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                            \item falls $X$ und $Y$ paarweise unkorreliert (folgt aus Unabhängigkeit), gilt $Var[X + Y] = Var[X] + Var[Y]$
+                                            \item $\displaystyle Var[X_1 + \ldots + X_n] = \sum_{i=1}^n Var(X_i) + 2\cdot \sum_{i,j=1,i<j}^n Cov[X_i, X_j]$
                                               \begin{itemize}
-                                                \item falls $X_i$ paarweise unkorreliert, gilt $\displaystyle Var(X_1 + \ldots +  X_n) = \sum_{i=1}^{n} Var(X_i)$ (Bienaymé-Gleichung)
+                                                \item falls $X_i$ paarweise unkorreliert, gilt $\displaystyle Var[X_1 + \ldots +  X_n] = \sum_{i=1}^{n} Var[X_i]$ (Bienaymé-Gleichung)
                                               \end{itemize}
                                           \end{itemize}       
-                                        \item $Var(X + c) = Var(X)$
-                                        \item $Var(c\cdot X) = c^2 \cdot Var(X)$
-                                        \item $Var(c) = 0$
-                                        \item Beweise sind \href[page=131]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
+                                        \item $Var[X + c] = Var[X]$
+                                        \item $Var[c\cdot X] = c^2 \cdot Var[X]$
+                                        \item $Var[c] = 0$
+                                        \item \href[page=83]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Beweise}
                                       \end{itemize}
                                     \item \alert{Standardabweichung:} $\sigma_X = \sqrt{Var(X)}$
                                   \end{itemize}
@@ -722,20 +725,20 @@
                               \resizebox{\textwidth}{!}{
                                 \begin{minipage}[t]{12cm}
                                   \begin{itemize}
-                                    \item \alert{diskret:} $\displaystyle Cov(X, Y) = \sum_{i = 1}^n \sum_{j = 1}^m (x_i - E(X))\cdot (y_j - E(Y)) \cdot \mathbb{P}(X = x_i, Y = y_j)$
-                                    \item \alert{stetig:} $\displaystyle Cov(X, Y) = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x - E(X))\cdot (y - E(Y))\cdot f(x, y)\cdot dx\cdot dy$
-                                    \item \alert{andere Schreibweisen:} $E[(X-E(X))\cdot (Y-E(Y))] = E(X\cdot Y) - E(X)\cdot E(Y)$
-                                    \item $X$ und $Y$ sind unkorreliert, falls $Cov(X, Y) = 0$
+                                    \item \href[page=103]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                    \item \alert{diskret:} $\displaystyle Cov[X, Y] = \sum_{i = 1}^n \sum_{j = 1}^m (x_i - E[X])\cdot (y_j - E[Y]) \cdot \mathbb{P}(X = x_i, Y = y_j)$
+                                    \item \alert{stetig:} $\displaystyle Cov[X, Y] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x - E[X])\cdot (y - E[Y])\cdot f(x, y)\cdot dx\cdot dy$
+                                    \item \alert{andere Schreibweisen:} $E[(X-E[X])\cdot (Y-E[Y])] = E[X\cdot Y] - E[X]\cdot E[Y]$
+                                    \item $X$ und $Y$ sind unkorreliert, falls $Cov[X, Y] = 0$
                                       \begin{itemize}
                                         \item unabhängig $\rightarrow$ unkorreliert
-                                        \item unkorreliert $\not\rightarrow$ unabhängig (Gegenbeispiel ist \href[page=152]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden)
+                                        \item unkorreliert $\not\rightarrow$ unabhängig (Gegenbeispiel ist \href[page=104]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden)
                                       \end{itemize}
                                     \item \alert{Rechenregeln:}
                                       \begin{itemize}
-                                        \item $Cov(X, Y) = Cov(Y, X)$
-                                        \item $Cov(X, X) = Var(X)$
-                                        \item $Cov(X + a, Y + b) = Cov(X, Y)$
-                                        \item Beweise sind \href[page=152]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{hier} zu finden
+                                        \item $Cov[X, Y] = Cov[Y, X]$
+                                        \item $Cov[X, X] = Var[X]$
+                                        \item $Cov[X + a, Y + b] = Cov[X, Y]$
                                       \end{itemize}
                                       % \item falls $X$ und $Y$ unabhängig sind, ist $Cov(X, Y) = 0$ und $f_{XY} = 0$, Gegenrichtung gilt nicht
                                   \end{itemize}                                       
@@ -747,7 +750,8 @@
                                 \resizebox{\textwidth}{!}{
                                   \begin{minipage}[t]{12cm}
                                     \begin{itemize}
-                                      \item $\displaystyle \frac{Cov(X, Y)}{\sqrt{Var(X)Var(Y)}} = \frac{Cov(X, Y)}{\sqrt{Var(X)}\cdot \sqrt{Var(Y)}} = \frac{Cov(X, Y)}{\sigma_X\cdot \sigma_Y}$
+                                      \item \href[page=107]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                      \item $\displaystyle \rho(X, Y) = \frac{Cov[X, Y]}{\sqrt{Var[X]Var[Y]}} = \frac{Cov[X, Y]}{\sqrt{Var[X]}\cdot \sqrt{Var[Y]}} = \frac{Cov[X, Y]}{\sigma_X\cdot \sigma_Y}$
                                     \end{itemize}
                                   \end{minipage}
                                 }
@@ -756,7 +760,137 @@
                           }
                         }
                         child {
-                          node {Wahrscheinlichkeitsverteilungen}
+                          node {Grenzwertsätze}
+                          child {
+                            node {Markov-Ungleichung
+                              \resizebox{\textwidth}{!}{
+                                \begin{minipage}[t]{12cm}
+                                  \begin{itemize}
+                                    \item $\displaystyle \mathbb{P}(X \geq \epsilon) \leq \frac{\mathbb{E}(X)}{\epsilon}, \forall\epsilon > 0$, nichtnegative Zufallsvariable $X$
+                                    \item \alert{Extended version for nondecreasing functions}:
+                                    \begin{itemize}
+                                      \item \href[page=168]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                      \item $\displaystyle \mathbb{P}(|X| \geq \epsilon) \leq \frac{\mathbb{E}(g(|X|))}{g(\epsilon)}, \forall\epsilon > 0$
+                                    \end{itemize}
+                                    \item \href{https://youtu.be/sp9RF0zH-SU?si=3vhdS-WdnrX0jrOG}{Beweis}
+                                  \end{itemize}
+                                \end{minipage}
+                              }
+                            }
+                            child {
+                              node {Tschebyscheff-Ungleichung
+                                \resizebox{\textwidth}{!}{
+                                  \begin{minipage}[t]{12cm}
+                                    \begin{itemize}
+                                      \item Maximale Wahrscheinlichkeit, dass der Wert einer Stichprobe $X$ außerhalb bestimmter Intervallgrenzen liegt (Obere Abschätzung von $X\notin(E(X)-k, E(X)+k)$):
+                                        \begin{itemize}
+                                          \item \href[page=168]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                          \item $\displaystyle \mathbb{P}(|X-\mathbb{E}(X)|\ge \epsilon) \le \frac{\mathbb{V}(X)}{\epsilon^2}, \forall\epsilon > 0$
+                                        \end{itemize}
+                                      \item Minimale Wahrscheinlichkeit, dass der Wert einer Stichprobe $X$ innerhalb bestimmter Intervallgrenzen liegt (Gegenwahrscheinlichkeit als untere Abschätzung von $X\in(E(X)-k, E(X)+k)$)
+                                        \begin{itemize}
+                                          \item $\displaystyle \mathbb{P}(|X-\mathbb{E}(X)|< \epsilon) \ge 1 - \frac{\mathbb{V}(X)}{\epsilon^2}, \forall\epsilon > 0$
+                                        \end{itemize}
+                                    \end{itemize}
+                                  \end{minipage}
+                                }
+                              }
+                            }
+                          }
+                          child {
+                            node {Schwaches Gesetz großer Zahlen
+                              \resizebox{\textwidth}{!}{
+                                \begin{minipage}[t]{12cm}
+                                  \begin{itemize}
+                                    \item \href[page=169]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                    \item $\displaystyle\lim_{n\rightarrow \infty} \mathbb{P}\left(\left|\frac{1}{n}\sum^n_{i=1} X_i - \mathbb{E}(X_1)\right|\ge \epsilon\right) = 0$
+                                  \end{itemize}
+                                \end{minipage}
+                              }
+                            }
+                            child {
+                              node {Stochastische Konvergenz
+                                \resizebox{\textwidth}{!}{
+                                  \begin{minipage}[t]{12cm}
+                                    \begin{itemize}
+                                      \item \href[page=170]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                      \item $\displaystyle \lim_{n\rightarrow\infty} \mathbb{P}(|X_n - X|\ge \epsilon) = 0$
+                                      \item \alert{Notation:} $X_n\xrightarrow{\mathbb{P}} X$
+                                    \end{itemize}
+                                  \end{minipage}
+                                }
+                              }
+                            }
+                          }
+                          child {
+                            node {Poissons Gesetz der kleinen Zahlen
+                              \resizebox{\textwidth}{!}{
+                                \begin{minipage}[t]{12cm}
+                                  \begin{itemize}
+                                    \item \href[page=175]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                    \item $\displaystyle\lim_{n\rightarrow \infty} b_{n, p_n}(\{k\}) = \frac{\lambda^k}{k!} e^{-\lambda} = P_{\lambda}(\{k\})$
+                                  \end{itemize}
+                                \end{minipage}
+                              }
+                            }
+                          }
+                          child {
+                            node (zentralergrenzwertsatz) {Zentraler Grenzwertsatz von Lévy (engl. Central Limit Theorem)
+                              \resizebox{\textwidth}{!}{
+                                \begin{minipage}[t]{14cm}
+                                  \begin{itemize}
+                                    \item alle $X_i's$ sind \alert{unabhängig} voneinander. Jedes $X_i$ hat die \alert{gleiche Verteilung}. \href[page=177]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Weitere Bedingungen}
+                                    \begin{itemize}
+                                      \item \alert{i.i.d.:} Independent and identically distributed random variables
+                                    \end{itemize}
+                                    \item $\displaystyle \lim_{n\rightarrow\infty} \mathbb{P}(a\le S_n^*\le b) = \lim_{n\rightarrow\infty} \mathbb{P}(a\le \frac{\sum_{i=1}^{n} X_i - n\cdot \mu}{\sigma \cdot \sqrt{n}} \le b) = \int_a^b \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx = \phi(b) - \phi(a)$, $\mu = E(X_1)$, $\sigma = V(X_1), \mu_{S_n} = n\cdot \mu, \sigma_{S_n} = \sqrt{n}\cdot \sigma$, $\mu_{S_n^*} = 0$, $\sigma_{S_n^*} = 1$
+                                    \begin{itemize}
+                                      \item $\displaystyle \frac{\sum_{i=1}^{n} X_i - n\cdot \mu}{\sigma \cdot \sqrt{n}}$ bedeutet wieviele Standardabweichungen entfernt vom Erwartungswert befindet sich $X_1 + \ldots + X_n$
+                                      \item $\displaystyle \lim_{n\rightarrow \infty} \mathbb{P}(a \le \frac{\overline{X} - \mu}{\frac{\sigma}{\sqrt{n}}}\le b) = \mathbb{P}(a \le \frac{\frac{\sum_{i=1}^{n} X_i}{n}  - \mu}{\frac{\sigma}{\sqrt{n}}} \le b) = \mathbb{P}(a \le \frac{\sum_{i=1}^{n} X_i  - n\cdot\mu}{\sqrt{n}\cdot \sigma} \le b), \mu_{\overline{X}} = \frac{n\cdot \mu}{n} = \mu, \displaystyle \sigma_{\overline{X}} = \frac{\sqrt{n}\cdot \sigma}{n} = \frac{\sqrt{n}\cdot \sigma}{\sqrt{n}\cdot \sqrt{n}} = \frac{\sigma}{\sqrt{n}}$, $\mu_{\overline{X}^*} = 0$, $\sigma_{\overline{X}^*} = 1$
+                                    \begin{itemize}
+                                      \item Ein Sigmaintervall für $\overline{X}$ sagt welche Spanne an Werten man für das Arithemtische Mittel mit einer gewissen hohen Wahrscheinlichkeit sieht.\\$\displaystyle \mathbb{P}(a \le \overline{X} \le b)$ sagt aus wie nah am Erwartungswert man sich mit seinem Intervall an Arithmetischen Mitteln befindet
+                                    \end{itemize}
+                                    \end{itemize}
+                                    \item \href{https://youtu.be/zeJD6dqJ5lo?si=HuSwFMEDkiWC2zn7}{Gute Erklärung}
+                                  \end{itemize}
+                                \end{minipage}
+                              }
+                            }
+                            child {
+                              node {Satz von deMoivre-Laplace
+                                \resizebox{\textwidth}{!}{
+                                  \begin{minipage}[t]{12cm}
+                                    \begin{itemize}
+                                      \item \href[page=178]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Bedingungen}
+                                      \item $\displaystyle \lim_{n\rightarrow \infty} \mathbb{P}(a\le S_n^*\le b) = \int_a^b \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} dx = \phi(b) - \phi(a)$
+                                    \end{itemize}
+                                  \end{minipage}
+                                }
+                              }
+                            }
+                            child {
+                              node {Stetigkeitskorrektur
+                                \resizebox{\textwidth}{!}{
+                                  \begin{minipage}[t]{12cm}
+                                    \begin{itemize}
+                                      \item \href[page=181]{\lpathprob{Stochastik_all_in_one_with_go_back.pdf}}{Beispiel}
+                                    \end{itemize}
+                                  \end{minipage}
+                                }
+                              }
+                            }
+                          }
+                        }
+                        child {
+                          node {Wahrscheinlichkeitsverteilungen
+                            \resizebox{\textwidth}{!}{
+                              \begin{minipage}[t]{12cm}
+                                \begin{itemize}
+                                  \item $X_1 ∼ B(n_1 , p)$ $\Leftrightarrow$ $X_1$ besitzt eine $B(n_1 , p)$–Verteilung
+                                \end{itemize}
+                              \end{minipage}
+                            }
+                          }
                           child {
                             node {Diskrete Wahrscheinlichkeitsverteilungen}
                             child {
@@ -768,6 +902,7 @@
                                       \item $\displaystyle \mathbb{P}(X=k) = \binom{n}{k} p^k\cdot (1-p)^{n-k}$
                                       \item $\displaystyle E(X) = n\cdot p$
                                       \item $\displaystyle V(X) = n(1-p)p$
+                                      \item $X_1 \sim B(n_1, p), X_2 \sim B(n_2, p), X_1 + X_2 \sim B(n_1 + n_2, p)$
                                     \end{itemize}
                                   \end{minipage}
                                 }
@@ -827,6 +962,7 @@
                                       \item $\displaystyle \mathbb{P}(X=k) = \dfrac{\lambda^k}{k!} e^{-\lambda}$
                                       \item $\displaystyle E(X) = \lambda$
                                       \item $\displaystyle V(X) = \lambda$
+                                      \item $X_1 \sim P(\lambda_1), X_2 \sim P(\lambda_2), X_1 + X_2 \sim P(\lambda_1 + \lambda_2)$
                                     \end{itemize}
                                   \end{minipage}
                                 }
@@ -882,6 +1018,9 @@
                                       \end{itemize}
                                       \item $\displaystyle E(X) = \mu$
                                       \item $\displaystyle V(X) = \sigma^2$
+                                      \item $X_1 \sim N(\mu_1, \sigma_1^2), X_2 \sim N(\mu_2, \sigma_2^2), X_1 + X_2 \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$
+                                      \item $\displaystyle \int_{-\sigma}^{\sigma} f(x) dx = 68.3\%$, $\displaystyle \int_{-2\sigma}^{2\sigma} f(x) dx = 95.5\%$, $\displaystyle \int_{-3\sigma}^{3\sigma} f(x) dx = 99.7\%$
+                                      \item \href{https://youtu.be/zeJD6dqJ5lo?si=sD0AP0KWhgvk7DTL&t=954}{Herleitung}
                                     \end{itemize}
                                   \end{minipage}
                                 }
@@ -893,7 +1032,8 @@
                                       \begin{itemize}
                                         % \item \alert{sinnvoller Wertebereich:} $\mathbb{R}$
                                         \item $\displaystyle \varphi(y) = \frac{1}{\sqrt{2\pi}} e^{-\frac{y^2}{2}}$
-                                      \item $\displaystyle \phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{z} e^{-\frac{t^2}{2}}dt$
+                                        \item $\displaystyle \phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{z} e^{-\frac{t^2}{2}}dt$
+                                        \item $\displaystyle \int_{-1}^{1} \varphi(x) dx = 68.3\%$, $\displaystyle \int_{-2}^{2} \varphi(x) dx = 95.5\%$, $\displaystyle \int_{-3}^{3} \varphi(x) dx = 99.7\%$
                                       \end{itemize}
                                     \end{minipage}
                                   }
@@ -915,55 +1055,56 @@
                                 }
                               }
                             }
-                            child {
-                              node {Gamma-Verteilung $\Gamma(\alpha, \beta)$
-                                \resizebox{\textwidth}{!}{
-                                  \begin{minipage}[t]{12cm}
-                                    \begin{itemize}
-                                      % \item \alert{sinnvoller Wertebereich:} $(0, \infty)$
-                                      % \item $\displaystyle f(x) = \frac{\beta^\alpha x^{\alpha-1}e^{-\beta x}}{\Gamma(\alpha)}\mathbf{1}_{[0, \infty)}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}\mathbf{1}_{[0, \infty)}(x)$
-                                      \item $\displaystyle f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}\mathbf{1}_{[0, \infty)}(x)$
-                                      \begin{itemize}
-                                        \item $\displaystyle\Gamma(x) = \int_{0}^{\infty} t^{x-1}e^{-t} dt, x > 0$
-                                      \end{itemize}
-                                      \item $\displaystyle F(z) = \frac{1}{\Gamma(\alpha)} \gamma(\alpha, \beta x)$
-                                      \item $\displaystyle E(X) = \frac{\alpha}{\beta}$
-                                      \item $\displaystyle V(X) = \frac{\alpha}{\beta^2}$
-                                    \end{itemize}
-                                  \end{minipage}
-                                }
-                              }
-                              child {
-                                node {$\chi^2$-Verteilung $\chi^2(n) = \Gamma(\frac{n}{2}                                     , \frac{1}{2})$
-                                  \resizebox{\textwidth}{!}{
-                                    \begin{minipage}[t]{12cm}
-                                      \begin{itemize}
-                                        % \item \alert{sinnvoller Wertebereich:} $(0, \infty)$
-                                        % \item $\displaystyle f(x) = \frac{x^{\frac{n}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} = \frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{-\frac{x}{2}}$
-                                        \item $\displaystyle f(x) = \frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{-\frac{x}{2}}$
-                                      \item $\displaystyle F(z) = \frac{1}{\Gamma(\frac{n}{2})} \gamma\left(\frac{n}{2}, \frac{z}{2}\right)$
-                                        \item $\displaystyle E(X) = n$
-                                        \item $\displaystyle V(X) = 2n$
-                                      \end{itemize}
-                                    \end{minipage}
-                                  }
-                                }
-                              }
-                            }
-                            child {
-                              node {t-Verteilung
-                                \resizebox{\textwidth}{!}{
-                                  \begin{minipage}[t]{12cm}
-                                    \begin{itemize}
-                                      % \item \alert{sinnvoller Wertebereich:} $(-\infty, \infty)$
-                                      \item $\displaystyle f(x) = \frac{1}{\sqrt{n\pi}}\frac{\Gamma(\frac{n+1}{2})}{\Gamma(\frac{n}{2})}\frac{1}{(1+\frac{x^2}{n})^{\frac{n+1}{2}})}$
-                                      \item $\displaystyle E(X) = 0, n > 1$
-                                      \item $\displaystyle V(X) = \frac{n}{n-2}, n>2$
-                                    \end{itemize}
-                                  \end{minipage}
-                                }
-                              }
-                            }
+                            % child {
+                            %   node {Gamma-Verteilung $\Gamma(\alpha, \beta)$
+                            %     \resizebox{\textwidth}{!}{
+                            %       \begin{minipage}[t]{12cm}
+                            %         \begin{itemize}
+                            %           % \item \alert{sinnvoller Wertebereich:} $(0, \infty)$
+                            %           % \item $\displaystyle f(x) = \frac{\beta^\alpha x^{\alpha-1}e^{-\beta x}}{\Gamma(\alpha)}\mathbf{1}_{[0, \infty)}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}\mathbf{1}_{[0, \infty)}(x)$
+                            %           \item $\displaystyle f(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x}\mathbf{1}_{[0, \infty)}(x)$
+                            %           \begin{itemize}
+                            %             \item $\displaystyle\Gamma(x) = \int_{0}^{\infty} t^{x-1}e^{-t} dt, x > 0$
+                            %           \end{itemize}
+                            %           \item $\displaystyle F(z) = \frac{1}{\Gamma(\alpha)} \gamma(\alpha, \beta x)$
+                            %           \item $\displaystyle E(X) = \frac{\alpha}{\beta}$
+                            %           \item $\displaystyle V(X) = \frac{\alpha}{\beta^2}$
+                            %         \end{itemize}
+                            %       \end{minipage}
+                            %     }
+                            %   }
+                            %   child {
+                            %     node {$\chi^2$-Verteilung $\chi^2(n) = \Gamma(\frac{n}{2}                                     , \frac{1}{2})$
+                            %       \resizebox{\textwidth}{!}{
+                            %         \begin{minipage}[t]{12cm}
+                            %           \begin{itemize}
+                            %             % \item \alert{sinnvoller Wertebereich:} $(0, \infty)$
+                            %             % \item $\displaystyle f(x) = \frac{x^{\frac{n}{2}-1}e^{-\frac{x}{2}}}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} = \frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{-\frac{x}{2}}$
+                            %             \item $\displaystyle f(x) = \frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})} x^{\frac{n}{2}-1}e^{-\frac{x}{2}}$
+                            %           \item $\displaystyle F(z) = \frac{1}{\Gamma(\frac{n}{2})} \gamma\left(\frac{n}{2}, \frac{z}{2}\right)$
+                            %             \item $\displaystyle E(X) = n$
+                            %             \item $\displaystyle V(X) = 2n$
+                            %           \end{itemize}
+                            %         \end{minipage}
+                            %       }
+                            %     }
+                            %   }
+                            % }
+                            % child {
+                            %   node {t-Verteilung
+                            %     \resizebox{\textwidth}{!}{
+                            %       \begin{minipage}[t]{12cm}
+                            %         \begin{itemize}
+                            %           % \item \alert{sinnvoller Wertebereich:} $(-\infty, \infty)$
+                            %           \item $\displaystyle f(x) = \frac{\Gamma(\frac{n+1}{2})}{\sqrt{n\pi}\Gamma(\frac{n}{2})}(1+\frac{x^2}{n})^{-\frac{n+1}{2}}$
+                            %           \item $F(z) = 1 - \frac{1}{2} I_{x(z)} ()$
+                            %           \item $\displaystyle E(X) = 0, n > 1$
+                            %           \item $\displaystyle V(X) = \frac{n}{n-2}, n>2$
+                            %         \end{itemize}
+                            %       \end{minipage}
+                            %     }
+                            %   }
+                            % }
                           }
                         }
                         child {
@@ -973,6 +1114,7 @@
                       \begin{edges}
                         \edge{tw}{kt}
                         \edge{varianz}{stdzv}
+                        \edge{zentralergrenzwertsatz}{stdzv}
                       \end{edges}
                       \annotation{pt.south}{This mindmap is provided without guarantee of correctness and completeness!};
                     \end{mindmap}

@@ -1,0 +1,6 @@
+@media screen and (max-device-width: 960px) {
+  h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}

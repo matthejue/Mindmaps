@@ -1,0 +1,14 @@
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-content,
+.cke_editable,
+.forum table,
+.text-content table,
+.views-table {
+    font-family: 'PT Sans', sans-serif !important;
+}

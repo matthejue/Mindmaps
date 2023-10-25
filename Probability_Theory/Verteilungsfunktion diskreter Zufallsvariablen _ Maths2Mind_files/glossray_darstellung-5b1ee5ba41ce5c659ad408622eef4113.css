@@ -1,0 +1,14 @@
+.block-facet--glossaryaz ul {
+ margin: -1%; 
+}
+.block-facets .glossaryaz.yes-results a {
+  color: #b22222 !important;
+  background: #fff;
+  border: 2px solid #b22222 !important;
+}
+.block-facets .glossaryaz.yes-results a.is-inactive:hover,
+.block-facets .glossaryaz.is-active a,
+.block-facets .glossaryaz.yes-results a:hover {
+  background: #b22222 !important;
+  color: #fff !important;
+}

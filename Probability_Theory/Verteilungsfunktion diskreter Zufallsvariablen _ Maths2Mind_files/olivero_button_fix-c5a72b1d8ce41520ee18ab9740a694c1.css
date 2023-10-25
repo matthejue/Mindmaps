@@ -1,0 +1,17 @@
+.button {
+  height: auto;
+  min-height: 3.375rem;
+}
+.button--small {
+  height: auto;
+  min-height: 2.8125rem;
+}
+.field--name-field-tax-tags .button--small {
+  padding: 0.25rem;
+  min-height: 2rem;
+  margin-top: 0;
+  font-weight: 400;
+}
+.view-elemente-des-kapitels .button {
+  cursor: auto;
+}

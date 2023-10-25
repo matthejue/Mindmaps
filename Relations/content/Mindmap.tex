@@ -11,14 +11,14 @@
 \begin{mindmap}
   \begin{mindmapcontent}
     \node (re) at (current page.center) {Relations
-      % \resizebox{\textwidth}{!}{
-      %   \begin{minipage}[t]{10cm}
-      %     \tiny
-      %     \begin{itemize}
-      %       \item a subset of a Cartesian product $A\times B$,
-      %     \end{itemize}
-      %   \end{minipage}
-      % }
+      \resizebox{\textwidth}{!}{
+        \begin{minipage}[t]{18cm}
+          \begin{itemize}
+            \item Seien $A$, $B$ Mengen. Eine Teilmenge $R \subseteq A \times B$ nennt man binäre Relation zwischen $A$ und $B$
+            \item $x R y$ is true $\Leftrightarrow (x,y) \in R$ is true $\Leftrightarrow$ an edge from $x$ to $y$ exists in the directed graph representing $R$
+          \end{itemize}
+        \end{minipage}
+      }
     }
     child {
       node {Heterogeneous relations
@@ -26,7 +26,6 @@
           \begin{minipage}[t]{12cm}
             \begin{itemize}
               \item a binary relation $R\subseteq A\times B$, where $A$ and $B$ are possibly distinct sets
-              \item $x R y$ is true $\Leftrightarrow (x,y) \in R$ is true $\Leftrightarrow$ an edge from $x$ to $y$ exists in the directed graph representing $R$
               \item \alert{left-unique} and \alert{right-total} both describe relationships focusing on the \alert{codomain} $B$ while their correspondings counterparts for functions \alert{right-unique } and \alert{left-total } focus on the \alert{domain} $A$             
             \end{itemize}
           \end{minipage}

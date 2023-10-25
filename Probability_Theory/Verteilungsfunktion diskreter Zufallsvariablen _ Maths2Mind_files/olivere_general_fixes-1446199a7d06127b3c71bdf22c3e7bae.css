@@ -1,0 +1,36 @@
+@media screen and (min-width: 1001px) {
+body .page-wrapper #main-wrapper {
+  padding-top: 89px;
+}
+}
+
+.main-content__container {
+  padding-top: 2rem;
+}
+#block-maths2mind-breadcrumbs {
+  margin-bottom: 1rem;
+}
+.table-responsive {
+  overflow-x: auto;
+}
+
+.node--type-einschub.node--view-mode-teaser:after,
+.node--type-aufgabe.node--view-mode-teaser:after,
+.node--type-formel.node--view-mode-teaser:after,
+.node--type-grundkompetenz.node--view-mode-teaser:after {
+        margin-left: calc(0px - 1.125rem);
+        width: calc(100% + 2.25rem);  
+}
+@media screen and (min-width: 62.5rem) {
+  .node--type-einschub.node--view-mode-teaser:after,
+  .node--type-aufgabe.node--view-mode-teaser:after,
+  .node--type-formel.node--view-mode-teaser:after,
+  .node--type-grundkompetenz.node--view-mode-teaser:after {
+          margin-left: calc(0px - 2.25rem);
+          width: calc(100% + 4.5rem);  
+  }
+}
+
+.text-content a, .cke_editable a {
+  box-shadow: none;
+}

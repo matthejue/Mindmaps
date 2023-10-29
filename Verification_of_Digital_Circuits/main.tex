@@ -22,15 +22,19 @@
               \begin{itemize}
                 \item \underline{essential definitions:}
                   \begin{itemize}
-                    \item \alert{verification method:} check equivalence between specification and implementation
-                    \item \alert{formal verification:} mathematical proofs of correctness
+                    \item \alert{verification method:} Check equivalence between specification and implementation
+                    \item \alert{formal verification:} Mathematical proofs of correctness
                       \begin{itemize}
                         \item one uses \alert{formal methods} to avoid and detect design errors
                         \item because validation by simulation can never cover the complete system behavior
                       \end{itemize}
-                    \item \alert{security:} a system should not leak information that should be kept secret
-                    \item \alert{safety:} system does what it should do, implementation behaves as said in the specification (in this lecture)
-                    \item \alert{canonical:} exactly one representation
+                    \item \alert{security:} A system should not leak information that should be kept secret
+                    \item \alert{safety:} System does what it should do, implementation behaves as said in the specification (in this lecture)
+                    \item \alert{canonical:} Exactly one representation
+                    \item \alert{topological sort:} A graph traversal in which each node v is visited only after all its dependencies are visited
+                    \begin{itemize}
+                      \item a topological ordering is possible \alert{iff} the graph is a directed acyclic graph (DAG)
+                    \end{itemize}
                   \end{itemize}
               \end{itemize}
             \end{minipage}

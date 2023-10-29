@@ -1,0 +1,28 @@
+\documentclass{standalone}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\begin{mindmap}
+  \begin{mindmapcontent}
+    \node (middle) at (current page.center) {Hardware Security and Trust
+      \resizebox{\textwidth}{!}{
+        \begin{minipage}[t]{18cm}
+          \begin{itemize}
+            \item asdf
+          \end{itemize}
+        \end{minipage}
+      }
+    }
+    child {
+      node (test){Basics}
+    }
+  \end{mindmapcontent}
+  \begin{edges}
+    \edge{test}{middle}
+  \end{edges}
+  \annotation{test}{annotation}
+\end{mindmap}
+\end{document}

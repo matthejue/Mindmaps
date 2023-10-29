@@ -7,28 +7,27 @@
 \begin{document}
 \begin{mindmap}
   \begin{mindmapcontent}
-    \node (middle) at (current page.center) {Topic}
+    \node (middle) at (current page.center) {Debugging and Fuzzing
+      \resizebox{\textwidth}{!}{
+        \begin{minipage}[t]{18cm}
+          \begin{itemize}
+            \item asdf
+          \end{itemize}
+        \end{minipage}
+      }
+    }
     child {
-      node (test) {Subtopic
+      node (test){Basics
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
             \begin{itemize}
-              \item \alert{total flow on edges leaving $U$:} $\displaystyle f^{+}(U)=\sum_{\mathclap{\substack{u \in U, v \in V \backslash U, u v \in E}}} f(u v)$
+              \item \alert{Defect:} The occurence
+              \begin{itemize}
+                \item Bug?
+              \end{itemize}
+              \item \alert{Infection}: Happened at point where one had defect in system
+              \item \alert{Failure:} In the end what one observes, is in the state through infections
             \end{itemize}
-            \begin{figure}
-              \begin{subfigure}{0.5\textwidth}
-                \begin{resettikz}
-                  \ctikzfig{test}
-                \end{resettikz}
-                \caption{a line}
-              \end{subfigure}
-              \begin{subfigure}{0.5\textwidth}
-                \begin{resettikz}
-                  \ctikzfig{test}
-                \end{resettikz}
-                \caption{another line}
-              \end{subfigure}
-            \end{figure}
           \end{minipage}
         }
       }

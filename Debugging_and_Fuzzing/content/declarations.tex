@@ -82,10 +82,31 @@
   ;\end{scope}
 }
 
+% ┌───────┐
+% │ Boxes │
+% └───────┘
+\DeclareTotalTCBox{\inlinebox}{ s m }
+{standard jigsaw,opacityback=0,colframe=SwitchColor,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
+  right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
+{\IfBooleanTF{#1}%
+{\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}#2}%
+{#2}}
+
 % ┌──────────────────┐
 % │ Case distinction │
 % └──────────────────┘
-\newtoggle{absolute}
-% \toggletrue{absolute}
-\togglefalse{absolute}
-\newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/x/}{./}#1}
+% \newtoggle{absolute}
+% % \toggletrue{absolute}
+% \togglefalse{absolute}
+% \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/x/}{./}#1}
+
+% ┌───────┐
+% │ Fixes │
+% └───────┘
+% https://tex.stackexchange.com/questions/89467/why-does-pdftex-hang-on-this-file
+% \newcommand{\colon}{\mathrel{\mathop:}}
+
+% ┌───────┐
+% │ Paths │
+% └───────┘
+\newcommand{\script}[2]{\href[page=#1]{/home/areo/Documents/Studium/Semester_1_Master/Verification_of_Digital_Circuits/slides/annotated/Verification_of_Digital_Circuits_all_in_one_with_go_back.pdf}{\inlinebox{#2}}}

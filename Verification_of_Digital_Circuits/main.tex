@@ -75,14 +75,91 @@
       child {
         node {Binary decision diagrams (BDDs)
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{6cm}
+            \begin{minipage}[t]{8cm}
               \begin{itemize}
                 \item \script{41}{Syntax}
                 \item \script{42}{Semantic}
                 \item \script{45}{Example}
                 \item \script{46}{Drawbacks}
+                \item  The \alert{size} is given by the number of non-terminal nodes
+                \item \underline{Limitations of BDDs:}
+                \begin{itemize}
+                  \item Canonical representation has to deal with the available memory.
+                  \item Not directly usable with sequential circuits.
+                  \item Not directly usable when the specification is a set of properties.
+                \end{itemize}
               \end{itemize}
             \end{minipage}
+          }
+        }
+        child {
+          node {Construction of ROBDDs}
+          child {
+            node {Forward construction / symbolic simulation
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{104}{Algorithm}
+                    \item \script{105}{Example}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {ITE-Operator
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{14cm}
+                    \begin{itemize}
+                      \item all the binary operation can be reduced to a call to ITE (\enquote{If-Then-Else}-Operator)
+                      \item \script{90}{Definition}: $ITE(F, G, H) = (F\wedge G)\vee(\neg F\wedge H)$
+                      \begin{itemize}
+                        \item the expression derives from the fact that a ITE node can be interpreted as a \alert{multiplexer} with inputs $G$ and $H$ and selector $F$
+                        \item $AND(F, G) = ITE(F, G, 0) = (F\wedge G)\vee(\neg F\wedge 0) = F\wedge G$
+                        \item $OR(F, G) = ITE(F, 1, G) = (F\wedge 1)\vee(\neg F\wedge G) = F \vee (\neg F \wedge G) = F\vee G$
+                        \item $NOT(F) = ITE(F, 0, 1) = (F\wedge 0)\vee(\neg F\wedge 1) = \neg F$
+                      \end{itemize}
+                    \item \script{91}{Theorem and Proof}: $ITE(F, G, H) = (\neg x_i \wedge ITE(F_{\neg x_i}, G_{\neg x_i}, H_{\neg x_i}))\vee(x_i\wedge ITE(F_{x_i}, G_{x_i}, H_{x_i}))$
+                    \item \script{93}{Algorithm to Compute a new ROBDD for ITE(F, G, H) out of ROBDD's F, G and H (ff.)}
+                      \begin{itemize}
+                        \item \underline{Base cases:} 
+                          \begin{itemize}
+                            \item $ITE(1, F, G) = ITE(0, G, F) = ITE(F, 1, 0) = ITE(G, F, F) = F$
+                            \item $NOT(F) = ITE(F , 0, 1) = \neg F$
+                          \end{itemize}
+                        \item \script{99}{Runtime}
+                      \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Backward construction
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{116}{Algorithm}
+                    \item \script{120}{Example}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Substitution operator, compose
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{117}{Definition}: $compose(F, G, x_i)(x_1, \ldots , x_n) = F (x_1 , \ldots , x_{i-1}, G (x_1 , \ldots , x_n), x_{i+1}, \ldots , x_n)$
+                      \item \script{118}{Theorem}: $compose(F, G, x_i) = ITE(G, F_{x_i}, F_{\neg x_i})$
+                      \begin{itemize}
+                        \item \script{119}{Proof}
+                      \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
           }
         }
         child {
@@ -92,7 +169,7 @@
                 \begin{itemize}
                   \item A BDD G is a Reduced Ordered Binary Decision Diagram iff it is ordered and reduced
                     \begin{itemize}
-                      \item In this context, reduced means that none of the reduction rules above (\enquote{isomorphism} and \enquote{Shannon}) can be applied (anymore).
+                      \item In this context, reduced means that none of the reduction rules (\enquote{isomorphism} and \enquote{Shannon}) can be applied (anymore).
                     \end{itemize}
                   \item \script{57}{Example}
                   \item (\script{62}{Remark})
@@ -143,7 +220,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item A BDD G over the set of variables $X_n = {x_1, \ldots, x_n}$ is ordered, iff it is \alert{free} and the \alert{variables on every path} from the root to a terminal node occur in the \alert{same order}
+                    \item A BDD G over the set of variables $X_n = \{x_1, \ldots, x_n\}$ is ordered, iff it is \alert{free} and the \alert{variables on every path} from the root to a terminal node occur in the \alert{same order}
                     \item \script{48}{information about variable order}
                     \item \script{49}{example}
                     \item This is still not enough, there can be redundancy in the OBDD
@@ -166,14 +243,101 @@
           }
         }
         child {
-          node {Decomposition rule / Shannon theorem
+          node {Shannon theorem
             \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{6cm}
+              \begin{minipage}[t]{8cm}
                 \begin{itemize}
-                  \item \script{43}{Definition}
+                  \item \script{43}{Definition}: $F = (\neg x_i\wedge F_{\neg x_i})\vee(x_i\wedge F_{x_i})$
                   \item \script{44}{Proof}
+                  \item for BDD's Composition rule and Decomposition rule have the same structure
                 \end{itemize}
               \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Use of ROBDDs in Verification
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item the size of a ROBDD depends strongly on the variable order $\pi$ one chooses
+                  \begin{itemize}
+                    \item \script{81}{example (f.)}
+                  \end{itemize}
+                  \item every cofactor regarding the first n variables consitutes a different Boolean function
+                  \begin{itemize}
+                    \item $2n$ different cofactors
+                    \item \script{83}{example}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Finding optimal variable order
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{8cm}
+                  \begin{itemize}
+                    \item \alert{Theorem (Bollig, Savicky, Wegener, 1994):} Given a ROBDD with variable order $\pi$, the problem of finding a new variable order $\pi\prime$ with minimal ROBDD-size is NP-Complete
+                      \begin{itemize}
+                        \item \underline{but there are \alert{Heuristics}:}
+                          \begin{itemize}
+                            \item define an initial variable order based on the circuit representation
+                            \item perform dynamic reordering within an existing variable order to reduce the size of the ROBDD
+                          \end{itemize}
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Define an initial variable order
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{107}{Method of Malik}
+                      \item \script{108}{Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Dynamic modification of the variable ordering
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{110}{General Algorithm}
+                      \begin{itemize}
+                        \item \script{112}{Sifting}
+                        \begin{itemize}
+                          \item script{113}{Example}
+                          \item \script{114}{Runtime}
+                        \end{itemize}
+                      \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Not applicable for all pratical functions
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \alert{Theorem (Shannon):} \enquote{Almost every} Boolean function $F\colon\, \mathbb{B}^n\rightarrow\mathbb{B}$ requires more than $(2^n / n) 2$-input gates for an optimal implementation
+                    \begin{itemize}
+                      \item holds also for ROBDDs, because they can be seen as multiplexer circuits
+                      \item \underline{should we care?}: not really, because one does equivalence checking mostly for circuits that are not exponential (the others that are not \enquote{almost every} usually occur, because we're interested in functions with structure)
+                    \end{itemize}
+                    \item \alert{Lemma (Bryant, 1986):} Independently from the variable order, multiplication is representable with ROBDDs only with exponential complexity in the bit-width
+                    \begin{itemize}
+                      \item there exist actually polynomial mutlipliers, but there are no ROBDDs with polynomial complexity in the bit-width for them
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
             }
           }
         }
@@ -226,6 +390,12 @@
             \begin{itemize}
               \item Prove that two designs have the same (functional) behavior
               \item Given two combinational circuits (i.e., without memory), do they compute the same boolean function?
+              \item So one can't do better in all cases, doesn't work for all practical cases, but for many:
+              \begin{itemize}
+                \item Combinational Equivalence Checking is NP-hard, if there would be polynomial data in a canonical datastructure one would just have to translate both circuits into this datastructure and comparison is easy, can't assume there's a datastructure with polynomial size which is canonical
+                \item some function tables are so random, it's not possible to compress them
+                \item canonical disjunctive normal form, then one has as many terms as elements in the ON-Set
+              \end{itemize}
             \end{itemize}
           \end{minipage}
         }

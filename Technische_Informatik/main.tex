@@ -57,8 +57,8 @@
 \usepackage{etoolbox}
 
 \newtoggle{absolute}
-% \toggletrue{absolute}
-\togglefalse{absolute}
+\toggletrue{absolute}
+% \togglefalse{absolute}
 
 \newcommand{\lpathti}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Technische_Informatik/}{./}#1}
 \newcommand{\lpathlogic}{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/Logic/main.pdf}{./Logic.pdf}}

@@ -28,7 +28,7 @@
                   \begin{itemize}
                     \item is about algorithms protecting secret information
                     \item \script{67}{Basic Cryptographic Scheme}
-                    \item \script{68}{Formal Notation}
+                    \item \script{68}{Formal Notation}, $E$ \alert{injective} and both setes have \alert{same cardinality}, so \alert{one-to-one}, \alert{bijective}, so it is \alert{reversable}, $D$ is the \alert{inverse function} of $E$ and by this also bijective
                     \item \script{69}{Practice: Sending and Receiving secure messages}
                   \end{itemize}
                   \item \alert{Cryptanalysis:} Art/science of breaking ciphertext
@@ -42,7 +42,7 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \script{70}{Definition}
+                \item \script{70}{Definition}, $E$ is a set of encryption algorithms and the key $K_E$ selects one special encryption algorithm based on the key, with each key one has a different encryption, same for $K_D$, both algorithms \alert{have to match}, they encryption key should be in a certain relation to the decrytpion key, they can also be just the same
                 \item \underline{advantage of crypto systems with keys:}
                 \begin{itemize}
                   \item keeping the encryption / decryption algorithm secret is not needed
@@ -61,6 +61,10 @@
                   \begin{itemize}
                     \item or one key is easily derived from the other
                   \end{itemize}
+                  \item \underline{disadvantage:}
+                  \begin{itemize}
+                    \item one needs a \alert{key exchange}, the sender and the receiver have to agree on the same key and they key should be secret, one needs a way to transport the secret key via a secure channel from the sender to the receiver
+                  \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -74,11 +78,12 @@
                   \item ecncipher and decipher using different keys
                   \begin{itemize}
                     \item computationally infeasible to derive one from other
+                    % \item it should be computationally infeasible in reasonable time to derive one private key from the public key
                   \end{itemize}
                   \item \underline{advantages:}
                     \begin{itemize}
-                      \item allows to share public key, secure key exchange not needed
-                      \item also other applications like authentication
+                      \item allows to share public key, secure key exchange not needed (for \alert{confidentiality}, message should be kept secret)
+                      \item also other applications like authentication (\alert{authenticity}, able to sign message, so it can be sure it can only come from oneself)
                     \end{itemize}
                 \end{itemize}
               \end{minipage}
@@ -131,7 +136,7 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item \script{74}{Defintion (f.)}
+                      \item \script{74}{Defintion (f.)}, example key is $3$
                       \item each letter in $P$ is substituted by a fixed letter. In this special case the \enquote{key} is of length $1$
                       \item \script{76}{Attack}
                     \end{itemize}

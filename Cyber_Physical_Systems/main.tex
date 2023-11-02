@@ -9,19 +9,250 @@
   \begin{mindmapcontent}
     \node (middle) at (current page.center) {Cyber Physical Systems
       \resizebox{\textwidth}{!}{
-        \begin{minipage}[t]{18cm}
+        \begin{minipage}[t]{12cm}
           \begin{itemize}
-            \item asdf
+            \item \alert{Definition:} Networked computational resources interacting with physical systems
+              \begin{itemize}
+                \item \script{41}{Examples}
+                \item \script{42}{Comparison with Embedded Systems (ff.)}
+                \item \script{46}{Problems}
+              \end{itemize}
           \end{itemize}
         \end{minipage}
       }
     }
     child {
+      node {Modelling Concurrent Systems
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \script{125}{Model checking schema (ff.)}
+              \item \script{168}{Semantic models}
+                \begin{itemize}
+                  \item \script{175}{states, transitions, atomic propositions}
+                \end{itemize}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Transition System
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{184}{Definition} and \script{187}{$Act$-Set}
+                \begin{itemize}
+                  \item \script{147}{safety, liveness, real-time requiremens}
+                  \item $!\alpha$ send signal $\alpha$
+                  \item $?\alpha$ receive signal $\alpha$
+                  \item \script{199}{Behaviour als algorithm (f.)}
+                  \item \script{204}{Nondeterminism} and \script{207}{Interpretation}
+                  \item \script{133}{Example: Control system for traffic lights (ff.)}
+                  \item \script{154}{Example: Railroad crossing (ff.)}
+                  \item \script{191}{Example: Beverage machine}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Mutual exclusion with an arbiter
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{250}{Protocol with Arbiter}
+                  \begin{itemize}
+                    \item \script{250}{Example: Mutual exclusion with an arbiter (ff.)}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node (interleavingoperator) {Interleaving operator $\parallel\;\!\!\!\mid$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{262}{Definition}
+                  \begin{itemize}
+                    \item \script{224}{\enquote{Diamond}}
+                    \item \script{218}{Example: Useless lights for non-crossing streets}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Synchronization operator $\parallel$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{275}{Definition}
+                  \begin{itemize}
+                    \item \script{251}{Synchronization Alphabet}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node (concurrency) {Concurrency between synchronized components
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{230}{Example: Booking system in supermarket}
+                    % reason: not transitive relation
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node {Composite Transition System
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{156}{Example: Railroad crossing (ff.)}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+    }
+    child {
       node (test){Basics}
+      child {
+        node {Important Definitions / Topics
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{Formal methods:} Applied mathematics for modelling and analysing CPS
+                \item \alert{Model:} Model is an abstract, formal, mathematical representation or description
+of structure or behaviour of a (software) system that abstracts from the datails of a system that are not relevant for the system % Mathemticaly precise abstraction from the datails of a system that are not relevant for the system
+                \begin{itemize}
+                  \item \alert{Model Checking:} Model checking is a formal verification technique which allows for desired behavioral properties of a given system to be verified on the basis of a suitable model of the system through systematic inspection of all states of the model
+                \end{itemize}
+                \item \script{47}{Impact of Errors}
+                \item \script{60}{System design cycle}
+                \item \script{71}{Validation Techniques}
+                \begin{itemize}
+                  \item \script{75}{Schema for formal verification (ff.)}
+                  \item \script{80}{Comparison to other validation techniques}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Structured operational semantics (SOS)
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{268}{Definition}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Formal Languages
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{6}{Alphabet and letters / symbols}
+                \item \script{7}{Word}
+                \item \script{11}{Concatenation}
+                \item \script{12}{Language}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
+        node {Non-deterministic finite automata
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{29}{Definition}
+                \begin{itemize}
+                  \item \script{15}{Terms}
+                  \item \script{31}{Example (ff.)}
+                \end{itemize}
+                \item \script{16}{Acceptance}
+                \begin{itemize}
+                  \item \script{23}{Example}
+                  \item \script{27}{Accepted Language and example}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Emptyness Check
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{86}{Definition}
+                  \item \script{87}{Algorithm (f.)}
+                  \begin{itemize}
+                    \item \script{100}{Example}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Intersection Construction
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{102}{Definition}
+                  \item \script{104}{Example}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Büchi Automata
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{111}{Definition}
+                \item \script{112}{Acceptance condition (f.)}
+                \begin{itemize}
+                  \item \script{119}{Example}
+                  \item \script{122}{Language of a Büchi Automaton and Example}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {$\omega$-Word and $\omega$-Language
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{107}{$\omega$-Word Definition}
+                  \item \script{109}{$\omega$-Language Definition}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
     }
   \end{mindmapcontent}
   \begin{edges}
     \edge{test}{middle}
+    \edge{interleavingoperator}{concurrency}
   \end{edges}
   \annotation{test}{annotation}
 \end{mindmap}

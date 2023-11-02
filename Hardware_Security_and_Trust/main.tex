@@ -9,15 +9,299 @@
   \begin{mindmapcontent}
     \node (middle) at (current page.center) {Hardware Security and Trust
       \resizebox{\textwidth}{!}{
-        \begin{minipage}[t]{18cm}
+        \begin{minipage}[t]{16cm}
           \begin{itemize}
-            \item asdf
+            \item \alert{Hardware Security} goes beyond classical cryptography, does not only consider the algorithm itself, but it considers the implementation of the algorithms (e.g. AES is believed to be secure, but attacks against the implementation like the side-channel attack: power analysis are pretty successful). % It protects the implementations of cryptographic algorithms against physical attacks, side-channel attacks etc.
+              % - Avoids tampering with devices
           \end{itemize}
         \end{minipage}
       }
     }
     child {
+      node {Classical Cryptography
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+                \item \alert{Cryptology:} Cryptography + cryptanalysis
+                \begin{itemize}
+                  \item \alert{Cryptography:} Art/science of keeping message secure
+                  \begin{itemize}
+                    \item is about algorithms protecting secret information
+                    \item \script{67}{Basic Cryptographic Scheme}
+                    \item \script{68}{Formal Notation}
+                    \item \script{69}{Practice: Sending and Receiving secure messages}
+                  \end{itemize}
+                  \item \alert{Cryptanalysis:} Art/science of breaking ciphertext
+                \end{itemize}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Crypto System with Keys
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{70}{Definition}
+                \item \underline{advantage of crypto systems with keys:}
+                \begin{itemize}
+                  \item keeping the encryption / decryption algorithm secret is not needed
+                  \item keys can regulary be changed, to increase security
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Symmetric cryptosystems $K_E = K_D$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item encipher and decipher using the same key
+                  \begin{itemize}
+                    \item or one key is easily derived from the other
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Asymmetric cryptosystems $K_E \ne K_D$
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item ecncipher and decipher using different keys
+                  \begin{itemize}
+                    \item computationally infeasible to derive one from other
+                  \end{itemize}
+                  \item \underline{advantages:}
+                    \begin{itemize}
+                      \item allows to share public key, secure key exchange not needed
+                      \item also other applications like authentication
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Basic Types of Ciphers}
+        child {
+          node {Substitution ciphers
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item letters of $P$ replaced with other letters by $E()$
+                  \item \underline{effects:}
+                  \begin{itemize}
+                    \item $C$ hides chars of $P$
+                    \item if $> 1$ key alphabet, $C$ dissipates high frequency chars
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Monoalphabetic substitution ciphers
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{10cm}
+                  \begin{itemize}
+                    \item in a general monoalphabetic substitution cipher each letter in $P$ is substituted by a fixed letter using a \alert{substitution table}
+                    \item the \alert{key} is the substitution table
+                    \begin{itemize}
+                      \item there are $26 \times 25 \times \ldots \times 3 \times 2 \times 1 = 26! \approx 2^{88}$ substitution tables ($=$ keys)
+                    \end{itemize}
+                    \item \underline{Attacks:}
+                    \begin{itemize}
+                      \item \script{79}{Exhaustive search}, Brute-force attack is not feasible
+                      \item \script{80}{Letter Frequency Analysis (ff.)}
+                      \begin{itemize}
+                        \item In practice, not only frequencies of individual letters can be used for an attack, but also the frequency of letter pairs (i.e., \enquote{TH} is very common in English), letter triples, etc
+                        \item need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search
+                      \end{itemize}
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Caesar Cipher
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{74}{Defintion (f.)}
+                      \item each letter in $P$ is substituted by a fixed letter. In this special case the \enquote{key} is of length $1$
+                      \item \script{76}{Attack}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Polyalphabetic substitution ciphers
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{84}{Definition (f.)}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Vigenère Tableaux Method
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{86}{Definition (ff.)}
+                      \item special case of polyalphabetic substitution with $n$ key alphabets. For each key alphabet the special case of Caesar cipher is chosen, i.e., each key alphabet can be represented by one letter
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+        }
+        child {
+          node {Transposition (permutation) ciphers
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item order of letters in $P$ rearranged by $E()$
+                  \item \script{89}{Definition}
+                  \item \underline{effects:}
+                  \begin{itemize}
+                    \item $C$ scrambles text, hides $n$-grams for $n > 1$
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Product ciphers
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item $E = E_1 + E_2 + ... + E_n$
+                  \item combine two or more ciphers to enhance the security of the cryptosystem
+                  \item \script{90}{Definition}
+                  \item \underline{effects:}
+                  \begin{itemize}
+                    \item can do all what Substitution and Transposition ciphers can so, more secure if used well
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+    }
+    child {
       node (test){Basics}
+      child {
+        node {Security
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{Security:} No complete definition. Could define it as ability to satisfy certain security properties (\script{13}{more precise})
+                  \begin{itemize}
+                    \item tampering can be conducted at all levels, hardware is not a root of trust, one only can't change it afterwards
+                    \item is also a matter of cost, most secure system is a system that doesn't do anything (don't grant access to anybody), but the system also has to be useful, not to expensive etc. (power, area, price and performance). Security processing may add considerable overhead to a resource-constrained embedded system. Only on componentn in a optimzation problem which optimizes the cost of the whole system. Today’s security features can be attacked by tomorrow’s technology
+                  \end{itemize}
+                \item \alert{Safety:} System is designed without any error leading to unintended behavior (\alert{design time})
+                \item \alert{Reliability:} A correctly designed system continues to work correctly during its \alert{life-time}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Possible Actions of Adversaries, Attacks (ff.)
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \alert{side-channel attack:} using sidechannel outputs to extract information, when a chip works it produces more information that occurs on the outputs, measure e.g. energy consumption, electromagnetic field etc. (focuses on \alert{outputs}, i.e. side-channels)
+                  \item \alert{fault injection:} counterpart to side-channel, focuses on \alert{additional inputs}, e.g. shooting with a laser beam on certain point in a chip which causes a fault and from the effect of this fault one can derive secret information
+                    \begin{itemize}
+                      \item \script{23}{Example: Power Analysis}
+                    \end{itemize}
+                    % using outputs of chip that are not the usual outputs, 
+                  \item \script{25}{Example for attacked device: Smart Card}, weak 8-Bit CPU, because of cost, not best encryption methods, easy to get physical access
+                  \item \script{26}{Example for attacked device: RFID}, even weaker IC, then on Smart Cards
+                  \item \script{35}{Countermeasures}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Related Terms
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \alert{Vulnerability:} Weakness in the secure system
+                  \item \alert{Threat:} Set of circumstances that has the potential to cause loss or harm
+                  \item \alert{Attack:} The act of a human exploiting the vulnerability in the system
+                    \begin{itemize}
+                      \item \script{16}{relationship security vs. safety and reliability}
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Security properties (\script{14}{\enquote{CIAAN}})
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \alert{Confidentiality:} Protecting confidential information from being disclosed to unauthorized parties.
+                    \begin{itemize}
+                      \item no unauthorized reads
+                    \end{itemize}
+                  \item \alert{Integrity:} Ensuring that information is only modified by authorized parties.
+                    \begin{itemize}
+                      \item no unauthorized writes
+                    \end{itemize}
+                  \item \alert{Availability:} Making sure that information and systems are accessible to authorized parties when they need them
+                    \begin{itemize}
+                      \item e.g. resistance to denial-of-service attacks
+                    \end{itemize}
+                  \item \alert{Authenticity:} Ensuring that information and communication come from the source they are supposed to come from.
+                    \begin{itemize}
+                      \item receiver of email knows for sure it comes from you, achieved by e.g. digital signatures
+                    \end{itemize}
+                  \item \alert{Non-repudiation:} Ensuring that nobody can deny having performed certain actions (like sending / receiving messages, changing data etc.).
+                    \begin{itemize}
+                      \item access to system is protected by login and logging when changing file
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
+        node {Design Cycle and Threats
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{41}{Traditional Design Cycle of ICs}
+                \item \alert{Problems:}
+                \begin{itemize}
+                  \item \script{42}{Problem 1 (f.)}: \alert{Cost of Manufacturing}, \textit{\enquote{fabless} companies}, \script{44}{untrusted foundry (pr.)}, \script{47}{untrusted assembly (pr.}, can mark corrects IC's as devective and sell them, fab doesn't know exactly fraction of devective to total)
+                  \item \script{48}{Problem 2}: \alert{Design Complexity}, Company that provides \textit{IP} (intellectual property) block can be untrusted
+                \end{itemize}
+                \item \script{50}{New Design Cycle of ICs}, Vendors of IP Blocks not trusted, safety (not part of this lecture) and security problem, \alert{Soft IP}: Buying \textit{RTL} (Register transfer level) designs, \alert{Firm IP}: Buying \textit{Gate Level Netlists}, \alert{Hard IP}: Integrating \textit{Layout Data} bought by another company, IP Vendors would not give all information about IP how they came to this layout because it could also not trust, because one could steal it's IP, both sides have to trust, one needs methologies that ensure that IP does the right thing and on the other hand that the person who bought it, is not able to steal it
+                \item \script{53}{Vulnerabilities and untrusted parties}, \alert{IC Piracy} is overproduction, selling devective \textit{out-of-spec} IC's etc., \script{58}{Counterfeiting}, \textit{Cloned IC's} when somoeone steals design data or reverse engineering, \script{59}{IC recyling}, Problem because of \alert{Bathtub Curve}
+                \item \script{60}{Overview: Supply Chain Vulnerabilities}, \alert{Remark} e.g. weak processor by the name of a much better proecessor, at all points of the supply chain there are threats for the hardware security
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
     }
   \end{mindmapcontent}
   \begin{edges}

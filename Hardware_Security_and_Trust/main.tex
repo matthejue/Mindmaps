@@ -38,7 +38,77 @@
         }
       }
       child {
-        node {Crypto System with Keys
+        node {Classification by way to process plaintext}
+        child {
+          node (streamcipher) {Stream Ciphers
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item bitwise Encryption and Decryption
+                  \item \script{93}{Definition}, $Xor$ ist associative
+                  \item \script{94}{Perfect encryption system if $\ldots$}
+                  \item used in e.g. Red Phone between US and SU was implemented in this way
+                  \item encrypt bits individually
+                  \item need a method to generate key stream efficiently, starting from some “seed
+                  \item usually small and fast common in embedded device
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Pseudo-random sequence
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{95}{Random function in C-library}, fixed values for $A$, $B$ and $m$, if prefix of plain text is known as many messages start with current date or files of certain type that have a prefix, one can continue the sequence, if $m$ happens to be a prime number, then it's a field and then one can compute inverse elements of each element and then it's just a solution of an equation system, if $m$ is not a prime number, then one does not have a field, but a ring and somtimes one can not compute the inverse or the inverse is not unique and also in this case on can try to solve a equation system to compute $A$ and $B$
+                    \item pseudo random functions for cryptography it might be a problem
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
+          node (blockcipher) {Block Ciphers
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item always encrypt a full block (several bits)
+                  \item are common for Internet applications
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Block Cipher Primitives
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \alert{Claude Shannon:} There are two primitive operations with which strong encryption algorithms can be built:
+                      \begin{enumerate}
+                        \item \alert{Confusion:} An encryption operation where the \alert{relationship between key and ciphertext is obscured}
+                          \begin{itemize}
+                            \item today, a common element for achieving confusion is substitution, which is found in AES and other ciphers.
+                          \end{itemize}
+                        \item \alert{Diffusion:} An encryption operation where the \alert{influence of one plaintext symbol is spread over many ciphertext symbols} with the goal of hiding statistical properties of the plaintext
+                          \begin{itemize}
+                            \item in other context known as Transposition
+                            \item a simple diffusion element is the \alert{bit permutation} (in other context known as Tranposition)
+                          \end{itemize}
+                      \end{enumerate}
+                      \begin{itemize}
+                        \item Both operations by themselves are suboptimal in providing security. A cipher must include confusion and diffusion elements
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+      }
+      child {
+        node {Classification by key
+          % Crypto System with Keys
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
@@ -53,7 +123,7 @@
           }
         }
         child {
-          node {Symmetric cryptosystems $K_E = K_D$
+          node (symmetric) {Symmetric cryptosystems $K_E = K_D$
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -69,9 +139,33 @@
               \end{minipage}
             }
           }
+          child {
+            node (aes) {Advanced Encryption Standard (AES)
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{101}{Properties and Backstory}, block size always the same, number of rounds depens on key length that can be different, efficiency in \textit{software} and \textit{hardware}, byte-oriented cipher to be appropriate for small microprocessors and -controlers that havea $8$-bit width in the data path
+                    \item \script{102}{Iterated Cipher types, key length, number rounds}
+                    \item \script{103}{Round Structure}, in each round transformation of the original key, for keywidth 128 one has $10$ rounds and for them one needs $11$ round keys derived from the secret key $k$, X instead of P, Y instead of C
+                    \item \script{104}{Internal Structure (f.)}: $16$ Bytes block size, arranged in a $4x4$ matrix
+                      \begin{itemize}
+                        \item \script{106}{Byte Substitution Layer (f.)}: Don't need matrix, is done Byte by Byte, S-Box / functions $S$ identical for all $16$ Bytes, propably to save memory, because $S$-Boxes are usually represendet in software by lookup tables with input values $0$ to $2^8-1 = 255$ , S-Boxes are the only \alert{nonlinear} elements of AES
+                        \item \script{108}{Diffusion Layer}: asdf
+                          \begin{itemize}
+                            \item \script{109}{ShiftRows Layer}: Computes Permutation on the Bytes
+                            \item \script{110}{MixColumn Layer}: Takes in this case $4$ Bytes and somehow does computations with these $4$ Bytes to obtain Diffusion. In the last round do the same omitting the MixColumn Layer (\href{https://crypto.stackexchange.com/questions/1346/why-is-mixcolumns-omitted-from-the-last-round-of-aes}{\inlinebox{reason}})
+                          \end{itemize}
+                        \item \script{111}{Key Addition Layer}: Bitwise Xor, in round number $i$ one add the round key $k_i$
+                      \end{itemize}
+                    \item at the moment most widely used symmetric cipher
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
         }
         child {
-          node {Asymmetric cryptosystems $K_E \ne K_D$
+          node (asymmetric) {Asymmetric cryptosystems $K_E \ne K_D$
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
@@ -92,17 +186,18 @@
         }
       }
       child {
-        node {Basic Types of Ciphers}
+        node {Classification by type of encryption operations}
+        % Basic Types of Ciphers
         child {
-          node {Substitution ciphers
+          node (substitution) {Substitution ciphers
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item letters of $P$ replaced with other letters by $E()$
                   \item \underline{effects:}
                   \begin{itemize}
-                    \item $C$ hides chars of $P$
-                    \item if $> 1$ key alphabet, $C$ dissipates high frequency chars
+                    \item $C$ hides chars of $P$ (plaintext)
+                    \item if $> 1$ key alphabet (polyalphabetic), $C$ dissipates high frequency chars
                   \end{itemize}
                   \item \underline{Sidenote:} One can say $key = 3$ or $key = \enquote{D}$, because $no(D) = 3$
                 \end{itemize}
@@ -162,7 +257,7 @@
               }
             }
             child {
-              node {Vigenère Tableaux Method
+              node (viginere) {Vigenère Tableaux Method
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
@@ -178,6 +273,7 @@
                       \begin{itemize}
                         \item same problem as for polyalphabetic substitution ciphers
                       \end{itemize}
+                      \item \script{97}{Classification}
                     \end{itemize}
                   \end{minipage}
                 }
@@ -186,35 +282,69 @@
           }
         }
         child {
-          node {Transposition (permutation) ciphers
+          node (transposition) {Transposition (permutation) ciphers
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item order of letters in $P$ rearranged by $E()$
-                  \item \script{90}{Definition}
+                  \begin{itemize}
+                    \item rearrange letters in plaintext to produce ciphertext
+                  \end{itemize}
                   \item \underline{effects:}
                   \begin{itemize}
-                    \item $C$ scrambles text, hides $n$-grams for $n > 1$
+                    \item $C$ scrambles text, hides $n$-grams for $n > 1$ (combinations of $n$ letters, e.g. th)
                   \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
           }
+          child {
+            node {Rail-Fence Cipher
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item columnar transposition
+                    \item \script{90}{Example}
+                    \item Key = Number of columns
+                    \item \underline{Attack:} Number of columns / the  key space is restricted if the text is short
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
         }
         child {
-          node {Product ciphers
+          node (product) {Product ciphers
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item $E = E_1 + E_2 + ... + E_n$
                   \item combine two or more ciphers to enhance the security of the cryptosystem
-                  \item \script{91}{Definition}
+                  \begin{itemize}
+                    \item $E = E_1 + E_2 + ... + E_n$
+                    \item built of multiple blocks, either \alert{Substitution} or \alert{Transposition}
+                  \end{itemize}
+                  \item \underline{attack}:
+                  \begin{itemize}
+                    \item product cipher might not necessarily be stronger than its individual components used separately, \script{91}{Example}
+                  \end{itemize}
                   \item \underline{effects:}
                   \begin{itemize}
                     \item can do all what Substitution and Transposition ciphers can so, more secure if used well
                   \end{itemize}
                 \end{itemize}
               \end{minipage}
+            }
+          }
+          child {
+            node {Two-block product cipher
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item $E2(E1(P, KE1), KE2)$
+                    \item may be repeated to form several encryption rounds
+                  \end{itemize}
+                \end{minipage}
+              }
             }
           }
         }
@@ -326,7 +456,9 @@
     }
   \end{mindmapcontent}
   \begin{edges}
-    \edge{test}{middle}
+    \edge{viginere}{blockcipher}
+    \edge{aes}{product}
+    \edge{aes}{blockcipher}
   \end{edges}
   \annotation{test}{annotation}
 \end{mindmap}

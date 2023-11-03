@@ -104,6 +104,7 @@
                     \item $C$ hides chars of $P$
                     \item if $> 1$ key alphabet, $C$ dissipates high frequency chars
                   \end{itemize}
+                  \item \underline{Sidenote:} One can say $key = 3$ or $key = \enquote{D}$, because $no(D) = 3$
                 \end{itemize}
               \end{minipage}
             }
@@ -116,15 +117,15 @@
                     \item in a general monoalphabetic substitution cipher each letter in $P$ is substituted by a fixed letter using a \alert{substitution table}
                     \item the \alert{key} is the substitution table
                     \begin{itemize}
-                      \item there are $26 \times 25 \times \ldots \times 3 \times 2 \times 1 = 26! \approx 2^{88}$ substitution tables ($=$ keys)
+                      \item there are $26 \times 25 \times \ldots \times 3 \times 2 \times 1 = 26! \approx 2^{88}$ substitution tables ($=$ keys) as depicted \script{78}{here (f.)}, because the mapping has to be injective
                     \end{itemize}
                     \item \underline{Attacks:}
                     \begin{itemize}
                       \item \script{79}{Exhaustive search}, Brute-force attack is not feasible
-                      \item \script{80}{Letter Frequency Analysis (ff.)}
+                      \item \script{80}{Letter Frequency Analysis (ff.)}: Statistical analysis
                       \begin{itemize}
                         \item In practice, not only frequencies of individual letters can be used for an attack, but also the frequency of letter pairs (i.e., \enquote{TH} is very common in English), letter triples, etc
-                        \item need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search
+                        \item need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search $\rightarrow$ Polyalphabetic substitution ciphers
                       \end{itemize}
                     \end{itemize}
                   \end{itemize}
@@ -137,8 +138,8 @@
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
                       \item \script{74}{Defintion (f.)}, example key is $3$
-                      \item each letter in $P$ is substituted by a fixed letter. In this special case the \enquote{key} is of length $1$
-                      \item \script{76}{Attack}
+                      \item each letter in $P$ is substituted by a fixed letter. In this special case the \enquote{key} is of length $1$, it is the shift amount
+                      \item \script{76}{Attack: Exhaustive search}
                     \end{itemize}
                   \end{minipage}
                 }
@@ -151,6 +152,11 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \script{84}{Definition (f.)}
+                    \item several key alphabets, flatten (diffuse) somewhat the frequency distribution of letters by combining high and low distributions
+                    \item \underline{Attack:} If one knows the $n$, then one can break the whole text into $n$ parts and for these a statistical analysis works as for the monialphabetic substitution cipher with the unigram model
+                    \begin{itemize}
+                      \item only works if the attacker doesn't know the algorithm, this is not optimal, because one has to hide the algorithm or consider this $n$ also as part of the key, but then $n$ has to be very large to avoid a brute-force attack. Pairs are not hidden, but the unigram attack still works (\script{86}{summary here})
+                    \end{itemize}
                   \end{itemize}
                 \end{minipage}
               }
@@ -160,8 +166,18 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item \script{86}{Definition (ff.)}
+                      \item \script{87}{Definition (ff.)}
                       \item special case of polyalphabetic substitution with $n$ key alphabets. For each key alphabet the special case of Caesar cipher is chosen, i.e., each key alphabet can be represented by one letter
+                      \item \script{88}{Tableaux}: rows are possible key characters and the columns give the encoding
+                      \begin{itemize}
+                        \item one can describe a row either by the shift or by saying which letter $c_i$ it mapped to which letter $c_j$ and takes $b_j$ as name of the row, choosing the last choice one can describe $n$ keys by a word of length $n$ 
+                      \end{itemize}
+                      \item \script{89}{Example}
+                      \item $26^n$ different keys, one has to choose $n$ large enough
+                      \item \alert{Attack:}
+                      \begin{itemize}
+                        \item same problem as for polyalphabetic substitution ciphers
+                      \end{itemize}
                     \end{itemize}
                   \end{minipage}
                 }
@@ -175,7 +191,7 @@
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item order of letters in $P$ rearranged by $E()$
-                  \item \script{89}{Definition}
+                  \item \script{90}{Definition}
                   \item \underline{effects:}
                   \begin{itemize}
                     \item $C$ scrambles text, hides $n$-grams for $n > 1$
@@ -192,7 +208,7 @@
                 \begin{itemize}
                   \item $E = E_1 + E_2 + ... + E_n$
                   \item combine two or more ciphers to enhance the security of the cryptosystem
-                  \item \script{90}{Definition}
+                  \item \script{91}{Definition}
                   \item \underline{effects:}
                   \begin{itemize}
                     \item can do all what Substitution and Transposition ciphers can so, more secure if used well

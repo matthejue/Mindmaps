@@ -109,4 +109,9 @@
 % ┌───────┐
 % │ Paths │
 % └───────┘
-\newcommand{\script}[2]{\href[page=#1]{/home/areo/Documents/Studium/Semester_1_Master/Cyber_Physical_Systems/slides/Cyber_Physical_Systems_all_in_one_with_go_back.pdf}{\inlinebox{#2}}}
+% \hypersetup{
+%     pdfnewwindow=true,
+% }
+% \hyperbaseurl{}
+% \newcommand{\script}[2]{\href[page=#1,pdfnewwindow]{/home/areo/Documents/Studium/Semester_1_Master/Cyber_Physical_Systems/slides/Cyber_Physical_Systems_all_in_one_with_go_back.pdf}{\inlinebox{#2}}}
+\newcommand{\script}[2]{\href[pdfnewwindow]{openpdf:///home/areo/Documents/Studium/Semester_1_Master/Cyber_Physical_Systems/slides/Cyber_Physical_Systems_all_in_one_with_go_back.pdf:#1}{\inlinebox{#2}}}

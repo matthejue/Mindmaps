@@ -45,7 +45,7 @@
                   \item \script{147}{safety, liveness, real-time requiremens}
                   \item $!\alpha$ send signal $\alpha$
                   \item $?\alpha$ receive signal $\alpha$
-                  \item \script{199}{Behaviour als algorithm (f.)}
+                  \item \script{199}{Behaviour al algorithm (f.)}
                   \item \script{204}{Nondeterminism} and \script{207}{Interpretation}
                   \item \script{133}{Example: Control system for traffic lights (ff.)}
                   \item \script{154}{Example: Railroad crossing (ff.)}
@@ -74,7 +74,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \script{262}{Definition}
+                  \item \script{262}{Definition (ff.)}
                   \begin{itemize}
                     \item \script{224}{\enquote{Diamond}}
                     \item \script{218}{Example: Useless lights for non-crossing streets}
@@ -89,7 +89,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \script{275}{Definition}
+                  \item \script{274}{Definition (f.)}
                   \begin{itemize}
                     \item \script{251}{Synchronization Alphabet}
                   \end{itemize}
@@ -125,6 +125,18 @@
     }
     child {
       node (test){Basics}
+      child {
+        node {Predicate Logic
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{16cm}
+              \begin{itemize}
+                \item $\overset{\infty}{\exists}i \in \mathbb{N}_0: \text{cond} = \forall j\in \mathbb{N}_0:\exists i\in\mathbb{N}_0: j < i \;\operatorname{and}\; \text{cond} \;\hat=$ \enquote{there exist infinitely many}
+                \item $\overset{\infty}{\forall}i \in \mathbb{N}_0: \text{cond}\;\hat=$ \enquote{for almost all, i.e., for all except for finitely many}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
       child {
         node {Important Definitions / Topics
           \resizebox{\textwidth}{!}{

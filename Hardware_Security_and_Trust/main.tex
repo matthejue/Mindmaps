@@ -38,6 +38,154 @@
         }
       }
       child {
+        node {Mathematical background
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{131}{finite field $(\{0, 1\}^8, +, \cdot)=GF(2^8)$}, special case of \inlinebox{Galois field} $GF(p^k)$, with a prime number $p$ and a natural number $k$, having $p^k$ elements
+                \begin{itemize}
+                  \item AES needs fitting definitions of $+$ and $\cdot$
+                \end{itemize}
+                \item \script{131}{$(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$} is a field if $m$ is a prime number and coincides with $GF(m)$
+                \begin{itemize}
+                  \item RSA, modulo arithmetic, calculations in the ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Groups
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{14cm}
+                \begin{itemize}
+                  \item \script{133}{Definition and Example}
+                  \item $(S, *)$, $S$ is a non-empty set, $*$: $S \times S \rightarrow S$ is a \alert{group} \textit{iff}
+                  \begin{itemize}
+                    \item $*$ is \alert{associative}
+                    \item an \alert{(unique) identity element} (unit element) $n \in S$ with $a * n = n * a = a \enspace\forall a\in S$
+                    \item for each $a\in S$ exists an \alert{inverse element} $a^{-1}\in S$ with $a * a^{-1} = a^{-1} * a = n$
+                  \end{itemize}
+                \item \alert{abelian group} \textit{iff} $*$ is commutative
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Fields
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{139}{Definition}
+                    \item $(S, +, \cdot)$, $S$ is a non-empty set, $+,\cdot$: $S \times S \rightarrow S$ is a \alert{field} \textit{iff}
+                    \begin{itemize}
+                      \item $(S, +)$ is an \alert{abelian group}
+                      \item \alert{Multiplication} is \alert{associative}
+                      \item \alert{Multiplication} is \alert{commutative}
+                      \item $(F\setminus \{0\}, \cdot)$ is an \alert{abelian group} ($0$ is the additive identity)
+                      \item \alert{Distribuitivity}
+                    \end{itemize}
+                  \item \alert{Difference} to \alert{commutative rings} with (multiplicative) identity: For each element of $F\setminus\{0\}$ there is a multiplicative inverse
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Finite Fields and Polynomial Rings
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{138}{Making $(\{0, 1\}^k, +, \cdot)$ a finite field}
+                        \begin{itemize}
+                          \item define addition on $(\{0,1\}^k, +, \cdot)$ as bitwise Xor
+                          \item  and $\cdot$ on $\{0,1\}^k$ such that the result becomes a finite field (to be done)
+                        \end{itemize}
+                      \item \underline{Solution:} \script{140}{Polynomial rings over $GF(2)$ and Example}
+                        \begin{itemize}
+                          \item \script{141}{Why not $\mathbb{Z}/2^k\mathbb{Z}$?}
+                          \item \script{143}{$GF(2)[X]$ and $GF(2)[X]_k$ and example for addition}:
+                            \begin{itemize}
+                              \item $F[X]$: All polynomials in one variable $X$ over the field $F$
+                              \item $F[X]_n$: Subset of $F[X]$ with $deg(g) < n$ for polynomials $g$
+                              \item we map $\{0,1\}^k$ bijectively to $GF(2)[X]_k$ by the mapping $\varphi(v_{k−1}, \ldots, v_0) = v_{k−1} X^{k−1} + \ldots + v_2 X^2 + v_1 X + v_0$ (in order to be able to define a \alert{multiplication} on $\{0,1\}^k$)
+                              \item \script{144}{Examples}
+                              \item \script{145}{Addition and (Problem with) Multiplication}
+                              \item \script{146}{Polynomial division and example}% , for a division by a polynomial of degree $k+1$, the remainder will be of degree $k$
+                              \item \script{147}{Division with remainder}: For $u(X)$, $g(X) \in F[X]$ with $g(X)\ne 0$ there exist unique polynomials $q(X), r(X) \in F[X]$ with $u(X) = q(X) g(X) + r(X)$ and $deg(r(X)) < deg(g(X))$ or $r(X) = 0$
+                              \begin{itemize}
+                                \item $u(X) \mod g(X) = r(X)$, $u(X) \operatorname{div} g(X) = q(X)$
+                              \end{itemize}
+                              \item \script{148}{Residue Class Ring Modulo a Polynomial}
+                            \end{itemize}
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Galois field
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item $(GF(2), +, \cdot) = (\mathbb{Z}/2\mathbb{Z}, +, \cdot) = (\{0, 1\}, \oplus, \wedge)$ forms a field with additive identity $0$,
+                        multiplicative identity $1$ and $1$ as the multplicative inverse of $1$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Rings
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{132}{Definition and Example}
+                    \item $(S, +, \cdot)$, $S$ is a non-empty set, $+,\cdot$: $S \times S \rightarrow S$ is a \alert{ring} \textit{iff}
+                    \begin{itemize}
+                      \item $(S, +)$ is an \alert{abelian group}
+                      \item \alert{Multiplication} is \alert{associative}
+                      \item \alert{Distributivity}
+                    \end{itemize}
+                    \item \alert{commutative ring} \textit{iff} the multiplication is also commutative
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Residue class ring
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{134}{Definitions (ff.)}
+                        \begin{itemize}
+                          % \item $2 \equiv 12 \mod 10 \overset{\text{mod gilt auf}}{\underset{\text{beiden Seiten}}{\Leftrightarrow}} 12 \equiv 2 \mod 2 \Leftrightarrow 12 + q_1\cdot m \equiv 2 + q_2\cdot m\Leftrightarrow 12 + 0\cdot m \equiv 2 + q_2\cdot m\Leftrightarrow 12 \equiv 2 + q_2\cdot m$
+                          \item $\boxed{12 / 10 = 1 \wedge 12 \mod 10 = 2 \enspace(\text{rest})} \Rightarrow 2 \equiv 12 \mod 10 \Leftrightarrow 2 + 1 \cdot 10 \equiv 12 + 0 \cdot 10 \Leftrightarrow \boxed{2 + 1 \cdot 10 \equiv 12}\Leftrightarrow 2 + 2 \cdot 10 \equiv 12 + 1 \cdot 10$ ($12$ is the dividend, because it's larger than $2$)
+                        \end{itemize}
+                      \item \script{134}{Division with remainder}
+                      \item \script{134}{Congruent modulo $m$ with proof}
+                      \item \script{135}{Residue class with example}
+                        \begin{itemize}
+                          \item $(\mathbb{Z}/m\mathbb{Z}, +, \cdot), \mathbb{Z}/m\mathbb{Z} = \{\overline{0}, \overline{1}, \ldots, \overline{m-1}\}$
+                          \item for $a \in r$ the integer $a$ mod $m$ is the unique element $r$ of $\overline{r}=\overline{a}=\{0\cdot m + r, 1\cdot m + r, \ldots, a,\ldots\}=\{q\cdot m + r \mid q\in\mathbb{Z}\}$ with $0 \le r < m$
+                          \item each $i \in \mathbb{Z}$ is in exactly one of $m$ the pairwise disjoint residue class: $\overline{0}, \overline{1}, \ldots, \overline{m-1}$
+                        \end{itemize}
+                      \item \script{136}{Lemma and proof}: If $a_1 \equiv a_2 \operatorname{mod} m$, $b_1 \equiv b_2 \operatorname{mod} m$ then
+                        \begin{itemize}
+                          \item $a_1 + b_1 \equiv a_2 + b_2 \operatorname{mod} m$
+                          \item $a_1 \cdot b_1 \equiv a_2 \cdot b_2 \operatorname{mod} m$
+                        \end{itemize}
+                      \item \script{137}{Addition and multiplication well definied, commutative ring, examples}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+        }
+      }
+      child {
         node {Classification by way to process plaintext}
         child {
           node (streamcipher) {Stream Ciphers
@@ -77,6 +225,23 @@
                   \item are common for Internet applications
                 \end{itemize}
               \end{minipage}
+            }
+          }
+          child {
+            node {More Block Ciphers
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item DES (Data Encryption Standard)
+                    \begin{itemize}
+                      \item Predecessor of AES
+                      \item Considered insecure (small key length of 56 bits)
+                      \item \script{129}{Triple-DES}
+                    \end{itemize}
+                    \item \script{129}{List of other ciphers}
+                  \end{itemize}
+                \end{minipage}
+              }
             }
           }
           child {
@@ -145,9 +310,9 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \script{101}{Properties and Backstory}, block size always the same, number of rounds depens on key length that can be different, efficiency in \textit{software} and \textit{hardware}, byte-oriented cipher to be appropriate for small microprocessors and -controlers that havea $8$-bit width in the data path
-                    \item \script{102}{Iterated Cipher types}, with key lengths $128, 192, 256$ and respective numbers of rounds $10, 12, 14$ and always $+1$ subkeys respective
+                    \item \script{102}{Iterated Cipher types}, with key lengths $128$ ($16$ Bytes), $192$, $256$ and respective numbers of rounds $10, 12, 14$ and always $+1$ subkeys respective
                     \item at the moment most widely used symmetric cipher
-                    \item asdf
+                    \item it is \alert{deterministic}, i.e., with the same key identical plain text blocks are mapped to the same cipher text blocks
                   \end{itemize}
                 \end{minipage}
               }
@@ -173,9 +338,28 @@
                       \item \alert{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible
                       \item \alert{Analytical attacks:} There is no analytical attack known that is better than brute-force
                       \item \alert{Side-channel attacks:} Several side-channel and fault-injection attacks have been published attacking the implemntation (not the algorithm)%. Note that side-channel attacks do not attack the underlying algorithm but the implementation of it
-                      \item \script{124}{Remark}
+                      \item \script{124}{Remark: Importance of nonlinear S-Boxes}
                     \end{itemize}
                   \end{minipage}
+                }
+              }
+              child {
+                node {Encrypting longer plain text
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{125}{Example: Image}
+                        \item \underline{Countermeasure:} Different modes for block ciphers
+                        \begin{itemize}
+                          \item \script{126}{ECB, Encryption, Decryption, Advantages, Disadvantages} = \alert{E}lectronic \alert{C}ode \alert{B}ook Mode
+                          \begin{itemize}
+                            \item Straightforward application of block cipher
+                          \end{itemize}
+                        \item \script{127}{CBC, Encryption, Decryption, Advantages, Disadvantages} = \alert{C}ipher \alert{B}lock \alert{C}haining Mode
+                        \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
                 }
               }
             }
@@ -350,6 +534,7 @@
                   \begin{itemize}
                     \item rearrange letters in plaintext to produce ciphertext
                   \end{itemize}
+                  \item \script{90}{Example}
                   \item \underline{effects:}
                   \begin{itemize}
                     \item $C$ scrambles text, hides $n$-grams for $n > 1$ (combinations of $n$ letters, e.g. th)

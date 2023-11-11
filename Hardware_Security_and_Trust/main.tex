@@ -44,12 +44,13 @@
               \begin{itemize}
                 \item \script{131}{\alert{finite field} $(\{0, 1\}^8, +, \cdot)=GF(2^8)$}, special case of \inlinebox{Galois field} $GF(p^k)$, with a prime number $p$ and a natural number $k$, having $p^k$ elements
                 \begin{itemize}
-                  \item AES needs fitting definitions of $+$ and $\cdot$ on $\{0, 1\}^8$ to turn it into a \alert{finite field}
+                  \item AES needs fitting definitions of $+$ and $\cdot$ on $\{0, 1\}^8$ to turn it into a \alert{finite field}. Small finite field with $256$ elements
                   \item The irreducible polynomial used in AES is part of its specification. It is $g(X) = X^8 + X^4 + X^3 + X + 1$
+                  \item one needs finite field property at point where one wants to invert the MixColumn Operation, one needs the property of having multiplicative inverse, to derive inverse matrix
                 \end{itemize}
                 \item \script{131}{$(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$} is a \alert{field} and coincides with $GF(m)$ if $m$ is a prime number, else it is a commutative ring with multiplicative identity $\overline{1}$ 
                 \begin{itemize}
-                  \item RSA, modulo arithmetic, calculations in the ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$
+                  \item RSA, modulo arithmetic, calculations in the ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$. RSA is a huge residue class ring, $2.048$ Bits, in the order of $2^{2046}$, $m$ is product of two really huge prime numbers
                 \end{itemize}
               \end{itemize}
             \end{minipage}
@@ -73,7 +74,7 @@
             }
           }
           child {
-            node {Fields
+            node {Fields (germ. Körper)
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
@@ -124,12 +125,12 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \script{132}{Definition and Example}
+                    \item \script{132}{Definition and Example}, example has 2 additional prperties that one are not required for it to be a ring
                     \item $(R, +, \cdot)$, $R$ is a non-empty set, $+,\cdot$: $R \times R \rightarrow R$ is a \alert{ring} \textit{iff}
                     \begin{itemize}
                       \item $(R, +)$ is an \alert{abelian group}
                       \item \alert{Multiplication} is \alert{associative}
-                      \item \alert{Distributivity}
+                      \item \alert{Distributivity}, because commutativity of multiplication is not required for a ring and therefore one needs second version of the law of distributivity
                     \end{itemize}
                     \item \alert{commutative ring} \textit{iff} the multiplication is also commutative
                   \end{itemize}
@@ -137,31 +138,41 @@
               }
             }
             child {
-              node {Residue class ring
+              node {Residue class ring (germ. Restklassenring)
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
                       \item \script{134}{Definitions (ff.)}
                         \begin{itemize}
                           % \item $2 \equiv 12 \mod 10 \overset{\text{mod gilt auf}}{\underset{\text{beiden Seiten}}{\Leftrightarrow}} 12 \equiv 2 \mod 2 \Leftrightarrow 12 + q_1\cdot m \equiv 2 + q_2\cdot m\Leftrightarrow 12 + 0\cdot m \equiv 2 + q_2\cdot m\Leftrightarrow 12 \equiv 2 + q_2\cdot m$
-                          \item $\boxed{12 / 10 = 1 \wedge 12 \mod 10 = 2 \enspace(\text{rest})} \Rightarrow 2 \equiv 12 \mod 10 \Leftrightarrow 2 + 1 \cdot 10 = 12 + 0 \cdot 10 \Leftrightarrow \boxed{2 + 1 \cdot 10 = 12}\Leftrightarrow 2 + 2 \cdot 10 = 12 + 1 \cdot 10$ ($12$ is the dividend, because it's larger than $2$)
+                          \item $\boxed{12 / 10 = 1 \wedge 12 \mod 10 = 2 \enspace(\text{remainder})} \Rightarrow 2 \equiv 12 \mod 10 \Leftrightarrow 2 + 1 \cdot 10 = 12 + 0 \cdot 10 \Leftrightarrow \boxed{2 + 1 \cdot 10 = 12}\Leftrightarrow 2 + 2 \cdot 10 = 12 + 1 \cdot 10$ ($12$ is the dividend, because it's larger than $2$, $0\le 2< 10$)
+                          \item \underline{Division with remainder in $\mathbb{Z}$:} For each $a \in \mathbb{Z}$ there is a unique integer $r$ with $0 \le r < m$ and $a = q \cdot m + r$ for some $q \in Z$ and $m \in \mathbb{N}, m > 1$
+                          \begin{itemize}
+                            \item \script{134}{Terms}
+                          \end{itemize}
+                          \item \underline{Congruent modulo $m$:} Definition: $a, b \in Z$ are congruent modulo $m$ ($a \equiv b \mod m$) \textit{iff} $a − b = q \cdot m$ for some $q \in Z$
+                            \begin{itemize}
+                              \item $a \equiv b \mod m$ iff the division with remainder wrt. $m$ gives the same remainder for $a$ and $b$
+                              \item \script{134}{Proof}, \underline{forward:} because $r_a = r_b$ are equal the second part reduces to $0$, \underline{backward:} because devision of remainder gives unique result, then one can conclude that $r_a = r_b$
+                            \end{itemize}
                         \end{itemize}
-                      \item \script{134}{Division with remainder}
-                      \item \script{134}{Congruent modulo $m$ with proof}
-                      \item \script{135}{Residue class with example}
+                      \item \script{135}{Residue class with example}: The residue class of $r \in \mathbb{Z}$ with $0 \le r < m$ is the set $\overline{r} = \{a \in \mathbb{Z} a \equiv r \mod m\} = \{q \cdot m + r q \in \mathbb{Z}\}$
                         \begin{itemize}
                           \item $(\mathbb{Z}/m\mathbb{Z}, +, \cdot), \mathbb{Z}/m\mathbb{Z} = \{\overline{0}, \overline{1}, \ldots, \overline{m-1}\}$
-                          \item for $a \in r$ the integer $a$ mod $m$ is the unique element $r$ of $\overline{r}=\overline{a}=\{0\cdot m + r, 1\cdot m + r, \ldots, a,\ldots\}=\{q\cdot m + r \mid q\in\mathbb{Z}\}$ with $0 \le r < m$
+                          \item for $a \in r$ the integer $a \mod m$ is the unique element $r$ of $\overline{r}=\overline{a}=\{0\cdot m + r, 1\cdot m + r, \ldots, a,\ldots\}=\{q\cdot m + r \mid q\in\mathbb{Z}\}$ with $0 \le r < m$ (so in the example $\overline{13} = \overline{3}$)
                           \item each $i \in \mathbb{Z}$ is in exactly one of $m$ pairwise disjoint residue classes: $\overline{0}, \overline{1}, \ldots, \overline{m-1}$
                         \end{itemize}
                       \item \script{136}{Lemma and proof}: If $a_1 \equiv a_2 \operatorname{mod} m$, $b_1 \equiv b_2 \operatorname{mod} m$ then
                         \begin{itemize}
                           \item $a_1 + b_1 \equiv a_2 + b_2 \operatorname{mod} m$
                           \item $a_1 \cdot b_1 \equiv a_2 \cdot b_2 \operatorname{mod} m$
+                          \item Addition and multiplication on $\mathbb{Z}/m\mathbb{Z}$ are \alert{well-defined}, since for the result it does not matter which representatives of $a$ and $b$ are chosen
                         \end{itemize}
-                      \item \script{137}{Addition and multiplication well definied, commutative ring, examples}
+                      \item \script{137}{Addition and Multiplication well definied}
                       \begin{itemize}
                         \item $\overline{a} + \overline{b} = \overline{a + b}$, $\overline{a} \cdot \overline{b} = \overline{a \cdot b}$
+                        \item residue class ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$ forms a \alert{commutative ring} with \alert{multiplicative identity} $\overline{1}$ for all $\overline{p} \in \mathbb{Z}/m\mathbb{Z}$
+                        \item \underline{Example:} \alert{residue class ring:} $\mathbb{Z}/5\mathbb{Z} = \{\overline{0}, \overline{1}, \overline{2}, \overline{3}, \overline{4}\}$ and one \alert{residue class:} $\overline{2} = \{q\cdot 5 + 2 \mid q\in \mathbb{Z}\}$, if one does computation one does not handle infinite sets but handle representatives: $\overline{2} + \overline{3} + \overline{4} = \overline{2 + 3 + 4} = \overline{4}$, modulo operation gives smalled possible element in residue class
                       \end{itemize}
                     \end{itemize}
                   \end{minipage}
@@ -277,7 +288,7 @@
                     \begin{itemize}
                       \item Predecessor of AES
                       \item Considered insecure (small key length of 56 bits)
-                      \item \script{129}{Triple-DES}
+                      \item \underline{idea to make DES more secure:} \script{129}{Triple-DES}, decryption and encryption are inverse, also for AES one could use decryption for encryption and encryption for decryption, encrypt, decrypt, encrypt ist becausse of backward compatibility, if have implementation for triple DES and someone sends text with single DES, then K1=K2 and then after 2 rounds again plain text
                     \end{itemize}
                     \item \script{129}{List of other ciphers}
                   \end{itemize}
@@ -379,7 +390,7 @@
                       \item \alert{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible
                       \item \alert{Analytical attacks:} There is no analytical attack known that is better than brute-force
                       \item \alert{Side-channel attacks:} Several side-channel and fault-injection attacks have been published attacking the implemntation (not the algorithm)%. Note that side-channel attacks do not attack the underlying algorithm but the implementation of it
-                      \item \script{124}{Remark: Importance of nonlinear S-Boxes}
+                      \item \script{124}{Remark: Importance of nonlinear S-Boxes}, several rounds also wouldn't make a problem, could still solve with linear equation system, because composition of two linears function is a linear function, composition of linear function with an addition is again just an addition
                     \end{itemize}
                   \end{minipage}
                 }
@@ -389,14 +400,18 @@
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{12cm}
                       \begin{itemize}
-                        \item \script{125}{Example: Image}
+                        \item \script{125}{Example: Image}, because it is deterministic, i.e., with the same key identical plain text blocks are mapped to the same cipher text blocks
                         \item \underline{Countermeasure:} Different modes for block ciphers
                         \begin{itemize}
                           \item \script{126}{ECB, Encryption, Decryption, Advantages, Disadvantages} = \alert{E}lectronic \alert{C}ode \alert{B}ook Mode
                           \begin{itemize}
                             \item Straightforward application of block cipher
+                            \item \underline{disadvantage:} \alert{traffic analysis}, if know block with encoding of account number, without knowing how encryption works, one can replace ones own encrypted account number with account number of other account in other transmission (\alert{substituion attack})
                           \end{itemize}
                         \item \script{127}{CBC, Encryption, Decryption, Advantages, Disadvantages} = \alert{C}ipher \alert{B}lock \alert{C}haining Mode
+                        \begin{itemize}
+                          \item \underline{advantage:} no \alert{traffic analysis} possible
+                        \end{itemize}
                         \end{itemize}
                       \end{itemize}
                     \end{minipage}

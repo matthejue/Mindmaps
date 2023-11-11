@@ -42,11 +42,12 @@
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \script{131}{finite field $(\{0, 1\}^8, +, \cdot)=GF(2^8)$}, special case of \inlinebox{Galois field} $GF(p^k)$, with a prime number $p$ and a natural number $k$, having $p^k$ elements
+                \item \script{131}{\alert{finite field} $(\{0, 1\}^8, +, \cdot)=GF(2^8)$}, special case of \inlinebox{Galois field} $GF(p^k)$, with a prime number $p$ and a natural number $k$, having $p^k$ elements
                 \begin{itemize}
-                  \item AES needs fitting definitions of $+$ and $\cdot$
+                  \item AES needs fitting definitions of $+$ and $\cdot$ on $\{0, 1\}^8$ to turn it into a \alert{finite field}
+                  \item The irreducible polynomial used in AES is part of its specification. It is $g(X) = X^8 + X^4 + X^3 + X + 1$
                 \end{itemize}
-                \item \script{131}{$(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$} is a field if $m$ is a prime number and coincides with $GF(m)$
+                \item \script{131}{$(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$} is a \alert{field} and coincides with $GF(m)$ if $m$ is a prime number, else it is a commutative ring with multiplicative identity $\overline{1}$ 
                 \begin{itemize}
                   \item RSA, modulo arithmetic, calculations in the ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$
                 \end{itemize}
@@ -60,11 +61,11 @@
               \begin{minipage}[t]{14cm}
                 \begin{itemize}
                   \item \script{133}{Definition and Example}
-                  \item $(S, *)$, $S$ is a non-empty set, $*$: $S \times S \rightarrow S$ is a \alert{group} \textit{iff}
+                  \item $(R, *)$, $R$ is a non-empty set, $*$: $R \times R \rightarrow R$ is a \alert{group} \textit{iff}
                   \begin{itemize}
                     \item $*$ is \alert{associative}
-                    \item an \alert{(unique) identity element} (unit element) $n \in S$ with $a * n = n * a = a \enspace\forall a\in S$
-                    \item for each $a\in S$ exists an \alert{inverse element} $a^{-1}\in S$ with $a * a^{-1} = a^{-1} * a = n$
+                    \item an \alert{(unique) identity element} (unit element) $n \in R$ with $a * n = n * a = a \enspace\forall a\in R$
+                    \item for each $a\in R$ exists an \alert{inverse element} $a^{-1}\in R$ with $a * a^{-1} = a^{-1} * a = n$
                   \end{itemize}
                 \item \alert{abelian group} \textit{iff} $*$ is commutative
                 \end{itemize}
@@ -77,9 +78,9 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \script{139}{Definition}
-                    \item $(S, +, \cdot)$, $S$ is a non-empty set, $+,\cdot$: $S \times S \rightarrow S$ is a \alert{field} \textit{iff}
+                    \item $(F, +, \cdot)$, $F$ is a non-empty set, $+,\cdot$: $F \times F \rightarrow F$ is a \alert{field} \textit{iff}
                     \begin{itemize}
-                      \item $(S, +)$ is an \alert{abelian group}
+                      \item $(F, +)$ is an \alert{abelian group}
                       \item \alert{Multiplication} is \alert{associative}
                       \item \alert{Multiplication} is \alert{commutative}
                       \item $(F\setminus \{0\}, \cdot)$ is an \alert{abelian group} ($0$ is the additive identity)
@@ -91,45 +92,27 @@
               }
             }
             child {
-              node {Finite Fields and Polynomial Rings
+              node (finitefields) {Finite / Galois Fields
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
+                  \begin{minipage}[t]{14cm}
                     \begin{itemize}
+                      \item $(GF(2), +, \cdot) = (\mathbb{Z}/2\mathbb{Z}, +, \cdot)$ (or $\{0, 1\}$ with $\oplus$ as $+$ and $\wedge$ as $\cdot$)forms a field with additive identity $0$, multiplicative identity $1$ and $1$ as the multplicative inverse of $1$
+                      \begin{itemize}
+                        \item \script{140}{Example} 
+                      \end{itemize}
                       \item \script{138}{Making $(\{0, 1\}^k, +, \cdot)$ a finite field}
                         \begin{itemize}
                           \item define addition on $(\{0,1\}^k, +, \cdot)$ as bitwise Xor
-                          \item  and $\cdot$ on $\{0,1\}^k$ such that the result becomes a finite field (to be done)
+                          \begin{itemize}
+                            \item Xor on $\{0,1\}$ is the same as $+$ on $GF(2) = \mathbb{Z}/2\mathbb{Z} = \{\overline{0}, \overline{1}\}$
+                          \end{itemize}
+                          \item definition of $\cdot$ on $\{0,1\}^k$ such that the result becomes a finite field
+                          \begin{itemize}
+                            \item the And operation is $\cdot$ on $GF(2)$
+                            \item to be done by reduction to the consideration of so-called polynomial rings over $GF(2)$
+                            \item \script{141}{Why not $\mathbb{Z}/2^k\mathbb{Z}$?}
+                          \end{itemize}
                         \end{itemize}
-                      \item \underline{Solution:} \script{140}{Polynomial rings over $GF(2)$ and Example}
-                        \begin{itemize}
-                          \item \script{141}{Why not $\mathbb{Z}/2^k\mathbb{Z}$?}
-                          \item \script{143}{$GF(2)[X]$ and $GF(2)[X]_k$ and example for addition}:
-                            \begin{itemize}
-                              \item $F[X]$: All polynomials in one variable $X$ over the field $F$
-                              \item $F[X]_n$: Subset of $F[X]$ with $deg(g) < n$ for polynomials $g$
-                              \item we map $\{0,1\}^k$ bijectively to $GF(2)[X]_k$ by the mapping $\varphi(v_{k−1}, \ldots, v_0) = v_{k−1} X^{k−1} + \ldots + v_2 X^2 + v_1 X + v_0$ (in order to be able to define a \alert{multiplication} on $\{0,1\}^k$)
-                              \item \script{144}{Examples}
-                              \item \script{145}{Addition and (Problem with) Multiplication}
-                              \item \script{146}{Polynomial division and example}% , for a division by a polynomial of degree $k+1$, the remainder will be of degree $k$
-                              \item \script{147}{Division with remainder}: For $u(X)$, $g(X) \in F[X]$ with $g(X)\ne 0$ there exist unique polynomials $q(X), r(X) \in F[X]$ with $u(X) = q(X) g(X) + r(X)$ and $deg(r(X)) < deg(g(X))$ or $r(X) = 0$
-                              \begin{itemize}
-                                \item $u(X) \mod g(X) = r(X)$, $u(X) \operatorname{div} g(X) = q(X)$
-                              \end{itemize}
-                              \item \script{148}{Residue Class Ring Modulo a Polynomial}
-                            \end{itemize}
-                        \end{itemize}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Galois field
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item $(GF(2), +, \cdot) = (\mathbb{Z}/2\mathbb{Z}, +, \cdot) = (\{0, 1\}, \oplus, \wedge)$ forms a field with additive identity $0$,
-                        multiplicative identity $1$ and $1$ as the multplicative inverse of $1$
                     \end{itemize}
                   \end{minipage}
                 }
@@ -142,9 +125,9 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \script{132}{Definition and Example}
-                    \item $(S, +, \cdot)$, $S$ is a non-empty set, $+,\cdot$: $S \times S \rightarrow S$ is a \alert{ring} \textit{iff}
+                    \item $(R, +, \cdot)$, $R$ is a non-empty set, $+,\cdot$: $R \times R \rightarrow R$ is a \alert{ring} \textit{iff}
                     \begin{itemize}
-                      \item $(S, +)$ is an \alert{abelian group}
+                      \item $(R, +)$ is an \alert{abelian group}
                       \item \alert{Multiplication} is \alert{associative}
                       \item \alert{Distributivity}
                     \end{itemize}
@@ -161,7 +144,7 @@
                       \item \script{134}{Definitions (ff.)}
                         \begin{itemize}
                           % \item $2 \equiv 12 \mod 10 \overset{\text{mod gilt auf}}{\underset{\text{beiden Seiten}}{\Leftrightarrow}} 12 \equiv 2 \mod 2 \Leftrightarrow 12 + q_1\cdot m \equiv 2 + q_2\cdot m\Leftrightarrow 12 + 0\cdot m \equiv 2 + q_2\cdot m\Leftrightarrow 12 \equiv 2 + q_2\cdot m$
-                          \item $\boxed{12 / 10 = 1 \wedge 12 \mod 10 = 2 \enspace(\text{rest})} \Rightarrow 2 \equiv 12 \mod 10 \Leftrightarrow 2 + 1 \cdot 10 \equiv 12 + 0 \cdot 10 \Leftrightarrow \boxed{2 + 1 \cdot 10 \equiv 12}\Leftrightarrow 2 + 2 \cdot 10 \equiv 12 + 1 \cdot 10$ ($12$ is the dividend, because it's larger than $2$)
+                          \item $\boxed{12 / 10 = 1 \wedge 12 \mod 10 = 2 \enspace(\text{rest})} \Rightarrow 2 \equiv 12 \mod 10 \Leftrightarrow 2 + 1 \cdot 10 = 12 + 0 \cdot 10 \Leftrightarrow \boxed{2 + 1 \cdot 10 = 12}\Leftrightarrow 2 + 2 \cdot 10 = 12 + 1 \cdot 10$ ($12$ is the dividend, because it's larger than $2$)
                         \end{itemize}
                       \item \script{134}{Division with remainder}
                       \item \script{134}{Congruent modulo $m$ with proof}
@@ -169,7 +152,7 @@
                         \begin{itemize}
                           \item $(\mathbb{Z}/m\mathbb{Z}, +, \cdot), \mathbb{Z}/m\mathbb{Z} = \{\overline{0}, \overline{1}, \ldots, \overline{m-1}\}$
                           \item for $a \in r$ the integer $a$ mod $m$ is the unique element $r$ of $\overline{r}=\overline{a}=\{0\cdot m + r, 1\cdot m + r, \ldots, a,\ldots\}=\{q\cdot m + r \mid q\in\mathbb{Z}\}$ with $0 \le r < m$
-                          \item each $i \in \mathbb{Z}$ is in exactly one of $m$ the pairwise disjoint residue class: $\overline{0}, \overline{1}, \ldots, \overline{m-1}$
+                          \item each $i \in \mathbb{Z}$ is in exactly one of $m$ pairwise disjoint residue classes: $\overline{0}, \overline{1}, \ldots, \overline{m-1}$
                         \end{itemize}
                       \item \script{136}{Lemma and proof}: If $a_1 \equiv a_2 \operatorname{mod} m$, $b_1 \equiv b_2 \operatorname{mod} m$ then
                         \begin{itemize}
@@ -177,8 +160,66 @@
                           \item $a_1 \cdot b_1 \equiv a_2 \cdot b_2 \operatorname{mod} m$
                         \end{itemize}
                       \item \script{137}{Addition and multiplication well definied, commutative ring, examples}
+                      \begin{itemize}
+                        \item $\overline{a} + \overline{b} = \overline{a + b}$, $\overline{a} \cdot \overline{b} = \overline{a \cdot b}$
+                      \end{itemize}
                     \end{itemize}
                   \end{minipage}
+                }
+              }
+              child {
+                node (polrings) {Polynomial rings over $GF(2)$
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{16cm}
+                      \begin{itemize}
+                        \item \script{143}{$GF(2)[X]$ and $GF(2)[X]_k$ and example for addition}:
+                          \begin{itemize}
+                            \item $F[X]$: All polynomials in one variable $X$ over the field $F$
+                            \item $F[X]_n$: Subset of $F[X]$ with $deg(g) < n$ for polynomials $g$
+                            \item we map $\{0,1\}^k$ bijectively to $GF(2)[X]_k$ by the mapping $\varphi(v_{k−1}, \ldots, v_0) = v_{k−1} X^{k−1} + \ldots + v_2 X^2 + v_1 X + v_0$ (in order to be able to define a \alert{multiplication} on $\{0,1\}^k$)
+                            \item \script{144}{Examples}
+                            \item \script{145}{Addition and Problem with Multiplication}
+                          \end{itemize}
+                        \item \script{148}{Definition: Residue Class Ring Modulo a Polynomial}: $\overline{F(X)} = F[X] / g(X):=\{\overline{u(X)} \mid u(X) \in F[X]\}$
+                          \begin{itemize}
+                            \item \alert{residue class of $u(X)$ modulo $g(X)$}: $\overline{u(X)}:=\{v(X) \in F[X] \mid v(X) \bmod g(X)=u(X) \bmod g(X)\}$,\quad$u(X),g(X) \in F[X] \text { with } \operatorname{deg}(g(X))\geq 1$
+                            \item exactly $2^k$ different residue classes modulo $g(X)\in GF(2)[X]_{k+1}$, the classes $\overline{r(X)}$ with $deg(r(X)) < k$ in the residue class ring $GF(2)[X]/g(X)$
+                            \item \script{148}{Addition and Multiplication in $F[X]/g(x)$}: $\overline{u(X)}+\overline{v(X)}:=\overline{u(X)+v(X)}$ and $\overline{u(X)} \cdot \overline{v(X)}:=\overline{u(X) \cdot v(X)}$
+                              \begin{itemize}
+                                \item \alert{bijective mapping} $\psi:\{0,1\}^k\rightarrow G F(2)[X] / g(X)$ with $\psi\left(v_{k-1}, \ldots, v_0\right)=\overline{v_{k-1} X^{k-1}+\cdots+v_2 X^2+v_1 X+v_0}$ and $g(X)\in GF(2)[X]_{k+1}$
+                                \item \alert{Addition} in $GF(2)[X]/g(X)$ \enquote{is} bitwise Xor on $\{0,1\}^k$
+                                \item \script{149}{Working Multiplication in $\{0, 1\}^k$}: $\left(v_{k-1}, \ldots, v_0\right) \cdot\left(w_{k-1}, \ldots, w_0\right):=\psi^{-1}\left(\psi\left(v_{k-1}, \ldots, v_0\right) \cdot \psi\left(w_{k-1}, \ldots, w_0\right)\right)$
+                                  \begin{itemize}
+                                    \item multiplication in $\{0,1\}^k$ \enquote{via} multiplication in $GF(2)[X]/g(X)$, works since $GF(2)[X]/g(X)$ is closed under multiplication
+                                    \item \script{150}{Example}
+                                  \end{itemize}
+                              \end{itemize}
+                            \item \script{152}{Multiplicative inverse for all elements $\ne 0$?}
+                              \begin{itemize}
+                                \item for $(GF(2)[X]/g(X), +, \cdot)$ to be a field, there must be multiplicative inverse for all elements $\ne 0$
+                                \item if $(GF(2)[X]/g(X), +, \cdot)$ is a field, then also $(\{0, 1\}^k, +, \cdot)$
+                                \item $g(X)$ must be \alert{irreducable}
+                                \item a polynomial $g(X) \in F[X]$ with $deg(g(X)) > 0$ is \alert{irreducible} \textit{iff} the following holds: If $g(X) = u(X) \cdot v(X)$ for $u(X), v(X) \in F[X]$ then $u(X) \in F$ or $v(X) \in F$
+                              \end{itemize}
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Polynomial Division
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \script{146}{Example}
+                          \item \script{147}{Lemma: Division with remainder}: For $u(X)$, $g(X) \in F[X]$ with $g(X)\ne 0$ there exist unique polynomials $q(X), r(X) \in F[X]$ with $u(X) = q(X) g(X) + r(X)$ and $deg(r(X)) < deg(g(X))$ or $r(X) = 0$
+                            \begin{itemize}
+                              \item $u(X) \mod g(X) = r(X)$, $u(X) \operatorname{div} g(X) = q(X)$
+                            \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
                 }
               }
             }
@@ -704,6 +745,7 @@
     \edge{viginere}{blockcipher}
     \edge{aes}{product}
     \edge{aes}{blockcipher}
+    \edge{finitefields}{polrings}
   \end{edges}
   \annotation{test}{annotation}
 \end{mindmap}

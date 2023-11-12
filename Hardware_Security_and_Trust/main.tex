@@ -50,6 +50,7 @@
                 \end{itemize}
                 \item \script{131}{$(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$} is a \alert{field} and coincides with $GF(m)$ if $m$ is a prime number, else it is a commutative ring with multiplicative identity $\overline{1}$ 
                 \begin{itemize}
+                  \item to be useable for AES, $m$ must be a prime number, but $2^8-1$ isn't
                   \item RSA, modulo arithmetic, calculations in the ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$. RSA is a huge residue class ring, $2.048$ Bits, in the order of $2^{2046}$, $m$ is product of two really huge prime numbers
                 \end{itemize}
               \end{itemize}
@@ -83,7 +84,13 @@
                     \begin{itemize}
                       \item $(F, +)$ is an \alert{abelian group}
                       \item \alert{Multiplication} is \alert{associative}
+                      \begin{itemize}
+                        \item already required by \alert{abelian group} property
+                      \end{itemize}
                       \item \alert{Multiplication} is \alert{commutative}
+                      \begin{itemize}
+                        \item already required by \alert{abelian group} property
+                      \end{itemize}
                       \item $(F\setminus \{0\}, \cdot)$ is an \alert{abelian group} ($0$ is the additive identity)
                       \item \alert{Distribuitivity}
                     \end{itemize}
@@ -111,7 +118,7 @@
                           \begin{itemize}
                             \item the And operation is $\cdot$ on $GF(2)$
                             \item to be done by reduction to the consideration of so-called polynomial rings over $GF(2)$
-                            \item \script{141}{Why not $\mathbb{Z}/2^k\mathbb{Z}$?}
+                            \item \script{141}{Why not $\mathbb{Z}/2^k\mathbb{Z}$?}, an element that is even is not invertable, therefore can't be a field, all elements in $\overline{1}$ are odd, $a\cdot p$ is even, because $p$ is even, so it can't be in a set where all elements are odd
                           \end{itemize}
                         \end{itemize}
                     \end{itemize}
@@ -140,7 +147,7 @@
             child {
               node {Residue class ring (germ. Restklassenring)
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
+                  \begin{minipage}[t]{14cm}
                     \begin{itemize}
                       \item \script{134}{Definitions (ff.)}
                         \begin{itemize}
@@ -183,33 +190,34 @@
                   \resizebox{\textwidth}{!}{
                     \begin{minipage}[t]{16cm}
                       \begin{itemize}
-                        \item \script{143}{$GF(2)[X]$ and $GF(2)[X]_k$ and example for addition}:
+                        \item \script{143}{$GF(2)[X]$ and $GF(2)[X]_k$ and example for addition}
                           \begin{itemize}
-                            \item $F[X]$: All polynomials in one variable $X$ over the field $F$
+                            \item $F[X]$: All polynomials in one variable $X$ over the field $F$, coefficients are elements of $F$
                             \item $F[X]_n$: Subset of $F[X]$ with $deg(g) < n$ for polynomials $g$
                             \item we map $\{0,1\}^k$ bijectively to $GF(2)[X]_k$ by the mapping $\varphi(v_{k−1}, \ldots, v_0) = v_{k−1} X^{k−1} + \ldots + v_2 X^2 + v_1 X + v_0$ (in order to be able to define a \alert{multiplication} on $\{0,1\}^k$)
                             \item \script{144}{Examples}
-                            \item \script{145}{Addition and Problem with Multiplication}
+                            \item \script{145}{Addition and Problem with Multiplication}, addition is complicated version of bitwise Xor:
                           \end{itemize}
                         \item \script{148}{Definition: Residue Class Ring Modulo a Polynomial}: $\overline{F(X)} = F[X] / g(X):=\{\overline{u(X)} \mid u(X) \in F[X]\}$
                           \begin{itemize}
                             \item \alert{residue class of $u(X)$ modulo $g(X)$}: $\overline{u(X)}:=\{v(X) \in F[X] \mid v(X) \bmod g(X)=u(X) \bmod g(X)\}$,\quad$u(X),g(X) \in F[X] \text { with } \operatorname{deg}(g(X))\geq 1$
-                            \item exactly $2^k$ different residue classes modulo $g(X)\in GF(2)[X]_{k+1}$, the classes $\overline{r(X)}$ with $deg(r(X)) < k$ in the residue class ring $GF(2)[X]/g(X)$
-                            \item \script{148}{Addition and Multiplication in $F[X]/g(x)$}: $\overline{u(X)}+\overline{v(X)}:=\overline{u(X)+v(X)}$ and $\overline{u(X)} \cdot \overline{v(X)}:=\overline{u(X) \cdot v(X)}$
+                            \item exactly $2^k$ different residue classes modulo $g(X)\in GF(2)[X]_{k+1}$, the classes $\overline{r(X)}$ with $deg(r(X)) < k$ in the residue class ring $GF(2)[X]/g(X)$ (can choose $2$ options for every coefficient $v_{k-1}$ to $v_0$)
+                            \item \script{148}{Addition and Multiplication in $F[X]/g(x)$}: $\overline{u(X)}+\overline{v(X)}:=\overline{u(X)+v(X)}$ and $\overline{u(X)} \cdot \overline{v(X)}:=\overline{u(X) \cdot v(X)}$, addition of two residue classes is just, one takes an element from the first residue class and an element from the second residue class and then applies operation and then compute the residue class what is computing the remainder modulo $g(X)$
                               \begin{itemize}
-                                \item \alert{bijective mapping} $\psi:\{0,1\}^k\rightarrow G F(2)[X] / g(X)$ with $\psi\left(v_{k-1}, \ldots, v_0\right)=\overline{v_{k-1} X^{k-1}+\cdots+v_2 X^2+v_1 X+v_0}$ and $g(X)\in GF(2)[X]_{k+1}$
-                                \item \alert{Addition} in $GF(2)[X]/g(X)$ \enquote{is} bitwise Xor on $\{0,1\}^k$
+                                \item again well-defined, because it doesn't matter what representetives one chooses
+                                \item \alert{bijective mapping} $\psi:\{0,1\}^k\rightarrow G F(2)[X] / g(X)$ with $\psi\left(v_{k-1}, \ldots, v_0\right)=\overline{v_{k-1} X^{k-1}+\cdots+v_2 X^2+v_1 X+v_0}$ and $g(X)\in GF(2)[X]_{k+1}$, now $\psi$ from before doesn't map to the polynomial ring, but to the residue class ring over polynomials, bar signifies the residue class ring
+                                \item \alert{Addition} in $GF(2)[X]/g(X)$ \enquote{remains} bitwise Xor on $\{0,1\}^k$, because if have polynomial with degree smaller than $k$ and a polynomial with degree smaller than $k$, than the division with $g(X)$ doesn't change anything, becase we already have something smaller than $k$, so the remainder is the element itself
                                 \item \script{149}{Working Multiplication in $\{0, 1\}^k$}: $\left(v_{k-1}, \ldots, v_0\right) \cdot\left(w_{k-1}, \ldots, w_0\right):=\psi^{-1}\left(\psi\left(v_{k-1}, \ldots, v_0\right) \cdot \psi\left(w_{k-1}, \ldots, w_0\right)\right)$
                                   \begin{itemize}
-                                    \item multiplication in $\{0,1\}^k$ \enquote{via} multiplication in $GF(2)[X]/g(X)$, works since $GF(2)[X]/g(X)$ is closed under multiplication
-                                    \item \script{150}{Example}
+                                    \item multiplication in $\{0,1\}^k$ \enquote{via} multiplication in $GF(2)[X]/g(X)$, works since $GF(2)[X]/g(X)$ is closed under multiplication. So product of two bitvectors defined by using the mapping into residue classes, doing the mulitplication of residue classes and then mapping back
+                                    \item \script{150}{Example}, polymomial with $X^4$ would be out of the polynomial ring with degree smaller than $k=3$, therefore consider residue classes which means one takes result and reduce by polymomial with degree $k=3$, so remainder has a degree smaller than $3$
                                   \end{itemize}
                               \end{itemize}
                             \item \script{152}{Multiplicative inverse for all elements $\ne 0$?}
                               \begin{itemize}
                                 \item for $(GF(2)[X]/g(X), +, \cdot)$ to be a field, there must be multiplicative inverse for all elements $\ne 0$
                                 \item if $(GF(2)[X]/g(X), +, \cdot)$ is a field, then also $(\{0, 1\}^k, +, \cdot)$
-                                \item $g(X)$ must be \alert{irreducable}
+                                \item $g(X)$ must be \alert{irreducable}, intuitively means that one doesn't have a decomposition of $g(X)$ into two non-trivial factors, so if one has $g(x) = u(X)\cdot v(X)$ then either $u(X)$ or $v(X)$ have to be a field element, trivial if one of them is a field element and non-trivial if one can really decopose it two non-trivial parts, it's similiar to prime numbers, if have integer number, one can also ask whether one can decompose it into the product of two non-trivial numbers or whether for each decomposition into two factors at least one for them has to be the one, if one computes the decomposition into prime factors, one only has one prime factor, one cannot decompose the prime numbers into non-trivial factorisation
                                 \item a polynomial $g(X) \in F[X]$ with $deg(g(X)) > 0$ is \alert{irreducible} \textit{iff} the following holds: If $g(X) = u(X) \cdot v(X)$ for $u(X), v(X) \in F[X]$ then $u(X) \in F$ or $v(X) \in F$
                               \end{itemize}
                           \end{itemize}
@@ -222,10 +230,11 @@
                     \resizebox{\textwidth}{!}{
                       \begin{minipage}[t]{12cm}
                         \begin{itemize}
-                          \item \script{146}{Example}
+                          \item \script{146}{Example and Check}, in normal division on would substract, but since we are doing computations based on $GF(2)$, addition and substraction are the same, doing XOR and therefore each element is it's own inverse, final result as soon as remainder is smaller than divisor. If one divides by a polynomial of degree $k$, one obtains a remainder with degree smaller than $k$
                           \item \script{147}{Lemma: Division with remainder}: For $u(X)$, $g(X) \in F[X]$ with $g(X)\ne 0$ there exist unique polynomials $q(X), r(X) \in F[X]$ with $u(X) = q(X) g(X) + r(X)$ and $deg(r(X)) < deg(g(X))$ or $r(X) = 0$
                             \begin{itemize}
                               \item $u(X) \mod g(X) = r(X)$, $u(X) \operatorname{div} g(X) = q(X)$
+                              \item $r(X)$ is a unique remainder
                             \end{itemize}
                         \end{itemize}
                       \end{minipage}

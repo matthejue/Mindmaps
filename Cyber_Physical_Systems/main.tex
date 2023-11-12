@@ -36,11 +36,42 @@
         }
       }
       child {
+        node {Program Graph
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{402}{Definition}, \alert{nodes} called \alert{locations} / lines and not states, $Cond(Var)\times Act$ is if guard is satisfied then execute the action, and executing the action, the values of variables change according to what the effect functiono has specified, somtimes action is void, effect defines how does the action change the values of the variables and therefore Effect function that assigns to each action a function that takes a value of the variables and gives them the new value of the variables
+                \begin{itemize}
+                  \item \script{412}{TS-semantics of a program graph (ff.)}, initial states are initial locations and values anything that satisify the initial condition, alpha is the alpha that labels edge in the program graph, edge in program graph drawn with hook and only go there if values of variables in state satify the guard, values of variables change according to what new valuation the effect function assigns to that action%, $\righrarrow$ is called transition function of transition system
+                \end{itemize}
+                \item \script{376}{Semantics and states}, it is not sufficient to just know what the \alert{variable} of $x$ is, because one also has to know in what \alert{location} it is to know what's the next statement one has to execute, location alone not sufficient because one could have if then else statemts and x could not have the right value
+                \item \script{379}{Example: Sequential program (f.)}, on the left side transition system, could label actions, then can label edges in transition system with action names%, in cases where one doesn't fix $x$ and $y$ one has to draw such a transiation system for every single pair of values for $x$ and $y$
+                \item \script{382}{Example: Critical resource (ff.)}, for access to resource to synchronse but not for request, variable called semaphor, if semaphor 1 can access critical section, both adhere to syme protocol, make sure that in transition system state where the location is crit1 crit2 can not be reached
+                \item \script{389}{Example: Beverage machine and \alert{number of states}}, guarded command language (GCL), environment modelled non-deterministicaly, $2$ program locations start and select and $3$ values for soda and beer
+              \end{itemize}
+              % EXAM: transform program graph into transition system
+            \end{minipage}
+          }
+        }
+        child {
+          node {Interleaving for PG
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{375}{Example}, if statement on outgoing edge at line $1$, will go from line one to the next line by executing the statement in line $1$, abstract away from the syntax of a programming language, one does not have to think about text%, resembles a little bit the notation of transiation systems
+                    , \alert{thread} 1 executing \alert{program} 1 and thread 2 executing program 2, in both cases locations are the same, but the state is different, because the value of the variable x is different. \alert{First} form the \alert{interleaving program} graph and \alert{second} from this program graph one derives / \alert{builds} the \alert{transition system}, one looks at the value of the variable $x$ according to each transition%. Is not the same as taking the transition system for both programs and taking the interleaving semantics for those
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
         node {Transition System
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \script{184}{Definition} and \script{187}{$Act$-Set}
+                \item \script{184}{Definition} and \script{187}{$Act$-Set} ($AP$, assign to each state observations that one can make in the present state)
                 \begin{itemize}
                   \item \script{147}{safety, liveness, real-time requiremens}
                   \item $!\alpha$ send signal $\alpha$
@@ -48,13 +79,40 @@
                   \item \script{199}{Behaviour al algorithm (f.)}
                   \item \script{204}{Nondeterminism} and \script{207}{Interpretation}
                   \item \script{133}{Example: Control system for traffic lights (ff.)}
-                  \item \script{154}{Example: Railroad crossing (ff.)}
+                  \item \script{154}{Example: Railroad crossing (ff.)}, it is possible that the train enters before we send the lower signal or before the phyiscal component has reached it's state here (edge lower, down) and this would mean one would end up in the state in 1 up and this is something one doesn't want
                   \item \script{191}{Example: Beverage machine}
                 \end{itemize}
               \end{itemize}
             \end{minipage}
           }
         }
+        child {
+          node {TS for special use cases
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{283}{Synchronization operator $\parallel_{Syn}$ for three or more processes (ff.)}, for the arbiter example the request did not appear in the synchronisation alphabet, even though it appeared in the shared alphabet of the two components, often request that that there may be an overlap between the action symbols of two, but never between three, don't allow that three move in parallel. \script{373}{This} is for the case where one does not specify the sychrnonsiation alphabet beforehand
+                  \item \script{328}{Sequential circuit (ff., pr.)}, always when one goes to the next state, the values of the input bits can be everything, must take account of all non-determinstic assignment of values, values of the registers are determined by this functions delta, atomic propositions play a role when we talk about properties that talk about the behaviour of the system, in terms what can be observed about the system, we don't observe value of the registers, input bits and output bits observed. Value of output written as label to the state
+                    \begin{itemize}
+                      \item \script{348}{Example}, first write all possible states (maybe good idea?), two initial states because the environment assigns Non-deterministicaly either a $0$ or $1$ to the input bit, each state will have two transitions because the $X$ can either be $0$ or $1$%, at the end flip between two states depending on input
+                      \item \script{352}{Number of states}, a \alert{state} is the sequence of all bits of values of the input and the registers, number gates don't play role
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        % child {
+        %   node {Dependant Actions
+        %     \resizebox{\textwidth}{!}{
+        %       \begin{minipage}[t]{12cm}
+        %         \begin{itemize}
+        %           \item \script{304}{Example}
+        %         \end{itemize}
+        %       \end{minipage}
+        %     }
+        %   }
+        % }
         child {
           node {Mutual exclusion with an arbiter
             \resizebox{\textwidth}{!}{
@@ -74,9 +132,9 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \script{262}{Definition (ff.)}
+                  \item \script{262}{Definition (ff.)}\quad(disjoint union: \cite{mAnswerWhatDefinition2010})
                   \begin{itemize}
-                    \item \script{224}{\enquote{Diamond}}
+                    \item \script{224}{\enquote{Diamond}}, order does not matter%, action is still enabled, because 2nd process hasn't changed it's state
                     \item \script{218}{Example: Useless lights for non-crossing streets}
                   \end{itemize}
                 \end{itemize}
@@ -91,7 +149,9 @@
                 \begin{itemize}
                   \item \script{274}{Definition (f.)}
                   \begin{itemize}
-                    \item \script{251}{Synchronization Alphabet}
+                    \item \script{251}{Synchronization Alphabet}, request not in synchronsiation alphat, no difference interleaving or synchronised transition, for synchronized parallel composition important to name $Act_1$, $Act_2$ apart, so that they don't appear in the intersection, for interleaving not important $r_1$ and $r_2$, because one doesn't talk about synchronization alphabets, based on this \script{254}{example} %(two green going away from crit1 wait2 lock and wait1 crit2 lock have to be r2, r1, left to right)
+                      , interleaving composition ignores the action labels, there is no synchronisation, that's why no label request \script{250}{here}
+                      % https://youtu.be/a8rkQRxgmfU?feature=shared&t=2270
                   \end{itemize}
                 \end{itemize}
               \end{minipage}
@@ -102,7 +162,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \script{230}{Example: Booking system in supermarket}
+                    \item \script{230}{Example: Booking system in supermarket}, in state 101 can code and print in parallel, either code and then print or print and then code, but arrive at the same state, also have diamond, have an action that concerns only $2$ of the $3$ components and not the third one and then the third one can move in parallel with the other two. We distinguish between the \alert{independant actions} that are the ones that don't appear in the shared synchronisation alphabet and the \alert{dependant} ones, they appear in the shared ones
                     % reason: not transitive relation
                   \end{itemize}
                 \end{minipage}
@@ -165,7 +225,8 @@ of structure or behaviour of a (software) system that abstracts from the datails
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
               \begin{itemize}
-                \item \script{268}{Definition}
+                \item \script{268}{Definition and Example}
+                \item \script{413}{Other Example}
               \end{itemize}
             \end{minipage}
           }
@@ -266,6 +327,12 @@ of structure or behaviour of a (software) system that abstracts from the datails
     \edge{test}{middle}
     \edge{interleavingoperator}{concurrency}
   \end{edges}
-  \annotation{test}{annotation}
+  \annotation{middle.south}{
+    \resizebox{\textwidth}{!}{
+      \begin{minipage}[t]{12cm}
+        \printbibliography[heading=none]
+      \end{minipage}
+    }
+  }
 \end{mindmap}
 \end{document}

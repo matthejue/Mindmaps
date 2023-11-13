@@ -31,6 +31,7 @@
                 \begin{itemize}
                   \item \script{175}{states, transitions, atomic propositions}
                 \end{itemize}
+              \item \script{204}{Nondeterminism} and \script{207}{Interpretation}
             \end{itemize}
           \end{minipage}
         }
@@ -38,11 +39,17 @@
       child {
         node {Program Graph
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{12cm}
+            \begin{minipage}[t]{14cm}
               \begin{itemize}
                 \item \script{402}{Definition}, \alert{nodes} called \alert{locations} / lines and not states, $Cond(Var)\times Act$ is if guard is satisfied then execute the action, and executing the action, the values of variables change according to what the effect functiono has specified, somtimes action is void, effect defines how does the action change the values of the variables and therefore Effect function that assigns to each action a function that takes a value of the variables and gives them the new value of the variables
                 \begin{itemize}
                   \item \script{412}{TS-semantics of a program graph (ff.)}, initial states are initial locations and values anything that satisify the initial condition, alpha is the alpha that labels edge in the program graph, edge in program graph drawn with hook and only go there if values of variables in state satify the guard, values of variables change according to what new valuation the effect function assigns to that action%, $\righrarrow$ is called transition function of transition system
+                  \item \script{416}{Labeling of the states}
+                  \item \script{421}{Typed variables}
+                  \item $Eval(Var)$: Set of evaluations for Var
+                  \item $Cond(Var))$: Set on the of Boolean conditions  on the variables in Var
+                  \item \script{425}{Conditions on typed variables and $\models$ relation (f.)}
+                  \item \script{431}{Effect-function for action}
                 \end{itemize}
                 \item \script{376}{Semantics and states}, it is not sufficient to just know what the \alert{variable} of $x$ is, because one also has to know in what \alert{location} it is to know what's the next statement one has to execute, location alone not sufficient because one could have if then else statemts and x could not have the right value
                 \item \script{379}{Example: Sequential program (f.)}, on the left side transition system, could label actions, then can label edges in transition system with action names%, in cases where one doesn't fix $x$ and $y$ one has to draw such a transiation system for every single pair of values for $x$ and $y$
@@ -77,7 +84,6 @@
                   \item $!\alpha$ send signal $\alpha$
                   \item $?\alpha$ receive signal $\alpha$
                   \item \script{199}{Behaviour al algorithm (f.)}
-                  \item \script{204}{Nondeterminism} and \script{207}{Interpretation}
                   \item \script{133}{Example: Control system for traffic lights (ff.)}
                   \item \script{154}{Example: Railroad crossing (ff.)}, it is possible that the train enters before we send the lower signal or before the phyiscal component has reached it's state here (edge lower, down) and this would mean one would end up in the state in 1 up and this is something one doesn't want
                   \item \script{191}{Example: Beverage machine}
@@ -336,3 +342,4 @@ of structure or behaviour of a (software) system that abstracts from the datails
   }
 \end{mindmap}
 \end{document}
+% whatever: 448

@@ -31,8 +31,7 @@
       level 2/.append style = {
         concept color=PrimaryColorDimmed,
         level distance=\leveldistance / 2,
-        % sibling angle=60,
-        sibling angle=360/\the\tikznumberofchildren,
+        sibling angle=35,
         execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
       },
       level 3/.append style = {
@@ -109,4 +108,4 @@
 % ┌───────┐
 % │ Paths │
 % └───────┘
-\newcommand{\script}[2]{\href[page=#1]{/home/areo/Documents/Studium/Semester_1_Master/Verification_of_Digital_Circuits/slides/annotated/Verification_of_Digital_Circuits_all_in_one_with_go_back.pdf}{\inlinebox{#2}}}
+\newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_1_Master/Verification_of_Digital_Circuits/slides/annotated/Verification_of_Digital_Circuits_all_in_one.pdf:#1}{\inlinebox{#2}}}

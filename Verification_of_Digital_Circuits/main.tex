@@ -16,6 +16,53 @@
     child {
       node {Basics}
       child {
+        node {Propositional Logic
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{128}{Syntax inductively and as context-free grammar}
+                \item \script{129}{Semantics}
+                \item \script{131}{Literal, Clause, Conjunctive Normal Form (CNF) (f.)}
+                \begin{itemize}
+                  \item \script{170}{Notation: Set of literals, empty clause} and \script{172}{Notation: CNF formula set of clauses, empty formula}
+                  \item \script{171}{Operations on clauses} and \script{172}{Union of two CNF formulas}
+                \end{itemize}
+                \item \script{144}{Equivalence}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Resolution
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{174}{Definition, resolvent}: $L\in C_1, \neg L \in C_2, R = (C_1 - \{L\}) \cup (C_2 - \{\neg L\})$, $R = C_1 \otimes_L C_2$
+                  \begin{itemize}
+                    \item \script{175}{Examples}
+                  \end{itemize}
+                  \item \script{176}{Resolution Lemma}: Let $F$ be a CNF formula and $R$ be the resolvent of two clauses $C_1$ and $C_2$ from $F$. Then $F$ and $F \cup \{R\}$ are equivalent: $F \equiv F \cup \{R\}$
+                  \begin{itemize}
+                    \item \script{177}{Proof}
+                  \end{itemize}
+                  \item \script{178}{$Res(F)$ etc.}
+                  \begin{itemize}
+                    \item $Res(F) = F \cup \{R \mid R \text{ is the resolvent of two clauses in } F\}$
+                    \item $Res^0(F) = F$
+                    \item $Res^{t+1}(F ) = Res(Res^t(F)) \text{ for } t \ge 0$
+                    \item $Res^*(F ) = lim_{t\ge 0}\enspace Res^t(F)$
+                  \end{itemize}
+                  \item \script{179}{Resolution Theorem}: A CNF formula F is \alert{unsatisfiable} \textit{iff} $\square \in Res^*(F)$
+                  \begin{itemize}
+                    \item \script{180}{Proof}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+      child {
         node {Important Definitions
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
@@ -316,7 +363,7 @@
                       \begin{itemize}
                         \item \script{112}{Sifting}
                         \begin{itemize}
-                          \item script{113}{Example}
+                          \item \script{113}{Example}
                           \item \script{114}{Runtime}
                         \end{itemize}
                       \end{itemize}
@@ -349,6 +396,57 @@
       }
       child {
         node {Satisfiability solvers (SAT / QBF)
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{130}{Satisfiable, Model, Unsatisfiable}
+                \item \script{133}{Satisfiability-Problem (SAT-Problem)}
+                \item \script{164}{Complexity of the SAT Problem}
+                \item \script{165}{Practice and Applications}
+                \item \script{167}{Overview on SAT Algorithms (f.)}, complete and incomplete methods
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Naive method
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item \script{181}{Algorithm}
+                  \item \script{182}{Complexity}
+                  \item \script{183}{Examples (ff.)}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {DP-Algorithm
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item based on \alert{variable elimination} method and uses a couple of optimizations:
+                  \begin{itemize}
+                    \item \script{189}{Subsumption check}: Let $C_1$ and $C_2$ be two clauses. $C_1$ subsumes $C_2$ iff all literals occurring in $C_1$ also occur in $C_2$: $C_1 \subseteq C_2$
+                      \begin{itemize}
+                        \item \alert{Idea:} To satisfy a CNF formula $F$, all clauses need to be satisfied, in particular $C_1$. Since all literals of $C_1$ are also contained in $C_2$, every satisfying assignment of $C_1$ also satisfies $C_2$. Therefore $C_2$ does not need to be considered separately and can be deleted
+                        \item \script{190}{Example}
+                      \end{itemize}
+                    \item \script{191}{Pure literal detection}: Let $F$ be a CNF-formula and $L$ a literal contained in $F$. $L$ is a \alert{pure literal} \textit{iff} $L$ is contained in $F$ either only positive or only negative, but not both $L$ and $\neg L$ appear in $F$
+                    \begin{itemize}
+                      \item \alert{Idea:} Delete from $F$ all clauses which contain a pure literal. They can be satisfied by an according assignment to $L$. This cannot prevent any other clause from being satisfied, because $\neg L$ does not appear in $F$
+                      \item \script{192}{Example}
+                    \end{itemize}
+                  \end{itemize}
+                  \item the optimizations improve the runtime behavior in practice, but not the worst case complexity of the naı̈ve method
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {DLL-Algorithm}
         }
       }
       child {
@@ -413,8 +511,70 @@
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item \alert{Equivalence Checking Method:} Convert each circuit into a datastructure that has exactly one representation of each Boolean function. Then compare these representations
+                  \item in \alert{BDD-based} equivalence checking the limiting resource is the \alert{available memory}, whereas in the \alert{SAT-based} approach this is the \alert{runtime} of the solving algorithm
                 \end{itemize}
               \end{minipage}
+            }
+          }
+          child {
+            node {SAT-based Equivalence Checking
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{135}{Approach}
+                    \item \script{139}{Miter Circuit with multiple outputs (f.)}
+                    \item usually SAT-algorithms take as input only CNF formulas; that means the Boolean function of the miter circuit must be translated into a CNF representation
+                    \item \script{162}{Example}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Conversion of a Propositional Logic Formula into CNF
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item every propositional logic formula $F$ can be translated into an equivalent CNF formula $F'$
+                      \begin{itemize}
+                        \item \script{144}{Proof}
+                      \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Satisfiability equivalent CNF (Tseitin Transformation)
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{152}{Algorithm for conversion into \alert{satisfiability equivalent} CNF}
+                        \item \script{153}{Gates}
+                        \item \script{154}{Example (ff.)}
+                        \item as long as for the CNF representation of each single gate only a constant number of clauses is required, the number of clauses in the final CNF will be linear in the number of gates in the circuit (the same holds for the size of the formula)
+                        \item \script{159}{Size comparison to equivalent CNF}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node (convcnf) {Equivalent CNF
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{145}{Algorithm for conversion into \alert{equivalent} CNF}
+                          \begin{itemize}
+                            \item \script{148}{Examples (ff.)}
+                          \end{itemize}
+                        \item \script{146}{Size of a formula}
+                          \begin{itemize}
+                            \item \script{147}{Proof}
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
             }
           }
         }

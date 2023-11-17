@@ -476,36 +476,44 @@
         child {
           node {DP-Algorithm
             \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
+              \begin{minipage}[t]{14cm}
                 \begin{itemize}
                   \item based on \alert{variable elimination} method and uses a couple of optimizations:
                   \begin{itemize}
                     \item \script{189}{Subsumption check}: Let $C_1$ and $C_2$ be two clauses. $C_1$ subsumes $C_2$ iff all literals occurring in $C_1$ also occur in $C_2$: $C_1 \subseteq C_2$
                       \begin{itemize}
-                        \item \alert{Idea:} To satisfy a CNF formula $F$, all clauses need to be satisfied, in particular $C_1$. Since all literals of $C_1$ are also contained in $C_2$, every satisfying assignment of $C_1$ also satisfies $C_2$. Therefore $C_2$ does not need to be considered separately and can be deleted
+                        \item \alert{Idea:} To satisfy a CNF formula $F$, all clauses need to be satisfied, in particular $C_1$. Since all literals of $C_1$ are also contained in $C_2$, every satisfying assignment of $C_1$ also satisfies $C_2$. Therefore $C_2$ does not need to be considered separately and can be deleted. One has to satify $C_1$ in any case for a satifying assigment, if on would satisify the additional literal in $C_2$, still the literals in $C_1$ have to be satisfied that would also satisfy $C_2$
+                        % \item the other way does not know if you satisfy C2 then you can satisfy using the additional literal and that does not help for satisfying C1 so you need to set up one more literal but that's not necessary because the one in C1 is sufficient
                         \item \script{190}{Example}
                       \end{itemize}
-                    \item \script{191}{Pure literal detection}: Let $F$ be a CNF-formula and $L$ a literal contained in $F$. $L$ is a \alert{pure literal} \textit{iff} $L$ is contained in $F$ either only positive or only negative, but not both $L$ and $\neg L$ appear in $F$
+                    \item \script{191}{Pure literal detection}: Let $F$ be a CNF-formula and $L$ a literal contained in $F$. $L$ is a \alert{pure literal} \textit{iff} $L$ is contained in $F$ either only positive or only negative, but not both $L$ and $\neg L$ appear in $F$. For satsifyiability one just needs one satisfying assignment, for making the literal true and removing clauses one will in every case find a satisfying assignment, but if one would make the literal false, there would be remaning clauses that have to be satisfied and could cause contradictions with the clauses not containing the literals. The first case would only have to satisfy the clauses without this literal, while in the second clauses the clauses without this literal and the ones that contained this literal would have to be satisfied, so one in always on the better side by choosing the literal to be true
                     \begin{itemize}
                       \item \alert{Idea:} Delete from $F$ all clauses which contain a pure literal. They can be satisfied by an according assignment to $L$. This cannot prevent any other clause from being satisfied, because $\neg L$ does not appear in $F$
                       \item \script{192}{Example}
                     \end{itemize}
-                    \item \script{193}{Variable Elimination}: The DP-algorithm applies resolution to eliminate a variable $x_i$ completely from the formula, i. e., all occurrences of $x_i$ and $\neg x_i$. The goal is to reduce the number of variables.
+                    \item these optimizations are not complete in the sense they are sufficient to solve the formula so we need one potentially expensive operation which does the the actual work and that is Variable Elimination
+                    \item \script{193}{Variable Elimination}: The DP-algorithm applies \alert{resolution} to eliminate a variable $x_i$ completely from the formula, i. e., all occurrences of $x_i$ and $\neg x_i$. The goal is to reduce the number of variables.
                       \begin{itemize}
                         \item \script{194}{$P$, $N$ and $W$}
                         \item \script{195}{$P \otimes_{x_i} N$}
                         \item \script{196}{Theorem: $F = P \cup N \cup W$ and $F' = (P \otimes_{x_i} N) \wedge W$ satisfiability equivalent}
                           \begin{itemize}
-                            \item \script{196}{Proof}
+                            \item \script{196}{Proof} and \href{/home/areo/Documents/Studium/Summaries/Verification_of_Digital_Circuits/figures/lecture06_sat_36_05.pdf}{\inlinebox{More detailed proof}}, replace the unions with and. %we still have to apply distributivity for that we take one Clause from the P one Clause from the n and take their Union so and do that with all the combinations what do we get we pick one Clause from that set that's a the same Clause as in p but x i is set to zero so x i is removed and we take one Clause from n the original clause contained the not x i with an x i to one so that's removed because it's zero that's just a resolvent 
+                              %get all these ressolvants by applying distributivity to these clauses but we have to pick one element from P one element from n and take the or that's the same as the resolving that you get by picking one clause from P one Clause from n and then resolving it on x i that removes the x i from the p Clause the not x_i from the n clause the same have the W plus all resolvents 
+                              Here we see exactly what variable elimination with the resolution does replaces x_i once by 0 once by 1 takes the or because one of the two parts has to be satisfied bring it back to CNF and you get the same as the resolution
                             \item we can reduce checking satisfiability of a formula $F$ to checking satisfiability of $F'$. $F'$ does not contain the variable $x_i$ anymore. If $F'$ is satisfiable, this also holds for $F$ and vice-versa
+                            \item will sooner or later terminate because you only have a finite number of variables
                           \end{itemize}
                         \item choose an appropriate variable $x_i$, perform resolution between all pairs of clauses which contain $x_i$ and $\neg x_i$, resp., and replace the original clauses (containing $x_i$ or $\neg x_i$) by the resolvents
                         \item usually the number of resolvents is larger than the number of original clauses which are replaced, i. e., the formula grows in size during variable elimination
-                        \item \script{201}{Example}
+                        \item \script{201}{Example}, tautology ignored, at the end one can eliminate X3 if one wants that gives the empty Clause so the formula was unsatisfiable
                       \end{itemize}                             
-                    \item \script{202}{Davis-Putnam Algorithm}
+                    \item \script{202}{Davis-Putnam Algorithm}, unit Clause: we delete all the Clauses that that contain L because that s these are satisfied and from the remaining Clauses that unit resolution step is we resolve all the Clauses that contain not L with the unit Clause that removes the not L from all clauses then we call DP on the simplified formula so delete all satisfied Clauses delete all unsatisfied literals and call it recursively. If all doesn't help one elimantes a variable in the last step so you cannot get an infinite sequence of DP calls
                   \end{itemize}
-                  \item the optimizations improve the runtime behavior in practice, but not the worst case complexity of the naı̈ve method
+                  \item the optimizations improve the runtime behavior in practice, but not the worst case complexity of the naı̈ve method, based on resolution plus a few optimizations%, they improve the running time in practice and the memory consumption but not in the worst case
+                  \begin{itemize}
+                    \item the main problem here is memory consumption so generating all these resolvents is costly
+                  \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -518,14 +526,13 @@
                 \begin{itemize}
                   \item circumvents the memory problems of resolution-based techniques through a distinction of cases, which leads to \alert{depth-first search}
                   \item \alert{Idea:} If a CNF formula $F$ is satisfiable, then for a variable $x_i$ either $x_i = 1$ or $x_i = 0$ must hold $\Rightarrow$ try both cases one after the other
-                  \item \script{206}{Algorithm}:
+                  \item \script{206}{DLL-Algorithm}:
                   \begin{itemize}
-                    \item Assign $L$ to $1$
-                    \item Delete all clauses containing $L$
-                    \item Delete all occurrences of $\neg L$
-                    \item \alert{Unit Clause}: A clause consisting of a single literal $L$ is called a unit clause. $L$ is the corresponding unit literal
+                    \item Assign $L$ to $1$. Delete all clauses containing $L$. Delete all occurrences of $\neg L$ % At the end we first set the literal to True, try to solve the formula we get by that, if it's satisfiable we are finished otherwise we flip the value to false try again and if that's also unsatisfiable the formula is unsatisfiable 
+                    \item \alert{Unit Clause}: A clause consisting of a single literal $L$ is called a unit clause. $L$ is the corresponding unit literal. For $P \otimes_{x_i} N$ with $N =\emptyset$ the result is $\emptyset$, because the condition in the set definition of the $P \otimes_{x_i} N$ is never satisfied, so one gets an empty formula
                     \item \script{208}{Example (ff.)}
                     \item \script{226}{Summary}
+                    \item the running time is still exponential because in the worst case we just have to to try all the assignments in N variables and there are 2^n assignments. \underline{Memory Problem:} When we have to do backtracking we need to go back to the old formula so you have to keep the old copy and you create a new formula with the modifications. With many variables the depth of the DFS Tree can be the number of variables
                   \end{itemize}
                 \end{itemize}
               \end{minipage}
@@ -537,6 +544,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{14cm}
                 \begin{itemize}
+                  \item \underline{Improvements:} we do we actually modify the formula we can just say oh that clause is satisfied that's one bit of information and we can keep an assignment of the variables then you can just look it up if a variable is unsatisfied or not that's one major Improvement and of course we can carefully select which literal to assign we can learn from the conflicts so we can find out what are the reasons why the formula is unsatisfied not always all decisions are responsible for a unsatisfied formula but only a subset and we want to find out which subset 
                   \item \script{237}{Basic techniques of today’s SAT solvers}
                     \begin{itemize}
                       \item preprocessing
@@ -694,7 +702,7 @@
           child {
             node {Improvements and Differences to DLL
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
+                \begin{minipage}[t]{14cm}
                   \begin{itemize}
                     \item \script{224}{Improvements to DLL}
                     \item \underline{Differences:}

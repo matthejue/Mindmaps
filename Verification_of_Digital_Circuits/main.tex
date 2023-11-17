@@ -16,6 +16,33 @@
     child {
       node {Basics}
       child {
+        node {Complexity classes
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \alert{P}: Problems that can be solved in Polynomial time in the size of the input
+                \begin{itemize}
+                  \item sorting ($n\cdot log(n)$), deciding if sequence is sortedv, shortest path in graph, matrix mulitplication (naively in $n^3$)
+                \end{itemize}
+                \item \alert{NP}: $N$ for nondeterministic, can guess a solution (yes answer) and verify efficiently that it is a solution
+                \begin{itemize}
+                  \item \alert{complete:} It's the hardest in it's class, if can solve SAT, one can solve all the problems in $NP$
+                  \begin{itemize}
+                    \item traveling salesman, bring in database in certain normal form, knapsack
+                    \item noone has ever found an algorithm that solves them efficiently without guessing, all have exponential runtime and also noone was able to proof that there's no efficient algorithm
+                  \end{itemize}
+                \end{itemize}
+                \item \alert{co-NP}: Can't guess the yes answer, one can guess the no
+                \begin{itemize}
+                  \item noone was able to proof whether NP and co-NP are the same, so one has to disitingiush them
+                  \item equivalence checking for combinational circuits is \alert{co-NP complete}, can find an input that deals different outputs, therefore it's NOT equivalent
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+      }
+      child {
         node {Propositional Logic
           \resizebox{\textwidth}{!}{
             \begin{minipage}[t]{12cm}
@@ -24,7 +51,7 @@
                 \item \script{129}{Semantics}
                 \item \script{131}{Literal, Clause, Conjunctive Normal Form (CNF) (f.)}
                 \begin{itemize}
-                  \item \script{170}{Notation: Set of literals, empty clause} and \script{172}{Notation: CNF formula set of clauses, empty formula}
+                  \item \script{170}{Notation: Set of literals, empty clause}, order of literals does not matter and duplicates do not matter, empty set has role like the neutral element of disjunction, thus the empty clause is \alert{unsatisfiable} by definition \script{172}{Notation: CNF formula set of clauses, empty formula}, empty formula is a set of clauses, if one adds an empty set of clauses nothing changes, the clauses are connected with AND, one has connect $1$ with AND such that nothing changes, thus a empty formula is \alert{satisfiayble} by definition
                   \item \script{171}{Operations on clauses} and \script{172}{Union of two CNF formulas}
                 \end{itemize}
                 \item \script{144}{Equivalence}
@@ -35,15 +62,15 @@
         child {
           node {Resolution
             \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
+              \begin{minipage}[t]{14cm}
                 \begin{itemize}
                   \item \script{174}{Definition, resolvent}: $L\in C_1, \neg L \in C_2, R = (C_1 - \{L\}) \cup (C_2 - \{\neg L\})$, $R = C_1 \otimes_L C_2$
                   \begin{itemize}
-                    \item \script{175}{Examples}
+                    \item \script{175}{Examples}, can delete all tautology clauses, because they are useless, at the bottom example for empty clause
                   \end{itemize}
-                  \item \script{176}{Resolution Lemma}: Let $F$ be a CNF formula and $R$ be the resolvent of two clauses $C_1$ and $C_2$ from $F$. Then $F$ and $F \cup \{R\}$ are equivalent: $F \equiv F \cup \{R\}$
+                  \item \script{176}{Resolution Lemma}: Let $F$ be a CNF formula and $R$ be the resolvent of two clauses $C_1$ and $C_2$ from $F$. Then $F$ and $F \cup \{R\}$ are \alert{(logically) equivalent}: $F \equiv F \cup \{R\}$
                   \begin{itemize}
-                    \item \script{177}{Proof}
+                    \item \script{177}{Proof}, \underline{one direction}: trivial, if assignment satisfies all clauses including the resolvent, then all the clauses without the resolvent are satisfied, \underline{other direction}: formula f satisfiable and show that also resolvent is satisfied, A a satisficing assignment of formula f, A is a model of f, if $L$ is true then $C_1$ was satisfied becaus of that, $C_2$ is also satisfied, otherwise the formula would not be satisfied, but it's not satisfied because of $L$, because the $\neg L$ is false, so $C_2$ without the $L$ has to contain another literal that is satisfied and that Literal is also contained in the resolvent and therefore the resolvent is satisfied. The other case wors exactly the same way%, $L$ is assigne to false, then $C_2$ is satisfied because of the $\neg L$, but $C_1$ cannot be satisfied because of the $L$, so $C_1$ has to contain another satisfying literal and that other satisfying literal ends up in the resolvent and satisfies it
                   \end{itemize}
                   \item \script{178}{$Res(F)$ etc.}
                   \begin{itemize}
@@ -51,10 +78,15 @@
                     \item $Res^0(F) = F$
                     \item $Res^{t+1}(F ) = Res(Res^t(F)) \text{ for } t \ge 0$
                     \item $Res^*(F ) = lim_{t\ge 0}\enspace Res^t(F)$
+                    \item do as long as fomrula changes, only finitely many clauses, so it has to terminate
                   \end{itemize}
                   \item \script{179}{Resolution Theorem}: A CNF formula F is \alert{unsatisfiable} \textit{iff} $\square \in Res^*(F)$
                   \begin{itemize}
-                    \item \script{180}{Proof}
+                    \item \script{180}{Proof}, proof two things: 
+                    \begin{itemize}
+                      \item \underline{if one can dervive the empty clause the formula is unsatisfied}: Only proof one half, if one can derive the empty clause, the formula is unsatisfied, resolution lemma: can add resolvents to the formula and it's logicaly equivalent, the empty clause is a resolvent, so one can add the empty clause to the formula and every formula that contains the empty clause is unsatisfied, the formula with the resolvent is unsatisfieable, therefore the original formula is unsatisfiable
+                      \item \underline{if formula is unsatisfied, one can derive the empty clause:} later eliminate variables using resolution you canot only add resolvents but you can if you do it right get rid of variables using resolution and the result is a equally satisfiable formula. You just apply resolution to eliminate all the variables and you know the result is equisatisfiable to original If one eliminates all the variables there are only two cases of formulas without variables the empty formula satisfiable or the formula that only contains the empty clause that's unsatisfiable so that means when you eliminate all the variables you end up either with empty formula empty clause and you know the outcome is equally satisfible to the original formula that means when the outcome is the empty Formula the original formula was satisfiable if the outcome is the empty close then the original formula was unsatisfiable whenever it's unsatisfied we have to get the empty Clause because it can't get the empty formula 
+                    \end{itemize}
                   \end{itemize}
                 \end{itemize}
               \end{minipage}
@@ -401,9 +433,26 @@
               \begin{itemize}
                 \item \script{130}{Satisfiable, Model, Unsatisfiable}
                 \item \script{133}{Satisfiability-Problem (SAT-Problem)}
-                \item \script{164}{Complexity of the SAT Problem}
-                \item \script{165}{Practice and Applications}
-                \item \script{167}{Overview on SAT Algorithms (f.)}, complete and incomplete methods
+                \item \script{164}{Complexity of the SAT Problem}, NP-complete
+                % what does NP-Complete mean summary: https://youtu.be/doDYnn9sXWg?feature=shared&t=2286
+                % complexity of equivalence checking: https://youtu.be/doDYnn9sXWg?feature=shared&t=2586
+                % restrictions ot SAT: https://youtu.be/doDYnn9sXWg?feature=shared&t=2715
+                % horn formulas: https://youtu.be/doDYnn9sXWg?feature=shared&t=2761
+                \item \script{165}{Practice and Applications}, in worst case all algorithm have exponential runtime, but worst case and pratical case are different
+                \item \script{167}{Overview on SAT Algorithms (f.)}
+                \begin{itemize}
+                  \item \script{167}{complete:} run until either they have found a solution or they can prove there's none, decide all formulas if one has enough time, always terminate and always give right answer
+                  \item \script{168}{incomplete methods:} typically can only find satisfying assignments, if one has a formula with many satisfying assignments, if one has a unsatisfiable formula, they will not terminate, they just look for solutions that modify assignment check again etc.
+                  \begin{itemize}
+                    \item scheduling problem, need to find good order, one knows that there's an order that works 
+                    \item in verification they play no role at all, because verification problems either unsatifiying assignments or a few not working corner cases and then incomplete methods are not good at all, either they don't terminate or need very long time to find one of these rare satisfying assignments. Therefore in verification typically only have these complete methods that systematically search for satisfying assignments and can also prove that the formula is unsatisfiable
+                    \item typically verification is applied if you cannot find any wrong answers anymore by just doing simulation
+                  \end{itemize}
+                \end{itemize}
+                \item \underline{different kinds of SAT:} $k$-SAT, every clause exactly $k$-literals, $3$-SAT, $2$-SAT (efficiently solvable)
+                \begin{itemize}
+                  \item \alert{Horn-Formulas:} arbitrary length but contain at most on positive literal (or other way round at most one negative literal), relevance in Prolog, Prolog Statements are Horn clauses, clause with only one literal (if 0 and 1 at the same time, then unsatisfiable), otherwise end up with formula where all clauses have at least length $2$, that means every clause contains a negative literal, if there are no unit clauses, the formula can be satisfied by simply setting all remaining variables negative, can be done efficiently without backtracking
+                \end{itemize}
               \end{itemize}
             \end{minipage}
           }
@@ -414,8 +463,11 @@
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item \script{181}{Algorithm}
-                  \item \script{182}{Complexity}
-                  \item \script{183}{Examples (ff.)}
+                  \item \script{182}{Complexity}, is limited by the number of different possible clauses (cnf formula is a \alert{set} of \alert{clauses}, not of maxterms, so there are $3$ states and not only $2$)
+                  \item \script{183}{Examples (ff.)}, resulting tautology $(x_2, \neg x_2)$ of first and fourth can be ignored
+                  \begin{itemize}
+                    \item we do not have to resolve two Clauses from F again because we already did that so we always take either two Clauses from the new ones orthird one Clause from F and one new Clause 
+                  \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -438,6 +490,20 @@
                       \item \alert{Idea:} Delete from $F$ all clauses which contain a pure literal. They can be satisfied by an according assignment to $L$. This cannot prevent any other clause from being satisfied, because $\neg L$ does not appear in $F$
                       \item \script{192}{Example}
                     \end{itemize}
+                    \item \script{193}{Variable Elimination}: The DP-algorithm applies resolution to eliminate a variable $x_i$ completely from the formula, i. e., all occurrences of $x_i$ and $\neg x_i$. The goal is to reduce the number of variables.
+                      \begin{itemize}
+                        \item \script{194}{$P$, $N$ and $W$}
+                        \item \script{195}{$P \otimes_{x_i} N$}
+                        \item \script{196}{Theorem: $F = P \cup N \cup W$ and $F' = (P \otimes_{x_i} N) \wedge W$ satisfiability equivalent}
+                          \begin{itemize}
+                            \item \script{196}{Proof}
+                            \item we can reduce checking satisfiability of a formula $F$ to checking satisfiability of $F'$. $F'$ does not contain the variable $x_i$ anymore. If $F'$ is satisfiable, this also holds for $F$ and vice-versa
+                          \end{itemize}
+                        \item choose an appropriate variable $x_i$, perform resolution between all pairs of clauses which contain $x_i$ and $\neg x_i$, resp., and replace the original clauses (containing $x_i$ or $\neg x_i$) by the resolvents
+                        \item usually the number of resolvents is larger than the number of original clauses which are replaced, i. e., the formula grows in size during variable elimination
+                        \item \script{201}{Example}
+                      \end{itemize}                             
+                    \item \script{202}{Davis-Putnam Algorithm}
                   \end{itemize}
                   \item the optimizations improve the runtime behavior in practice, but not the worst case complexity of the naı̈ve method
                 \end{itemize}
@@ -446,7 +512,228 @@
           }
         }
         child {
-          node {DLL-Algorithm}
+          node {DLL/DPLL-Algorithm
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item circumvents the memory problems of resolution-based techniques through a distinction of cases, which leads to \alert{depth-first search}
+                  \item \alert{Idea:} If a CNF formula $F$ is satisfiable, then for a variable $x_i$ either $x_i = 1$ or $x_i = 0$ must hold $\Rightarrow$ try both cases one after the other
+                  \item \script{206}{Algorithm}:
+                  \begin{itemize}
+                    \item Assign $L$ to $1$
+                    \item Delete all clauses containing $L$
+                    \item Delete all occurrences of $\neg L$
+                    \item \alert{Unit Clause}: A clause consisting of a single literal $L$ is called a unit clause. $L$ is the corresponding unit literal
+                    \item \script{208}{Example (ff.)}
+                    \item \script{226}{Summary}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+        child {
+          node {Modern SAT-Algorithms
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{14cm}
+                \begin{itemize}
+                  \item \script{237}{Basic techniques of today’s SAT solvers}
+                    \begin{itemize}
+                      \item preprocessing
+                      \item alternation between ...
+                        \begin{itemize}
+                          \item choose the next decision variable, decide its value
+                          \item boolean Constraint Propagation / Unit Propagation
+                          \item if applicable, conflict analysis and backtracking
+                        \end{itemize}
+                      \item at some fixed points of the search process
+                        \begin{itemize}
+                          \item Unlearning (some conflict clauses)
+                          \item Restarts
+                        \end{itemize}
+                    \end{itemize}
+                  \item \script{238}{Algorithm}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Preprocessing
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{240}{in the algorithm}
+                    \item \script{241}{goal, practical observations, find good compromise}
+                    \item \script{242}{preprocessing techniques}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Unit Propagation
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item if omitted, then immediately performed during solving process
+                      \item \underline{procedure:}
+                      \begin{itemize}
+                        \item identify unit clauses in the CNF
+                        \item assign units, simplify
+                        \item ... until the CNF is free from unit clauses
+                      \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Unit Propagation Lookahead (UPLA)
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item Fix a variable $x_i$ to $0$, check implications; then change its value to $x_i = 1$, check implications. Simplify the formula exploiting the \script{244}{consequences}
+                      \item \script{245}{Advantages and Disadvantages}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Self-subsuming resolution
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item Appply resolution to two clauses and resolution result subsumes one of the clauses. Saves literals
+                      \item \script{246}{Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Elimination by Resolution% / clause distribution ?
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \alert{variable elimination} applied to a variable of the CNF formula
+                      \item it is applied only if it leads to a simplification of the formula
+                      \item \script{247}{Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Variable elimination by substitution
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item if clauses represent a gate like in the Tseitin transformation, these clauses can be removed and then every occurence of the variable that corresponds to the output of the gate has to be replaced by the other side of the equation for the remaning clauses
+                      \item potentially saves variables, literals and clauses, it is applied only if it leads to a simplification of the formula
+                      \item \script{248}{Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Forward subsumption
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item Test if a clause generated during one of the other preprocessing techniques is subsumed by one clause of the initial formula
+                      \item Remove all the clauses subsumed
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Backward subsumption
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item Test if a clause generated during one of the other preprocessing techniques subsumes one (or more) clauses of the initial formula
+                      \item Remove all the clauses subsumed
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Blocked Clause Elimination
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item let $C$ be a clause and $\ell \in C$ a literal, $C$ is blocked by $\ell$ \texttt{iff} for all clauses $D$ with $\neg\ell \in D$ holds: $C \otimes_{\ell} D$ is a tautology
+                      \item \alert{Blocked clauses} can be deleted without changing satisfiability
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Equivalent Literals
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item take only the binary clauses $\{\ell, \kappa\}$
+                      \item create the \alert{binary clause graph} $G = (V, E)$ with
+                      \begin{itemize}
+                        \item $V = \{x, \neg x \mid x \text{ variable}\}$
+                        \item $E = \{(\neg \ell, \kappa), (\neg \kappa, \ell) \mid \{\ell, \kappa\} \in \varphi\}$
+                      \end{itemize}
+                      \item all literals in strongly connected components can be replaced by one representative
+                      \item if there is a path from $\neg \ell$ to $\ell$ for some literal $\ell$, we can replace $\ell$ by $1$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+          child {
+            node {Improvements and Differences to DLL
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{224}{Improvements to DLL}
+                    \item \underline{Differences:}
+                      \begin{itemize}
+                        \item \script{228}{Difference $1$: Recursion and modification of formula (f.)}
+                          \begin{itemize}
+                            \item \underline{DLL}:
+                              \begin{itemize}
+                                \item recursive procedure
+                                \item for the transition from the recursion level $r$ to the level $r + 1$ the given formula is modified (clauses being satisfied are removed and \enquote{unsatisfied literals} are erased)
+                                \item for backtracking from level $r + 1$ to $r$ the original (sub)formula at level $r$ must be restored
+                              \end{itemize}
+                            \item \underline{Modern SAT}:
+                              \begin{itemize}
+                                \item non-recursive procedure 
+                                \item apart from special cases, during the search process neither satisfied clauses nor resolved literals are removed from the CNF formula no removal from CNF formula
+                                \item usually the \alert{pure literal} rule is not applied. \alert{Subsumption check} is applied by modern SAT-algorithms only during preprocessing. \alert{Variable elimination} is applied by modern SAT during preprocessing. Here elimination of a variable is only done if it reduces the formula size (or only slightly increases it)
+                              \end{itemize}
+                          \end{itemize}
+                        \item \script{230}{Difference $2$: Unit clause definition (f.)}
+                          \begin{itemize}
+                            \item In DLL a clause is made of exactly one literal. In modern procedures also the clauses where all the literals but one are assigned with negated polarity are denoted with the term unit clause. \script{231}{Example of implication}
+                            \item \script{232}{Boolean Constraint Propagation (BCP) or Unit Propagation and example}: Determining all the implications forced by the assignment of a variable
+                          \end{itemize}
+                        \item \script{233}{Difference $3$: Contradiction / conflict (f.)}
+                          \begin{itemize}
+                            \item empty clause for DLL, Unsatisfied clause for modern SAT algorithms. \script{233}{Example}
+                          \end{itemize}
+                        \item \script{234}{Difference $4$: Conflict analysis and backtracking: (f.)}
+                          \begin{itemize}
+                            \item \underline{DLL:} The combination of the previously done decisions will always be considered as the origin of a conflict. Backtracking (recursive back tracing) to the recursion level of the last \enquote{branching} in which one case for a variable assignment has not been explored yet. If none exists the given CNF formula is unsatisfiable
+                            \item \underline{Modern SAT:} Complex and deep analysis of the conflict setting, because not all the previously made \enquote{branchings} must be involved in the current conflict Derivation via resolution and learning of a \alert{conflict clause} for the given formula. The conflict clause avoids to run into the identical conflict again by including all the literals that are responsible (because of their assignment) for the current contradiction. Backtrack with the help of the conflict clause or output UNSATISFIABLE
+                          \end{itemize}
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
         }
       }
       child {
@@ -511,7 +798,10 @@
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
                   \item \alert{Equivalence Checking Method:} Convert each circuit into a datastructure that has exactly one representation of each Boolean function. Then compare these representations
-                  \item in \alert{BDD-based} equivalence checking the limiting resource is the \alert{available memory}, whereas in the \alert{SAT-based} approach this is the \alert{runtime} of the solving algorithm
+                  \item in \alert{BDD-based} equivalence checking the limiting resource is the \alert{available memory}, whereas in the \alert{SAT-based} approach this is the \alert{runtime} (exponential in the size of the formula) of the solving algorithm
+                  \begin{itemize}
+                    \item size of the formula will be linear in the size of the circuit, so if one can get the circuit into memory, one can also get the formula into memory
+                  \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -522,7 +812,7 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \script{135}{Approach}
-                    \item \script{139}{Miter Circuit with multiple outputs (f.)}
+                    \item \script{139}{Miter Circuit with multiple outputs (f.)}, convert Miter Circuit into propositional logic formula with the property of being satisfied if the miter circuit outputs a $1$ and the Miter circuit has the property that it's output is $1$ for a certain input assignment if the circuits behave differently
                     \item usually SAT-algorithms take as input only CNF formulas; that means the Boolean function of the miter circuit must be translated into a CNF representation
                     \item \script{162}{Example}
                   \end{itemize}
@@ -545,13 +835,16 @@
               child {
                 node {Satisfiability equivalent CNF (Tseitin Transformation)
                   \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{12cm}
+                    \begin{minipage}[t]{14cm}
                       \begin{itemize}
+                        \item it doesn't work good to turn formula into equivalent CNF formula, instead turn miter circuit into formula that is satisfiable \textit{iff} the original two circuits are not equivalent. Don't need the same output for all possible assignments, only need satisfiable \textit{iff} not equivalent. Not logically equivalent to normal CNF, 
+                          \item one gives up \alert{logical equivalence} and only requires \alert{equisatisfiability} because because in the formula $X\oplus Y$ you cannot assign the output variable $Z$ in the wrong way, but in the formula $Z \equiv X \oplus Y$ you can, because of the additional variables that would not be assigned in the original formula
+                        \item define for $F$ an \alert{equisatisfiable} CNF $F'$ that is satisfiable \textit{iff} $F$ is satisfiable. Every line in the circuit has variable, not only the outputs % ist satisfiable gdw. andere seite....
                         \item \script{152}{Algorithm for conversion into \alert{satisfiability equivalent} CNF}
                         \item \script{153}{Gates}
-                        \item \script{154}{Example (ff.)}
+                        \item \script{155}{Example (ff.)}, satisfying assignments of the formula are exactly the consistents assignments of the circuit, all the output has to be derived using the gate function from the gate, that does not mean one gets a $1$ at the output \script{157}{Example for reason for unit clause in the last line}, all clauses satisfied but output is $0$, can only satisfy this clause if assign output of the circuit to $1$, first 3 lines say that we need a consistent assignment, the output of each gate has to match the gate function applied to the inputs and last line says output must be $1$, this formula is satisfiable \textit{iff} there's a input assignment that makes the output $1$
                         \item as long as for the CNF representation of each single gate only a constant number of clauses is required, the number of clauses in the final CNF will be linear in the number of gates in the circuit (the same holds for the size of the formula)
-                        \item \script{159}{Size comparison to equivalent CNF}
+                        \item \script{159}{Size comparison to equivalent CNF}, linear in the size of the circuit
                       \end{itemize}
                     \end{minipage}
                   }
@@ -560,13 +853,13 @@
               child {
                 node (convcnf) {Equivalent CNF
                   \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{12cm}
+                    \begin{minipage}[t]{14cm}
                       \begin{itemize}
-                        \item \script{145}{Algorithm for conversion into \alert{equivalent} CNF}
+                        \item \script{145}{Algorithm for conversion into \alert{equivalent} CNF}, move nots inside the formula until they only appear directly in front of variables, elimnate double negation, move ands outside with distributivity
                           \begin{itemize}
-                            \item \script{148}{Examples (ff.)}
+                            \item \script{148}{Examples (ff.)}, already shortest CNF for the formulas
                           \end{itemize}
-                        \item \script{146}{Size of a formula}
+                        \item \script{146}{Size of a formula}, in wost case formula increases exponentialy in size
                           \begin{itemize}
                             \item \script{147}{Proof}
                           \end{itemize}

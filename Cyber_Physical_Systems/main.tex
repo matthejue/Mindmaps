@@ -22,6 +22,58 @@
       }
     }
     child {
+      node {Linear-time properties (LT properties)
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{16cm}
+            \begin{itemize}
+              \item \script{577}{Definition}, LT property so is set of traces (language of all traces allowed in the system),infinite words are infinite sequences of sets of atomic propositions that are traces, because we have this assumption that everything is infinite E is then a subset of the power set of AP to the Omega
+            \item \script{577}{Example: Mutex (ff.)}, often do some sort of quantification over the natural numbers i (index) and can think of this as we say something about \alert{all points of time} because the trace the sequence models the flow of time we start with the labeling of the initial state and then as the transition system makes steps we get new sets of atomic propositions that describe how the system develops over time. An equivalent way would be to say there does not exist a point of time where both are in the critical section. An atomic proposition can be element or not but it cannot be equal $A_i$, we look at the atomic propositions and LT properties completely separately from the transition system right we have just fixed the set of atomic propositions and I mean our implementation may satisfy something like it's never case that wait crit1 crit2 hold at the same time but when we're specifying the property we don't think about these kinds of things, $\emptyset\{wait _1, crit_1\} \not\in MUTEX$ also possible, even though it makes no sense
+              \item \script{587}{Satisfaction relation (f.)}, the transition system satisfies the property if and only if every initial state of the transition system satisfies the property%, this is what a model checker checks in the end, a test case only tests one, here it is all possible infinetely many traces
+              \begin{itemize}
+                \item \script{589}{same for individual states}: all the traces that start in this state if this set is a subset of e then the state satisfies the LT property 
+              \end{itemize}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+      child {
+        node {Liveness
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item \script{584}{Definition}: e.g. not waiting forever to get into ciritical section, shouldn't say every process that requests enters because this is talking about actions we need to talk about the atomic propositions wait and crit and so we can define this livess or starvation freedom property as the set of all infinite words over the power set of the atomic propositions such that we say that if process one is waiting infinitely often then process one should also be in the critical section infinitely often because if you're waitiing often and you don't only get to enter finitely many times, then at some point you have to wait forever and the same of course holds for the second process that one shouldn't wait forever either okay and right in the same way, parenthesis around the premise, otherwise it's a bit ambigous
+                \begin{itemize}
+                  \item examples for trace in live: $(\{wait_1\}, \{crit_1\}, \{wait_2\}, \{crit_2\})^{\omega}\in LIVE$, $\emptyset^{\omega} \in LIVE$, $\{crit_1\}\in LIVE$, if noones wait infintely often we don't care what else happens, $(\{wait_1\}, \{crit_1\}, \{wait_2\})^{\omega}\in LIVE$
+                \end{itemize}
+                \item \script{601}{Example: Mutex}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Mutual Exclusion
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{14cm}
+                \begin{itemize}
+                  \item \script{601}{Problem with Liveness (ff.), } in this Trace we have infinitely often wait 2 right this these three occurrences are repeated infinitely often but we don't have any occurrence of crit 2 so in particular we don't have infinitely many occurrences of crit 2 and this is problematic here right we have the second process has requested but it never gets to actually enter the critical section, many people will actually still use semaphores for Mutual exclusion because in practice is it's probably it's quite unlikely that this happens and towards the end of the lecture we will see the concept of fairness so that's sort of an additional assumption that we put to rule out this
+                  \item \script{604}{Peterson algorithm (ff.)}: $b_1$ and $b_2$ are booleans, $X$ identifies one of the two processes
+                    \begin{itemize}
+                      \item  P1 when it requests sets B1 to true or to one so B1 sort of means process one would like to be in the critical section and it also sets the variable X to two and P2 does something symmetric afterwards 
+                      \item now process one if it wants to enter it can only enter if this guard is fulfilled right it can only enter if either X is equal to one but we just set it to two so something has to happen for that to hold or B2 is false not b2 holds so if the other process doesn't want to enter then of course I can just enter that's the easy case um but if this if B1 is set to true then we have to wait until X is equal to one 
+                      \item similar to a common situation two people who want to exit. in a few minutes we all want to exit through this door but we don't want to run into each other so there's a mutual exclusion only one person can be in the door at the same time and let's say two people are heading to the door and one person arrives like a split second before the other person because we're all very polite people the first person will say no please you go first and then the second person to arrive will also be very polite and say no please you will here first you go first and then the first person will go through right and this is sort of what happens here when the process one sets X to two it says so process two you can go first and if process two arrives second it will undo this change it will set X to one again and then this is satisfied so the first process can actually go through the door and as it leaves the door it makes space for the second process to also enter the door or enter the critical section here
+                      \item \script{611}{Example, $b_1 = 0, b_2 = 0$}, initially they have not requested because if we do that then we have this nice thing that whenever we are in ncrit one then B1 is equal to zero and whenever we are in wait one or crit one B1 is equal to one and the same here for the second process, in this transition system I didn't write the values of B1 and B2 because else unreadable and it's okay because whenever I'm in wait one I know that B1 must be equal to one and if I'm in ncrit 2 then that means B2 is equal to zero right
+                        \begin{itemize}
+                          \item also satisfies live one way we can do that is we can look at all the states where wait one holds and I mean we know that when we are in one of these states infinitely often we should make sure that we're also infinitely often in a state with crit one and we can do that if we make sure that after we're such in such a state after a finite number of steps we're going to be in a state with crit one again because then if one happens infinitely often the other one also has to happen infinitely often and that's the case% because right for this state here we know that immediately in the next state process one is in the critical section so it's fine for this state we have two options either crit one holds immediately in the next step or after two steps also still fine and then we can sort of propagate that back right so this state is also okay because even though wait one holds in the next step we are in a state where we know that soon after crit one will hold so in particular after at most three steps crit one will hold and then for this state after at most four steps crit one will hold so if we're in one of these states then in one of the yellow States infinitely often we must be in one of the red States infinitely often as well
+                        \end{itemize}
+                    \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+        }
+      }
+    }
+    child {
       node {Modelling Concurrent Systems
         \resizebox{\textwidth}{!}{
           \begin{minipage}[t]{12cm}
@@ -53,7 +105,7 @@
                   \item $Eval(Var)$: Set of evaluations for Var
                   \item $Cond(Var))$: Set on the of Boolean conditions  on the variables in Var
                   \item \script{425}{Conditions on typed variables and $\models$ relation (f.)}
-                  \item \script{431}{Effect-function for action}
+                  \item \script{431}{Effect-function for action}, \href{/home/areo/Documents/Studium/Summaries/Cyber_Physical_Systems/figures/effect_function.pdf}{\inlinebox{More details about Effect-function}}, for many statements it was always quite obvious from the name of this action what the effect was meant to be but you will also see in the exercises some actions where this is not clear from the name and so we have to define the effects separately
                 \end{itemize}
                 \item \script{376}{Semantics and states}, it is not sufficient to just know what the \alert{variable} of $x$ is, because one also has to know in what \alert{location} it is to know what's the next statement one has to execute, location alone not sufficient because one could have if then else statemts and x could not have the right value
                 \item \script{379}{Example: Sequential program (f.)}, on the left side transition system, could label actions, then can label edges in transition system with action names%, in cases where one doesn't fix $x$ and $y$ one has to draw such a transiation system for every single pair of values for $x$ and $y$
@@ -71,10 +123,15 @@
                 \begin{itemize}
                   \item \script{375}{Example}, if statement on outgoing edge at line $1$, will go from line one to the next line by executing the statement in line $1$, abstract away from the syntax of a programming language, one does not have to think about text%, resembles a little bit the notation of transiation systems
                     , \alert{thread} 1 executing \alert{program} 1 and thread 2 executing program 2, in both cases locations are the same, but the state is different, because the value of the variable x is different. \alert{First} form the \alert{interleaving program} graph and \alert{second} from this program graph one derives / \alert{builds} the \alert{transition system}, one looks at the value of the variable $x$ according to each transition%. Is not the same as taking the transition system for both programs and taking the interleaving semantics for those
-                \item \script{443}{Independant and dependant actions, interleaving and competition}
-                \begin{itemize}
-                  \item \script{448}{Example with graph and disabled actions (ff.)}
-                \end{itemize}
+                  \item \script{443}{Independant and dependant actions, interleaving and competition}
+                    \begin{itemize}
+                      \item \script{448}{Example with graph and disabled actions (ff.)}
+                    \end{itemize}
+                    \item looks very similar to the inter leaving of transition systems but it is a program graph so we call these nodes here locations rather than States and they still have these guards which is something that we don't have in transition systems
+                    \begin{itemize}
+                      \item take the transition system by adding the valuations of variables 
+                      \item what could also happen is that of course we have the combination of two locations with different variable valuations appearing in the transition system right so for instance if I didn't fix that Y is equal to 1 in the beginning I would also have an initial state for ncrit 1 ncrit 2 and y is equal to 2 right this would be another initial State and then we would have a number of other states that are reachable from that 
+                    \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -101,11 +158,80 @@
           }
         }
         child {
+          node {State-based view
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{14cm}
+                \begin{itemize}
+                  \item abstraction fom actions, ignore action labels on transitions, only useful for modelling formalisms, ignore details, more generel view of states, therefore use \alert{atomic propositions} 
+                  \item \underline{reasons:} 
+                  \begin{itemize}
+                    \item many states don't need to distinguish all of them, can happen that 2 states with the same atomic propositions labeled and treated the same
+                    \item want to do this modeling of the transition system or more generally the design of the actual system independently and separately from the rec requirements. We want to be able to write down the requirements and maybe even formalize them before we even start designing the system. % Don't know what the states of this whe transition system are going to look like so I'm going to just fix some Atomic propositions that I think are important to the requirements that I care about and then I can specify the system using only those atomic propositions and later the designer of the system for example can read my specification and think about how to implement it but all these implementation details like actions and the 
+                      structure of States um is something I don't want to care about when I'm just specifying the behavior
+                    % \item the set of atomic propositions that we choose always depends on what properties we are interested in
+                  \end{itemize}
+                  \item \script{527}{Overview (ff.)}, if we have any terminal State then there's no outgoing transition what we're going to do is we're going to add a new state this is not a state that is previously part of the transition system and we're going to add one new atomic proposition and this state is going to have a self loop and any terminal state just gets a transition to the state so now we no longer have terminal states and it's in a sense equivalent right we can just we have to adapt our specifications a bit so for instance instead of saying something always holds we maybe have to say it always holds unless the system has terminated and for that we can use this atomic proposition or if we just want to rule out terminal states we can also just add the specification that the system never terminates right it depends a bit on which system we are going to look at. It's also not expensive
+                  \item \script{532}{Example: Communicating traffic lights}, labeling is as one would expect, this transition system has just one execution when we start in initial state we have only one transition we can take and then only one transition we can take after that it's a completely deterministic and then we also must have only one trace
+                  \item \script{535}{Example: Independent traffic lights (pr.)}, many possibilities we can for example do this loop n number of times and then do this loop forever right that gives you for every natural number a different trace so we already have definitely infinitely many
+                  \item \script{537}{Example: Mutual exclusion with semaphore (ff.)}, infinitely many choices
+                  \item \script{554}{Example: Four States (ff.)}, infinitely many paths, always when we have these like two different Loops that are nested into each other we often have infinitely many right we can for example take this Loop on the left side a couple of times and then loop around or we can do the the bigger Loop a couple of times, only one Trace we always switch between a blue and a yellow State and it doesn't matter which path we take, \underline{later:} now we have the same graph but because we suddenly distinguish between these two states the number of traces explodes from one to infinitely many
+                  \item \script{561}{Example: From Programgraph (ff.)}, when we have a transition system derived from a program graph often times we take Atomic propositions that look like conditions over the variables and then we need to check how we label those States so we just check the variable assignment satisfies which of the atomic propositions it satisfies, \underline{later:} right hand side we may have infinitely many paths but because those states are labeled with the same set we have only one trace the empty set and then infinitely often the set even y
+                  \item when ones talks about traces always look what are the atomic propositions and and how is the transition system labeled, 
+                \end{itemize}
+              \end{minipage}
+            }
+          }
+          child {
+            node {Paths
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \alert{Path}: An initial maximal path fragment
+                      \begin{itemize}
+                        %   \item paths should always be as long as they possibly can. self Loop we would only call this a path if we take it infinitely often and so path either has to be infinite or it has to end in a state like where there is no next step to take 
+                        \item \script{516}{Path Fragment}: Sequence of states arising from the projection of an execution fragment to the states and can be infinite or finite, or \underline{informal:} execution fragment where one has removed all the action labels
+                          \begin{itemize}
+                            \item \alert{Execution}: An initial maximal execution fragment
+                              \begin{itemize}
+                                \item \script{516}{Execution Fragment}: Sequence of consecutive transitions
+                                \item \alert{initial:} If $s_0 \in S_0$ , if it starts in a initial state
+                                \item \alert{maximal:} If infinite or ending in a terminal state
+                              \end{itemize}
+                          \end{itemize}
+                        \item \script{510}{Paths of a Transition system (f.)}
+                        \item $Paths(s_i)$: Paths of a particular state
+                        \item $Paths_{fin}(s_i)$: Set of finite path fragments starting in $s_i$, e.g. take self loop any finite number of times, so infinitely many finite path fragments
+                        \item $Paths_{fin}(\mathcal{T})$: Finite path fragments of the whole transition system
+                      \end{itemize}         
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Traces
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{523}{Trace (pr.)}: Take a path of a transition system and replace every state by the label of the state, the set of atomic propositions
+                    \begin{itemize}
+                      \item $\operatorname{Traces}(\mathcal{T}) \stackrel{\text { def }}{=}\{\operatorname{trace}(\pi): \pi \in \operatorname{Paths}(\mathcal{T})\} \subseteq\left(2^{A P}\right)^\omega$, the traces of a transition system are the traces of each path% and the paths are the initial maximal path fragments
+                      \item $\operatorname{Traces}_{\text {fin }}(\mathcal{T}) \stackrel{\text { def }}{=}\left\{\operatorname{trace}(\widehat{\pi}): \widehat{\pi} \in \operatorname{Paths}_{\text {fin }}(\mathcal{T})\right\} \subseteq\left(2^{A P}\right)^*$
+                      \item often look at TS's that \alert{don't have terminal states}, because if we don't have terminal states then all the executions are infinite we can never get stuck in the terminal State or the paths are infinite and all the traces are infinite and that's just otherwise we often have to make this case distinctionif the trace is finite then this and if the trace is infinite we have to do something else. If we make this assumption then the traces are exactly a subset of this set on the right 
+                    \end{itemize}
+                    \item \script{521}{Example}, two paths depending on what initial state ones chooses
+                    \item several executions can have the same trace
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+        }
+        child {
           node {TS for special use cases
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \script{283}{Synchronization operator $\parallel_{Syn}$ for three or more processes (ff.)}, for the arbiter example the request did not appear in the synchronisation alphabet, even though it appeared in the shared alphabet of the two components, often request that that there may be an overlap between the action symbols of two, but never between three, don't allow that three move in parallel. \script{373}{This} is for the case where one does not specify the sychrnonsiation alphabet beforehand
                   \item \script{328}{Sequential circuit (ff., pr.)}, always when one goes to the next state, the values of the input bits can be everything, must take account of all non-determinstic assignment of values, values of the registers are determined by this functions delta, atomic propositions play a role when we talk about properties that talk about the behaviour of the system, in terms what can be observed about the system, we don't observe value of the registers, input bits and output bits observed. Value of output written as label to the state
                     \begin{itemize}
                       \item \script{348}{Example}, first write all possible states (maybe good idea?), two initial states because the environment assigns Non-deterministicaly either a $0$ or $1$ to the input bit, each state will have two transitions because the $X$ can either be $0$ or $1$%, at the end flip between two states depending on input
@@ -128,63 +254,6 @@
         %   }
         % }
         child {
-          node {Mutual exclusion with an arbiter
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item \script{250}{Protocol with Arbiter}
-                  \begin{itemize}
-                    \item \script{250}{Example: Mutual exclusion with an arbiter (ff.)}
-                  \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node (interleavingoperator) {Interleaving operator $\parallel\;\!\!\!\mid$
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item \script{262}{Definition (ff.)}\quad(disjoint union: \cite{mAnswerWhatDefinition2010})
-                  \begin{itemize}
-                    \item \script{224}{\enquote{Diamond}}, order does not matter%, action is still enabled, because 2nd process hasn't changed it's state
-                    \item \script{218}{Example: Useless lights for non-crossing streets}
-                  \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-        }
-        child {
-          node {Synchronization operator $\parallel$
-            \resizebox{\textwidth}{!}{
-              \begin{minipage}[t]{12cm}
-                \begin{itemize}
-                  \item \script{274}{Definition (f.)}
-                  \begin{itemize}
-                    \item \script{251}{Synchronization Alphabet}, request not in synchronsiation alphat, no difference interleaving or synchronised transition, for synchronized parallel composition important to name $Act_1$, $Act_2$ apart, so that they don't appear in the intersection, for interleaving not important $r_1$ and $r_2$, because one doesn't talk about synchronization alphabets, based on this \script{254}{example} %(two green going away from crit1 wait2 lock and wait1 crit2 lock have to be r2, r1, left to right)
-                      , interleaving composition ignores the action labels, there is no synchronisation, that's why no label request \script{250}{here}
-                      % https://youtu.be/a8rkQRxgmfU?feature=shared&t=2270
-                  \end{itemize}
-                \end{itemize}
-              \end{minipage}
-            }
-          }
-          child {
-            node (concurrency) {Concurrency between synchronized components
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item \script{230}{Example: Booking system in supermarket}, in state 101 can code and print in parallel, either code and then print or print and then code, but arrive at the same state, also have diamond, have an action that concerns only $2$ of the $3$ components and not the third one and then the third one can move in parallel with the other two. We distinguish between the \alert{independant actions} that are the ones that don't appear in the shared synchronisation alphabet and the \alert{dependant} ones, they appear in the shared ones
-                    % reason: not transitive relation
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-          }
-        }
-        child {
           node {Composite Transition System
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
@@ -192,6 +261,68 @@
                   \item \script{156}{Example: Railroad crossing (ff.)}
                 \end{itemize}
               \end{minipage}
+            }
+          }
+          child {
+            node (interleavingoperator) {Interleaving operator $\parallel\;\!\!\!\mid$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{262}{Definition (ff.)}\quad(disjoint union: \cite{mAnswerWhatDefinition2010})
+                      \begin{itemize}
+                        \item \script{224}{\enquote{Diamond}}, order does not matter%, action is still enabled, because 2nd process hasn't changed it's state
+                        \item \script{218}{Example: Useless lights for non-crossing streets}
+                      \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Synchronization operator $\parallel$
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{274}{Definition (f.)}, if $\alpha \in Act_i \setminus Syn$ then it's just like the interleaving operator
+                      \begin{itemize}
+                        \item \script{251}{Synchronization Alphabet}, request not in synchronsiation alphat, no difference interleaving or synchronised transition, for synchronized parallel composition important to name $Act_1$, $Act_2$ apart, so that they don't appear in the intersection, for interleaving not important $r_1$ and $r_2$, because one doesn't talk about synchronization alphabets, based on this \script{254}{example} %(two green going away from crit1 wait2 lock and wait1 crit2 lock have to be r2, r1, left to right)
+                          , interleaving composition ignores the action labels, there is no synchronisation, that's why no label request \script{250}{here}
+                          % https://youtu.be/a8rkQRxgmfU?feature=shared&t=2270
+                      \end{itemize}
+                    \item \script{283}{Synchronization operator $\parallel_{Syn}$ for three or more processes (ff.)}, for the arbiter example the request did not appear in the synchronisation alphabet, even though it appeared in the shared alphabet of the two components, often request that that there may be an overlap between the action symbols of two, but never between three, don't allow that three move in parallel. \script{373}{This} is for the case where one does not specify the sychrnonsiation alphabet beforehand
+                    \begin{itemize}
+                      \item $Syn$ always has to be a subset of the actions of the two transition systems so we did a little trick here and said we define this in this context to just mean we synchronize here only over the actions that are in syn and are in T1 as well as in T2 
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node (arbiter) {Mutual exclusion with an arbiter
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{250}{Protocol with Arbiter}
+                        \begin{itemize}
+                          \item \script{250}{Example: Mutual exclusion with an arbiter (ff.)}, take the interleaving of the two transition systems, so they don't synchronise with each other
+                          \item if Y is initially equal to 1 then only one of one process can be in the it's critical location if Y is initially equal to two then at most two processes can be in their critical location
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node (concurrency) {Concurrency between synchronized components
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{230}{Example: Booking system in supermarket}, in state 101 can code and print in parallel, either code and then print or print and then code, but arrive at the same state, also have diamond, have an action that concerns only $2$ of the $3$ components and not the third one and then the third one can move in parallel with the other two. We distinguish between the \alert{independant actions} that are the ones that don't appear in the shared synchronisation alphabet and the \alert{dependant} ones, they appear in the shared ones
+                        % reason: not transitive relation
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
             }
           }
         }
@@ -340,6 +471,7 @@ of structure or behaviour of a (software) system that abstracts from the datails
   \begin{edges}
     \edge{test}{middle}
     \edge{interleavingoperator}{concurrency}
+    \edge{interleavingoperator}{arbiter}
   \end{edges}
   \annotation{middle.south}{
     \resizebox{\textwidth}{!}{

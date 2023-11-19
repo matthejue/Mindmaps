@@ -544,7 +544,6 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{14cm}
                 \begin{itemize}
-                  \item \underline{Improvements:} we do we actually modify the formula we can just say oh that clause is satisfied that's one bit of information and we can keep an assignment of the variables then you can just look it up if a variable is unsatisfied or not that's one major Improvement and of course we can carefully select which literal to assign we can learn from the conflicts so we can find out what are the reasons why the formula is unsatisfied not always all decisions are responsible for a unsatisfied formula but only a subset and we want to find out which subset 
                   \item \script{237}{Basic techniques of today’s SAT solvers}
                     \begin{itemize}
                       \item preprocessing
@@ -561,6 +560,10 @@
                         \end{itemize}
                     \end{itemize}
                   \item \script{238}{Algorithm}
+                  \begin{itemize}
+                    \item BCP processes all the implications and detects a conflict if we have a conflict we run conflict analysis we get back a backtrack level if the backtrack level is $0$ we know the formula is unsatisfiable if it's not zero but greater than zero then we can do backtracking and finally if the decision juristic has nothing to do anymore, meaning all the variables are assigned then the formula is satisfiable so that also means we do not check if the formula is already satisfied that might happen before all the variables are assigned but a solver does not detect that it just runs until all variables are assigned and if no conflict has happened the formula satisfied why is that the case because it's cheaper to just run until all variables are assigned then detecting if the formula satisfied so nobody checks if the formula satisfied because that requires running overall clauses and in between you sometimes do just unlearning and restarts and so on
+                    \item want to get a satisfying assignment at the end if you did pre-processing then you have to be careful the satisfying assignment you get from the solver is the satisfying assignment of the formula after pre-processing but you don't want the satisfying assignment of the formula after pre-processing but before pre-processing because you don't mind what the solver does of the formula and it can happen that the satisfying assignment you get does not work for the original formula, you might have to add a few more assignments because you're eliminated variables it might also happen that you have to modify that assignment because you deleted some clauses that you were allowed to delete but you get a wrong assignment then and you have to correct it
+                  \end{itemize}
                 \end{itemize}
               \end{minipage}
             }
@@ -587,7 +590,8 @@
                       \begin{itemize}
                         \item identify unit clauses in the CNF
                         \item assign units, simplify
-                        \item ... until the CNF is free from unit clauses
+                        \item if you get an empty clause formula is unsatisfiable otherwise in the end the CNF does not contain any unique clauses
+                        % \item ... until the CNF is free from unit clauses
                       \end{itemize}
                     \end{itemize}
                   \end{minipage}
@@ -599,7 +603,8 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item Fix a variable $x_i$ to $0$, check implications; then change its value to $x_i = 1$, check implications. Simplify the formula exploiting the \script{244}{consequences}
+                      \item fix a variable $x_i$ to $0$, check implications; then change its value to $x_i = 1$, check implications. Simplify the formula exploiting the \script{244}{consequences}, and also $(x_i = 0 \rightarrow x_j = 1) \wedge (x_i = 1 \rightarrow x_j = 0) \Rightarrow x_i \equiv \neg x_j$
+                      \item ones pretends to have a unit clause and checks what happens, all you need for that is already implemented in the solver the only thing you need is BCP and you need BCP anyway what's the drawback Now it only works if you have clauses of length $2$ if all clauses in the formula have a length longer than two by assigning one variable you don't get any implications, it requires binary clauses and it only makes sense to apply UPLA to variables that appear in binary claes the rest can just be skipped. And because some of the variables might be missing after applying UPLA you have to do something after solving the formula namely add more variable assignments you have to keep track if variables are equivalent or so
                       \item \script{245}{Advantages and Disadvantages}
                     \end{itemize}
                   \end{minipage}
@@ -611,20 +616,23 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item Appply resolution to two clauses and resolution result subsumes one of the clauses. Saves literals
+                      % \item apply resolution to two clauses and resolution result subsumes one of the clauses
+                      \item apply resolution such that the outcome is a subset of one of the operands. why can we replace it you can always add the resolvend to the clause then apply the subsumption checking and that deletes one of the two so it's just replace and outcome is a logically equivalent formula 
+. Saves literals
                       \item \script{246}{Example}
                     \end{itemize}
                   \end{minipage}
                 }
               }
-            }
+            }% / clause distribution ?
             child {
-              node {Elimination by Resolution% / clause distribution ?
+              node {Elimination by Resolution
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item \alert{variable elimination} applied to a variable of the CNF formula
+                      \item \alert{variable elimination} applied to a variable of the CNF formula, seen in DP
                       \item it is applied only if it leads to a simplification of the formula
+                      \item so deleting Clause is not always good of course it makes the formula shorter but later during the solution process the solver goes the hard way to derive conflict clauses they are just resolved and added so it's not always good to delete clauses also it makes the formula shorter if you could add the good conflict clause in the beginning the solver would be much faster so it's not clear what helps
                       \item \script{247}{Example}
                     \end{itemize}
                   \end{minipage}
@@ -645,24 +653,18 @@
               }
             }
             child {
-              node {Forward subsumption
+              node {Forward subsumption and Backward subsumption
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
+                  \begin{minipage}[t]{16cm}
                     \begin{itemize}
-                      \item Test if a clause generated during one of the other preprocessing techniques is subsumed by one clause of the initial formula
-                      \item Remove all the clauses subsumed
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Backward subsumption
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item Test if a clause generated during one of the other preprocessing techniques subsumes one (or more) clauses of the initial formula
-                      \item Remove all the clauses subsumed
+                      \item \alert{Forward Subsumption:} Test if a clause generated during one of the other preprocessing techniques is subsumed by one clause of the initial formula. Remove all the clauses subsumed
+                      \item \alert{Backward Subsumption:} Test if a clause generated during one of the other preprocessing techniques subsumes one (or more) clauses of the initial formula. Remove all the clauses subsumed
+                      \item in principle you do subsumption checking whenever you add a clause to the clause database there's function add_clause that gets a new clause and adds it to the list of all clauses whenever you do that you can check for subsumption and there are two variables as the new Clause is the short one the subsuming clause the subset is newly added and the long one is already in the clause database or the other way around you have a short clause in the clause database and you want to add a new clause which is a super set of the one you already have in the first case when you add the short clause you can replace the long with the short in the second case where you add the long one you can just ignore it
+                      \item forward subsumption is you add the long one backward subsumption is you add the short one now why do we distinguish it really here because the running time of the check is completely different 
+                      \item backwards subsumption now one of the data structures in the preprocessor is typically the occurrence list so for every lital you have a list of all clauses which this lital occures so you have a list of X1 list for not X1 list for X2 for not X2 and so on so when you add the short clause how can you find all candidates that could be subsumed by the new clause if you add X1 X2 
+                      \item all candidates that can be subsumed by X1 X2 contain X1 and they also contain an X2 so you can look either at the occurrence list of X1 or at the occurrence list of X2 and you just pick the shorter one you have to only run over the shortest occurrences that's quite efficient 
+                      \item forward subsumption: you have the long clause, the only thing you know is the short clause contains at least one of the literals of the long clause so you have to run over all occurrence to find all possible candidates and running over all occurrences is worse than just running off the best one shortest one and therefore forward subsumption is expensive backward subsumption is quite cheap 
+                      \item backward subsumption is done all the time forward subsumption from time to time only 
                     \end{itemize}
                   \end{minipage}
                 }
@@ -700,11 +702,28 @@
             }
           }
           child {
-            node {Improvements and Differences to DLL
+            node {Improvements
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{16cm}
+                  \begin{itemize}
+                    \item \script{224}{Improvements to DLL}: We do we actually modify the formula we can just say oh that clause is satisfied that's one bit of information and we can keep an assignment of the variables then you can just look it up if a variable is unsatisfied or not that's one major Improvement and of course we can carefully select which literal to assign we can learn from the conflicts so we can find out what are the reasons why the formula is unsatisfied not always all decisions are responsible for a unsatisfied formula but only a subset and we want to find out which subset 
+                    \begin{itemize}
+                      \item \alert{pre-processing} before you solve the formula the goal is simplify a formula simplify means get rid of some of the clauses get rid of some of the variables shorten some clauses just simplify 
+                      \item \alert{decision heuristics} pick a good variable and a good value for that variable when you make the decision. It's obvious that a good decision juristic helps on satisfiable formulas it also helps on unsatisfiable formulas because the sooner you run into a conflict the smaller part of the search Tree is that you have to look at if you run directly into conflict there's no reason to continue at this point you just try the other part so the sooner you run into conflict the better
+                      \item \alert{BCP} is just the process of finding all unit clauses in principle it's trivial run over the formula check each clause is there only one unassigned literal left, it's not easy to do it fast looking at all clauses is too expensive, BCP is how do you do it as fast as possible. BCP is find all unit clauses as fast as possible
+                      \item \alert{conflict analysis} happens when you run it a conflict conflict is you have an unsatisfied clause an empty clause then you want to find out which were the assignments that triggered this conflict which are responsible for getting an empty clause and you use that for backtracking that information there are two variants of backtracking one is called chronological backtracking and the other one non-chronological \alert{chronological} is what you have seen go back to the last decision and keep it. \alert{Non-chronological} backtracking tries to undo as many decisions as possible such as you just resolve the conflict and sometimes you can undo more assignments that's called non-chronological backtracking and the only information is that you need is which is the reason for the conflict yeah unlearning so conflict analysis also adds an additional clause to the formula that says not that bad assignment again so for instance if the if you found out in conflict analysis that assigning x 1 to true and X2 to false are the reason for the conflict so whenever you assign X1 to 1 and X2 to false you will get a conflict so you never want to do that again how can you say that oh you say either X 1 is false or X 2 is true so you have to Clause not X1 or X2 whenever you try to get that bad assignment again when you assign X1 to one then that clause becomes a unit clause and says oh X2 has to be one that's a conflict clause and you add it to the Clause database in order to prevent the solve from running into the same conflict again so the problem is you run into millions of conflicts during the solution process and you often learn more clauses than your original formula had and you have to store all of that in memory you have to process them all during bollean constraint propagation so the more you of these conflict Clauses you have the more work you have to put into BCP and there is a tradeoff between many conflict Clauses which hope hopefully trigger some implication from time to time and slowing down easy and therefore from time to time you just delete conflict clauses to reduce the memory overhead and to prevent BCP from slowing out that's \alert{unlearning conflict clauses}
+                      \item \alert{restarts} something strange you just start from scratch again so it can happen that the solver gets stuck into in some bad part of the search space so you have a tree you learn conflict and conflict and conflict and conflict but you make little progress so you only learn really long little useful conflict clauses and then it makes sense to say oh let's start again you keep the good conflict clause that you have learned you keep the information the decision heuristics has learned about good variables and you start from scretch and it seems to help so the hope is the information that you have learned drives you into a different part of the search space not into the bad one when you get stuck but you first look at the different part and there you learn additional conflict losses and they might be useful to handle this difficult part of the search space and therefore you make these restarts from time to time you have to be bit careful if you restart too often you can end up doing restarts in a cycle so you restart you solve a little bit you restart you solve a little bit again you restart you solve a little bit again and so on you can get stuck so typically you choose the interval between two restarts such that it diverges it gets longer longer you make few and fewer restarts 
+                    \end{itemize}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Differences to DLL
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{14cm}
-                  \begin{itemize}
-                    \item \script{224}{Improvements to DLL}
+                  \begin{itemize} 
                     \item \underline{Differences:}
                       \begin{itemize}
                         \item \script{228}{Difference $1$: Recursion and modification of formula (f.)}
@@ -719,7 +738,8 @@
                               \begin{itemize}
                                 \item non-recursive procedure 
                                 \item apart from special cases, during the search process neither satisfied clauses nor resolved literals are removed from the CNF formula no removal from CNF formula
-                                \item usually the \alert{pure literal} rule is not applied. \alert{Subsumption check} is applied by modern SAT-algorithms only during preprocessing. \alert{Variable elimination} is applied by modern SAT during preprocessing. Here elimination of a variable is only done if it reduces the formula size (or only slightly increases it)
+                                \item usually the \alert{pure literal} rule is not applied, overhead for detecting pure literals is larger than what it helps. Pure literals can occur after preprocessing when you assign variables and you can ignore the satisfied clauses and in the remaining not yet satisfied sources there can be pure literals. \alert{Subsumption check} is applied by modern SAT-algorithms only during preprocessing. \alert{Variable elimination} is applied by modern SAT during preprocessing. Here elimination of a variable is only done if it reduces the formula size (or only slightly increases it)
+                                \item we never modify clauses except in pre-processing
                               \end{itemize}
                           \end{itemize}
                         \item \script{230}{Difference $2$: Unit clause definition (f.)}
@@ -729,12 +749,12 @@
                           \end{itemize}
                         \item \script{233}{Difference $3$: Contradiction / conflict (f.)}
                           \begin{itemize}
-                            \item empty clause for DLL, Unsatisfied clause for modern SAT algorithms. \script{233}{Example}
+                            \item empty clause for DLL, Unsatisfied clause for modern SAT algorithms in which all literals are assigned to false. \script{233}{Example}
                           \end{itemize}
                         \item \script{234}{Difference $4$: Conflict analysis and backtracking: (f.)}
                           \begin{itemize}
-                            \item \underline{DLL:} The combination of the previously done decisions will always be considered as the origin of a conflict. Backtracking (recursive back tracing) to the recursion level of the last \enquote{branching} in which one case for a variable assignment has not been explored yet. If none exists the given CNF formula is unsatisfiable
-                            \item \underline{Modern SAT:} Complex and deep analysis of the conflict setting, because not all the previously made \enquote{branchings} must be involved in the current conflict Derivation via resolution and learning of a \alert{conflict clause} for the given formula. The conflict clause avoids to run into the identical conflict again by including all the literals that are responsible (because of their assignment) for the current contradiction. Backtrack with the help of the conflict clause or output UNSATISFIABLE
+                            \item \underline{DLL:} The combination of the previously done decisions will always be considered as the origin of a conflict. Backtracking (recursive back tracing) to the recursion level of the last \enquote{branching} in which one case for a variable assignment has not been explored yet. If none exists the given CNF formula is unsatisfiable. Backtracking always goes back one decision level
+                            \item \underline{Modern SAT:} Complex and deep analysis of the conflict setting, because not all the previously made \enquote{branchings} must be involved in the current conflict Derivation via resolution and learning of a \alert{conflict clause} for the given formula. The conflict clause avoids to run into the identical conflict again by including all the literals that are responsible (because of their assignment) for the current contradiction. Backtrack with the help of the conflict clause or output UNSATISFIABLE. What are the actual assignments that led to the conflict and rule out the ones that are not involved in the conflict
                           \end{itemize}
                       \end{itemize}
                   \end{itemize}

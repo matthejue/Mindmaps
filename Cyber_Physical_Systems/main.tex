@@ -28,9 +28,9 @@
             \begin{itemize}
               \item \script{577}{Definition}, LT property so is set of traces (language of all traces allowed in the system),infinite words are infinite sequences of sets of atomic propositions that are traces, because we have this assumption that everything is infinite E is then a subset of the power set of AP to the Omega
             \item \script{577}{Example: Mutex (ff.)}, often do some sort of quantification over the natural numbers i (index) and can think of this as we say something about \alert{all points of time} because the trace the sequence models the flow of time we start with the labeling of the initial state and then as the transition system makes steps we get new sets of atomic propositions that describe how the system develops over time. An equivalent way would be to say there does not exist a point of time where both are in the critical section. An atomic proposition can be element or not but it cannot be equal $A_i$, we look at the atomic propositions and LT properties completely separately from the transition system right we have just fixed the set of atomic propositions and I mean our implementation may satisfy something like it's never case that wait crit1 crit2 hold at the same time but when we're specifying the property we don't think about these kinds of things, $\emptyset\{wait _1, crit_1\} \not\in MUTEX$ also possible, even though it makes no sense
-              \item \script{587}{Satisfaction relation (f.)}, the transition system satisfies the property if and only if every initial state of the transition system satisfies the property%, this is what a model checker checks in the end, a test case only tests one, here it is all possible infinetely many traces
+              \item \script{587}{Satisfaction relation (f.)}: The transition system satisfies the property if and only if every initial state of the transition system satisfies the property%, this is what a model checker checks in the end, a test case only tests one, here it is all possible infinetely many traces
               \begin{itemize}
-                \item \script{589}{same for individual states}: all the traces that start in this state if this set is a subset of e then the state satisfies the LT property 
+                \item \script{589}{Same for individual states}: All the traces that start in this state if this set is a subset of e then the state satisfies the LT property 
               \end{itemize}
             \end{itemize}
           \end{minipage}
@@ -45,7 +45,6 @@
                 \begin{itemize}
                   \item examples for trace in live: $(\{wait_1\}, \{crit_1\}, \{wait_2\}, \{crit_2\})^{\omega}\in LIVE$, $\emptyset^{\omega} \in LIVE$, $\{crit_1\}\in LIVE$, if noones wait infintely often we don't care what else happens, $(\{wait_1\}, \{crit_1\}, \{wait_2\})^{\omega}\in LIVE$
                 \end{itemize}
-                \item \script{601}{Example: Mutex}
               \end{itemize}
             \end{minipage}
           }
@@ -98,18 +97,17 @@
             \begin{minipage}[t]{14cm}
               \begin{itemize}
                 \item \script{402}{Definition}, \alert{nodes} called \alert{locations} / lines and not states, $Cond(Var)\times Act$ is if guard is satisfied then execute the action, and executing the action, the values of variables change according to what the effect functiono has specified, somtimes action is void, effect defines how does the action change the values of the variables and therefore Effect function that assigns to each action a function that takes a value of the variables and gives them the new value of the variables
-                \begin{itemize}
-                  \item \script{412}{TS-semantics of a program graph (ff.)}, initial states are initial locations and values anything that satisify the initial condition, alpha is the alpha that labels edge in the program graph, edge in program graph drawn with hook and only go there if values of variables in state satify the guard, values of variables change according to what new valuation the effect function assigns to that action%, $\righrarrow$ is called transition function of transition system
-                  \item \script{416}{Labeling of the states}
-                  \item \script{421}{Typed variables}
-                  \item $Eval(Var)$: Set of evaluations for Var
-                  \item $Cond(Var))$: Set on the of Boolean conditions  on the variables in Var
-                  \item \script{425}{Conditions on typed variables and $\models$ relation (f.)}
-                  \item \script{431}{Effect-function for action}, \href{/home/areo/Documents/Studium/Summaries/Cyber_Physical_Systems/figures/effect_function.pdf}{\inlinebox{More details about Effect-function}}, for many statements it was always quite obvious from the name of this action what the effect was meant to be but you will also see in the exercises some actions where this is not clear from the name and so we have to define the effects separately
-                \end{itemize}
                 \item \script{376}{Semantics and states}, it is not sufficient to just know what the \alert{variable} of $x$ is, because one also has to know in what \alert{location} it is to know what's the next statement one has to execute, location alone not sufficient because one could have if then else statemts and x could not have the right value
+                  \item \script{412}{TS-semantics of a program graph (ff.)}, initial states are initial locations and values anything that satisify the initial condition, alpha is the alpha that labels edge in the program graph, edge in program graph drawn with hook and only go there if values of variables in state satify the guard, values of variables change according to what new valuation the effect function assigns to that action%, $\righrarrow$ is called transition function of transition system
+                    \begin{itemize}
+                      \item \script{416}{Labeling of the states}
+                      \item \script{421}{Typed variables}
+                      \item $Eval(Var)$: Set of evaluations for Var
+                      \item $Cond(Var))$: Set on the of Boolean conditions  on the variables in Var
+                      \item \script{425}{Conditions on typed variables and $\models$ relation (f.)}
+                      \item \script{431}{Effect-function for action}, \scripttwo{1}{More details about Effect-function}, for many statements it was always quite obvious from the name of this action what the effect was meant to be but you will also see in the exercises some actions where this is not clear from the name and so we have to define the effects separately
+                    \end{itemize}
                 \item \script{379}{Example: Sequential program (f.)}, on the left side transition system, could label actions, then can label edges in transition system with action names%, in cases where one doesn't fix $x$ and $y$ one has to draw such a transiation system for every single pair of values for $x$ and $y$
-                \item \script{382}{Example: Critical resource (ff.)}, for access to resource to synchronse but not for request, variable called semaphor, if semaphor 1 can access critical section, both adhere to syme protocol, make sure that in transition system state where the location is crit1 crit2 can not be reached
                 \item \script{389}{Example: Beverage machine and \alert{number of states}}, guarded command language (GCL), environment modelled non-deterministicaly, $2$ program locations start and select and $3$ values for soda and beer
               \end{itemize}
               % EXAM: transform program graph into transition system
@@ -132,6 +130,7 @@
                       \item take the transition system by adding the valuations of variables 
                       \item what could also happen is that of course we have the combination of two locations with different variable valuations appearing in the transition system right so for instance if I didn't fix that Y is equal to 1 in the beginning I would also have an initial state for ncrit 1 ncrit 2 and y is equal to 2 right this would be another initial State and then we would have a number of other states that are reachable from that 
                     \end{itemize}
+                  \item \script{382}{Example: Critical resource (ff.)}, for access to resource to synchronse but not for request, variable called semaphor, if semaphor 1 can access critical section, both adhere to syme protocol, make sure that in transition system state where the location is crit1 crit2 can not be reached
                 \end{itemize}
               \end{minipage}
             }
@@ -279,7 +278,7 @@
             }
           }
           child {
-            node {Synchronization operator $\parallel$
+            node {Synchronization operator \& parallel operator $\parallel$
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
@@ -289,10 +288,11 @@
                           , interleaving composition ignores the action labels, there is no synchronisation, that's why no label request \script{250}{here}
                           % https://youtu.be/a8rkQRxgmfU?feature=shared&t=2270
                       \end{itemize}
-                    \item \script{283}{Synchronization operator $\parallel_{Syn}$ for three or more processes (ff.)}, for the arbiter example the request did not appear in the synchronisation alphabet, even though it appeared in the shared alphabet of the two components, often request that that there may be an overlap between the action symbols of two, but never between three, don't allow that three move in parallel. \script{373}{This} is for the case where one does not specify the sychrnonsiation alphabet beforehand
+                    \item \script{283}{Synchronization operator $\parallel_{Syn}$ for three or more processes (f.)}, for the arbiter example the request did not appear in the synchronisation alphabet, even though it appeared in the shared alphabet of the two components, often request that that there may be an overlap between the action symbols of two, but never between three, don't allow that three move in parallel. \script{373}{This} is for the case where one does not specify the sychrnonsiation alphabet beforehand
                     \begin{itemize}
                       \item $Syn$ always has to be a subset of the actions of the two transition systems so we did a little trick here and said we define this in this context to just mean we synchronize here only over the actions that are in syn and are in T1 as well as in T2 
                     \end{itemize}
+                    \item \script{285}{Parallel operator $\parallel$ (for three or more processes)}
                   \end{itemize}
                 \end{minipage}
               }

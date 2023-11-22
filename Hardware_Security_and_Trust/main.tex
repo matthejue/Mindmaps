@@ -216,13 +216,62 @@
                             \item \script{152}{Multiplicative inverse for all elements $\ne 0$?}
                               \begin{itemize}
                                 \item for $(GF(2)[X]/g(X), +, \cdot)$ to be a field, there must be multiplicative inverse for all elements $\ne 0$
-                                \item if $(GF(2)[X]/g(X), +, \cdot)$ is a field, then also $(\{0, 1\}^k, +, \cdot)$
-                                \item $g(X)$ must be \alert{irreducable}, intuitively means that one doesn't have a decomposition of $g(X)$ into two non-trivial factors, so if one has $g(x) = u(X)\cdot v(X)$ then either $u(X)$ or $v(X)$ have to be a field element, trivial if one of them is a field element and non-trivial if one can really decompose it into two non-trivial parts, it's similiar to prime numbers, if have integer number, one can also ask whether one can decompose it into the product of two non-trivial numbers or whether for each decomposition into two factors at least one for them has to be the one, if one computes the decomposition into prime factors, one only has one prime factor, one cannot decompose the prime numbers into non-trivial factorisation
+                                \begin{itemize}
+                                  \item if $(GF(2)[X]/g(X), +, \cdot)$ is a field, then also $(\{0, 1\}^k, +, \cdot)$
+                                  \item $g(X)$ must be \alert{irreducable}
+                                \end{itemize}
                                 \item a polynomial $g(X) \in F[X]$ with $deg(g(X)) > 0$ is \alert{irreducible} \textit{iff} the following holds: If $g(X) = u(X) \cdot v(X)$ for $u(X), v(X) \in F[X]$ then $u(X) \in F$ or $v(X) \in F$
+                                \begin{itemize}
+                                  \item \alert{irreducable} intuitively means that one doesn't have a decomposition of $g(X)$ into two non-trivial factors, so if one has $g(x) = u(X)\cdot v(X)$ then either $u(X)$ or $v(X)$ have to be a field element, trivial if one of them is a field element and non-trivial if one can really decompose it into two non-trivial parts, it's similiar to prime numbers, if have integer number, one can also ask whether one can decompose it into the product of two non-trivial numbers or whether for each decomposition into two factors at least one for them has to be the one, if one computes the decomposition into prime factors, one only has one prime factor, one cannot decompose the prime numbers into non-trivial factorisation. Field element $\hat =$ Polynomial of degreee $0$
+                                \end{itemize}
+                                \item \underline{Theorem (Polynomial Residue Class Ring):} Let $g(X)\in F[X]$ with $deg(g(X)) > 0$. $g(X)$ is \alert{irreducible} \textit{iff} $(F[X]/g(X), +, \cdot)$ is a field
+                                \begin{itemize}
+                                  \item \script{167}{Proof (f.)}
+                                \end{itemize}
                               \end{itemize}
                           \end{itemize}
                       \end{itemize}
                     \end{minipage}
+                  }
+                }
+                child {
+                  node {Greatest common divisor (GCD)
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \script{153}{Definition}
+                          \item \underline{Lemma(Polynomial Residue Class Ring):} For each $u(X), v(X) \in F[X] \setminus \{0\}$ with $max(deg(u(X), deg(v(X)) > 0$ there is a gcd $g(X) \in F[X]$ and there is a representation $g(X) = q_u(X) \cdot u(X) + q_v(X) ∙ v(X)$ with $q_u(X), q_v(X) \in F[X]$
+                          \begin{itemize}
+                            \item \script{164}{Proof and \enquote{Extended} Euklid‘s algorithm (ff.)}
+                          \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node {Analogy in Modular Arithmetic
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \underline{Theorem (MA):} Let $n \in \mathbb{N}, n > 1$. $n$ is a prime number \textit{iff} $(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$ is a field
+                          \begin{itemize}
+                            \item \alert{Prime Number}: A number $n \in \mathbb{N} \setminus \{0, 1\}$ is a prime number \textit{iff} the following holds: If $n = u \cdot v$ for $u, v \in N$ then $u = 1$ or $v = 1$
+                          \end{itemize}
+                          \item \underline{Theorem (MA’):} Let $n \in \mathbb{N}, n > 1$. The inverse of $\overline{a} \in (\mathbb{Z}_n, +, \cdot)$ exists \textit{iff} $gcd(a, n) = 1$
+                          \begin{itemize}
+                            \item Theorem (MA') implies Theorem(MA), \script{157}{Proof}, \script{162}{Proof 2}
+                          \end{itemize}
+                        \item \underline{Lemma (MA):} For each $u, v \in \mathbb{Z} \setminus \{0\}$ there is a gcd $g \in \mathbb{N} \setminus \{0\} \subseteq \mathbb{Z} \setminus \{0\}$ and there is a representation $g = q_u \cdot u + q_v \cdot v$ with $q_u, q_v \in \mathbb{Z}$.
+                        \begin{itemize}
+                          \item \script{159}{Proof with Euklid's algorithm (f.)}
+                          \begin{itemize}
+                            \item \script{161}{\enquote{Extended} Euklid's algorithm}
+                          \end{itemize}
+                        \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
                   }
                 }
                 child {

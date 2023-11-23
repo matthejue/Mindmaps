@@ -58,6 +58,103 @@
           }
         }
         child {
+          node {Greatest common devisor (gcd)}
+          child {
+            node {Prime factorization
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item $24 = 2\cdot 12 = 2\cdot 2\cdot 6 = \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{2}\cdot 2\cdot \textcolor{PrimaryColor}{3}$
+                    \item $36 = 2\cdot 18 = 2\cdot 2\cdot 9 = \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{3}\cdot 3$
+                      \begin{itemize}
+                        \item not $2\cdot 18 = 2 \cdot 3\cdot 6$, is only correct be coincidence, choose smallest possible prime number first
+                      \end{itemize}
+                    \item $gcd(24, 36) = \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{3} = 12$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Devisor series
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item $devseries(24) = (1, 2, 3, 4, 6, 8, \textcolor{PrimaryColor}{12}, 24)$
+                    \item $devseries(36) = (1, 2, 3, 4, 6, 9, \textcolor{PrimaryColor}{12}, 18, 36)$
+                    \item $gcd(24, 36) = \textcolor{PrimaryColor}{12}$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Euklidian algorithm
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item $\begin{aligned}[t]
+                        36:24 &= 1\quad R: 12\\
+                        24:\textcolor{PrimaryColor}{12} &= 2\quad R: 0\\
+                      \end{aligned}$
+                    \item $gcd(36,24) = 12$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Least common multiple (lcm)
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item germ. \enquote{kleinstes gemeinsames Vielfaches (kgv)}
+                    \item $gcd(6, 8) = \dfrac{6\cdot 8}{lcm(6, 8)} = \dfrac{48}{24} = 2$
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Prime factorisation
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item $84 = 2\cdot 2\cdot 3\cdot 7 = 2^2\cdot 3\cdot \textcolor{PrimaryColor}{7}$
+                      \item $120 = 2\cdot 2\cdot 2\cdot 3\cdot 5= \textcolor{PrimaryColor}{2^3}\cdot \textcolor{PrimaryColor}{3}\cdot \textcolor{PrimaryColor}{5}$
+                      \item $lcm(84, 120) = \textcolor{PrimaryColor}{2^3}\cdot \textcolor{PrimaryColor}{3}\cdot\textcolor{PrimaryColor}{5}\cdot \textcolor{PrimaryColor}{7} = 840$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Multiple series
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item $mulseries(6) = (6, 12, 18, \textcolor{PrimaryColor}{24}, 30, 36, 42, 48)$
+                      \item $mulseries(8) = (8, 16, \textcolor{PrimaryColor}{24}, 32, 40, 48)$
+                      \item $lcm(6, 8) = \textcolor{PrimaryColor}{24}$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Greatest common divisor (gcd)
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item germ. \enquote{kleinstes gemeinsames Vielfaches (kgv)}
+                      \item $lcm(6, 8) = \dfrac{6\cdot 8}{gcd(6, 8)} = \dfrac{48}{2} = 24$
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+          }
+        }
+        child {
           node {Groups
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{14cm}
@@ -216,18 +313,24 @@
                             \item \script{152}{Multiplicative inverse for all elements $\ne 0$?}
                               \begin{itemize}
                                 \item for $(GF(2)[X]/g(X), +, \cdot)$ to be a field, there must be multiplicative inverse for all elements $\ne 0$
-                                \begin{itemize}
-                                  \item if $(GF(2)[X]/g(X), +, \cdot)$ is a field, then also $(\{0, 1\}^k, +, \cdot)$
-                                  \item $g(X)$ must be \alert{irreducable}
-                                \end{itemize}
+                                  \begin{itemize}
+                                    \item if $(GF(2)[X]/g(X), +, \cdot)$ is a field, then also $(\{0, 1\}^k, +, \cdot)$
+                                    \item $g(X)$ must be \alert{irreducable}
+                                  \end{itemize}
                                 \item a polynomial $g(X) \in F[X]$ with $deg(g(X)) > 0$ is \alert{irreducible} \textit{iff} the following holds: If $g(X) = u(X) \cdot v(X)$ for $u(X), v(X) \in F[X]$ then $u(X) \in F$ or $v(X) \in F$
-                                \begin{itemize}
-                                  \item \alert{irreducable} intuitively means that one doesn't have a decomposition of $g(X)$ into two non-trivial factors, so if one has $g(x) = u(X)\cdot v(X)$ then either $u(X)$ or $v(X)$ have to be a field element, trivial if one of them is a field element and non-trivial if one can really decompose it into two non-trivial parts, it's similiar to prime numbers, if have integer number, one can also ask whether one can decompose it into the product of two non-trivial numbers or whether for each decomposition into two factors at least one for them has to be the one, if one computes the decomposition into prime factors, one only has one prime factor, one cannot decompose the prime numbers into non-trivial factorisation. Field element $\hat =$ Polynomial of degreee $0$
-                                \end{itemize}
+                                  \begin{itemize}
+                                    \item \alert{irreducable} intuitively means that one doesn't have a decomposition of $g(X)$ into two non-trivial factors, so if one has $g(x) = u(X)\cdot v(X)$ then either $u(X)$ or $v(X)$ have to be a field element, trivial if one of them is a field element and non-trivial if one can really decompose it into two non-trivial parts, it's similiar to prime numbers, if have integer number, one can also ask whether one can decompose it into the product of two non-trivial numbers or whether for each decomposition into two factors at least one for them has to be the one, if one computes the decomposition into prime factors, one only has one prime factor, one cannot decompose the prime numbers into non-trivial factorisation. Field element $\hat =$ Polynomial of degreee $0$
+                                  \end{itemize}
                                 \item \underline{Theorem (Polynomial Residue Class Ring):} Let $g(X)\in F[X]$ with $deg(g(X)) > 0$. $g(X)$ is \alert{irreducible} \textit{iff} $(F[X]/g(X), +, \cdot)$ is a field
-                                \begin{itemize}
-                                  \item \script{167}{Proof (f.)}
-                                \end{itemize}
+                                  \begin{itemize}
+                                    \item \script{167}{Proof (f.)}
+                                  \end{itemize}
+                                \item \script{153}{GCD for Polynomials}
+                                \item \underline{Lemma(Polynomial Residue Class Ring):} For each $u(X), v(X) \in F[X] \setminus \{0\}$ with $max(deg(u(X), deg(v(X)) > 0$ there is a gcd $g(X) \in F[X]$ and there is a representation $g(X) = q_u(X) \cdot u(X) + q_v(X) ∙ v(X)$ with $q_u(X), q_v(X) \in F[X]$
+                                  \begin{itemize}
+                                    \item \script{164}{Proof and \enquote{Extended} Euklid‘s algorithm (ff.)}
+                                    \item Theorem (Polynomial Residue Class Ring) can easily proven with this lemma
+                                  \end{itemize}
                               \end{itemize}
                           \end{itemize}
                       \end{itemize}
@@ -235,40 +338,42 @@
                   }
                 }
                 child {
-                  node {Greatest common divisor (GCD)
-                    \resizebox{\textwidth}{!}{
-                      \begin{minipage}[t]{12cm}
-                        \begin{itemize}
-                          \item \script{153}{Definition}
-                          \item \underline{Lemma(Polynomial Residue Class Ring):} For each $u(X), v(X) \in F[X] \setminus \{0\}$ with $max(deg(u(X), deg(v(X)) > 0$ there is a gcd $g(X) \in F[X]$ and there is a representation $g(X) = q_u(X) \cdot u(X) + q_v(X) ∙ v(X)$ with $q_u(X), q_v(X) \in F[X]$
-                          \begin{itemize}
-                            \item \script{164}{Proof and \enquote{Extended} Euklid‘s algorithm (ff.)}
-                          \end{itemize}
-                        \end{itemize}
-                      \end{minipage}
-                    }
-                  }
-                }
-                child {
                   node {Analogy in Modular Arithmetic
                     \resizebox{\textwidth}{!}{
-                      \begin{minipage}[t]{12cm}
+                      \begin{minipage}[t]{18cm}
                         \begin{itemize}
                           \item \underline{Theorem (MA):} Let $n \in \mathbb{N}, n > 1$. $n$ is a prime number \textit{iff} $(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$ is a field
-                          \begin{itemize}
-                            \item \alert{Prime Number}: A number $n \in \mathbb{N} \setminus \{0, 1\}$ is a prime number \textit{iff} the following holds: If $n = u \cdot v$ for $u, v \in N$ then $u = 1$ or $v = 1$
-                          \end{itemize}
+                            \begin{itemize}
+                              \item $n$ prime number $\hat =$ irreducable polynomial $g(X)$
+                              \item \alert{Prime Number}: A number $n \in \mathbb{N} \setminus \{0, 1\}$ is a prime number \textit{iff} the following holds: If $n = u \cdot v$ for $u, v \in N$ then $u = 1$ or $v = 1$
+                              \item \script{157}{Proof}, inverse of $\overline{1}$ is $\overline{1}$, for all elements besides $\overline{0}$ there's an inverse element, if $n$ would not be a prime number, then there would be a non-trivial decomposition into two numbers where both numbers are from this set: $\{2, \ldots, n-1\}$ and therefore we can conclude that $n$ must be a prime number
+                                \begin{itemize}
+                                  \item Theorem (MA') implies Theorem(MA)
+                                \end{itemize}
+                            \end{itemize}
                           \item \underline{Theorem (MA’):} Let $n \in \mathbb{N}, n > 1$. The inverse of $\overline{a} \in (\mathbb{Z}_n, +, \cdot)$ exists \textit{iff} $gcd(a, n) = 1$
-                          \begin{itemize}
-                            \item Theorem (MA') implies Theorem(MA), \script{157}{Proof}, \script{162}{Proof 2}
-                          \end{itemize}
-                        \item \underline{Lemma (MA):} For each $u, v \in \mathbb{Z} \setminus \{0\}$ there is a gcd $g \in \mathbb{N} \setminus \{0\} \subseteq \mathbb{Z} \setminus \{0\}$ and there is a representation $g = q_u \cdot u + q_v \cdot v$ with $q_u, q_v \in \mathbb{Z}$.
-                        \begin{itemize}
-                          \item \script{159}{Proof with Euklid's algorithm (f.)}
-                          \begin{itemize}
-                            \item \script{161}{\enquote{Extended} Euklid's algorithm}
-                          \end{itemize}
-                        \end{itemize}
+                            \begin{itemize}
+                              \item this does not only say something about um n equal to a prime number but it also says something about other rings where n is not a prime number and for those rings this theorem exactly characterizes the invertible elements, this are the elements a bar where the greatest common divisor of a and n here is equal to one which means a and n are relatively prime
+                              \item if p is even then the greatest common devisor of 2 to the power of k and p is at least two which is not one of course and therefore if p is even then the element is not invertible. If p is odd then the prime factor decomposition doesn't contain two which means the greatest common divisor of an odd p and 2 to the power of k is one and then we immediately have that this element is invertible which means in this special case with this theorem we can completely characterize the even elements are not invertible the odd elements are invertible 
+                              \item $2^k$ only has $2$ and $1$ as devisors, $2\cdot k$ has a lot of devisors including $1$ and $2$, thus the gcd is $1\cdot 2 = 2$, thus $2^k$ is not invertible
+                              \item $2^k$ only has $2$ and $1$ as devisors, $2\cdot k+1$ has a lot of devisors excluding $2$, thus the gcd is $1$, thus $2^k+1$ is invertible
+                              \item \underline{Lemma (MA):} For each $u, v \in \mathbb{Z} \setminus \{0\}$ there is a gcd $g \in \mathbb{N} \setminus \{0\} \subseteq \mathbb{Z} \setminus \{0\}$ and there is a representation $g = q_u \cdot u + q_v \cdot v$ with $q_u, q_v \in \mathbb{Z}$.
+                                \begin{itemize}
+                                  \item \alert{Euklid's algorithm}: euklids algorithm computes the greatest common devisor, always works, the series of the remainders is monotonicaly decreasing and at some point one will arrive at $0$ and then one knows the gcd, because the gcd of some number and $0$ is the number itself, representation example on the right and below how to \script{158}{obtain these factors}
+                                    \begin{itemize}
+                                      \item \script{158}{Example: Euklid's algorithm} 
+                                      \item \script{159}{Proof of Euklid's algorithm (f.)}, \underline{common devisor}: We can without loss of generality assume that $u$ and $v$ are natural numbers because some if some of them is negative then you just put in this representation the minus one let's say $u$ is negative then you can consider the absolute value of $u$ and and put the minus to $q_u$, divide $a_0$ by $a_1$ and obtain representation with $q_1$ being the quotient and $+$ the remainder called $a_2$, if one looks at $0\le a_2 < a_1$ and $0\le a_3 < a_2$ the $a_i$ are monotonicaly decreasing, second page prove that result is the gcd, common deviser means $a_n$ devides $a_0$ and it devides $a_2$, now look at the second last equation here you have a combination of a n minus one and a n you know that that a n minus one divides a n minus one and a n also divides a n and therefore a n divides a n minus 2, continue this calculation until you arrive at the first equation,
+                                        %and then at the first equation you see that a n divides a 0 from the second equation you see that a n divides a 1 by going from bottom to top you know that a n divides a 1 and a n divides a 0 therefore a n is a common divisor of a 0 and a 1
+                                        \underline{greatest common devisor}: each common divisor d of a one and a zero also divides a n, a 0 and a 1 are the two numbers for which one wanted to compute the gcd
+                                      \item \script{160}{Proof of representation $g = q_u\cdot u + q_v\cdot v$}, bottom, again just the same as in in the example just by substitution and you can either decide to do this from the second last equation to the first or the other way around let let's say we we start with the first equation, by using the second equation we have a representation of A3 as a linear combination of a0 and a1 and then you can do this until the second last equation% and finally from the second last equation you have a n is equal to a n - 1 - q n - 1 * a n minus one and you're using this for substitution and finally you obtain a n is equal to [representation], 
+                                        from the first equation we can see that a A2 is a combination of a0 and a1 from the second that A3 is a combination of a0 and A1 and and finally from the second class we conclude that a n is a linear combination of a0 and a1
+                                        %, we show a n is a common devisor and then we show it's a greatest common devisor
+                                      \item the approach to compute a representation of $gcd(a_0, a_1)$ as a linear combination of $a_0$ and $a_1$ (proof above) is called \script{161}{\enquote{Extended} Euklid's algorithm}, extended euklids algorithm computes the representation of the greatest common divisor by a linear combination of the original numbers
+                                    \end{itemize}
+                                \end{itemize}
+                              \item \script{162}{Proof with help of the Lemma(MA)}, $\Leftarrow$: n bar is equal to zero bar because you're considering the remainder by dividing by n if you divide n by n you obtain one and the remainder is zero therefore this here is zero, this is by the way a method to compute the inverse in such a residue class ring if the greatest common devisor of some element a with n is greater than one then you don't have to look for an inverse because there doesn't exist an inverse, if the greatest common divisor of A and N is one then you apply euklids algorithm you're doing those substitutions of extended euklids algorithm and by those substitutions you obtain representation of one as a combination of A and N and from this you immediately have the multiplicative inverse which is q A bar, so in this extended euklids algorithm you are Computing this QA and a qn you are not interested in the qn but you are interested in the QA because the residue class of this QA is exactly the multiplicative inverse you're looking for, $\Rightarrow$: or in other words the difference of a * B and 1 is a multiple of n or you can say... assume that the greatest common divisor of A and N is some D which means that a is equal to some QA * d and n is equal to some qn * D which is just a definition here we are not using greatest common devisor but we are using common devisor, we insert this here for a in this equation we insert this here for n in this equation, now we just have to have a close look at this equation and use the fact that all numbers here are integers so you have D * and QA is an integer B is an integer Y and qn is an integer you have D * some integer is equal to 1 if D * some integer is equal to one then we can immediately conclude that D is one because otherwise it doesn't work
+                              \item used to generate Keys for RSA
+                            \end{itemize}
                         \end{itemize}
                       \end{minipage}
                     }

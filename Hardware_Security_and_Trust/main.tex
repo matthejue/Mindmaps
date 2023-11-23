@@ -40,13 +40,14 @@
       child {
         node {Mathematical background
           \resizebox{\textwidth}{!}{
-            \begin{minipage}[t]{12cm}
+            \begin{minipage}[t]{14cm}
               \begin{itemize}
                 \item \script{131}{\alert{finite field} $(\{0, 1\}^8, +, \cdot)=GF(2^8)$}, special case of \inlinebox{Galois field} $GF(p^k)$, with a prime number $p$ and a natural number $k$, having $p^k$ elements
                 \begin{itemize}
                   \item AES needs fitting definitions of $+$ and $\cdot$ on $\{0, 1\}^8$ to turn it into a \alert{finite field}. Small finite field with $256$ elements
                   \item The irreducible polynomial used in AES is part of its specification. It is $g(X) = X^8 + X^4 + X^3 + X + 1$
                   \item one needs finite field property at point where one wants to invert the MixColumn Operation, one needs the property of having multiplicative inverse, to derive inverse matrix
+                  \item you can use this complete nice mathematical background for aes and just construct a multiplication table you just take two bytes use this mathematical approach and compute the product of two bytes which result in a byte and then you take this table and you forgot about all the mathematical background and you can still do computations in aes because in aes you just need this table this is true for aes but this is not true for what we will see next this RSA for RSA we really cannot compress everything you must know into one table for this we need some some insight into mathematical background
                 \end{itemize}
                 \item \script{131}{$(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$} is a \alert{field} and coincides with $GF(m)$ if $m$ is a prime number, else it is a commutative ring with multiplicative identity $\overline{1}$ 
                 \begin{itemize}
@@ -285,7 +286,7 @@
               child {
                 node (polrings) {Polynomial rings over $GF(2)$
                   \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{16cm}
+                    \begin{minipage}[t]{20cm}
                       \begin{itemize}
                         \item \script{143}{$GF(2)[X]$ and $GF(2)[X]_k$ and example for addition}
                           \begin{itemize}
@@ -321,16 +322,16 @@
                                   \begin{itemize}
                                     \item \alert{irreducable} intuitively means that one doesn't have a decomposition of $g(X)$ into two non-trivial factors, so if one has $g(x) = u(X)\cdot v(X)$ then either $u(X)$ or $v(X)$ have to be a field element, trivial if one of them is a field element and non-trivial if one can really decompose it into two non-trivial parts, it's similiar to prime numbers, if have integer number, one can also ask whether one can decompose it into the product of two non-trivial numbers or whether for each decomposition into two factors at least one for them has to be the one, if one computes the decomposition into prime factors, one only has one prime factor, one cannot decompose the prime numbers into non-trivial factorisation. Field element $\hat =$ Polynomial of degreee $0$
                                   \end{itemize}
-                                \item \underline{Theorem (Polynomial Residue Class Ring):} Let $g(X)\in F[X]$ with $deg(g(X)) > 0$. $g(X)$ is \alert{irreducible} \textit{iff} $(F[X]/g(X), +, \cdot)$ is a field
-                                  \begin{itemize}
-                                    \item \script{167}{Proof (f.)}
-                                  \end{itemize}
+                              \end{itemize}
+                            \item \underline{Theorem (Polynomial Residue Class Ring):} Let $g(X)\in F[X]$ with $deg(g(X)) > 0$. $g(X)$ is \alert{irreducible} \textit{iff} $(F[X]/g(X), +, \cdot)$ is a field
+                              \begin{itemize}
                                 \item \script{153}{GCD for Polynomials}
                                 \item \underline{Lemma(Polynomial Residue Class Ring):} For each $u(X), v(X) \in F[X] \setminus \{0\}$ with $max(deg(u(X), deg(v(X)) > 0$ there is a gcd $g(X) \in F[X]$ and there is a representation $g(X) = q_u(X) \cdot u(X) + q_v(X) ∙ v(X)$ with $q_u(X), q_v(X) \in F[X]$
                                   \begin{itemize}
-                                    \item \script{164}{Proof and \enquote{Extended} Euklid‘s algorithm (ff.)}
+                                    \item \script{164}{Proof and \enquote{Extended} Euklid‘s algorithm (ff.)}, Euklid‘s algorithm working with polynomial division instead of division of numbers, how to to choose this qn this qn you just choose this qn as a n of X time the inverse of f, f to the power of of minus one and then you have here a n minus one of x * F to the power of N - 1 * F and and then the remainder is zero, if you arrive at degree zero you need at most one additional step if it's already zero you don't need an additional step, this part with the representation of G... is just the same and also the prove that Euklids algorithm does the the right thing is also the same 
                                     \item Theorem (Polynomial Residue Class Ring) can easily proven with this lemma
                                   \end{itemize}
+                                \item \script{167}{Proof (f.)}, $\Leftarrow$: the proof of the theory is an immediate consequence of the lemma, ...is a field which means that each element in this structure here which is not equal to zero is invertible that is what we want to show, choose in this R of x bar the smallest representative, this R of x has a degree which is strictly smaller than the degree of G of X, therefore the greatest common divisor of R of x and G of X is a divisor of R of x which means that for this here the degree of greatest common divisor of R of x g of x is smaller than the degree of G of X, G of X is the product of this greatest common divisor and some Q of X and the degree of this is smaller than the degree of G of X and therefore the degree of this Q of X has to be greater than zero, because otherwise you come not to the degree of by this multiplication you have not the possibility to come to the degree of G of X which means the degree of Q of x is greater than zero, now we are using un irreducibility of G of x here we have found a product of some of two polynomials namely the greatest common divisor and Q of X and here the degree is greater than zero which means this is a non-trivial decomposition if the degree of the greatest common divisor is not zero then you would have a non-trivial decomposition and this cannot occur because G of X is irreducible and therefore we can conclude that the greatest common divisor has to be a field element. And then you compute the residue classes as in the previous proof which means you make a big bar here and you are using that g of x bar is equal to zero bar which means this second part here can be omitted... now you just use the property that f is a field this capital F is a field which means there is an inverse in the field of this F which is f to the power of minus 1... this means you can can take this and this is the multiplicative inverse of r of x bar... If Q G of X is irreducible you can find a multiplicative inverse to each residue class which is not equal to zero bar. And then you compute the residue classes as in the previous proof which means you make a big bar here and you are using that g of x bar is equal to zero bar which means this second part here can be omitted... now you just use the property that f is a field this capital F is a field which means there is an inverse in the field of this F which is f to the power of minus 1... this means you can can take this and this is the multiplicative inverse of r of x bar... if Q G of X is irreducible you can find a multiplicative inverse to each residue class which is not equal to zero bar, $\Rightarrow$: g of x bar is of course zero bar because if you're are doing a remainder modulo g of x then from g of x you obtain zero bar, this is a property you always have in rings and in this special polinomial ring it's immediately clear because if you multiply a polinomial with a zero polomial you obtain the zero polynomial, contradiction to this assumption that you have a non-trivial decomposition of G of X into two factors this V of X should not be Zero Bar it should be something different so non-trivial factors means that the degree of V of X is greater than zero 
                               \end{itemize}
                           \end{itemize}
                       \end{itemize}

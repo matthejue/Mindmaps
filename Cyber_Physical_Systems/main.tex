@@ -71,8 +71,8 @@
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
                     \item \script{688}{Definition}
-                    \item \script{693}{Example:  Beverage machines (f.)}
-                    \item \script{698}{Example: Yellow and Blue}
+                    \item \script{693}{Example:  Beverage machines (f.)}, want property e that says that when this is T1 and this is T2 I want the property that says T1 is correct because T1 satisfies the property and T2 is not correct because it does not satisfy the property and the thing is such a property does not exist, I need to describe my system in terms of linear sequences because my linear time properties are traces are sets of sequences, one way to get out of it would to say okay so I extend my set of atomic propositions and this would allow me to distinguish between this these states here but it's not really a solution because this seems like implementation details right I mean the user does not care about the internal state of my machine the user cares about can I insert a coin can I take my beverage, because they are Trace equivalent according to the theorem that we have just proven we know that they satisfy the same properties and so there is no property that can be used to distinguish this system from this system by saying that this system does not satisfy the property and this system satisfies it
+                    \item \script{698}{Example: Yellow and Blue}, you cannot have two without having a third yellow ($\{a,b\}\{a,b\}\{a\}\not\in Traces(T_2)$)
                   \end{itemize}
                 \end{minipage}
               }
@@ -83,12 +83,12 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \script{650}{Definition}
+                    \item \script{650}{Definition}: $Traces(T_1)\subseteq Traces(T_2)\wedge T_2\models E \Rightarrow T_1\models E$, inclusion between sets is a \alert{transitive} relation
                     \item Let $T_1$ and $T_2$ be transition systems over $AP$. Then, the following statements are equivalent:
                       \begin{itemize}
                         \item $Traces(T_1) \subseteq Traces(T_2)$
                         \item for all LT-properties $E$ over $AP$: whenever $T_2 \models E$ then $T_1 \models E$
-                        \item \script{654}{Proof}
+                        \item \script{654}{Proof}, 2: the smallest property $E$ that satisfies $T_2$ is the set of all traces of $T_2$: $Traces(T_2)$, that T1 satisfies e means that the set of all traces of T1 forms a subset of e but e is Traces(T2) so this means that the set of all traces of T1 is a subset of the traces of T2 and this is what we needed to show ($Traces(T_1) \subseteq E = Traces(T_2)$)
                       \end{itemize}
                   \end{itemize}
                 \end{minipage}
@@ -97,9 +97,9 @@
             child {
               node {Implementation/refinement relation (Appears naturally as)
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
+                  \begin{minipage}[t]{16cm}
                     \begin{itemize}
-                      \item \script{657}{Definition}
+                      \item \script{657}{Definition}, what does refine mean it becomes finer it becomes less abstract so you go to another model and because it is less abstract it has less nondeterminism it has more implementation details and that means that it has less traces. This is something that you can check by just a comparison of the two transition system and since you go from T1 to T2 in a systematic fashion the hope is that the check $T_2 \sqsubseteq T_1$ will be easier and perhaps this check $T_2\models E$ will be difficult but you don't need to do it because it's already implied by $T_1\models E$ and $T_2 \sqsubseteq T_1$
                     \end{itemize}
                   \end{minipage}
                 }
@@ -108,10 +108,10 @@
             child {
               node {Resolving nondeterminism (Appears naturally when)
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
+                  \begin{minipage}[t]{16cm}
                     \begin{itemize}
-                      \item \script{666}{Definition}
-                      \item \script{660}{Example (ff.)}
+                      \item \script{666}{Definition}, the consequences of resolving non determinism is that you will have less paths and if you have less paths then you have less traces
+                      \item \script{660}{Example (ff.)}, then when you have proven your property about this system here you no longer need to prove it about this system here, it does not even matter what the labeling is of the different states in the transition system because the already for the sets of paths we have this inclusion relation and if we have it for the paths then we also have it for the labelings no matter what the labeling is, for any property e over this given set of atomic propositions and for the set of other positions you can choose any
                     \end{itemize}
                   \end{minipage}
                 }
@@ -120,9 +120,9 @@
             child {
               node {Context of abstractions (Appears naturally in)
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
+                  \begin{minipage}[t]{18cm}
                     \begin{itemize}
-                      \item \script{672}{Example (ff.)}
+                      \item \script{672}{Example (ff.)}, corresponds to a property just like Mutual exclusion except that for Mission exclusion I have crit one and crit two and here I say that I never have at the same time that I am at the location L2 and Y is odd right or one could always say that always L2 is not in a i or odd y is not in a i and this must hold for all positions I, program graph translated to transition system, abstract ts because it's too big, two states are equivalent if we cannot distinguish them with respect to three properties, \alert{equal modul 2} means that the difference between the two is even, we have that X is equal to zero so we don't have non negatives, we don't consider this other case where I'm at L1 and X is greater zero and X is different from Y modul 2 and the reason that we don't consider this is because such a state will not be reachable, this state here no longer says that X is exactly seven and Y is exactly five I lose this information I \alert{abstract away from the concrete values} all I remember is these two things, in the concrete I know that this here will be executed exactly six times and at the seventh time I will be at a state where X is equal to zero and here you can see that this transition here can be executed an arbitrary number of times and what does this mean it means that although the transition system T that is associated to this program graph here does not have any \alert{infinite execution} this one here does right I can stay here forever I can also say that the length of the executions is unbounded in this transition system, for now we only look at a property that is \alert{different from termination} and so this abstraction is fine, location l2 values don't change to it holds before. now when I look at this transition system here it allows me to observe that whenever I'm in location L2 then the difference between X and Y is even and X is equal to 0 and since 0 is an even number Y is also an even number and so I have proven my um property that whenever I have terminated the Y Loop X is even or X is not odd and so you see that here I have nondeterminism in the abstraction whereas in the concrete transition system it is always determined whether I take this edge so whether I execute the Y Loop or whether I jump out of the Y Loop and it's determined by the evaluation of the Guard but when I only know that X is greater than zero then and I decrement X by one then I don't know perhaps if x was strictly greater than one then it will be greater 0 afterwards and so I execute this transition in the transition system but if the value was one then execute this one here but by just looking at this transition system I have \alert{lost this information} I have abstracted it away and so this abstraction introduces nondeterminism so nondeterminism looks like I have more choices but this is the price that I pay for the fact that here I have only four states and here I have many more states okay and so this abstract transition system here if I call it t Prime then it allows me to verify this property because there's only one state where I'm at L2 and I know that then y cannot be odd because it's X is equal to 0 and um X is equal to Y modul 2. we have our \alert{theorem} about the \alert{trace inclusion} we have that the transition system with the largest set of traces satisfies our correctness properties and this allows us to conclude that the transition system that we're interested in also satisfies the property
                     \end{itemize}
                   \end{minipage}
                 }
@@ -135,7 +135,7 @@
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{12cm}
                 \begin{itemize}
-                  \item \script{703}{Overview and examples}
+                  \item \script{703}{Overview and examples}, classification does not mean that we have here the set of all LT properties all linear Time Properties and then we have then we can divide all linear Time Properties such that it is either a safety or liveness that is not the case so it's not as if LT is the union of safety and liveness however what is the case is that whenever I have a property e that I can write this e as a disjunction of E1 and E2 such that E1 is a safety property and E2 is a liveness property and this is very nice that I can do this so it's a form of decomposition I decompose the property into a conjunction of a safety and the liveness property and this is very nice because I have one algorithm for safety properties and I have another algorithm for liveness properties
                 \end{itemize}
               \end{minipage}
             }
@@ -145,7 +145,7 @@
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{12cm}
                   \begin{itemize}
-                    \item \script{708}{Examples and classification (ff.)}
+                    \item \script{708}{Examples and classification (ff.)}, it's related to the fact that bureaucracy is so great right when you go to the university and you ask can you do this they will say no it's not possible why because it's always safe to do nothing so when you when you have a system where You always remain in the same state this system satisfies every lifeless property every safety property right you are safe right save just means that you don't arrive at the bad thing, save just means that you don't arrive at the bad thing 
                   \end{itemize}
                 \end{minipage}
               }
@@ -155,7 +155,7 @@
                 \resizebox{\textwidth}{!}{
                   \begin{minipage}[t]{12cm}
                     \begin{itemize}
-                      \item \script{727}{Definition}
+                      \item \script{727}{Definition}, invariantly the not bad thing holds true
                         \begin{itemize}
                           \item \enquote{no bad state will be reached} 
                         \end{itemize}
@@ -173,10 +173,12 @@
           child {
             node {Liveness properties
               \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
+                \begin{minipage}[t]{16cm}
                   \begin{itemize}
-                    \item \script{584}{Definition}: e.g. not waiting forever to get into ciritical section, shouldn't say every process that requests enters because this is talking about actions we need to talk about the atomic propositions wait and crit and so we can define this livess or starvation freedom property as the set of all infinite words over the power set of the atomic propositions such that we say that if process one is waiting infinitely often then process one should also be in the critical section infinitely often because if you're waitiing often and you don't only get to enter finitely many times, then at some point you have to wait forever and the same of course holds for the second process that one shouldn't wait forever either okay and right in the same way, parenthesis around the premise, otherwise it's a bit ambigous
+                    \item \script{584}{Definition}: e.g. not waiting forever to get into ciritical section, shouldn't say every process that requests enters because this is talking about actions we need to talk about the atomic propositions wait and crit and so we can define this livess or starvation freedom property as the set of all infinite words over the power set of the atomic propositions such that we say that if process one is waiting infinitely often then process one should also be in the critical section infinitely often because if you're waitiing often and you don't only get to enter finitely many times, then at some point you have to wait forever and the same of course holds for the second process that one shouldn't wait forever either okay and right in the same way, parenthesis around the premise, otherwise it's a bit ambigous, but you're more ambitious right so something good is supposed to happen so you must move to some good state and eventually yoand not stay in the same save state and eventually you will arrive at the good thing
                       \begin{itemize}
+                        \item starvation freedom what does means something like each time there is a request there will be an acknowledgement and so the request is an action but the effect of the action is that the successor state has the label wait either wait one or wait two and then there is an acknowledgement where the acknowledgement here means the enter action and the effect of the enter action is that the successor state satisfies the atomic proposition crit one or crit 2
+                        \item to understand this implication it makes sense to look at its negation the negation of an implication is that the left side of the implication holds and the right side does not and it means that we have this infinite trace because it's infinite and goes outside of the transparency and infinitely often there is this request and so the process let's say process one is is in the wait state or is in a state that satisfies the atomic proposition wait and now the right hand side of the implication is wrong if the implication is falsified and what does this mean it means that only finite many positions have crit one in the letter so that means that after a finite amount let's say here there is no more so in the rest here there is no more our position such that the label contains the atomic proposition crit one% and this means that there are requests right because we have infinitely more infinite requests and in fact there are infinitely many requests because there infinitely many positions where wait one is an element of the labor which do not have the response right the the request to enter the critical section is not met because from here on we no longer have crit in one of the letters and intuitively it is because we reason about infinite traces so we do not care what happens finitely often so if finally often a request is met by an acknowledgement that's fine but we want that it happens infinitely often
                         \item examples for trace in live: $(\{wait_1\}, \{crit_1\}, \{wait_2\}, \{crit_2\})^{\omega}\in LIVE$, $\emptyset^{\omega} \in LIVE$, $\{crit_1\}\in LIVE$, if noones wait infintely often we don't care what else happens, $(\{wait_1\}, \{crit_1\}, \{wait_2\})^{\omega}\in LIVE$
                       \end{itemize}
                   \end{itemize}
@@ -184,11 +186,22 @@
               }
             }
             child {
+              node {Contradiction to independance
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{639}{Example: LT property \enquote{infinitely often green} (ff.)}, this is somehow in contradiction to the fact that the two transition systems are independent right so they work independently there is no synchronization between them they don't know it about each other so how come when I take the model for the two together the property suddenly stops well obviously this model here is not a good model because it does not allow us to reflect that well in the real world this cyber physical system here does satisfy this property here so we need to accommodate the model for the safety properties it is perfect but um it's not good for the other one
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
               node {Liveness for Mutual Exclusion
                 \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{14cm}
+                  \begin{minipage}[t]{16cm}
                     \begin{itemize}
-                      \item \script{601}{Problem with Liveness (ff.), } in this Trace we have infinitely often wait 2 right this these three occurrences are repeated infinitely often but we don't have any occurrence of crit 2 so in particular we don't have infinitely many occurrences of crit 2 and this is problematic here right we have the second process has requested but it never gets to actually enter the critical section, many people will actually still use semaphores for Mutual exclusion because in practice is it's probably it's quite unlikely that this happens and towards the end of the lecture we will see the concept of fairness so that's sort of an additional assumption that we put to rule out this
+                      \item \script{601}{Problem with Liveness (ff.), } in this Trace we have infinitely often wait 2 right this these three occurrences are repeated infinitely often but we don't have any occurrence of crit 2 so in particular we don't have infinitely many occurrences of crit 2 and this is problematic here right we have the second process has requested but it never gets to actually enter the critical section, many people will actually still use semaphores for Mutual exclusion because in practice is it's probably it's quite unlikely that this happens and towards the end of the lecture we will see the concept of fairness so that's sort of an additional assumption that we put to rule out this. Usually we would have a self flop in the initial state that means that perhaps a process never ever needs to uh make a request but it can if it wishes
                       \item \script{604}{Peterson algorithm (ff.)}: $b_1$ and $b_2$ are booleans, $X$ identifies one of the two processes
                         \begin{itemize}
                           \item  P1 when it requests sets B1 to true or to one so B1 sort of means process one would like to be in the critical section and it also sets the variable X to two and P2 does something symmetric afterwards 
@@ -197,6 +210,7 @@
                           \item \script{611}{Example, $b_1 = 0, b_2 = 0$}, initially they have not requested because if we do that then we have this nice thing that whenever we are in ncrit one then B1 is equal to zero and whenever we are in wait one or crit one B1 is equal to one and the same here for the second process, in this transition system I didn't write the values of B1 and B2 because else unreadable and it's okay because whenever I'm in wait one I know that B1 must be equal to one and if I'm in ncrit 2 then that means B2 is equal to zero right
                             \begin{itemize}
                               \item also satisfies live one way we can do that is we can look at all the states where wait one holds and I mean we know that when we are in one of these states infinitely often we should make sure that we're also infinitely often in a state with crit one and we can do that if we make sure that after we're such in such a state after a finite number of steps we're going to be in a state with crit one again because then if one happens infinitely often the other one also has to happen infinitely often and that's the case% because right for this state here we know that immediately in the next state process one is in the critical section so it's fine for this state we have two options either crit one holds immediately in the next step or after two steps also still fine and then we can sort of propagate that back right so this state is also okay because even though wait one holds in the next step we are in a state where we know that soon after crit one will hold so in particular after at most three steps crit one will hold and then for this state after at most four steps crit one will hold so if we're in one of these states then in one of the yellow States infinitely often we must be in one of the red States infinitely often as well
+                              \item and so you see that here you you can no longer execute the loop where the transition from wait into critical can be ignored forever so it is ignored here so we don't have a transition that goes from wait 2 to critical 2 important is that from here I canot take the transition where the first process goes from wait to critical and this is because we have this flag here x = 1 and that means that when both of them are in wait the value of x signals whose turn it is we avoid this infinite Loop that ignores the second process forever 
                             \end{itemize}
                         \end{itemize}
                     \end{itemize}
@@ -350,7 +364,8 @@
                         \begin{itemize}
                           \item $\operatorname{Traces}(\mathcal{T}) \stackrel{\text { def }}{=}\{\operatorname{trace}(\pi): \pi \in \operatorname{Paths}(\mathcal{T})\} \subseteq\left(2^{A P}\right)^\omega$, the traces of a transition system are the traces of each path% and the paths are the initial maximal path fragments
                           \item $\operatorname{Traces}_{\text {fin }}(\mathcal{T}) \stackrel{\text { def }}{=}\left\{\operatorname{trace}(\widehat{\pi}): \widehat{\pi} \in \operatorname{Paths}_{\text {fin }}(\mathcal{T})\right\} \subseteq\left(2^{A P}\right)^*$
-                          \item often look at TS's that \alert{don't have terminal states}, because if we don't have terminal states then all the executions are infinite we can never get stuck in the terminal State or the paths are infinite and all the traces are infinite and that's just otherwise we often have to make this case distinctionif the trace is finite then this and if the trace is infinite we have to do something else. If we make this assumption then the traces are exactly a subset of this set on the right 
+                          % \item often look at TS's that \alert{don't have terminal states}, because if we don't have terminal states then all the executions are infinite we can never get stuck in the terminal State or the paths are infinite and all the traces are infinite and that's just otherwise we often have to make this case distinctionif the trace is finite then this and if the trace is infinite we have to do something else. If we make this assumption then the traces are exactly a subset of this set on the right 
+                          \item \alert{ignore} transition systems that have \alert{terminal traces} and the intuition is that we don't really need terminal traces because we can always add a self loop and in fact that self Loop models the fact that when you stay in the same state well it is in fact you do a self transition and when we want to reflect that you don't need to get out of a state then you want to add a self transition to the state right so when you have somehow a state which has no outgoing transition well this is as if the time is stuck right and when you have a state which has an outgoing transition well this looks as if in fact you are obliged to move into this state here whereas in truth we don't specify how long we stay there and so in fact it would make sense to add a self Loop to every state and then if we do that then we don't have any terminal states because and it would not change anything with respect to the safety properties. we don't put them always because it makes the system a little bit more complicated but we put them at states that would be terminal otherwise 
                         \end{itemize}
                       \item \script{521}{Example}, two paths depending on what initial state ones chooses
                       \item several executions can have the same trace

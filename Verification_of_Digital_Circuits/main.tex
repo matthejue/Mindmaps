@@ -539,7 +539,7 @@
             }
           }
         }
-        child {
+        child [level distance = 10cm] {
           node {Modern SAT-Algorithms
             \resizebox{\textwidth}{!}{
               \begin{minipage}[t]{14cm}
@@ -561,6 +561,10 @@
                     \end{itemize}
                   \item \script{238}{Algorithm}
                   \begin{itemize}
+                    \item Modern SAT algorithms do not test whether the CNF formula is already satisfied during the search, rather it is indirectly guaranteed from assigning all the variables without running into a conflict
+                    \begin{itemize}
+                      \item \script{276}{Example}
+                    \end{itemize}
                     \item BCP processes all the implications and detects a conflict if we have a conflict we run conflict analysis we get back a backtrack level if the backtrack level is $0$ we know the formula is unsatisfiable if it's not zero but greater than zero then we can do backtracking and finally if the decision juristic has nothing to do anymore, meaning all the variables are assigned then the formula is satisfiable so that also means we do not check if the formula is already satisfied that might happen before all the variables are assigned but a solver does not detect that it just runs until all variables are assigned and if no conflict has happened the formula satisfied why is that the case because it's cheaper to just run until all variables are assigned then detecting if the formula satisfied so nobody checks if the formula satisfied because that requires running overall clauses and in between you sometimes do just unlearning and restarts and so on
                     \item want to get a satisfying assignment at the end if you did pre-processing then you have to be careful the satisfying assignment you get from the solver is the satisfying assignment of the formula after pre-processing but you don't want the satisfying assignment of the formula after pre-processing but before pre-processing because you don't mind what the solver does of the formula and it can happen that the satisfying assignment you get does not work for the original formula, you might have to add a few more assignments because you're eliminated variables it might also happen that you have to modify that assignment because you deleted some clauses that you were allowed to delete but you get a wrong assignment then and you have to correct it
                   \end{itemize}
@@ -569,153 +573,493 @@
             }
           }
           child {
-            node {Preprocessing
-              \resizebox{\textwidth}{!}{
-                \begin{minipage}[t]{12cm}
-                  \begin{itemize}
-                    \item \script{240}{in the algorithm}
-                    \item \script{241}{goal, practical observations, find good compromise}
-                    \item \script{242}{preprocessing techniques}
-                  \end{itemize}
-                \end{minipage}
-              }
-            }
-            child {
-              node {Unit Propagation
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item if omitted, then immediately performed during solving process
-                      \item \underline{procedure:}
-                      \begin{itemize}
-                        \item identify unit clauses in the CNF
-                        \item assign units, simplify
-                        \item if you get an empty clause formula is unsatisfiable otherwise in the end the CNF does not contain any unique clauses
-                        % \item ... until the CNF is free from unit clauses
-                      \end{itemize}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Unit Propagation Lookahead (UPLA)
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item fix a variable $x_i$ to $0$, check implications; then change its value to $x_i = 1$, check implications. Simplify the formula exploiting the \script{244}{consequences}, and also $(x_i = 0 \rightarrow x_j = 1) \wedge (x_i = 1 \rightarrow x_j = 0) \Rightarrow x_i \equiv \neg x_j$
-                      \item ones pretends to have a unit clause and checks what happens, all you need for that is already implemented in the solver the only thing you need is BCP and you need BCP anyway what's the drawback Now it only works if you have clauses of length $2$ if all clauses in the formula have a length longer than two by assigning one variable you don't get any implications, it requires binary clauses and it only makes sense to apply UPLA to variables that appear in binary claes the rest can just be skipped. And because some of the variables might be missing after applying UPLA you have to do something after solving the formula namely add more variable assignments you have to keep track if variables are equivalent or so
-                      \item \script{245}{Advantages and Disadvantages}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Self-subsuming resolution
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      % \item apply resolution to two clauses and resolution result subsumes one of the clauses
-                      \item apply resolution such that the outcome is a subset of one of the operands. why can we replace it you can always add the resolvend to the clause then apply the subsumption checking and that deletes one of the two so it's just replace and outcome is a logically equivalent formula 
-. Saves literals
-                      \item \script{246}{Example}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }% / clause distribution ?
-            child {
-              node {Elimination by Resolution
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item \alert{variable elimination} applied to a variable of the CNF formula, seen in DP
-                      \item it is applied only if it leads to a simplification of the formula
-                      \item so deleting Clause is not always good of course it makes the formula shorter but later during the solution process the solver goes the hard way to derive conflict clauses they are just resolved and added so it's not always good to delete clauses also it makes the formula shorter if you could add the good conflict clause in the beginning the solver would be much faster so it's not clear what helps
-                      \item \script{247}{Example}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Variable elimination by substitution
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item if clauses represent a gate like in the Tseitin transformation, these clauses can be removed and then every occurence of the variable that corresponds to the output of the gate has to be replaced by the other side of the equation for the remaning clauses
-                      \item potentially saves variables, literals and clauses, it is applied only if it leads to a simplification of the formula
-                      \item \script{248}{Example}
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Forward subsumption and Backward subsumption
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{16cm}
-                    \begin{itemize}
-                      \item \alert{Forward Subsumption:} Test if a clause generated during one of the other preprocessing techniques is subsumed by one clause of the initial formula. Remove all the clauses subsumed
-                      \item \alert{Backward Subsumption:} Test if a clause generated during one of the other preprocessing techniques subsumes one (or more) clauses of the initial formula. Remove all the clauses subsumed
-                      \item in principle you do subsumption checking whenever you add a clause to the clause database there's function add_clause that gets a new clause and adds it to the list of all clauses whenever you do that you can check for subsumption and there are two variables as the new Clause is the short one the subsuming clause the subset is newly added and the long one is already in the clause database or the other way around you have a short clause in the clause database and you want to add a new clause which is a super set of the one you already have in the first case when you add the short clause you can replace the long with the short in the second case where you add the long one you can just ignore it
-                      \item forward subsumption is you add the long one backward subsumption is you add the short one now why do we distinguish it really here because the running time of the check is completely different 
-                      \item backwards subsumption now one of the data structures in the preprocessor is typically the occurrence list so for every lital you have a list of all clauses which this lital occures so you have a list of X1 list for not X1 list for X2 for not X2 and so on so when you add the short clause how can you find all candidates that could be subsumed by the new clause if you add X1 X2 
-                      \item all candidates that can be subsumed by X1 X2 contain X1 and they also contain an X2 so you can look either at the occurrence list of X1 or at the occurrence list of X2 and you just pick the shorter one you have to only run over the shortest occurrences that's quite efficient 
-                      \item forward subsumption: you have the long clause, the only thing you know is the short clause contains at least one of the literals of the long clause so you have to run over all occurrence to find all possible candidates and running over all occurrences is worse than just running off the best one shortest one and therefore forward subsumption is expensive backward subsumption is quite cheap 
-                      \item backward subsumption is done all the time forward subsumption from time to time only 
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Blocked Clause Elimination
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item let $C$ be a clause and $\ell \in C$ a literal, $C$ is blocked by $\ell$ \texttt{iff} for all clauses $D$ with $\neg\ell \in D$ holds: $C \otimes_{\ell} D$ is a tautology
-                      \item \alert{Blocked clauses} can be deleted without changing satisfiability
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-            child {
-              node {Equivalent Literals
-                \resizebox{\textwidth}{!}{
-                  \begin{minipage}[t]{12cm}
-                    \begin{itemize}
-                      \item take only the binary clauses $\{\ell, \kappa\}$
-                      \item create the \alert{binary clause graph} $G = (V, E)$ with
-                      \begin{itemize}
-                        \item $V = \{x, \neg x \mid x \text{ variable}\}$
-                        \item $E = \{(\neg \ell, \kappa), (\neg \kappa, \ell) \mid \{\ell, \kappa\} \in \varphi\}$
-                      \end{itemize}
-                      \item all literals in strongly connected components can be replaced by one representative
-                      \item if there is a path from $\neg \ell$ to $\ell$ for some literal $\ell$, we can replace $\ell$ by $1$
-                    \end{itemize}
-                  \end{minipage}
-                }
-              }
-            }
-          }
-          child {
-            node {Improvements
+            node {Improvements to DLL
               \resizebox{\textwidth}{!}{
                 \begin{minipage}[t]{16cm}
                   \begin{itemize}
                     \item \script{224}{Improvements to DLL}: We do we actually modify the formula we can just say oh that clause is satisfied that's one bit of information and we can keep an assignment of the variables then you can just look it up if a variable is unsatisfied or not that's one major Improvement and of course we can carefully select which literal to assign we can learn from the conflicts so we can find out what are the reasons why the formula is unsatisfied not always all decisions are responsible for a unsatisfied formula but only a subset and we want to find out which subset 
-                    \begin{itemize}
-                      \item \alert{pre-processing} before you solve the formula the goal is simplify a formula simplify means get rid of some of the clauses get rid of some of the variables shorten some clauses just simplify 
-                      \item \alert{decision heuristics} pick a good variable and a good value for that variable when you make the decision. It's obvious that a good decision juristic helps on satisfiable formulas it also helps on unsatisfiable formulas because the sooner you run into a conflict the smaller part of the search Tree is that you have to look at if you run directly into conflict there's no reason to continue at this point you just try the other part so the sooner you run into conflict the better
-                      \item \alert{BCP} is just the process of finding all unit clauses in principle it's trivial run over the formula check each clause is there only one unassigned literal left, it's not easy to do it fast looking at all clauses is too expensive, BCP is how do you do it as fast as possible. BCP is find all unit clauses as fast as possible
-                      \item \alert{conflict analysis} happens when you run it a conflict conflict is you have an unsatisfied clause an empty clause then you want to find out which were the assignments that triggered this conflict which are responsible for getting an empty clause and you use that for backtracking that information there are two variants of backtracking one is called chronological backtracking and the other one non-chronological \alert{chronological} is what you have seen go back to the last decision and keep it. \alert{Non-chronological} backtracking tries to undo as many decisions as possible such as you just resolve the conflict and sometimes you can undo more assignments that's called non-chronological backtracking and the only information is that you need is which is the reason for the conflict yeah unlearning so conflict analysis also adds an additional clause to the formula that says not that bad assignment again so for instance if the if you found out in conflict analysis that assigning x 1 to true and X2 to false are the reason for the conflict so whenever you assign X1 to 1 and X2 to false you will get a conflict so you never want to do that again how can you say that oh you say either X 1 is false or X 2 is true so you have to Clause not X1 or X2 whenever you try to get that bad assignment again when you assign X1 to one then that clause becomes a unit clause and says oh X2 has to be one that's a conflict clause and you add it to the Clause database in order to prevent the solve from running into the same conflict again so the problem is you run into millions of conflicts during the solution process and you often learn more clauses than your original formula had and you have to store all of that in memory you have to process them all during bollean constraint propagation so the more you of these conflict Clauses you have the more work you have to put into BCP and there is a tradeoff between many conflict Clauses which hope hopefully trigger some implication from time to time and slowing down easy and therefore from time to time you just delete conflict clauses to reduce the memory overhead and to prevent BCP from slowing out that's \alert{unlearning conflict clauses}
-                      \item \alert{restarts} something strange you just start from scratch again so it can happen that the solver gets stuck into in some bad part of the search space so you have a tree you learn conflict and conflict and conflict and conflict but you make little progress so you only learn really long little useful conflict clauses and then it makes sense to say oh let's start again you keep the good conflict clause that you have learned you keep the information the decision heuristics has learned about good variables and you start from scretch and it seems to help so the hope is the information that you have learned drives you into a different part of the search space not into the bad one when you get stuck but you first look at the different part and there you learn additional conflict losses and they might be useful to handle this difficult part of the search space and therefore you make these restarts from time to time you have to be bit careful if you restart too often you can end up doing restarts in a cycle so you restart you solve a little bit you restart you solve a little bit again you restart you solve a little bit again and so on you can get stuck so typically you choose the interval between two restarts such that it diverges it gets longer longer you make few and fewer restarts 
-                    \end{itemize}
+                      \begin{itemize}
+                        \item \alert{pre-processing} before you solve the formula the goal is simplify a formula simplify means get rid of some of the clauses get rid of some of the variables shorten some clauses just simplify 
+                        \item \alert{decision heuristics} pick a good variable and a good value for that variable when you make the decision. It's obvious that a good decision juristic helps on satisfiable formulas it also helps on unsatisfiable formulas because the sooner you run into a conflict the smaller part of the search Tree is that you have to look at if you run directly into conflict there's no reason to continue at this point you just try the other part so the sooner you run into conflict the better
+                        \item \alert{BCP} is just the process of finding all unit clauses in principle it's trivial run over the formula check each clause is there only one unassigned literal left, it's not easy to do it fast looking at all clauses is too expensive, BCP is how do you do it as fast as possible. BCP is find all unit clauses as fast as possible
+                        \item \alert{conflict analysis} happens when you run it a conflict conflict is you have an unsatisfied clause an empty clause then you want to find out which were the assignments that triggered this conflict which are responsible for getting an empty clause and you use that for backtracking that information there are two variants of backtracking one is called chronological backtracking and the other one non-chronological \alert{chronological} is what you have seen go back to the last decision and keep it. \alert{Non-chronological} backtracking tries to undo as many decisions as possible such as you just resolve the conflict and sometimes you can undo more assignments that's called non-chronological backtracking and the only information is that you need is which is the reason for the conflict yeah unlearning so conflict analysis also adds an additional clause to the formula that says not that bad assignment again so for instance if the if you found out in conflict analysis that assigning x 1 to true and X2 to false are the reason for the conflict so whenever you assign X1 to 1 and X2 to false you will get a conflict so you never want to do that again how can you say that oh you say either X 1 is false or X 2 is true so you have to Clause not X1 or X2 whenever you try to get that bad assignment again when you assign X1 to one then that clause becomes a unit clause and says oh X2 has to be one that's a conflict clause and you add it to the Clause database in order to prevent the solve from running into the same conflict again so the problem is you run into millions of conflicts during the solution process and you often learn more clauses than your original formula had and you have to store all of that in memory you have to process them all during bollean constraint propagation so the more you of these conflict Clauses you have the more work you have to put into BCP and there is a tradeoff between many conflict Clauses which hope hopefully trigger some implication from time to time and slowing down easy and therefore from time to time you just delete conflict clauses to reduce the memory overhead and to prevent BCP from slowing out that's \alert{unlearning conflict clauses}
+                        \item \alert{restarts} something strange you just start from scratch again so it can happen that the solver gets stuck into in some bad part of the search space so you have a tree you learn conflict and conflict and conflict and conflict but you make little progress so you only learn really long little useful conflict clauses and then it makes sense to say oh let's start again you keep the good conflict clause that you have learned you keep the information the decision heuristics has learned about good variables and you start from scretch and it seems to help so the hope is the information that you have learned drives you into a different part of the search space not into the bad one when you get stuck but you first look at the different part and there you learn additional conflict losses and they might be useful to handle this difficult part of the search space and therefore you make these restarts from time to time you have to be bit careful if you restart too often you can end up doing restarts in a cycle so you restart you solve a little bit you restart you solve a little bit again you restart you solve a little bit again and so on you can get stuck so typically you choose the interval between two restarts such that it diverges it gets longer longer you make few and fewer restarts 
+                      \end{itemize}
                   \end{itemize}
                 \end{minipage}
+              }
+            }
+            child [level distance = 12cm] {
+              node {Preprocessing
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{240}{In the algorithm}
+                      \item \script{241}{Goal, practical observations, find good compromise}
+                      \item \script{242}{Preprocessing techniques}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Unit Propagation
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item if omitted, then immediately performed during solving process
+                        \item \underline{procedure:}
+                          \begin{itemize}
+                            \item identify unit clauses in the CNF
+                            \item assign units, simplify
+                            \item if you get an empty clause formula is unsatisfiable otherwise in the end the CNF does not contain any unique clauses
+                              % \item ... until the CNF is free from unit clauses
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Unit Propagation Lookahead (UPLA)
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item fix a variable $x_i$ to $0$, check implications; then change its value to $x_i = 1$, check implications. Simplify the formula exploiting the \script{244}{consequences}, and also $(x_i = 0 \rightarrow x_j = 1) \wedge (x_i = 1 \rightarrow x_j = 0) \Rightarrow x_i \equiv \neg x_j$
+                        \item ones pretends to have a unit clause and checks what happens, all you need for that is already implemented in the solver the only thing you need is BCP and you need BCP anyway what's the drawback Now it only works if you have clauses of length $2$ if all clauses in the formula have a length longer than two by assigning one variable you don't get any implications, it requires binary clauses and it only makes sense to apply UPLA to variables that appear in binary claes the rest can just be skipped. And because some of the variables might be missing after applying UPLA you have to do something after solving the formula namely add more variable assignments you have to keep track if variables are equivalent or so
+                        \item \script{245}{Advantages and Disadvantages}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Self-subsuming resolution
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        % \item apply resolution to two clauses and resolution result subsumes one of the clauses
+                        \item apply resolution such that the outcome is a subset of one of the operands. why can we replace it you can always add the resolvend to the clause then apply the subsumption checking and that deletes one of the two so it's just replace and outcome is a logically equivalent formula 
+                          . Saves literals
+                        \item \script{246}{Example}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }% / clause distribution ?
+              child {
+                node {Elimination by Resolution
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \alert{variable elimination} applied to a variable of the CNF formula, seen in DP
+                        \item it is applied only if it leads to a simplification of the formula
+                        \item so deleting Clause is not always good of course it makes the formula shorter but later during the solution process the solver goes the hard way to derive conflict clauses they are just resolved and added so it's not always good to delete clauses also it makes the formula shorter if you could add the good conflict clause in the beginning the solver would be much faster so it's not clear what helps
+                        \item \script{247}{Example}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Variable elimination by substitution
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item if clauses represent a gate like in the Tseitin transformation, these clauses can be removed and then every occurence of the variable that corresponds to the output of the gate has to be replaced by the other side of the equation for the remaning clauses
+                        \item potentially saves variables, literals and clauses, it is applied only if it leads to a simplification of the formula
+                        \item \script{248}{Example}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Forward subsumption and Backward subsumption
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{16cm}
+                      \begin{itemize}
+                        \item \alert{Forward Subsumption:} Test if a clause generated during one of the other preprocessing techniques is subsumed by one clause of the initial formula. Remove all the clauses subsumed
+                        \item \alert{Backward Subsumption:} Test if a clause generated during one of the other preprocessing techniques subsumes one (or more) clauses of the initial formula. Remove all the clauses subsumed
+                        \item in principle you do subsumption checking whenever you add a clause to the clause database there's function add_clause that gets a new clause and adds it to the list of all clauses whenever you do that you can check for subsumption and there are two variables as the new Clause is the short one the subsuming clause the subset is newly added and the long one is already in the clause database or the other way around you have a short clause in the clause database and you want to add a new clause which is a super set of the one you already have in the first case when you add the short clause you can replace the long with the short in the second case where you add the long one you can just ignore it
+                        \item forward subsumption is you add the long one backward subsumption is you add the short one now why do we distinguish it really here because the running time of the check is completely different 
+                        \item backwards subsumption now one of the data structures in the preprocessor is typically the occurrence list so for every lital you have a list of all clauses which this lital occures so you have a list of X1 list for not X1 list for X2 for not X2 and so on so when you add the short clause how can you find all candidates that could be subsumed by the new clause if you add X1 X2 
+                        \item all candidates that can be subsumed by X1 X2 contain X1 and they also contain an X2 so you can look either at the occurrence list of X1 or at the occurrence list of X2 and you just pick the shorter one you have to only run over the shortest occurrences that's quite efficient 
+                        \item forward subsumption: you have the long clause, the only thing you know is the short clause contains at least one of the literals of the long clause so you have to run over all occurrence to find all possible candidates and running over all occurrences is worse than just running off the best one shortest one and therefore forward subsumption is expensive backward subsumption is quite cheap 
+                        \item backward subsumption is done all the time forward subsumption from time to time only 
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Blocked Clause Elimination
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item let $C$ be a clause and $\ell \in C$ a literal, $C$ is blocked by $\ell$ \texttt{iff} for all clauses $D$ with $\neg\ell \in D$ holds: $C \otimes_{\ell} D$ is a tautology
+                        \item \alert{Blocked clauses} can be deleted without changing satisfiability
+                        \item \script{250}{Illustration}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Equivalent Literals
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item take only the binary clauses $\{\ell, \kappa\}$
+                        \item create the \alert{binary clause graph} 
+                        \item all literals in strongly connected components can be replaced by one representative
+                        \item if there is a path from $\neg \ell$ to $\ell$ for some literal $\ell$, we can replace $\ell$ by $1$
+                        \item \script{251}{Illustrations}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Binary clause graph
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item only binary clauses $\{\ell, \kappa\}$
+                          \item $G = (V, E)$ with
+                            \begin{itemize}
+                              \item $V = \{x, \neg x \mid x \text{ variable}\}$
+                              \item $E = \{(\neg \ell, \kappa), (\neg \kappa, \ell) \mid \{\ell, \kappa\} \in \varphi\}$
+                            \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
+            }
+            child {
+              node {Decision Heuristics
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{275}{In the algorithm}
+                      \item role of choosing the next Decision Variable
+                        \begin{itemize}
+                          \item comparable with \enquote{case distinction} in the DLL algorithm
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Classical decision heuristics
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item among the unassigned variables, choose the one that occurs more frequently in the currently unsatisfied clause
+                          \begin{itemize}
+                            \item in most cases also weighted with the length of those clauses
+                          \end{itemize}
+                        \item \underline{Complexity:} These heuristics are quite time consuming, because both the status of each clause and the distribution of the variables in the (learned) clauses have to be computed and kept up to date 
+                          \begin{itemize}
+                            \item computation complexity determined by \#Clauses
+                          \end{itemize}
+                        \item \script{277}{Summary}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Variable State Independent Decaying Sum (VSIDS)
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item today’s standard method used by every SAT solver 
+                        \item $P_{x_i} = P_{x_i} + 1 \text{ if } L = x_i$, $N_{x_i} = N_{x_i} + 1 \text{ if } L = \neg x_i$
+                          \begin{itemize}
+                            \item initially, $P_{x_i}$ ($N_{x_i}$) equals the number of occurrences of $x_i$ ($\neg x_i$ ) in the original CNF
+                            \item unassigned variable $x_i$ with the highest activity ($P_{x_i}$ or $N_{x_i}$) is chosen as decision variable, valuation depends on whether $P_{x_i} > N_{x_i}$ holds or not
+                          \end{itemize}
+                        \item \underline{Complexity:} No update is needed for assignments and backtracks, since values do not depend on variable state
+                          \begin{itemize}
+                            \item computation complexity determined by \#Variables
+                          \end{itemize}
+                        \item periodically, the activities are \enquote{normalized}, i. e., divided by a constant factor
+                          \begin{enumerate}[label=$\Rightarrow$]
+                            \item after the normalization, the recently learned clauses have a higher weight in comparison with the clauses learned before that last normalization
+                            \item takes into account the \enquote{history} of the search process
+                          \end{enumerate}
+                        \item \script{279}{Several optimizations possible}
+                        \item \script{278}{Summary (f.)}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+            }
+            child {
+              node {Boolean Constraint Propagation
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{281}{In the algorithm}
+                      \item \underline{Tasks}
+                        \begin{itemize}
+                          \item detecting all the implications from the assignment of a variable
+                          \item detecting conflicts
+                        \end{itemize}
+                      \item comparable to the repeated application of the unit rule in the DLL algorithm
+                        % \item efficient implementation mandatory, because roughly 80\% of the runtime of a SAT algorithm is spent in the BCP routine
+                      \item \script{283}{General procedure}
+                      \item \script{284}{Example (ff.)}
+                      \item \script{282}{Summary (ff.)}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Counter-Based Schemes
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \underline{2-Counter Scheme:} 
+                          \begin{itemize}
+                            \item two counters for each clause
+                              \begin{itemize}
+                                \item one counter for the literals which satisfy the clause
+                                \item one counter for the unassigned literals (aka “open” literals)
+                              \end{itemize}
+                          \end{itemize}
+                        \item \underline{1-Counter Scheme:}
+                          \begin{itemize}
+                            \item one counter for each clause to count the number of not falsified literals 
+                          \end{itemize}
+                        \item \underline{Disadvantages:}
+                          \begin{itemize}
+                            \item \enquote{unnecessary} counter updates
+                            \item adjustment of the counter values during the backtracks
+                            \item need a list for each variable and polarity to store all the clause where the \enquote{related literal} (variable having that polarity) occurs (called \enquote{occurrences list})
+                          \end{itemize}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Watched Literals / 2-Literal Watching Scheme
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \underline{Idea:} As long as a clause contains two unassigned (or one satisfied) literal, it can not be a unit clause and the exact number of unassigned literals is not important
+                        \item for each clause mark two different literals
+                        \item \underline{Invariant:} The watched literals of a clause are either unassigned or satisfy the clause
+                        \item \underline{Advantages:}
+                          \begin{itemize}
+                            \item update operations only when necessary, i.e., when an assignment \enquote{breaks} the invariant
+                            \item one list for each variable and polarity (like above) containing only the clauses currently watching that literal
+                          \end{itemize}
+                        \item \underline{Disadvantages:} The literals of a clause are checked several times
+                        \item \script{297}{Example}
+                        \item \underline{Possible optimizations:}
+                          \begin{itemize}
+                            \item store the watched literals in the first two positions (memory \enquote{cells}) of a clause
+                              \begin{itemize}
+                                \item makes it possible to access to the \enquote{second} watched literal of a clause fast, as well as its status
+                                \item if the second watched literal satisfies the clause, it is not necessary to find a replacement for the first one, if this is in turn falsified
+                              \end{itemize}
+                          \end{itemize}
+                          % \item watched Literal schemes have been used in all the modern SAT solvers in the last years
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+            }
+            child {
+              node {Conflict Analysis and Backtracking
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{300}{In the algorithm}
+                      \item comparison of \script{301}{DLL algorithm} and \script{303}{Modern SAT Algorithms}
+                      \item \script{302}{Example}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Backtracking
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item in today’s SAT algorithms the backtrack level is only determined by the resulting conflict clause
+                        \item the backtrack level matches the maximum decision level among all the literals in the conflict clause except the UIP literal, that means with the exception of the literal assigned at the current decision level, which is conflicting by definition
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Chronological Backtracking
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item is what one has seen, go back to the last decision and keep it
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node {Non-Chronological Backtracking
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \underline{Idea:} \enquote{What would have happened if the conflict clause had already been contained in the original CNF formula?}
+                          \item \script{318}{Procedure}
+                            \begin{itemize}
+                              \item if a conflict appears at decision level $0$, the CNF formula is unsatisfiable
+                            \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
+              child {
+                node {Conflict Analysis
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item during the conflict analysis the \alert{implication graph} is traversed backwards (in reverse order of the assignments in the decision stack) starting from the conflicting point, to allow to compute the series of resolution steps which finally lead to the \alert{conflict clause}
+                        \item different termination criteria for interrupting the resolution steps lead to different conflict clauses
+                        \item \script{306}{Implementations}
+                        \item \script{307}{Example for Conflict Analysis (ff.)}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {(1st) Unique Implication Point (UIP and 1UIP)
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \underline{Observation:} Many partitions of the implication graph into \enquote{conflict side} and \enquote{reason side} are possible
+                          \item a node in the implication graph is called a \alert{Unique Implication Point} (UIP) \textit{iff} a paths from the decision variables of the current decision level to the conflict variable go through this node
+                            \begin{itemize}
+                              \item the set of UIPs is not empty. The node with the decision variable of the current decision level is a Unique Implication Point
+                              \item the \alert{1st Unique Implication Point} (1UIP) is the UIP that is closest to the conflict variable
+                            \end{itemize}
+                          \item an \alert{asserting clause} is a clause with exactly one literal from the current decision level
+                          \item \underline{Observation:} A partition with a UIP on the reason side and all successors of the UIP on the conflict side leads to an \alert{asserting clause} as a \alert{conflict clause}
+                          \item \alert{1UIP scheme}: Use the 1UIP for constructing an (asserting) conflict clause
+                            \begin{itemize}
+                              \item conflict analysis according to the \alert{1UIP scheme} terminates as soon as the currently computed resolvent contains exactly one literal which was assigned at the decision level being analyzed at that moment (the highest), whereas all other literals were assigned at lower decision levels
+                              \item \alert{conflict clauses} represent combinations of variables that will inevitably lead to a conflict
+                              \item \alert{Resolution Lemma} allows to insert the conflict clauses into the CNF formula, and consequently to \enquote{prune} the whole search tree (they prevent the algorithm from running into identical conflicts)
+                              \item compared to others, the \alert{1UIP scheme} turned out to be the most powerful (shorter
+                                conflicts clauses, more effective pruning, faster runtime)
+                            \end{itemize}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node {Implication Graph
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          % \item data structure for performing the conflict analysis in today’s SAT algorithms 
+                          \item Directed, acyclic graph 
+                            \begin{itemize}
+                              \item Nodes represent assignments to variables
+                              \item Edges reflect which set of assignments have caused an implication
+                            \end{itemize}
+                          \item the implication graph is updated at every variable assignment and every backtrack operation of the search process
+                          \item \script{304}{Example for Implication} and \script{305}{Example for Implication graph}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
+            }
+            child {
+              node {Unlearning
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{320}{In the algorithm}
+                      \item Modern SAT algorithms produce a conflict clause for each conflict and add it to the set of clauses
+                      \item \underline{Problems:}
+                        \begin{itemize}
+                          \item Risk of memory overflow
+                          \item Significant slowdown of the BCP routine
+                        \end{itemize}
+                      \item \underline{Solution:} Periodic deletion of conflict clauses
+                      \item the following clauses are excluded from deletion:
+                        \begin{itemize}
+                          \item those of the original CNF formula
+                          \item those which are used in the current implication graph
+                        \end{itemize}
+                      \item it is important to find a good compromise between $\ldots$
+                        \begin{itemize}
+                          \item the deletion of information, and
+                          \item the avoidance of the above stated problems
+                        \end{itemize}
+                      \item \underline{possible criteria for conflict clause deletion:}
+                        \begin{itemize}
+                          \item delete clauses whose length exceeds a predefined value
+                          \item delete “old” and/or “inactive” conflict clauses
+                            \begin{itemize}
+                              \item the age of a clause results from the order of learning
+                              \item the activity of a clause is increased every time this clause is involved in a resolution step of some following conflict analyses
+                                $\Rightarrow$ active clauses are often used to derive conflicts
+                            \end{itemize}
+                        \end{itemize}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+            }
+            child {
+              node {Restarts
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{324}{In the algorithm}
+                        % \item possibility that SAT algorithms perform search in less promising areas of the search tree
+                      \item \underline{basic idea}:
+                        \begin{itemize}
+                          \item the longer a SAT algorithm searches for a model with no result, the higher the probability that $\ldots$
+                            \begin{itemize}
+                              \item the solver is looking in an unsatisfiable part of the search space
+                              \item at previous branches, it made \enquote{wrong} decisions
+                            \end{itemize}
+                        \end{itemize}
+                      \item \underline{procedure:} from time to time
+                        \begin{enumerate}
+                          \item stop the search routine
+                          \item undo all assignments except from those at decision level 0
+                          \item restart the search with decision level 1
+                        \end{enumerate}
+                      \item keep the clauses already learned
+                      \item variable activities remain unchanged
+                      \item \underline{compared to the previous search, good chance that:}
+                        \begin{itemize}
+                          \item other variables are chosen at lower decision levels
+                          \item the search process goes into another direction
+                        \end{itemize}
+                      \item infinite loops are generally avoided by continuously increasing the interval between two restarts
+                        % \item \underline{several optimizations possible:}
+                        %   \begin{itemize}
+                        %     \item when should the first restart take place?
+                        %     \item by how much should the interval between two restarts be increased?
+                        %   \end{itemize}
+                      \item restarts are not only useful to accelerate the process in case of satisfiable CNF formula, but also in case of unsatisfiable ones
+                    \end{itemize}
+                  \end{minipage}
+                }
               }
             }
           }
@@ -762,10 +1106,102 @@
               }
             }
           }
+          child {
+            node {Decision Stack
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    % \item Central data structure of modern SAT algorithms
+                    \item stores the order of the executed assignments
+                    \item if a model for a CNF formula could be found, the decision stack stores the satisfying assignment
+                    \item each variable assignment has an associated decision level
+                    \begin{itemize}
+                      \item decision level is initialized with $0$; before a decision is made, it is incremented by one; backtracking decrements the decision level appropriately
+                      \item decision level $0$ plays a special role: it stores only implications from unit clauses in the original formula, but no decisions
+                      \item a conflict on decision level $0$ means that the CNF is unsatisfiable
+                    \end{itemize}
+                    \item \script{253}{Illustration}
+                    \item \script{255}{Example 1 (ff.)}, \script{265}{Example 2 (ff.)}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Termination
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item Observation: Due to conflict analysis, learning, and non-chronological backtracking, it seems that modern SAT solvers roam \enquote{wildly} in the search space
+                    \item \script{329}{Argumentation why termination is given (f.)}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
+          child {
+            node {Aspects without more details
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{332}{Overview}
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+          }
         }
       }
       child {
         node {And-inverter graphs (AIGs)
+          \resizebox{\textwidth}{!}{
+            \begin{minipage}[t]{12cm}
+              \begin{itemize}
+                \item AIGs are a class of circuits which consist only of AND gates and inverters:
+                  \begin{itemize}
+                    \item Nodes represent AND gates
+                    \item Negated edges represent inverters
+                  \end{itemize}
+                \item Efficient data structure, since there is only one type of nodes (inverters are stored as last bit of pointers)
+                \item Apart from exor/exnor all binary operations can be represented using only one AIG node
+                \item AIGs do not provide a canonical representation
+                  \begin{itemize}
+                    \item \script{340}{Example (ff.)}, thus, combinational equivalence checking cannot be reduced to an isomorphism check on AIGs
+                  \end{itemize}
+                \item \script{344}{Combinational Equivalence Checking with AIGs}
+                \begin{itemize}
+                  \item \script{345}{Example (f.)}
+                \end{itemize}
+                \item \script{348}{Normalization rules (f.)}
+                \begin{itemize}
+                  \item \script{350}{Limits of Normalization Rules (ff.)}
+                \end{itemize}
+              \end{itemize}
+            \end{minipage}
+          }
+        }
+        child {
+          node {Functionally Reduced AIGs (FRAIGs)
+            \resizebox{\textwidth}{!}{
+              \begin{minipage}[t]{12cm}
+                \begin{itemize}
+                  \item not canonical, but \enquote{\alert{semi-canonical}}, can be used to normalize and compress circuits representations
+                  \item \underline{maintain the invariant:} There is no pair of two nodes in a FRAIG which represent the same Boolean function (or a function and its negation)
+                  \begin{itemize}
+                    \item by this invariants, FRAIGs are sufficient for combinational equivalence checking.
+                  \end{itemize}
+                  \item \script{362}{Building Option 1}
+                  \begin{itemize}
+                    \item \script{365}{Example (ff.)}
+                  \end{itemize}
+                  \item \script{374}{Building Option 2}
+                  \begin{itemize}
+                    \item \script{376}{Example (ff.)}
+                  \end{itemize}
+                \end{itemize}
+              \end{minipage}
+            }
+          }
         }
       }
     }
@@ -863,7 +1299,7 @@
               child {
                 node {Satisfiability equivalent CNF (Tseitin Transformation)
                   \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{14cm}
+                    \begin{minipage}[t]{16cm}
                       \begin{itemize}
                         \item it doesn't work good to turn formula into equivalent CNF formula, instead turn miter circuit into formula that is satisfiable \textit{iff} the original two circuits are not equivalent. Don't need the same output for all possible assignments, only need satisfiable \textit{iff} not equivalent. Not logically equivalent to normal CNF, 
                           \item one gives up \alert{logical equivalence} and only requires \alert{equisatisfiability} because because in the formula $X\oplus Y$ you cannot assign the output variable $Z$ in the wrong way, but in the formula $Z \equiv X \oplus Y$ you can, because of the additional variables that would not be assigned in the original formula

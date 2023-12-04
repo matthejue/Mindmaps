@@ -51,6 +51,7 @@
 											\begin{itemize}
 												\item \script{589}{Same for individual states}: All the traces that start in this state if this set is a subset of e then the state satisfies the LT property
 											\end{itemize}
+											\item \alert{linear time} just means that we define the property as a set of sequences and so sequences are linearly ordered as opposed to a tree
 										\end{itemize}
 									\end{minipage}
 								}
@@ -146,11 +147,16 @@
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item \script{790}{Definition (ff.)}
-															\item \script{708}{Examples and classification (ff.)}, it's related to the fact that bureaucracy is so great right when you go to the university and you ask can you do this they will say no it's not possible why because it's always safe to do nothing so when you when you have a system where you always remain in the same state this system satisfies every lifeless property every safety property right you are safe right save just means that you don't arrive at the bad thing, save just means that you don't arrive at the bad thing
-															% \begin{itemize}
-															% 	\item \script{779}{Alternative depiction and examples}
-															% \end{itemize}
 															\begin{itemize}
+																\item \videoeight{2065}{Explanation: Counter Example}
+																\item \videoeight{2283}{Explanation: Empty Set}
+																\item \scriptthree{4}{More direct} and \videoeight{2109}{Explanation}, whenever I have a trace that does not satisfy the property I know after finetely many states or finetely many elements in the sequence I know it means that I no longer need to look at what the remainder of Sigma is because the remainder of Sigma does not matter whatever you choose to extend it you will not be able to get a trace that satisfies E you will not be able to repair it
+																\item another way to read this is if a trace violates the property e then it has a bad prefix but what is a bad prefix well it is one that cannot be extended to trace E
+																\item what is a bad prefix it is a finite sequence and if it is if this finite sequence is a prefix of an infinite trace then this infinite trace will not satisfy the given linear time property e
+															\end{itemize}
+															\item \script{708}{Examples and classification (ff.)}, it's related to the fact that bureaucracy is so great right when you go to the university and you ask can you do this they will say no it's not possible why because it's always safe to do nothing so when you when you have a system where you always remain in the same state this system satisfies every lifeless property every safety property right you are safe right save just means that you don't arrive at the bad thing, save just means that you don't arrive at the bad thing
+															\begin{itemize}
+																\item \script{779}{Alternative depiction and examples}, invariant, mutual exclusion and deadlock freedoom can be identified by looking at one single state, don't need to look at history, \videoeight{1550}{Explanation: Safety properties that need history}, \enquote{\alert{there is no bad prefix}}%, once come to state that breaks condition, then one has a finite prefix of the infinite sequence of states
 																\item \script{799}{Examle: Traffic light (ff.)}
 															\end{itemize}
 															\item \script{809}{Satisfaction}
@@ -166,7 +172,7 @@
 													\end{minipage}
 												}
 											}
-										child [level distance = 7cm] {
+										child [level distance = 2.5cm] {
 												node {Prefix closure
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
@@ -188,6 +194,12 @@
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
 																	\item \script{784}{Examples}
+																	\begin{itemize}
+																		\item it is the infinite Trace that violates a property of infinite traces so one cannot say that a finite prefix violates the property it's just that one knows that every Trace that has this prefix will violate the property no matter how this continues this Trace here will not satisfy by the correctness so the prefix is bad in the sense that you cannot continue it to a trace that satisfies the property so it is a finite witness
+																		\item \videoeight{1723}{Explanation}
+																	\end{itemize}
+																	\item \videoeight{2341}{With respect to property with example}, it doesn't make sense to say that some finite sequence of labels is a bad prefix but it depends on the property for other properties it could be extended
+																	\item \script{794}{Minimal bad prefixes}, not always minimal, whenever you have this bad thing happening and you extend it will remain a bad prefix, any finite extension of a minimal bad prefix is again a bad prefix and every extension of a bad prefix is a bad, bad prefixes are \alert{finite} that's why we use a $*$, if shorter then there is a way to repair it
 																\end{itemize}
 															\end{minipage}
 														}
@@ -199,9 +211,13 @@
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
 																	\item \script{750}{Invariant Checking (f.)}
-																	\item \script{727}{Definition}, invariantly the not bad thing holds true
+																	\begin{itemize}
+																		\item not satisfied want \videoeight{655}{Counter example}, i.e. path that reaches state that violates invariant condition, path only until state that violates property, don't need to extend path, trace that labels path is infinite but one already knows that trace will violate the invariant, so it doesn't matter what follows after this state
+																	\end{itemize}
+																	\item \script{727}{Definition}, $always\;\phi$, $never\;\neg\phi$, invariantly the not bad thing holds true, every state on path of transition system which always starts in initial state satisfies the invariant condition, which means the label satisfies it
 																	\begin{itemize}
 																		\item \enquote{no bad state will be reached}
+																		\item \videoeight{467}{Intuitive explanation}
 																	\end{itemize}
 																	\item \script{711}{Examples}
 																	\begin{itemize}
@@ -217,10 +233,13 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{756}{Algorithm}
+																			\item \script{756}{Algorithm}, failed search means that system is so far correct, reverse stack for counter example
 																			\begin{itemize}
 																				\item \script{752}{Input and Output}
-																				\item \script{766}{Resursive DFS}
+																				\item \script{766}{Resursive DFS}, %arbitrary states, first time on initial states, 
+																				\begin{itemize}
+																					\item \videoeight{958}{Explanation}, if state has already been processed which means that it is not in the set of unprocessed states then the algorithm will say no the serach has failed because I already have processed the state and if I have come here it means that the processing of this state did not result in a positive answer because if there was a positive answer I would stop, loop then state already processed so no push on stack for new identical state
+																				\end{itemize}
 																			\end{itemize}
 																			\item \script{767}{Example (ff.)}
 																		\end{itemize}
@@ -546,6 +565,9 @@
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
 											\item \script{715}{Overview (ff.)}
+											\begin{itemize}
+												\item \script{722}{State satisfies condition}
+											\end{itemize}
 										\end{itemize}
 									\end{minipage}
 								}

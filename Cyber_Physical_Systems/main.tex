@@ -136,7 +136,16 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{703}{Overview and examples} and \videoeight{3935}{Explanation}, classification does not mean that we have here the set of all LT properties all linear Time Properties and then we have then we can divide all linear Time Properties such that it is either a safety or liveness that is not the case so it's not as if LT is the union of safety and liveness however what is the case is that whenever I have a property e that I can write this e as a conjunction of E1 and E2 such that E1 is a safety property and E2 is a liveness property and this is very nice that I can do this so it's a form of decomposition I decompose the property into a conjunction of a safety and the liveness property and this is very nice because I have one algorithm for safety properties and I have another algorithm for liveness properties, to prove that a transition system satisfies E I prove that it satisfies E1 and I prove that it satisfies E2, to prove safety properties I take the finite prefixes I look at the finite words and for the for the other ones I look at the infinite words, for the finite ones I use automata over finite Words and for the other ones the second kind of life properties one will use Büchi automata
+													\item \script{703}{Overview and examples} and \videoeight{3935}{Explanation}
+													\item \script{937}{Examples}
+													\item \script{965}{Decomposition theorem (ff.)}
+													\begin{itemize}
+														\item classification does not mean that we have here the set of all LT properties all linear Time Properties and then we have then we can divide all linear Time Properties such that it is either a safety or liveness that is not the case so it's \alert{not} as if LT is the \alert{union} of safety and liveness however what is the case is that whenever I have a property e that I can write this e as a \alert{conjunction} of E1 and E2 such that E1 is a safety property and E2 is a liveness property and this is very nice that I can do this so it's a form of decomposition I decompose the property into a conjunction of a safety and the liveness property and this is very nice because I have one \alert{algorithm for safety properties} and I have \alert{another algorithm for liveness properties}, to prove that a transition system satisfies E I prove that it satisfies E1 and I prove that it satisfies E2, to prove safety properties I take the finite prefixes I look at the \alert{finite words} and for the other ones I look at the \alert{infinite words}, for the \alert{finite} ones I use automata over finite Words and for the other ones the \alert{second kind} of life properties one will use Büchi automata
+														\item \script{974}{Proof (ff.)}
+													\end{itemize}
+													\begin{itemize}
+														\item \script{956}{Only property both Safe and Live}
+													\end{itemize}
 												\end{itemize}
 											\end{minipage}
 										}
@@ -156,6 +165,7 @@
 																\item \scriptthree{9}{Antoher Definition} and \videoeight{4449}{Explained}, set of all traces such that no prefix of sigma lies in E
 																\item \scriptthree{12}{Condition for safety property (bottom)} and \videoeight{5301}{Explanation}
 																\item \videoeight{3857}{Finite good}, the nice thing about these characteristics is that my satisfaction relation of the transition system is now one where I don't need to look at the infinite traces but it is sufficient to look at the finite traces and this is because the $E$ defines me a set of finite words and vice versa a set of finite words I can use it as a set of bad prefixes to define an e, when a property is safety property when it can be defined by a set of bad prefixes, whether I have first come up with the set of finite words or whether I have first come up with the property and then i define the set of finite words it doesn't matter in any case this set of finite words is what I can use to define the correctness of the transition system
+																\item \script{960}{Definition with closure (pr.)}
 															\end{itemize}
 															\item \script{708}{Examples and classification (ff.)}, it's related to the fact that bureaucracy is so great right when you go to the university and you ask can you do this they will say no it's not possible why because it's always safe to do nothing so when you when you have a system where you always remain in the same state this system satisfies every lifeless property every safety property right you are safe right save just means that you don't arrive at the bad thing, save just means that you don't arrive at the bad thing
 															\begin{itemize}
@@ -191,12 +201,12 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{851}{Definition}
+																	\item \script{891}{Definition}
 																	\item $E$ is a safety property \textit{iff} $cl(E) = E$
 																	\begin{itemize}
-																		\item \script{857}{Proof (ff.)}
+																		\item \script{902}{Proof (ff.)}
 																	\end{itemize}
-																	\item \script{849}{Examples}
+																	\item \script{898}{Examples}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -268,11 +278,13 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{16cm}
 														\begin{itemize}
-															\item \script{584}{Definition}: e.g. not waiting forever to get into ciritical section, shouldn't say every process that requests enters because this is talking about actions we need to talk about the atomic propositions wait and crit and so we can define this livess or starvation freedom property as the set of all infinite words over the power set of the atomic propositions such that we say that if process one is waiting infinitely often then process one should also be in the critical section infinitely often because if you're waitiing often and you don't only get to enter finitely many times, then at some point you have to wait forever and the same of course holds for the second process that one shouldn't wait forever either okay and right in the same way, parenthesis around the premise, otherwise it's a bit ambigous, but you're more ambitious right so something good is supposed to happen so you must move to some good state and eventually yoand not stay in the same save state and eventually you will arrive at the good thing
+															\item \script{941}{Definition}
 															\begin{itemize}
-																\item starvation freedom what does means something like each time there is a request there will be an acknowledgement and so the request is an action but the effect of the action is that the successor state has the label wait either wait one or wait two and then there is an acknowledgement where the acknowledgement here means the enter action and the effect of the enter action is that the successor state satisfies the atomic proposition crit one or crit 2
-																\item to understand this implication it makes sense to look at its negation the negation of an implication is that the left side of the implication holds and the right side does not and it means that we have this infinite trace because it's infinite and goes outside of the transparency and infinitely often there is this request and so the process let's say process one is is in the wait state or is in a state that satisfies the atomic proposition wait and now the right hand side of the implication is wrong if the implication is falsified and what does this mean it means that only finite many positions have crit one in the letter so that means that after a finite amount let's say here there is no more so in the rest here there is no more our position such that the label contains the atomic proposition crit one% and this means that there are requests right because we have infinitely more infinite requests and in fact there are infinitely many requests because there infinitely many positions where wait one is an element of the labor which do not have the response right the the request to enter the critical section is not met because from here on we no longer have crit in one of the letters and intuitively it is because we reason about infinite traces so we do not care what happens finitely often so if finally often a request is met by an acknowledgement that's fine but we want that it happens infinitely often
-																\item examples for trace in live: $(\{wait_1\}, \{crit_1\}, \{wait_2\}, \{crit_2\})^{\omega}\in LIVE$, $\emptyset^{\omega} \in LIVE$, $\{crit_1\}\in LIVE$, if noones wait infintely often we don't care what else happens,% $(\{wait_1\}, \{crit_1\}, \{wait_2\})^{\omega}\in LIVE$
+																\item \script{945}{Examples (ff.)}
+															\end{itemize}
+															\item \script{926}{Categories with examples}
+															\begin{itemize}
+																\item \alert{liveness:} \enquote{something good will happen}
 															\end{itemize}
 														\end{itemize}
 													\end{minipage}
@@ -294,6 +306,12 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{16cm}
 																\begin{itemize}
+																	\item \script{584}{Definition for Mutex}: %e.g. not waiting forever to get into ciritical section, shouldn't say every process that requests enters because this is talking about actions we need to talk about the atomic propositions wait and crit and so we can define this livess or starvation freedom property as the set of all infinite words over the power set of the atomic propositions such that we say that if process one is waiting infinitely often then process one should also be in the critical section infinitely often because if you're waitiing often and you don't only get to enter finitely many times, then at some point you have to wait forever and the same of course holds for the second process that one shouldn't wait forever either okay and right in the same way, parenthesis around the premise, otherwise it's a bit ambigous, but you're more ambitious right so something good is supposed to happen so you must move to some good state and eventually yoand not stay in the same save state and eventually you will arrive at the good thing
+																	\begin{itemize}
+																		\item \alert{starvation freedom} means something like each time there is a request there will be an acknowledgement and so the request is an action but the effect of the action is that the successor state has the label wait either wait one or wait two and then there is an acknowledgement where the acknowledgement here means the enter action and the effect of the enter action is that the successor state satisfies the atomic proposition crit one or crit 2
+																		% 	\item to understand this implication it makes sense to look at its negation the negation of an implication is that the left side of the implication holds and the right side does not and it means that we have this infinite trace because it's infinite and goes outside of the transparency and infinitely often there is this request and so the process let's say process one is is in the wait state or is in a state that satisfies the atomic proposition wait and now the right hand side of the implication is wrong if the implication is falsified and what does this mean it means that only finite many positions have crit one in the letter so that means that after a finite amount let's say here there is no more so in the rest here there is no more our position such that the label contains the atomic proposition crit one% and this means that there are requests right because we have infinitely more infinite requests and in fact there are infinitely many requests because there infinitely many positions where wait one is an element of the labor which do not have the response right the the request to enter the critical section is not met because from here on we no longer have crit in one of the letters and intuitively it is because we reason about infinite traces so we do not care what happens finitely often so if finally often a request is met by an acknowledgement that's fine but we want that it happens infinitely often
+																		% 	\item examples for trace in live: $(\{wait_1\}, \{crit_1\}, \{wait_2\}, \{crit_2\})^{\omega}\in LIVE$, $\emptyset^{\omega} \in LIVE$, $\{crit_1\}\in LIVE$, if noones wait infintely often we don't care what else happens,% $(\{wait_1\}, \{crit_1\}, \{wait_2\})^{\omega}\in LIVE$
+																	\end{itemize}
 																	\item \script{601}{Problem with Liveness (ff.), } in this Trace we have infinitely often wait 2 right this these three occurrences are repeated infinitely often but we don't have any occurrence of crit 2 so in particular we don't have infinitely many occurrences of crit 2 and this is problematic here right we have the second process has requested but it never gets to actually enter the critical section, many people will actually still use semaphores for Mutual exclusion because in practice is it's probably it's quite unlikely that this happens and towards the end of the lecture we will see the concept of fairness so that's sort of an additional assumption that we put to rule out this. Usually we would have a self flop in the initial state that means that perhaps a process never ever needs to uh make a request but it can if it wishes
 																	\item \script{604}{Peterson algorithm (ff.)}: $b_1$ and $b_2$ are booleans, $X$ identifies one of the two processes
 																	\begin{itemize}

@@ -153,29 +153,28 @@
 								child {
 										node {Safety properties
 												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{18cm}
+													\begin{minipage}[t]{20cm}
 														\begin{itemize}
-															\item \script{790}{Definition (ff.)}
+															\item \script{790}{Definition (ff.)}, set of all \alert{infinite} words / traces that do not have a bad prefix
 															\begin{itemize}
 																\item \videoeight{2065}{Explanation: Counter Example}
 																\item \videoeight{2283}{Explanation: Empty Set}
-																\item \scriptthree{4}{More direct} and \videoeight{2109}{Explanation}, whenever I have a trace that does not satisfy the property I know after finetely many states or finetely many elements in the sequence I know it means that I no longer need to look at what the remainder of Sigma is because the remainder of Sigma does not matter whatever you choose to extend it you will not be able to get a trace that satisfies E you will not be able to repair it
-																\item another way to read this is if a trace violates the property e then it has a bad prefix but what is a bad prefix well it is one that cannot be extended to trace E
-																\item what is a bad prefix it is a finite sequence and if it is if this finite sequence is a prefix of an infinite trace then this infinite trace will not satisfy the given linear time property e
-																\item \scriptthree{9}{Antoher Definition} and \videoeight{4449}{Explained}, set of all traces such that no prefix of sigma lies in E
+																\item \scriptthree{4}{More direct} and \videoeight{2109}{Explanation}, whenever I have a trace that does not satisfy the property one doesn't have to look at the whole infinite trace to know that the property does not hold, it is sufficient to look at all finite prefixes, if it does not satisfy the property, then there will be a position $n$ such that the prefix going from $A_0$ to $A_n$ is a bad prefix%, after finetely many states or finetely many elements in the sequence I know that I no longer need to look at what the remainder of Sigma is because the remainder of Sigma does not matter whatever you choose to extend it you will not be able to get a trace that satisfies E you will not be able to repair it
+																\item another way to read this is \alert{if a trace violates (does not satisfy) the property e then it has a bad prefix} but what is a bad prefix well it is one that cannot be extended to trace E
+																\item \scriptthree{9}{Antoher Definition} and \videoeight{4449}{Explained}%, set of all traces such that no prefix of sigma lies in E
 																\item \scriptthree{12}{Condition for safety property (bottom)} and \videoeight{5301}{Explanation}
 																\item \videoeight{3857}{Finite good}, the nice thing about these characteristics is that my satisfaction relation of the transition system is now one where I don't need to look at the infinite traces but it is sufficient to look at the finite traces and this is because the $E$ defines me a set of finite words and vice versa a set of finite words I can use it as a set of bad prefixes to define an e, when a property is safety property when it can be defined by a set of bad prefixes, whether I have first come up with the set of finite words or whether I have first come up with the property and then i define the set of finite words it doesn't matter in any case this set of finite words is what I can use to define the correctness of the transition system
 																\item \script{960}{Definition with closure (pr.)}
 															\end{itemize}
 															\item \script{708}{Examples and classification (ff.)}, it's related to the fact that bureaucracy is so great right when you go to the university and you ask can you do this they will say no it's not possible why because it's always safe to do nothing so when you when you have a system where you always remain in the same state this system satisfies every lifeless property every safety property right you are safe right save just means that you don't arrive at the bad thing, save just means that you don't arrive at the bad thing
 															\begin{itemize}
-																\item \script{779}{Alternative depiction and examples}, invariant, mutual exclusion and deadlock freedoom can be identified by looking at one single state, don't need to look at history, \videoeight{1550}{Explanation: Safety properties that need history}, \enquote{\alert{there is no bad prefix}}%, once come to state that breaks condition, then one has a finite prefix of the infinite sequence of states
-																\item \script{799}{Examle: Traffic light (ff.)}
+																\item \script{779}{Alternative depiction and examples}, invariants like \alert{mutual exclusion} ($never\enspace crit_1\wedge crit_2$) and \alert{deadlock freedoom} ($never \bigwedge_{0\le i< n} wait_i$) can be identified by looking at one single state, don't need to look at history: \enquote{\alert{no bad state will be reached}} \videoeight{1550}{Explanation: Safety properties that need history}: \enquote{\alert{there is no bad prefix}}%, once come to state that breaks condition, then one has a finite prefix of the infinite sequence of states
+																\item \script{799}{Examle: Traffic light (ff.)}, just come up with bad prefix
 																\begin{itemize}
 																	\item \videoeight{2799}{Why don't talk about sequence of states}, when specify correctness property don't know Cyber Physical systems, not constructed yet, don't have model yet, \videoeight{3195}{Don't say before this position}, reason that is not set of minimal bad prefixes, not first occurence
 																\end{itemize}
 															\end{itemize}
-															\item \script{809}{Satisfaction}
+															\item \script{809}{Satisfaction}, can characterize the validity of a safety property on a given transition system T by the fact that none of the finite prefixes of a trace in the transition system is a bad prefix
 															\begin{itemize}
 																\item \videoeight{3424}{Proof: Minimal ones, why subset is equivalent}, why is this equivalent to go up if the set of finite traces does not contain a minimal bad prefix then I know that it does not contain a bad prefix because if it did contain a bad prefix then I could make this prefix minimal and then I would get a witness in the minimal bad prefixes and the other direction down is clear because minimal Bad prefix is a subset of Bad prefixes
 																\item \script{811}{Proof (ff.)} and \videoeight{3500}{Explanation}, to be totally correct I should always put an index, a set of bad prefixes always depends on $E$, one defines a set of bad prefixes for the $E$
@@ -213,17 +212,22 @@
 													}
 											}
 										child [level distance = 6cm] {
-												node {Bad prefixes
+												node {Bad prefix
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{784}{Examples}
+																	\item finite word that can't be extented to a trace that satisfies the property $E$
 																	\begin{itemize}
-																		\item it is the infinite Trace that violates a property of infinite traces so one cannot say that a finite prefix violates the property it's just that one knows that every Trace that has this prefix will violate the property no matter how this continues this Trace here will not satisfy by the correctness so the prefix is bad in the sense that you cannot continue it to a trace that satisfies the property so it is a finite witness
-																		\item \videoeight{1723}{Explanation}
+																		% \item what is a bad prefix it is a finite sequence and if it is if this finite sequence is a prefix of an infinite trace then this infinite trace will not satisfy the given linear time property e
+																		\item \script{793}{$BadPref$}, set of \alert{finite} words / prefixes
+																		\item \script{794}{Minimal bad prefixes}, not always minimal, whenever you have this bad thing happening and you extend it will remain a bad prefix, any finite extension of a minimal bad prefix is again a bad prefix and every extension of a bad prefix is a bad, bad prefixes are \alert{finite} that's why we use a $*$, if shorter then there is a way to repair it
+																		\item \script{784}{Examples}
+																		\begin{itemize}
+																			\item it is the infinite Trace that violates a property of infinite traces so one cannot say that a finite prefix violates the property it's just that one knows that every Trace that has this prefix will violate the property no matter how this continues this Trace here will not satisfy by the correctness so the prefix is bad in the sense that you cannot continue it to a trace that satisfies the property so it is a finite witness
+																			\item \videoeight{1723}{Explanation}
+																		\end{itemize}
+																		\item \videoeight{2341}{With respect to property with example}, it doesn't make sense to say that some finite sequence of labels is a bad prefix but it depends on the property for other properties it could be extended
 																	\end{itemize}
-																	\item \videoeight{2341}{With respect to property with example}, it doesn't make sense to say that some finite sequence of labels is a bad prefix but it depends on the property for other properties it could be extended
-																	\item \script{794}{Minimal bad prefixes}, not always minimal, whenever you have this bad thing happening and you extend it will remain a bad prefix, any finite extension of a minimal bad prefix is again a bad prefix and every extension of a bad prefix is a bad, bad prefixes are \alert{finite} that's why we use a $*$, if shorter then there is a way to repair it
 																\end{itemize}
 															\end{minipage}
 														}
@@ -238,16 +242,16 @@
 																	\begin{itemize}
 																		\item not satisfied want \videoeight{655}{Counter example}, i.e. path that reaches state that violates invariant condition, path only until state that violates property, don't need to extend path, trace that labels path is infinite but one already knows that trace will violate the invariant, so it doesn't matter what follows after this state
 																	\end{itemize}
-																	\item \script{727}{Definition}, $always\;\phi$, $never\;\neg\phi$, invariantly the not bad thing holds true, every state on path of transition system which always starts in initial state satisfies the invariant condition, which means the label satisfies it
+																	\item \script{727}{Definition}, $always\;\phi$, $never\;\neg\phi$, invariantly the not bad thing holds true, every state on path of transition system which always starts in initial state satisfies the invariant condition, which means the label satisfies it, some invariant conditions holds true about every state in every execution of the transition system that starts in the initial state
 																	\begin{itemize}
-																		\item \enquote{no bad state will be reached}
+																		\item \enquote{\alert{no bad state will be reached}}
 																		\item \videoeight{467}{Intuitive explanation}
 																	\end{itemize}
 																	\item \script{711}{Examples}
 																	\begin{itemize}
 																		\item \script{730}{Example: Mutex (ff.)}
 																	\end{itemize}
-																	\item \script{738}{Satisfaction of invariants (ff.)}
+																	\item \script{738}{Satisfaction of invariants (ff.)}, only look at one state at a time on paths, so check that for each reachable state it satisfies the invariant condition
 																\end{itemize}
 															\end{minipage}
 														}

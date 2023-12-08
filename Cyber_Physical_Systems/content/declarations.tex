@@ -26,43 +26,43 @@
 					level distance=\leveldistance,
 					sibling angle=360/\the\tikznumberofchildren,
 					% https://tex.stackexchange.com/questions/501240/trying-to-use-the-array-environment-inside-a-tikz-node-with-execute-at-begin-no
-					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
 				},
 			level 2/.append style = {
 					concept color=PrimaryColorDimmed,
 					level distance=\leveldistance / 2,
 					sibling angle=35,
-					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
 				},
 			level 3/.append style = {
 					concept color=SecondaryColorDimmed,
 					level distance=\leveldistance / 3,
-					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
 				},
 			level 4/.append style = {
 					concept color=PrimaryColorDimmed,
 					level distance=\leveldistance / 4,
-					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
 				},
 			level 5/.append style = {
 					concept color=SecondaryColorDimmed,
 					level distance=\leveldistance / 5,
-					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
 				},
 			level 6/.append style = {
 					concept color=PrimaryColorDimmed,
 					level distance=\leveldistance / 6,
-					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
 				},
 			level 7/.append style = {
 					concept color=SecondaryColorDimmed,
 					level distance=\leveldistance / 7,
-					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
 				},
 			level 8/.append style = {
 					concept color=PrimaryColorDimmed,
 					level distance=\leveldistance / 8,
-					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor},
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
 				},
 			concept connection/.append style = {
 					color = BoxColor,
@@ -88,7 +88,14 @@
 {standard jigsaw,opacityback=0,colframe=SwitchColor,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
 	right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
 {\IfBooleanTF{#1}%
-	{\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}#2}%
+	{\textcolor{SwitchColor}{\setBold >\enspace\ignorespaces}#2}%
+	{#2}}
+
+\DeclareTotalTCBox{\inlineboxtwo}{ s m }
+{standard jigsaw,opacityback=0,colframe=SwitchColorDimmed,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
+	right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
+{\IfBooleanTF{#1}%
+	{\textcolor{SwitchColorDimmed}{\setBold >\enspace\ignorespaces}#2}%
 	{#2}}
 
 % ┌──────────────────┐
@@ -116,4 +123,4 @@
 \newcommand{\script}[2]{\href{openpdf:///home/areo/Documents/Studium/Semester_1_Master/Cyber_Physical_Systems/slides/Cyber_Physical_Systems_all_in_one.pdf:#1}{\inlinebox{#2}}}
 \newcommand{\scripttwo}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/Cyber_Physical_Systems/figures/effect_function.pdf:#1}{\inlinebox{#2}}}
 \newcommand{\scriptthree}[2]{\href{openpdf:///home/areo/Documents/Studium/Semester_1_Master/Cyber_Physical_Systems/slides/bonus/2023_11_29_Safety_Properties.pdf:#1}{\inlinebox{#2}}}
-\newcommand{\videoeight}[2]{\href{https://youtu.be/gDGNy8B9J1Q?si=IM_1X_M8JHKG8Xkr&t=#1}{\inlinebox{#2}}}
+\newcommand{\videoeight}[2]{\href{https://youtu.be/gDGNy8B9J1Q?si=IM_1X_M8JHKG8Xkr&t=#1}{\inlineboxtwo{#2}}}

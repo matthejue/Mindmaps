@@ -46,6 +46,9 @@
 									\begin{minipage}[t]{16cm}
 										\begin{itemize}
 											\item \script{577}{Definition}, LT property so is set of traces (language of all traces allowed in the system),infinite words are infinite sequences of sets of atomic propositions that are traces, because we have this assumption that everything is infinite E is then a subset of the power set of AP to the Omega
+											\begin{itemize}
+												\item \videonine{4515}{Short: What is linear time property}
+											\end{itemize}
 											\item \script{577}{Example: Mutex (ff.)}, often do some sort of quantification over the natural numbers i (index) and can think of this as we say something about \alert{all points of time} because the trace the sequence models the flow of time we start with the labeling of the initial state and then as the transition system makes steps we get new sets of atomic propositions that describe how the system develops over time. An equivalent way would be to say there does not exist a point of time where both are in the critical section. An atomic proposition can be element or not but it cannot be equal $A_i$, we look at the atomic propositions and LT properties completely separately from the transition system right we have just fixed the set of atomic propositions and I mean our implementation may satisfy something like it's never case that wait crit1 crit2 hold at the same time but when we're specifying the property we don't think about these kinds of things, $\emptyset\{wait _1, crit_1\} \not\in MUTEX$ also possible, even though it makes no sense
 											\item \script{587}{Satisfaction relation (f.)}: The transition system satisfies the property if and only if every initial state of the transition system satisfies the property%, this is what a model checker checks in the end, a test case only tests one, here it is all possible infinetely many traces
 											\begin{itemize}
@@ -134,17 +137,21 @@
 						child {
 								node {Classification of LT-properties
 										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
+											\begin{minipage}[t]{16cm}
 												\begin{itemize}
 													\item \script{703}{Overview and examples} and \videoeight{3935}{Explanation}
-													\item \script{937}{Examples}
-													\item \script{965}{Decomposition theorem (ff.)}
+													\item \script{937}{Examples} and \videonine{4065}{Explanation}, \videonine{4135}{Philosophers think}, \videonine{4225}{Philosophers eat same time}, \videonine{4257}{Philosophers eat before}, \videonine{4360}{Philosopher eats afterwards}, no starvation property, \videonine{4456}{Philosophers eating phase}
+													\item \script{965}{Decomposition theorem (ff.)}, \videonine{5555}{Don't write as conjunction}
 													\begin{itemize}
 														\item classification does not mean that we have here the set of all LT properties all linear Time Properties and then we have then we can divide all linear Time Properties such that it is either a safety or liveness that is not the case so it's \alert{not} as if LT is the \alert{union} of safety and liveness however what is the case is that whenever I have a property e that I can write this e as a \alert{conjunction} of E1 and E2 such that E1 is a safety property and E2 is a liveness property and this is very nice that I can do this so it's a form of decomposition I decompose the property into a conjunction of a safety and the liveness property and this is very nice because I have one \alert{algorithm for safety properties} and I have \alert{another algorithm for liveness properties}, to prove that a transition system satisfies E I prove that it satisfies E1 and I prove that it satisfies E2, to prove safety properties I take the finite prefixes I look at the \alert{finite words} and for the other ones I look at the \alert{infinite words}, for the \alert{finite} ones I use automata over finite Words and for the other ones the \alert{second kind} of life properties one will use Büchi automata
 														\item \script{974}{Proof (ff.)}
 													\end{itemize}
 													\begin{itemize}
-														\item \script{956}{Only property both Safe and Live}
+														\item \script{956}{Only property both Safe and Live} and \videonine{4982}{Explanations}, \videonine{5017}{Empty Set Liveness}
+														\begin{itemize}
+															\item \videonine{5037}{Set of all traces}, \videonine{5057}{Safety set of all traces}, \videonine{5127}{Liveness set of all traces}
+															\item  \videonine{5209}{Reason for only}, \videonine{5417}{Why does it hold}
+														\end{itemize}
 													\end{itemize}
 												\end{itemize}
 											\end{minipage}
@@ -155,6 +162,7 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{20cm}
 														\begin{itemize}
+															\item \enquote{\alert{nothing bad will happen}}
 															\item \script{790}{Definition (ff.)}, set of all \alert{infinite} words / traces that do not have a bad prefix
 															\begin{itemize}
 																\item \videoeight{2065}{Explanation: Counter Example}
@@ -165,8 +173,9 @@
 																\item \scriptthree{12}{Condition for safety property (bottom)} and \videoeight{5301}{Explanation}
 																\item \videoeight{3857}{Finite good}, the nice thing about these characteristics is that my satisfaction relation of the transition system is now one where I don't need to look at the infinite traces but it is sufficient to look at the finite traces and this is because the $E$ defines me a set of finite words and vice versa a set of finite words I can use it as a set of bad prefixes to define an e, when a property is safety property when it can be defined by a set of bad prefixes, whether I have first come up with the set of finite words or whether I have first come up with the property and then i define the set of finite words it doesn't matter in any case this set of finite words is what I can use to define the correctness of the transition system
 																\item \script{960}{Definition with closure (pr.)}
+																\item \videonine{2627}{Summary of safety property and bad prefix}
 															\end{itemize}
-															\item \script{708}{Examples and classification (ff.)}, it's related to the fact that bureaucracy is so great right when you go to the university and you ask can you do this they will say no it's not possible why because it's always safe to do nothing so when you when you have a system where you always remain in the same state this system satisfies every lifeless property every safety property right you are safe right save just means that you don't arrive at the bad thing, save just means that you don't arrive at the bad thing
+															\item \script{708}{Examples and classification (ff.)}% , it's related to the fact that bureaucracy is so great right when you go to the university and you ask can you do this they will say no it's not possible why because it's always safe to do nothing so when you when you have a system where you always remain in the same state this system satisfies every lifeless property every safety property right you are safe right save just means that you don't arrive at the bad thing, save just means that you don't arrive at the bad thing
 															\begin{itemize}
 																\item \script{779}{Alternative depiction and examples}, invariants like \alert{mutual exclusion} ($never\enspace crit_1\wedge crit_2$) and \alert{deadlock freedoom} ($never \bigwedge_{0\le i< n} wait_i$) can be identified by looking at one single state, don't need to look at history: \enquote{\alert{no bad state will be reached}} \videoeight{1550}{Explanation: Safety properties that need history}: \enquote{\alert{there is no bad prefix}}%, once come to state that breaks condition, then one has a finite prefix of the infinite sequence of states
 																\item \script{799}{Examle: Traffic light (ff.)}, just come up with bad prefix
@@ -186,26 +195,51 @@
 																\begin{itemize}
 																	\item \scriptthree{11}{Special case of Safety Property: Invariant} and \videoeight{4917}{Explanation}, there's no trace that every state satisfies false
 																	\begin{itemize}
-																		\item \videoeight{5022}{Difference false and Empty Set}, the empty set is as an atomic proposition is not the same as false as an as a propositional formula, just as everything satisfies true, no such thing satisfies false,
+																		\item \videoeight{5022}{Difference false and Empty Set}, the empty set is as an atomic proposition is not the same as false as an as a propositional formula, just as everything satisfies true, no such thing satisfies false, there's no trace that satisfies the safety property, all finite words are bad prefixes and the minimal bad prefix is the empty word $\epsilon$
 																	\end{itemize}
 																\end{itemize}
-																\item \script{837}{$(2^{AP})^\omega$ is a safety property} and \scriptthree{12}{Other Version} and \videoeight{5186}{Explanation}, premise always false, all finite words are bad prefixes, can choose empty set as the set of bad prefixes
+																\item \script{837}{$(2^{AP})^\omega$ is a safety property} and \scriptthree{12}{Other Version} and \videoeight{5186}{Explanation}, premise that a trace does not satisfy the property is never fullfilled and implicatin where the premise is never fulfilled is valid, can choose empty set as the set of bad prefixes
 															\end{itemize}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
-										child [level distance = 8cm] {
+										child [level distance = 9cm] {
 												node {Prefix closure
 														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
+															\begin{minipage}[t]{16cm}
 																\begin{itemize}
 																	\item \script{891}{Definition}
-																	\item $E$ is a safety property \textit{iff} $cl(E) = E$
 																	\begin{itemize}
-																		\item \script{902}{Proof (ff.)}
+																		\item \script{906}{$\sigma\in cl(E)$ \textit{iff} $pref(\sigma)\subseteq pref(E)$ (f.)}, and also negation on both sides
+																		\item \scriptfour{1}{Closure in Math}, \videonine{823}{Operation/Function}, \videonine{869}{Open Interval Intuition, add limit points, closed set}
+																		\begin{itemize}
+																			\item \videonine{3244}{Other interesting things}, set closed means it is equal to it's closure, \alert{whenever one has a property e and one takes it's closure, then one gets a safety property}
+																		\end{itemize}
+																		\item \scriptfour{1}{Other definition for prefix closure}, \videonine{1046}{Explanation}, \videonine{1094}{Example}, \videonine{1273}{What has to do with limit points}, \videonine{1403}{Function $pref$}, \videonine{1496}{Role of Inclusion}, \videonine{1580}{Why Property is subset of Closure}, \videonine{3011}{Closure condition explained}
+																		\item \script{898}{Examples} and \scriptfour{2}{Sidenotes}
+																		\begin{itemize}
+																			\item \underline{example 1:} \videonine{1937}{Complement Method}, \videonine{2758}{Summary}
+																			\item \underline{example 2:} \videonine{2102}{Explanation}, \videonine{2324}{Explanation: Inclusions}, \videonine{2796}{Summary}
+																		\end{itemize}
+																		\item \videonine{3076}{Not being in $pref(E)$}, which means it can't be extented and is a bad prefix
 																	\end{itemize}
-																	\item \script{898}{Examples}
+																	\item \alert{$E$ is a safety property \textit{iff} $cl(E) = E$}, subset inclusion always holds in one direction, if there's a trace trace that is in in the closure but not in E then it's not a safety property
+																	\begin{itemize}
+																		\item \videonine{2432}{Explanation} and \scriptfour{3}{Sidenotes}, \videonine{2492}{Complement closure method}
+																		\item \script{909}{Proof (ff. prr.)} and \scriptfour{4}{Sidenotes}, \videonine{2870}{Explanation: Backward}, \videonine{3167}{Explanation: Forward}
+																		\begin{itemize}
+																			\item \videonine{3272}{$cl(E) \supseteq E$ holds}
+																			\item \videonine{3312}{$cl(E) \subseteq E$ holds}
+																			\begin{itemize}
+																				\item \videonine{3415}{$pref(cl(E)) = pref(E)$}, prefixes of the closure of the set equal to prefixes of the set, because elements in the closure are defined by it's prefixes
+																			\end{itemize}
+																		\end{itemize}
+																		\item \videonine{3449}{Use this property}
+																		\begin{itemize}
+																			\item \videonine{3489}{Closure of $E$ is Safety Property}, because the closure of the closure is the closure again
+																		\end{itemize}
+																	\end{itemize}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -282,14 +316,13 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{16cm}
 														\begin{itemize}
-															\item \script{941}{Definition}
+															\item \enquote{\alert{something good will happen}}
+															\item \script{941}{Definition} and \scriptfour{5}{Sidenotes} and \videonine{4508}{Explanation}, \videonine{4553}{Inclusion}
 															\begin{itemize}
-																\item \script{945}{Examples (ff.)}
+																\item \script{926}{Categories with examples}, \videonine{3564}{Explanation}, \videonine{3892}{No starvation property}
 															\end{itemize}
-															\item \script{926}{Categories with examples}
-															\begin{itemize}
-																\item \alert{liveness:} \enquote{something good will happen}
-															\end{itemize}
+															\item \videonine{3711}{Intuition Liveness Property}, to know that an event will not occur eventually, one needs to know the whole infinite trace, if it's satisfied for some liveness properties (not infinitely many times) there's a finite witness
+															\item \script{945}{Examples (ff.)} and \videonine{4644}{Explanations}, \videonine{4772}{Wrong here can be star}, \videonine{4885}{Reactiveness}, \videonine{4953}{Reason for strictly greater}
 														\end{itemize}
 													\end{minipage}
 												}

@@ -1051,8 +1051,10 @@
 																						\item conflict analysis according to the \alert{1UIP scheme} terminates as soon as the currently computed resolvent contains exactly one literal which was assigned at the decision level being analyzed at that moment (the highest), whereas all other literals were assigned at lower decision levels
 																						\item \alert{conflict clauses} represent combinations of variables that will inevitably lead to a conflict
 																						\item \alert{Resolution Lemma} allows to insert the conflict clauses into the CNF formula, and consequently to \enquote{prune} the whole search tree (they prevent the algorithm from running into identical conflicts)
-																						\item compared to others, the \alert{1UIP scheme} turned out to be the most powerful (shorter
-																						conflicts clauses, more effective pruning, faster runtime)
+																						\begin{itemize}
+																							\item \videonine{5022}{Meaning of Resolution}, you don't want to get that assignment again
+																						\end{itemize}
+																						\item compared to others, the \alert{1UIP scheme} turned out to be the most powerful (shorter conflicts clauses, more effective pruning, faster runtime)
 																					\end{itemize}
 																				\end{itemize}
 																			\end{minipage}
@@ -1449,15 +1451,165 @@
 							}
 					}
 				child {
-						node {Sequential circuits}
-						child {
-								node {Product automata}
+						node {Sequential circuits
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{456}{Definition and difference to Combinational}
+											\item \script{458}{State}
+											\item \script{462}{Notations}
+										\end{itemize}
+									\end{minipage}
+								}
 							}
 						child {
-								node {Characteristic functions}
+								node {Deterministic Finite Automata (DFA)
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{459}{Definition}, also called \alert{transducer}
+													\begin{itemize}
+														\item \script{464}{Semantics of Transducers}
+													\end{itemize}
+													\item \script{460}{Illustration}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Equivalence
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{468}{Equivalence of Finite Automata}
+															\item \script{471}{Combinational equivalence checking}, Identical State Encoding
+															\item \script{473}{Behavioral Equivalence w.r.t. a State Correspondence}
+															\item \script{477}{Equivalent States}
+															\begin{itemize}
+																\item \script{477}{Theorem: Implication for equivalent states}
+																\item \script{480}{Theorem: Equivalence for DFA's}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Product Automaton
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{481}{Definition}
+															\item \script{482}{Equivalence}
+															\begin{itemize}
+																\item \script{487}{Equivalence check with reachability analysis}
+															\end{itemize}
+															\item \script{483}{Example}
+															\item \script{485}{Properties (ff.)}
+															\item \script{492}{Method}
+															\begin{itemize}
+																\item \script{493}{Illustration}
+																\item \script{494}{Complexity}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Reduced Finite Automata
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item alternative without Product Automata
+															\item \script{497}{Definition}
+															\begin{itemize}
+																\item \underline{Theorem:} The reduced deterministic finite automaton for a deterministic finite automaton is \alert{unique up to isomorphism}, i.e, up to renaming of the states.
+															\end{itemize}
+															\item \script{499}{Analysis}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
 							}
 						child {
-								node {Image and pre-image computations}
+								node {Characteristic functions
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{501}{Definition and characteristic boolean functions}
+													\item \script{502}{Set Operations}
+													\item \script{504}{Boolean Functions and Relations}
+													\begin{itemize}
+														\item \script{505}{Example (f.)}
+														\item \script{507}{Characteristic function of the corresponding boolean relation}
+													\end{itemize}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Image and Preimage and Range
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{508}{Definition}
+													\begin{itemize}
+														\item \script{509}{Example (ff.)}
+													\end{itemize}
+													\item \script{512}{Problem: Efficient with ROBDD}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node (efficient image computation) {Efficient Image Computation
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{524}{Formula}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node (efficient preimage computation) {Efficient Preimage Computation
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{527}{Formula}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node (efficient range computation) {Efficient Range Computation
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{521}{Formula}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node (existential quantification) {Existential Quantification
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{514}{Definition}
+																	\item \script{516}{Notation and Lemma}
+																	\item \script{518}{Exercise}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
 							}
 						child {
 								node {BDD-based methods for proving equivalence of two sequential circuits}

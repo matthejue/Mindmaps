@@ -241,7 +241,7 @@
 												child {
 														node {Product-TS
 																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
+																	\begin{minipage}[t]{16cm}
 																		\begin{itemize}
 																			\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
 																		\end{itemize}
@@ -701,29 +701,32 @@
 		child {
 				node (test){Basics}
 				child {
-						node {Propositional Logic
-								\resizebox{\textwidth}{!}{
-									\begin{minipage}[t]{12cm}
-										\begin{itemize}
-											\item \script{715}{Overview (ff.)}
-											\begin{itemize}
-												\item \script{722}{State satisfies condition}
-											\end{itemize}
-										\end{itemize}
-									\end{minipage}
-								}
+						node {Logic}
+						child {
+								node {Propositional Logic
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{715}{Overview (ff.)}
+													\begin{itemize}
+														\item \script{722}{State satisfies condition}
+													\end{itemize}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
 							}
-					}
-				child {
-						node {Predicate Logic
-								\resizebox{\textwidth}{!}{
-									\begin{minipage}[t]{16cm}
-										\begin{itemize}
-											\item $\overset{\infty}{\exists}i \in \mathbb{N}_0: \text{cond}_i = \forall j\in \mathbb{N}_0:\exists i\in\mathbb{N}_0: i > j \;\wedge\; \text{cond}_i \;\hat=$ \enquote{there exist infinitely many}
-											\item $\overset{\infty}{\forall}i \in \mathbb{N}_0: \text{cond}_i = \exists j\in \mathbb{N}_0:\forall i\in\mathbb{N}_0: i > j \rightarrow \text{cond}_i \;\hat=$ \enquote{for almost all, i.e., for all except for finitely many}
-										\end{itemize}
-									\end{minipage}
-								}
+						child {
+								node {Predicate Logic
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{16cm}
+												\begin{itemize}
+													\item $\overset{\infty}{\exists}i \in \mathbb{N}_0: \text{cond}_i = \forall j\in \mathbb{N}_0:\exists i\in\mathbb{N}_0: i > j \;\wedge\; \text{cond}_i \;\hat=$ \enquote{there exist infinitely many}
+													\item $\overset{\infty}{\forall}i \in \mathbb{N}_0: \text{cond}_i = \exists j\in \mathbb{N}_0:\forall i\in\mathbb{N}_0: i > j \rightarrow \text{cond}_i \;\hat=$ \enquote{for almost all, i.e., for all except for finitely many}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
 							}
 					}
 				child {
@@ -829,77 +832,80 @@
 							}
 					}
 				child {
-						node {Non-deterministic finite automata
-								\resizebox{\textwidth}{!}{
-									\begin{minipage}[t]{12cm}
-										\begin{itemize}
-											\item \script{29}{Definition}
-											\begin{itemize}
-												\item \script{15}{Terms}
-												\item \script{31}{Example (ff.)}
-											\end{itemize}
-											\item \script{16}{Acceptance}
-											\begin{itemize}
-												\item \script{23}{Example}
-												\item \script{27}{Accepted Language and example}
-											\end{itemize}
-										\end{itemize}
-									\end{minipage}
-								}
-							}
+						node {Automata}
 						child {
-								node {Emptyness Check
+								node {Non-deterministic finite automata
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{86}{Definition}
-													\item \script{87}{Algorithm (f.)}
+													\item \script{29}{Definition}
 													\begin{itemize}
-														\item \script{100}{Example}
+														\item \script{15}{Terms}
+														\item \script{31}{Example (ff.)}
+													\end{itemize}
+													\item \script{16}{Acceptance}
+													\begin{itemize}
+														\item \script{23}{Example}
+														\item \script{27}{Accepted Language and example}
 													\end{itemize}
 												\end{itemize}
 											\end{minipage}
 										}
 									}
+								child {
+										node {Emptyness Check
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{86}{Definition}
+															\item \script{87}{Algorithm (f.)}
+															\begin{itemize}
+																\item \script{100}{Example}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Intersection Construction
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{102}{Definition}
+															\item \script{104}{Example}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
 							}
 						child {
-								node {Intersection Construction
+								node {Büchi Automata
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{102}{Definition}
-													\item \script{104}{Example}
+													\item \script{111}{Definition}
+													\item \script{112}{Acceptance condition (f.)}
+													\begin{itemize}
+														\item \script{119}{Example}
+														\item \script{122}{Language of a Büchi Automaton and Example}
+													\end{itemize}
 												\end{itemize}
 											\end{minipage}
 										}
 									}
-							}
-					}
-				child {
-						node {Büchi Automata
-								\resizebox{\textwidth}{!}{
-									\begin{minipage}[t]{12cm}
-										\begin{itemize}
-											\item \script{111}{Definition}
-											\item \script{112}{Acceptance condition (f.)}
-											\begin{itemize}
-												\item \script{119}{Example}
-												\item \script{122}{Language of a Büchi Automaton and Example}
-											\end{itemize}
-										\end{itemize}
-									\end{minipage}
-								}
-							}
-						child {
-								node {$\omega$-Word and $\omega$-Language
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{107}{$\omega$-Word Definition}
-													\item \script{109}{$\omega$-Language Definition}
-												\end{itemize}
-											\end{minipage}
-										}
+								child {
+										node {$\omega$-Word and $\omega$-Language
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{107}{$\omega$-Word Definition}
+															\item \script{109}{$\omega$-Language Definition}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
 									}
 							}
 					}

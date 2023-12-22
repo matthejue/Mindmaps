@@ -22,7 +22,7 @@
 						\resizebox{\textwidth}{!}{
 							\begin{minipage}[t]{12cm}
 								\begin{itemize}
-									\item \script{252}{Side-channel and fault injection}
+									\item \script{255}{Side-channel and fault injection}
 								\end{itemize}
 							\end{minipage}
 						}
@@ -35,8 +35,8 @@
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item \script{252}{Definition}, using side-channel inputs
-											\item \script{253}{Side channel inputs for fault injection}
+											\item \script{255}{Definition}, using side-channel inputs
+											\item \script{256}{Side channel inputs for fault injection}
 										\end{itemize}
 									\end{minipage}
 								}
@@ -47,47 +47,14 @@
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item \script{252}{Definition}, observing side channel outputs
-											\item \script{253}{Side channel outputs for side channel attacks}
+											\item \script{255}{Definition}, observing side channel outputs
+											\item \script{256}{Side channel outputs for side channel attacks}
 										\end{itemize}
 									\end{minipage}
 								}
 							}
 						child {
 								node {Power Consumption
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{255}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {EM Side Channels
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{256}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {Acoustic Side Channels
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{257}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {Optical Side Channels
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
@@ -98,7 +65,7 @@
 									}
 							}
 						child {
-								node {Timing and Delay
+								node {EM Side Channels
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
@@ -109,11 +76,44 @@
 									}
 							}
 						child {
-								node {Hardware Targets
+								node {Acoustic Side Channels
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
 													\item \script{260}{Definition}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Optical Side Channels
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{261}{Definition}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Timing and Delay
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{262}{Definition}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Hardware Targets
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{263}{Definition}
 												\end{itemize}
 											\end{minipage}
 										}
@@ -147,8 +147,8 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{199}{Main idea}, exploited vulnerabilties
-													\item \script{249}{Summary}
+													\item \script{202}{Main idea}, exploited vulnerabilties
+													\item \script{252}{Summary}
 												\end{itemize}
 											\end{minipage}
 										}
@@ -158,25 +158,25 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item based on out-of-order executions (superscalar processor)
-															\item \script{200}{Overview (f.)}
-															\item \script{226}{What it uses}
+															\item based on out-of-order executions (superscalar processor), \script{202}{Note}
+															\item \script{203}{Overview (f.)}
+															\item \script{229}{What it uses}
 															\item \underline{Implementation details:}
 															\begin{itemize}
-																\item \script{228}{Step 1: Unauthorized read, probe\_array and cache data (f.)}
+																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}
 																\begin{itemize}
-																	\item \script{227}{Precondition and Code}
+																	\item \script{230}{Precondition and Code}
 																\end{itemize}
-																\item \script{230}{Step 2: Flushing the cache lines, Measure access times}
-																\item \script{232}{Exception handling (pr.)}
-																\item \script{233}{Race condition}
+																\item \script{233}{Step 2: Flushing the cache lines, Measure access times}
+																\item \script{235}{Exception handling (pr.)}
+																\item \script{236}{Race condition}
 																\begin{itemize}
-																	\item \script{234}{Steps in the race}
+																	\item \script{237}{Steps in the race}
 																\end{itemize}
 															\end{itemize}
-															\item \script{235}{Leak whole memory}
-															\item \script{236}{Summary and Visualization}
-															\item \script{238}{Countermeasures}
+															\item \script{238}{Leak whole memory}
+															\item \script{239}{Summary and Visualization}
+															\item \script{241}{Countermeasures}
 														\end{itemize}
 													\end{minipage}
 												}
@@ -186,7 +186,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{202}{Definition}
+																	\item \script{205}{Definition}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -197,9 +197,9 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{203}{Definition}, Retiring phase
+																	\item \script{206}{Definition}, Retiring phase
 																	\begin{itemize}
-																		\item \script{204}{Illustration}
+																		\item \script{207}{Illustration}
 																	\end{itemize}
 																\end{itemize}
 															\end{minipage}
@@ -211,7 +211,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{205}{Tomasulo Scheduling (ff.)}
+																	\item \script{208}{Example (ff.)}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -222,9 +222,9 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{218}{RAW}
-																	\item \script{219}{WAR}
-																	\item \script{220}{WAW}
+																	\item \script{221}{RAW}
+																	\item \script{222}{WAR}
+																	\item \script{223}{WAW}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -235,13 +235,13 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{221}{Definition}
-																	\item \script{222}{Adress Translation Illustration}
+																	\item \script{224}{Definition}
+																	\item \script{225}{Adress Translation Illustration}
 																	\item Each process has its own page table
 																	\item For efficiency reasons, each process page table contains kernel address space as well (at least until Meltdown)
 																	\begin{itemize}
-																		\item \script{224}{Virtual address space of processes}, Advantage of including kernel space into process page tables: TLB does not need to be flushed for privileged accesses to kernel space, e.g. system calls
-																		\item \script{225}{When an exception is thrown}
+																		\item \script{227}{Virtual address space of processes}, Advantage of including kernel space into process page tables: TLB does not need to be flushed for privileged accesses to kernel space, e.g. system calls
+																		\item \script{228}{When an exception is thrown}
 																	\end{itemize}
 																\end{itemize}
 															\end{minipage}
@@ -252,7 +252,7 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{223}{Definition}
+																			\item \script{226}{Definition}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -264,7 +264,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{226}{Definition}, \alert{cache hit} and \alert{cache miss}
+																	\item \script{229}{Definition}, \alert{cache hit} and \alert{cache miss}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -276,11 +276,11 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item based on speculative executions, \script{199}{Note}
-															\item \script{239}{Overview} and \script{241}{More}
-															\item \script{242}{Code (ff.)}
-															\item \script{247}{Other Application Scenarios}
-															\item \script{248}{Countermeasures}
+															\item based on speculative executions, \script{202}{Note}
+															\item \script{242}{Overview} and \script{244}{More}
+															\item \script{245}{Code (ff.)}
+															\item \script{250}{Other Application Scenarios}
+															\item \script{251}{Countermeasures}
 														\end{itemize}
 													\end{minipage}
 												}
@@ -290,7 +290,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{240}{Definition}
+																	\item \script{243}{Definition}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -301,7 +301,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{245}{Example}
+																	\item \script{248}{Example}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -311,7 +311,7 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{246}{Definition}
+																			\item \script{249}{Definition}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -985,21 +985,20 @@
 																		\item \script{179}{Euler's $\phi$-function}, \videoeight{1246}{$gcd(a, n) = 1$ relatively prime}, \videoeight{3372}{Could break RSA if could factor $n$ into $p$ and $q$}, \videoeight{3384}{Computations in ring and not field because...}, \videoeight{3587}{Example Eulers phi function}, \videoeight{3862}{Phi function important key generation and proof of correctness}, \videoeight{3891}{phi p-1 times q-1}, \videoeight{4266}{Special case used in RSA}, \videoeight{4283}{Special case only prime number}, \videoeight{4395}{Definition based on}, Computations done in ring Z mod n Z where n = p times q, but the key generation is done in another ring and that is Z mod phi n Z
 																		\item \script{180}{Modular division and modular reduction}, \videonine{357}{Inverse elements don't need to exist in general residue class rings}, \videonine{512}{Complete modular reduction}, \videonine{546}{Doing reduction is choosing other representative}, works because of this
 																	\end{itemize}
-																	\item \script{181}{Encryption and Decryption} and \scripttwo{1}{Notes}, \videonine{610}{$n$ in which residue class ring do computations}, \videonine{688}{Block based cipher}, block size depends, more than 1000 bits, \videonine{728}{Meaning block and number}, \videonine{843}{Never encryption by iterated multiplication}, \videonine{988}{Complexity}, 																	\begin{itemize}
-																		\item \script{182}{Key Generation} and \scripttwo{2}{Notes}, \videonine{1065}{Non-trivial task}, \videonine{1152}{Key Generation: Computations no in Z mod n Z}, \videonine{1228}{How find public exponent}, \videonine{1272}{Take simple number for public exponenet}, small number of ones in the binary representation, \videonine{1342}{Why it has to be invertable}, \videonine{1377}{How can compute this}, extended euclids algorithm to compute inverse, \videonine{1841}{Why could break RSA if could factor n in p and q}, \videonine{1939}{One way function of RSA}
-																		\item \script{183}{Example including Key Generation} and \scripttwo{3}{Notes}, \videonine{1574}{Choice of e}, \videonine{1674}{public key is both...}
+																	\item \script{181}{Encryption and Decryption}, \videonine{610}{$n$ in which residue class ring do computations}, \videonine{688}{Block based cipher}, block size depends, more than 1000 bits, \videonine{728}{Meaning block and number}, \videonine{843}{Never encryption by iterated multiplication}, \videonine{988}{Complexity}, 																	\begin{itemize}
+																		\item \script{182}{Key Generation}, \videonine{1065}{Non-trivial task}, \videonine{1152}{Key Generation: Computations no in Z mod n Z}, \videonine{1228}{How find public exponent}, \videonine{1272}{Take simple number for public exponenet}, small number of ones in the binary representation, \videonine{1342}{Why it has to be invertable}, \videonine{1377}{How can compute this}, extended euclids algorithm to compute inverse, \videonine{1841}{Why could break RSA if could factor n in p and q}, \videonine{1939}{One way function of RSA}
+																		\item \script{183}{Example including Key Generation}, \videonine{1574}{Choice of e}, \videonine{1674}{public key is both...}
 																	\end{itemize}
-																	\item \script{184}{Security} and \scripttwo{4}{Notes}, \videonine{1986}{Use Extented Euklids algorithm to compute inverse}, \videonine{2096}{Number bits of prime numbers fixed}, \videonine{2309}{Prime number table too huge}, density not decreasing that fast
-																	\item \script{185}{Correctness}, Euler's Theorem and \scripttwo{5}{Notes} and \videonine{2667}{Explanation}, \videonine{2810}{Follows from Euler's Theorem}, \videonine{2865}{Alternative way to get multiplicative inverse}, under condition that one knows phi of n, \videonine{2898}{If this times a not equal to 1}, then there's no multiplicative inverse, because then gcd is not 1, \videonine{2935}{Alternative way to compute private key d}
+																	\item \script{184}{Security}, \videonine{1986}{Use Extented Euklids algorithm to compute inverse}, \videonine{2096}{Number bits of prime numbers fixed}, \videonine{2309}{Prime number table too huge}, density not decreasing that fast
+																	\item \script{185}{Correctness}, Euler's Theorem and \videonine{2667}{Explanation}, \videonine{2810}{Follows from Euler's Theorem}, \videonine{2865}{Alternative way to get multiplicative inverse}, under condition that one knows phi of n, \videonine{2898}{If this times a not equal to 1}, then there's no multiplicative inverse, because then gcd is not 1, \videonine{2935}{Alternative way to compute private key d}
 																	\begin{itemize}
-																		\item \script{186}{Proof}, \scripttwo{6}{Fake proof} and \videonine{2954}{Explanation}, \scripttwo{7}{Real Proof for RSA}
-																		and \videonine{3201}{Explanation}
+																		\item \script{187}{Correctness Proof} and \videonine{3201}{Explanation}, \script{186}{Fake proof} and \videonine{2954}{Explanation}
 																		\begin{itemize}
-																			\item \scripttwo{8}{Proof of Eulers Theorem (f.)} \videonine{4018}{Explanation}, \videonine{4661}{Multiplying with a permutes elements}
+																			\item \script{188}{Proof of Eulers Theorem (f.)} and \videonine{4018}{Explanation}, \videonine{4661}{Multiplying with a permutes elements}
 																		\end{itemize}
 																	\end{itemize}
-																	\item \script{187}{Symmetry Property} and \scripttwo{10}{Notes}, \videonine{5414}{In not simple version a hash of message is encrypted}, \videonine{5587}{Also not send as plain text}
-																	\item \script{192}{Attacks (pr. ff.)}
+																	\item \script{190}{Symmetry Property}, \videonine{5414}{In not simple version a hash of message is encrypted}, \videonine{5587}{Also not send as plain text}
+																	\item \script{194}{Attacks (pr. ff.)}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -1011,8 +1010,8 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{188}{Definition}
-																	\item \script{189}{Algorithm}
+																	\item \script{191}{Definition}
+																	\item \script{192}{Algorithm}
 																\end{itemize}
 															\end{minipage}
 														}

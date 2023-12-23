@@ -35,7 +35,7 @@
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item \script{255}{Definition}, using side-channel inputs
+											\item \script{255}{Definition}, using side-channel inputs, \videoten{2131}{Other definition}
 											\item \script{256}{Side channel inputs for fault injection}
 										\end{itemize}
 									\end{minipage}
@@ -47,7 +47,7 @@
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item \script{255}{Definition}, observing side channel outputs
+											\item \script{255}{Definition}, observing side channel outputs, \videoten{2114}{Other definition}
 											\item \script{256}{Side channel outputs for side channel attacks}
 										\end{itemize}
 									\end{minipage}
@@ -62,6 +62,28 @@
 												\end{itemize}
 											\end{minipage}
 										}
+									}
+								child {
+										node {Power attacks
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{265}{Definition}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Power Consumption of a Circuit
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{266}{Definition}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
 									}
 							}
 						child {
@@ -118,24 +140,36 @@
 											\end{minipage}
 										}
 									}
+								child {
+										node {Smart Cards
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{264}{Definition}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
 							}
 					}
 				child {
 						node {Attacks by Microarchitectural Data Sampling (MDS)
 								\resizebox{\textwidth}{!}{
-									\begin{minipage}[t]{12cm}
+									\begin{minipage}[t]{18cm}
 										\begin{itemize}
 											\item \alert{Instruction Set Architecture} (ISA) of a processor = interface it provides to the software it executes. It specifies:
 											\begin{itemize}
 												\item Set of instructions
 												\item Registers and memory processed by the instructions
 											\end{itemize}
-											\item \alert{Architectural states} = states defined by the ISA, i.e., memory cells and user-visible registers
-											\item \alert{Microarchitectural states} = processor states not defined in the ISA, e.g.:
+											\item \alert{Architectural states} = states defined by the ISA, i.e., memory cells and user-visible registers, \videoten{2501}{Architectural states visible to the programmer}, \videoten{2618}{Example for no architectural state}
+											\item \alert{Microarchitectural states} = processor states not defined in the ISA, \videoten{2935}{Microarchitectural states occurence} due to certain implementation of ISA, e.g.:
 											\begin{itemize}
-												\item States of Functional Units
-												\item States of reservation stations
-												\item Cache contents
+												\item \videoten{2669}{In general}
+												\item \videoten{2707}{States of Functional Units}
+												\item \videoten{2753}{States of reservation stations}, internal datastructure of out of order processors
+												\item \videoten{2781}{Cache contents}
 												\item etc.
 											\end{itemize}
 										\end{itemize}
@@ -147,7 +181,7 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{202}{Main idea}, exploited vulnerabilties
+													\item \script{202}{Main idea}, exploited vulnerabilties, \videoten{2892}{In other words}, caches, \videoten{3263}{Fulfill correct semantics}, result / effect architectural level / state never incorrect, result has to be same as in sequential execution, invariant, \videoten{3347}{Effects of invalid out of order and discarded speculative executions}, change microarchitectural states, \videoten{3419}{In other words 2}
 													\item \script{252}{Summary}
 												\end{itemize}
 											\end{minipage}
@@ -159,9 +193,9 @@
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item based on out-of-order executions (superscalar processor), \script{202}{Note}
-															\item \script{203}{Overview (f.)}
+															\item \script{203}{Overview}
 															\item \script{229}{What it uses}
-															\item \underline{Implementation details:}
+															\item \underline{Implementation details}, \videoten{3537}{First step operating system}
 															\begin{itemize}
 																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}
 																\begin{itemize}
@@ -177,44 +211,63 @@
 															\item \script{238}{Leak whole memory}
 															\item \script{239}{Summary and Visualization}
 															\item \script{241}{Countermeasures}
+															\item \underline{Preconditions:}
+															\begin{enumerate}
+																\item[\bfseries\color{PrimaryColor}$\bullet$] \videoten{3563}{Precondition on same machine}, able to start processes on this machine
+																\item \videoten{3610}{Out-of-order execution}
+																\item Virtual memory management with paging
+																\item Instruction and data caches for memory accesses
+															\end{enumerate}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
 										child {
-												node {Out-of-order execution
+												node {Parallel Instruction Execution
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{205}{Definition}
+																	\item \script{204}{Overview}, \videoten{3651}{Available resources meaning}, \videoten{3705}{Pipelining}, \videoten{3843}{In-order}
 																\end{itemize}
 															\end{minipage}
 														}
 													}
-											}
-										child {
-												node {Reservation stations (RSs) and Functional Units (FUs)
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{206}{Definition}, Retiring phase
-																	\begin{itemize}
-																		\item \script{207}{Illustration}
-																	\end{itemize}
-																\end{itemize}
-															\end{minipage}
-														}
-													}
-											}
-										child {
-												node {Tomasulo Scheduling
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{208}{Example (ff.)}
-																\end{itemize}
-															\end{minipage}
-														}
+												child {
+														node {Out-of-order execution
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{205}{Definition}, \videoten{2974}{In other words}, \videoten{3239}{Superscalar processors}, happens in them, \videoten{3876}{Combined with in-order}, \videoten{4046}{If something faster or waiting for operands}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+														child {
+																node {Reservation stations (RSs) and Functional Units (FUs)
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{206}{Definition} and \videoten{4140}{Explanation}
+																					\begin{itemize}
+																						\item \script{207}{Illustration}, \videoten{4341}{Register flags result invalid}, \videoten{4539}{Reservation stations internal states}
+																						\item \videoten{4604}{\alert{Retiring Phase}}, put result from functional unit or load buffer on common data bus, \alert{result token}, \videoten{4657}{Forwarding}, \videoten{4760}{Exception}
+																					\end{itemize}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {Tomasulo Scheduling
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{208}{Example (ff.)}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
 													}
 											}
 										child {
@@ -290,7 +343,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{243}{Definition}
+																	\item \script{243}{Definition}, \videoten{2995}{In other words}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -337,8 +390,18 @@
 											\item \script{69}{Practice: Sending and Receiving secure messages}
 										\end{itemize}
 										\item \alert{Cryptanalysis:} Art/science of breaking ciphertext
+										\begin{itemize}
+											\item \script{194}{Different possible situations (pr. ff.)} and \videoten{1126}{Explanation}
+											\begin{itemize}
+												\item \videoten{1216}{Ciphertext-only}
+												\item \videoten{1327}{Known plaintext}, \videoten{1373}{E.g. date or file header at beginning}
+												\item \videoten{1457}{Chosen plaintext}
+												\item \videoten{1591}{Chosen ciphertext}
+												\item \videoten{1676}{Fault injection}
+											\end{itemize}
+										\end{itemize}
 									\end{itemize}
-									\item \script{194}{Criteria for \enquote{Good} Ciphers}
+									\item \script{194}{Criteria for \enquote{Good} Ciphers} and \videoten{1741}{Explanation}, \videoten{1976}{Only has to be good modulo the resources able to invest}, the target field of application fixes the required security level and also the cost one is able to invest
 								\end{itemize}
 							\end{minipage}
 						}
@@ -998,7 +1061,6 @@
 																		\end{itemize}
 																	\end{itemize}
 																	\item \script{190}{Symmetry Property}, \videonine{5414}{In not simple version a hash of message is encrypted}, \videonine{5587}{Also not send as plain text}
-																	\item \script{194}{Attacks (pr. ff.)}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -1011,7 +1073,7 @@
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
 																	\item \script{191}{Definition}
-																	\item \script{192}{Algorithm}
+																	\item \script{192}{Algorithm: Square and Multiply}, \videoten{395}{Example explanation}, \videoten{692}{Summary of algorithm}, \videoten{740}{Number of square operations and multiplications}, \videoten{761}{Pseudocode explained}, \videoten{888}{Complexity}, simple method number of operations is equal to k, for square and multiply number of operations is linear in the number of bits in the representation of k which is logarithmic, \videoten{948}{Modulo n operation}, \videoten{1021}{Used in encryption and decryption for RSA}
 																\end{itemize}
 															\end{minipage}
 														}

@@ -75,6 +75,17 @@
 											}
 									}
 								child {
+										node {Measuring Phase
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{267}{Definition}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
 										node {Power Consumption of a Circuit
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
@@ -179,7 +190,7 @@
 						child {
 								node {Meltdown and Spectre
 										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
+											\begin{minipage}[t]{16cm}
 												\begin{itemize}
 													\item \script{202}{Main idea}, exploited vulnerabilties, \videoten{2892}{In other words}, caches, \videoten{3263}{Fulfill correct semantics}, result / effect architectural level / state never incorrect, result has to be same as in sequential execution, invariant, \videoten{3347}{Effects of invalid out of order and discarded speculative executions}, change microarchitectural states, \videoten{3419}{In other words 2}
 													\item \script{252}{Summary}
@@ -197,10 +208,7 @@
 															\item \script{229}{What it uses}
 															\item \underline{Implementation details}, \videoten{3537}{First step operating system}
 															\begin{itemize}
-																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}
-																\begin{itemize}
-																	\item \script{230}{Precondition and Code}
-																\end{itemize}
+																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}, \script{230}{Precondition and Code}, \videoeleven{5166}{If memory managment works as it should...}, \videoeleven{5195}{Problem is...}, forwarding will put data into load reservation station before being finished with check for unprivliged access, \videoeleven{5292}{Then be fast}, read access, in cache access to secret address, \videoeleven{5321}{Probe array property}, all addresses lead to cache misses before, \videoeleven{5373}{Other detail has to be solved}
 																\item \script{233}{Step 2: Flushing the cache lines, Measure access times}
 																\item \script{235}{Exception handling (pr.)}
 																\item \script{236}{Race condition}
@@ -214,23 +222,34 @@
 															\item \underline{Preconditions:}
 															\begin{enumerate}
 																\item[\bfseries\color{PrimaryColor}$\bullet$] \videoten{3563}{Precondition on same machine}, able to start processes on this machine
-																\item \videoten{3610}{Out-of-order execution}
-																\item Virtual memory management with paging
-																\item Instruction and data caches for memory accesses
+																\item \videoten{3610}{Out-of-order execution} or more precisely \videoeleven{3049}{Out-of-order with forwarding}%, \videoeleven{220}{Predondition 1 repreated}
+																\item \videoeleven{3059}{Virtual memory managment with / based on paging}
+																\item \videoeleven{4850}{Use of caches}, not only for tlb but also for data and instruction and data caches for memory accesses
 															\end{enumerate}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
 										child {
-												node {Parallel Instruction Execution
+												node {Parallel Accelerated Execution
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{204}{Overview}, \videoten{3651}{Available resources meaning}, \videoten{3705}{Pipelining}, \videoten{3843}{In-order}
+																	\item \script{204}{Overview}, \videoten{3651}{Available resources meaning}
 																\end{itemize}
 															\end{minipage}
 														}
+													}
+												child {
+														node {Pipelining
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \videoten{3705}{Definition}, \videoten{3843}{In-order}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
 													}
 												child {
 														node {Out-of-order execution
@@ -247,7 +266,7 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{206}{Definition} and \videoten{4140}{Explanation}
+																					\item \script{206}{Definition} and \videoten{4140}{Explanation}, \videoeleven{310}{Decentralized control for execution of instruction}
 																					\begin{itemize}
 																						\item \script{207}{Illustration}, \videoten{4341}{Register flags result invalid}, \videoten{4539}{Reservation stations internal states}
 																						\item \videoten{4604}{\alert{Retiring Phase}}, put result from functional unit or load buffer on common data bus, \alert{result token}, \videoten{4657}{Forwarding}, \videoten{4760}{Exception}
@@ -262,25 +281,38 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{208}{Example (ff.)}
+																					\item \script{208}{Example (ff.)}, instance of out-of-order execution, \videoeleven{828}{To issue}, \videoeleven{838}{Issue always in-order}
+																					\begin{itemize}
+																						\item \videoeleven{520}{Explanation Different parts}
+																						\begin{itemize}
+																							\item \videoeleven{529}{Register file}, \videoeleven{561}{Valid bit}, \videoeleven{577}{Reference to Reservation Station}, where future contents of register produced
+																							\item \videoeleven{665}{At least 3 reservation stations}, but here functional unit several reservation stations, \videoeleven{718}{InFU and other column titles}, \videoeleven{774}{Common databus}, connect everything, \videoeleven{874}{RS1 and RS2 Columns}
+																						\end{itemize}
+																						\item \videoeleven{943}{Explanation Procedure}
+																						\begin{itemize}
+																							\item \videoeleven{1034}{Change register status}, \videoeleven{1191}{One Cycle, next Executed}, remaining cycles in FU after cycle 2, \videoeleven{1318}{Reg invalidated}, \videoeleven{1450}{Operation finishes}, Register 2 waiting for result of RS 1, \videoeleven{1621}{Forwarding}, immediately read what is on common data bus for register 2, take as early as possible, else would have to delay addition for one cycle, \videoeleven{1996}{Confusing}, register file and reservation stations values after cycle 6 and common data bus values during cycle 6, \videoeleven{2060}{WAR-hazard}, reservation stations read operands immediately, \videoeleven{2246}{Two places waiting for result}, of multiplication
+																						\end{itemize}
+																						\item \videoeleven{1830}{Disadvantage of original Tomasulo Scheduling}, common databus bottleneck
+																					\end{itemize}
 																				\end{itemize}
 																			\end{minipage}
 																		}
 																	}
+																child {
+																		node {Data Dependencies
+																				\resizebox{\textwidth}{!}{
+																					\begin{minipage}[t]{12cm}
+																						\begin{itemize}
+																							\item \script{221}{RAW} and \videoeleven{2451}{Example in Tomasulo}, Forwarding is exploited in Meltdown
+																							\item \script{222}{WAR} and \videoeleven{2749}{Example in Tomasulo}, \videoeleven{2690}{In Tomasulo solution is early reading into RSs}, \videoeleven{2938}{If Read in between}
+																							\item \script{223}{WAW}
+																							\item \videoeleven{2627}{Read after Read is no problem}
+																						\end{itemize}
+																					\end{minipage}
+																				}
+																			}
+																	}
 															}
-													}
-											}
-										child {
-												node {Data Dependencies
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{221}{RAW}
-																	\item \script{222}{WAR}
-																	\item \script{223}{WAW}
-																\end{itemize}
-															\end{minipage}
-														}
 													}
 											}
 										child {
@@ -288,13 +320,13 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{224}{Definition}
-																	\item \script{225}{Adress Translation Illustration}
+																	\item \script{224}{Definition} and \videoeleven{3073}{Explanation}
+																	\item \script{225}{Adress Translation Illustration} and \videoeleven{3311}{Explanation}, \videoeleven{3419}{Page table pointer}, \videoeleven{3539}{Normally care about size of page table}, \videoeleven{3581}{Every process own page table}, context switch between two processes, then just change page table pointer, \videoeleven{3626}{Interesting question}, how Meltdown can read memory of other processes or main memory of the kernel, in this simple version, \videoeleven{3703}{Case of page fault}, \videoeleven{3796}{What do in Address translation}, 2 memory accesses, main memory accesses pretty slow, cache virtual addresses used in the past, Translation Lookaside buffer
 																	\item Each process has its own page table
 																	\item For efficiency reasons, each process page table contains kernel address space as well (at least until Meltdown)
 																	\begin{itemize}
-																		\item \script{227}{Virtual address space of processes}, Advantage of including kernel space into process page tables: TLB does not need to be flushed for privileged accesses to kernel space, e.g. system calls
-																		\item \script{228}{When an exception is thrown}
+																		\item \script{227}{Virtual address space of processes}, Advantage of including kernel space into process page tables: TLB does not need to be flushed for privileged accesses to kernel space, e.g. system calls, \videoeleven{4125}{What do with kernel addresses}, programs have system calls and during them addresses of kernel space can be read, \videoeleven{4125}{What do with kernel addresses}, programs have system calls and during them addresses of kernel space can be read, \videoeleven{4179}{Could do same mechanism with system calls}, flush TLB and have seperate page table during syscall that belongs to OS, like context switch, also when comes back, \videoeleven{4328}{Don't have to change page table and TLB}, when doing syscall, efficiency reasons
+																		\item \script{228}{When an exception is thrown}, \videoeleven{4410}{Additional contents in page table}, memory managment unit, \videoeleven{4519}{Cause interrupt}, run into segmentation fault, \videoeleven{4581}{Syscalls implement with care}, from designers of the OS, \videoeleven{4714}{Vulnerability of Meltdown}, microachitectural states are not clean, \videoeleven{4776}{Problem that Meltdown has to solve}, Segmentation fault
 																	\end{itemize}
 																\end{itemize}
 															\end{minipage}
@@ -305,7 +337,7 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{226}{Definition}
+																			\item \script{226}{Definition} and \videoeleven{3877}{Explanation}, \videoeleven{3960}{Most expansive memory}, \videoeleven{3973}{With virtual address}, parallel comparison to all entries in TLB, \videoeleven{4014}{What has to happen on context switch with TLB}, flush TLB on context switch
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -317,7 +349,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{229}{Definition}, \alert{cache hit} and \alert{cache miss}
+																	\item \script{229}{Definition}, \alert{cache hit} and \alert{cache miss}, \videoeleven{4941}{Cache miss also put result into cache}, for the next access to the same address
 																\end{itemize}
 															\end{minipage}
 														}

@@ -201,30 +201,35 @@
 								child {
 										node {Meltdown
 												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{12cm}
+													\begin{minipage}[t]{18cm}
 														\begin{itemize}
 															\item based on out-of-order executions (superscalar processor), \script{202}{Note}
 															\item \script{203}{Overview}
 															\item \script{229}{What it uses}
 															\item \underline{Implementation details}, \videoten{3537}{First step operating system}
 															\begin{itemize}
-																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}, \script{230}{Precondition and Code}, \videoeleven{5166}{If memory managment works as it should...}, \videoeleven{5195}{Problem is...}, forwarding will put data into load reservation station before being finished with check for unprivliged access, \videoeleven{5292}{Then be fast}, read access, in cache access to secret address, \videoeleven{5321}{Probe array property}, all addresses lead to cache misses before, \videoeleven{5373}{Other detail has to be solved}
-																\item \script{233}{Step 2: Flushing the cache lines, Measure access times}
-																\item \script{235}{Exception handling (pr.)}
-																\item \script{236}{Race condition}
+																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}
 																\begin{itemize}
-																	\item \script{237}{Steps in the race}
+																	\item \script{230}{Precondition and Code}, \videoeleven{5166}{If memory managment works as it should...}, \videoeleven{5195}{Problem is...}, forwarding will put data into load reservation station before being finished with check for unprivliged access, \videoeleven{5292}{Then be fast}, read access, in cache access to secret address, \videoeleven{5321}{Probe array property}, all addresses lead to cache misses besides one address that has a future hit, \videoeleven{5373}{Other detail has to be solved}, \videotwelve{258}{Read after Write situation}, often forwarding to reservation station that does the load from the probe array at this address in IN1, \videotwelve{322}{If forwarding would not happen attack impossible}, \videotwelve{357}{Idea is use secret data to do this read access}, before it came clear that it was not allowed to read from this address, \videotwelve{2479}{Question for understanding}, not possible to read secret data in other way, cannot say reach this cache line, secret data used as address for doing access to probe array, therefore one does not evaluate cache itself by it's contents, but by the fact where one has fast access / cache hit
+																	\item \videotwelve{422}{$R_s$ and $R_p$ are load reservation stations}, \videotwelve{469}{First and second reservation stations wait for}, \videotwelve{542}{How in Tomasulo Algorithm}, \videotwelve{564}{Forward to $R_p$ no problem}, no architectural state, internal state, \videotwelve{585}{Assume doing read}, \videotwelve{675}{Not important that sd written into cache}, important that cache is accessed with address sd, \videotwelve{820}{To make this effect visible}
+																\end{itemize}
+																\item \script{233}{Step 2: Flushing the cache lines, Measure access times}, \videotwelve{895}{Not possible to read data from cache directly}, \videotwelve{984}{Size of probe array}, \videotwelve{1159}{Access first address}, \videotwelve{1174}{Fast access at $i$}, \videotwelve{1215}{Why left shift $12$ positions}, \videotwelve{1254}{For seperating cache lines}, with block of size $2^12$, with accesing $0$ would also fill cache at position $1$, \videotwelve{1309}{Cache lines don't have $2^12$}, \videotwelve{1393}{Can this work?}
+																\item \script{235}{Exception handling (pr.)}, \videotwelve{1548}{What fork does}, \videotwelve{1579}{How can execution in parent and child process be different}, \videotwelve{1697}{Method with return value}, \videotwelve{1738}{Reason why this works}, cache not private to some process, but is a global structure in the whole processor, \videotwelve{1787}{Need rights to install own signal handler}, \videotwelve{1842}{TSX group instructions}
+																\item \script{236}{Race condition}, \videotwelve{2111}{Can ensure probe\_array starts at beginning of memory page}, \videotwelve{2160}{What effect of this}, address translations with respect to probe array fast, because already have in TLB, \videotwelve{2193}{Reason for 12}, page size not cache line size, \videotwelve{2324}{By access to blue bytes}, addresses stored in TLB, \videotwelve{2351}{TLB summary} accelerated translation of virtual to real addresses or short: Acceleration of address translation, only flushed when doing context switch between 2 processes, \videotwelve{2399}{One needs accelerated access to probe\_array}, \videotwelve{2444}{Secret data available earlier}, secret kernel address in cache, so provided faster and thus forwarded faster
+																\begin{itemize}
+																	\item \script{237}{Steps in the race (f.)} and \videotwelve{2670}{Explanation}, \videotwelve{2941}{Get cache miss because}, flushed cache before, \videotwelve{2965}{But not important what one reads}, it's important that one is reading from $b$, \videotwelve{3038}{What doesn't help}, bringing address a into TLB would accelerate both, but one only wants to accelerate sequence $2$
 																\end{itemize}
 															\end{itemize}
-															\item \script{238}{Leak whole memory}
-															\item \script{239}{Summary and Visualization}
-															\item \script{241}{Countermeasures}
+															\item \script{238}{Leak whole memory}, \videotwelve{3165}{What helps to leak whole memory}, reference to page in physical memory coming from kernel, \videotwelve{3190}{Add second reference to physical page}, which is from user process page table, if allocate memory by user process, \videotwelve{3207}{Kernel page table is simple}, \videotwelve{3278}{Access all possible physical page frames}, via kernel, read complete physical memory if can read kernel
+															\item \script{239}{Summary and Visualization} and \videotwelve{3378}{Explanation}, \videotwelve{3442}{Main Problem of Meltdown}, \videotwelve{3512}{Assumption not necessary to clean Microarchitectural states}
+															% \item \script{240}{(Affected Processors)}, \videotwelve{3583}{AMD not}, possibly something different about timing, \videotwelve{4001}{Updates not always applied}, precondition is having malware on machine
+															\item \script{241}{Countermeasures}, \videotwelve{3644}{Not all coutermeasures published}, \videotwelve{3687}{Why not mapping kernel memory works}, \videotwelve{3759}{Before Meltdown kernel memory}, in each page table of each process, \videotwelve{3866}{Problem with checking access rights before loading}, \videotwelve{3917}{Race always won by... explained}
 															\item \underline{Preconditions:}
 															\begin{enumerate}
 																\item[\bfseries\color{PrimaryColor}$\bullet$] \videoten{3563}{Precondition on same machine}, able to start processes on this machine
 																\item \videoten{3610}{Out-of-order execution} or more precisely \videoeleven{3049}{Out-of-order with forwarding}%, \videoeleven{220}{Predondition 1 repreated}
-																\item \videoeleven{3059}{Virtual memory managment with / based on paging}
-																\item \videoeleven{4850}{Use of caches}, not only for tlb but also for data and instruction and data caches for memory accesses
+																\item \videoeleven{3059}{Virtual memory managment with / based on paging} and \videotwelve{108}{Kernel space mapped into virtual address space}, of each process
+																\item \videoeleven{4850}{Use of caches}, not only for tlb but also for data and instruction and data caches for memory accesses, \videotwelve{135}{In particular data caching}
 															\end{enumerate}
 														\end{itemize}
 													\end{minipage}
@@ -359,13 +364,18 @@
 								child {
 										node {Spectre
 												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{12cm}
+													\begin{minipage}[t]{16cm}
 														\begin{itemize}
 															\item based on speculative executions, \script{202}{Note}
-															\item \script{242}{Overview} and \script{244}{More}
-															\item \script{245}{Code (ff.)}
+															\item \script{242}{Overview}, \videotwelve{4152}{More difficult to exploit because...}, more preconditions
+															\item \script{244}{Preconditions}:
+															\begin{enumerate}
+																\item Speculative Execution, \videotwelve{4530}{What unexpected code executions means}
+																\item \videotwelve{4570}{Make victim to execute some code}, Attacker not start process
+															\end{enumerate}
+															\item \script{245}{Code (ff.)}, \videotwelve{4785}{Sandboxing}, \videotwelve{4894}{Instrumentation}, \videotwelve{4925}{Side remark for probe\_array}, \videotwelve{5004}{Everything in address space of victim}, \videotwelve{5099}{Attack tries to influence outcome of speculation}, \videotwelve{5143}{Increase probability that attack works}, \videotwelve{5247}{Again traces in the cache}, 2nd part same as in meltdown, \videotwelve{5265}{Difference to Meltdown}, Not crash, \alert{access to memory that belongs to executing process itself}
 															\item \script{250}{Other Application Scenarios}
-															\item \script{251}{Countermeasures}
+															\item \script{251}{Countermeasures}, \videotwelve{5437}{Avoid by separate process for javascript code}, \videotwelve{5459}{In new browsers fixed}
 														\end{itemize}
 													\end{minipage}
 												}
@@ -375,7 +385,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{243}{Definition}, \videoten{2995}{In other words}
+																	\item \script{243}{Definition}, \videoten{2995}{In other words}, \videotwelve{4230}{Branches}, \videotwelve{4293}{Avoid changes to architectural states that can't revert}, \videotwelve{4384}{Avoid writing memory or register file}, \videotwelve{4447}{Should not retire speculative instruction}, before not clear whehter jump should be taken or not, \videotwelve{4505}{If miss predicted ensure architectural state correct}
 																\end{itemize}
 															\end{minipage}
 														}

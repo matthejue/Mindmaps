@@ -22,7 +22,7 @@
 						\resizebox{\textwidth}{!}{
 							\begin{minipage}[t]{12cm}
 								\begin{itemize}
-									\item \script{255}{Side-channel and fault injection}
+									\item \script{255}{Side-channel and fault injection}, \videothirteen{3263}{Non- or semi-invasive}, no damage, \videothirteen{3326}{Sometimes side channel for fault injection}
 								\end{itemize}
 							\end{minipage}
 						}
@@ -36,7 +36,7 @@
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
 											\item \script{255}{Definition}, using side-channel inputs, \videoten{2131}{Other definition}
-											\item \script{256}{Side channel inputs for fault injection}
+											\item \script{256}{Side channel inputs for fault injection}, \videothirteen{3358}{Decrease supply voltage}, delay slower, information not arrive at register, \videothirteen{3408}{Clock frequency}, increasing frequency similiar to decreasing supply voltage, \videothirteen{3462}{Temperature}, influence speed, \videothirteen{3491}{Common goal}
 										\end{itemize}
 									\end{minipage}
 								}
@@ -54,91 +54,94 @@
 								}
 							}
 						child {
-								node {Power Consumption
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{258}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
+								node {Side Channels}
 								child {
-										node {Power attacks
+										node {Power Consumption
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{265}{Definition}
+															\item \script{258}{Definition} and \videothirteen{3672}{Explanation}, power consumption depends on next input, the more switching in cmos logic circuit, the more power consumption, derive about input applied, e.g. doesn't change, \videothirteen{3825}{Processor power cons. depends on instructions executed}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Power attacks
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{265}{Definition} and \videothirteen{4990}{Explanation idea}, \videothirteen{3579}{Historical order}, more clever, \videothirteen{5156}{Can't predict power completely}, unkown / uncontrolled influences, \videothirteen{5239}{Several measurements}, hypothesis correct or not, cancel out noice by statistical analysis and taking average, randomness cancels out, \videothirteen{5274}{Example}, signals with small signal to noise ratio
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Measuring Phase
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{267}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Power Consumption of a Circuit
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{266}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child {
+										node {EM Side Channels
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{259}{Definition}, \videothirteen{3906}{Inductive coupling}, electric / magnetic field, \videothirteen{3933}{Capacitive coupling}, charge, \videothirteen{3955}{Modulated signals}, \videothirteen{3986}{Similar to analyzing power consumption}, measuring current also measure power consumption
 														\end{itemize}
 													\end{minipage}
 												}
 											}
 									}
 								child {
-										node {Measuring Phase
+										node {Acoustic Side Channels
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{267}{Definition}
+															\item \script{260}{Definition}, \videothirteen{3640}{Extract keys from ciphers}, \videothirteen{4068}{Each key different sound}, \videothirteen{4247}{Cooler}, not directly connected with power consumption, load, \videothirteen{4286}{Sound cannot hear}, \videothirteen{4349}{Called coil whining}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
 									}
 								child {
-										node {Power Consumption of a Circuit
+										node {Optical Side Channels
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{266}{Definition}
+															\item \script{261}{Definition}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
 									}
-							}
-						child {
-								node {EM Side Channels
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{259}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {Acoustic Side Channels
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{260}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {Optical Side Channels
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{261}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {Timing and Delay
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{262}{Definition}
-												\end{itemize}
-											\end{minipage}
-										}
+								child {
+										node {Timing and Delay
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{262}{Definition} and \videothirteen{4533}{Explanation}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
 									}
 							}
 						child {
@@ -146,7 +149,7 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{263}{Definition}
+													\item \script{263}{Definition} and \videothirteen{4657}{Explanation}, \videothirteen{4675}{8-Bit width}, \videothirteen{4742}{Difficulty of attacks different}, fpga hardware parallelism, the more complicated device, the more difficult is attack
 												\end{itemize}
 											\end{minipage}
 										}
@@ -156,7 +159,7 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{264}{Definition}
+															\item \script{264}{Definition}, \videothirteen{4825}{Power supply outside}, can manipulate power supply, \videothirteen{4864}{No clock}, card reading machine clock outside privided, fault injection attacks, \videothirteen{4903}{Simple processor}, no multicore, only observe encryption algorithm, no multicore, only observe encryption algorithm, only thing running, \videothirteen{5059}{Another advantage smart card}, measure directly at source, microprocessor capacitors make signal smother, the closer to device the better measurements are
 														\end{itemize}
 													\end{minipage}
 												}
@@ -193,7 +196,7 @@
 											\begin{minipage}[t]{16cm}
 												\begin{itemize}
 													\item \script{202}{Main idea}, exploited vulnerabilties, \videoten{2892}{In other words}, caches, \videoten{3263}{Fulfill correct semantics}, result / effect architectural level / state never incorrect, result has to be same as in sequential execution, invariant, \videoten{3347}{Effects of invalid out of order and discarded speculative executions}, change microarchitectural states, \videoten{3419}{In other words 2}
-													\item \script{252}{Summary}
+													\item \script{252}{Summary}, \videothirteen{2987}{Hardware designers not think about microarchitectural states}, thought noone can read
 												\end{itemize}
 											\end{minipage}
 										}
@@ -210,10 +213,10 @@
 															\begin{itemize}
 																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}
 																\begin{itemize}
-																	\item \script{230}{Precondition and Code}, \videoeleven{5166}{If memory managment works as it should...}, \videoeleven{5195}{Problem is...}, forwarding will put data into load reservation station before being finished with check for unprivliged access, \videoeleven{5292}{Then be fast}, read access, in cache access to secret address, \videoeleven{5321}{Probe array property}, all addresses lead to cache misses besides one address that has a future hit, \videoeleven{5373}{Other detail has to be solved}, \videotwelve{258}{Read after Write situation}, often forwarding to reservation station that does the load from the probe array at this address in IN1, \videotwelve{322}{If forwarding would not happen attack impossible}, \videotwelve{357}{Idea is use secret data to do this read access}, before it came clear that it was not allowed to read from this address, \videotwelve{2479}{Question for understanding}, not possible to read secret data in other way, cannot say reach this cache line, secret data used as address for doing access to probe array, therefore one does not evaluate cache itself by it's contents, but by the fact where one has fast access / cache hit
+																	\item \script{230}{Precondition and Code}, \videoeleven{5166}{If memory managment works as it should...}, \videoeleven{5195}{Problem is...}, forwarding will put data into load reservation station before being finished with check for unprivliged access, \videoeleven{5292}{Then be fast}, read access, in cache access to secret address, \videoeleven{5321}{Probe array property}, all addresses lead to cache misses besides one address that has a future hit, \videoeleven{5373}{Other detail has to be solved}, \videotwelve{258}{Read after Write situation}, often forwarding to reservation station that does the load from the probe array at this address in IN1, \videotwelve{322}{If forwarding would not happen attack impossible}, \videotwelve{357}{Idea is use secret data to do this read access}, before it came clear that it was not allowed to read from this address, \videotwelve{2479}{Question for understanding}, not possible to read secret data in other way, cannot say reach this cache line, secret data used as address for doing access to probe array, therefore one does not evaluate cache itself by it's contents, but by the fact where one has fast access / cache hit, probe array has $256$ entries, because one reads one \alert{byte} from the kernel which are $2^8=256$ and the probe array entry that can be read fast is going to correspond to the byte that has been read, a byte can only be between $0$ and $256$
 																	\item \videotwelve{422}{$R_s$ and $R_p$ are load reservation stations}, \videotwelve{469}{First and second reservation stations wait for}, \videotwelve{542}{How in Tomasulo Algorithm}, \videotwelve{564}{Forward to $R_p$ no problem}, no architectural state, internal state, \videotwelve{585}{Assume doing read}, \videotwelve{675}{Not important that sd written into cache}, important that cache is accessed with address sd, \videotwelve{820}{To make this effect visible}
 																\end{itemize}
-																\item \script{233}{Step 2: Flushing the cache lines, Measure access times}, \videotwelve{895}{Not possible to read data from cache directly}, \videotwelve{984}{Size of probe array}, \videotwelve{1159}{Access first address}, \videotwelve{1174}{Fast access at $i$}, \videotwelve{1215}{Why left shift $12$ positions}, \videotwelve{1254}{For seperating cache lines}, with block of size $2^12$, with accesing $0$ would also fill cache at position $1$, \videotwelve{1309}{Cache lines don't have $2^12$}, \videotwelve{1393}{Can this work?}
+																\item \script{233}{Step 2: Flushing the cache lines, Measure access times}, \videotwelve{895}{Not possible to read data from cache directly}, \videotwelve{984}{Size of probe array}, \videotwelve{1159}{Access first address}, \videotwelve{1174}{Fast access at $i$}, \videotwelve{1215}{Why left shift $12$ positions}, \videotwelve{1254}{For seperating cache lines}, with block of size $2^12$, with accesing $0$ would also fill cache at position $1$, \videotwelve{1309}{Cache lines don't have $2^{12}$}, \videotwelve{1393}{Can this work?}
 																\item \script{235}{Exception handling (pr.)}, \videotwelve{1548}{What fork does}, \videotwelve{1579}{How can execution in parent and child process be different}, \videotwelve{1697}{Method with return value}, \videotwelve{1738}{Reason why this works}, cache not private to some process, but is a global structure in the whole processor, \videotwelve{1787}{Need rights to install own signal handler}, \videotwelve{1842}{TSX group instructions}
 																\item \script{236}{Race condition}, \videotwelve{2111}{Can ensure probe\_array starts at beginning of memory page}, \videotwelve{2160}{What effect of this}, address translations with respect to probe array fast, because already have in TLB, \videotwelve{2193}{Reason for 12}, page size not cache line size, \videotwelve{2324}{By access to blue bytes}, addresses stored in TLB, \videotwelve{2351}{TLB summary} accelerated translation of virtual to real addresses or short: Acceleration of address translation, only flushed when doing context switch between 2 processes, \videotwelve{2399}{One needs accelerated access to probe\_array}, \videotwelve{2444}{Secret data available earlier}, secret kernel address in cache, so provided faster and thus forwarded faster
 																\begin{itemize}
@@ -221,9 +224,9 @@
 																\end{itemize}
 															\end{itemize}
 															\item \script{238}{Leak whole memory}, \videotwelve{3165}{What helps to leak whole memory}, reference to page in physical memory coming from kernel, \videotwelve{3190}{Add second reference to physical page}, which is from user process page table, if allocate memory by user process, \videotwelve{3207}{Kernel page table is simple}, \videotwelve{3278}{Access all possible physical page frames}, via kernel, read complete physical memory if can read kernel
-															\item \script{239}{Summary and Visualization} and \videotwelve{3378}{Explanation}, \videotwelve{3442}{Main Problem of Meltdown}, \videotwelve{3512}{Assumption not necessary to clean Microarchitectural states}
+															\item \script{239}{Summary and Visualization} and \videotwelve{3378}{Explanation} and \videothirteen{44}{Explanation 2}, \videotwelve{3442}{Main Problem of Meltdown}, \videotwelve{3512}{Assumption not necessary to clean Microarchitectural states}
 															% \item \script{240}{(Affected Processors)}, \videotwelve{3583}{AMD not}, possibly something different about timing, \videotwelve{4001}{Updates not always applied}, precondition is having malware on machine
-															\item \script{241}{Countermeasures}, \videotwelve{3644}{Not all coutermeasures published}, \videotwelve{3687}{Why not mapping kernel memory works}, \videotwelve{3759}{Before Meltdown kernel memory}, in each page table of each process, \videotwelve{3866}{Problem with checking access rights before loading}, \videotwelve{3917}{Race always won by... explained}
+															\item \script{241}{Countermeasures}, \videotwelve{3644}{Not all coutermeasures published}, \videotwelve{3687}{Why not mapping kernel memory works}, \videotwelve{3759}{Before Meltdown kernel memory}, in each page table of each process, \videotwelve{3866}{Problem with checking access rights before loading}, \videotwelve{3917}{Race always won by... explained}, \videothirteen{164}{Critique about access rights before loading}, slow down every memory access, \videothirteen{238}{Race always won can't be done by firmware update}, \videothirteen{249}{Access right checking takes so long}, can be that access right bits not written in TLB, solution then to store in TLB, then fast enough, \videothirteen{442}{Another proposal}, access right violation just flush the cache, prevnt reading information out in next step, comes at cost, one process with frequent acess right violations would slow down all other processes, because cache global data structure, \videothirteen{590}{Flush only cache line containing secret address}, queue of last addresses that go to the cache, flush lines stored in this queue on access right violation, number addresses in queue depend on implementation rates between access right violation and read out
 															\item \underline{Preconditions:}
 															\begin{enumerate}
 																\item[\bfseries\color{PrimaryColor}$\bullet$] \videoten{3563}{Precondition on same machine}, able to start processes on this machine
@@ -373,9 +376,10 @@
 																\item Speculative Execution, \videotwelve{4530}{What unexpected code executions means}
 																\item \videotwelve{4570}{Make victim to execute some code}, Attacker not start process
 															\end{enumerate}
-															\item \script{245}{Code (ff.)}, \videotwelve{4785}{Sandboxing}, \videotwelve{4894}{Instrumentation}, \videotwelve{4925}{Side remark for probe\_array}, \videotwelve{5004}{Everything in address space of victim}, \videotwelve{5099}{Attack tries to influence outcome of speculation}, \videotwelve{5143}{Increase probability that attack works}, \videotwelve{5247}{Again traces in the cache}, 2nd part same as in meltdown, \videotwelve{5265}{Difference to Meltdown}, Not crash, \alert{access to memory that belongs to executing process itself}
-															\item \script{250}{Other Application Scenarios}
-															\item \script{251}{Countermeasures}, \videotwelve{5437}{Avoid by separate process for javascript code}, \videotwelve{5459}{In new browsers fixed}
+															\item \script{245}{Code (f.)}, \videotwelve{4785}{Sandboxing}, \videotwelve{4894}{Instrumentation}, \videotwelve{4925}{Side remark for probe\_array}, \videotwelve{5004}{Everything in address space of victim}, \videotwelve{5099}{Attack tries to influence outcome of speculation}, \videotwelve{5143}{Increase probability that attack works}, \videotwelve{5247}{Again traces in the cache}, 2nd part same as in meltdown, \videotwelve{5265}{Difference to Meltdown}, Not crash, \alert{access to memory that belongs to executing process itself}, \videothirteen{1053}{Remainder same as in meltdown}
+															\item \script{247}{Win the \enquote{race}}, \videothirteen{1176}{Similiar to meltdown approach}, \videothirteen{1236}{How caching and uncaching work}, 2nd attack not change speculation if enough access with x smaller array1\_size, \videothirteen{1339}{In Javascript not possible to use cache flush}
+															\item \script{250}{Other Application Scenarios}, \videothirteen{2434}{Gadgets}, \videothirteen{2469}{How could work}, \videothirteen{2510}{But also preconditions and evaluation}, of probe\_array, \videothirteen{2647}{Need 3 things}
+															\item \script{251}{Countermeasures}, \videotwelve{5437}{Avoid by separate process for javascript code}, \videotwelve{5459}{In new browsers fixed}, \videothirteen{2735}{Sandboxing}, \videothirteen{2757}{Each website in separate process}, \alert{stronger sandboxing}, don't additional if conditions, \videothirteen{2784}{Different processes also completely different page tables}, no access to browser address space, \videothirteen{2956}{Somtimes have to sacrafice performance for security}
 														\end{itemize}
 													\end{minipage}
 												}
@@ -396,7 +400,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{248}{Example}
+																	\item \script{248}{Example} and \videothirteen{1405}{Explanation}, \videothirteen{1416}{Letters}, \videothirteen{1578}{A-Way}, \videothirteen{1714}{Additional step for number of byte}, because in datablock complete cache line stored, \videothirteen{1784}{Valid Bits}, \videothirteen{1813}{Access in Direct Mapped Cache}, \videothirteen{1840}{Fully-associative cache}, $s=0$, \videothirteen{1902}{Cache replacement strategies}, all address prefixes different from S and all A data blocks occupied
 																\end{itemize}
 															\end{minipage}
 														}
@@ -406,7 +410,7 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{249}{Definition}
+																			\item \script{249}{Definition} and \videothirteen{2015}{Explanation}, \videothirteen{2072}{Number accesses depending on replacement strategy}, with A accesses in A-way associative can be sure evicted contents, \videothirteen{2095}{probe\_array completely uncached number of accesses}, \#num\_address\_in\_array * A, \videothirteen{2141}{Example}, can also be directly replaced, all A are different, random replacement strategy can be never throw out
 																		\end{itemize}
 																	\end{minipage}
 																}

@@ -76,7 +76,7 @@
 														}
 													}
 												child {
-														node {Simple Power Attacks (SPA)
+														node {Simple Power Analysis (SPA)
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
@@ -85,7 +85,7 @@
 																			\begin{itemize}
 																				\item \script{289}{Operations having high SPA Risk}
 																			\end{itemize}
-																			\item \script{291}{Conclusion}
+																			\item \script{291}{Conclusions}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -126,22 +126,72 @@
 															}
 													}
 												child {
-														node {Differential Power Attacks (DPA)
+														node {Differential Power Analysis (DPA)
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{293}{Definition}
+																			\item \script{293}{Definition with Traces (ff.)}
+																			\item \script{299}{Basic Principle (f.)}
 																		\end{itemize}
 																	\end{minipage}
 																}
 															}
+														child {
+																node {Dynamic CMOS Power Consumption
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{296}{Definition (f.)}
+																					\item \script{298}{Example: Xor}
+																					\item \script{322}{Countermeasures}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {DES
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{301}{DES (ff.)}
+																					\begin{itemize}
+																						\item \script{303}{Feistel network}
+																					\end{itemize}
+																					\item \script{305}{DPA on DES (ff.)}
+																					\begin{itemize}
+																						\item \script{307}{Illustration}
+																						\item \script{310}{Key Extraction Flow}
+																						\item \script{311}{Hypothesis Testing (f.)}
+																					\end{itemize}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {AES
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{316}{Round Structure}
+																					\item \script{317}{DPA on AES (ff.)}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
 													}
 												child {
-														node {Correlation Power Attacks
+														node {Correlation Power Analysis
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{324}{Definition}
+																			\item \script{324}{Definition (ff.)}
+																			\begin{itemize}
+																				\item \script{325}{Measure Correlation}
+																				\item \script{326}{Pearson‘s Correlation Coefficient}
+																			\end{itemize}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -213,6 +263,29 @@
 														\end{itemize}
 													\end{minipage}
 												}
+											}
+										child {
+												node {Timing attacks
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{329}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Square and Multiply
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{330}{Definition}
+																			\item \script{331}{Relationship between Power and Timing}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
 											}
 									}
 							}

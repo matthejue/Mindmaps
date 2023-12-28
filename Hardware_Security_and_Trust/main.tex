@@ -70,7 +70,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{265}{Definition} and \videothirteen{4990}{Explanation idea}, \videothirteen{3579}{Historical order}, more clever, \videothirteen{5156}{Can't predict power completely}, unkown / uncontrolled influences, \videothirteen{5239}{Several measurements}, hypothesis correct or not, cancel out noice by statistical analysis and taking average, randomness cancels out, \videothirteen{5274}{Example}, signals with small signal to noise ratio
+																	\item \script{265}{Definition} and \videothirteen{4990}{Explanation idea}, \videothirteen{3579}{Historical order}, more clever, \videothirteen{5156}{Can't predict power completely}, unkown / uncontrolled influences, \videothirteen{5239}{Several measurements}, hypothesis correct or not, cancel out noice by statistical analysis and taking average, randomness cancels out, \videothirteen{5274}{Example}, signals with small signal to noise ratio, \videofourteen{138}{Hypothesis of the key}, subkey or one bit in key, \videofourteen{171}{Decision maybe only one bit}, then repeat attack and extract other bits
 																\end{itemize}
 															\end{minipage}
 														}
@@ -81,26 +81,36 @@
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
 																			\item \script{270}{Definition}
-																			\item \script{290}{Countermeasures}
+																			\item \script{290}{Countermeasures}, \videofourteen{2759}{Do coding in a way}, not derive information from power profile or timing, \videofourteen{2787}{Create Coding lead to performance penalty}
 																			\begin{itemize}
-																				\item \script{289}{Operations having high SPA Risk}
+																				\item \script{289}{Operations having high SPA Risk}, \videofourteen{2590}{Could be check password}, \videofourteen{2610}{Password successful to certain degree}, \videofourteen{2636}{Fix of vulnerability}, result flag, init to true, hide even more with else case where assignment to flag as well, \videofourteen{2721}{Keeping number iterations constant}, no data dependant
 																			\end{itemize}
-																			\item \script{291}{Conclusions}
+																			\item \script{291}{Conclusions}, \videofourteen{2843}{Detect key change}
 																		\end{itemize}
 																	\end{minipage}
 																}
 															}
 														child {
-																node {Data Encryption Standard (DES)
+																node (des) {Data Encryption Standard (DES)
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
 																					\item \script{271}{Most important facts}
-																					\item \script{272}{Basic Structure}
-																					\item \script{273}{SPA on DES}
+																					\item \script{272}{Basic Structure}, \videofourteen{733}{DES Structure}, \videofourteen{755}{Contrast to AES plaintext 128 bits}, \videofourteen{860}{Feistel network only place use key}, subkey round one, \videofourteen{909}{Key Schedule}, predefined selection mechanism, \videofourteen{966}{Feistel network}, \videofourteen{991}{Similar S-Boxes in AES}, \videofourteen{1014}{What is R1}, \videofourteen{1051}{Rounds same, only different keys used}
+																					\item \script{273}{SPA on DES}, \videofourteen{1097}{Flow}
 																					\begin{itemize}
-																						\item \script{274}{Power Trace (ff.)}
-																						\item \script{280}{Intermediary result}
+																						\item \script{274}{Power Trace (ff.)}, \videofourteen{1166}{What does it tell us}, \videofourteen{1226}{Input and Output permutation}, \videofourteen{1274}{Round 2 and 3}, \videofourteen{1378}{Spikes different in rounds}, rotations, \videofourteen{1509}{Cycle 6 difference}, \videofourteen{1544}{Jump taken or not can depend on the key}, \videofourteen{1566}{Smart card not implemented in hardware}, \videofourteen{1576}{Don't have left rotation on registers}, \videofourteen{1586}{What doing instead}, \videofourteen{1615}{May be conditional jump}
+																						\item \script{280}{Intermediary result}, \videofourteen{1709}{8 Bit instructions and registers}, \videofourteen{1770}{28 bits mask out leading 1}
+																					\end{itemize}
+																					\item \script{301}{Back to DES (ff.)}
+																					\begin{itemize}
+																						\item \script{303}{Feistel network}
+																					\end{itemize}
+																					\item \script{305}{DPA on DES (ff.)}
+																					\begin{itemize}
+																						\item \script{307}{Illustration}
+																						\item \script{310}{Key Extraction Flow}
+																						\item \script{311}{Hypothesis Testing (f.)}
 																					\end{itemize}
 																				\end{itemize}
 																			\end{minipage}
@@ -112,13 +122,13 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{281}{Definition}
+																					\item \script{281}{Definition}, \videofourteen{1899}{Only algorithm secure not implementation}, may be insecure, \videofourteen{2001}{Square and Multiply complexity}, linear in number of bits in e and d, \videofourteen{2025}{Don't attack public key}, because it's public
 																					\item \script{282}{Square and Multiply}
 																					\item \script{285}{SPA on Square and Multiply}
 																					\begin{itemize}
-																						\item \script{283}{Power Trace (f.)}
+																						\item \script{283}{Power Trace (f.)}, \videofourteen{2210}{Derive exponent from power trace}, derive private key, \videofourteen{2331}{Problem data dependant jump}
 																					\end{itemize}
-																					\item \script{286}{Countermeasures (ff.)}
+																					\item \script{286}{Countermeasures (ff.)}, \videofourteen{2390}{Dummy multiplication in every case}, \videofourteen{2481}{Bad to make jumps based on data would like to protect}
 																				\end{itemize}
 																			\end{minipage}
 																		}
@@ -126,12 +136,18 @@
 															}
 													}
 												child {
-														node {Differential Power Analysis (DPA)
+														node (dpa) {Differential Power Analysis (DPA)
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{293}{Definition with Traces (ff.)}
-																			\item \script{299}{Basic Principle (f.)}
+																			\item \script{293}{Definition with Traces (ff.)}, \videofourteen{3006}{Data-dependence}, \videofourteen{3059}{Cancel out noise by looking at average of many power profiles}, everything not correlated somehow cancels out, \videofourteen{3174}{Addition several power profiles}, not so easy to say then there's e.g. 2nd round of left rotation, \videofourteen{3239}{Why DPA helps here}, \videofourteen{3303}{Contribution second algorithm goes away}, noise cancels out, average several runs, \videofourteen{3347}{Another thing}, maybe 2nd process cancels out in difference of average run with key a and average run of key b, because it possible does same for key a and key b, \videofourteen{3404}{Averaging and comparing 2 averages to each other}, \videofourteen{3610}{Summary DPA}, form groups, in groups compute averages to cancel out noise and difference show rly small differences in those averages
+																			\begin{itemize}
+																				\item \script{294}{Power Traces} and \videofourteen{3469}{Explanation}, \videofourteen{3550}{Computing difference make small differences visible}, can zoom into difference, \videofourteen{3568}{Precondition to be applicable to cryptanalysis}, form meaningful groups, extract information from difference of those groups
+																			\end{itemize}
+																			\item \script{299}{Basic Principle (f.)}, \videofourteen{4643}{Basic Principle explained}, \videofourteen{4700}{From sequence of input patterns get sequence of power values}, \videofourteen{4741}{Don't talk about traces}, talk about single power values at first, for each pattern have a value, \videofourteen{4767}{Model of circuit}, \videofourteen{4863}{Target gate is 0}, contribution to overall power consumption small, \videofourteen{5333}{Main idea}
+																			\begin{itemize}
+																				\item \script{300}{2nd part}, \videofourteen{4951}{What plan to do}, average power in s+ larger than average power in s-, if contribution of all other gates somehow cancels out, noise canceling, \videofourteen{5142}{Compute difference}, \videofourteen{5252}{In DPA attack hypothesis depends on key}, if assumption on key was correct, this partitioning was correct and one can see a difference. If hypothesis was not correct, then yellow contribution are distributed more or less equally between s+ and s- and therefore the difference is 0
+																			\end{itemize}
 																			\item \script{322}{Countermeasures}
 																		\end{itemize}
 																	\end{minipage}
@@ -142,28 +158,8 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{296}{Definition (f.)}
-																					\item \script{298}{Example: Xor}
-																				\end{itemize}
-																			\end{minipage}
-																		}
-																	}
-															}
-														child {
-																node {DES
-																		\resizebox{\textwidth}{!}{
-																			\begin{minipage}[t]{12cm}
-																				\begin{itemize}
-																					\item \script{301}{DES (ff.)}
-																					\begin{itemize}
-																						\item \script{303}{Feistel network}
-																					\end{itemize}
-																					\item \script{305}{DPA on DES (ff.)}
-																					\begin{itemize}
-																						\item \script{307}{Illustration}
-																						\item \script{310}{Key Extraction Flow}
-																						\item \script{311}{Hypothesis Testing (f.)}
-																					\end{itemize}
+																					\item \script{296}{Definition (f.)}, \videofourteen{3663}{CMOS Inverter}, \videofourteen{3734}{Not considering static behaviour}, measure what happens if change from 0 to 1 or 1 to 0, \videofourteen{3948}{What happens measuring current at this point}, high current loading output to 1 for 1 to 0, stops when arrive at 1 at this capacitor, \videofourteen{4007}{Transition 0 to 1, output 1 to 0}, 2nd case, capacitor C is discharged to ground, \videofourteen{4050}{Little peak in power profile}, changing transistors from conductive to non-conductive or vice versa there's point in time where both are conducting a little bit, then have little bit of current from vdd to ground, one is transistor open and the other is not closed perfectly, \videofourteen{4161}{Reason is that measuring here}, with oscilloscope, else other way round, then switching current when go from 1 to 0, \videofourteen{4188}{Asymmetry comes from the point where on is measuring}
+																					\item \script{298}{Example: Xor}, \videofourteen{4320}{Don't possible to observe real output of XOR gate}, only derive from power consumption
 																				\end{itemize}
 																			\end{minipage}
 																		}
@@ -199,22 +195,22 @@
 													}
 											}
 										child {
-												node {Measuring Phase
+												node {Power Consumption of a Circuit
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{267}{Definition}
+																	\item \script{266}{Definition}, \videofourteen{208}{Cmos}, static power low, if no switching one of the connections not conductive, in reality small static power flowing from vdd to ground also if no switching, transistors a little bit conductive, static power not data dependant, \videofourteen{294}{Dynamic power information about switchings}, in circuit, \videofourteen{310}{Why switching consumes power}, charge capacitors
 																\end{itemize}
 															\end{minipage}
 														}
 													}
 											}
 										child {
-												node {Power Consumption of a Circuit
+												node {Measuring Phase
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{266}{Definition}
+																	\item \script{267}{Definition}, \videofourteen{386}{Measure with Oscilloscope}, \videofourteen{422}{Also important where on measures}, goal as close to attacked device as possible
 																\end{itemize}
 															\end{minipage}
 														}
@@ -279,8 +275,12 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{330}{Definition}
-																			\item \script{331}{Relationship between Power and Timing}
+																			\item \script{330}{Timing Attack on Square and Multiply}
+																			\begin{itemize}
+																				\item \script{331}{Relationship between Power and Timing}
+																				\item \script{332}{Observation, Better Timing Attacks on RSA}
+																			\end{itemize}
+																			\item \script{333}{Countermeasures}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -1560,6 +1560,7 @@
 		\edge{aes}{product}
 		\edge{aes}{blockcipher}
 		\edge{finitefields}{polrings}
+		\edge{dpa}{des}
 	\end{edges}
 	\annotation{test}{annotation}
 \end{mindmap}

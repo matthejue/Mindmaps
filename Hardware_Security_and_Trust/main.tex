@@ -102,15 +102,21 @@
 																						\item \script{274}{Power Trace (ff.)}, \videofourteen{1166}{What does it tell us}, \videofourteen{1226}{Input and Output permutation}, \videofourteen{1274}{Round 2 and 3}, \videofourteen{1378}{Spikes different in rounds}, rotations, \videofourteen{1509}{Cycle 6 difference}, \videofourteen{1544}{Jump taken or not can depend on the key}, \videofourteen{1566}{Smart card not implemented in hardware}, \videofourteen{1576}{Don't have left rotation on registers}, \videofourteen{1586}{What doing instead}, \videofourteen{1615}{May be conditional jump}
 																						\item \script{280}{Intermediary result}, \videofourteen{1709}{8 Bit instructions and registers}, \videofourteen{1770}{28 bits mask out leading 1}
 																					\end{itemize}
-																					\item \script{301}{Back to DES (ff.)}
+																					\item \script{301}{Back to DES (ff.)} and \videofifteen{563}{Explanation}, \videofifteen{605}{8 bits omitted}, \videofifteen{610}{Why k16}, what one knows
 																					\begin{itemize}
-																						\item \script{303}{Feistel network}
+																						\item \script{301}{What is known} and \videofifteen{723}{Explanation}, \videofifteen{817}{If know key, then L15 is known}, use 1 bit of L15 for partitioning, \videofifteen{861}{If would depend on all key bits...}, then would have to guess complete subkey
+																						\item \script{303}{Feistel network}, \videofifteen{878}{1 Bit of L15 depends only on 6 bits of the key}, Feistel netowrk, can enumerate all possible assignments, \videofifteen{988}{Fixed rule how expansion is done}, not important how done in particular, \videofifteen{1029}{8 6 bit parts}, \videofifteen{1043}{Similar S-Box from AES}, non-linear mapping of 6 bits into 4 bits, \videofifteen{1101}{What important to understand attack}, 1 output bit of feistel network depends on 6 key bits, i.e. 6 bits of round key $k_i$
+																						\item \script{304}{Single output bit}, \videofifteen{1215}{How know L15j}, \videofifteen{1335}{What can use this for power attack}
 																					\end{itemize}
-																					\item \script{305}{DPA on DES (ff.)}
+																					\item \script{305}{DPA on DES (ff.)}, \videofifteen{1381}{Main idea}, \videofifteen{1427}{$2^6$ possible assumptions}, only $1$ is correct, 64, \alert{die $6$ bits bei DES sind von ihrer Position fest, aber nicht ihrem Wert ($0$ oder $1$), daher $2^6$}, \videofifteen{1471}{L15j that depends}, \videofifteen{1487}{Doing by simulation}
 																					\begin{itemize}
-																						\item \script{307}{Illustration}
-																						\item \script{310}{Key Extraction Flow}
-																						\item \script{311}{Hypothesis Testing (f.)}
+																						\item \script{306}{Case distinction}, \videofifteen{1569}{If assumption not correct}, random distribution, \videofifteen{1607}{If assumption correct}, s+ larger than s-, \enquote{assumption propably choice of $k_S$}, \videofifteen{1649}{Assumption wrong in remaning 63 cases}, wrong assumption, \videofifteen{1737}{If n large enough random property cancels out noise}
+																						\item \script{307}{Illustration} and \videofifteen{1752}{Explanation}
+																						\item \script{308}{Order applying patterns sidenote} and \videofifteen{1968}{Explanation}, if random should be ok, best thing if alternating s+ and s-, \alert{can only observe large power consumption for transitions from 0 to 1, it has to switch to from 1 to 0 in between, else it is transition from 1 to 1}, \videofifteen{2149}{Bad choice}, \videofifteen{2210}{Since doing computation in advance}, usually one measurement and then distribution into k+ and k- based on key assumption
+																						\item \script{309}{Don't know point in time when switching occurs}
+																						\item \script{310}{Key Extraction Flow} and \videofifteen{2570}{Explanation}
+																						\item \script{311}{Hypothesis Testing (f.)}, \videofifteen{2737}{See not completely 0}, not cancel out completely, \videofifteen{2753}{Hint most likely}, this key assumption correct one, most probably here the event on l5j will occur, at this point in time partitioning with respect to key assumption k1 was correct
+																						\item \script{313}{Finding out all bits}, \videofifteen{2834}{5 (3?) other outputs depend on same 6 key bits}, all others depend on other set of 6 key bits, \videofifteen{2910}{Key deterministic}, if know 48 bits of key, then can compute? wich one in the original key they are, \videofifteen{2941}{Brut force $2^8$ remaining possibilities}, \videofifteen{2972}{Same situation with L15 and R15}
 																					\end{itemize}
 																				\end{itemize}
 																			\end{minipage}
@@ -140,15 +146,17 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{293}{Definition with Traces (ff.)}, \videofourteen{3006}{Data-dependence}, \videofourteen{3059}{Cancel out noise by looking at average of many power profiles}, everything not correlated somehow cancels out, \videofourteen{3174}{Addition several power profiles}, not so easy to say then there's e.g. 2nd round of left rotation, \videofourteen{3239}{Why DPA helps here}, \videofourteen{3303}{Contribution second algorithm goes away}, noise cancels out, average several runs, \videofourteen{3347}{Another thing}, maybe 2nd process cancels out in difference of average run with key a and average run of key b, because it possible does same for key a and key b, \videofourteen{3404}{Averaging and comparing 2 averages to each other}, \videofourteen{3610}{Summary DPA}, form groups, in groups compute averages to cancel out noise and difference show rly small differences in those averages
+																			\item \script{293}{Definition with Traces (ff.)}, \videofourteen{3006}{Data-dependence}, \videofourteen{3059}{Cancel out noise by looking at average of many power profiles}, everything not correlated somehow cancels out, \videofourteen{3174}{Addition several power profiles}, not so easy to say then there's e.g. 2nd round of left rotation, \videofourteen{3239}{Why DPA helps here}, \videofourteen{3303}{Contribution second algorithm goes away}, noise cancels out, average several runs, \videofourteen{3347}{Another thing}, maybe 2nd process cancels out in difference of average run with key a and average run of key b, because it possible does same for key a and key b, \videofourteen{3404}{Averaging and comparing 2 averages to each other}, \videofourteen{3610}{Summary DPA}, form groups, in groups compute averages to cancel out noise and difference show rly small differences in those averages, \videofifteen{71}{If operands depend on the key}
 																			\begin{itemize}
 																				\item \script{294}{Power Traces} and \videofourteen{3469}{Explanation}, \videofourteen{3550}{Computing difference make small differences visible}, can zoom into difference, \videofourteen{3568}{Precondition to be applicable to cryptanalysis}, form meaningful groups, extract information from difference of those groups
 																			\end{itemize}
-																			\item \script{299}{Basic Principle (f.)}, \videofourteen{4643}{Basic Principle explained}, \videofourteen{4700}{From sequence of input patterns get sequence of power values}, \videofourteen{4741}{Don't talk about traces}, talk about single power values at first, for each pattern have a value, \videofourteen{4767}{Model of circuit}, \videofourteen{4863}{Target gate is 0}, contribution to overall power consumption small, \videofourteen{5333}{Main idea}
+																			\item \script{299}{Basic Principle (f.)} and \videofourteen{4643}{Explanation}, \videofourteen{4700}{From sequence of input patterns get sequence of power values}, \videofourteen{4741}{Don't talk about traces}, talk about single power values at first, for each pattern have a value, \videofourteen{4767}{Model of circuit}, \videofourteen{4863}{Target gate is 0}, contribution to overall power consumption small, \videofourteen{5333}{Main idea}, \videofifteen{282}{Select one output bit}, \videofifteen{298}{Choosing target gate}, property if know key and if know input (plain text or cipher text) then one knows the value at the output of this gate, \videofifteen{4507}{Idea of DPA}, to cancel out single affects by averaging
 																			\begin{itemize}
-																				\item \script{300}{2nd part}, \videofourteen{4951}{What plan to do}, average power in s+ larger than average power in s-, if contribution of all other gates somehow cancels out, noise canceling, \videofourteen{5142}{Compute difference}, \videofourteen{5252}{In DPA attack hypothesis depends on key}, if assumption on key was correct, this partitioning was correct and one can see a difference. If hypothesis was not correct, then yellow contribution are distributed more or less equally between s+ and s- and therefore the difference is 0
+																				\item \script{300}{2nd part}, \videofourteen{4951}{What plan to do}, average power in s+ larger than average power in s-, if contribution of all other gates somehow cancels out, noise canceling, \videofourteen{5142}{Compute difference}, \videofourteen{5252}{In DPA attack hypothesis depends on key}, if assumption on key was correct, this partitioning was correct and one can see a difference. If hypothesis was not correct, then yellow contribution are distributed more or less equally between s+ and s- and therefore the difference is 0, \videofifteen{410}{Average over pattern for left side larger}, then for the right side with high probability, because include tiny additional component of power consumption due to this special target gate
 																			\end{itemize}
-																			\item \script{322}{Countermeasures}
+																			\item \script{322}{Countermeasures}, \videofifteen{4414}{Signal to noise ratio reducing}, signals are more looking like noise, \videofifteen{4438}{Effect of low power designs}, the more successful are in reducing power consumption and reducing peaks, the more difficult DPA will be, \videofifteen{4477}{Do something in parallel}, \videofifteen{4534}{Leak masking}, if using non-random contributions to power consumption, then could be possible to hide the key dependant power consumption, \videofifteen{4567}{Doesn't necessarily work}, same as multicores, but even multicores can be attacked with DPA if have enough patterns to apply, \videofifteen{4597}{Countermeasures always can avoided by more samples}, have this property, \videofifteen{4617}{Temporal noise explained}, if able to shift measurements against each other then can avoid sharp peak in differential power trace, \videofifteen{4695}{Random generator that influences clock speed}, \videofifteen{4747}{Balance power consumption}, more expensive than Cmos, varying power consumption 0 to 1 (bigger) and 1 to 0 (smaller), \videofifteen{4812}{Instead of 1 transistor? always have 2}, doubling area of implementation, \videofifteen{4866}{Power supply filters}, impossible measure real power consumption, if measure plug in the wall have capacitors that cancel out peaks, power supply filters are capacitors in simplest case consuming / cancel out peaks
+																			% , \videofifteen{4727}{Temporal noise pretty often used}
+																			% , \videofifteen{5072}{AES secure against DPA?}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -158,7 +166,7 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{296}{Definition (f.)}, \videofourteen{3663}{CMOS Inverter}, \videofourteen{3734}{Not considering static behaviour}, measure what happens if change from 0 to 1 or 1 to 0, \videofourteen{3948}{What happens measuring current at this point}, high current loading output to 1 for 1 to 0, stops when arrive at 1 at this capacitor, \videofourteen{4007}{Transition 0 to 1, output 1 to 0}, 2nd case, capacitor C is discharged to ground, \videofourteen{4050}{Little peak in power profile}, changing transistors from conductive to non-conductive or vice versa there's point in time where both are conducting a little bit, then have little bit of current from vdd to ground, one is transistor open and the other is not closed perfectly, \videofourteen{4161}{Reason is that measuring here}, with oscilloscope, else other way round, then switching current when go from 1 to 0, \videofourteen{4188}{Asymmetry comes from the point where on is measuring}
+																					\item \script{296}{Definition (f.)}, \videofourteen{3663}{CMOS Inverter}, \videofourteen{3734}{Not considering static behaviour}, measure what happens if change from 0 to 1 or 1 to 0, \videofourteen{3948}{What happens measuring current at this point}, high current loading output to 1 for 1 to 0, stops when arrive at 1 at this capacitor, \videofourteen{4007}{Transition 0 to 1, output 1 to 0}, 2nd case, capacitor C is discharged to ground, \videofourteen{4050}{Little peak in power profile}, changing transistors from conductive to non-conductive or vice versa there's point in time where both are conducting a little bit, then have little bit of current from vdd to ground, one is transistor open and the other is not closed perfectly, \videofourteen{4161}{Reason is that measuring here}, with oscilloscope, else other way round, then switching current when go from 1 to 0, \videofourteen{4188}{Asymmetry comes from the point where on is measuring}, \videofifteen{203}{VDD}, this part not conductive, almost no current, \videofourteen{4204}{Always measure at VDD connection}, \videofifteen{248}{Always assuming measurements at VDD 2}
 																					\item \script{298}{Example: Xor}, \videofourteen{4320}{Don't possible to observe real output of XOR gate}, only derive from power consumption
 																				\end{itemize}
 																			\end{minipage}
@@ -170,8 +178,13 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{316}{Round Structure}
-																					\item \script{317}{DPA on AES (ff.)}
+																					\item \script{314}{DPA on AES (ff.)}, \videofifteen{3103}{What one needs}, one bit distinguisher, depend on restricted number of key bits / cases, not possible if number of candidate bits too large, \videofifteen{3237}{Last attack was only cipher text}, plain text played no role
+																					\begin{itemize}
+																						\item \script{316}{Round Structure}, \videofifteen{3346}{Not in the middle}, not able to compute this bit, \videofifteen{3411}{Simplest possible locations}, key addition layer, \videofifteen{3439}{Select one bit}, output only depends on one key bit and one plain text bit, \videofifteen{3509}{Pretty similar way also do it at the end}, know cipher text and one bit of key n, then know bit, \videofifteen{3556}{Other possibility assumption on 8 bits}, one output of a S-Box, Byte Substitution Layer, \videofifteen{3658}{Mapping known and be be inverted}, \videofifteen{3663}{First 8 Bits of the key}, one bit at output
+																						\item \script{317}{Traces (ff.)} and \videofifteen{3787}{Traces explained}, \videofifteen{3719}{Is arbitrary whether to choose LSB and first S-box}, one output of S-Box only depends on $a_0$ and $a_0$ by key addition only depends on first byte of $k_0$, in this special case $k_0$ is the same as $k$ if one has 128 bit AES, \videofifteen{3772}{Same game}, only number possible key assumptions is not $64$ but $2^8=256$, \videofifteen{3867}{Most probably this is the correct key}, usually (differential)? trace with largest peaks is the right one, \videofifteen{3922}{Argumentation behind waving}, at all other places everything random, there are also other correlations with the key assumption
+																						\item \script{320}{Work with every \alert{single bit distinguisher}} and \videofifteen{3961}{Explanation}, does every single bit distinguisher work, \videofifteen{4080}{Example not every distinguisher working}, effects cancel out, \videofifteen{4190}{Don't make use of}, don't know exact implementation, hope something is correlated with the key bit assumption
+																						\item \script{321}{Using S-Box} and \videofifteen{4293}{Explanation}, \videofifteen{4314}{How obtain remaining key bytes}, choosing another S-Box, \videofifteen{4329}{No Brootforce needed}
+																					\end{itemize}
 																				\end{itemize}
 																			\end{minipage}
 																		}
@@ -183,7 +196,7 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{324}{Definition (ff.)}
+																			\item \script{324}{Definition (ff.)}, \videofifteen{5027}{Needing less samples}
 																			\begin{itemize}
 																				\item \script{325}{Measure Correlation}
 																				\item \script{326}{Pearson‘s Correlation Coefficient}
@@ -223,6 +236,11 @@
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item \script{259}{Definition}, \videothirteen{3906}{Inductive coupling}, electric / magnetic field, \videothirteen{3933}{Capacitive coupling}, charge, \videothirteen{3955}{Modulated signals}, \videothirteen{3986}{Similar to analyzing power consumption}, measuring current also measure power consumption
+															\begin{itemize}
+																\item \script{335}{Probe design}, localized readings, \script{336}{Signal}
+																\item \script{337}{Spatial Positioning} and \script{338}{Spectral density}
+																\item \script{339}{Features, Drawbacks, Countermeasures}
+															\end{itemize}
 														\end{itemize}
 													\end{minipage}
 												}
@@ -233,10 +251,31 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{260}{Definition}, \videothirteen{3640}{Extract keys from ciphers}, \videothirteen{4068}{Each key different sound}, \videothirteen{4247}{Cooler}, not directly connected with power consumption, load, \videothirteen{4286}{Sound cannot hear}, \videothirteen{4349}{Called coil whining}
+															\item \script{260}{Definition and Examples}, \videothirteen{3640}{Extract keys from ciphers}, \videothirteen{4068}{Each key different sound}, \videothirteen{4247}{Cooler}, not directly connected with power consumption, load, \videothirteen{4286}{Sound cannot hear}, \videothirteen{4349}{Called coil whining}
+															\begin{itemize}
+																\item \script{342}{Measurement and \enquote{coil whining}}
+																\item \script{343}{Microphone Readout (f.)}
+															\end{itemize}
+															\item \script{354}{Countermeasures}
 														\end{itemize}
 													\end{minipage}
 												}
+											}
+										child {
+												node {RSA
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{341}{Extract RSA Key (from GnuPG)}
+																	\begin{itemize}
+																		\item \script{345}{Attacking RSA (f.)}
+																		\item \script{348}{Acoustic Side Channel (f.)}
+																		\item \script{349}{Key Extraction (ff.)}
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
 											}
 									}
 								child {
@@ -358,7 +397,7 @@
 															\begin{itemize}
 																\item \script{231}{Step 1: Unauthorized read, probe\_array and cache data (f.)}
 																\begin{itemize}
-																	\item \script{230}{Precondition and Code}, \videoeleven{5166}{If memory managment works as it should...}, \videoeleven{5195}{Problem is...}, forwarding will put data into load reservation station before being finished with check for unprivliged access, \videoeleven{5292}{Then be fast}, read access, in cache access to secret address, \videoeleven{5321}{Probe array property}, all addresses lead to cache misses besides one address that has a future hit, \videoeleven{5373}{Other detail has to be solved}, \videotwelve{258}{Read after Write situation}, often forwarding to reservation station that does the load from the probe array at this address in IN1, \videotwelve{322}{If forwarding would not happen attack impossible}, \videotwelve{357}{Idea is use secret data to do this read access}, before it came clear that it was not allowed to read from this address, \videotwelve{2479}{Question for understanding}, not possible to read secret data in other way, cannot say reach this cache line, secret data used as address for doing access to probe array, therefore one does not evaluate cache itself by it's contents, but by the fact where one has fast access / cache hit, probe array has $256$ entries, because one reads one \alert{byte} from the kernel which are $2^8=256$ and the probe array entry that can be read fast is going to correspond to the byte that has been read, a byte can only be between $0$ and $256$
+																	\item \script{230}{Precondition and Code}, \videoeleven{5166}{If memory managment works as it should...}, \videoeleven{5195}{Problem is...}, forwarding will put data into load reservation station before being finished with check for unprivliged access, \videoeleven{5292}{Then be fast}, read access, in cache access to secret address, \videoeleven{5321}{Probe array property}, all addresses lead to cache misses besides one address that has a future hit, \videoeleven{5373}{Other detail has to be solved}, \videotwelve{258}{Read after Write situation}, often forwarding to reservation station that does the load from the probe array at this address in IN1, \videotwelve{322}{If forwarding would not happen attack impossible}, \videotwelve{357}{Idea is use secret data to do this read access}, before it came clear that it was not allowed to read from this address, \videotwelve{2479}{Question for understanding}, not possible to read secret data in other way, cannot say reach this cache line, secret data used as address for doing access to probe array, therefore one does not evaluate cache itself by it's contents, but by the fact where one has fast access / cache hit, \alert{probe array has $256$ entries, because one reads one \alert{byte} from the kernel which are $2^8=256$ and the probe array entry that can be read fast is going to correspond to the byte that has been read, a byte can only be between $0$ and $256$}
 																	\item \videotwelve{422}{$R_s$ and $R_p$ are load reservation stations}, \videotwelve{469}{First and second reservation stations wait for}, \videotwelve{542}{How in Tomasulo Algorithm}, \videotwelve{564}{Forward to $R_p$ no problem}, no architectural state, internal state, \videotwelve{585}{Assume doing read}, \videotwelve{675}{Not important that sd written into cache}, important that cache is accessed with address sd, \videotwelve{820}{To make this effect visible}
 																\end{itemize}
 																\item \script{233}{Step 2: Flushing the cache lines, Measure access times}, \videotwelve{895}{Not possible to read data from cache directly}, \videotwelve{984}{Size of probe array}, \videotwelve{1159}{Access first address}, \videotwelve{1174}{Fast access at $i$}, \videotwelve{1215}{Why left shift $12$ positions}, \videotwelve{1254}{For seperating cache lines}, with block of size $2^12$, with accesing $0$ would also fill cache at position $1$, \videotwelve{1309}{Cache lines don't have $2^{12}$}, \videotwelve{1393}{Can this work?}

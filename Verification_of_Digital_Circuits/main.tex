@@ -1322,31 +1322,154 @@
 							\begin{minipage}[t]{12cm}
 								\begin{itemize}
 									\item Prove that a system specifies a set of properties
+									\item \script{647}{Motivation}
+									\item We need to model \enquote{runs} of a sequential circuit if we want to analyze timed properties
+									\item \script{650}{Application scenario}
 								\end{itemize}
 							\end{minipage}
 						}
 					}
 				child {
-						node {Specification of properties with temporal logics}
-					}
-				child {
-						node {Algorithms for checking properties of circuits}
-					}
-				child {
-						node {Bounded model checking using SAT solvers}
-					}
-				child {
-						node {Unbounded model checking}
-						child {
-								node {K-Induktion}
+						node {Language / method for modelling runs of a sequential circuit
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item asdf
+										\end{itemize}
+									\end{minipage}
+								}
 							}
 						child {
-								node {Craig interpolation}
-							}
-						child {
-								node {Property directed reachability (PDR)}
+								node {Kripke structure
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{653}{Definition (pr.)}
+													\begin{itemize}
+														\item \script{661}{General Transformation (prr.)}
+													\end{itemize}
+													\item \script{656}{Example (prr.)}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Temporal structure
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{662}{Computational Runs}
+															\item \script{663}{Paths through a temporal structure}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
 							}
 					}
+				child {
+						node {Language for modelling timed properties}
+						child {
+								node {Temporal Propositional Logic
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{672}{Linear temporal operators and Path quantifiers (prr.)}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Computation Tree Logic (CTL)
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{673}{Definition}
+													\item \script{675}{Semantics of CTL-Operators} and \script{676}{Abbreviations}
+													\begin{itemize}
+														\item \script{674}{Illustration}
+														\item \script{677}{Deriving $A(\phi_1\cup \phi_2)$}
+														\item \script{682}{Examples: Query require and Progress property (prr.)}
+														\item \script{687}{Examples: Liveness and Safety Property, Mutual Exclusion Problem (prr.)}
+													\end{itemize}
+													\item \script{727}{Advantages, Disadvantages and Alternatives}
+													\item \script{719}{Fixed points for CTL}
+													\item \script{721}{Complexity of CTL}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Model Checking in CTL
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{689}{Problem}
+															\item \script{690}{Procedure (f.)}
+															\item \script{692}{Main program}
+															\begin{itemize}
+																\item \script{693}{Lemma: The easy procedures}
+																\item \script{699}{$SAT_M(E(\phi_1 \cup \phi_2$))}
+																\begin{itemize}
+																	\item \script{700}{Example (ff.)}
+																\end{itemize}
+																\item \script{718}{$SAT(EG_\phi)$}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Symbolic Model Checking
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{722}{Definition (ff.)}
+																	\begin{itemize}
+																		\item \script{726}{Additional remarks}
+																	\end{itemize}
+																	\item \script{725}{Algorithm}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+							}
+					}
+				child {
+						node {Algorithms for proving properties
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item asdf
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				% child {
+				% 		node {Specification of properties with temporal logics}
+				% 	}
+				% child {
+				% 		node {Algorithms for checking properties of circuits}
+				% 	}
+				% child {
+				% 		node {Bounded model checking using SAT solvers}
+				% 	}
+				% child {
+				% 		node {Unbounded model checking}
+				% 		child {
+				% 				node {K-Induktion}
+				% 			}
+				% 		child {
+				% 				node {Craig interpolation}
+				% 			}
+				% 		child {
+				% 				node {Property directed reachability (PDR)}
+				% 			}
+				% 	}
 			}
 		child {
 				node {Equivalence checking
@@ -1467,7 +1590,7 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{459}{Definition}, also called \alert{transducer}
+													\item \script{459}{Definition}, also called \alert{transducer}, \script{528}{Compact}
 													\begin{itemize}
 														\item \script{464}{Semantics of Transducers}
 													\end{itemize}
@@ -1483,7 +1606,7 @@
 														\begin{itemize}
 															\item \script{468}{Equivalence of Finite Automata}
 															\item \script{471}{Combinational equivalence checking}, Identical State Encoding
-															\item \script{473}{Behavioral Equivalence w.r.t. a State Correspondence}
+															\item \script{473}{Behavioral Equivalence w.r.t. a State Correspondence}, Isomorphic State Encoding
 															\item \script{477}{Equivalent States}
 															\begin{itemize}
 																\item \script{477}{Theorem: Implication for equivalent states}
@@ -1492,6 +1615,197 @@
 														\end{itemize}
 													\end{minipage}
 												}
+											}
+										child {
+												node (algorithmeq) {Algorithm for Equivalence Checking
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{573}{Algorithm}
+																	\item \script{580}{Modified Algorithm}
+																	\begin{itemize}
+																		\item \script{577}{Improvement of the Algorithm}
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Optimizations
+															}
+														child {
+																node {Backward Traversal
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{591}{Motivation}
+																					\item \script{594}{Definition}
+																					\item \script{595}{Algorithm: Equivalence Checking by Backward Traversal}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {Simplified transition relation
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{603}{Definition}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {Early quantification
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{604}{Definition}
+																					\item \script{605}{Algorithm}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {Image computation with generalized cofactor
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{608}{Definition}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+																child {
+																		node {Generalized cofactor
+																				\resizebox{\textwidth}{!}{
+																					\begin{minipage}[t]{12cm}
+																						\begin{itemize}
+																							\item \script{611}{Definition (ff.)}
+																							\item \script{617}{Algorithm}
+																							\item \script{619}{Theorem and Proof}
+																							\item \script{622}{Theorem 2}
+																							\item \script{623}{Image computation with the generalized cofactor}
+																						\end{itemize}
+																					\end{minipage}
+																				}
+																			}
+																	}
+															}
+														child {
+																node {Functional image computation
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{626}{Definition (ff.)}
+																					\item \script{631}{Preliminaries}
+																					\item \script{632}{Algorithm}
+																					\item \script{633}{Functional preimage computation}
+																					\item \script{639}{Optimization of state sets}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+													}
+												child {
+														node {Counterexample Generation
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{581}{Definition: Counterexample}
+																			\item \script{582}{Illustration}
+																			\item \script{589}{Approach}
+																			\item \script{590}{Optimizations}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+										child {
+												node {Efficient Implementation of the Equivalence Check}
+												child {
+														node {Characteristic functions
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{501}{Definition and characteristic boolean functions}, can be represented by BDDs or AIGs
+																			\item \script{502}{Set Operations}
+																			\item \script{504}{Boolean Functions and Relations}
+																			\begin{itemize}
+																				\item \script{505}{Example (f.)}
+																				\item \script{507}{Characteristic function of the corresponding boolean relation}
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Image and Preimage and Range
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{508}{Definition}
+																			\begin{itemize}
+																				\item \script{509}{Example (ff.)}
+																			\end{itemize}
+																			\item \script{512}{Problem: Efficient with ROBDD}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+														child {
+																node (efficient image computation) {Efficient Image Computation
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{524}{Formula}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node (efficient preimage computation) {Efficient Preimage Computation
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{527}{Formula}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node (efficient range computation) {Efficient Range Computation
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{521}{Formula}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+																child {
+																		node (existential quantification) {Existential Quantification
+																				\resizebox{\textwidth}{!}{
+																					\begin{minipage}[t]{12cm}
+																						\begin{itemize}
+																							\item \script{514}{Definition}
+																							\item \script{516}{Notation and Lemma}
+																							\item \script{518}{Exercise}
+																						\end{itemize}
+																					\end{minipage}
+																				}
+																			}
+																	}
+															}
+													}
 											}
 									}
 								child {
@@ -1515,6 +1829,93 @@
 													\end{minipage}
 												}
 											}
+										child {
+												node {Special form
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{529}{Definition}
+																	\item \script{531}{Equivalence check (pr.)}
+																	\item \script{536}{Method}
+																	\begin{itemize}
+																		\item \script{537}{Illustration}
+																		\item \script{539}{Symbolic Traversal of Automata} and \script{546}{Computation of all reachable states}
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Partial Orders
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{548}{Definition and \alert{Supremum}}
+																			\item \script{550}{Infimum}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Lattice
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{553}{Definition, \alert{Complete Lattice} (prr.)}
+																			\item \script{554}{Example}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Monotonicity and Continuity
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{558}{Monotone Increasing / Decreasing, Upward / downward continuous}
+																			\begin{itemize}
+																				\item \alert{Lemma:} If $f$ is (upward or downward) continuous, then $f$ is monotone increasing
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Fixed Point
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{561}{Definition}
+																			\begin{itemize}
+																				\item \script{561}{\alert{Theorem:} Unique least fixed point}
+																				\begin{itemize}
+																					\item \script{562}{Proof (ff.)}
+																				\end{itemize}
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+														child {
+																node (automatontraversal) {Automaton Traversal as Fixed Point Iteration
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{566}{Definition}
+																					\item \script{566}{Theorem: Product automaton and unique least fixed point}
+																					\begin{itemize}
+																						\item \script{567}{Proof}
+																					\end{itemize}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+													}
+											}
 									}
 								child {
 										node {Reduced Finite Automata
@@ -1533,95 +1934,18 @@
 											}
 									}
 							}
-						child {
-								node {Characteristic functions
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{501}{Definition and characteristic boolean functions}
-													\item \script{502}{Set Operations}
-													\item \script{504}{Boolean Functions and Relations}
-													\begin{itemize}
-														\item \script{505}{Example (f.)}
-														\item \script{507}{Characteristic function of the corresponding boolean relation}
-													\end{itemize}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {Image and Preimage and Range
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{508}{Definition}
-													\begin{itemize}
-														\item \script{509}{Example (ff.)}
-													\end{itemize}
-													\item \script{512}{Problem: Efficient with ROBDD}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-								child {
-										node (efficient image computation) {Efficient Image Computation
-												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{12cm}
-														\begin{itemize}
-															\item \script{524}{Formula}
-														\end{itemize}
-													\end{minipage}
-												}
-											}
-									}
-								child {
-										node (efficient preimage computation) {Efficient Preimage Computation
-												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{12cm}
-														\begin{itemize}
-															\item \script{527}{Formula}
-														\end{itemize}
-													\end{minipage}
-												}
-											}
-									}
-								child {
-										node (efficient range computation) {Efficient Range Computation
-												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{12cm}
-														\begin{itemize}
-															\item \script{521}{Formula}
-														\end{itemize}
-													\end{minipage}
-												}
-											}
-										child {
-												node (existential quantification) {Existential Quantification
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{514}{Definition}
-																	\item \script{516}{Notation and Lemma}
-																	\item \script{518}{Exercise}
-																\end{itemize}
-															\end{minipage}
-														}
-													}
-											}
-									}
-							}
-						child {
-								node {BDD-based methods for proving equivalence of two sequential circuits}
-							}
-						child {
-								node {Generation of counterexamples}
-							}
+						% child {
+						% 		node {BDD-based methods for proving equivalence of two sequential circuits}
+						% 	}
+						% child {
+						% 		node {Generation of counterexamples}
+						% 	}
 					}
 			}
 	\end{mindmapcontent}
 	\begin{edges}
 		\edge{test}{middle}
+		\edge{algorithmeq}{automatontraversal}
 	\end{edges}
 	\annotation{test}{annotation}
 \end{mindmap}

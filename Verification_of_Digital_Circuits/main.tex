@@ -1330,125 +1330,125 @@
 						}
 					}
 				child {
-						node {Language / method for modelling runs of a sequential circuit
+						node {Kripke structure
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item asdf
+											\item \script{653}{Definition (pr.)}
+											\begin{itemize}
+												\item \script{661}{General Transformation (prr.)}
+											\end{itemize}
+											\item \script{656}{Example (prr.)}
 										\end{itemize}
 									\end{minipage}
 								}
 							}
 						child {
-								node {Kripke structure
+								node {Temporal structure
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{653}{Definition (pr.)}
-													\begin{itemize}
-														\item \script{661}{General Transformation (prr.)}
-													\end{itemize}
-													\item \script{656}{Example (prr.)}
+													\item \script{662}{Computational Runs}
+													\item \script{663}{Paths through a temporal structure}
 												\end{itemize}
 											\end{minipage}
 										}
-									}
-								child {
-										node {Temporal structure
-												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{12cm}
-														\begin{itemize}
-															\item \script{662}{Computational Runs}
-															\item \script{663}{Paths through a temporal structure}
-														\end{itemize}
-													\end{minipage}
-												}
-											}
 									}
 							}
 					}
+				% child {
+				% 		node {Language / method for modelling runs of a sequential circuit
+				% 				\resizebox{\textwidth}{!}{
+				% 					\begin{minipage}[t]{12cm}
+				% 						\begin{itemize}
+				% 							\item asdf
+				% 						\end{itemize}
+				% 					\end{minipage}
+				% 				}
+				% 			}
+				% 	}
 				child {
-						node {Language for modelling timed properties}
-						child {
-								node {Temporal Propositional Logic
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{12cm}
-												\begin{itemize}
-													\item \script{672}{Linear temporal operators and Path quantifiers (prr.)}
-												\end{itemize}
-											\end{minipage}
-										}
-									}
+						node {Temporal Propositional Logic
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{672}{Linear temporal operators and Path quantifiers (prr.)}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
+						node {Computation Tree Logic (CTL)
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{673}{Definition}
+											\item \script{675}{Semantics of CTL-Operators} and \script{676}{Abbreviations}
+											\begin{itemize}
+												\item \script{674}{Illustration}
+												\item \script{677}{Deriving $A(\phi_1\cup \phi_2)$}
+												\item \script{682}{Examples: Query require and Progress property (prr.)}
+												\item \script{687}{Examples: Liveness and Safety Property, Mutual Exclusion Problem (prr.)}
+											\end{itemize}
+											\item \script{727}{Advantages, Disadvantages and Alternatives}
+											\item \script{719}{Fixed points for CTL}
+											\item \script{721}{Complexity of CTL}
+										\end{itemize}
+									\end{minipage}
+								}
 							}
 						child {
-								node {Computation Tree Logic (CTL)
+								node {Model Checking in CTL
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{673}{Definition}
-													\item \script{675}{Semantics of CTL-Operators} and \script{676}{Abbreviations}
+													\item \script{689}{Problem}
+													\item \script{690}{Procedure (f.)}
+													\item \script{692}{Main program}
 													\begin{itemize}
-														\item \script{674}{Illustration}
-														\item \script{677}{Deriving $A(\phi_1\cup \phi_2)$}
-														\item \script{682}{Examples: Query require and Progress property (prr.)}
-														\item \script{687}{Examples: Liveness and Safety Property, Mutual Exclusion Problem (prr.)}
+														\item \script{693}{Lemma: The easy procedures}
+														\item \script{699}{$SAT_M(E(\phi_1 \cup \phi_2$))}
+														\begin{itemize}
+															\item \script{700}{Example (ff.)}
+														\end{itemize}
+														\item \script{718}{$SAT(EG_\phi)$}
 													\end{itemize}
-													\item \script{727}{Advantages, Disadvantages and Alternatives}
-													\item \script{719}{Fixed points for CTL}
-													\item \script{721}{Complexity of CTL}
 												\end{itemize}
 											\end{minipage}
 										}
 									}
 								child {
-										node {Model Checking in CTL
+										node {Symbolic Model Checking
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{689}{Problem}
-															\item \script{690}{Procedure (f.)}
-															\item \script{692}{Main program}
+															\item \script{722}{Definition (ff.)}
 															\begin{itemize}
-																\item \script{693}{Lemma: The easy procedures}
-																\item \script{699}{$SAT_M(E(\phi_1 \cup \phi_2$))}
-																\begin{itemize}
-																	\item \script{700}{Example (ff.)}
-																\end{itemize}
-																\item \script{718}{$SAT(EG_\phi)$}
+																\item \script{726}{Additional remarks}
 															\end{itemize}
+															\item \script{725}{Algorithm}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
-										child {
-												node {Symbolic Model Checking
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{722}{Definition (ff.)}
-																	\begin{itemize}
-																		\item \script{726}{Additional remarks}
-																	\end{itemize}
-																	\item \script{725}{Algorithm}
-																\end{itemize}
-															\end{minipage}
-														}
-													}
-											}
 									}
 							}
 					}
-				child {
-						node {Algorithms for proving properties
-								\resizebox{\textwidth}{!}{
-									\begin{minipage}[t]{12cm}
-										\begin{itemize}
-											\item asdf
-										\end{itemize}
-									\end{minipage}
-								}
-							}
-					}
+				% child {
+				% 		node {Language for modelling timed properties}
+				% 	}
+				% child {
+				% 		node {Algorithms for proving properties
+				% 				\resizebox{\textwidth}{!}{
+				% 					\begin{minipage}[t]{12cm}
+				% 						\begin{itemize}
+				% 							\item asdf
+				% 						\end{itemize}
+				% 					\end{minipage}
+				% 				}
+				% 			}
+				% 	}
 				% child {
 				% 		node {Specification of properties with temporal logics}
 				% 	}

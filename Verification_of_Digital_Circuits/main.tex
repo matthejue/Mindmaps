@@ -1484,17 +1484,28 @@
 										\item some function tables are so random, it's not possible to compress them
 										\item canonical disjunctive normal form, then one has as many terms as elements in the ON-Set
 									\end{itemize}
+									\item \videoeleven{327}{Modeling Combination and Sequential}
 								\end{itemize}
 							\end{minipage}
 						}
 					}
 				child {
-						node {Combinational circuits}
+						node {Combinational circuits
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \videoeleven{9}{Summary}
+											\item \videoeleven{1160}{Complexity, Co-NP}, \videotwelve{483}{CoNP complete again}, guess no answer and verify in polynomial time that it's a counter example
+										\end{itemize}
+									\end{minipage}
+								}
+							}
 						child {
 								node {Application of BDDs and SAT for equivalence checking
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
+													\item \script{383}{Summary Approaches}
 													\item \alert{Equivalence Checking Method:} Convert each circuit into a datastructure that has exactly one representation of each Boolean function. Then compare these representations
 													\item in \alert{BDD-based} equivalence checking the limiting resource is the \alert{available memory}, whereas in the \alert{SAT-based} approach this is the \alert{runtime} (exponential in the size of the formula) of the solving algorithm
 													\begin{itemize}
@@ -1570,7 +1581,33 @@
 									}
 							}
 						child {
-								node {Exploitation of structural information}
+								node {Exploitation of structural information
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{385}{Definition}, idea and approaches
+													\begin{itemize}
+														\item \script{386}{Observation (f.)}
+													\end{itemize}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Basic Approach
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{388}{Definition}
+															\item \script{389}{Example}
+															\begin{itemize}
+																\item \script{402}{Analysis}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
 							}
 					}
 				child {
@@ -1578,9 +1615,9 @@
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item \script{456}{Definition and difference to Combinational}
-											\item \script{458}{State}
-											\item \script{462}{Notations}
+											\item \script{456}{Definition and difference to Combinational}, \videoeleven{221}{Memory content depends on all previous inputs}, \videotwelve{136}{Output also depends on internal state}, not only current input, \videotwelve{157}{For modelling need automatons}, not boolean functions
+											\item \script{458}{State}, \videoeleven{248}{Bits memory number of states}
+											\item \script{462}{Notations}, \videoeleven{719}{Sequences of input words}
 										\end{itemize}
 									\end{minipage}
 								}
@@ -1590,11 +1627,11 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{459}{Definition}, also called \alert{transducer}, \script{528}{Compact}
+													\item \script{459}{Definition} and \videoeleven{395}{Explanation}, also called \alert{transducer}, \script{528}{Compact}, \videoeleven{375}{Transducer explained}, \videotwelve{170}{Finetely many states}, $n$ flipflops $2^n$ states
 													\begin{itemize}
 														\item \script{464}{Semantics of Transducers}
 													\end{itemize}
-													\item \script{460}{Illustration}
+													\item \script{460}{Illustration} and \videoeleven{609}{Explanation}
 												\end{itemize}
 											\end{minipage}
 										}
@@ -1604,14 +1641,14 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{468}{Equivalence of Finite Automata}
+															\item \script{468}{Equivalence of Finite Automata}, \alert{behavorial equivalence}, \videoeleven{895}{When are 2 circuits equivalent}, \videoeleven{1224}{Is it Co-NP?}, \videoeleven{1303}{What P-Space is}, \videotwelve{499}{PSpace again}
 															\item \script{471}{Combinational equivalence checking}, Identical State Encoding
 															\item \script{473}{Behavioral Equivalence w.r.t. a State Correspondence}, Isomorphic State Encoding
 															\item \script{477}{Equivalent States}
 															\begin{itemize}
 																\item \script{477}{Theorem: Implication for equivalent states}
-																\item \script{480}{Theorem: Equivalence for DFA's}
 															\end{itemize}
+															\item \script{480}{Theorem: Equivalence for DFA's}, \videoeleven{1925}{Transducers finite}
 														\end{itemize}
 													\end{minipage}
 												}
@@ -1621,7 +1658,15 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{573}{Algorithm}
+																	\item \script{536}{Method} and \videotwelve{3380}{Explanation}, \videotwelve{3421}{Check for bad states}, intersect q not equal, empty set represented by zero bdd, \videotwelve{3527}{Question: How new BDD}, \videotwelve{4050}{What written in pseudo code}
+																	\begin{itemize}
+																		\item \script{537}{Illustration}
+																		\item \script{539}{Symbolic Traversal of Automata}, \videotwelve{4074}{Details how it works}, \videotwelve{4085}{Reachability analysis}, bdd initial state, bdd one path to leave $1$ and encoding corresponds to state, all other edges directly go to $0$
+																		\begin{itemize}
+																			\item \script{546}{Computation of all reachable states}, \videotwelve{4104}{Image computation}, what it means, \videotwelve{4124}{Fill in details}, definition of product automaton, delta bdd's from circuit, initial state beginning, \videotwelve{4150}{Get BDD in terms of p variables}, \videotwelve{4193}{Model checking fix points why important}
+																		\end{itemize}
+																	\end{itemize}
+																	\item \script{573}{Algorithm} and \videotwelve{3564}{Explanation}, \videotwelve{3623}{Intersection, zero BDD}, not zero bdd intersection not empty, reached state bad state, \videotwelve{3665}{Update, compute image}, \videotwelve{3679}{Next state variables}, reached states expressed in terms of the current state variables, $q$'s and the $p$, \videotwelve{3696}{Rename}, call bdd compose operator, \videotwelve{3714}{Compose operator}, exception nice variable order, p q's corresponding, variable order always neighbours, \videotwelve{3751}{If next to each other can rename them}, same structure after compose, \videotwelve{3764}{What exactly happening in line}, replace next state with current state variables such that both BDD's are expressed in terms of same variables, Do or, \videotwelve{3783}{Check anything changed}, \videotwelve{3810}{Reduced?}, same structure, \videotwelve{3874}{qr bdd only contains current state variables}, no $p$ inside, output image computation only talks about $p$'s not about $q$'s, \videotwelve{3874}{qr bdd only contains current state variables}, no $p$ inside, output image computation only talks about $p$'s not about $q$'s, \videotwelve{3897}{Only works with automated variable order}, corresponding p next to the q in the variable order, \videotwelve{3910}{Why renaming important}, otherwise structure of the BDD might change, \videotwelve{3950}{Cannot write other way}, some of the good states unreachable at the beginning, qr doesn't contain all good states at the beginning
 																	\item \script{580}{Modified Algorithm}
 																	\begin{itemize}
 																		\item \script{577}{Improvement of the Algorithm}
@@ -1731,14 +1776,14 @@
 												child {
 														node {Characteristic functions
 																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
+																	\begin{minipage}[t]{16cm}
 																		\begin{itemize}
-																			\item \script{501}{Definition and characteristic boolean functions}, can be represented by BDDs or AIGs
-																			\item \script{502}{Set Operations}
-																			\item \script{504}{Boolean Functions and Relations}
+																			\item \script{501}{Definition and characteristic boolean functions}, can be represented by BDDs or AIGs, \videoeleven{3963}{Represent things as BDD's that haven't done so far}, so far circuit to BDD and boolean function to BDD, \videoeleven{3994}{Base set A}, all bitstrings of length n, n number of flip flops, \videoeleven{4041}{It's a boolean function}, and because of that can represent as BDD, input e.g. 0111010 and output 0 or 1, \videoeleven{4055}{Why that is useful}, compute intersection, \videoeleven{4104}{How do when sets represented using bdds}, symmetric intersection is xor, \videoeleven{4163}{Running time not depend on size of represented set}, but on size of the represented, \videoeleven{4182}{BDD can be much smaller than size set}, odd number of ones, $2\cdot n - 1$, num elements is $2^n-1$, linear size, run over list exponential num of steps, \videoeleven{4228}{Secret behind symbolic equivalence checking}, summary
+																			\item \script{502}{Set Operations}, \videoeleven{4286}{Sequential circuit to BDD}
+																			\item \script{504}{Boolean Functions and Relations}, \videoeleven{4297}{One BDD per output}, by symbolic simulation, bdd's for input variables, then ITE for every gate and then one BDD per output, \videoeleven{4349}{Turn in BDD's for the state outputs into one BDD}, \videoeleven{4392}{Relation again just set of elements, so can take characteristic function}, and represent it as a bdd, set of bitvectors, \videotwelve{1198}{$m$ BDD's for transition function}
 																			\begin{itemize}
-																				\item \script{505}{Example (f.)}
-																				\item \script{507}{Characteristic function of the corresponding boolean relation}
+																				\item \script{505}{Example (f.)}, \videoeleven{4470}{Already have BDD for $f_1$ and $f_2$}, bdd for whole function, \videoeleven{4493}{Turned $2$ outputs into $1$ output}, \videoeleven{4506}{Introduce one new variable per output}, Tseitin Transformation, \videoeleven{4537}{How get BDD}, \videotwelve{1266}{For every output one new variable}, $y_1$ and $y_2$, \videotwelve{1292}{Expression implemented with BDD's}, know how to get BDD for variable, function, negated xor, ITE, \videotwelve{1313}{In the end one BDD}, that represents whole transition relation of the circuit
+																				\item \script{507}{Characteristic function of the corresponding boolean relation}, \videoeleven{4603}{Get BDD...}, \videoeleven{4632}{Equivalence negated XOR}, \videoeleven{4671}{Optimizations}, later see how do directly without construction of this relation, \videoeleven{4719}{Faster, sometimes not always}, combined BDD can explode and single bdds can be small
 																			\end{itemize}
 																		\end{itemize}
 																	\end{minipage}
@@ -1748,13 +1793,13 @@
 												child {
 														node {Image and Preimage and Range
 																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
+																	\begin{minipage}[t]{16cm}
 																		\begin{itemize}
-																			\item \script{508}{Definition}
+																			\item \script{508}{Definition}, \videoeleven{4781}{Next state computation}, \videoeleven{4838}{Only difference replace A with c}, \videoeleven{4869}{Preimage description}, other way round, fix set of of outputs and look what corresponding inputs
 																			\begin{itemize}
-																				\item \script{509}{Example (ff.)}
+																				\item \script{509}{Example (ff.)}, \videoeleven{5024}{Characteristic function of the range}, return 1 except for input 0, 1
 																			\end{itemize}
-																			\item \script{512}{Problem: Efficient with ROBDD}
+																			\item \script{512}{Problem: Efficient with ROBDD} and \videoeleven{5277}{Explanation}, new BDD operation existantial quantification, \videotwelve{1643}{One BDD for whole circuit and one BDD for set C}, want BDD for Image
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -1764,7 +1809,7 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{524}{Formula}
+																					\item \script{524}{Formula}, \videotwelve{2479}{What replace}, \videotwelve{2528}{What does it say}, \videotwelve{2545}{Same as definition written in terms of BDD's}, \videotwelve{2593}{How it helps}, delta function, fi's are our deltas, \videotwelve{2616}{C is set of all states we have already reached}, \videotwelve{2631}{Rest explained}, and operation, \videotwelve{2651}{Delta i's}, \videotwelve{2691}{How will use that}, one step in state space traversal
 																				\end{itemize}
 																			\end{minipage}
 																		}
@@ -1775,7 +1820,7 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{527}{Formula}
+																					\item \script{527}{Formula}, \videotwelve{2775}{Same as before}, \videotwelve{2800}{X and Y variables not same}, x are current state variables, y are next state variables, \videotwelve{2839}{For image computation C has to be expressed in terms of X's}, \videotwelve{2870}{For preimage other way round}, \videotwelve{2884}{Why important for later}, \videotwelve{2913}{Be careful}, rename variables
 																				\end{itemize}
 																			\end{minipage}
 																		}
@@ -1786,7 +1831,7 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-																					\item \script{521}{Formula}
+																					\item \script{521}{Formula}, \videotwelve{2234}{Looks a bit like existential computation}, turn into BDD operation, \videotwelve{2268}{Spoken out}, \videotwelve{2286}{Summary}, \videotwelve{2326}{Summary in other words}, \videotwelve{2366}{Again}, \videotwelve{2445}{Are all BDD operations}
 																				\end{itemize}
 																			\end{minipage}
 																		}
@@ -1796,9 +1841,9 @@
 																				\resizebox{\textwidth}{!}{
 																					\begin{minipage}[t]{12cm}
 																						\begin{itemize}
-																							\item \script{514}{Definition}
-																							\item \script{516}{Notation and Lemma}
-																							\item \script{518}{Exercise}
+																							\item \script{514}{Definition} and \videotwelve{1683}{Existentail Quantification explanation}, Exists value for $x_i$ such that output of function $1$, only two choices, replace $x_i$ with $1$ or $0$, \videotwelve{1669}{In SAT chapter}, variable elimination is sound proof, \videotwelve{1727}{What means for BDD}, \videotwelve{1746}{Independant of $x_i$}, \videotwelve{1752}{Property BDD}, \videotwelve{1770}{How implement on BDD}
+																							\item \script{516}{Notation and Lemma}, \videotwelve{1816}{One by one or can be done more efficient}
+																							\item \script{518}{Exercise}, \videotwelve{1908}{Complexity}, exponential, NP-hard, \videotwelve{2015}{Three-SAT}, \videotwelve{2067}{See BDD satisfiable or not}, one reachable, if BDD not equal to leave $0$, \videotwelve{2136}{Every path hat leads to leave 1 is a satisfying assignment}, checking for satisfiability is done in constant time, \videotwelve{2152}{Existential quantification is the problem}
 																						\end{itemize}
 																					\end{minipage}
 																				}
@@ -1813,17 +1858,17 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{481}{Definition}
-															\item \script{482}{Equivalence}
+															\item \script{481}{Definition} and \videoeleven{1953}{Explanation}, \videoeleven{2151}{Summary}
+															\item \script{482}{Equivalence} and \videoeleven{2920}{Explanation}
 															\begin{itemize}
+																\item \script{485}{Properties (ff.)} and \videoeleven{3123}{Explanation}, \videoeleven{3005}{Not equivlant as well}, \videoeleven{3160}{States are equivalent no states reachable where outputs are different}, \videoeleven{3184}{How use this in procedure}, and example
 																\item \script{487}{Equivalence check with reachability analysis}
 															\end{itemize}
-															\item \script{483}{Example}
-															\item \script{485}{Properties (ff.)}
-															\item \script{492}{Method}
+															\item \script{483}{Example}, \videoeleven{2190}{Number of states}, $3\cdot 4=12$, \videoeleven{2382}{Edges with output 0}, tell nothing about equivalence, \videoeleven{2523}{Depth First Search}, \videoeleven{2543}{Procedure}, stop if find edge with output $0$, not equivalent, finish after 4 gray states, no new states not handled, automatons equivalent, \videoeleven{2672}{Don't generate white states}, \videoeleven{2692}{Number outgoing edges each state}, outgoing edges in case of $64$ bit input: $2^64$, \videoeleven{2742}{1 Bit and 64 States}, have to traverse $2^64$, \videoeleven{2768}{How do better, BDDs}, BDD's function table compact, \videoeleven{2785}{Function table}, compare line by line, $2^n$ lines, \videoeleven{2814}{How BDD's help us, which are gray states}, \videoeleven{2842}{Trick: Represent using BDD's}, \videoeleven{2881}{Problem with white states}, find gray states, \videoeleven{3325}{Two automata are equivalent}, \videotwelve{996}{Drawback of BDD method}
+															\item \script{492}{Method} and \videoeleven{3345}{Explanation}, \videoeleven{3433}{Exponential time}, \videoeleven{3471}{Same one doing when on tries it state by state}, \videoeleven{3564}{Benefit of this approach}, \videoeleven{3586}{Example bdd method}, \videoeleven{3632}{Step might be exponential}, if bdd size large
 															\begin{itemize}
-																\item \script{493}{Illustration}
-																\item \script{494}{Complexity}
+																\item \script{493}{Illustration} and \videoeleven{3701}{Explanation}
+																\item \script{494}{Complexity}, \videoeleven{3767}{Not all of them reachable}
 															\end{itemize}
 														\end{itemize}
 													\end{minipage}
@@ -1834,13 +1879,8 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{529}{Definition}
-																	\item \script{531}{Equivalence check (pr.)}
-																	\item \script{536}{Method}
-																	\begin{itemize}
-																		\item \script{537}{Illustration}
-																		\item \script{539}{Symbolic Traversal of Automata} and \script{546}{Computation of all reachable states}
-																	\end{itemize}
+																	\item \script{529}{Definition} and \videotwelve{3018}{Explanation}, \videotwelve{2999}{$2$ Circuits and want to get bdd for product automaton}, \videotwelve{3153}{Initial state}, \videotwelve{3162}{Summary}, Initial state, \videotwelve{3238}{BDD for initial state}, \videotwelve{3258}{Whole product automaton with BDD's}
+																	\item \script{531}{Theorem: Equivalence check (pr.)}, \videotwelve{3290}{In other words}, \videotwelve{3302}{How do on BDD's}, \videotwelve{3340}{BDD from previous slide}, bottom, \videotwelve{3350}{What do in the end}
 																\end{itemize}
 															\end{minipage}
 														}
@@ -1850,8 +1890,9 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{548}{Definition and \alert{Supremum}}
-																			\item \script{550}{Infimum}
+																			\item \script{548}{Definition}, \videotwelve{4274}{Finite, infinite, countable, uncountable doesn't matter}, \videotwelve{4460}{Partial order why called this way}, \videotwelve{4543}{Example subset of}, \videotwelve{4585}{Example total order}, less equal
+																			\item \script{548}{Supremum} and \videotwelve{4627}{Explanation}
+																			\item \script{550}{Infimum}, \videotwelve{4681}{$m$ is the greatest lower bound}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -1862,8 +1903,10 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{553}{Definition, \alert{Complete Lattice} (prr.)}
-																			\item \script{554}{Example}
+																			\item \script{553}{Definition (prr.)}, \videotwelve{4723}{Why not trivial}, \videotwelve{4727}{Integer numbers}, \videotwelve{4742}{Subsets}, supreme of infime of all even numbers, \videotwelve{4785}{For all elements it works called lattice}, \videotwelve{4798}{Not complete lattice}, integer numbers, not working for arbitrary subsets, \videotwelve{4805}{Subsets of ABC}, \videotwelve{4841}{Supremum}, \videotwelve{4869}{Infimum}, \videotwelve{4897}{Graph}, arrows less equal, \videotwelve{4913}{Supremum of 2 nodes}, not exist, not lattice
+																			\item \script{553}{Complete Lattice (prr.)}, \videotwelve{4941}{Counter example: integer numbers}, no supremum and infimum of the even numbers
+																			\item \underline{Lemma:} Each \alert{finite} lattice is \alert{complete}, \videotwelve{4955}{Every finite lattice automatically complete}, terminates after finite steps, \videotwelve{4977}{Not every infinite lattice complete}, \videotwelve{4986}{Top and bottom element}, smallest and greatest element of the lattice
+																			\item \script{554}{Example}, \videotwelve{5014}{The lines omit everything can get by transitivity}, \videotwelve{5028}{Why complete lattice}, subset lattice is always a complete lattice
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -1874,7 +1917,8 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{558}{Monotone Increasing / Decreasing, Upward / downward continuous}
+																			\item \script{558}{Monotone Increasing / Decreasing}, \videotwelve{5071}{Our complete lattice will be the set or subset of all states}, \videotwelve{5104}{The greater element is mapped to the greater element}
+																			\item \script{558}{Upward / downward continuous}, \videotwelve{5153}{Known as theorem...}, \videotwelve{5166}{Problem general version hard to prove}, \videotwelve{5175}{Simplify proof}, instead of Monotone functions, continous functions, \videotwelve{5206}{What it means}, \videotwelve{5233}{Downward}, \videotwelve{5257}{Less general by...}, also for monotone function, \videotwelve{5274}{Prove every continuous function is monotone}
 																			\begin{itemize}
 																				\item \alert{Lemma:} If $f$ is (upward or downward) continuous, then $f$ is monotone increasing
 																			\end{itemize}
@@ -1923,11 +1967,11 @@
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item alternative without Product Automata
-															\item \script{497}{Definition}
+															\item \script{497}{Definition} and \videoeleven{3801}{Explanation}, no distinct equivalent states
 															\begin{itemize}
-																\item \underline{Theorem:} The reduced deterministic finite automaton for a deterministic finite automaton is \alert{unique up to isomorphism}, i.e, up to renaming of the states.
+																\item \underline{Theorem:} The reduced deterministic finite automaton for a deterministic finite automaton is \alert{unique up to isomorphism}, i.e, up to renaming of the states, \videoeleven{3824}{Just like bdd's unique up to isomorphism}
 															\end{itemize}
-															\item \script{499}{Analysis}
+															\item \script{499}{Analysis}, complexity, \videoeleven{3867}{All this algorithms have to visit every state at least once}, \videoeleven{3897}{Only problem in verification is the science}, \videoeleven{3944}{Not clear what do when automaton rly large}, Do instead...
 														\end{itemize}
 													\end{minipage}
 												}
@@ -1944,8 +1988,10 @@
 			}
 	\end{mindmapcontent}
 	\begin{edges}
-		\edge{test}{middle}
 		\edge{algorithmeq}{automatontraversal}
+		\edge{existential quantification}{efficient range computation}
+		\edge{existential quantification}{efficient image computation}
+		\edge{existential quantification}{efficient preimage computation}
 	\end{edges}
 	\annotation{test}{annotation}
 \end{mindmap}

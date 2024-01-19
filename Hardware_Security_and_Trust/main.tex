@@ -22,7 +22,10 @@
 						\resizebox{\textwidth}{!}{
 							\begin{minipage}[t]{12cm}
 								\begin{itemize}
-									\item \script{255}{Side-channel and fault injection}, \videothirteen{3263}{Non- or semi-invasive}, no damage, \videothirteen{3326}{Sometimes side channel for fault injection}
+									\item \script{255}{Side-channel and fault injection} and \script{359}{again}, \videothirteen{3263}{Non- or semi-invasive}, no damage, \videothirteen{3326}{Sometimes side channel for fault injection}
+									\begin{itemize}
+										\item \script{360}{Illustration} and \videoseventeen{3694}{Explanation}
+									\end{itemize}
 								\end{itemize}
 							\end{minipage}
 						}
@@ -30,23 +33,348 @@
 				child {
 						node {Attacks via Test Infrastructure}
 					}
-				child {
-						node {Fault Injection
+				child [level distance = 35cm] {
+						node (fault injection) {Fault Injection
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item \script{255}{Definition}, using side-channel inputs, \videoten{2131}{Other definition}
-											\item \script{256}{Side channel inputs for fault injection}, \videothirteen{3358}{Decrease supply voltage}, delay slower, information not arrive at register, \videothirteen{3408}{Clock frequency}, increasing frequency similiar to decreasing supply voltage, \videothirteen{3462}{Temperature}, influence speed, \videothirteen{3491}{Common goal}
+											\item Fault injections are a special case of \alert{physical attacks}, \videoseventeen{3928}{Borders are fluid}
+											\begin{itemize}
+												\item \videoseventeen{3651}{One definition}, both side channel attacks, fault injection is side channel attack
+											\end{itemize}
+											\item \script{380}{Definition}
+											\item \script{255}{Short Definition} and \script{362}{again}, using side-channel inputs, \videoten{2131}{Other definition}, \videoseventeen{3673}{In lecture other definition}
+											\item \script{256}{Side channel inputs for fault injection} and \script{361}{again}, \videothirteen{3358}{Decrease supply voltage}, delay slower, information not arrive at register, \videothirteen{3408}{Clock frequency}, increasing frequency similiar to decreasing supply voltage, \videothirteen{3462}{Temperature}, influence speed, \videothirteen{3491}{Common goal}
+											\item \script{387}{Relevance}
+											\item \script{364}{Categories below}, \videoseventeen{3995}{Here not important how fault injections was done physically}, algorithms
 										\end{itemize}
 									\end{minipage}
 								}
 							}
+						child {
+								node {Countermeasures
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{389}{Definition}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Probing Attempt Detector
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{390}{Definition (f.)}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Top-layer Sensor Meshes
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{392}{Definition} and \script{394}{Countering}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Error Detection / Error Correction
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{395}{Error Detection / Error Correction}
+															\item \script{397}{Self-Checking Design}
+															\item \script{398}{Error-Detecting Codes}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+							}
+						child [level distance = 5cm] {
+								node {Examples for attacks using fault injection}
+								child {
+										node {Differential Fault Injection Attacks
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{379}{Fundamental Idea}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Simple Fault Attack
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{381}{Example (ff.)}
+															\begin{itemize}
+																\item \script{383}{Precision}, fault model
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {RSA
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{384}{Attack (ff.)}
+															\begin{itemize}
+																\item \script{386}{Example}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+							}
+						child {
+								node {Different methods to inject faults}
+								child {
+										node {Non-Invasive Fault Injection Attacks
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item Lowest cost (need oscilloscopes, waveform generators, ...)
+															\item No damage to the target IC
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Clock Glitching
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{365}{Definition} and \videoseventeen{4060}{Explanation}, \videoseventeen{4130}{Impact of increasing clock speed}, \videoseventeen{4234}{Find out longest path}, find out maximum delay, resolt not yet there, \videoseventeen{4341}{Skip instructions}, instruction fetch phase, prevent instruction from being executed because not stored in instruction register, clock glitching at exactly right moment, \videoseventeen{4388}{Change way instruction executed}, jump instruction, jump target by some computation, could avoid storing of target address and by this avoid jump, e.g. jump after password check, \videoseventeen{4489}{Need to know a lot about target architecture}, how build, if has instruction pipeline, \videoseventeen{4551}{In many cases CPU crashes}, \videoseventeen{4640}{Premature latching explained}, \videoseventeen{4694}{By several methods}, capacitive coupling
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Voltage Glitching
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{366}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child [level distance = 12cm] {
+										node {Semi-Invasive Fault Injection Attacks
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item Intermediate cost (need better oscilloscopes, logic analyzers, test boards, ...)
+															\item Minimal physical tampering required
+															\item Preceded by decapsulation of the IC ($\Rightarrow$ semi-invasive)
+															\begin{itemize}
+																\item Decapsulation with \alert{mechanical} or \alert{chemical} methods
+															\end{itemize}
+															\item \script{367}{Local Heating, Flash Glitching, Laser Glitching}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Local Heating
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{371}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Flash Glitching
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{371}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Laser Glitching
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{371}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Backside Imaging
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{369}{Definition}
+																	\item Backside imaging with infrared light
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Laser Scanning
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{369}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child {
+										node {Invasive Fault Injection Attacks
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item High cost
+															\begin{itemize}
+																\item E.g. Removing layers of an IC, scanning by electron microscopes, small microprobes
+															\end{itemize}
+															\item Destructive
+															\item Modifies attacked IC itself
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Signal injection
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{372}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Disconnect nets in the circuit by laser cutting}
+											}
+										child {
+												node {Modify nets by wire bonding}
+											}
+										child {
+												node {Destroy transistors / wires by high voltage between two probes}
+											}
+										child {
+												node {Decapsulation}
+											}
+										child {
+												node {Laser Cutting
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{373}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Test Point Creation
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{373}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Wire Bonding
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{373}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Reverse Engineering}
+												child {
+														node {Get physical access to all structures of the IC
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{376}{Definition}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Reverse Engineering
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{376}{Definition}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Memory Extraction
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{376}{Definition}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+										child {
+												node {Side Channels by Micro Probing
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{377}{Definition}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+							}
 					}
 				child {
-						node {Side Channel Attacks
+						node (side channel) {Side Channel Attacks
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
+											\item Side Channel Attacks are a special case of \alert{physical attacks}
 											\item \script{255}{Definition}, observing side channel outputs, \videoten{2114}{Other definition}
 											\item \script{256}{Side channel outputs for side channel attacks}
 										\end{itemize}
@@ -146,7 +474,7 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{18cm}
 																		\begin{itemize}
-																			\item \script{293}{Definition with Traces (ff.)}, \videofourteen{3006}{Data-dependence}, \videofourteen{3059}{Cancel out noise by looking at average of many power profiles}, everything not correlated somehow cancels out, \videofourteen{3174}{Addition several power profiles}, not so easy to say then there's e.g. 2nd round of left rotation, \videofourteen{3239}{Why DPA helps here}, \videofourteen{3303}{Contribution second algorithm goes away}, noise cancels out, average several runs, \videofourteen{3347}{Another thing}, maybe 2nd process cancels out in difference of average run with key a and average run of key b, because it possible does same for key a and key b, \videofourteen{3404}{Averaging and comparing 2 averages to each other}, \videofourteen{3610}{Summary DPA}, form groups, in groups compute averages to cancel out noise and difference show rly small differences in those averages, \videofifteen{71}{If operands depend on the key}
+																			\item \script{293}{Definition with Traces (ff.)}, \videofourteen{3006}{Data-dependence}, \videofourteen{3059}{Cancel out noise by looking at average of many power profiles}, everything not correlated somehow cancels out, \videofourteen{3174}{Addition several power profiles}, not so easy to say then there's e.g. 2nd round of left rotation, \videofourteen{3239}{Why DPA helps here}, \videofourteen{3303}{Contribution second algorithm goes away}, noise cancels out, average several runs, \videofourteen{3347}{Another thing}, maybe 2nd process cancels out in difference of average run with key a and average run of key b, because it possible does same for key a and key b, \videofourteen{3404}{Averaging and comparing 2 averages to each other}, \videofourteen{3610}{Summary DPA}, form groups, in groups compute averages to cancel out noise and difference show rly small differences in those averages, \videofifteen{71}{If operands depend on the key}, \videosixteen{53}{Another summary}
 																			\begin{itemize}
 																				\item \script{294}{Power Traces} and \videofourteen{3469}{Explanation}, \videofourteen{3550}{Computing difference make small differences visible}, can zoom into difference, \videofourteen{3568}{Precondition to be applicable to cryptanalysis}, form meaningful groups, extract information from difference of those groups
 																			\end{itemize}
@@ -196,10 +524,11 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{324}{Definition (ff.)}, \videofifteen{5027}{Needing less samples}
+																			\item \script{324}{Definition (ff.)}, idea \videofifteen{5027}{Needing less samples}, \videosixteen{434}{Processed values maybe several bits}, \videosixteen{467}{Example: Hamming weight explained}, \videosixteen{524}{Hamming weight high means high power consumption}, based on observation that switchings to 1 correspond to high power consumption, \videosixteen{553}{Generalization of DPA}
 																			\begin{itemize}
-																				\item \script{325}{Measure Correlation}
-																				\item \script{326}{Pearson‘s Correlation Coefficient}
+																				\item \script{325}{Measure Correlation}, \videosixteen{742}{If key byte assumption wrong}, possibly not any point in time where correlation is large, \videosixteen{752}{If key byte assumption is correct}, if took right time interval one will find the point in time where there's a large correlation
+																				\item \script{326}{Pearson‘s Correlation Coefficient}, \videosixteen{864}{Correlation coefficient}, \videosixteen{905}{Doesn't depend on $X$ and $Y$}, \videosixteen{989}{What is covariance}, \videosixteen{1145}{If would consider $X$ instead of $Y$}, if $y_i$ equal to $x_i$, \videosixteen{1188}{Extreme case}, series $Y$ equal to series $X$, \videosixteen{1229}{Summary}, \videosixteen{1257}{Problem with covariation}, $X$ and $3\cdot X$, covariance would increase by factor $3$, \videosixteen{1350}{Special cases}, \videosixteen{1363}{All $y_i$ equal to $x_i$}, \videosixteen{1416}{Also for X and $3\cdot X$}, \videosixteen{1892}{Ommited 1/n}
+																				\item \script{327}{Procedure}, \videosixteen{1624}{In practise not for each plain text single value}, but trace over points in time, \videosixteen{1645}{p points in time}, \videosixteen{1680}{Example subkey guesses}, \videosixteen{1722}{Exactly same as for DPA}, \videosixteen{1779}{Fix point in time and fix key guess}, \videosixteen{1820}{Obtain $n$ values}, \videosixteen{1841}{$n$ values different plain texts with fixed key guess}, \videosixteen{1924}{Sum up over power traces}, fixed point in time and fixed key guess, \videosixteen{2043}{$i$ gives key guess}, output S-Box depends on key guess, \videosixteen{2124}{$p\times m$ correlation coefficients}, $p$ points in time, $m$ subkey guesses, \videosixteen{2143}{How one continues}, \videosixteen{2219}{Question why not actual S-Box outputs}, previous value not guaranteed to be $0$, good enough to differentiate between wrong and right key guesses, \videosixteen{2465}{Question}, what is subkey, \videosixteen{2607}{Hope effects cancel out}, power consumption also influenced by other S-Box outputs, slighly larger correlation with right key assumption compared to wrong key assumptions, \videosixteen{2805}{Sure that highest correlation corresponds to correct key assumption}, not guaranteed, assumptions remainder of circuit, affect that invalidated correlation between power values and hamming weight of output, 3 best correlations, brute force analysis, additional effects in whole circuit
 																			\end{itemize}
 																		\end{itemize}
 																	\end{minipage}
@@ -235,10 +564,11 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{259}{Definition}, \videothirteen{3906}{Inductive coupling}, electric / magnetic field, \videothirteen{3933}{Capacitive coupling}, charge, \videothirteen{3955}{Modulated signals}, \videothirteen{3986}{Similar to analyzing power consumption}, measuring current also measure power consumption
+															\item \script{259}{Definition (n.l.)}, \videothirteen{3906}{Inductive coupling}, electric / magnetic field, \videothirteen{3933}{Capacitive coupling}, charge, \videothirteen{3955}{Modulated signals}, \videothirteen{3986}{Similar to analyzing power consumption}, measuring current also measure power consumption
 															\begin{itemize}
-																\item \script{335}{Probe design}, localized readings, \script{336}{Signal}
-																\item \script{337}{Spatial Positioning} and \script{338}{Spectral density}
+																\item \script{335}{Probe design}, localized readings, \videosixteen{3750}{Electromagnetic field}, \videosixteen{3792}{Advantage}, localized readings, power consumption is just averaging about all possible locations on the chip
+																\item \script{336}{Signal}, \videosixteen{3898}{Changes of current correspond to derivation of current}, if have EM curve do integration to get current curve, \videosixteen{3935}{Can basically do same as in power analysis}, if voltage is fixed, then current corresponds to power, \videosixteen{3966}{Localised power analysis}
+																\item \script{337}{Spatial Positioning} and \script{338}{Spectral density}, \videosixteen{4027}{Find out something about layout of chip}, \videosixteen{4090}{Resolution depends size of coil}, \videosixteen{4149}{Decapsulated of the chip}, remove shielding effects, remove package, attack on chip surface
 																\item \script{339}{Features, Drawbacks, Countermeasures}
 															\end{itemize}
 														\end{itemize}
@@ -251,12 +581,12 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{260}{Definition and Examples}, \videothirteen{3640}{Extract keys from ciphers}, \videothirteen{4068}{Each key different sound}, \videothirteen{4247}{Cooler}, not directly connected with power consumption, load, \videothirteen{4286}{Sound cannot hear}, \videothirteen{4349}{Called coil whining}
+															\item \script{260}{Definition and Examples (n.l.)}, \videothirteen{3640}{Extract keys from ciphers}, \videothirteen{4068}{Each key different sound}, \videothirteen{4247}{Cooler}, not directly connected with power consumption, load, \videothirteen{4286}{Sound cannot hear}, \videothirteen{4349}{Called coil whining}
 															\begin{itemize}
-																\item \script{342}{Measurement and \enquote{coil whining}}
-																\item \script{343}{Microphone Readout (f.)}
+																\item \script{342}{Measurement and \enquote{coil whining}}, \videosixteen{4409}{Resolution not rly high}, even tough fan connected to power consumption, not correlated on fine granular basis
+																\item \script{343}{Microphone Readout (f.)}, \videosixteen{4480}{Picture from paper explained}, \videosixteen{4587}{Different instructions make different noises}, \videosixteen{4654}{Much is in spectrum one can not hear}
 															\end{itemize}
-															\item \script{354}{Countermeasures}
+															\item \script{356}{Countermeasures}, \videoseventeen{2760}{Acoustic shielding}, not always possible remove all sounds on spectrum one can not hear, \videoseventeen{2831}{If random can counteract with many measurements}, to cancel out noise, \videoseventeen{2936}{Cipher text randomization}, famous countermeasure, \videoseventeen{3003}{Not only give $y$ to encryption algorithm}, \videoseventeen{3017}{Modulo $n$ always not mentioned}, \videoseventeen{3147}{Text $r$ not completely random}, must be invertible, so not completely random, \videoseventeen{3191}{So should be relatively prime with $n$}, then it's also invertible, not have $p$ or $q$ as factor, then it's enough
 														\end{itemize}
 													\end{minipage}
 												}
@@ -264,13 +594,21 @@
 										child {
 												node {RSA
 														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
+															\begin{minipage}[t]{18cm}
 																\begin{itemize}
 																	\item \script{341}{Extract RSA Key (from GnuPG)}
 																	\begin{itemize}
-																		\item \script{345}{Attacking RSA (f.)}
-																		\item \script{348}{Acoustic Side Channel (f.)}
-																		\item \script{349}{Key Extraction (ff.)}
+																		\item \script{342}{Acoustic Side Channel and MicrophoneHuman Readout (ff.)}
+																		\item \script{345}{Attacking RSA (f.)}, \videosixteen{4705}{RSA operations executed on usual processor}, \videosixteen{4722}{Multiplication with large numbers}, map multiplications into software multiplications, \videosixteen{4793}{Attacking signing and decryption operations}, operations using private keys
+																		\begin{itemize}
+																			\item \script{346}{Chinese Remainder Theorem (CRT)}, \videosixteen{4980}{Advantage don't have to make exponentiation with $d$}, \videosixteen{5930}{Need to know this trick}, without this trick not possible
+																			\item \script{347}{Cost estimation} and \videosixteen{5239}{Explanation}, \videosixteen{5691}{Not save any exponentiations or multiplications}, \videosixteen{5735}{First sight}, \videosixteen{5780}{Reason}, modulo p and q half of bits in n, same number of operations but on shorter numbers, \videosixteen{5828}{Multiplication has to be done in software}, map multiplication of large numbers by software to several multiplications of small numbers, \videosixteen{5856}{Software libraries runtime}, multiplication of numbers with $n$ bits $n^2$ or best $n^log(3)$, \videoseventeen{252}{Real numbers}, 4096, around 2000
+																		\end{itemize}
+																		\item \script{348}{Acoustic Side Channel (f.)} and \videoseventeen{344}{Explanation}, switching from this to this operation, \videoseventeen{419}{See difference if change key}, yes, \videoseventeen{430}{Signing or decryption not relevant}
+																		\item \script{350}{Key Extraction (ff.)}, \videoseventeen{556}{Chosen-ciphertext attack}, choose ciphertext in intelligent way to get information leaked about key, corresponding plain text could be complete nonsense, \videoseventeen{608}{Adaptive}, choose different cipher texts in rounds, what choose in next round depends on what found out in previous round, \videoseventeen{633}{What one needs}, access to decryption mechanism, able to force victim to decrypt chosen ciphertexts, \videoseventeen{771}{Only second part, don't care about first part}, could also attack $p$ and not $q$, just decided this way, \videoseventeen{818}{If know $q$ one has broken the decryption}, then one can compute $p$, \videoseventeen{856}{Factorization problem}, also express as if find out $q$..., 2: \videoseventeen{985}{Choosen ciphertext attack in rounds}, in each round $1$ additional bit of $q$, starting with most significant bits, \videoseventeen{1027}{Before the first round one msb is already known}, \videoseventeen{1048}{Chosen cipher text attack}, $y_i$ ciphertext used in round $i$, part of $q$ one already knows, then $0$ and a sequence of $1$es, \videoseventeen{1087}{By this choice}, depending on value of next bit, the input to the exponentiation algorithm will differ pretty much, 3: \videoseventeen{1131}{Case distinction explained}, \videoseventeen{1238}{Back to exponentiation operation}, \videoseventeen{1275}{Because $y_i$ strictly smaller than $q$}, the modulo operation doesn't change the $y_i$, \videoseventeen{1348}{2nd case}, \videoseventeen{1390}{Prefix of $q$ and $y_i$ is the same}, \videoseventeen{1446}{Modulo operation changes something}, \videoseventeen{1506}{Substract $q$}, \videoseventeen{1763}{Use assumption of case distinction}, \videoseventeen{1948}{Why that has to be the result}, \videoseventeen{1968}{$Q$ has leading bit $1$}, \videoseventeen{1990}{In both cases calculated number}, that goes into square and multiply algorithm with exponent..., \videoseventeen{2080}{Assume $q$ looking random}, \videoseventeen{2117}{Hope sound different for both cases}, 5: \videoseventeen{2223}{Authors paper argue there's acoustic difference}, \videoseventeen{2283}{$p$ part no difference}, for $q$ part see difference, \videoseventeen{2314}{Should be able to detect whether it is $0$ or $1$}, analyzing many sound profile to know that looks like $0$ or $1$, remarks: \videoseventeen{2375}{Remark: Could also do Timing attack}, similar way like acoustic attacks, \videoseventeen{2406}{Similar timing attack explained}, Software based multiplication, multiplication with smaller numbers should need less time, \videoseventeen{2446}{Advantage acoustic over timing}, timing close to internals of CPU, operations in software library, \videoseventeen{2506}{Question realistic}, 2048 emails, next email depends on result of analysis, send on after the other, someone would notice that he's attacked, \videoseventeen{2636}{Nonsense text}, plain text corresponding to cipher text is nonsense, \videoseventeen{2665}{Must somehow use decryption engine of victim}, cause victim to do decryptions in some way, \videoseventeen{2695}{Another disadvantage}, cannot put everything into one ciphertext, the weakness of this attack, \videoseventeen{3490}{Question: How know which is correct bit}, don't know, assume zero or one have certain feature in profile
+																		\begin{itemize}
+																			\item \script{355}{Work if CRT-trick not used?} and \videoseventeen{3231}{Explanation}, \videoseventeen{3260}{Assume library uses CRT trick}, otherwise don't have different computations for $q$ in $2$ different residue class rings, \videoseventeen{3329}{Instead would do this computation}
+																		\end{itemize}
 																	\end{itemize}
 																\end{itemize}
 															\end{minipage}
@@ -314,12 +652,12 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{330}{Timing Attack on Square and Multiply}
+																			\item \script{330}{Timing Attack on Square and Multiply}, \videosixteen{3217}{For decryption $k$ is equal to right key}
 																			\begin{itemize}
-																				\item \script{331}{Relationship between Power and Timing}
-																				\item \script{332}{Observation, Better Timing Attacks on RSA}
+																				\item \script{331}{Relationship between Power and Timing}, \videosixteen{3288}{$0$ just squaring}, \videosixteen{3294}{If have $1$, squaring and multiplication}, squaring and multiplication different shape, \videosixteen{3387}{Influence on length of power curve}, switching one $0$ to $1$, \videosixteen{3419}{Can find out number of 1es in key}
+																				\item \script{332}{Observation, Better Timing Attacks on RSA}, \videosixteen{3606}{Turn acoustic attack into timing attack}, \videosixteen{3629}{Summary timing attack}
 																			\end{itemize}
-																			\item \script{333}{Countermeasures}
+																			\item \script{333}{Countermeasures} and \videosixteen{3676}{Explanation}, modify code need same amount of time independant from $0$ or $1$
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -1600,6 +1938,7 @@
 		\edge{aes}{blockcipher}
 		\edge{finitefields}{polrings}
 		\edge{dpa}{des}
+		\edge{fault injection}{side channel}
 	\end{edges}
 	\annotation{test}{annotation}
 \end{mindmap}

@@ -1,0 +1,172 @@
+\documentclass{standalone}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\begin{mindmap}
+	\begin{mindmapcontent}
+		\node (middle) at (current page.center) {Docker}
+		child {
+				node {Dockerfiles
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item \script{514}{Definition}
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {Common Instructions
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{515}{Definition}
+											\item \script{516}{Example}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
+						node {Processes
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{517}{Definition}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
+						node {Shell}
+					}
+				child {
+						node {Placeholders}
+					}
+				child {
+						node {Miscellaneous}
+					}
+				child {
+						node {Stages}
+					}
+			}
+		child {
+				node {Docker Compose}
+				child {
+						node {Format}
+						child {
+								node {Services Section}
+							}
+						child {
+								node {Networks Section}
+							}
+						child {
+								node {Volumes Section}
+							}
+					}
+				child {
+						node {Commands}
+						child {
+								node {Essential Commands}
+							}
+						child {
+								node {Container logs}
+							}
+					}
+			}
+		child {
+				node {Commands}
+				child {
+						node {Build}
+					}
+				child {
+						node {Run}
+						child {
+								node {Process Environment}
+							}
+						child {
+								node {Container}
+							}
+					}
+				child {
+						node {Inspect}
+					}
+			}
+		child {
+				node (test) {Architecture}
+				child {
+						node {Client user interface}
+					}
+				child {
+						node {Container engine}
+					}
+				child {
+						node {Container runtime}
+					}
+			}
+		child {
+				node {Image
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item OCI Container Images
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {Registry
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item Image Registry
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
+						node {Layer
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item OCI Image Layer
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
+						node {Runtime Bundle
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item OCI Runtime Bundle
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+						child {
+								node {Overlayfs
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item asdf
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+					}
+			}
+	\end{mindmapcontent}
+	\begin{edges}
+		\edge{middle}{test}
+	\end{edges}
+	\annotation{test}{annotation}
+\end{mindmap}
+\end{document}

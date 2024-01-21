@@ -60,6 +60,41 @@
 								}
 							}
 						child {
+								node (ltl semantics applied) {LTL semantics for LT properties, Transition Systems, Paths
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{1358}{LT \alert{property} of formula}
+													\item \script{1361}{LTL semantics over \alert{paths} of TS}
+													\begin{itemize}
+														\item \script{1359}{Given TS}
+														\item \script{1370}{Example Trace} and \script{1395}{Example with other operators}
+														\item \script{1382}{Example Trace $2$}
+													\end{itemize}
+													\item \script{1396}{LTL semantics over \alert{states} of a TS}
+													\item \script{1401}{Interpretation of LTL formulas over TS}
+													\begin{itemize}
+														\item \script{1411}{Example (prr.)}
+													\end{itemize}
+													\item \script{1416}{Theorems}:
+													\begin{itemize}
+														\item For each path $\pi$ we have: $\pi \models \phi$ or $\pi \models \neg\phi$
+														\item For each state $s$ we have: $s \models \phi$ or $s \models \neg\phi$
+													\end{itemize}
+                          \item \script{1422}{Example 1: MUTEX protocols}
+                          \item \script{1427}{Example 2: Formula for propositional formula or $\omega$-regular expression}
+                          \item \script{1440}{Example 3: Traffic light}
+                          \begin{itemize}
+                            \item \script{1443}{Two independent traffic lights}
+                            \item \script{1448}{Nextfree specification of a traffic light}
+                          \end{itemize}
+                          \item \script{1451}{Exapmle 4: Modulo-4-counter (ff.)}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
 								node {Trace relations
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
@@ -196,7 +231,7 @@
 																\item \videoeight{3424}{Proof: Minimal ones, why subset is equivalent}, why is this equivalent to go up if the set of finite traces does not contain a minimal bad prefix then I know that it does not contain a bad prefix because if it did contain a bad prefix then I could make this prefix minimal and then I would get a witness in the minimal bad prefixes and the other direction down is clear because minimal Bad prefix is a subset of Bad prefixes
 																\item \script{811}{Proof (ff.)} and \videoeight{3500}{Explanation}, to be totally correct I should always put an index, a set of bad prefixes always depends on $E$, one defines a set of bad prefixes for the $E$
 															\end{itemize}
-															\item \underline{interesting facts:}
+															\item \underline{theorems:}
 															\begin{itemize}
 																\item \script{830}{Every invariant is a safety property} and \scriptthree{8}{Other version} and \videoeight{4029}{Explanation}, $E\;always\;\phi$: every reachable state satisfies some invariant condition $\phi$
 																\item \script{837}{$\emptyset$ is a safety property} and \scriptthree{10}{Other Version} and \videoeight{4535}{Explanation}, we are talking about the prefixes of the negation of $E$, every trace is not part of the empty set, singleton that contains the empty word
@@ -212,8 +247,8 @@
 													\end{minipage}
 												}
 											}
-										child [level distance=8cm] {
-												node {Regular safety properties
+										child [level distance=10cm] {
+												node (regular safety properties) {Regular safety properties
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
@@ -221,17 +256,18 @@
 																	\begin{itemize}
 																		\item \videotwelve{4106}{Regular languages} and \scriptfive{20}{Node}
 																	\end{itemize}
-																	\item \script{1048}{BadPref is regular \textit{iff} MinBadPref is regular}
-																	\item \script{1020}{If $\mathcal{T}$ is a finite transition system then $Traces_{fin}(\mathcal{T})$ is regular}, Tansform TS into an NFA and \videotwelve{2204}{Explanation}, \scriptfive{9}{Node}, \videotwelve{2475}{Just need to decide}, \videotwelve{2576}{Initial state not accepting}, \videotwelve{2705}{Label outgoing edge also possible}
-																	\item \script{1026}{Checking safety and $\omega$-regular properties (f.)}, \scriptfive{8}{Node 1} and \scriptfive{10}{Node 2} and \scriptfive{11}{Node 3} , \videotwelve{3014}{Omega regular}, \videotwelve{3035}{Regular}, \videotwelve{3054}{Acceptance condition}, \videotwelve{2158}{Bad prefix represented by finite and bad traces by Büchi automaton}
-																	\item \underline{interesting facts:}
+																	\item \script{1062}{Verifying regular safety properties}, \videotwelve{4394}{Complement of automaton}, not everything in complement is good prefix, notion of good prefix doesn't exist
+																	\item \script{1065}{Overview Model checking (f. pr.)}, \scriptfive{21}{Node}, \videotwelve{4666}{Could also do with transition system}, but doesn't matter, \videotwelve{4675}{Safety can always be reduced to invariant}, \videotwelve{4700}{Two possibilities}
 																	\begin{itemize}
+																		\item \script{1073}{$3$ Equivalent Statements (prr.)}, \videotwelve{4999}{Explanation: 3 Conditions}, production automaton, \videotwelve{5004}{$2$ options to check algorithmically}, \videotwelve{5046}{Case where safety property regular}, correctness checking reduced to checking of an invariant
+																	\end{itemize}
+																	\item \underline{theorems:}
+																	\begin{itemize}
+																		\item \script{1020}{If $\mathcal{T}$ is a finite transition system then $Traces_{fin}(\mathcal{T})$ is regular}, Tansform TS into an NFA and \videotwelve{2204}{Explanation}, \scriptfive{9}{Node}, \videotwelve{2475}{Just need to decide}, \videotwelve{2576}{Initial state not accepting}, \videotwelve{2705}{Label outgoing edge also possible}
+																		\item \script{1048}{BadPref is regular \textit{iff} MinBadPref is regular}
 																		\item \script{1054}{Every invariant is regular (prr.)} and \videotwelve{3806}{Explanation}, \scriptfive{18}{Node}, \videotwelve{3614}{Property Negation}
 																		\item \script{1059}{Every safety property is regular (ff.)} and \videotwelve{4058}{Explanation}, \scriptfive{19}{Node}, \videotwelve{4226}{Possible to have bad prefixes regular but minimal bad prefixes is not}
 																	\end{itemize}
-																	\item \script{1062}{Verifying regular safety properties}, \videotwelve{4394}{Complement of automaton}, not everything in complement is good prefix, notion of good prefix doesn't exist
-																	\item \script{1065}{Overview Model checking (f. pr.)}, \scriptfive{21}{Node}, \videotwelve{4666}{Could also do with transition system}, but doesn't matter, \videotwelve{4675}{Safety can always be reduced to invariant}, \videotwelve{4700}{Two possibilities}
-																	\item \script{1073}{$3$ Equivalent Statements (prr.)}, \videotwelve{4999}{Explanation: 3 Conditions}, production automaton, \videotwelve{5004}{$2$ options to check algorithmically}, \videotwelve{5046}{Case where safety property regular}, correctness checking reduced to checking of an invariant
 																	\item \script{1075}{Example: Sequential circuit (ff.)} and \videotwelve{5109}{Explanation}, \videotwelve{5203}{$2$ possibilities}, \videotwelve{5319}{Counter Example}
 																	\item \script{1082}{Algorithm}, \videotwelve{5351}{Explanation}, \videotwelve{5360}{Construct product automaton or product TS}
 																\end{itemize}
@@ -267,6 +303,47 @@
 																				\item \script{1047}{Example: Regular safety property (prr.)}, \videotwelve{3671}{Explanation}
 																				\item \script{1055}{Example: DFA for MUTEX}
 																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node (regular lt properties) {Regular LT properties
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{16cm}
+																		\begin{itemize}
+																			\item \script{1083}{Overview}
+																			\item \script{1105}{Checking safety and $\omega$-regular properties (f.)}
+																			\begin{itemize}
+																				\item \script{1026}{Derivation from BadPref (f.)}, \scriptfive{8}{Node 1} and \scriptfive{10}{Node 2} and \scriptfive{11}{Node 3} , \videotwelve{3014}{Omega regular}, \videotwelve{3035}{Regular}, \videotwelve{3054}{Acceptance condition}, \videotwelve{2158}{Bad prefix represented by finite and bad traces by Büchi automaton}
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+										child {
+												node (fairness safety) {Fairness
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1282}{\alert{Theorem:} For realizable fairness assumption $\mathcal{F}$: $\mathcal{T}\models E$ \alert{iff} $\mathcal{T}\models_{\mathcal{F}} E$}
+																	\begin{itemize}
+																		\item \script{1286}{Proof}
+																	\end{itemize}
+																	\item \script{1294}{Safety and realizable fairness (prr.)}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node (fairness in ltl) {Fairness assumptions in LTL
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{1344}{Defintions}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -317,7 +394,7 @@
 													}
 											}
 										child [level distance = 6cm] {
-												node {Bad prefix
+												node {Bad prefixes
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
@@ -325,7 +402,6 @@
 																	\begin{itemize}
 																		% \item what is a bad prefix it is a finite sequence and if it is if this finite sequence is a prefix of an infinite trace then this infinite trace will not satisfy the given linear time property e
 																		\item \script{793}{$BadPref$}, set of \alert{finite} words / prefixes
-																		\item \script{794}{Minimal bad prefixes}, not always minimal, whenever you have this bad thing happening and you extend it will remain a bad prefix, any finite extension of a minimal bad prefix is again a bad prefix and every extension of a bad prefix is a bad, bad prefixes are \alert{finite} that's why we use a $*$, if shorter then there is a way to repair it
 																		\item \script{784}{Examples}
 																		\begin{itemize}
 																			\item it is the infinite Trace that violates a property of infinite traces so one cannot say that a finite prefix violates the property it's just that one knows that every Trace that has this prefix will violate the property no matter how this continues this Trace here will not satisfy by the correctness so the prefix is bad in the sense that you cannot continue it to a trace that satisfies the property so it is a finite witness
@@ -336,6 +412,17 @@
 																\end{itemize}
 															\end{minipage}
 														}
+													}
+												child {
+														node (minimal bad prefixes) {Minimal bad prefixes
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{794}{Minimal bad prefixes}, not always minimal, whenever you have this bad thing happening and you extend it will remain a bad prefix, any finite extension of a minimal bad prefix is again a bad prefix and every extension of a bad prefix is a bad, bad prefixes are \alert{finite} that's why we use a $*$, if shorter then there is a way to repair it
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
 													}
 											}
 										child {
@@ -398,6 +485,88 @@
 														\end{itemize}
 													\end{minipage}
 												}
+											}
+										child [level distance = 8cm] {
+												node (regular liveness properties) {Regular liveness properties
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1087}{Overview Model checking (pr.)}, $\omega$-regular properties
+																	\item \script{1088}{Example: Infinitely often green (ff.)}
+																	\item \script{1096}{Example: Each repeatedly sent message will eventually be delivered (ff.)}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child [level distance = 8cm] {
+												node (fairness) {Fairness
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1158}{Observation}
+																	\begin{itemize}
+																		\item \script{1162}{Example: Two independent traffic lights}
+																		\item \script{1166}{Example Mutual exclusion, semaphore (f.)}
+																		\item \script{1172}{Process fairness}, definition
+																		\item \script{1212}{Action-based fairness assumptions}
+																		\item \script{1213}{Fair satisfaction relation}
+																		\begin{itemize}
+																			\item \script{1218}{Example}
+																		\end{itemize}
+																		\item \script{1256}{Purpose of fairness conditions}
+																		\begin{itemize}
+																			\item \script{1270}{For liveness and safety properties}
+																		\end{itemize}
+																		\item \script{1260}{Channel fairness for communication protocol}
+																		\item \script{1269}{Input fairness for sequential circuits (prr.)}
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Unconditional, strong and weak fairness
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{16cm}
+																		\begin{itemize}
+																			\item \script{1176}{Definition}
+																			\begin{itemize}
+																				\item \script{1190}{Fairness for action sets (prr.)}, unconditionally $A$-fair, strongly $A$-fair, weakly $A$-fair, conditions in words
+																				\item \script{1192}{Unconditional vs strong vs weak fairness}, what implies what
+																				\item \underline{Strong vs weak action fairness:}
+																				\begin{itemize}
+																					\item \script{1196}{Strong $A$-fairness is violated if...}
+																					\item \script{1197}{Weak $A$-fairness is violated if...}
+																				\end{itemize}
+																				\item \script{1198}{Example: Mutual exclusion with arbiter}
+																				\begin{itemize}
+																					\item \script{1232}{Same example with two different mutual exclusion properties (ff.)}
+																					\item \script{1248}{Peterson mutual exclusion algorithm (ff.)}
+																				\end{itemize}
+																				\item \script{1228}{Fairness assumptions should be \alert{as weak as possible}}
+																				\item \script{1231}{Example: Two independent traffic lights}
+																				\item \script{1255}{Process fairness}
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Realizability of fairness assumptions
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{1276}{Definition (prr.)}
+																			\begin{itemize}
+																				\item \script{1280}{For unconditional, strong and weak fairness}
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
 											}
 										child {
 												node {Contradiction to independance
@@ -728,6 +897,37 @@
 										}
 									}
 							}
+						child {
+								node {Temporal logics
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{1336}{Definition}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node (ltl) {Linear Temporal Logic (LTL)
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{1337}{Definition}
+															\begin{itemize}
+																\item \script{1340}{Derived operators}
+																\item \script{1341}{Illustration of next, until and eventually}
+																\item \script{1342}{Examples}
+																\item \script{1352}{Semantics (prr.)}
+																\begin{itemize}
+																	\item \script{1357}{Semantics of derived operators} and \script{1385}{More operators}
+																\end{itemize}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+							}
 					}
 				child {
 						node {Not-categorizable topics
@@ -912,9 +1112,14 @@
 			}
 	\end{mindmapcontent}
 	\begin{edges}
-		\edge{test}{middle}
+		% \edge{test}{middle}
 		\edge{interleavingoperator}{concurrency}
 		\edge{interleavingoperator}{arbiter}
+		\edge{regular safety properties}{minimal bad prefixes}
+		\edge{regular liveness properties}{regular lt properties}
+		\edge{fairness}{fairness safety}
+		\edge{ltl}{ltl semantics applied}
+		\edge{ltl}{fairness in ltl}
 	\end{edges}
 	\annotation{middle.south}{
 		\resizebox{\textwidth}{!}{

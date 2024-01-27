@@ -45,8 +45,11 @@
 											\item \script{380}{Definition}
 											\item \script{255}{Short Definition} and \script{362}{again}, using side-channel inputs, \videoten{2131}{Other definition}, \videoseventeen{3673}{In lecture other definition}
 											\item \script{256}{Side channel inputs for fault injection} and \script{361}{again}, \videothirteen{3358}{Decrease supply voltage}, delay slower, information not arrive at register, \videothirteen{3408}{Clock frequency}, increasing frequency similiar to decreasing supply voltage, \videothirteen{3462}{Temperature}, influence speed, \videothirteen{3491}{Common goal}
-											\item \script{387}{Relevance}
+											\item \script{363}{Overview fault injections and physical attacks}
+											\item \script{389}{Overview countermeasures against fault injection}
+											\item \script{388}{Relevance}
 											\item \script{364}{Categories below}, \videoseventeen{3995}{Here not important how fault injections was done physically}, algorithms
+											\item \script{383}{Precision}, fault model
 										\end{itemize}
 									\end{minipage}
 								}
@@ -56,44 +59,114 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{389}{Definition}
+													\item \script{390}{Overview}
 												\end{itemize}
 											\end{minipage}
 										}
 									}
 								child {
-										node {Probing Attempt Detector
+										node (non-invasive fault injection countermeasures) {Non-Invasive Fault Injection countermeasures
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{390}{Definition (f.)}
+															\item \script{390}{Overview}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node (error detection correction) {Error Detection / Error Correction
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{396}{Overview}, soft error and fault injection comparison
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Error Detection}
+														child {
+																node (self-checking design) {Self-Checking Design
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{398}{Definition}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {Error-Detecting Codes
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{399}{Definition (ff.)}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+													}
+												child {
+														node (error correction) {Error Correction}
+														child {
+																node {Triple Modular Redundancy
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{397}{Definition}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+													}
+											}
+									}
+								child {
+										node (semi-invasive fault injection countermeasures) {Semi-Invasive Fault Injection countermeasures
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{390}{Overview}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
 									}
 								child {
-										node {Top-layer Sensor Meshes
+										node (invasive fault injection countermeasures) {Invasive Fault Injection counntermeasures
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{392}{Definition} and \script{394}{Countering}
+															\item \script{390}{Overview}
 														\end{itemize}
 													\end{minipage}
 												}
 											}
-									}
-								child {
-										node {Error Detection / Error Correction
-												\resizebox{\textwidth}{!}{
-													\begin{minipage}[t]{12cm}
-														\begin{itemize}
-															\item \script{395}{Error Detection / Error Correction}
-															\item \script{397}{Self-Checking Design}
-															\item \script{398}{Error-Detecting Codes}
-														\end{itemize}
-													\end{minipage}
-												}
+										child {
+												node {Probing Attempt Detector
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{391}{Definition (f.)}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Top-layer Sensor Meshes
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{393}{Definition} and \script{395}{Countering}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
 											}
 									}
 							}
@@ -116,9 +189,6 @@
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item \script{381}{Example (ff.)}
-															\begin{itemize}
-																\item \script{383}{Precision}, fault model
-															\end{itemize}
 														\end{itemize}
 													\end{minipage}
 												}
@@ -129,9 +199,10 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item \script{384}{Attack (ff.)}
+															\item \script{384}{Attack (f.)}
 															\begin{itemize}
-																\item \script{386}{Example}
+																\item \script{386}{Derivation}
+																\item \script{387}{Example}
 															\end{itemize}
 														\end{itemize}
 													\end{minipage}
@@ -148,6 +219,7 @@
 														\begin{itemize}
 															\item Lowest cost (need oscilloscopes, waveform generators, ...)
 															\item No damage to the target IC
+															\item \underline{Countermeassure:} Add voltage and frequency sensors to detect voltage / frequency glitching attacks
 														\end{itemize}
 													\end{minipage}
 												}
@@ -187,6 +259,7 @@
 																\item Decapsulation with \alert{mechanical} or \alert{chemical} methods
 															\end{itemize}
 															\item \script{367}{Local Heating, Flash Glitching, Laser Glitching}
+															\item \underline{Countermeassure:} Ambient light sensors and switches against decapsulation of the device
 														\end{itemize}
 													\end{minipage}
 												}
@@ -263,60 +336,66 @@
 													\end{minipage}
 												}
 											}
-										child {
-												node {Signal injection
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{372}{Definition}
-																\end{itemize}
-															\end{minipage}
-														}
+										child [level distance = 14cm] {
+												node {Attacks}
+												child {
+														node {Signal injection
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{372}{Definition}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Disconnect nets in the circuit by laser cutting}
+													}
+												child {
+														node {Modify nets by wire bonding}
+													}
+												child {
+														node {Destroy transistors / wires by high voltage between two probes}
 													}
 											}
-										child {
-												node {Disconnect nets in the circuit by laser cutting}
-											}
-										child {
-												node {Modify nets by wire bonding}
-											}
-										child {
-												node {Destroy transistors / wires by high voltage between two probes}
-											}
-										child {
-												node {Decapsulation}
-											}
-										child {
-												node {Laser Cutting
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{373}{Definition}
-																\end{itemize}
-															\end{minipage}
-														}
+										child [level distance = 9cm] {
+												node {IC Modifications}
+												child {
+														node {Decapsulation}
 													}
-											}
-										child {
-												node {Test Point Creation
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{373}{Definition}
-																\end{itemize}
-															\end{minipage}
-														}
+												child {
+														node {Laser Cutting
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{373}{Definition}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
 													}
-											}
-										child {
-												node {Wire Bonding
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{373}{Definition}
-																\end{itemize}
-															\end{minipage}
-														}
+												child {
+														node {Test Point Creation
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{373}{Definition}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Wire Bonding
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{373}{Definition}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
 													}
 											}
 										child {
@@ -1939,6 +2018,11 @@
 		\edge{finitefields}{polrings}
 		\edge{dpa}{des}
 		\edge{fault injection}{side channel}
+		\edge{semi-invasive fault injection countermeasures}{error detection correction}
+		\edge{invasive fault injection countermeasures}{error detection correction}
+		\edge{invasive fault injection countermeasures}{error detection correction}
+		\edge{self-checking design}{error correction}
+		\edge{self-checking design}{error correction}
 	\end{edges}
 	\annotation{test}{annotation}
 \end{mindmap}

@@ -41,6 +41,30 @@
 						}
 					}
 				child {
+						node (ltl model checking) {LTL model checking
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{1646}{Illustration (f.)} and \script{1664}{Illustration counter example}
+                      \item \script{1672}{Algorithm (prr.)} and \script{1666}{Summary of algorithm}
+                      \item \script{1674}{Example (ff.)}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+              child {
+                node (model checking ltl with fairness) {Model checking for LTL with fairness
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{1686}{Definition}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+					}
+				child {
 						node {Linear-time properties (LT properties)
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{16cm}
@@ -64,7 +88,7 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{1358}{LT \alert{property} of formula}
+													\item \script{1358}{LT \alert{property} of formula}, $Words(\varphi)$
 													\item \script{1361}{LTL semantics over \alert{paths} of TS}
 													\begin{itemize}
 														\item \script{1359}{Given TS}
@@ -81,14 +105,14 @@
 														\item For each path $\pi$ we have: $\pi \models \phi$ or $\pi \models \neg\phi$
 														\item For each state $s$ we have: $s \models \phi$ or $s \models \neg\phi$
 													\end{itemize}
-                          \item \script{1422}{Example 1: MUTEX protocols}
-                          \item \script{1427}{Example 2: Formula for propositional formula or $\omega$-regular expression}
-                          \item \script{1440}{Example 3: Traffic light}
-                          \begin{itemize}
-                            \item \script{1443}{Two independent traffic lights}
-                            \item \script{1448}{Nextfree specification of a traffic light}
-                          \end{itemize}
-                          \item \script{1451}{Exapmle 4: Modulo-4-counter (ff.)}
+													\item \script{1422}{Example 1: MUTEX protocols}
+													\item \script{1427}{Example 2: Formula for propositional formula or $\omega$-regular expression}
+													\item \script{1440}{Example 3: Traffic light}
+													\begin{itemize}
+														\item \script{1443}{Two independent traffic lights}
+														\item \script{1448}{Nextfree specification of a traffic light}
+													\end{itemize}
+													\item \script{1451}{Exapmle 4: Modulo-4-counter (ff.)}
 												\end{itemize}
 											\end{minipage}
 										}
@@ -201,7 +225,7 @@
 											}
 									}
 								child {
-										node {Safety properties
+										node (safety properties) {Safety properties
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{20cm}
 														\begin{itemize}
@@ -247,7 +271,7 @@
 													\end{minipage}
 												}
 											}
-										child [level distance=10cm] {
+										child [level distance=12cm] {
 												node (regular safety properties) {Regular safety properties
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
@@ -279,7 +303,11 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{16cm}
 																		\begin{itemize}
-																			\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
+																			\item \script{1648}{Definition}
+																			\begin{itemize}
+																				\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
+                                        \item \script{1649}{Example (ff.)}
+																			\end{itemize}
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -324,7 +352,7 @@
 															}
 													}
 											}
-										child {
+										child [level distance = 4cm] {
 												node (fairness safety) {Fairness
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
@@ -337,17 +365,6 @@
 																\end{itemize}
 															\end{minipage}
 														}
-													}
-												child {
-														node (fairness in ltl) {Fairness assumptions in LTL
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
-																		\begin{itemize}
-																			\item \script{1344}{Defintions}
-																		\end{itemize}
-																	\end{minipage}
-																}
-															}
 													}
 											}
 										child { % [level distance = 5cm] {
@@ -393,7 +410,7 @@
 														}
 													}
 											}
-										child [level distance = 6cm] {
+										child [level distance = 5cm] {
 												node {Bad prefixes
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
@@ -468,6 +485,17 @@
 															}
 													}
 											}
+										child {
+												node {NFA and NBA for safety properties
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1641}{Definition (ff.)}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
 									}
 								child {
 										node {Liveness properties
@@ -508,22 +536,47 @@
 																	\begin{itemize}
 																		\item \script{1162}{Example: Two independent traffic lights}
 																		\item \script{1166}{Example Mutual exclusion, semaphore (f.)}
-																		\item \script{1172}{Process fairness}, definition
-																		\item \script{1212}{Action-based fairness assumptions}
-																		\item \script{1213}{Fair satisfaction relation}
-																		\begin{itemize}
-																			\item \script{1218}{Example}
-																		\end{itemize}
-																		\item \script{1256}{Purpose of fairness conditions}
-																		\begin{itemize}
-																			\item \script{1270}{For liveness and safety properties}
-																		\end{itemize}
-																		\item \script{1260}{Channel fairness for communication protocol}
-																		\item \script{1269}{Input fairness for sequential circuits (prr.)}
 																	\end{itemize}
+																	\item \script{1172}{Process fairness}, definition
+																	\item \script{1256}{Purpose of fairness conditions}
+																	\begin{itemize}
+																		\item \script{1270}{For liveness and safety properties}
+																	\end{itemize}
+																	\item \script{1260}{Channel fairness for communication protocol}
+																	\item \script{1269}{Input fairness for sequential circuits (prr.)}
 																\end{itemize}
 															\end{minipage}
 														}
+													}
+												child {
+														node {Fair satisfaction relation
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{1213}{Fair satisfaction relation}
+																			\begin{itemize}
+																				\item \script{1212}{$FairTraces$}, Action-based fairness assumptions
+																				\item \script{1218}{Example}
+																				\begin{itemize}
+																					\item \script{1222}{Example with other action set}
+																					\item \script{1226}{Example with other action set 2}
+																				\end{itemize}
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node (fairness in ltl) {Fairness assumptions in LTL
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{1344}{Defintions}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
 													}
 												child {
 														node {Unconditional, strong and weak fairness
@@ -541,11 +594,17 @@
 																				\end{itemize}
 																				\item \script{1198}{Example: Mutual exclusion with arbiter}
 																				\begin{itemize}
-																					\item \script{1232}{Same example with two different mutual exclusion properties (ff.)}
+																					\item \script{1203}{Action Set $\{Enter_1\}$}
+																					\item \script{1205}{Action Set $\{Enter_1\}$ with other trace}
+																					\item \script{1207}{Action Set $\{Enter_1\}$ with other trace $2$}
+																					\item \script{1211}{Action Set $\{Enter_1, Enter_2\}$}
 																					\item \script{1248}{Peterson mutual exclusion algorithm (ff.)}
 																				\end{itemize}
 																				\item \script{1228}{Fairness assumptions should be \alert{as weak as possible}}
-																				\item \script{1231}{Example: Two independent traffic lights}
+																				\begin{itemize}
+																					\item \script{1231}{Example: Two independent traffic lights}
+																					\item \script{1232}{Example Mutual exlusion from above with fairness relation (ff.)}
+																				\end{itemize}
 																				\item \script{1255}{Process fairness}
 																			\end{itemize}
 																		\end{itemize}
@@ -554,11 +613,11 @@
 															}
 													}
 												child {
-														node {Realizability of fairness assumptions
+														node (realizability) {Realizability of fairness assumptions
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item \script{1276}{Definition (prr.)}
+																			\item \script{1275}{Definition} and \script{1276}{Other Definition}
 																			\begin{itemize}
 																				\item \script{1280}{For unconditional, strong and weak fairness}
 																			\end{itemize}
@@ -915,16 +974,91 @@
 															\item \script{1337}{Definition}
 															\begin{itemize}
 																\item \script{1340}{Derived operators}
+																\item \script{1344}{Composed operators}, infinitely often and almost always
 																\item \script{1341}{Illustration of next, until and eventually}
 																\item \script{1342}{Examples}
 																\item \script{1352}{Semantics (prr.)}
 																\begin{itemize}
 																	\item \script{1357}{Semantics of derived operators} and \script{1385}{More operators}
 																\end{itemize}
+																\item \script{1579}{The weak until operator $W$}
+																\begin{itemize}
+																	\item \script{1571}{Examples}
+																	\item \script{1575}{Until versus weak until}
+																	\item \script{1587}{Duality of $U$ and $W$ (prr.)}
+																\end{itemize}
 															\end{itemize}
 														\end{itemize}
 													\end{minipage}
 												}
+											}
+										child {
+												node {LTL in positive normal form (PNF)
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1594}{Definition (prr.)}
+																	\begin{itemize}
+																		\item \script{1591}{PNF for propositional logic}
+																		\item \script{1596}{Universality of LTL-PNF}
+																		\begin{itemize}
+																			\item \script{1597}{Example}
+																		\end{itemize}
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Equivalence of LTL formulas
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1530}{Definition} and \script{1564}{Overview}
+																	\begin{itemize}
+																		\item \script{1531}{Self-duality of the next operator}
+																		\item \script{1537}{Eventually and Always with \enquote{and} and \enquote{or}}
+																		\item \script{1540}{Double Eventually and Always}
+																		\item \script{1543}{Next and Always}
+																		\item \script{1546}{Eventually and Always}
+																		\item \script{1549}{Always and Until}
+																		\item \script{1552}{Eventually and Until (ff.)}
+																		\item \script{1557}{Eventually and Until and \enquote{and}}
+																		\item \script{1563}{Expansion laws}, are fixed point equations
+																		\begin{itemize}
+																			\item \script{1559}{Expansion laws for until and eventually}
+																			\item \script{1561}{Expansion law for always}
+																			\item \script{1589}{Expansion laws for $U$ and $W$}
+																		\end{itemize}
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {LTL-specification of sequential programs
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1526}{Illustration (pr.)}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {LTL as a real-time logic
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item LTL can serve to specify real-time properties of synchronous systems, the underlying time domain is discrete, e.g. $\mathbb{N}$
+																	\item \script{1520}{Modified operators}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
 											}
 									}
 							}
@@ -1096,6 +1230,37 @@
 										}
 									}
 								child {
+										node {Nondeterministic Büchi automata (NBA)
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item \script{1600}{Definition}
+															\begin{itemize}
+																\item \script{1600}{Run for an infinite word}
+																\item \script{1602}{Accepted language}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node (from ltl to nba) {From LTL to NBA
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1607}{Theorem}
+																	\item \script{1613}{NBA for LTL formulas (ff.)}
+																	\begin{itemize}
+																		\item \script{1619}{More examples (ff.)}
+																		\item \script{1624}{More examples 2 (ff.)}
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child {
 										node {$\omega$-Word and $\omega$-Language
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
@@ -1118,8 +1283,11 @@
 		\edge{regular safety properties}{minimal bad prefixes}
 		\edge{regular liveness properties}{regular lt properties}
 		\edge{fairness}{fairness safety}
+    \edge{fairness}{model checking ltl with fairness}
 		\edge{ltl}{ltl semantics applied}
 		\edge{ltl}{fairness in ltl}
+		\edge{from ltl to nba}{ltl}
+		\edge{safety properties}{realizability}
 	\end{edges}
 	\annotation{middle.south}{
 		\resizebox{\textwidth}{!}{

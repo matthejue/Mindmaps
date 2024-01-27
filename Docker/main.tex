@@ -7,7 +7,19 @@
 \begin{document}
 \begin{mindmap}
 	\begin{mindmapcontent}
-		\node (middle) at (current page.center) {Docker}
+		\node (middle) at (current page.center) {Docker
+			\resizebox{\textwidth}{!}{
+				\begin{minipage}[t]{12cm}
+					\begin{itemize}
+						\item \script{481}{History}
+						\item \script{482}{Objectives}
+						\item \script{483}{Builds}
+						\item \script{484}{Specifications}
+						\item \script{485}{Components (ff.)}
+					\end{itemize}
+				\end{minipage}
+			}
+		}
 		child {
 				node {Dockerfiles
 						\resizebox{\textwidth}{!}{
@@ -97,55 +109,83 @@
 					}
 			}
 		child {
-				node (test) {Architecture}
-				child {
-						node {Client user interface}
-					}
-				child {
-						node {Container engine}
-					}
-				child {
-						node {Container runtime}
-					}
-			}
-		child {
-				node {Image
+				node (test) {Architecture
 						\resizebox{\textwidth}{!}{
 							\begin{minipage}[t]{12cm}
 								\begin{itemize}
-									\item OCI Container Images
+									\item \script{492}{Overview}
 								\end{itemize}
 							\end{minipage}
 						}
 					}
 				child {
-						node {Registry
+						node {Client user interface
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item Image Registry
+											\item \script{493}{Docker Client Definition}
 										\end{itemize}
 									\end{minipage}
 								}
 							}
 					}
 				child {
-						node {Layer
+						node {Container engine
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item OCI Image Layer
+											\item \script{494}{Definition}
 										\end{itemize}
 									\end{minipage}
 								}
 							}
 					}
 				child {
-						node {Runtime Bundle
+						node {Container runtime
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
-											\item OCI Runtime Bundle
+											\item \script{495}{Definition}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+			}
+		child {
+				node {OCI Container Images
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item \script{496}{Definition}
+									\item \script{497}{Illustration}
+									\begin{itemize}
+										\item \script{498}{Index}
+                    \item \script{500}{Manifest}
+                    \item \script{501}{Manifest Layers}
+                    \item \script{503}{Configuration (ff.)}
+									\end{itemize}
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {(OCI Image) Layer
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{507}{Definition}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
+						node {(OCI) Runtime Bundle
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{508}{Definition}
 										\end{itemize}
 									\end{minipage}
 								}
@@ -155,11 +195,22 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item asdf
+													\item \script{509}{Definition (ff.)}
 												\end{itemize}
 											\end{minipage}
 										}
 									}
+							}
+					}
+				child {
+						node {(Image) Registry
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item Registry
+										\end{itemize}
+									\end{minipage}
+								}
 							}
 					}
 			}

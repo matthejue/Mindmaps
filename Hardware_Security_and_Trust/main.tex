@@ -31,9 +31,214 @@
 						}
 					}
 				child {
-						node {Attacks via Test Infrastructure}
+						node {Attacks via Test Infrastructure
+              \resizebox{\textwidth}{!}{
+                \begin{minipage}[t]{12cm}
+                  \begin{itemize}
+                    \item \script{407}{Trade-off between \alert{testing} and \alert{security}}, Reasons for malfunctions, Reasons for Testing
+                    \item Test, diagnosis, failure analysis are crucial for \alert{quality and economic feasibility} of electronic products. Emerging challenge: Testing without compromising security
+                  \end{itemize}
+                \end{minipage}
+              }
+            }
+            child {
+              node {Testing
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{410}{Goal of testing, Fault model, Definition test}, impossible to do complete checks of the circuit for all input values due to time and cost constraints, computation of tests for the modeled faults
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Fault Model: Single Stuck-at
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{411}{Definition}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+            }
+            child {
+              node {Design for Testability
+                \resizebox{\textwidth}{!}{
+                  \begin{minipage}[t]{12cm}
+                    \begin{itemize}
+                      \item \script{412}{\alert{Controllable} and \alert{Observable}}
+                    \end{itemize}
+                  \end{minipage}
+                }
+              }
+              child {
+                node {Scan chains
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{413}{Definition}
+                        \item \script{415}{Illustration (pr.)}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Test point insertion
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{419}{Test Point Insertion for observability}
+                        \item \script{421}{Test Point Insertion for controllability}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+              }
+              child {
+                node {Boundary scan
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{422}{Motivation}, orignal and today 
+                        \item \script{423}{Illustration}, used to isolate different modules in a circuit
+                        \item \script{424}{Testing interconnects (EXTEST) and a module (INTEST)}
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {JTAG
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \script{425}{Definition}
+                          \item \script{426}{Pins}
+                          \item \script{427}{Three Basic Modes}
+                          \item \script{428}{Solution with Access to Internal Module Registers}
+                          \item \script{429}{Connecting JTAG Devices}, \alert{Daisy chaining}, Disadvantages, Reconfigurable Scan Networks (RSNs)
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+                child {
+                  node {Built-in self-test (BIST)
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \script{436}{Definition}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                }
+              }
+            }
+            child {
+              node {Basic Attack Vectors}
+              child {
+                node {Design-for-Testability as a Side-Channel
+                  \resizebox{\textwidth}{!}{
+                    \begin{minipage}[t]{12cm}
+                      \begin{itemize}
+                        \item \script{431}{Examples}, for DFT structures and Further instruments
+                      \end{itemize}
+                    \end{minipage}
+                  }
+                }
+                child {
+                  node {Sniff TDI/TDO Signals
+                    \resizebox{\textwidth}{!}{
+                      \begin{minipage}[t]{12cm}
+                        \begin{itemize}
+                          \item \script{432}{Definition}
+                        \end{itemize}
+                      \end{minipage}
+                    }
+                  }
+                  child {
+                    node {Xbox 360 Exploit
+                      \resizebox{\textwidth}{!}{
+                        \begin{minipage}[t]{12cm}
+                          \begin{itemize}
+                            \item \script{433}{Explanation}
+                          \end{itemize}
+                        \end{minipage}
+                      }
+                    }
+                  }
+                }
+                child {
+                  node {Countermeasures}
+                  child {
+                    node {Removal/Destruction of JTAG
+                      \resizebox{\textwidth}{!}{
+                        \begin{minipage}[t]{12cm}
+                          \begin{itemize}
+                            \item \script{435}{Possibilities and Problem}, remove (disadvantage: not way for in-field test, use BIST instead), security fuses, implement different levels of disabled JTAG use
+                          \end{itemize}
+                        \end{minipage}
+                      }
+                    }
+                  }
+                  child {
+                    node {Removal of sensitive data during test}
+                    child {
+                      node {Secure Scan
+                        \resizebox{\textwidth}{!}{
+                          \begin{minipage}[t]{12cm}
+                            \begin{itemize}
+                              \item \script{437}{Definition}
+                              \item \script{438}{Illustrations}
+                            \end{itemize}
+                          \end{minipage}
+                        }
+                      }
+                    }
+                  }
+                  child {
+                    node {Authentication for JTAG
+                      \resizebox{\textwidth}{!}{
+                        \begin{minipage}[t]{12cm}
+                          \begin{itemize}
+                            \item \script{439}{Idea and where research approaches differ}
+                          \end{itemize}
+                        \end{minipage}
+                      }
+                    }
+                    child {
+                      node {Protocol
+                        \resizebox{\textwidth}{!}{
+                          \begin{minipage}[t]{12cm}
+                            \begin{itemize}
+                              \item \script{440}{Illustration, Implementation with public / private key authentication}
+                            \end{itemize}
+                          \end{minipage}
+                        }
+                      }
+                    }
+                    child {
+                      node {Lightweight Scan Protection
+                        \resizebox{\textwidth}{!}{
+                          \begin{minipage}[t]{12cm}
+                            \begin{itemize}
+                              \item \script{441}{Basic Idea}
+                              \item \script{442}{Technical realization and Illustration (f.)}
+                              \item \script{444}{Illustration of Single scan chain}
+                            \end{itemize}
+                          \end{minipage}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
 					}
-				child [level distance = 35cm] {
+				child [level distance = 32cm] {
 						node (fault injection) {Fault Injection
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}

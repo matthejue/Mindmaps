@@ -59,12 +59,12 @@ jobs:
           overwrite: true
           body: "Document ${{ github.event.inputs.subject }}.pdf was added / updated most recently"
 
-      - name: Upload png of document to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.UPLOAD_TO_REPO }}
-          file: ${{ github.event.inputs.subject }}/main.png
-          asset_name: ${{ github.event.inputs.subject }}.png
-          tag: ${{ github.ref_name }}
-          overwrite: true
-          body: "Document ${{ github.event.inputs.subject }}.png was added / updated most recently"
+      # - name: Upload png of document to release
+      #   uses: svenstaro/upload-release-action@v2
+      #   with:
+      #     repo_token: ${{ secrets.UPLOAD_TO_REPO }}
+      #     file: ${{ github.event.inputs.subject }}/main.png
+      #     asset_name: ${{ github.event.inputs.subject }}.png
+      #     tag: ${{ github.ref_name }}
+      #     overwrite: true
+      #     body: "Document ${{ github.event.inputs.subject }}.png was added / updated most recently"

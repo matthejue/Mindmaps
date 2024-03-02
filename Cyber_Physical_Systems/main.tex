@@ -22,6 +22,83 @@
 			}
 		}
 		child {
+				node {Software Model Checking
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{18cm}
+								\begin{itemize}
+									\item \script{1835}{Definition}, \videofifteen{51}{Extend algorithms from finite to infinite state systems}, \videofifteen{239}{Software model checking}, combination of all 3, get advantages of all 3 without disadvantages
+									\item \script{1835}{Influences}
+									\begin{itemize}
+										\item \videofifteen{81}{Theorem Proving}, user comes up with arguments for correctness of program, theorem prover to check if arguments for correctness are valid, inference rules, \videofifteen{121}{Strength}, rich logics to encode behaviour of programs, \videofifteen{137}{Disadvantage}, manual
+										\item \videofifteen{155}{Static analysis}, abstractions simplifies, but may loose precision needed to prove correctness of program
+										\item \videofifteen{182}{Model checking}, if graph not finite algorithms will not work, graphs can be very large, \videofifteen{221}{Advantages}, completely automatic, if falsify get counterexample
+									\end{itemize}
+									\item \script{1841}{Example Program Graph (pr.)}, \videofifteen{499}{Program graph explained}, \videofifteen{574}{When have assume statement}, just write condition, block if condition not hold then block, no outgoing edge p==0, \videofifteen{649}{Only have goto's}, go from location to next one, by changing location execute command, \videofifteen{718}{2 kinds of statements: update and assume}, \videofifteen{767}{Assume}, if holds, then continue, if not stop execution, \videofifteen{807}{Labeled with negation}, \videofifteen{857}{Program counter and program variables, $p$ and $n$}
+									\begin{itemize}
+										\item \videofifteen{968}{Trace}, not sequence of labels of states but sequence of action labels, means it's sequence of statements, \videofifteen{943}{Sequence of labels on the graph}, like action labels, \videofifteen{985}{Alphabet}, is set of statements of the program
+										\item \videofifteen{1005}{Error trace}, labeling of path starts in initial location and follow paths in program graph and reaches error location and then look at sequence of action labels on this path
+									\end{itemize}
+									\item \script{1860}{Algorithm}, \videofifteen{2521}{Scheme explained}, \videofifteen{2581}{Omit old disadvantages}, but new disadvantage, when have loop there's the possiblity that the loop continues forever, union larger and larger and construct new and new correct programs and never have this inclusion success
+                  \begin{itemize}
+										\item \script{1849}{Example Step 1}, \videofifteen{1584}{Already conjunct of two already unsatisfiable}, \alert{unsatisfiable core}
+										\item \script{1854}{Example Step 2}, \videofifteen{1626}{Every path from initial to error location}, labeled with unfeasible sequence of statements, \videofifteen{1670}{Each self loop labeled with one of program statements}, still unsatisfiable, \videofifteen{1661}{Add statements still remains correct}
+                    \item \script{1855}{Example Step 3}, \videofifteen{1729}{Can not update in the middle}, \videofifteen{1811}{Can add any statement that does not contain the variable p}, \videofifteen{1820}{Also where test variable certain value}
+                    \item \script{1856}{Example Step 4}, \videofifteen{1887}{Physics principle}, \videofifteen{1903}{Go from program to proof}, but here from proof to program, maximal program proof correct from fact that right is unsatisfiable
+                    \item \script{1859}{Example Step 5 (prr.)}, \videofifteen{2026}{Question every execution of right program is covered by execution of right program}, \videofifteen{2067}{Question is undecidable}, \videofifteen{2185}{Set of statements now alphabet}, just becomes letter, \videofifteen{2203}{New question}
+                    \item \script{1863}{Example Step 6}, \videofifteen{2231}{Word (trace) in left automaton not in right automaton}, counterexample to inclusion, \videofifteen{2338}{Is infeasible}
+                    \item \script{1865}{Example Step 7}, \videofifteen{2399}{Extract infeasible core}
+                    \item \script{1869}{Example Step 8}, \videofifteen{2422}{Go from sequence of statements to program correct by construction}
+										\item \script{1872}{Example Step 9 (pr.)}
+                  \end{itemize}
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {Correctness or programs
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \script{1843}{Criteria for the correctness of programs}, \videofifteen{432}{Formal argument loop invariant}, \videofifteen{1203}{Different things characterize correctness of programs}, \videofifteen{1212}{Already talked about...}
+											\begin{itemize}
+												\item \videofifteen{837}{Correctness is unreachability of error location}, \videofifteen{1162}{Reformulate description of correctness of program}, block before
+											\end{itemize}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+						child {
+								node {Infeasibility of error traces
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{1842}{Infeasible}, \videofifteen{1044}{Infeasible}, there's no execution that can execute this sequence
+													\begin{itemize}
+														\item \script{1845}{Hoare triple with pre/condition pair ( true, false)}, \videofifteen{1112}{Every successor state}, after executing this satisfies false, \videofifteen{1130}{$2$ example how something becomes infeasible}, \videofifteen{1354}{Trace infeasible}
+														\item \script{1847}{Write as formula}, \videofifteen{1483}{If have update then have to introduce new variable for value after update}, \videofifteen{1519}{Unfeasibility of trace corresponds to unsatisfiability of formula}
+													\end{itemize}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Partial correctness
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{1844}{Definition}
+													\begin{itemize}
+														\item \videofifteen{1245}{Hoare triples}, precondition, program, postcondition, \videofifteen{1258}{How read this}, if start in state where value of x is equal to 3, then execute assume statement, then arrive in state that satisfies false, \videofifteen{1278}{From this precondition this statement is not executable}, \videofifteen{1289}{Put precondition true}, \videofifteen{1313}{Postcondition}, instead of arbitrary pre and postconditions, have to true and false
+													\end{itemize}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+					}
+			}
+		child {
 				node {Model Checking
 						\resizebox{\textwidth}{!}{
 							\begin{minipage}[t]{20cm}
@@ -46,23 +123,23 @@
 									\begin{minipage}[t]{12cm}
 										\begin{itemize}
 											\item \script{1646}{Illustration (f.)} and \script{1664}{Illustration counter example}
-                      \item \script{1672}{Algorithm (prr.)} and \script{1666}{Summary of algorithm}
-                      \item \script{1674}{Example (ff.)}
+											\item \script{1672}{Algorithm (prr.)} and \script{1666}{Summary of algorithm}
+											\item \script{1674}{Example (ff.)}
 										\end{itemize}
 									\end{minipage}
 								}
 							}
-              child {
-                node (model checking ltl with fairness) {Model checking for LTL with fairness
-                  \resizebox{\textwidth}{!}{
-                    \begin{minipage}[t]{12cm}
-                      \begin{itemize}
-                        \item \script{1686}{Definition}
-                      \end{itemize}
-                    \end{minipage}
-                  }
-                }
-              }
+						child {
+								node (model checking ltl with fairness) {Model checking for LTL with fairness
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \script{1686}{Definition}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
 					}
 				child {
 						node {Linear-time properties (LT properties)
@@ -92,18 +169,19 @@
 													\item \script{1361}{LTL semantics over \alert{paths} of TS}
 													\begin{itemize}
 														\item \script{1359}{Given TS}
-														\item \script{1370}{Example Trace} and \script{1395}{Example with other operators}
+														\item \script{1370}{Example Trace} and
 														\item \script{1382}{Example Trace $2$}
+														\item \script{1395}{Example with other operators}
 													\end{itemize}
 													\item \script{1396}{LTL semantics over \alert{states} of a TS}
-													\item \script{1401}{Interpretation of LTL formulas over TS}
+													\item \script{1401}{Interpretation of LTL formulas over \alert{TS}}
 													\begin{itemize}
 														\item \script{1411}{Example (prr.)}
 													\end{itemize}
-													\item \script{1416}{Theorems}:
+													\item \script{1416}{Important distinction for \alert{paths} and \alert{states}}:
 													\begin{itemize}
 														\item For each path $\pi$ we have: $\pi \models \phi$ or $\pi \models \neg\phi$
-														\item For each state $s$ we have: $s \models \phi$ or $s \models \neg\phi$
+														\item For each state $s$ we \alert{don't} have: $s \models \phi$ or $s \models \neg\phi$
 													\end{itemize}
 													\item \script{1422}{Example 1: MUTEX protocols}
 													\item \script{1427}{Example 2: Formula for propositional formula or $\omega$-regular expression}
@@ -306,7 +384,7 @@
 																			\item \script{1648}{Definition}
 																			\begin{itemize}
 																				\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
-                                        \item \script{1649}{Example (ff.)}
+																				\item \script{1649}{Example (ff.)}
 																			\end{itemize}
 																		\end{itemize}
 																	\end{minipage}
@@ -486,7 +564,7 @@
 													}
 											}
 										child {
-												node {NFA and NBA for safety properties
+												node (nfa and nba for safety properties) {NFA and NBA for safety properties
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
@@ -715,6 +793,7 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
+                              \item \book{59}{Definition}
 															\item \script{375}{Example}, if statement on outgoing edge at line $1$, will go from line one to the next line by executing the statement in line $1$, abstract away from the syntax of a programming language, one does not have to think about text%, resembles a little bit the notation of transiation systems
 															, \alert{thread} 1 executing \alert{program} 1 and thread 2 executing program 2, in both cases locations are the same, but the state is different, because the value of the variable x is different. \alert{First} form the \alert{interleaving program} graph and \alert{second} from this program graph one derives / \alert{builds} the \alert{transition system}, one looks at the value of the variable $x$ according to each transition%. Is not the same as taking the transition system for both programs and taking the interleaving semantics for those
 															\item \script{443}{Independant and dependant actions, interleaving and competition}
@@ -987,6 +1066,7 @@
 																	\item \script{1575}{Until versus weak until}
 																	\item \script{1587}{Duality of $U$ and $W$ (prr.)}
 																\end{itemize}
+																\item \book{251}{Precedence and associativity rules}, $\boxed{¬, \bigcirc, \diamond, \square} > \boxed{\mathsf{U}, \mathsf{W}} > \boxed{\land} > \boxed{\lor} > \boxed{\Rightarrow} > \boxed{\Leftrightarrow}$, $a \Rightarrow (b \Rightarrow c)$, $a\operatorname{\mathsf{U}} (b\operatorname{\mathsf{U}} c)$ (\href{https://dl.acm.org/doi/fullHtml/10.1145/3387109}{source})
 															\end{itemize}
 														\end{itemize}
 													\end{minipage}
@@ -1168,7 +1248,7 @@
 				child {
 						node {Automata}
 						child {
-								node {Non-deterministic finite automata
+								node (nfa) {Non-deterministic finite automata
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
@@ -1283,11 +1363,12 @@
 		\edge{regular safety properties}{minimal bad prefixes}
 		\edge{regular liveness properties}{regular lt properties}
 		\edge{fairness}{fairness safety}
-    \edge{fairness}{model checking ltl with fairness}
+		\edge{fairness}{model checking ltl with fairness}
 		\edge{ltl}{ltl semantics applied}
 		\edge{ltl}{fairness in ltl}
 		\edge{from ltl to nba}{ltl}
 		\edge{safety properties}{realizability}
+		\edge{nfa and nba for safety properties}{nfa}
 	\end{edges}
 	\annotation{middle.south}{
 		\resizebox{\textwidth}{!}{

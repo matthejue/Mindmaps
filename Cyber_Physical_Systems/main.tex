@@ -39,17 +39,17 @@
 										\item \videofifteen{1005}{Error trace}, labeling of path starts in initial location and follow paths in program graph and reaches error location and then look at sequence of action labels on this path
 									\end{itemize}
 									\item \script{1860}{Algorithm}, \videofifteen{2521}{Scheme explained}, \videofifteen{2581}{Omit old disadvantages}, but new disadvantage, when have loop there's the possiblity that the loop continues forever, union larger and larger and construct new and new correct programs and never have this inclusion success
-                  \begin{itemize}
+									\begin{itemize}
 										\item \script{1849}{Example Step 1}, \videofifteen{1584}{Already conjunct of two already unsatisfiable}, \alert{unsatisfiable core}
 										\item \script{1854}{Example Step 2}, \videofifteen{1626}{Every path from initial to error location}, labeled with unfeasible sequence of statements, \videofifteen{1670}{Each self loop labeled with one of program statements}, still unsatisfiable, \videofifteen{1661}{Add statements still remains correct}
-                    \item \script{1855}{Example Step 3}, \videofifteen{1729}{Can not update in the middle}, \videofifteen{1811}{Can add any statement that does not contain the variable p}, \videofifteen{1820}{Also where test variable certain value}
-                    \item \script{1856}{Example Step 4}, \videofifteen{1887}{Physics principle}, \videofifteen{1903}{Go from program to proof}, but here from proof to program, maximal program proof correct from fact that right is unsatisfiable
-                    \item \script{1859}{Example Step 5 (prr.)}, \videofifteen{2026}{Question every execution of right program is covered by execution of right program}, \videofifteen{2067}{Question is undecidable}, \videofifteen{2185}{Set of statements now alphabet}, just becomes letter, \videofifteen{2203}{New question}
-                    \item \script{1863}{Example Step 6}, \videofifteen{2231}{Word (trace) in left automaton not in right automaton}, counterexample to inclusion, \videofifteen{2338}{Is infeasible}
-                    \item \script{1865}{Example Step 7}, \videofifteen{2399}{Extract infeasible core}
-                    \item \script{1869}{Example Step 8}, \videofifteen{2422}{Go from sequence of statements to program correct by construction}
+										\item \script{1855}{Example Step 3}, \videofifteen{1729}{Can not update in the middle}, \videofifteen{1811}{Can add any statement that does not contain the variable p}, \videofifteen{1820}{Also where test variable certain value}
+										\item \script{1856}{Example Step 4}, \videofifteen{1887}{Physics principle}, \videofifteen{1903}{Go from program to proof}, but here from proof to program, maximal program proof correct from fact that right is unsatisfiable
+										\item \script{1859}{Example Step 5 (prr.)}, \videofifteen{2026}{Question every execution of right program is covered by execution of right program}, \videofifteen{2067}{Question is undecidable}, \videofifteen{2185}{Set of statements now alphabet}, just becomes letter, \videofifteen{2203}{New question}
+										\item \script{1863}{Example Step 6}, \videofifteen{2231}{Word (trace) in left automaton not in right automaton}, counterexample to inclusion, \videofifteen{2338}{Is infeasible}
+										\item \script{1865}{Example Step 7}, \videofifteen{2399}{Extract infeasible core}
+										\item \script{1869}{Example Step 8}, \videofifteen{2422}{Go from sequence of statements to program correct by construction}
 										\item \script{1872}{Example Step 9 (pr.)}
-                  \end{itemize}
+									\end{itemize}
 								\end{itemize}
 							\end{minipage}
 						}
@@ -120,11 +120,16 @@
 				child {
 						node (ltl model checking) {LTL model checking
 								\resizebox{\textwidth}{!}{
-									\begin{minipage}[t]{12cm}
+									\begin{minipage}[t]{18cm}
 										\begin{itemize}
-											\item \script{1646}{Illustration (f.)} and \script{1664}{Illustration counter example}
-											\item \script{1672}{Algorithm (prr.)} and \script{1666}{Summary of algorithm}
+											\item \script{1647}{Illustration (pr.)} and \script{1664}{Illustration counter example}, \script{1742}{Illustraction more details (prr.)}
+                      \item \script{1736}{Problem}
+											\item \script{1672}{Algorithm (prr.)}, \script{1739}{Algorithm counterexample}
 											\item \script{1674}{Example (ff.)}
+                      \item \script{1752}{Comparison with regular safety model checking}
+                      \begin{itemize}
+                        \item \script{1756}{Equivalences comparison}
+                      \end{itemize}
 										\end{itemize}
 									\end{minipage}
 								}
@@ -134,7 +139,7 @@
 										\resizebox{\textwidth}{!}{
 											\begin{minipage}[t]{12cm}
 												\begin{itemize}
-													\item \script{1686}{Definition}
+													\item \script{1690}{Definition (prr.)}
 												\end{itemize}
 											\end{minipage}
 										}
@@ -156,6 +161,7 @@
 												\item \script{589}{Same for individual states}: All the traces that start in this state if this set is a subset of e then the state satisfies the LT property
 											\end{itemize}
 											\item \alert{linear time} just means that we define the property as a set of sequences and so sequences are linearly ordered as opposed to a tree
+											\item \script{988}{Examples}
 										\end{itemize}
 									\end{minipage}
 								}
@@ -308,7 +314,7 @@
 													\begin{minipage}[t]{20cm}
 														\begin{itemize}
 															\item \enquote{\alert{nothing bad will happen}} or eqnuivalently \enquote{\alert{nothing bad happens and if it happens, it happens after a finite amount of time}}
-															\item \script{790}{Definition (ff.)}, set of all \alert{infinite} words / traces that do not have a bad prefix
+															\item \script{790}{Definition (ff.)} and \script{1287}{Summary (f.)}, set of all \alert{infinite} words / traces that do not have a bad prefix
 															\begin{itemize}
 																\item \videoeight{2065}{Explanation: Counter Example}
 																\item \videoeight{2283}{Explanation: Empty Set}
@@ -383,8 +389,8 @@
 																		\begin{itemize}
 																			\item \script{1648}{Definition}
 																			\begin{itemize}
-																				\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
 																				\item \script{1649}{Example (ff.)}
+																				\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
 																			\end{itemize}
 																		\end{itemize}
 																	\end{minipage}
@@ -564,9 +570,9 @@
 													}
 											}
 										child {
-												node (nfa and nba for safety properties) {NFA and NBA for safety properties
+												node (nfa and nba for safety properties) {NFA and NBA for language of bad prefixes of a safety property
 														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
+															\begin{minipage}[t]{16cm}
 																\begin{itemize}
 																	\item \script{1641}{Definition (ff.)}
 																\end{itemize}
@@ -622,9 +628,34 @@
 																	\end{itemize}
 																	\item \script{1260}{Channel fairness for communication protocol}
 																	\item \script{1269}{Input fairness for sequential circuits (prr.)}
+																	\item \script{1693}{Summary (f.)}
 																\end{itemize}
 															\end{minipage}
 														}
+													}
+												child {
+														node (fairness in ltl) {Fairness in LTL
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{1344}{LTL fairness assumptions}
+																			\item \script{1698}{Conjunctions of LTL formulas (prr.)}
+																			\item \script{1702}{Fair satisfaction relation}
+																			\begin{itemize}
+																				\item \script{1707}{Randomized arbiter for MUTEX (ff.)}
+																				\item \script{1717}{Examples}
+																			\end{itemize}
+																			\item \script{1728}{Equivalence (pr.)}
+																			\begin{itemize}
+																				\item \script{1726}{Examples: Weak and strong fairness (prr.)}
+																				\item \script{1729}{Example: Weak until and normal until}
+																			\end{itemize}
+																			\item \script{1731}{$\varphi_1 \equiv_{fair} \varphi_2$ implies $\neg\varphi_1 \equiv_{fair} \neg\varphi_2$}
+																			\item \script{1733}{(Usecases)}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
 													}
 												child {
 														node {Fair satisfaction relation
@@ -646,22 +677,11 @@
 															}
 													}
 												child {
-														node (fairness in ltl) {Fairness assumptions in LTL
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
-																		\begin{itemize}
-																			\item \script{1344}{Defintions}
-																		\end{itemize}
-																	\end{minipage}
-																}
-															}
-													}
-												child {
-														node {Unconditional, strong and weak fairness
+														node {Fairness assumptions
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{16cm}
 																		\begin{itemize}
-																			\item \script{1176}{Definition}
+																			\item \script{1176}{Definition}, Unconditional, strong and weak fairness
 																			\begin{itemize}
 																				\item \script{1190}{Fairness for action sets (prr.)}, unconditionally $A$-fair, strongly $A$-fair, weakly $A$-fair, conditions in words
 																				\item \script{1192}{Unconditional vs strong vs weak fairness}, what implies what
@@ -689,19 +709,19 @@
 																	\end{minipage}
 																}
 															}
-													}
-												child {
-														node (realizability) {Realizability of fairness assumptions
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
-																		\begin{itemize}
-																			\item \script{1275}{Definition} and \script{1276}{Other Definition}
-																			\begin{itemize}
-																				\item \script{1280}{For unconditional, strong and weak fairness}
-																			\end{itemize}
-																		\end{itemize}
-																	\end{minipage}
-																}
+														child {
+																node (realizability) {Realizability of fairness assumptions
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item \script{1275}{Definition} and \script{1276}{Other Definition}
+																					\begin{itemize}
+																						\item \script{1280}{For unconditional, strong and weak fairness}
+																					\end{itemize}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
 															}
 													}
 											}
@@ -793,7 +813,7 @@
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-                              \item \book{59}{Definition}
+															\item \book{59}{Definition}
 															\item \script{375}{Example}, if statement on outgoing edge at line $1$, will go from line one to the next line by executing the statement in line $1$, abstract away from the syntax of a programming language, one does not have to think about text%, resembles a little bit the notation of transiation systems
 															, \alert{thread} 1 executing \alert{program} 1 and thread 2 executing program 2, in both cases locations are the same, but the state is different, because the value of the variable x is different. \alert{First} form the \alert{interleaving program} graph and \alert{second} from this program graph one derives / \alert{builds} the \alert{transition system}, one looks at the value of the variable $x$ according to each transition%. Is not the same as taking the transition system for both programs and taking the interleaving semantics for those
 															\item \script{443}{Independant and dependant actions, interleaving and competition}
@@ -1328,7 +1348,7 @@
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
-																	\item \script{1607}{Theorem}
+																	\item \script{1607}{Theorem}, size
 																	\item \script{1613}{NBA for LTL formulas (ff.)}
 																	\begin{itemize}
 																		\item \script{1619}{More examples (ff.)}

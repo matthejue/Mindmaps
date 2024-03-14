@@ -1,0 +1,87 @@
+\documentclass[landscape, a4paper]{article}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+
+\fontsize{4pt}{5pt}\selectfont
+
+\begin{minipage}[t]{0.19\pagewidth}
+	\begin{itemize}
+		\item \alert{Important security properties (\enquote{CIAAN}) are:}
+		\begin{itemize}
+			\item \alert{Confidentiality:} Protecting confidential information from being disclosed to unauthorized parties.
+			\item \alert{Integrity:} Ensuring that information is only modified by authorized parties.
+			\item \alert{Availability:} Making sure that information and systems are accessible to authorized parties when they need them (e.g. resistance to denial-of-service attacks).
+			\item \alert{Authenticity:} Ensuring that information and communication come from the source they are supposed to come from.
+			\item \alert{Non-repudiation:} Ensuring that nobody can deny having performed certain actions (like sending / receiving messages, changing data etc.).
+		\end{itemize}
+		\item \alert{Safety:} System is designed without any error leading to unintended behavior
+		\item  \alert{Reliability:} A correctly designed system continues to work correctly during its life-time
+		\item \alert{Cryptology:} cryptography + cryptanalysis
+		\item \alert{Cryptography:} art/science of keeping message secure
+		\item \alert{Cryptanalysis:} art/science of breaking ciphertext
+		\item \underline{Advantage of crypto systems with keys:}
+		\begin{itemize}
+			\item  Keeping the encryption / decryption algorithm is not needed.
+			\item  Keys can regulary be changed.to increase security
+		\end{itemize}
+		\item \alert{Symmetric cryptosystems:} $K_E = K_D$
+		\begin{itemize}
+			\item Encipher and decipher using the same key
+			\item Or one key is easily derived from the other
+		\end{itemize}
+		\item \alert{Asymmetric cryptosystems:} $K_E \ne K_D$
+		\begin{itemize}
+			\item Encipher and decipher using different keys
+			\item Computationally infeasible to derive one from other
+		\end{itemize}
+		\item \underline{Attacks:}
+		\begin{itemize}
+			\item \alert{Exhaustive search:} Try all possible keys until you find the right one
+      \item \alert{Statistical analysis:} The longer the ciphertext C, the more effective it would be, 1-gram (unigram) model of language
+		\end{itemize}
+		\item \underline{Types of Ciphers:}
+		\begin{itemize}
+			\item \alert{Substitution ciphers}
+			\begin{itemize}
+				\item Letters of P replaced with other letters by E()
+				\begin{itemize}
+					\item Monoalphabetic Substitution Cipher
+				\end{itemize}
+			\end{itemize}
+			\item \alert{Transposition (permutation) ciphers}
+			\begin{itemize}
+				\item Order of letters in P rearranged by E()
+			\end{itemize}
+			\item \alert{Product ciphers}
+			\begin{itemize}
+				\item Combine two or more ciphers to enhance the security of the cryptosystem
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.19\pagewidth}
+	\begin{itemize}
+		\item asdf
+		\item asdf
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.19\pagewidth}
+	\begin{itemize}
+		\item asdf
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.19\pagewidth}
+	\begin{itemize}
+		\item asdf
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.19\pagewidth}
+	\begin{itemize}
+		\item asdf
+	\end{itemize}
+\end{minipage}
+\end{document}

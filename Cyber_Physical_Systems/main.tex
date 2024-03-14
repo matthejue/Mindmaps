@@ -22,7 +22,7 @@
 			}
 		}
 		child {
-				node {Software Model Checking
+				node (software model checking) {Software Model Checking
 						\resizebox{\textwidth}{!}{
 							\begin{minipage}[t]{18cm}
 								\begin{itemize}
@@ -99,7 +99,7 @@
 					}
 			}
 		child {
-				node {Model Checking
+				node (model checking) {Model Checking
 						\resizebox{\textwidth}{!}{
 							\begin{minipage}[t]{20cm}
 								\begin{itemize}
@@ -123,13 +123,13 @@
 									\begin{minipage}[t]{18cm}
 										\begin{itemize}
 											\item \script{1647}{Illustration (pr.)} and \script{1664}{Illustration counter example}, \script{1742}{Illustraction more details (prr.)}
-                      \item \script{1736}{Problem}
+											\item \script{1736}{Problem}
 											\item \script{1672}{Algorithm (prr.)}, \script{1739}{Algorithm counterexample}
 											\item \script{1674}{Example (ff.)}
-                      \item \script{1752}{Comparison with regular safety model checking}
-                      \begin{itemize}
-                        \item \script{1756}{Equivalences comparison}
-                      \end{itemize}
+											\item \script{1752}{Comparison with regular safety model checking}
+											\begin{itemize}
+												\item \script{1756}{Equivalences comparison}
+											\end{itemize}
 										\end{itemize}
 									\end{minipage}
 								}
@@ -289,6 +289,100 @@
 										}
 									}
 								child {
+										node (regular lt properties) {Regular LT properties
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{16cm}
+														\begin{itemize}
+															\item \script{1083}{Overview}
+															\item \script{1105}{Checking safety and $\omega$-regular properties (f.)}
+															\begin{itemize}
+																\item \script{1026}{Derivation from BadPref (f.)}, \scriptfive{8}{Node 1} and \scriptfive{10}{Node 2} and \scriptfive{11}{Node 3} , \videotwelve{3014}{Omega regular}, \videotwelve{3035}{Regular}, \videotwelve{3054}{Acceptance condition}, \videotwelve{2158}{Bad prefix represented by finite and bad traces by Büchi automaton}
+															\end{itemize}
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child [level distance=10cm] {
+												node (regular safety properties) {Regular safety properties
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1031}{Definition}, Regular means accpeted by automaton
+																	\begin{itemize}
+																		\item \videotwelve{4106}{Regular languages} and \scriptfive{20}{Node}
+																	\end{itemize}
+																	\item \script{1062}{Verifying regular safety properties}, \videotwelve{4394}{Complement of automaton}, not everything in complement is good prefix, notion of good prefix doesn't exist
+																	\item \script{1065}{Overview Model checking (f. pr.)}, \scriptfive{21}{Node}, \videotwelve{4666}{Could also do with transition system}, but doesn't matter, \videotwelve{4675}{Safety can always be reduced to invariant}, \videotwelve{4700}{Two possibilities}
+																	\begin{itemize}
+																		\item \script{1073}{$3$ Equivalent Statements (prr.)}, \videotwelve{4999}{Explanation: 3 Conditions}, production automaton, \videotwelve{5004}{$2$ options to check algorithmically}, \videotwelve{5046}{Case where safety property regular}, correctness checking reduced to checking of an invariant
+																	\end{itemize}
+																	\item \underline{theorems:}
+																	\begin{itemize}
+																		\item \script{1020}{If $\mathcal{T}$ is a finite transition system then $Traces_{fin}(\mathcal{T})$ is regular}, Tansform TS into an NFA and \videotwelve{2204}{Explanation}, \scriptfive{9}{Node}, \videotwelve{2475}{Just need to decide}, \videotwelve{2576}{Initial state not accepting}, \videotwelve{2705}{Label outgoing edge also possible}
+																		\item \script{1048}{BadPref is regular \textit{iff} MinBadPref is regular}
+																		\item \script{1054}{Every invariant is regular (prr.)} and \videotwelve{3806}{Explanation}, \scriptfive{18}{Node}, \videotwelve{3614}{Property Negation}
+																		\item \script{1059}{Every safety property is regular (ff.)} and \videotwelve{4058}{Explanation}, \scriptfive{19}{Node}, \videotwelve{4226}{Possible to have bad prefixes regular but minimal bad prefixes is not}
+																	\end{itemize}
+																	\item \script{1075}{Example: Sequential circuit (ff.)} and \videotwelve{5109}{Explanation}, \videotwelve{5203}{$2$ possibilities}, \videotwelve{5319}{Counter Example}
+																	\item \script{1082}{Algorithm}, \videotwelve{5351}{Explanation}, \videotwelve{5360}{Construct product automaton or product TS}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Product-TS
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{16cm}
+																		\begin{itemize}
+																			\item \script{1648}{Definition}
+																			\begin{itemize}
+																				\item \script{1649}{Example (ff.)}
+																				\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Nondeterministic finite automata (NFA)
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item \script{1034}{Definition} and \videotwelve{3221}{Explanation}, \scriptfive{13}{Node}
+																			\begin{itemize}
+																				\item \script{1037}{Notations in pictures example (f.)}, \scriptfive{15}{Node}, \videotwelve{3445}{Short hand}, stands for whole set of edges where label of edge can be any set that satisfies formula
+																				\item \script{1039}{Symbolic notations for transition labels and examples}, \scriptfive{16}{Node}, \videotwelve{3445}{Short hand}, stands for whole set of edges where label of edge can be any set that satisfies formula, \videotwelve{3507}{Empty set}
+																				\item \videotwelve{2273}{Initial state of automaton}
+																			\end{itemize}
+																			\item \videotwelve{3196}{Accept words and recognize sets}, \scriptfive{12}{Node}
+																			\item \underline{Examples:}
+																			\begin{itemize}
+																				\item \script{1042}{Example: NFA for bad prefixes}, \videotwelve{3553}{Explanation}, \videotwelve{3614}{Property Negation}
+																				\item \script{1047}{Example: Regular safety property (prr.)}, \videotwelve{3671}{Explanation}
+																				\item \script{1055}{Example: DFA for MUTEX}
+																			\end{itemize}
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+										child [level distance = 8cm] {
+												node (regular liveness properties) {Regular liveness properties
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item \script{1087}{Overview Model checking (pr.)}, $\omega$-regular properties
+																	\item \script{1088}{Example: Infinitely often green (ff.)}
+																	\item \script{1096}{Example: Each repeatedly sent message will eventually be delivered (ff.)}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child {
 										node {Decomposition theorem
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
@@ -355,88 +449,7 @@
 													\end{minipage}
 												}
 											}
-										child [level distance=12cm] {
-												node (regular safety properties) {Regular safety properties
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{1031}{Definition}, Regular means accpeted by automaton
-																	\begin{itemize}
-																		\item \videotwelve{4106}{Regular languages} and \scriptfive{20}{Node}
-																	\end{itemize}
-																	\item \script{1062}{Verifying regular safety properties}, \videotwelve{4394}{Complement of automaton}, not everything in complement is good prefix, notion of good prefix doesn't exist
-																	\item \script{1065}{Overview Model checking (f. pr.)}, \scriptfive{21}{Node}, \videotwelve{4666}{Could also do with transition system}, but doesn't matter, \videotwelve{4675}{Safety can always be reduced to invariant}, \videotwelve{4700}{Two possibilities}
-																	\begin{itemize}
-																		\item \script{1073}{$3$ Equivalent Statements (prr.)}, \videotwelve{4999}{Explanation: 3 Conditions}, production automaton, \videotwelve{5004}{$2$ options to check algorithmically}, \videotwelve{5046}{Case where safety property regular}, correctness checking reduced to checking of an invariant
-																	\end{itemize}
-																	\item \underline{theorems:}
-																	\begin{itemize}
-																		\item \script{1020}{If $\mathcal{T}$ is a finite transition system then $Traces_{fin}(\mathcal{T})$ is regular}, Tansform TS into an NFA and \videotwelve{2204}{Explanation}, \scriptfive{9}{Node}, \videotwelve{2475}{Just need to decide}, \videotwelve{2576}{Initial state not accepting}, \videotwelve{2705}{Label outgoing edge also possible}
-																		\item \script{1048}{BadPref is regular \textit{iff} MinBadPref is regular}
-																		\item \script{1054}{Every invariant is regular (prr.)} and \videotwelve{3806}{Explanation}, \scriptfive{18}{Node}, \videotwelve{3614}{Property Negation}
-																		\item \script{1059}{Every safety property is regular (ff.)} and \videotwelve{4058}{Explanation}, \scriptfive{19}{Node}, \videotwelve{4226}{Possible to have bad prefixes regular but minimal bad prefixes is not}
-																	\end{itemize}
-																	\item \script{1075}{Example: Sequential circuit (ff.)} and \videotwelve{5109}{Explanation}, \videotwelve{5203}{$2$ possibilities}, \videotwelve{5319}{Counter Example}
-																	\item \script{1082}{Algorithm}, \videotwelve{5351}{Explanation}, \videotwelve{5360}{Construct product automaton or product TS}
-																\end{itemize}
-															\end{minipage}
-														}
-													}
-												child {
-														node {Product-TS
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{16cm}
-																		\begin{itemize}
-																			\item \script{1648}{Definition}
-																			\begin{itemize}
-																				\item \script{1649}{Example (ff.)}
-																				\item \script{1070}{Example (prr.)}, \scriptfive{22}{Node}, \videotwelve{4700}{Two possibilities}, \videotwelve{4783}{Construction}, \videotwelve{4874}{Prefer constructing automaton from transition system}, \videotwelve{4977}{notion of acceptance}, never reach a accepting state, never accpepting invariant condition holds in every execution
-																			\end{itemize}
-																		\end{itemize}
-																	\end{minipage}
-																}
-															}
-													}
-												child {
-														node {Nondeterministic finite automata (NFA)
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
-																		\begin{itemize}
-																			\item \script{1034}{Definition} and \videotwelve{3221}{Explanation}, \scriptfive{13}{Node}
-																			\begin{itemize}
-																				\item \script{1037}{Notations in pictures example (f.)}, \scriptfive{15}{Node}, \videotwelve{3445}{Short hand}, stands for whole set of edges where label of edge can be any set that satisfies formula
-																				\item \script{1039}{Symbolic notations for transition labels and examples}, \scriptfive{16}{Node}, \videotwelve{3445}{Short hand}, stands for whole set of edges where label of edge can be any set that satisfies formula, \videotwelve{3507}{Empty set}
-																				\item \videotwelve{2273}{Initial state of automaton}
-																			\end{itemize}
-																			\item \videotwelve{3196}{Accept words and recognize sets}, \scriptfive{12}{Node}
-																			\item \underline{Examples:}
-																			\begin{itemize}
-																				\item \script{1042}{Example: NFA for bad prefixes}, \videotwelve{3553}{Explanation}, \videotwelve{3614}{Property Negation}
-																				\item \script{1047}{Example: Regular safety property (prr.)}, \videotwelve{3671}{Explanation}
-																				\item \script{1055}{Example: DFA for MUTEX}
-																			\end{itemize}
-																		\end{itemize}
-																	\end{minipage}
-																}
-															}
-													}
-												child {
-														node (regular lt properties) {Regular LT properties
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{16cm}
-																		\begin{itemize}
-																			\item \script{1083}{Overview}
-																			\item \script{1105}{Checking safety and $\omega$-regular properties (f.)}
-																			\begin{itemize}
-																				\item \script{1026}{Derivation from BadPref (f.)}, \scriptfive{8}{Node 1} and \scriptfive{10}{Node 2} and \scriptfive{11}{Node 3} , \videotwelve{3014}{Omega regular}, \videotwelve{3035}{Regular}, \videotwelve{3054}{Acceptance condition}, \videotwelve{2158}{Bad prefix represented by finite and bad traces by Büchi automaton}
-																			\end{itemize}
-																		\end{itemize}
-																	\end{minipage}
-																}
-															}
-													}
-											}
-										child [level distance = 4cm] {
+										child [level distance = 5cm] {
 												node (fairness safety) {Fairness
 														\resizebox{\textwidth}{!}{
 															\begin{minipage}[t]{12cm}
@@ -597,19 +610,6 @@
 														\end{itemize}
 													\end{minipage}
 												}
-											}
-										child [level distance = 8cm] {
-												node (regular liveness properties) {Regular liveness properties
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item \script{1087}{Overview Model checking (pr.)}, $\omega$-regular properties
-																	\item \script{1088}{Example: Infinitely often green (ff.)}
-																	\item \script{1096}{Example: Each repeatedly sent message will eventually be delivered (ff.)}
-																\end{itemize}
-															\end{minipage}
-														}
-													}
 											}
 										child [level distance = 8cm] {
 												node (fairness) {Fairness
@@ -1381,7 +1381,6 @@
 		\edge{interleavingoperator}{concurrency}
 		\edge{interleavingoperator}{arbiter}
 		\edge{regular safety properties}{minimal bad prefixes}
-		\edge{regular liveness properties}{regular lt properties}
 		\edge{fairness}{fairness safety}
 		\edge{fairness}{model checking ltl with fairness}
 		\edge{ltl}{ltl semantics applied}
@@ -1389,6 +1388,7 @@
 		\edge{from ltl to nba}{ltl}
 		\edge{safety properties}{realizability}
 		\edge{nfa and nba for safety properties}{nfa}
+		\edge{software model checking}{model checking}
 	\end{edges}
 	\annotation{middle.south}{
 		\resizebox{\textwidth}{!}{

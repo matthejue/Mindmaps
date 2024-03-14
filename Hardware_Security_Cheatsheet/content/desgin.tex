@@ -4,7 +4,6 @@
 % │ Formatting │
 % └────────────┘
 \setlength{\parskip}{0.0cm} % space between paragraphs, https://latexref.xyz/bs-par.html
-\setlist[itemize]{itemsep=0cm, topsep=0cm, leftmargin=0.15cm, labelsep=0cm, listparindent=0cm}
 \setlength{\parindent}{0.0cm}
 \setlength{\parsep}{0.0cm}
 \setlength{\partopsep}{0.0cm}
@@ -45,7 +44,21 @@
 % ┌─────────┐
 % │ Mindmap │
 % └─────────┘
-\renewcommand{\labelitemi}{$\textcolor{SwitchColor}{\bullet}$}
-\renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
-\renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blacksquare}$}
-\renewcommand{\labelitemiv}{$\textcolor{SwitchColor}{\blacklozenge}$}
+% \renewcommand{\labelitemi}{}
+% \renewcommand{\labelitemii}{}
+% \renewcommand{\labelitemiii}{}
+% \renewcommand{\labelitemiv}{}
+\newlist{betterlist}{enumerate}{9}
+\setlist[betterlist,1]{label=$\textcolor{SwitchColor}{\bullet}$}
+\setlist[betterlist,2]{label=$\textcolor{SwitchColor}{\blacktriangleright}$}
+\setlist[betterlist,3]{label=$\textcolor{SwitchColor}{\blacksquare}$}
+\setlist[betterlist,4]{label=$\textcolor{SwitchColor}{\blacklozenge}$}
+\setlist[betterlist,5]{label=$\textcolor{SwitchColor}{\bullet}$}
+\setlist[betterlist,6]{label=$\textcolor{SwitchColor}{\blacktriangleright}$}
+\setlist[betterlist,7]{label=$\textcolor{SwitchColor}{\blacksquare}$}
+\setlist[betterlist,8]{label=$\textcolor{SwitchColor}{\blacklozenge}$}
+\setlist[betterlist,9]{label=$\textcolor{SwitchColor}{\bullet}$}
+\setlist[betterlist,10]{label=$\textcolor{SwitchColor}{\blacktriangleright}$}
+\setlist[betterlist,11]{label=$\textcolor{SwitchColor}{\blacksquare}$}
+\setlist[betterlist,12]{label=$\textcolor{SwitchColor}{\blacklozenge}$}
+\setlist[betterlist]{itemsep=0cm, topsep=0cm, leftmargin=0.15cm, labelsep=0cm, listparindent=0cm}

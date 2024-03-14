@@ -9,79 +9,311 @@
 \fontsize{4pt}{5pt}\selectfont
 
 \begin{minipage}[t]{0.19\pagewidth}
-	\begin{itemize}
+	\fbox{General}
+	\begin{betterlist}
 		\item \alert{Important security properties (\enquote{CIAAN}) are:}
-		\begin{itemize}
+		\begin{betterlist}
 			\item \alert{Confidentiality:} Protecting confidential information from being disclosed to unauthorized parties.
 			\item \alert{Integrity:} Ensuring that information is only modified by authorized parties.
 			\item \alert{Availability:} Making sure that information and systems are accessible to authorized parties when they need them (e.g. resistance to denial-of-service attacks).
 			\item \alert{Authenticity:} Ensuring that information and communication come from the source they are supposed to come from.
 			\item \alert{Non-repudiation:} Ensuring that nobody can deny having performed certain actions (like sending / receiving messages, changing data etc.).
-		\end{itemize}
+		\end{betterlist}
 		\item \alert{Safety:} System is designed without any error leading to unintended behavior
 		\item  \alert{Reliability:} A correctly designed system continues to work correctly during its life-time
+	\end{betterlist}
+	\fbox{\enquote{Classical} Cryptography}
+	\begin{betterlist}
 		\item \alert{Cryptology:} cryptography + cryptanalysis
 		\item \alert{Cryptography:} art/science of keeping message secure
 		\item \alert{Cryptanalysis:} art/science of breaking ciphertext
-		\item \underline{Advantage of crypto systems with keys:}
-		\begin{itemize}
-			\item  Keeping the encryption / decryption algorithm is not needed.
-			\item  Keys can regulary be changed.to increase security
-		\end{itemize}
-		\item \alert{Symmetric cryptosystems:} $K_E = K_D$
-		\begin{itemize}
-			\item Encipher and decipher using the same key
-			\item Or one key is easily derived from the other
-		\end{itemize}
-		\item \alert{Asymmetric cryptosystems:} $K_E \ne K_D$
-		\begin{itemize}
-			\item Encipher and decipher using different keys
-			\item Computationally infeasible to derive one from other
-		\end{itemize}
-		\item \underline{Attacks:}
-		\begin{itemize}
-			\item \alert{Exhaustive search:} Try all possible keys until you find the right one
-      \item \alert{Statistical analysis:} The longer the ciphertext C, the more effective it would be, 1-gram (unigram) model of language
-		\end{itemize}
-		\item \underline{Types of Ciphers:}
-		\begin{itemize}
-			\item \alert{Substitution ciphers}
-			\begin{itemize}
-				\item Letters of P replaced with other letters by E()
-				\begin{itemize}
-					\item Monoalphabetic Substitution Cipher
-				\end{itemize}
-			\end{itemize}
-			\item \alert{Transposition (permutation) ciphers}
-			\begin{itemize}
-				\item Order of letters in P rearranged by E()
-			\end{itemize}
-			\item \alert{Product ciphers}
-			\begin{itemize}
-				\item Combine two or more ciphers to enhance the security of the cryptosystem
-			\end{itemize}
-		\end{itemize}
-	\end{itemize}
+	\end{betterlist}
+	\fbox{Classification by type of encryption operations}
+	\begin{betterlist}
+		\item \alert{Substitution ciphers}
+		\begin{betterlist}
+			\item letters of $P$ replaced with other letters by $E()$
+			\item \underline{Effects:}
+			\begin{betterlist}
+				\item $C$ hides chars of $P$ (plaintext)
+				\item if $> 1$ key alphabet (polyalphabetic), $C$ dissipates high frequency chars
+			\end{betterlist}
+			\item \underline{Sidenote:} One can say $key = 3$ or $key = \enquote{D}$, because $no(D) = 3$
+		\end{betterlist}
+		\begin{betterlist}
+			\item \alert{Monoalphabetic substitution ciphers}
+			\begin{betterlist}
+				\item in a general monoalphabetic substitution cipher each letter in $P$ is substituted by a fixed letter using a \alert{substitution table}
+				\item the \alert{key} is the substitution table
+				\item \underline{Attacks:}
+				\begin{betterlist}
+					\item In practice, not only frequencies of individual letters can be used for an attack, but also the frequency of letter pairs (i.e., \enquote{TH} is very common in English), letter triples, etc
+					\item need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search $\rightarrow$ Polyalphabetic substitution ciphers
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item \alert{Caesar Cipher}
+				\begin{betterlist}
+					\item each letter in $P$ is substituted by a fixed letter. In this special case the \enquote{key} is of length $1$, it is the shift amount
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+		\begin{betterlist}
+			\item \alert{Polyalphabetic substitution ciphers}
+			\begin{betterlist}
+				\item several key alphabets, flatten (diffuse) somewhat the frequency distribution of letters by combining high and low distributions
+				\item \underline{Attack:} If one knows the $n$, then one can break the whole text into $n$ parts and for these a statistical analysis works as for the monialphabetic substitution cipher with the unigram model
+			\end{betterlist}
+			\begin{betterlist}
+				\item \alert{Vigenère Tableaux Method}
+				\begin{betterlist}
+					\item special case of polyalphabetic substitution with $n$ key alphabets. For each key alphabet the special case of Caesar cipher is chosen, i.e., each key alphabet can be represented by one letter
+					\begin{betterlist}
+						\item one can describe a row either by the shift or by saying which letter $c_i$ it mapped to which letter $c_j$ and takes $b_j$ as name of the row, choosing the last choice one can describe $n$ keys by a word of length $n$
+					\end{betterlist}
+					\item $26^n$ different keys, one has to choose $n$ large enough
+					\item \underline{Attack:}
+					\begin{betterlist}
+						\item same problem as for polyalphabetic substitution ciphers
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item \alert{Transposition (permutation) ciphers}
+		\begin{betterlist}
+			\item order of letters in $P$ rearranged by $E()$
+			\begin{betterlist}
+				\item rearrange letters in plaintext to produce ciphertext
+			\end{betterlist}
+			\item \underline{Effects:}
+			\begin{betterlist}
+				\item $C$ scrambles text, hides $n$-grams for $n > 1$ (combinations of $n$ letters, e.g. th)
+			\end{betterlist}
+		\end{betterlist}
+		\begin{betterlist}
+			\item \alert{Rail-Fence Cipher}
+			\begin{betterlist}
+				\item columnar transposition
+				\item Key = Number of columns
+				\item \underline{Attack:} Number of columns / the  key space is restricted if the text is short
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item \alert{Product ciphers}
+		\begin{betterlist}
+			\item combine two or more ciphers to enhance the security of the cryptosystem
+			\begin{betterlist}
+				\item $E = E_1 + E_2 + ... + E_n$
+				\item built of multiple blocks, either \alert{Substitution} or \alert{Transposition}
+			\end{betterlist}
+			\item \underline{Attack}:
+			\item \underline{Effects:}
+			\begin{betterlist}
+				\item can do all what Substitution and Transposition ciphers can so, more secure if used well
+			\end{betterlist}
+		\end{betterlist}
+		\begin{betterlist}
+			\item \alert{Two-block product cipher}
+			\begin{betterlist}
+				\item $E2(E1(P, KE1), KE2)$
+				\item may be repeated to form several encryption rounds
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	% 	\item \underline{Advantage of crypto systems with keys:}
+	% 	\begin{betterlist}
+	% 		\item  Keeping the encryption / decryption algorithm is not needed.
+	% 		\item  Keys can regulary be changed.to increase security
+	% 	\end{betterlist}
+	% 	\item \alert{Symmetric cryptosystems:} $K_E = K_D$
+	% 	\begin{betterlist}
+	% 		\item Encipher and decipher using the same key
+	% 		\item Or one key is easily derived from the other
+	% 	\end{betterlist}
+	% 	\item \alert{Asymmetric cryptosystems:} $K_E \ne K_D$
+	% 	\begin{betterlist}
+	% 		\item Encipher and decipher using different keys
+	% 		\item Computationally infeasible to derive one from other
+	% 	\end{betterlist}
+	% 	\item \underline{Attacks:}
+	% 	\begin{betterlist}
+	% 		\item \alert{Exhaustive search:} Try all possible keys until you find the right one
+	%      \item \alert{Statistical analysis:} The longer the ciphertext C, the more effective it would be, 1-gram (unigram) model of language
+	% 	\end{betterlist}
+	% 	\item \underline{Types of Ciphers:}
+	% 	\begin{betterlist}
+	% 		\item \alert{Substitution ciphers}
+	% 		\begin{betterlist}
+	% 			\item Letters of P replaced with other letters by E()
+	% 			\begin{betterlist}
+	%          \item \alert{General Monoalphabetic Substitution Cipher}: $26!\approx 2^{88}$
+	% 			\end{betterlist}
+	% 		\end{betterlist}
+	% 		\item \alert{Transposition (permutation) ciphers}
+	% 		\begin{betterlist}
+	% 			\item Order of letters in P rearranged by E()
+	% 		\end{betterlist}
+	% 		\item \alert{Product ciphers}
+	% 		\begin{betterlist}
+	% 			\item Combine two or more ciphers to enhance the security of the cryptosystem
+	% 		\end{betterlist}
+	% 	\end{betterlist}
+	% \end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\pagewidth}
-	\begin{itemize}
-		\item asdf
-		\item asdf
-	\end{itemize}
+	\fbox{Classification by key}
+	\begin{betterlist}
+		\item \alert{Crypto System with Keys:} $P = D(K_D, E(K_E, P))$
+		\begin{betterlist}
+			\item \underline{advantage of crypto systems with keys:}
+			\begin{betterlist}
+				\item keeping the encryption / decryption algorithm secret is not needed
+				\item keys can regulary be changed, to increase security
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item \alert{Symmetric cryptosystems} $K_E = K_D$
+		\begin{betterlist}
+      \item encipher and decipher using the same key or one key is easily derived from the other
+			\item \underline{advantage:}
+			\item \underline{disadvantage:}
+			\begin{betterlist}
+				\item one needs a \alert{key exchange}, the sender and the receiver have to agree on the same key and they key should be secret, one needs a way to transport the secret key via a secure channel from the sender to the receiver
+			\end{betterlist}
+		\end{betterlist}
+		\begin{betterlist}
+			\item Advanced Encryption Standard (AES)
+			\begin{betterlist}
+				\item at the moment most widely used symmetric cipher
+				\item it is \alert{deterministic}, i.e., with the same key identical plain text blocks are mapped to the same cipher text blocks
+			\end{betterlist}
+			\begin{betterlist}
+				\item Implementation in Software
+				\begin{betterlist}
+					\item straightforward implementation is well suited for $8$-bit processors (e.g., smart cards) with small amount of memory, because operations are on bytes, but inefficient on $32$-bit or $64$-bit processors
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item Security
+				\begin{betterlist}
+					\item \alert{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible
+					\item \alert{Analytical attacks:} There is no analytical attack known that is better than brute-force
+				\end{betterlist}
+				\begin{betterlist}
+					\item Encrypting longer plain text
+					\begin{betterlist}
+						\item \underline{Countermeasure:} Different modes for block ciphers
+						\begin{betterlist}
+							\item Straightforward application of block cipher
+							\item \underline{disadvantage:} \alert{traffic analysis}, if know block with encoding of account number, without knowing how encryption works, one can replace ones own encrypted account number with account number of other account in other transmission (\alert{substituion attack})
+						\end{betterlist}
+						\begin{betterlist}
+							\item \underline{advantage:} no \alert{traffic analysis} possible
+						\end{betterlist}
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item Decryption
+				\begin{betterlist}
+					\item \alert{Inv Byte Substitution layer}, since the S-Box is bijective, it is possible to construct an inverse, such that $A_i = S^{–1}(B_i) = S^{–1}(S(A_i))$. The inverse S-Box is used for decryption. It is usually realized as a lookup table. Inverse Lookup Table easy to get from Lookup Table
+					\item \alert{Decryption key schedule}, subkeys are needed in reversed order (compared to encryption). \underline{For decryption:} Before starting decryption, first compute all subkeys from the actual key (as done for encryption) and apply in reverse order, same subkey generation as for the encryption
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item Round Structure and Internal Structure
+				\begin{betterlist}
+					\item \alert{Diffusion Layer:}  Provides diffusion over all input state bits. Performs a linear operation on state matrices A and B, i.e., $DIFF(A) \oplus DIFF(B) = DIFF(A \oplus B)$
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item \alert{Asymmetric cryptosystems} $K_E \ne K_D$
+		\begin{betterlist}
+      \item encipher and decipher using different keys, computationally infeasible to derive one from other
+			\item \underline{advantages:}
+			\begin{betterlist}
+				\item allows to share public key, secure key exchange not needed (for \alert{confidentiality}, message should be kept secret)
+				\item also other applications like authentication (\alert{authenticity}, able to sign message, so it can be sure it can only come from oneself)
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item RSA
+		\begin{betterlist}
+			\item Fast Modular Exponentiation
+		\end{betterlist}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\pagewidth}
-	\begin{itemize}
-		\item asdf
-	\end{itemize}
+	\fbox{Classification by way to process plaintext}
+	\begin{betterlist}
+		\item \alert{Stream Ciphers}
+		\begin{betterlist}
+			\item bitwise Encryption and Decryption
+			\item used in e.g. Red Phone between US and SU was implemented in this way
+			\item encrypt bits individually
+			\item need a method to generate key stream efficiently, starting from some “seed
+			\item usually small and fast common in embedded device
+		\end{betterlist}
+		\begin{betterlist}
+			\item Pseudo-random sequence
+			\begin{betterlist}
+				\item pseudo random functions for cryptography it might be a problem
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item \alert{Block Ciphers}
+		\begin{betterlist}
+			\item always encrypt a full block (several bits)
+			\item are common for Internet applications
+		\end{betterlist}
+		\begin{betterlist}
+			\item More Block Ciphers
+			\begin{betterlist}
+				\item DES (Data Encryption Standard)
+				\begin{betterlist}
+					\item Predecessor of AES
+					\item Considered insecure (small key length of 56 bits)
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+		\begin{betterlist}
+			\item Block Cipher Primitives
+			\begin{betterlist}
+				\item \alert{Claude Shannon:} There are two primitive operations with which strong encryption algorithms can be built:
+				\begin{enumerate}
+					\item \alert{Confusion:} An encryption operation where the \alert{relationship between key and ciphertext is obscured}
+					\begin{betterlist}
+						\item today, a common element for achieving confusion is substitution, which is found in AES and other ciphers.
+					\end{betterlist}
+					\item \alert{Diffusion:} An encryption operation where the \alert{influence of one plaintext symbol is spread over many ciphertext symbols} with the goal of hiding statistical properties of the plaintext
+					\begin{betterlist}
+						\item in other context known as Transposition
+						\item a simple diffusion element is the \alert{bit permutation} (in other context known as Tranposition)
+					\end{betterlist}
+				\end{enumerate}
+				\begin{betterlist}
+					\item Both operations by themselves are suboptimal in providing security. A cipher must include confusion and diffusion elements
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\pagewidth}
-	\begin{itemize}
+	\begin{betterlist}
 		\item asdf
-	\end{itemize}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\pagewidth}
-	\begin{itemize}
+	\begin{betterlist}
 		\item asdf
-	\end{itemize}
+	\end{betterlist}
 \end{minipage}
 \end{document}

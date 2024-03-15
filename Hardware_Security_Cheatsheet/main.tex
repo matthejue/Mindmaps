@@ -8,53 +8,115 @@
 
 \fontsize{4pt}{5pt}\selectfont
 
-\begin{minipage}[t]{0.19\pagewidth}
+\begin{minipage}[t]{0.198\pagewidth}
 	\fbox{General}
 	\begin{betterlist}
-		\item \alert{Important security properties (\enquote{CIAAN}) are:}
+		\item \alert{Hardware Security} goes beyond classical cryptography. It protects the implementations of cryptographic algorithms against physical attacks, side-channel attacks etc. Avoids tampering with devices
+		\item \alert{Security} entails that the system fulfills certain security properties which an intelligent attacker seeks to undermine. No static and complete definition or classification. \alert{Important security properties (\enquote{CIAAN}) are:}
 		\begin{betterlist}
-			\item \alert{Confidentiality:} Protecting confidential information from being disclosed to unauthorized parties.
-			\item \alert{Integrity:} Ensuring that information is only modified by authorized parties.
+			\item \alert{Confidentiality:} Protecting confidential information from being disclosed to unauthorized parties. (no unauthorized reads)
+			\item \alert{Integrity:} Ensuring that information is only modified by authorized parties. (no unauthorized writes)
 			\item \alert{Availability:} Making sure that information and systems are accessible to authorized parties when they need them (e.g. resistance to denial-of-service attacks).
 			\item \alert{Authenticity:} Ensuring that information and communication come from the source they are supposed to come from.
 			\item \alert{Non-repudiation:} Ensuring that nobody can deny having performed certain actions (like sending / receiving messages, changing data etc.).
 		\end{betterlist}
-		\item \alert{Safety:} System is designed without any error leading to unintended behavior
-		\item  \alert{Reliability:} A correctly designed system continues to work correctly during its life-time
+		\item \alert{Vulnerability:} Weakness in the secure system
+		\item \alert{Threat:} set of circumstances that has the potential to cause loss or harm
+		\item \alert{Attack:} The act of a human exploiting the vulnerability in the system
+		\item \alert{Safety:} System is designed without any error leading to unintended behavior. (\alert{design time})
+		\item \alert{Reliability:} A correctly designed system continues to work correctly during its \alert{life-time}
+		\begin{betterlist}
+			\item \underline{relationship between security and safety / reliability:} Port for monitoring the system good for safety / reliability, but bad for confidentiality of the processed data. Safety problems (erroneous implementations) may also lead to security problems
+		\end{betterlist}
+		\item \underline{Possible Actions of Adversaries, Attacks:}
+		\begin{betterlist}
+			\item Pirating Intellectual Property (IP) – illegal use of IPs
+			\begin{betterlist}
+				\item E.g. system integrators, fabrication facilities
+			\end{betterlist}
+			\item Implementing and inserting Trojan horses
+			\item Reverse engineering of ICs
+			\item Spying by exploiting IC vulnerabilities (\enquote{backdoors})
+			\item Physical attacks, side-channel attacks, fault injection
+			\item Counterfeiting ICs by Recycling ICs and Cloning, overproducing ICs (e.g. fabrication facilities)
+		\end{betterlist}
+		\item \underline{Examples for Countermeasures to Attacks:}
+		\begin{betterlist}
+			\item Encrypting secret data
+			\begin{betterlist}
+				\item Encryption has to do with scrambling to hide
+			\end{betterlist}
+			\item Design locks or physical locks limiting the access
+			\item Devices to verify the user identities
+			\item Hiding signatures in the design files
+			\item Intrusion detection
+			\item Security policies
+		\end{betterlist}
 	\end{betterlist}
+	\fbox{Supply Chain Vulnerabilities}
+	\begin{betterlist}
+		\item \underline{Problem 1:} Cost of Manufacturing
+		\begin{betterlist}
+			\item An \alert{untrusted foundry} may overproduce ICs and sell overproduced chips on its own account
+			\item An \alert{untrusted assembly} may sell defective ICs, sell out-of-spec ICs (possibly noticed only by early aging, e.g.), mark correct ICs as defective and sell them on its own account
+		\end{betterlist}
+		\item \underline{Problem 2:} Design Complexity
+		\begin{betterlist}
+			\item buy design data as \alert{intellectual property} ($=$ \alert{IP}) from other companies
+			\item \alert{IP Vendors} are located across the world. No control on the design process. Safety and security problem
+		\end{betterlist}
+		\item \underline{Several parties may be untrusted:} IP vendors (untrusted IP), System integrator (untrusted system, IP piracy), Fab (untrusted IC, IC Piracy (Counterfeiting)), Assembly (IC Piracy (Counterfeiting))
+		\item  \alert{Counterfeit} chips are not restricted to Overproduced chips (foundry) and Defective / out-of-spec chips (assembly + test). The whole IC life cycle and supply chain is affected: \alert{Recycled ICs} and \alert{Cloned ICs}
+	\end{betterlist}
+	\includegraphics[width=\linewidth]{./figures/supply_chain_vulnerabilities.png}
 	\fbox{\enquote{Classical} Cryptography}
 	\begin{betterlist}
 		\item \alert{Cryptology:} cryptography + cryptanalysis
-		\item \alert{Cryptography:} art/science of keeping message secure
+		\item \alert{Cryptography:} art/science of keeping message secure. Is about algorithms protecting secret information
 		\item \alert{Cryptanalysis:} art/science of breaking ciphertext
+		\item \alert{Basic Cryptographic Scheme:} \alert{injective} and both sets have \alert{same cardinality}, so \alert{one-to-one}, \alert{bijective}, so it is \alert{reversable}, $D$ is the \alert{inverse function} of $E$ and by this also bijective
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.198\pagewidth}
 	\fbox{Classification by type of encryption operations}
 	\begin{betterlist}
 		\item \alert{Substitution ciphers}
 		\begin{betterlist}
 			\item letters of $P$ replaced with other letters by $E()$
+			% \item \underline{Sidenote:} One can say $key = 3$ or $key = \enquote{D}$, because $no(D) = 3$
 			\item \underline{Effects:}
 			\begin{betterlist}
 				\item $C$ hides chars of $P$ (plaintext)
 				\item if $> 1$ key alphabet (polyalphabetic), $C$ dissipates high frequency chars
 			\end{betterlist}
-			\item \underline{Sidenote:} One can say $key = 3$ or $key = \enquote{D}$, because $no(D) = 3$
 		\end{betterlist}
 		\begin{betterlist}
-			\item \alert{Monoalphabetic substitution ciphers}
+			\item \alert{General Monoalphabetic substitution ciphers}
 			\begin{betterlist}
-				\item in a general monoalphabetic substitution cipher each letter in $P$ is substituted by a fixed letter using a \alert{substitution table}
-				\item the \alert{key} is the substitution table
+				\item each letter in $P$ is substituted by a fixed letter using a \alert{substitution table}
+				\item the \alert{key} is the substitution table, $26!=2^{88}$ substitution tables (= keys)
 				\item \underline{Attacks:}
 				\begin{betterlist}
-					\item In practice, not only frequencies of individual letters can be used for an attack, but also the frequency of letter pairs (i.e., \enquote{TH} is very common in English), letter triples, etc
-					\item need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search $\rightarrow$ Polyalphabetic substitution ciphers
+					\item \sout{Exhaustive search:} Search through $2^{88}$ keys (substitution tables) is completely infeasible with today‘s computers!
+					\item \alert{Letter Frequency Attack:}
+					\begin{betterlist}
+						\item in practice, not only frequencies of individual letters (\alert{1-gram} (unigram) model of a language) can be used for an attack, but also the frequency of letter pairs, letter triples, etc
+						\item  the longer the ciphertext $C$, the more effective statistical analysis would be
+					\end{betterlist}
 				\end{betterlist}
+				\item need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search
 			\end{betterlist}
 			\begin{betterlist}
 				\item \alert{Caesar Cipher}
 				\begin{betterlist}
-					\item each letter in $P$ is substituted by a fixed letter. In this special case the \enquote{key} is of length $1$, it is the shift amount
+					\item each letter in $P$ is substituted by a fixed letter. In this special case the \alert{key} is of length $1$, it is the shift amount
+					\item \underline{Attacks:}
+					\begin{betterlist}
+						\item \alert{Exhaustive search:} Try all possible keys until you find the right one. \enquote{Finding the right one} means \enquote{receiving a meaningful plain text}.
+						\begin{betterlist}
+							\item has $26$ possible keys
+						\end{betterlist}
+					\end{betterlist}
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
@@ -62,7 +124,11 @@
 			\item \alert{Polyalphabetic substitution ciphers}
 			\begin{betterlist}
 				\item several key alphabets, flatten (diffuse) somewhat the frequency distribution of letters by combining high and low distributions
-				\item \underline{Attack:} If one knows the $n$, then one can break the whole text into $n$ parts and for these a statistical analysis works as for the monialphabetic substitution cipher with the unigram model
+				\item \underline{Attack:}
+				\begin{betterlist}
+					\item frequency of pairs is somewhat hidden. Works if the attacker doesn't know that polyalphabetic substitution with $n$ keys is used
+					\item if one knows the $n$, then one can break the whole text into $n$ parts and for these a \alert{statistical analysis} works as for the monialphabetic substitution cipher with the unigram model
+				\end{betterlist}
 			\end{betterlist}
 			\begin{betterlist}
 				\item \alert{Vigenère Tableaux Method}
@@ -84,89 +150,50 @@
 		\item \alert{Transposition (permutation) ciphers}
 		\begin{betterlist}
 			\item order of letters in $P$ rearranged by $E()$
-			\begin{betterlist}
-				\item rearrange letters in plaintext to produce ciphertext
-			\end{betterlist}
+			% \begin{betterlist}
+			% 	\item rearrange letters in plaintext to produce ciphertext
+			% \end{betterlist}
 			\item \underline{Effects:}
 			\begin{betterlist}
-				\item $C$ scrambles text, hides $n$-grams for $n > 1$ (combinations of $n$ letters, e.g. th)
+				\item $C$ scrambles text, hides \alert{$n$-grams} for $n > 1$ (combinations of $n$ letters, e.g. th)
 			\end{betterlist}
 		\end{betterlist}
 		\begin{betterlist}
 			\item \alert{Rail-Fence Cipher}
 			\begin{betterlist}
 				\item columnar transposition
-				\item Key = Number of columns
-				\item \underline{Attack:} Number of columns / the  key space is restricted if the text is short
+				\item \alert{key} = number of columns
+				\item \underline{Attack:} Number of columns, the key space is restricted if the text is short
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
 	\begin{betterlist}
 		\item \alert{Product ciphers}
 		\begin{betterlist}
-			\item combine two or more ciphers to enhance the security of the cryptosystem
+			\item idea to combine two or more ciphers to enhance the security of the cryptosystem
 			\begin{betterlist}
-				\item $E = E_1 + E_2 + ... + E_n$
 				\item built of multiple blocks, either \alert{Substitution} or \alert{Transposition}
 			\end{betterlist}
-			\item \underline{Attack}:
+			\item might not be stronger than individual components used separatly (two times ceasar is like one time ceaser with key being sum of keys) or as strong as individual components (two times ceasar with keys $3$ and $23$)
 			\item \underline{Effects:}
 			\begin{betterlist}
-				\item can do all what Substitution and Transposition ciphers can so, more secure if used well
+				\item can do all what Substitution and Transposition ciphers can, so more secure if used well
 			\end{betterlist}
-		\end{betterlist}
-		\begin{betterlist}
 			\item \alert{Two-block product cipher}
 			\begin{betterlist}
-				\item $E2(E1(P, KE1), KE2)$
-				\item may be repeated to form several encryption rounds
+				\item $E2(E1(P, KE1), KE2)$, may be repeated to form several encryption rounds
 			\end{betterlist}
+			\item \alert{AES}
 		\end{betterlist}
 	\end{betterlist}
-	% 	\item \underline{Advantage of crypto systems with keys:}
-	% 	\begin{betterlist}
-	% 		\item  Keeping the encryption / decryption algorithm is not needed.
-	% 		\item  Keys can regulary be changed.to increase security
-	% 	\end{betterlist}
-	% 	\item \alert{Symmetric cryptosystems:} $K_E = K_D$
-	% 	\begin{betterlist}
-	% 		\item Encipher and decipher using the same key
-	% 		\item Or one key is easily derived from the other
-	% 	\end{betterlist}
-	% 	\item \alert{Asymmetric cryptosystems:} $K_E \ne K_D$
-	% 	\begin{betterlist}
-	% 		\item Encipher and decipher using different keys
-	% 		\item Computationally infeasible to derive one from other
-	% 	\end{betterlist}
-	% 	\item \underline{Attacks:}
-	% 	\begin{betterlist}
-	% 		\item \alert{Exhaustive search:} Try all possible keys until you find the right one
-	%      \item \alert{Statistical analysis:} The longer the ciphertext C, the more effective it would be, 1-gram (unigram) model of language
-	% 	\end{betterlist}
-	% 	\item \underline{Types of Ciphers:}
-	% 	\begin{betterlist}
-	% 		\item \alert{Substitution ciphers}
-	% 		\begin{betterlist}
-	% 			\item Letters of P replaced with other letters by E()
-	% 			\begin{betterlist}
-	%          \item \alert{General Monoalphabetic Substitution Cipher}: $26!\approx 2^{88}$
-	% 			\end{betterlist}
-	% 		\end{betterlist}
-	% 		\item \alert{Transposition (permutation) ciphers}
-	% 		\begin{betterlist}
-	% 			\item Order of letters in P rearranged by E()
-	% 		\end{betterlist}
-	% 		\item \alert{Product ciphers}
-	% 		\begin{betterlist}
-	% 			\item Combine two or more ciphers to enhance the security of the cryptosystem
-	% 		\end{betterlist}
-	% 	\end{betterlist}
-	% \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\pagewidth}
+\begin{minipage}[t]{0.198\pagewidth}
 	\fbox{Classification by key}
 	\begin{betterlist}
 		\item \alert{Crypto System with Keys:} $P = D(K_D, E(K_E, P))$
+		\begin{betterlist}
+			\item $P = D(K_D, C)$, $C = E(K_E, P)$, $D/E =$ set of d/encryption algorithms, $K_D/K_E$ selects $D_j/E_i \in D/E$
+		\end{betterlist}
 		\begin{betterlist}
 			\item \underline{advantage of crypto systems with keys:}
 			\begin{betterlist}
@@ -178,124 +205,73 @@
 	\begin{betterlist}
 		\item \alert{Symmetric cryptosystems} $K_E = K_D$
 		\begin{betterlist}
-      \item encipher and decipher using the same key or one key is easily derived from the other
+			\item encipher and decipher using the same key or one key is easily derived from the other
 			\item \underline{advantage:}
 			\item \underline{disadvantage:}
 			\begin{betterlist}
 				\item one needs a \alert{key exchange}, the sender and the receiver have to agree on the same key and they key should be secret, one needs a way to transport the secret key via a secure channel from the sender to the receiver
 			\end{betterlist}
-		\end{betterlist}
-		\begin{betterlist}
-			\item Advanced Encryption Standard (AES)
-			\begin{betterlist}
-				\item at the moment most widely used symmetric cipher
-				\item it is \alert{deterministic}, i.e., with the same key identical plain text blocks are mapped to the same cipher text blocks
-			\end{betterlist}
-			\begin{betterlist}
-				\item Implementation in Software
-				\begin{betterlist}
-					\item straightforward implementation is well suited for $8$-bit processors (e.g., smart cards) with small amount of memory, because operations are on bytes, but inefficient on $32$-bit or $64$-bit processors
-				\end{betterlist}
-			\end{betterlist}
-			\begin{betterlist}
-				\item Security
-				\begin{betterlist}
-					\item \alert{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible
-					\item \alert{Analytical attacks:} There is no analytical attack known that is better than brute-force
-				\end{betterlist}
-				\begin{betterlist}
-					\item Encrypting longer plain text
-					\begin{betterlist}
-						\item \underline{Countermeasure:} Different modes for block ciphers
-						\begin{betterlist}
-							\item Straightforward application of block cipher
-							\item \underline{disadvantage:} \alert{traffic analysis}, if know block with encoding of account number, without knowing how encryption works, one can replace ones own encrypted account number with account number of other account in other transmission (\alert{substituion attack})
-						\end{betterlist}
-						\begin{betterlist}
-							\item \underline{advantage:} no \alert{traffic analysis} possible
-						\end{betterlist}
-					\end{betterlist}
-				\end{betterlist}
-			\end{betterlist}
-			\begin{betterlist}
-				\item Decryption
-				\begin{betterlist}
-					\item \alert{Inv Byte Substitution layer}, since the S-Box is bijective, it is possible to construct an inverse, such that $A_i = S^{–1}(B_i) = S^{–1}(S(A_i))$. The inverse S-Box is used for decryption. It is usually realized as a lookup table. Inverse Lookup Table easy to get from Lookup Table
-					\item \alert{Decryption key schedule}, subkeys are needed in reversed order (compared to encryption). \underline{For decryption:} Before starting decryption, first compute all subkeys from the actual key (as done for encryption) and apply in reverse order, same subkey generation as for the encryption
-				\end{betterlist}
-			\end{betterlist}
-			\begin{betterlist}
-				\item Round Structure and Internal Structure
-				\begin{betterlist}
-					\item \alert{Diffusion Layer:}  Provides diffusion over all input state bits. Performs a linear operation on state matrices A and B, i.e., $DIFF(A) \oplus DIFF(B) = DIFF(A \oplus B)$
-				\end{betterlist}
-			\end{betterlist}
+			\item \alert{AES}
 		\end{betterlist}
 	\end{betterlist}
 	\begin{betterlist}
 		\item \alert{Asymmetric cryptosystems} $K_E \ne K_D$
 		\begin{betterlist}
-      \item encipher and decipher using different keys, computationally infeasible to derive one from other
+			\item encipher and decipher using different keys, computationally infeasible to derive one from other
 			\item \underline{advantages:}
 			\begin{betterlist}
 				\item allows to share public key, secure key exchange not needed (for \alert{confidentiality}, message should be kept secret)
 				\item also other applications like authentication (\alert{authenticity}, able to sign message, so it can be sure it can only come from oneself)
 			\end{betterlist}
 		\end{betterlist}
-	\end{betterlist}
-	\begin{betterlist}
-		\item RSA
 		\begin{betterlist}
-			\item Fast Modular Exponentiation
+			\item RSA
+			\begin{betterlist}
+				\item Fast Modular Exponentiation
+			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\pagewidth}
+\begin{minipage}[t]{0.198\pagewidth}
 	\fbox{Classification by way to process plaintext}
 	\begin{betterlist}
 		\item \alert{Stream Ciphers}
 		\begin{betterlist}
 			\item bitwise Encryption and Decryption
-			\item used in e.g. Red Phone between US and SU was implemented in this way
 			\item encrypt bits individually
-			\item need a method to generate key stream efficiently, starting from some “seed
-			\item usually small and fast common in embedded device
-		\end{betterlist}
-		\begin{betterlist}
-			\item Pseudo-random sequence
 			\begin{betterlist}
-				\item pseudo random functions for cryptography it might be a problem
+				\item Encryption and decryption are simple additions modulo 2 (aka XOR).
+				\item Encryption and decryption are the same functions
+				\item \alert{Encryption:} $y_i = e_{si}(x_i) = s_i \oplus x_i$, where $x_i, y_i, s_i \in \{0, 1\}$. \alert{Decryption:} $x_i = e_{si}(y_i) = s_i \oplus y_i$
 			\end{betterlist}
+			\includegraphics[width=0.4\linewidth]{./figures/stream_ciphers.png}
+			\begin{betterlist}
+				\item \underline{Attack:}
+
+				\includegraphics[width=\linewidth]{./figures/stream_cipher_attack.png}
+				\begin{betterlist}
+					\item if a prefix of plaintext is known, then $S_0, S_1, \ldots, S_k$ are known, then paramters of the random function are known and thus all $S_i$ are known
+				\end{betterlist}
+			\end{betterlist}
+			% \item need a method to generate key stream efficiently, starting from some \enquote{seed}
+			% \item usually small and fast common in embedded device
 		\end{betterlist}
 	\end{betterlist}
 	\begin{betterlist}
 		\item \alert{Block Ciphers}
 		\begin{betterlist}
 			\item always encrypt a full block (several bits)
-			\item are common for Internet applications
-		\end{betterlist}
-		\begin{betterlist}
-			\item More Block Ciphers
-			\begin{betterlist}
-				\item DES (Data Encryption Standard)
-				\begin{betterlist}
-					\item Predecessor of AES
-					\item Considered insecure (small key length of 56 bits)
-				\end{betterlist}
-			\end{betterlist}
-		\end{betterlist}
-		\begin{betterlist}
+			% \item are common for Internet applications
 			\item Block Cipher Primitives
 			\begin{betterlist}
 				\item \alert{Claude Shannon:} There are two primitive operations with which strong encryption algorithms can be built:
 				\begin{enumerate}
 					\item \alert{Confusion:} An encryption operation where the \alert{relationship between key and ciphertext is obscured}
 					\begin{betterlist}
-						\item today, a common element for achieving confusion is substitution, which is found in AES and other ciphers.
+						\item today, a common element for achieving confusion is substitution, which is found in AES and other ciphers
 					\end{betterlist}
 					\item \alert{Diffusion:} An encryption operation where the \alert{influence of one plaintext symbol is spread over many ciphertext symbols} with the goal of hiding statistical properties of the plaintext
 					\begin{betterlist}
-						\item in other context known as Transposition
 						\item a simple diffusion element is the \alert{bit permutation} (in other context known as Tranposition)
 					\end{betterlist}
 				\end{enumerate}
@@ -303,17 +279,124 @@
 					\item Both operations by themselves are suboptimal in providing security. A cipher must include confusion and diffusion elements
 				\end{betterlist}
 			\end{betterlist}
+			\item \alert{polyalphabetic cipher} is a block cipher with (small) $8$-bit-blocks as char is encoded by $8$ bits
+			\item Data Encryption Standard (\alert{DES})
+			\item \alert{AES}
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\pagewidth}
+\begin{minipage}[t]{0.198\pagewidth}
+	\fbox{Advanced Encryption Standard (\alert{AES})}
 	\begin{betterlist}
-		\item asdf
+		\item \underline{requirements for all AES candidate submissions were:}
+		\begin{betterlist}
+			\item Block cipher with 128-bit block size
+			\item Three supported key lengths: $128$, $192$ and $256$ bit
+			\begin{betterlist}
+				\item the number of AES rounds depends on the chosen key length ($10$, $12$, $14$)
+			\end{betterlist}
+			\item Security relative to other submitted algorithms
+			\item Efficiency in software and hardware
+			\begin{betterlist}
+				\item \alert{Implementation in Software:} straightforward implementation is well suited for $8$-bit processors (e.g., smart cards) with small amount of memory, because operations are on bytes, but inefficient on $32$-bit or $64$-bit processors.
+				\item \alert{T-Tables:} When executing MixColumn for one column of the state matrix one can speed up the calculation of the resulting vector which is made of $4$ \alert{columns} with one entry of the column of the state matrix multiplied with the values of one column of the $4\times 4$ matrix with $3$ exor operations between the columns. There are $2^8$ possible values for this one value from the column of the state matrix, thus one needs a lookup table with $2^8$ values of $32$-bit values concatenating the resulting values of one column of the calculation. One needs $4$ such lookup tables, because the $4\times 4$ matrix has $4$ columns. One can then calculate the resulting vector by $4$ lookups to the $4$ lookup tables and $3$ exor operations.
+			\end{betterlist}
+		\end{betterlist}
+		\item \underline{Round Structure and Internal Structure:}
+		\begin{betterlist}
+			\item state $A$ (i.e., the $128$-bit data path) can be arranged in a $4\times 4$ \alert{state matrix} with $A_0,\ldots, A_{15}$ denoting the $16$-byte input of AES
+		\end{betterlist}
+		\begin{minipage}[b]{0.64\linewidth}
+			\includegraphics[width=\linewidth]{./figures/aes_round_structure.png}
+		\end{minipage}
+		\begin{minipage}[b]{0.34\linewidth}
+			\includegraphics[width=0.5\linewidth]{./figures/fourtimesfourmatrix.png}
+			\includegraphics[width=\linewidth]{./figures/shiftrow_matrix.png}
+			\includegraphics[width=\linewidth]{./figures/mixcolumn.png}
+			\includegraphics[width=\linewidth]{./figures/aes_algorithm.png}
+		\end{minipage}
+		\begin{minipage}[b]{0.49\linewidth}
+			\includegraphics[width=\linewidth]{./figures/key_schedule.png}
+		\end{minipage}
+		\begin{minipage}[b]{0.49\linewidth}
+			\includegraphics[height=0.6\linewidth, angle=90]{./figures/functiong.png}
+			\includegraphics[width=\linewidth]{./figures/aes_round_structure_details.png}
+		\end{minipage}
+		\begin{betterlist}
+			\item \alert{Byte Substitution Layer:}
+			\begin{betterlist}
+				\item $16$ \alert{identical} S-Boxes that are \alert{bijective} (can be \alert{uniquely reversed})
+				\item only \alert{nonlinear} elements of AES, i.e., $ByteSub(A_i) \oplus ByteSub(A_j) \ne ByteSub(A_i \oplus A_j)$, for $i, j = 0,\ldots,15$
+				\item in software implementations, the S-Box is usually realized as a lookup table
+				\item described as computing \alert{multiplicative inverse} in $GF(2^8)$
+				\includegraphics[width=\linewidth]{./figures/importanceofsboxes.png}
+			\end{betterlist}
+			\item \alert{Diffusion Layer:} Provides diffusion over all input state bits. Performs a linear operation on state matrices $A$ and $B$, i.e., $DIFF(A) \oplus DIFF(B) = DIFF(A \oplus B)$
+			\begin{betterlist}
+				\item \alert{ShiftRows Sublayer:} Rows of the state matrix are shifted cyclically
+				\item \alert{MixColumn Sublayer:} Linear transformation which mixes each column of the state matrix. All arithmetic is done in the Galois field $GF(2^8)$ ($\{0, 1\}^8$ with addition as bitwise exor and an \enquote{appropriate} multiplication). So one does multiplication with the same matrix and this matrix is fixed for AES. This matrix needs to have the property of being \alert{invertable}
+			\end{betterlist}
+			\item \alert{Key Addition Layer:}
+			\begin{betterlist}
+				\item $C \oplus k_i$, state matrix $C = C_0C_1\ldots C_{15}$, \alert{subkey} $k_i$ generated in the \alert{key schedule}, $\#subkeys = \#rounds + 1$
+				% , different key schedules for the d{i}fferent key sizes
+				\item \alert{word-oriented:} $1$ word = $32$ bits
+				\item \alert{round coefficient} $RC$ represents an element of $GF(2^8)$. Until $RC[8]$ it is leftshift, then one can't shift anymore and chooses elements of the Galois field again, starting with $RC[1] = x^0 = (00000001)_2$
+			\end{betterlist}
+		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\pagewidth}
+
+\newpage
+
+\begin{minipage}[t]{0.198\pagewidth}
+	\fbox{AES Continue}
 	\begin{betterlist}
-		\item asdf
+		\item \alert{Decryption:}
+		\begin{betterlist}
+			\item all layers must be inverted
+			\item inverse S-Box: $A_i = S^{-1}(B_i) = S^{-1}(S(A_i))$ usually realized as a lookup table
+			\item the product of the inverse of the $4\times 4$ and the $4\times 4$ matrix (in $GF(2^8)$) is the identity matrix ($1$es from top left to bottom right)
+			\item Key Addition layer is its own inverse, Decryption key schedule. Before starting decryption, first compute all subkeys from the
+			actual key (as done for encryption) and apply in reverse order
+		\end{betterlist}
+		\begin{minipage}[b]{0.5\linewidth}
+			\includegraphics[width=\linewidth]{./figures/invshiftrowslayer.png}
+		\end{minipage}
+		\begin{minipage}[b]{0.5\linewidth}
+			\includegraphics[width=\linewidth]{./figures/inversemixcolumnlayer.png}
+		\end{minipage}
+		\item \underline{Attacks / Security:}
+		\begin{betterlist}
+			\item \sout{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible
+			\item \sout{Analytical attacks:} There is no analytical attack known that is better than brute-force
+			\item \alert{Side-channel attacks:}
+			\begin{betterlist}
+				\item TODO
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item \underline{Encrypting longer plain text:}
+		\begin{betterlist}
+			\item \alert{ECB} = Electronic Code Book Mode (Straightforward application of block cipher)
+			\begin{betterlist}
+				\item Problem that with the same key identical plain text blocks are mapped to the same cipher text blocks (it is deterministic). Each pixel $\hat= 1$ Byte, $16$ pixels = $1$ AES-block
+			\end{betterlist}
+			\includegraphics[width=\linewidth]{./figures/ecb.png}
+			\includegraphics[width=\linewidth]{./figures/ecb2.png}
+			\begin{betterlist}
+				\item \alert{Traffic analysis and substitution attack:} If know block with encoding of account number, without knowing how encryption works, one can replace ones own encrypted account number with account number of other account in other transmission
+			\end{betterlist}
+			\item \alert{CBC} = Cipher Block Chaining Mode
+			\begin{betterlist}
+				\item \underline{advantage:} no \alert{traffic analysis} possible
+			\end{betterlist}
+
+			\includegraphics[width=\linewidth]{./figures/cbc.png}
+			\includegraphics[width=0.8\linewidth]{./figures/cbc2.png}
+		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
+
 \end{document}

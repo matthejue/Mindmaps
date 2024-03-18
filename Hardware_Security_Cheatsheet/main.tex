@@ -5,7 +5,6 @@
 \input{./content/declarations}
 
 \begin{document}
-
 \fontsize{4pt}{5pt}\selectfont
 
 \begin{minipage}[t]{0.198\pagewidth}
@@ -203,10 +202,14 @@
 		\end{betterlist}
 	\end{betterlist}
 	\begin{betterlist}
-		\item \alert{Symmetric cryptosystems} $K_E = K_D$
+		\item \alert{Symmetric cryptosystems} $K_E = K_D$ (secret key encryption)
 		\begin{betterlist}
-			\item encipher and decipher using the same key or one key is easily derived from the other
-			\item \underline{advantage:}
+			\item encipher and decipher using the same key or one key is easily derived from the other. Only sender $S$ and receiver $R$ know the \alert{secret key}
+			\item as long as the key remains secret it also provides \alert{authentication} ($=$ proof of sender’s identity)
+			% \item \underline{advantage:}
+			%      \begin{betterlist}
+			%
+			%      \end{betterlist}
 			\item \underline{disadvantage:}
 			\begin{betterlist}
 				\item one needs a \alert{key exchange}, the sender and the receiver have to agree on the same key and they key should be secret, one needs a way to transport the secret key via a secure channel from the sender to the receiver
@@ -215,19 +218,66 @@
 		\end{betterlist}
 	\end{betterlist}
 	\begin{betterlist}
-		\item \alert{Asymmetric cryptosystems} $K_E \ne K_D$
+		\item \alert{Asymmetric cryptosystems} $K_E \ne K_D$ (public key encryption)
 		\begin{betterlist}
 			\item encipher and decipher using different keys, computationally infeasible to derive one from other
-			\item \underline{advantages:}
+			\item also other applications like \alert{authentication} (authenticity, able to sign message, so it can be sure it can only come from oneself)
+			\item only owner of \alert{private key} $K_D$ can decode msgs that could be encoded by anybody with \alert{public key} $K_E$
+			\item asymmetric schemes based on a \alert{one-way function} (based on mathematically hard problems) $f()$: Computing $y = f(x)$ easy, but $x = f^{-1}(y)$ is computationally infeasible
+			\item \underline{advantage:}
 			\begin{betterlist}
-				\item allows to share public key, secure key exchange not needed (for \alert{confidentiality}, message should be kept secret)
-				\item also other applications like authentication (\alert{authenticity}, able to sign message, so it can be sure it can only come from oneself)
+				% \item allows to share \alert{public key}, secure key exchange not needed (for \alert{confidentiality}, message should be kept secret)
+				\item distribution of public key for encryption can be done over an insecure channel
 			\end{betterlist}
-		\end{betterlist}
-		\begin{betterlist}
-			\item RSA
+			\item \underline{disadvantage:}
 			\begin{betterlist}
-				\item Fast Modular Exponentiation
+				\item usually assymetric crypto systems are much slower than symmetric ones
+			\end{betterlist}
+			\item \alert{RSA}
+		\end{betterlist}
+		\item \alert{Hybrid Asymmetric-symm. Systems:}
+		\begin{betterlist}
+			\item Key exchange (for symmetric schemes) and digital signatures performed with (slow) asymmetric algorithms. Encryption of data is done using (fast) symmetric ciphers
+		\end{betterlist}
+		\includegraphics[width=\linewidth]{./figures/hybrid_assymetric-symmetric_systems.png}
+	\end{betterlist}
+	\fbox{RSA}
+	\begin{betterlist}
+		\item \alert{Key Generation:}
+		\begin{enumerate}
+			\item choose two large primes $p$, $q$
+			\item compute $n = p \cdot q$
+			\item compute $\Phi(n) = (p - 1) \cdot (q - 1)$
+			\begin{betterlist}
+				\item $\Phi(n) = |\{a \mid a\in \{0, \ldots, n-1\}, gcd(a, n) = 1\}|$, is equal to the number of invertible / relatively prime elements in $\mathbb{Z}/n\mathbb{Z}$
+			\end{betterlist}
+			\item select an arbitrary public exponent $e \in \{1, 2, \ldots, \Phi(n) - 1\}$ such that $gcd(e, \Phi(n) ) = 1$
+			\begin{betterlist}
+				\item computations are done in $\mathbb{Z}/ \Phi(n)\mathbb{Z}$, $e$ must have inverse in $\mathbb{Z}_{\Phi(n)}$
+			\end{betterlist}
+			\item compute the private key $d \in \{1, 2, \ldots , \Phi(n) - 1\}$ s.t. $d \cdot e \equiv 1 \mod \Phi(n)$
+			\begin{betterlist}
+				\item E.g. computed with extended Euklid algorithm computing $gcd(e, \Phi(n))$
+				\item $d$ is the inverse of $e$ in $\mathbb{Z}_{\Phi(n)}$, $d$ has $4096$ bits, $d\le 2^{4096}-1$
+			\end{betterlist}
+			\item RETURN $k_{pub} = (n, e), k_{pr} = d$
+		\end{enumerate}
+		\item \alert{Ecnryption:} $y = x^e \mod n$, \alert{Descryption:} $x = y^d \mod n$
+		\item \alert{Authentication / Signing:}
+		\begin{betterlist}
+			\item $(x^e)^d = x^{ed} = (x^d)^e \equiv x \mod n$, thus it is also possible to encrypt with the private key and decrypt with the public key
+			\item[\color{PrimaryColor}\textbf{1.} ] A sends $(M, e_{K_{prA}}(M))$ to B
+			\item[\color{PrimaryColor}\textbf{2.} ] B checks whether $M = d_{K_{pubA}}(e_{K_{prA}}(M))$ on recieving it
+			\item to make it more efficient A uses a known hash function to compute a shorter $hash(M)$ and encrypt this: $e_{K_{prA}}(hash(M))$
+		\end{betterlist}
+		\item \alert{Security:}
+		\begin{betterlist}
+			\item relies on the hardness to derive the \alert{private exponent} $d$ given the public key $(n, e)$
+			\item if it would be possible to factorize $n$, then it would also be possible to compute $\Phi(n)= (p - 1) \cdot (q - 1)$. Use very big prime numbers $p$ and $q$ to make it hard to factorize $n$ into $p$ and $q$
+			\item with the public key $e$ it would then be possible to compute the inverse of $e$ in $\mathbb{Z}_{\Phi(n)}$
+			\begin{betterlist}
+				\item with Euklid‘s algorithm $gcd(e, \Phi(n) ) = 1$ is computed as well as integers $x$ and $y$ with $x \cdot e + y \cdot \Phi(n) = 1$
+				\item then $x$ mod $\Phi(n)$ is the multiplicative inverse, i.e., $x$ mod $\Phi(n)$ is the private key $d$
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
@@ -280,10 +330,24 @@
 				\end{betterlist}
 			\end{betterlist}
 			\item \alert{polyalphabetic cipher} is a block cipher with (small) $8$-bit-blocks as char is encoded by $8$ bits
-			\item Data Encryption Standard (\alert{DES})
 			\item \alert{AES}
 		\end{betterlist}
 	\end{betterlist}
+	\fbox{Fast Modular Exponentiation:}
+	\begin{betterlist}
+		\item \alert{Square and Multiply algorithm:}
+		\begin{betterlist}
+			\item $4^6 = 4^{110} \rightarrow \underbrace{1^2 * 4 = 4}_{1} \rightarrow \underbrace{4^2 * 4 = 64}_{1} \rightarrow \underbrace{64^2 = 4096}_{0}$
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Cryptanalysis}
+	\begin{enumerate}
+		\item Ciphertext-only attack: Exhaustive search, Letter Frequency attack (correlation based method possible)
+		\item Known plaintext attack: Analyst have $C$ and $P$ (or partial match between $C$ and $P$). Needs to deduce $E$ such that $C=E(P)$, then finds $D$ (e.g. header of file or todays date)
+		\item Chosen plaintext attack: Analyst able to fabricate encrypted msgs for arbitrary plain texts
+		\item Chosen ciphertext attack: Analyst is able to obtain decryptions of chosen ciphertexts. Purpose to find $K_D$
+		\item Fault injection attack
+	\end{enumerate}
 \end{minipage}
 \begin{minipage}[t]{0.198\pagewidth}
 	\fbox{Advanced Encryption Standard (\alert{AES})}
@@ -398,5 +462,380 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-
+\begin{minipage}[t]{0.198\pagewidth}
+	\fbox{Mathematical background}
+	\begin{betterlist}
+		\item \underline{Overview:}
+		\begin{betterlist}
+			\item \alert{finite field} $(\{0, 1\}^8, +, \cdot)=GF(2^8)$ is a special case of a Galois field $GF(p^k)$, with a prime number $p$ and a natural number $k$, having $p^k$ elements
+			\begin{betterlist}
+				\item AES needs fitting definitions of $+$ and $\cdot$ on $\{0, 1\}^8$ to turn it into a \alert{finite field}. Small finite field with $256$ elements
+				\item The irreducible polynomial used in AES is Part of its specification. It is $g(X) = X^8 + X^4 + X^3 + X + 1$. Several irreducable polynomials of degree $8$
+				\item one needs finite field property at point where one wants to invert the MixColumn Operation, one needs the property of having multiplicative inverse, to derive inverse matrix
+				% \item AES Summary and Explanation, you can use this complete nice mathematical background for aes and just construct a multiplication table you just take two bytes use this mathematical approach and compute the product of two bytes which result in a byte and then you take this table and you forgot about all the mathematical background and you can still do computations in aes because in aes you Just need this table this is true for aes but this is not true for what we will see next this RSA for RSA we really cannot compress everything you must know into one table for this we need some some insight into mathematical background. Byte, length 8, degree 7, Irreducible then each row contains a 1, there see ninverse element to row element, apart from 0, Small hint key schedule of AES, remainder of polynomial division, MixColumn multiplication connection, single operations are always additions or multiplications of bytes
+			\end{betterlist}
+			\item $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$, is a \alert{field} and coincides with $GF(m)$ if $m$ is a prime number, else it is a Commutative ring with multiplicative identity $\overline{1}$, if $n$ is prime it is a field
+			\begin{betterlist}
+				\item to be useable for AES, $m$ must be a prime number, but $2^8-1$ isn't
+				\item RSA, modulo arithmetic, calculations in the ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$. RSA is a huge residue class ring, $2.048$ Bits, in the order of $2^{2046}$, $m$ is product of two really huge prime numbers, just on table not possible
+			\end{betterlist}
+		\end{betterlist}
+		\begin{betterlist}
+			\item \alert{Groups}
+			\begin{betterlist}
+				\item $(R, *)$, $R$ is a non-empty set, $*$: $R \times R \rightarrow R$ is a \alert{group} \textit{iff}
+				\begin{betterlist}
+					\item $*$ is \alert{associative}
+					\item an \alert{(unique) identity element} (unit element) $n \in R$ with $a * n = n * a = a \enspace\forall a\in R$
+					\item for each $a\in R$ exists an \alert{inverse element} $a^{-1}\in R$ with $a * a^{-1} = a^{-1} * a = n$
+				\end{betterlist}
+				\item \alert{abelian group} \textit{iff} $*$ is commutative
+			\end{betterlist}
+			\begin{betterlist}
+				\item \alert{Fields (germ. Körper)}
+				\begin{betterlist}
+					\item $(F, +, \cdot)$, $F$ is a non-empty set, $+,\cdot$: $F \times F \rightarrow F$ is a \alert{field} \textit{iff}
+					\begin{betterlist}
+						\item $(F, +)$ is an \alert{abelian group}
+						\item \alert{Multiplication} is \alert{associative}
+						\begin{betterlist}
+							\item already required by \alert{abelian group} property
+						\end{betterlist}
+						\item \alert{Multiplication} is \alert{commutative}
+						\begin{betterlist}
+							\item already required by \alert{abelian group} property
+						\end{betterlist}
+						\item $(F\setminus \{0\}, \cdot)$ is an \alert{abelian group} ($0$ is the additive identity)
+						\item \alert{Distribuitivity}
+					\end{betterlist}
+					\item \alert{Difference} to \alert{commutative rings} with (multiplicative) identity: For each element of $F\setminus\{0\}$ there is a multiplicative inverse
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item \alert{Rings}
+				\begin{betterlist}
+					\item $(R, +, \cdot)$, $R$ is a non-empty set, $+,\cdot$: $R \times R \rightarrow R$ is a \alert{ring} \textit{iff}
+					\begin{betterlist}
+						\item $(R, +)$ is an \alert{abelian group}
+						\item \alert{Multiplication} is \alert{associative},
+						\item \alert{(Special) Distributivity}: $a \cdot (b + c) = a \cdot b + a \cdot c$ and $(b + c)\cdot a = b \cdot a + c\cdot  a$ (commutativity of multiplication not required)
+					\end{betterlist}
+					\item \alert{commutative ring} \textit{iff} the multiplication is also commutative
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+		\fbox{Greatest common devisor (gcd)}
+		\begin{betterlist}
+			\item \underline{Prime factorization:}
+			\begin{betterlist}
+				\item $24 = 2\cdot 12 = 2\cdot 2\cdot 6 = \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{2}\cdot 2\cdot \textcolor{PrimaryColor}{3}$
+				\item $36 = 2\cdot 18 = 2\cdot 2\cdot 9 = \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{3}\cdot 3$
+				\begin{betterlist}
+					\item not $2\cdot 18 = 2 \cdot 3\cdot 6$, is only correct be coincidence, choose smallest possible prime number first
+				\end{betterlist}
+				\item $gcd(24, 36) = \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{2}\cdot \textcolor{PrimaryColor}{3} = 12$
+			\end{betterlist}
+			\item \underline{Devisor series:}
+			\begin{betterlist}
+				\item $devseries(24) = (1, 2, 3, 4, 6, 8, \textcolor{PrimaryColor}{12}, 24)$
+				\item $devseries(36) = (1, 2, 3, 4, 6, 9, \textcolor{PrimaryColor}{12}, 18, 36)$
+				\item $gcd(24, 36) = \textcolor{PrimaryColor}{12}$
+			\end{betterlist}
+			\item \underline{Euklidian algorithm:}
+			\begin{betterlist}
+				\item $\begin{aligned}[t]
+						36\mod 24                           & = 12 \\
+						24\mod \textcolor{PrimaryColor}{12} & = 0
+					\end{aligned}$
+				\item $gcd(36,24) = 12$
+			\end{betterlist}
+			\item \alert{Least common multiple (lcm)}
+			\begin{betterlist}
+				\item $gcd(6, 8) = \dfrac{6\cdot 8}{lcm(6, 8)} = \dfrac{48}{24} = 2$
+			\end{betterlist}
+			\begin{betterlist}
+				\item \underline{Prime factorisation:}
+				\begin{betterlist}
+					\item $84 = 2\cdot 2\cdot 3\cdot 7 = 2^2\cdot 3\cdot \textcolor{PrimaryColor}{7}$
+					\item $120 = 2\cdot 2\cdot 2\cdot 3\cdot 5= \textcolor{PrimaryColor}{2^3}\cdot \textcolor{PrimaryColor}{3}\cdot \textcolor{PrimaryColor}{5}$
+					\item $lcm(84, 120) = \textcolor{PrimaryColor}{2^3}\cdot \textcolor{PrimaryColor}{3}\cdot\textcolor{PrimaryColor}{5}\cdot \textcolor{PrimaryColor}{7} = 840$
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item \underline{Multiple series:}
+				\begin{betterlist}
+					\item $mulseries(6) = (6, 12, 18, \textcolor{PrimaryColor}{24}, 30, 36, 42, 48)$
+					\item $mulseries(8) = (8, 16, \textcolor{PrimaryColor}{24}, 32, 40, 48)$
+					\item $lcm(6, 8) = \textcolor{PrimaryColor}{24}$
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item \underline{Greatest common divisor (gcd):}
+				\begin{betterlist}
+					\item $lcm(6, 8) = \dfrac{6\cdot 8}{gcd(6, 8)} = \dfrac{48}{2} = 24$
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.198\pagewidth}
+	\fbox{Residue class ring}
+	\begin{betterlist}
+		\item $\boxed{12 / 10 = 1 \wedge 12 \mod 10 = 2 \enspace(\text{remainder})} \Rightarrow 2 \equiv 12 \mod 10 \Leftrightarrow 2 + 1 \cdot 10 = 12 + 0 \cdot 10 \Leftrightarrow \boxed{2 + 1 \cdot 10 = 12}\Leftrightarrow 2 + 2 \cdot 10 = 12 + 1 \cdot 10$ ($12$ is the dividend, because it's larger than $2$, $0\le 2< 10$)
+		\item \alert{Division with remainder in $\mathbb{Z}$:} For each $a \in \mathbb{Z}$ there is a unique integer $r$ with $0 \le r < m$ and $a = q \cdot m + r$ for some $q \in Z$ and $m \in \mathbb{N}, m > 1$
+		\begin{betterlist}
+			\item $10 / 4 = 1\enspace R:2$ (was bleibt übrig, wenn man Vielfache des Divisors so nah wie möglich aber kleiner an Dividend bekommen will) or $10 \mod 4 = 2$ (wieviel über Modul / Devisor drüber, wenn man Vielfache des Divisors so nah wie möglich aber kleiner an Dividend bekommen will), $4 / 10 = 0\enspace R:4$ (bei Vielfachen $0$ des Modul / Devisor  wieviel es bis zum Dividend ist) or $4 \mod 10 = 4$ (bei Vielfachen $0$ des Modul / Devisor um wieviel man darüber ist)
+		\end{betterlist}
+		\item $a, b \in Z$ are \alert{congruent modulo} $m$ ($a \equiv b \mod m$) \textit{iff} $a - b = q \cdot m$ for some $q \in Z$
+		\begin{betterlist}
+			\item $a \equiv b \mod m$ iff the division with remainder wrt. $m$ gives the same remainder for $a$ and $b$
+		\end{betterlist}
+		\item The \alert{residue class} of $r \in \mathbb{Z}$ with $0 \le r < m$ is the set $\overline{r} = \{a \in \mathbb{Z} \mid a \equiv r \mod m\} = \{q \cdot m + r \mid q \in \mathbb{Z}\}$
+		\begin{betterlist}
+			\item $(\mathbb{Z}/m\mathbb{Z}, +, \cdot), \mathbb{Z}/m\mathbb{Z} = \{\overline{0}, \overline{1}, \ldots, \overline{m-1}\}$
+			\item for $a \in \overline{r}$ the integer $a \mod m$ is the unique element $r$ of $\overline{r}=\overline{a}=\{0\cdot m + r, 1\cdot m + r, \ldots, a,\ldots\}=\{q\cdot m + r \mid q\in\mathbb{Z}\}$ with $0 \le r < m$ (so in the example $\overline{13} = \overline{3}$)
+			\item each $i \in \mathbb{Z}$ is in exactly one of $m$ pairwise disjoint residue classes: $\overline{0}, \overline{1}, \ldots, \overline{m-1}$
+		\end{betterlist}
+		\item If $a_1 \equiv a_2 \operatorname{mod} m$, $b_1 \equiv b_2 \operatorname{mod} m$ then
+		\begin{betterlist}
+			\item $a_1 + b_1 \equiv a_2 + b_2 \operatorname{mod} m$
+			\item $a_1 \cdot b_1 \equiv a_2 \cdot b_2 \operatorname{mod} m$
+		\end{betterlist}
+		\item \underline{Addition and Multiplication well definied:} $\overline{a} + \overline{b} = \overline{a + b}$, $\overline{a} \cdot \overline{b} = \overline{a \cdot b}$
+		\begin{betterlist}
+			\item Addition and multiplication on $\mathbb{Z}/m\mathbb{Z}$ are \alert{well-defined}, since for the result it does not matter which representatives of $a$ and $b$ are chosen
+			\item residue class ring $(\mathbb{Z}/m\mathbb{Z}, +, \cdot)$ forms a \alert{commutative ring} with \alert{multiplicative identity} $\overline{1}$ for all $\overline{p} \in \mathbb{Z}/m\mathbb{Z}$
+			\item \underline{Example:} \alert{residue class ring:} $\mathbb{Z}/5\mathbb{Z} = \{\overline{0}, \overline{1}, \overline{2}, \overline{3}, \overline{4}\}$ and one \alert{residue class:} $\overline{2} = \{q\cdot 5 + 2 \mid q\in \mathbb{Z}\}$, if one does computation one does not handle infinite sets but handle representatives: $\overline{2} + \overline{3} + \overline{4} = \overline{2 + 3 + 4} = \overline{4}$, modulo operation gives smallest possible element in residue class
+			\item \alert{Modular division:} $\overline{b}/\overline{a} = \overline{b}\cdot \overline{a}^{-1}$
+			\item \alert{Modular reduction:}
+			\begin{betterlist}
+				\item $3^8 \mod 7 = ((81 \mod 7) \cdot (81 \mod 7)) \mod 7 = 4 \cdot 4 \mod 7 = 16 \mod 7 \equiv 2 \mod 7$
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Finite / Galois Fields}
+	\begin{betterlist}
+		\item $GF(2) = (\mathbb{Z}/2\mathbb{Z}, +, \cdot)$ (same as $(\{0, 1\}, \oplus, \land)$) forms a field with additive identity $0$, multiplicative identity $1$ and $1$ as the multplicative inverse of $1$
+		\item Making $(\{0, 1\}^k, +, \cdot)$ a finite field
+		\begin{betterlist}
+			\item define addition on $(\{0,1\}^k, +, \cdot)$ as bitwise Xor
+			\begin{betterlist}
+				\item Xor on $\{0,1\}$ is the same as $+$ on $GF(2) = \mathbb{Z}/2\mathbb{Z} = \{\overline{0}, \overline{1}\}$
+			\end{betterlist}
+			\item definition of $\cdot$ on $\{0,1\}^k$ such that the result becomes a finite field
+			\begin{betterlist}
+				\item the And operation is $\cdot$ on $GF(2)$
+				\item to be done by reduction to the consideration of so-called polynomial rings over $GF(2)$
+			\end{betterlist}
+			\item \underline{Why not $\mathbb{Z}/2^k\mathbb{Z}$?:} an element $e$ that is even is not invertable in $\mathbb{Z}/2^k\mathbb{Z}$ and therefore can't be a field, all elements in $\overline{1} = \{1 + q\cdot 2^k \mid q\in \mathbb{Z}\}$ are odd as $q\cdot 2^k$ is always even, $a\cdot e$ is even, because $e$ is even, so it can't be in a set where all elements are odd
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.198\pagewidth}
+	\fbox{Polynomial rings over $GF(2)$}
+	\begin{betterlist}
+		\item $F[X]$: All polynomials in one variable $X$ over the field $F$, coefficients are elements of $F$
+		\item $F[X]_n$: Subset of $F[X]$ with $deg(g) < n$ for polynomials $g$
+		\item we map $\{0,1\}^k$ bijectively to $GF(2)[X]_k$ by the mapping $\varphi(v_{k-1}, \ldots, v_0) = v_{k-1} X^{k-1} + \ldots + v_2 X^2 + v_1 X + v_0$ in order to be able to define a \alert{multiplication} on $\{0,1\}^k$
+		\begin{betterlist}
+			\item the usual \alert{polynomial addition} in $GF(2)[X]_k$ \enquote{is compatible} with bitwise exor on $\{0,1\}^k$
+		\end{betterlist}
+		\item \alert{Residue Class Ring Modulo a Polynomial:} $\overline{F(X)} = F[X] / g(X)$%$:=\{\overline{u(X)} \mid u(X) \in F[X]\}$
+		\begin{betterlist}
+			\item \alert{residue class of $u(X)$ modulo $g(X)$}: $\overline{u(X)}:=\{v(X) \in F[X] \mid v(X) \bmod g(X)=u(X) \bmod g(X)\}$,\quad$u(X),g(X) \in F[X] \text { with } \operatorname{deg}(g(X))\geq 1$
+			\item exactly $2^k$ different residue classes modulo $g(X)\in GF(2)[X]_{k+1}$, the classes $\overline{r(X)}$ with $deg(r(X)) < k$ in the residue class ring $GF(2)[X]/g(X)$
+			\item \alert{Addition and Multiplication in $F[X]/g(x)$:} $\overline{u(X)}+\overline{v(X)}:=\overline{u(X)+v(X)}$ and $\overline{u(X)} \cdot \overline{v(X)}:=\overline{u(X) \cdot v(X)}$
+			\begin{betterlist}
+				\item again well-defined, because it doesn't matter what representetives one chooses
+				\item \alert{bijective mapping} $\psi:\{0,1\}^k\rightarrow G F(2)[X] / g(X)$\\
+				with $\psi\left(v_{k-1}, \ldots, v_0\right)=\overline{v_{k-1} X^{k-1}+\ldots+v_1 X+v_0}$ and $g(X)\in GF(2)[X]_{k+1}$
+				\item \alert{Addition} in $GF(2)[X]/g(X)$ is bitwise exor on $\{0,1\}^k$%, because if have polynomial with degree smaller than $k$ and a polynomial with degree smaller than $k$, than the division with $g(X)$ doesn't change anything, becase we already have something smaller than $k$, so the remainder is the element itself
+				\item \alert{Multiplication}: $\left(v_{k-1}, \ldots, v_0\right) \cdot\left(w_{k-1}, \ldots, w_0\right):=\psi^{-1}\left(\psi\left(v_{k-1}, \ldots, v_0\right) \cdot \psi\left(w_{k-1}, \ldots, w_0\right)\right)$
+				\begin{betterlist}
+					\item multiplication in $\{0,1\}^k$ \enquote{via} multiplication in $GF(2)[X]/g(X)$, works since $GF(2)[X]/g(X)$ is closed under multiplication%. So product of two bitvectors defined by using the mapping into residue classes, doing the mulitplication of residue classes and then mapping back
+					% \item Example, polymomial with $X^4$ would be out of the polynomial ring with degree smaller than $k=3$, therefore consider residue classes which means one takes result and reduce by polymomial with degree $k=3$, so remainder has a degree smaller than $3$
+				\end{betterlist}
+			\end{betterlist}
+			\begin{betterlist}
+				\item for $(GF(2)[X]/g(X), +, \cdot)$ to be a field, there must be multiplicative inverse for all elements $\ne 0$
+				\begin{betterlist}
+					% \item if $(GF(2)[X]/g(X), +, \cdot)$ is a field, then also $(\{0, 1\}^k, +, \cdot)$
+					\item $g(X)$ must be \alert{irreducable}
+					\item a polynomial $g(X) \in F[X]$ with $deg(g(X)) > 0$ is \alert{irreducible} \textit{iff} the following holds: If $g(X) = u(X) \cdot v(X)$ for $u(X), v(X) \in F[X]$ then $u(X) \in F$ or $v(X) \in F$
+					\begin{betterlist}
+						% \item \alert{irreducable} intuitively means that one doesn't have a decomposition of $g(X)$ into two non-trivial factors, so if one has $g(x) = u(X)\cdot v(X)$ then either $u(X)$ or $v(X)$ have to be a field element, trivial if one of them is a field element and non-trivial if one can really decompose it into two non-trivial parts, it's similiar to prime numbers, if have integer number, one can also ask whether one can decompose it into the product of two non-trivial numbers or whether for each decomposition into two factors at least one for them has to be the one, if one computes the decomposition into prime factors, one only has one prime factor, one cannot decompose the prime numbers into non-trivial factorisation.
+						\item Field element $\hat =$ Polynomial of degreee $0$
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+			\item \underline{Polynomial Residue Class Ring:} Let $g(X)\in F[X]$ with $deg(g(X)) > 0$. $g(X)$ is \alert{irreducible} \textit{iff} $(F[X]/g(X), +, \cdot)$ is a field
+			% \begin{betterlist}
+			% 	\item \underline{Lemma: Polynomial Residue Class Ring:} For each $u(X), v(X) \in F[X] \setminus \{0\}$ with $max(deg(u(X), deg(v(X)) > 0$ there is a gcd $g(X) \in F[X]$ and there is a representation $g(X) = q_u(X) \cdot u(X) + q_v(X) ∙ v(X)$ with $q_u(X), q_v(X) \in F[X]$
+			% \end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Invertible Elements}
+	\begin{betterlist}
+		\item \underline{Theorem (MA):} Let $n \in \mathbb{N}, n > 1$. $n$ is a prime number \textit{iff} $(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$ is a field
+		\begin{betterlist}
+			% \item $n$ prime number $\hat =$ irreducable polynomial $g(X)$
+			\item \alert{Prime Number}: A number $n \in \mathbb{N} \setminus \{0, 1\}$ is a prime number \textit{iff} the following holds: If $n = u \cdot v$ for $u, v \in N$ then $u = 1$ or $v = 1$
+			% \item Proof, inverse of $\overline{1}$ is $\overline{1}$, for all elements besides $\overline{0}$ there's an inverse element, if $n$ would not be a prime number, then there would be a non-trivial decomposition into two numbers where both numbers are from this set: $\{2, \ldots, n-1\}$ and therefore we can conclude that $n$ must be a prime number
+			\begin{betterlist}
+				\item Theorem (MA') implies Theorem(MA)
+			\end{betterlist}
+		\end{betterlist}
+		\item \underline{Theorem (MA’):} Let $n \in \mathbb{N}, n > 1$. The inverse of $\overline{a} \in (\mathbb{Z}_n, +, \cdot)$ exists \textit{iff} $gcd(a, n) = 1$
+		\begin{betterlist}
+			\item $a$ and $n$ are \alert{relatively prime} \alert{iff} $gcd(a, n) = 1$
+			% \item this does not only say something about um n equal to a prime number but it also says something about other rings where n is not a prime number and for those rings this theorem exactly characterizes the invertible elements, this are the elements a bar where the greatest common divisor of a and n here is equal to one which means a and n are relatively prime
+			% \begin{betterlist}
+			% 	\item \underline{reason for $1$:} It is the neutral element of multiplication: $m \cdot m^{-1} = 1$
+			% \end{betterlist}
+			\item if $p$ is even then the greatest common devisor of $2^k$ and $p$ is at least $2$ which is not $1$ of course and therefore if $p$ is even then it's not invertible. If $p$ is odd then the prime factor decomposition doesn't contain $2$ which means the greatest common divisor of an odd $p$ and $2$ to the power of $k$ is $1$ and then we immediately have that this element is invertible % which means in this special case with this theorem we can completely characterize the even elements are not invertible, the odd elements are invertible
+			\begin{betterlist}
+				\item $2^k$ only has $2$ and $1$ as devisors, $2\cdot k$ has a lot of devisors including $1$ and $2$, thus the gcd is $1\cdot 2 = 2$, thus $2^k$ is not invertible
+				\item $2^k$ only has $2$ and $1$ as devisors, $2\cdot k+1$ has a lot of devisors excluding $2$, thus the gcd is $1$, thus $2^k+1$ is invertible
+			\end{betterlist}
+			\item \underline{Lemma (MA):} For each $u, v \in \mathbb{Z} \setminus \{0\}$ there is a gcd $g \in \mathbb{N} \setminus \{0\} \subseteq \mathbb{Z} \setminus \{0\}$ and there is a representation $g = q_u \cdot u + q_v \cdot v$ with $q_u, q_v \in \mathbb{Z}$.
+		\end{betterlist}
+		\item \alert{Eulers Theorem:} Let $a\in \mathbb{Z}$, $n\in \mathbb{N}\setminus \{0\}$ with $gcd(a, n) = 1$. Then $a^{\Phi(n)}\equiv 1 \mod n$
+		\begin{betterlist}
+			\item If $gcd(a, n) = 1$, then $\overline{a^{\Phi(n)-1}}$ is the \alert{mulitplicative inverse} of $\overline{a}$ in $\mathbb{Z}/n\mathbb{Z}$
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Polynomial Division}
+	\begin{betterlist}
+		\item in normal division one would substract, but since we are doing computations based on $GF(2)$, addition and substraction are the same, doing XOR and therefore each element is it's own inverse. Final result as soon as remainder is smaller than divisor. If one divides by a polynomial of degree $k$, one obtains a remainder with degree smaller than $k$
+		% \item \underline{Lemma: Division with remainder:} For $u(X)$, $g(X) \in F[X]$ with $g(X)\ne 0$ there exist unique polynomials $q(X), r(X) \in F[X]$ with $u(X) = q(X) g(X) + r(X)$ and $deg(r(X)) < deg(g(X))$ or $r(X) = 0$
+		% \begin{betterlist}
+		% 	\item $u(X) \mod g(X) = r(X)$, $u(X) \operatorname{div} g(X) = q(X)$
+		% 	\item $r(X)$ is a unique remainder
+		% \end{betterlist}
+	\end{betterlist}
+	\fbox{Spectre:}
+	\begin{betterlist}
+		\item Leak information directly from user applications
+		\item \underline{Preconditions for attacker:}
+		\begin{enumerate}
+			\item based on unexpected code executions due to speculative execution
+			\begin{betterlist}
+				\item Tries to predict whether branch is taken or not based on previous executions of branch instruction. Speculatively execute instructions at predicted position, avoid changes of architectural states during \alert{speculative execution}. If branch condition is finally evaluated and branch was mispredicted: Flush the effects of speculative executions (like pipeline flushing, invalidation of register writes in retiring phases etc.)%. Acceleration if branch correctly predicted, but at least correct architectural state if mispredicted
+			\end{betterlist}
+			\item can influence executed code of the victim
+			\begin{betterlist}
+				\item JavaScipt code is instrumented by web browser for memory protection (\enquote{sandboxing})
+			\end{betterlist}
+		\end{enumerate}
+		\item \underline{Steps:}
+		\begin{betterlist}
+			\item \underline{instrumented code:} \verb|if (x < array1_size) y = probe_array[array1[x] << 12];|
+			\begin{betterlist}
+				\item \verb|array1| is an array of unsigned bytes of size \verb|array1_size|
+				\item \verb|probe_array| is an array of unsigned bytes of size $1$ MB = $220$ Bytes
+				% \item \verb|array1[x] << 12| cannot be larger than $2^{20}$ , so checking for access to \verb|probe_array| is not necessary
+				\item choose \verb|x > array1_size| such that \verb|sd = array1[x]| is a secret data byte in the address space of the victim
+				\item execute instrumented code several times with \verb|x < array1_size| until branch prediction predicts if-condition to be true
+				% \item then \verb|x > array1_size| is executed such that \verb|sd = array1[x]| is secret data byte in the address space of the victim. \verb|y = probe_array[array1[x] << 12]| is executed by speculative execution
+				\item speculative execution is aborted as soon as \verb|x < array1_size| evaluates to \verb|false|.
+			\end{betterlist}
+			\item Readout of cache information as in Meltdown
+			\begin{betterlist}
+				\item \verb|probe_array| is uncached (to enable readout of microarchitectural state). Caching by iterating the attack
+				\item Uncaching by cache flushing or cache eviction. Evict certain cache line just by (at most) A memory accesses with the same set number. Cache eviction instead of flushing needed in JavaScript code, since JavaScript lacks instructions for cache flushing
+			\end{betterlist}
+		\end{betterlist}
+		\item \underline{Preconditions to win the \enquote{race}:}
+		\begin{enumerate}
+			\item \verb|array1_size| is uncached (to slow down if-condition checking)
+			\item \verb|sd = array1[x]| is cached (to accelerate \verb|probe_array[array1[x] << 12]|)
+		\end{enumerate}
+		\item \underline{Possible countermeasures:}
+		\begin{betterlist}
+			\item Stricter sandboxing
+			\begin{betterlist}
+				\item Many modern browsers execute each website in a separate process
+				\item No access to browser‘s address space possible
+				% \item Spectre attack was demonstrated with Google Chrome version 62.0.3202
+				% \item Modern Google Chrome browsers are not vulnerable anymore
+			\end{betterlist}
+			\item No speculative execution?
+			\begin{betterlist}
+				\item Huge performance degradation
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\pagewidth}
+	\fbox{Attacks by Microarchitectural Data Sampling}
+	\begin{betterlist}
+		\item \alert{Instruction Set Architecture (ISA) of a processor:} interface it provides to the software it executes. Specifies set of instructions and registers and memory processed by the instructions
+		\item \alert{Architectural states:} states defined by the ISA, i.e., memory cells and user-visible registers
+		\item \alert{Microarchitectural states:} processor states not defined in the ISA, e.g. states of functional units, states of reservation stations, cache contents etc.
+		\item It is ensured that effects of invalid out-of-order executions or discarded speculative executions do not change architectural states. However they may change microarchitectural states. Reading out microarchitectural states as side-channel information may leak information. Vulnerability on the hardware level, not on software level
+	\end{betterlist}
+	\fbox{Meltdown:}
+	\begin{betterlist}
+		\item uses Effects of \alert{out-of-order execution} to transport secret data into \alert{microarchitectural state} ($=$ buffers in reservation stations) and  uses \alert{data caching} to extract secret from microarchitectural state to \alert{architectural state}
+		\begin{betterlist}
+			\item breaks the isolation between user applications and the operating system. Allows a program to access the memory (of other programs and the operating system), even when it is not authorized to do so
+		\end{betterlist}
+		\item \underline{Preconditions for attacker}
+		\begin{enumerate}
+			% \item[\bfseries\color{PrimaryColor}$\bullet$] run on same machine and ability to start processes on this machine
+			\item[\bfseries\color{PrimaryColor}$\bullet$] able to execute code on the attacked machine
+			\item out-of-order execution with forwarding
+			\begin{betterlist}
+				\item \alert{out-of-order execution:} several instructions issued to several functional units in parallel, may be finished in an order different from the order in the program
+				\item \alert{forwarding:} in Retiring phase after execution of the instruction $i$ by a FU $n$ a result token is generated which is sent (forwarded) to all reservation stations waiting for the result of FU $n$. Instruction can executed before register has been written in case of RAW (= read after write), if calculation result that should be written to this is forwarded to FU dealing with this instruction
+			\end{betterlist}
+			\item virtual memory managment with / based on paging and kernel space mapped into virtual address space of each process
+			\begin{betterlist}
+				% \item each process virtually uses it's complete address space (of e.g. $2^{64}$ addresses). Both \alert{virtual memory} and \alert{physical memory} are partitioned into \alert{pages} of the same size (e.g. $4 KB = 2^{12} Byte$). Most significant bits (e.g. $64 – 12 = 52$ bits) of virtual address = \alert{page number}. Most significant bits (e.g. $64 – 12 = 52$ bits) of physical address = \alert{page frame number}. Access to virtual page number $v$: Hardware Memory Management Unit (\alert{MMU}) checks in page table whether process has physical memory for page $v$. \underline{If yes:} MMU provides physical page frame number $p$ and makes access to $p$. \underline{If no:} \alert{Page fault}, operating system makes new physical memory page with page frame number $p$ available, enters $p$ for virtual page number $v$ into page table. Each process has its own \alert{page table}
+				\item \underline{advantage of including kernel space into process page tables:} TLB does not need to be flushed for privileged accesses to kernel space, e.g. system calls
+			\end{betterlist}
+			\item use of caches not only for Translation Lookaside Buffer (TLB) but also for data and instruction and data caches for memory accesses, in particular data caching
+			\begin{betterlist}
+				\item modern CPUs use instruction and data caches for memory accesses to avoid slow memory accesses as far as possible
+				\item fast cache memory storing page table entries recently accessed. Lookup in TLB first. Access page table only in case of TLB miss
+			\end{betterlist}
+		\end{enumerate}
+		\item \underline{Steps:}
+		\begin{enumerate}
+			\item unauthorized READ of one byte from \verb|secret_kernel_address| is managed by Reservation Station $R_s$. The following READ in \verb|probe_array| is issued to Reservation Station $R_p$, before the READ from \verb|secret_kernel_address| has been finished. As soon as the secret data byte \verb|sd := M[secret_kernel_address]| arrives in $R_s$, it is forwarded to $R_p$ which reads \verb|probe_array[sd << 12]|. During the read of \verb|probe_array[sd << 12]| data are cached. The hardware memory protection raises an exception which is registered in the retiring phase of $R_s$ , writing into \verb|IN1| is prevented, exception is handled. However the secret data \verb|sd| left traces in the cache
+			\item read out of the changed microarchitectural state: Read from \verb|probe_array[0 << 12]|, \ldots \verb|probe_array[255 << 12]|. Measure the access time in all $256$ cases. If access to address $i \ll 12$ is fast, all other accesses slow, then the leaked secret is $i$
+			\begin{betterlist}
+				\item left shift by $12$, since a processor does not read single bytes into the cache, but cache lines (surroundings of address)
+				\item $256$ different access to \verb|probe_array| because the read byte can have $256$ different values and one just uses the \verb|probe_array| to find out which value has been read, because the address that can quickly be read corresponds to the forwarded value
+				\item ensure that the contents of \verb|probe_array| are not cached before the attack. E.g. achieved by flushing the cache lines using x86 instruction \verb|clflush|
+			\end{betterlist}
+		\end{enumerate}
+		\includegraphics[width=\linewidth]{./figures/meltdown_visualisation.png}
+		\item \underline{Ways out of abortion by exception handling:}
+		\begin{enumerate}
+			\item \underline{Fork-and-crash:} Fork attacking application before accessing invalid memory location. Access invalid memory location only in child process. Recover the secret by probing in the parent process
+			\item \underline{Exception handling:} Install an own signal handler for segmentation violation that does not crash the process
+			\item \underline{Exception suppressing via TSX:} Use Intel‘s Transactional Synchronization Extensions (TSX). Transaction = Sequence of instructions that execute atomically. All instructions of a transaction are inverted, if one of them fails. But no exception raised!. Just wrap the attacking code into a TSX transaction ...
+		\end{enumerate}
+		\item \uline{only works, if race between exception handling and cache loading (reading \texttt{probe\_array[sd]}) is won by cache loading:}
+		\begin{enumerate}
+			\item try to read from \verb|secret_kernel_address| already before actual attack (e.g. by other processes). \underline{Goal:} Bring \verb|sd = M[secret_kernel_address]| into cache, so \verb|sd| is available earlier
+			\item assuming that \verb|probe_array| starts at the beginning of a memory page and the page size is $2^{12}$, we first access $probe\_array[0 \ll 12 + 2^{11}], \ldots, probe\_array[255 \ll 12 + 2^{11}]$ (access all $256$ \verb|probe_array| pages with addresses in the middle of the pages). \underline{Goal:} Page addresses go into TLB, accelerated access to \verb|probe_array|...
+			\item \sout{bringing physical address for \texttt{secret\_kernel\_address} into TLB won't help because it would accelerate both exception handling and cache loading}
+		\end{enumerate}
+		\item \underline{Possible countermeasures:}
+		\begin{betterlist}
+			\item Do not map kernel memory into address space of user processes. \underline{Disadvantages:}
+			\begin{betterlist}
+				\item For every system call the TLB has to be flushed. Performance problem
+			\end{betterlist}
+			\item fix vulnerability in hardware
+			\begin{betterlist}
+				\item check access rights before loading
+				\item or implement hardware in a way that race is always won by access right checking + aborting the following instructions
+				\item in case of right violation: Flush the cache completely or possibly flush the "last accessed" cache lines (needs some hardware modification)
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
 \end{document}

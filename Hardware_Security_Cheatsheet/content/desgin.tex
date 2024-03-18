@@ -11,11 +11,12 @@
 % ┌───────┐
 % │ Fonts │
 % └───────┘
-\usepackage{fontspec}
 % \newfontfamily\gyre{DejaVu Math TeX Gyre}
 % colored bold
 % \newcommand\alert[1]{\textcolor{SwitchColor}{\textbf{#1}}}
 \newcommand\alert[1]{\textcolor{SwitchColor}{#1}}
+% \setmainfont{Latin Modern Roman} % select a suitable text font
+\setmathfont{Latin Modern Math}[Scale=1] % set scaling factor
 
 % ┌──────────────┐
 % │ Pseudo Code  │
@@ -61,5 +62,13 @@
 \setlist[betterlist,10]{label=$\textcolor{SwitchColor}{\blacktriangleright}$}
 \setlist[betterlist,11]{label=$\textcolor{SwitchColor}{\blacksquare}$}
 \setlist[betterlist,12]{label=$\textcolor{SwitchColor}{\blacklozenge}$}
+\setlist[betterlist,13]{label=$\textcolor{SwitchColor}{\bullet}$}
+\setlist[betterlist,14]{label=$\textcolor{SwitchColor}{\blacktriangleright}$}
+\setlist[betterlist,15]{label=$\textcolor{SwitchColor}{\blacksquare}$}
+\setlist[betterlist,16]{label=$\textcolor{SwitchColor}{\blacklozenge}$}
+\setlist[betterlist,17]{label=$\textcolor{SwitchColor}{\bullet}$}
+\setlist[betterlist,18]{label=$\textcolor{SwitchColor}{\blacktriangleright}$}
+\setlist[betterlist,19]{label=$\textcolor{SwitchColor}{\blacksquare}$}
+\setlist[betterlist,20]{label=$\textcolor{SwitchColor}{\blacklozenge}$}
 \setlist[betterlist]{itemsep=0cm, topsep=0cm, leftmargin=0.15cm, labelsep=0cm, listparindent=0cm}
 \setlist[enumerate]{itemsep=0cm, topsep=0cm, leftmargin=0.15cm, labelsep=0cm, listparindent=0cm, label=\bfseries\color{SwitchColor}\arabic*.}

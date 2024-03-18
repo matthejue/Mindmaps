@@ -339,6 +339,8 @@
 		\begin{betterlist}
 			\item $4^6 = 4^{110} \rightarrow \underbrace{1^2 * 4 = 4}_{1} \rightarrow \underbrace{4^2 * 4 = 64}_{1} \rightarrow \underbrace{64^2 = 4096}_{0}$
 		\end{betterlist}
+		% \includegraphics[width=\linewidth]{./figures/square_multiply.png}
+		\includegraphics[width=\linewidth]{./figures/square_and_multiply.png}
 	\end{betterlist}
 	\fbox{Cryptanalysis}
 	\begin{enumerate}
@@ -434,10 +436,7 @@
 		\begin{betterlist}
 			\item \sout{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible
 			\item \sout{Analytical attacks:} There is no analytical attack known that is better than brute-force
-			\item \alert{Side-channel attacks:}
-			\begin{betterlist}
-				\item TODO
-			\end{betterlist}
+			\item Side-channel attacks
 		\end{betterlist}
 	\end{betterlist}
 	\begin{betterlist}
@@ -742,7 +741,7 @@
 			\item Readout of cache information as in Meltdown
 			\begin{betterlist}
 				\item \verb|probe_array| is uncached (to enable readout of microarchitectural state). Caching by iterating the attack
-				\item Uncaching by cache flushing or cache eviction. Evict certain cache line just by (at most) A memory accesses with the same set number. Cache eviction instead of flushing needed in JavaScript code, since JavaScript lacks instructions for cache flushing
+				\item Uncaching by cache flushing or cache eviction. Evict certain cache line just by (at most) $A$ memory accesses with the same set number. Cache eviction instead of flushing needed in JavaScript code, since JavaScript lacks instructions for cache flushing
 			\end{betterlist}
 		\end{betterlist}
 		\item \underline{Preconditions to win the \enquote{race}:}
@@ -835,6 +834,100 @@
 				\item or implement hardware in a way that race is always won by access right checking + aborting the following instructions
 				\item in case of right violation: Flush the cache completely or possibly flush the "last accessed" cache lines (needs some hardware modification)
 			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\pagewidth}
+	\fbox{Associative Cache}
+
+	\includegraphics[width=\linewidth]{./figures/associative_cache.png}
+\end{minipage}
+\begin{minipage}[t]{0.2\pagewidth}
+	\fbox{Side Channel Attacks}
+	\begin{betterlist}
+		\item \underline{Observable side channel \alert{outputs} for side channel attacks:}
+		\begin{betterlist}
+			\item Power consumption
+			\begin{betterlist}
+				\item \underline{Two types:}
+				\begin{betterlist}
+					\item \alert{static power (data independent):} typically leakage
+					\item \alert{dynamic power (data / activity dependent):} stems from circuit activity and each signal change consumes dynamic power
+				\end{betterlist}
+				\item \underline{Dynamic CMOS Power Consumption:}
+				\begin{betterlist}
+					\item \alert{Switching current} from VDD to load output capacitance when \alert{output} switches from $0$ to $1$
+					\item \alert{Through current} from VDD to GND when both p-channel transistor and n-channel transistor turned on briefly during switch $0 \rightarrow 1$ or $1 \rightarrow 0$
+				\end{betterlist}
+			\end{betterlist}
+			\item Electro-magnetic emissions
+			\item Sound (accoustic)
+			\item Light emissions (optical)
+			\item Timing behavior, delay (timing and delay)
+		\end{betterlist}
+		\item \alert{Power Attacks:}
+		\begin{betterlist}
+			\item in \alert{smart cards}, one operation running at a time $\rightarrow$ simple power tracing is possible. In \alert{high-end processors} or \alert{FPGAs} typically parallel computations prevent visual SPA inspection $\rightarrow$ DPA
+			\item \alert{Simple Power Analysis (SPA):}
+			\begin{betterlist}
+				\item targets variable instruction flow. Can reveal also data in special cases
+				\item internal structure of \alert{DES} by looking at power trace (find out implemented algorithm by number of rounds etc.)
+				\begin{betterlist}
+					\item \sout{no direct key extraction possible for \alert{DES}}
+				\end{betterlist}
+				\item with higher resolution analysis on the level of single instructions (like conditional jump taken or not)
+				\item \underline{data comparison:} involves string and memory comparison operations performing a conditional branch when a mismatch is found
+				\item \underline{leak RSA key via square and multiply algorithm:}
+				\begin{betterlist}
+					\item Data dependent jump. Square always executed. Multiply depends on data. In the case of RSA, data $=$ private key
+					\item \underline{Countermeasures:} in genereal execute dummy instructions to avoid leakage by power profile. Additional cost for increasing security
+				\end{betterlist}
+				\item \underline{Countermeasures:}
+				\begin{betterlist}
+					\item avoid procedures that use secret information for conditional branching operations via \enquote{creative coding} and \enquote{performance penalty}
+					\item add code to hide power differences
+					\item countermeasures from DPA and CPA
+				\end{betterlist}
+			\end{betterlist}
+			\item \alert{Differential Power Analysis (DPA):}
+			\begin{betterlist}
+				\item targets data-dependence. Different operands present different power. Analyzes multiple execution flows. DPA typically able to make tiny differences in power consumption visible
+				\item \underline{(statistical) aspect of DPA:} \alert{Averaging} over many traces to cancel out noise and \alert{form groups of measurements} and compute differences of averages
+				\item \underline{Basic Principle:}
+				\begin{betterlist}
+					\item Consider one target gate in the circuit (for hardware implementation) or one target operation (for software implementation)
+					\item Apply sequence of input patterns $P_0, P_1, \ldots, P_n$. Measure power consumed for each input pattern
+					\item \underline{Create two sets:}
+					\begin{betterlist}
+						\item $S^+$ = set of patterns where output of target gate is $1$
+						\begin{betterlist}
+							\item if previous value of target gate was 0, then target gate contributes to increased power consumption
+							\item if previous value of target gate was 1, then target gate does not contribute to increased power consumption
+						\end{betterlist}
+						\item $S^−$ = set of transitions where output of target gate is $0$
+						\begin{betterlist}
+							\item target gate does not contribute to increased power consumption (independently from previous value)
+						\end{betterlist}
+					\end{betterlist}
+          \item Differences of single power consumptions for other gates cancel out between $S^+$ and $S^−$ by averaging
+					\item $AveragePower(S^+) - AveragePower(S^−) > 0$
+				\end{betterlist}
+        \includegraphics[width=\linewidth]{./figures/dpa_average.png} 
+			\end{betterlist}
+			\item \alert{Correlation Power Analysis (CPA):}
+			\begin{betterlist}
+				\item asdf
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Fault Injection Attacks}
+	\begin{betterlist}
+		\item \underline{Usable side channel \alert{inputs} for fault injection:}
+		\begin{betterlist}
+			\item Supply voltage
+			\item Clock frequency
+			\item Temperature
+			\item Light
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}

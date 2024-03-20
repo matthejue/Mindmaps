@@ -270,8 +270,9 @@
 			\item[\color{PrimaryColor}\textbf{2.} ] B checks whether $M = d_{K_{pubA}}(e_{K_{prA}}(M))$ on recieving it
 			\item to make it more efficient A uses a known hash function to compute a shorter $hash(M)$ and encrypt this: $e_{K_{prA}}(hash(M))$
 		\end{betterlist}
-		\item \alert{Security:}
+		\item \alert{Attacks / Security:}
 		\begin{betterlist}
+			\item timing and accoustic \enquote{chosen cipher text} attack
 			\item relies on the hardness to derive the \alert{private exponent} $d$ given the public key $(n, e)$
 			\item if it would be possible to factorize $n$, then it would also be possible to compute $\Phi(n)= (p - 1) \cdot (q - 1)$. Use very big prime numbers $p$ and $q$ to make it hard to factorize $n$ into $p$ and $q$
 			\item with the public key $e$ it would then be possible to compute the inverse of $e$ in $\mathbb{Z}_{\Phi(n)}$
@@ -279,6 +280,7 @@
 				\item with Euklid‘s algorithm $gcd(e, \Phi(n) ) = 1$ is computed as well as integers $x$ and $y$ with $x \cdot e + y \cdot \Phi(n) = 1$
 				\item then $x$ mod $\Phi(n)$ is the multiplicative inverse, i.e., $x$ mod $\Phi(n)$ is the private key $d$
 			\end{betterlist}
+			\item
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
@@ -436,7 +438,7 @@
 		\begin{betterlist}
 			\item \sout{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible
 			\item \sout{Analytical attacks:} There is no analytical attack known that is better than brute-force
-			\item Side-channel attacks
+			\item Side-channel attack
 		\end{betterlist}
 	\end{betterlist}
 	\begin{betterlist}
@@ -865,61 +867,198 @@
 			\item Light emissions (optical)
 			\item Timing behavior, delay (timing and delay)
 		\end{betterlist}
-		\item \alert{Power Attacks:}
+	\end{betterlist}
+	\fbox{Power Attacks}
+	\begin{betterlist}
+		\item in \alert{smart cards}, one operation running at a time $\rightarrow$ simple power tracing is possible. In \alert{high-end processors} or \alert{FPGAs} typically parallel computations prevent visual SPA inspection $\rightarrow$ DPA
+		\item \alert{Simple Power Analysis (SPA):}
 		\begin{betterlist}
-			\item in \alert{smart cards}, one operation running at a time $\rightarrow$ simple power tracing is possible. In \alert{high-end processors} or \alert{FPGAs} typically parallel computations prevent visual SPA inspection $\rightarrow$ DPA
-			\item \alert{Simple Power Analysis (SPA):}
+			\item targets variable instruction flow. Can reveal also data in special cases
+			\item internal structure of \alert{DES} by looking at power trace (find out implemented algorithm by number of rounds etc.)
 			\begin{betterlist}
-				\item targets variable instruction flow. Can reveal also data in special cases
-				\item internal structure of \alert{DES} by looking at power trace (find out implemented algorithm by number of rounds etc.)
-				\begin{betterlist}
-					\item \sout{no direct key extraction possible for \alert{DES}}
-				\end{betterlist}
-				\item with higher resolution analysis on the level of single instructions (like conditional jump taken or not)
-				\item \underline{data comparison:} involves string and memory comparison operations performing a conditional branch when a mismatch is found
-				\item \underline{leak RSA key via square and multiply algorithm:}
-				\begin{betterlist}
-					\item Data dependent jump. Square always executed. Multiply depends on data. In the case of RSA, data $=$ private key
-					\item \underline{Countermeasures:} in genereal execute dummy instructions to avoid leakage by power profile. Additional cost for increasing security
-				\end{betterlist}
-				\item \underline{Countermeasures:}
-				\begin{betterlist}
-					\item avoid procedures that use secret information for conditional branching operations via \enquote{creative coding} and \enquote{performance penalty}
-					\item add code to hide power differences
-					\item countermeasures from DPA and CPA
-				\end{betterlist}
+				\item \sout{no direct key extraction possible for \alert{DES}}
 			\end{betterlist}
-			\item \alert{Differential Power Analysis (DPA):}
+			\item with higher resolution analysis on the level of single instructions (like conditional jump taken or not)
+			\item \underline{data comparison:} involves string and memory comparison operations performing a conditional branch when a mismatch is found
+			\item \underline{leak RSA key via square and multiply algorithm:}
 			\begin{betterlist}
-				\item targets data-dependence. Different operands present different power. Analyzes multiple execution flows. DPA typically able to make tiny differences in power consumption visible
-				\item \underline{(statistical) aspect of DPA:} \alert{Averaging} over many traces to cancel out noise and \alert{form groups of measurements} and compute differences of averages
-				\item \underline{Basic Principle:}
+				\item Data dependent jump. Square always executed. Multiply depends on data. In the case of RSA, data $=$ private key
+				\item \underline{Countermeasures:} in genereal execute dummy instructions to avoid leakage by power profile. Additional cost for increasing security
+			\end{betterlist}
+			\item \underline{Countermeasures:}
+			\begin{betterlist}
+				\item avoid procedures that use secret information for conditional branching operations via \enquote{creative coding} and \enquote{performance penalty}
+				\item add code to hide power differences
+				\item countermeasures from DPA and CPA
+			\end{betterlist}
+		\end{betterlist}
+		\item \alert{Differential Power Analysis (DPA):}
+		\begin{betterlist}
+			\item targets data-dependence. Different operands present different power. Analyzes multiple execution flows. DPA typically able to make tiny differences in power consumption visible
+			\item \underline{(statistical) aspect of DPA:} \alert{Averaging} over many traces to cancel out noise and \alert{form groups of measurements} and compute differences of averages
+			\item \underline{Basic Principle:}
+			\begin{betterlist}
+				\item consider one target gate in the circuit (for hardware implementation) or one target operation (for software implementation)
+				\item apply sequence of input patterns $P_0, P_1, \ldots, P_n$. Measure power consumed for each input pattern
+				\item \underline{Create two sets:}
 				\begin{betterlist}
-					\item Consider one target gate in the circuit (for hardware implementation) or one target operation (for software implementation)
-					\item Apply sequence of input patterns $P_0, P_1, \ldots, P_n$. Measure power consumed for each input pattern
-					\item \underline{Create two sets:}
+					\item $S^+$ = set of patterns where output of target gate is $1$
 					\begin{betterlist}
-						\item $S^+$ = set of patterns where output of target gate is $1$
-						\begin{betterlist}
-							\item if previous value of target gate was 0, then target gate contributes to increased power consumption
-							\item if previous value of target gate was 1, then target gate does not contribute to increased power consumption
-						\end{betterlist}
-						\item $S^−$ = set of transitions where output of target gate is $0$
-						\begin{betterlist}
-							\item target gate does not contribute to increased power consumption (independently from previous value)
-						\end{betterlist}
+						\item if previous value of target gate was $0$, then target gate contributes to increased power consumption
+						\item if previous value of target gate was $1$, then target gate does not contribute to increased power consumption
 					\end{betterlist}
-          \item Differences of single power consumptions for other gates cancel out between $S^+$ and $S^−$ by averaging
-					\item $AveragePower(S^+) - AveragePower(S^−) > 0$
+					\item $S^−$ = set of transitions where output of target gate is $0$
+					\begin{betterlist}
+						\item target gate does not contribute to increased power consumption (independently from previous value)
+					\end{betterlist}
 				\end{betterlist}
-        \includegraphics[width=\linewidth]{./figures/dpa_average.png} 
+				% \item contribution of a single gate to overall power consumption is small, but nevertheless visible in the average power consumption of the two sets $S^+$ and $S^−$
+				\item differences of single power consumptions for other gates cancel out between $S^+$ and $S^−$ by averaging
+				\item $AveragePower(S^+) - AveragePower(S^−) > 0$
 			\end{betterlist}
-			\item \alert{Correlation Power Analysis (CPA):}
+			\includegraphics[width=0.8\linewidth]{./figures/dpa_average.png}
+
+			\item order of applying patterns not unimportant, as there has to be a switch from $0$ to $1$ in order to have a increased power consumption, so one has the best result if one applies always one pattern from $S^+$, then one from $S^-$. If order is random it should also be ok, since on average \enquote{half of the transitions in $S^+$} go from $0$ to $1$ and other half from $1$ to $1$, in $S^-$ there's never a $0\rightarrow 1$ transition
+			\item \underline{\alert{one / single bit distiguisher} for partitioning into $S^+(k_s)$ and $S^−(k_s)$:} A location in the algorithm where knowledge on a small subset of key bits enables the computation of a bit value. Gate output, output bit of an operation which one can compute, if plain and / or cipher text + a (small) subset of the key is known. Hope something is correlated with key bit assumption, if correlation holds partitioning is ok, then can derive some information
+
+			% \includegraphics[width=\linewidth]{./figures/distinguisher_not_always_working.png}
+			\includegraphics[width=0.8\linewidth]{./figures/distinguisher_not_always_working_short.png}
 			\begin{betterlist}
-				\item asdf
+				\item effects cancel out, because transition happens at almost the same time at both places
+			\end{betterlist}
+			\item \alert{DPA attack on DES:}
+			\begin{betterlist}
+				\item with the correct assumption on $k_s$ the value of $(L_{15})_j (k_s, C_i)$ is correct with \enquote{probability $1$}
+				\begin{betterlist}
+					\item $AveragePower(S^+(k_s)) - AveragePower(S^−(k_s)) > 0$
+				\end{betterlist}
+				\item if assumption on $k_s$ is wrong, the value of $(L_{15})_j (k_s, C_i)$ is correct with \enquote{probability $\approx 0.5$}
+				\begin{betterlist}
+					\item $AveragePower(S^+(k_s)) - AveragePower(S^−(k_s)) \approx 0$
+				\end{betterlist}
+				\item since the point in time when exactly $(L_{15})_j$ is computed is unknown, DPA does not record \alert{single power values} for plain texts $P_i$, but \alert{power traces} over a certain amount of time
+				% \item the power traces for different plain texts $P_i$ have to be precisely synchronized wrt. the start time of the recording
+			\end{betterlist}
+			\includegraphics[width=0.8\linewidth]{./figures/dpa_attack_on_des.png}
+
+			\begin{betterlist}
+				\item Compute average traces for $S^+(k_s)$ and $S^−(k_s)$. Subtract average traces. Zoom in for analyzing differential trace. Repeat for all keys $k_s$
+				\item Method reveals $6$ bits of $k_{16}$. Repeat for different bit $j$ of $L_{15}$, revealing $6$ other bits. By this, $48$ out of $56$ bits of user key $k$ are known. \underline{Two options:} brute-force attack to compute remaining $8$ bits or continue with previous rounds
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\pagewidth}
+	\fbox{Power Attacks Continue}
+	\begin{betterlist}
+		\item \alert{DPA attack on AES:}
+		\begin{betterlist}
+			\item use a bit (e.g. LSB) of the output of first S-box in round $1$ for partitioning. Depends on first key byte. Number of key hypotheses is $256$. Just repeat the attack for remaining $15$ S-Boxes and key bytes
+			\item average traces for all $256$ possible key bytes with output bit $0$ and $1$ ($S^+(k_i)$ and $S^-(k_i)$) and then compute differential trace for all key bytes
+		\end{betterlist}
+		\item \underline{Countermeasures to DPA:} Difficult, but try to increase at least the number of samples needed for obtaining meaningful results by:
+		\begin{betterlist}
+			\item Signal size reduction
+			\begin{betterlist}
+				\item Use operations leaking less information in power consumption
+				\item Reduce power consumption by different gate realizations (technology)
+			\end{betterlist}
+			\item Adding noise to power consumption measurements
+			\begin{betterlist}
+				\item Random noise cancels out by averaging (but more samples needed)
+				\item Non-random contributions to hide key-dependent power consumption (\enquote{leak masking})
+				\item Temporal noise (like varying clock speeds) for disturbing trace synchronization (shift measurements against each other, then can avoid sharp peak in differential power trace, e.g. random generator that influences clock speed)
+			\end{betterlist}
+			\item Balance power consumption (e.g. by dual-rail precharge logic, two transistors which always switch in opposite direction, 0 $\rightarrow$ 1 and 1 $\rightarrow$ 0 have same power consumption)
+			\item Power supply filters (simplest just capacitors which just consume / cancel the peaks)
+			\item Frequent key exchange to prevent attacks with large amount of samples
+		\end{betterlist}
+	\end{betterlist}
+	\begin{betterlist}
+		\item \alert{Correlation Power Analysis (CPA):}
+		\begin{betterlist}
+			\item goes beyond the usage of binary distinguishers (as for DPA)
+			\item often less traces are needed than with DPA
+			\item \underline{basic idea:} compute a correlation between \alert{power consumption} and \alert{processed values} (over several bits)
+			\begin{betterlist}
+				\item consider \alert{Hamming weight (HW)} of the intermediate value $x$ (e.g. a byte) that directly \alert{correlates with power consumption}
+				\begin{betterlist}
+					\item larger $HW(x)$, larger power consumption
+					\item smaller $HW(x)$, smaller power consumption
+					\item \underline{example:} Hamming weight of output of first S-box in round $1$ of AES
+				\end{betterlist}
+				% \item $X$ = power consumptions (for $n$ different \alert{plain texts}). $Y$ = hamming weights of some intermediate value (like output of first S-box in round $1$ of AES based on a certain key byte assumption)%. Choose the key byte hypothesis where correlation for some point in time is maximized. Repeat the previous steps for every key part in order to recover the full key
+				\item assume we have $n$ \alert{power traces (of plain texts)}, each with $p$ data points $d_j^k$ $(1 \le k \le n, 1 \le j \le p)$. There are $m$ subkey guesses, for each subkey guess $i$ and each power trace the \alert{hamming weight of the guessed intermdiate value} (like output of first S-box in round $1$ of AES based on a certain key byte assumption) is $h_i^k$ $(1 \le k \le n, 1 \le i \le m)$. We have to compute $p \cdot m$ correlation coefficients $ρ_{j,i}$ for each time $j$ and each subkey guess $i$:
+
+				\includegraphics[width=0.4\linewidth]{./figures/pearson_correlation_coefficient.png}
+				% \item \alert{Pearson‘s correlation coefficient:} $−1 \le \rho_{X,Y} \le 1$
+				%
+				% \includegraphics[width=0.1\linewidth]{./figures/pearson_symbol.png}
+				% \includegraphics[width=0.4\linewidth]{./figures/pearson_correlation_coefficient.png}
+				% \begin{betterlist}
+				% 	\item $X$ = Power consumptions (for $n$ different plain texts)
+				% 	\item $Y$ = Hamming weights of some intermediate value (like output of first S-box in round $1$ of AES based on a certain key byte assumption)
+				% \end{betterlist}
+				\item we select the key guess $i$ with the highest $\rho_{j,i}$. Repeat the previous steps for every key part in order to recover the full key
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Timing Attacks}
+	\begin{betterlist}
+		\item \underline{Timing attack against RSA:}
+		\begin{betterlist}
+			\item simple timing attack over number of $1$'s in Square and Multiply. If number of $1$'s is \alert{very small} or \alert{very high}, then such a simple timing attack enables \alert{brute-force attack}
+			\item similiar attack possible as for accoustic chosen ciphertext attack
+		\end{betterlist}
+		\item similar to SPA countermeasures
+	\end{betterlist}
+	\fbox{Attack over electromagnetic side channels}
+	\begin{betterlist}
+		\item electrical transitions induce EM field captured by inductive probe. Obtain current signal on the die by integrating the recorded signal. Changes / derivation of current $\hat=$ EM field $\rightarrow$ similar to power analysis
+		% \item can be used for \enquote{reverse engineering} of chip properties. Areas with high activity = CPU, functional units. Local information (resolution depends on probe). 
+		\item \underline{Advantage:} Allows localized readings. \underline{Disadvantages:} Experimentally complicated. Geometrical scanning can be tedious. Low level and noisy signals (decapsulation required)
+		\item \underline{Attacks:} approaches similar to power analysis possible (differential, correlation)
+		\item \underline{Countermeasures:} E.g. shielding against electro-magnetic radiation, Faraday cages, ...
+	\end{betterlist}
+	\fbox{Attack over acoustic side channels}
+	\begin{betterlist}
+		\item \alert{Acoustic attack against RSA}
+		\begin{betterlist}
+			\item attack on modular exponentiation step $y^{d \mod (q−1)} \mod q$ to compute $q$ (attacking $p$ would be possible as well)
+      \item if $q$ is known, then $p = n/q$ is known and $\Phi(n)= (p − 1) \cdot (q − 1)$ is known and $d$ can be computed from $e$
+			\item assume that before round $i$ the $i$ most significant bits of $q$, i.e., $(q_{2047} \ldots q_{2048−i})$ are already known
+			\item choose ciphertext $y_i = (q_{2047} \ldots q_{2048−i} 011 \ldots 1)$
+			\item \alert{Case 1:} $q_{2048−i−1} = 1$, then $q > y^i$, then $(y^i)_q=y^i$ goes into square and multiply algorithm with exponent $d \mod (q − 1)$
+			\item \alert{Case 2:} $q_{2048−i−1} = 0$, then $q \le y^i$, then $(y^i)_q=(y^i - q)$ goes into square and multiply algorithm with exponent $d \mod (q − 1)$
+      \item square and multiply algorithm always multiplies with $(y^i)_q$. Different acoustic behaviour depending on $(y^i)_q$, because in the two different cases $(y^i)_q$ have vastly different values
+      \item after estimating $q_{2048−i−1}$ from acoustic analysis go to round $i + 1$ with known $i + 1$ most significant bits $(q_{2047} \ldots q_{2048−i−1})$
+      
+		\end{betterlist}
+		\item \underline{Countermeasures:}
+		\begin{betterlist}
+			\item acoustic shielding
+			\item carefully designed acoustic noise generator to hide acoustic signal?
+			\item parallel software load for hiding? (multi-core processors, FPGA-implementations)
+			\item \enquote{cipher text randomization} to compromise chosen cipher text approach: Instead of decrypting cipher text $y$. Choose random text $r$ (not completely random, but invertible). Decrypt $r^e \cdot y$, i.e., $r^e \cdot y$ is used for exponentiation instead of $y$. Multiply the result by $r^{−1}$. $(r^e \cdot y)^d \cdot r^{−1} \mod n \equiv r^{ed} \cdot r^{−1} \cdot y^d \mod n \equiv r \cdot r^{−1} \cdot y^d \mod n \equiv y^d \mod n$
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Chinese Remainder Theorem (CRT)}
+	\begin{betterlist}
+		\item accelerated exponentiation
+		\item the number of operations is not reduced, but the bit width of the operands
+		\item possible computation of $x = y^d \mod n$ with $n = p \cdot q$, $p$, $q$ primes
+		\begin{betterlist}
+			\item \underline{Transformation into CRT domain:} $y_p \equiv y \mod p, y_q \equiv y \mod q$
+			\item \underline{Exponentiation in CRT domain:}\\
+			$x_p \equiv y_p^{d \mod (p-1)} \mod p, x_q \equiv y_q^{d \mod (q-1)} \mod q$
+			\item \underline{Backtransformation using CRT}: $x \equiv [q \cdot c_p] \cdot x_p + [p \cdot c_q] \cdot x_q \mod n$
+			\begin{betterlist}
+				\item where $c_p$ is the inverse of $q$ in $\mathbb{Z}/p\mathbb{Z}$, $c_q$ is the inverse of $p$ in $\mathbb{Z}/q\mathbb{Z}$.
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\pagewidth}
 	\fbox{Fault Injection Attacks}
 	\begin{betterlist}
 		\item \underline{Usable side channel \alert{inputs} for fault injection:}

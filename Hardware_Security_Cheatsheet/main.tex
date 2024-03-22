@@ -5,9 +5,9 @@
 \input{./content/declarations}
 
 \begin{document}
-\fontsize{4pt}{5pt}\selectfont
+\fontsize{3pt}{3pt}\selectfont
 
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{General}
 	\begin{betterlist}
 		\item \alert{Hardware Security} goes beyond classical cryptography. It protects the implementations of cryptographic algorithms against physical attacks, side-channel attacks etc. Avoids tampering with devices
@@ -66,8 +66,9 @@
 		\end{betterlist}
 		\item \underline{Several parties may be untrusted:} IP vendors (untrusted IP), System integrator (untrusted system, IP piracy), Fab (untrusted IC, IC Piracy (Counterfeiting)), Assembly (IC Piracy (Counterfeiting))
 		\item  \alert{Counterfeit} chips are not restricted to Overproduced chips (foundry) and Defective / out-of-spec chips (assembly + test). The whole IC life cycle and supply chain is affected: \alert{Recycled ICs} and \alert{Cloned ICs}
+		\item \alert{Soft IP:} High Level Synthesis (RTL HDL code from other vendor). \alert{Firm IP:} Logic Synthesis. \alert{Hard IP:} Physical Synthesis (Place \& Route)
 	\end{betterlist}
-	\includegraphics[width=\linewidth]{./figures/supply_chain_vulnerabilities.png}
+	\includegraphics[width=0.8\linewidth]{./figures/supply_chain_vulnerabilities.png}
 	\fbox{\enquote{Classical} Cryptography}
 	\begin{betterlist}
 		\item \alert{Cryptology:} cryptography + cryptanalysis
@@ -76,7 +77,7 @@
 		\item \alert{Basic Cryptographic Scheme:} \alert{injective} and both sets have \alert{same cardinality}, so \alert{one-to-one}, \alert{bijective}, so it is \alert{reversable}, $D$ is the \alert{inverse function} of $E$ and by this also bijective
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Classification by type of encryption operations}
 	\begin{betterlist}
 		\item \alert{Substitution ciphers}
@@ -186,7 +187,7 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Classification by key}
 	\begin{betterlist}
 		\item \alert{Crypto System with Keys:} $P = D(K_D, E(K_E, P))$
@@ -239,7 +240,7 @@
 		\begin{betterlist}
 			\item Key exchange (for symmetric schemes) and digital signatures performed with (slow) asymmetric algorithms. Encryption of data is done using (fast) symmetric ciphers
 		\end{betterlist}
-		\includegraphics[width=\linewidth]{./figures/hybrid_assymetric-symmetric_systems.png}
+		\includegraphics[width=0.7\linewidth]{./figures/hybrid_assymetric-symmetric_systems.png}
 	\end{betterlist}
 	\fbox{RSA}
 	\begin{betterlist}
@@ -280,11 +281,10 @@
 				\item with Euklid‘s algorithm $gcd(e, \Phi(n) ) = 1$ is computed as well as integers $x$ and $y$ with $x \cdot e + y \cdot \Phi(n) = 1$
 				\item then $x$ mod $\Phi(n)$ is the multiplicative inverse, i.e., $x$ mod $\Phi(n)$ is the private key $d$
 			\end{betterlist}
-			\item
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Classification by way to process plaintext}
 	\begin{betterlist}
 		\item \alert{Stream Ciphers}
@@ -353,7 +353,7 @@
 		\item Fault injection attack
 	\end{enumerate}
 \end{minipage}
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Advanced Encryption Standard (\alert{AES})}
 	\begin{betterlist}
 		\item \underline{requirements for all AES candidate submissions were:}
@@ -417,7 +417,7 @@
 
 \newpage
 
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{AES Continue}
 	\begin{betterlist}
 		\item \alert{Decryption:}
@@ -463,7 +463,7 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Mathematical background}
 	\begin{betterlist}
 		\item \underline{Overview:}
@@ -579,7 +579,7 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Residue class ring}
 	\begin{betterlist}
 		\item $\boxed{12 / 10 = 1 \wedge 12 \mod 10 = 2 \enspace(\text{remainder})} \Rightarrow 2 \equiv 12 \mod 10 \Leftrightarrow 2 + 1 \cdot 10 = 12 + 0 \cdot 10 \Leftrightarrow \boxed{2 + 1 \cdot 10 = 12}\Leftrightarrow 2 + 2 \cdot 10 = 12 + 1 \cdot 10$ ($12$ is the dividend, because it's larger than $2$, $0\le 2< 10$)
@@ -632,7 +632,7 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.198\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Polynomial rings over $GF(2)$}
 	\begin{betterlist}
 		\item $F[X]$: All polynomials in one variable $X$ over the field $F$, coefficients are elements of $F$
@@ -767,7 +767,7 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.2\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Attacks by Microarchitectural Data Sampling}
 	\begin{betterlist}
 		\item \alert{Instruction Set Architecture (ISA) of a processor:} interface it provides to the software it executes. Specifies set of instructions and registers and memory processed by the instructions
@@ -839,15 +839,16 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.2\pagewidth}
+\newpage
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Associative Cache}
 
 	\includegraphics[width=\linewidth]{./figures/associative_cache.png}
 \end{minipage}
-\begin{minipage}[t]{0.2\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Side Channel Attacks}
 	\begin{betterlist}
-		\item \underline{Observable side channel \alert{outputs} for side channel attacks:}
+		\item \uline{Observable (physical, not logical) side channel \alert{outputs} for side channel attacks:}
 		\begin{betterlist}
 			\item Power consumption
 			\begin{betterlist}
@@ -885,12 +886,7 @@
 				\item Data dependent jump. Square always executed. Multiply depends on data. In the case of RSA, data $=$ private key
 				\item \underline{Countermeasures:} in genereal execute dummy instructions to avoid leakage by power profile. Additional cost for increasing security
 			\end{betterlist}
-			\item \underline{Countermeasures:}
-			\begin{betterlist}
-				\item avoid procedures that use secret information for conditional branching operations via \enquote{creative coding} and \enquote{performance penalty}
-				\item add code to hide power differences
-				\item countermeasures from DPA and CPA
-			\end{betterlist}
+			\item \underline{Countermeasures:} \alert{1)} avoid procedures that use secret information for conditional branching operations via \enquote{creative coding} and \enquote{performance penalty} \alert{2)} add code to hide power differences \alert{3)} countermeasures from DPA and CPA
 		\end{betterlist}
 		\item \alert{Differential Power Analysis (DPA):}
 		\begin{betterlist}
@@ -948,7 +944,7 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.2\pagewidth}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Power Attacks Continue}
 	\begin{betterlist}
 		\item \alert{DPA attack on AES:}
@@ -1025,14 +1021,14 @@
 		\item \alert{Acoustic attack against RSA}
 		\begin{betterlist}
 			\item attack on modular exponentiation step $y^{d \mod (q−1)} \mod q$ to compute $q$ (attacking $p$ would be possible as well)
-      \item if $q$ is known, then $p = n/q$ is known and $\Phi(n)= (p − 1) \cdot (q − 1)$ is known and $d$ can be computed from $e$
+			\item if $q$ is known, then $p = n/q$ is known and $\Phi(n)= (p − 1) \cdot (q − 1)$ is known and $d$ can be computed from $e$
 			\item assume that before round $i$ the $i$ most significant bits of $q$, i.e., $(q_{2047} \ldots q_{2048−i})$ are already known
 			\item choose ciphertext $y_i = (q_{2047} \ldots q_{2048−i} 011 \ldots 1)$
 			\item \alert{Case 1:} $q_{2048−i−1} = 1$, then $q > y^i$, then $(y^i)_q=y^i$ goes into square and multiply algorithm with exponent $d \mod (q − 1)$
 			\item \alert{Case 2:} $q_{2048−i−1} = 0$, then $q \le y^i$, then $(y^i)_q=(y^i - q)$ goes into square and multiply algorithm with exponent $d \mod (q − 1)$
-      \item square and multiply algorithm always multiplies with $(y^i)_q$. Different acoustic behaviour depending on $(y^i)_q$, because in the two different cases $(y^i)_q$ have vastly different values
-      \item after estimating $q_{2048−i−1}$ from acoustic analysis go to round $i + 1$ with known $i + 1$ most significant bits $(q_{2047} \ldots q_{2048−i−1})$
-      
+			\item square and multiply algorithm always multiplies with $(y^i)_q$. Different acoustic behaviour depending on $(y^i)_q$, because in the two different cases $(y^i)_q$ have vastly different values
+			\item after estimating $q_{2048−i−1}$ from acoustic analysis go to round $i + 1$ with known $i + 1$ most significant bits $(q_{2047} \ldots q_{2048−i−1})$
+
 		\end{betterlist}
 		\item \underline{Countermeasures:}
 		\begin{betterlist}
@@ -1058,16 +1054,453 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.2\pagewidth}
-	\fbox{Fault Injection Attacks}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{How to inject faults}
 	\begin{betterlist}
-		\item \underline{Usable side channel \alert{inputs} for fault injection:}
+		\item \underline{Usable (physical, not logical) side channel \alert{inputs} for fault injection:} Supply voltage. Clock frequency. Temperature. Light
+		\item \alert{Non-Invasive Fault Injection Attacks}
 		\begin{betterlist}
-			\item Supply voltage
-			\item Clock frequency
-			\item Temperature
-			\item Light
+			\item Lowest cost (need oscilloscopes, waveform generators, ...). No damage to the target IC
+			\item \alert{Clock Glitching:} Increase clock speed for short time (one or more cycles). Prevent flip-flops from latching correct data and \enquote{skips instructions}. Requires knowledge on when to attack what
+			\item \alert{Voltage Glitching:} Burst of high or low voltage. Increase or decrease gate speeds. Extreme case: $VDD < VTH \Rightarrow$ Change behavior of transistors. Effects as for clock glitching + change control logic outputs / change memory outputs. Requires knowledge on when to attack what
+		\end{betterlist}
+		\item \alert{Semi-Invasive Fault Injection Attacks}
+		\begin{betterlist}
+			\item Intermediate cost (need better oscilloscopes, logic analyzers, test boards, ...). Minimal physical tampering required.
+			\item Preceded by decapsulation of the IC ($\Rightarrow$ semi-invasive). Decapsulation with \alert{mechanical} or \alert{chemical} methods
+			\item \alert{Local Heating:}  High power laser is used to selectively heat small areas. Hot enough to change $V_{th}$ but not hot enough to damage. Trial and error with location is used to determine useful glitches
+			\item \alert{Flash Glitching:} Magnified camera flash can cause mass glitching. Tinfoil masks created to cause selective glitching. Trial and error with location and timing is used to determine useful glitches
+			\item \alert{Laser Glitching:} Infrared laser is used to selectively glitch small areas. Trial and error with location and timing is used to determine useful glitches. Process is more precise than Flash Glitching
+			\item \alert{Backside Imaging:} Substrate exposed to infrared light / X-ray. Transistor layout is visible through substrate. Reverse engineering of block-level functionality: determine size of data bus, determine location of control logic, determine location of security logic. With infrared light. Picture taken with standard low-cost monochrome CCD camera
+			\item \alert{Laser Scanning:} See memory structures and read stored values
+		\end{betterlist}
+		\item \alert{Invasive Fault Injection Attacks}
+		\begin{betterlist}
+			\item High cost. E.g. Removing layers of an IC, scanning by electron microscopes, small microprobes. Destructive. Modifies attacked IC itself
+			\item \underline{Attacks:}
+			\begin{betterlist}
+				\item \alert{Signal injection:} Use probes to enforce certain logical values / flip logical values. Purpose: Modify control signals / data values on the chip. Modify memory contents. Forcefully bypass security protection
+				\item \alert{Disconnect nets in the circuit by laser cutting}
+				\item \alert{Modify nets by wire bonding}
+				\item \alert{Destroy transistors / wires by high voltage between two probes}
+			\end{betterlist}
+			\item \underline{Other attacks:}
+			\begin{betterlist}
+				\item \alert{Get physical access to all structures of the IC:} Decapsulation. Use of acids to remove layers one by one. Image each layer before removing it
+				\item \alert{Reverse Engineering:} Provide knowledge about design of IC. Layout reconstruction from images. Build netlist. Find out all functions of IC
+				\item \alert{Memory Extraction:} Read contents of ROM from layout reconstruction. Scan contents of EEPROM/FLASH
+				\item \alert{Micro Probing:} Microprobes can also provide side channel outputs. Listen to control lines. Listen to data bus
+			\end{betterlist}
+			\item \underline{IC Modifications:}
+			\begin{betterlist}
+				\item \alert{Decapsulation}
+				\item \alert{Laser Cutting:} Not completely destructive. Selective exposure of lower layers. Selectively disconnect nets
+				\item \alert{Test Point Creation:} Cut test points into IC. More spots for micro probing / signal injection below top layer. Access more signals
+				\item \alert{Wire Bonding:} Use laser cutting to expose net / cut test point for bonding target. Add wire for signal insertion or for modifying circuit paths as needed
+			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Countermeasures}
+	% \item it is currently believed that an attacker with infinite resources can break an arbitrary device by side-channel analysis and fault injection. Moreover, security must be balanced against performance, power consumption and cost, so countermeasures are subject to limitations
+	\begin{betterlist}
+		\item \alert{Non-Invasive Fault Injection countermeasures}
+		\begin{betterlist}
+			\item add voltage and frequency sensors to detect voltage / frequency glitching attacks
+		\end{betterlist}
+		\item \alert{Semi-Invasive Fault Injection countermeasures}
+		\begin{betterlist}
+			\item ambient light sensors and switches against decapsulation of the device
+		\end{betterlist}
+		\item \alert{Invasive Fault Injection counntermeasures}
+		\begin{betterlist}
+			\item \alert{Probing Attempt Detector:} to detect probing. \underline{Idea:} Frequency depends on delay. Based on a ring oscillator. A ring oscillator (RO) with an attacked victim line temporarily oscillates with a reduced frequency. Use two ring oscillators with (almost) identical frequencies. Detect non-negligable frequency differences between reference RO and RO with victim line
+			% A probe on the victim line increases its capacity and thus the delay of the ring
+
+			\includegraphics[width=\linewidth]{./figures/probing_attempt_detector.png}
+			\item \alert{Top-layer Sensor Meshes:} to avoid access to chip internals. Additional metallization layers form a sensor mesh above the actual circuit and do not carry any critical signals. All the paths in a sensor mesh are continuously monitored for interruptions and short-circuits while power is available. Prevents laser cutter or selective etching access to the bus lines. Mesh layer hides the lower layer which makes navigation on the chip surface for probing and FIB (Focused Ion Beam) editing more tedious
+		\end{betterlist}
+		\item \alert{All types of Fault Injection} use \enquote{standard} error detection / error correction methods
+		\begin{betterlist}
+			% \item Re-use of \enquote{classical} \alert{error detection / correction} techniques to \alert{detect} fault injection attacks
+			\item \alert{Soft Error:} temporarily changing a logic value in the circuit due to a random natural event
+			% \begin{betterlist}
+			%   \item while \alert{Fault Injection} temporarily changes a logic value in the circuit due to an attack
+			% \end{betterlist}
+			\item \alert{error detection:}
+			\begin{betterlist}
+				\item \alert{self-checking design:} Functional unit designed in a way that faults manifest themselves as invalid (error-space) outputs. Invalid outputs are detectable / correctable by an external code checker
+
+				\includegraphics[width=0.8\linewidth]{./figures/self_checking_design.png}
+				\item \alert{error-detecting codes:}  A simple error-detecting code (detects all single-bit errors): Attach an even parity bit to each $k$-bit data word. Check bit = XOR of all data bits. \alert{Data space:} All $2^k$ possible $k$-bit words. \alert{Code space:} All $2^k$ possible even-parity $(k + 1)$-bit codewords. \alert{Error space:} All $2^k$ possible odd-parity $(k + 1)$-bit noncodewords
+
+				\begin{betterlist}
+					\item many redundancy techniques can be considered as coding schemes. \alert{Duplex:} Using code $\{00, 11\}$. Bit $0$ encoded as $00$, $1$ as $11$. Detects any error in one version. \alert{Triplex:} Using code $\{000, 111\}$. Corrects all single errors. If we triplicate the voter to obtain 3 results, we perform $f(x)$ on coded inputs, getting coded outputs
+
+					% \includegraphics[width=0.6\linewidth]{./figures/error_detecting_codes.png}
+					% \includegraphics[width=0.4\linewidth]{./figures/redundancy_as_coding_scheme.png}
+					\item \alert{checkpointing \& recovery:} Store system state at checkpoint, revert if fault / attack is detected
+
+					% \includegraphics[width=0.6\linewidth]{./figures/checkpointing_recovery.png}
+					\item \alert{self-destruction:} When attack is detected: Destroy circuit
+				\end{betterlist}
+
+				% \includegraphics[width=0.3\linewidth]{./figures/parity_bit.png} 
+			\end{betterlist}
+			\item \alert{error correction:}
+			\begin{betterlist}
+				\item \alert{triple modular redundancy:} the voting element accepts the outputs from the three sources and delivers the \alert{majority vote as its output}. \underline{This is a $2$-of-$3$ system:} as long as a majority of the modules produce correct results, the system will be functional
+				\item error-correcting codes
+
+				% \includegraphics[width=0.6\linewidth]{./figures/triple_modular_redundancy.png}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Using fault injections to extract secret information}
+	\begin{betterlist}
+		\item \alert{Differential Fault Injection Attacks}
+		\begin{betterlist}
+			\item \underline{Fundamental Idea:} Malicious modification of internal data during cipher execution leads to a change in data and final observable result. This often requires precise information on timing, algorithm, data used, etc... Comparison between faulty and fault free execution reveals secret information (e.g. derive secret key by differential cryptanalysis). Also applicable to some non-crypto systems, e.g., jump over password check routine by changing its result bit
+			\item \alert{fault model:} E.g. Single/multiple bit-flips at positions chosen by attacker or Localized fault in, e.g., a byte of the cipher state: the attacker cannot influence which bits will be flipped, but can observe which bits have been flipped or same, but attacker doesn’t know which bits were flipped. Fault effect can last for one clock cycle, multiple clock cycles or forever (permanent fault)
+			\begin{betterlist}
+				\item \underline{in practise limited precision:} spatial (location) and temporal precision (timing). An attack with too strong assumptions not matched by the used equipment will yield invalid results
+			\end{betterlist}
+			\item \alert{Fault Injection + Known Plaintext Attack:}
+			\begin{betterlist}
+				\item \alert{Fault model:} Suppose the adversary can change any bit $k_i$ of secret key $k$ to $0$ but not to $1$
+				\item \underline{Encrypt without any faults:} $y = e_K(x)$. Select a position $i$, change key bit $k_i$ to $0$, encrypt again: $y’ = e_{K’}(x)$. If $y = y'$, the key bit $k_i$ was $0$, otherwise it was $1$. To retrieve the complete key, repeat for all $i$
+				\begin{betterlist}
+					\item \underline{Alternative:} apply less fault injections; use brute-force search for the rest
+				\end{betterlist}
+			\end{betterlist}
+			\item \alert{Fault Attack on RSA:}
+			\begin{betterlist}
+				\item only decryption $m = c^d \mod n$ is subject to attacks
+				\item \alert{fault model:} attacker can flip a single bit in key $d$, but doesn’t know which bit was flipped
+				\item assume attacker can observe $m$ and $c$. Generate m without and $m'$ with fault injection. We can derive the flipped bit by trying two tests for all possible positions $i$:
+				\begin{enumerate}
+					\item if there is an $i$ such that $m’ = m \cdot c^{2^i} \mod n$, then $d$ had $0$ at position $i$ and it was flipped to $1$: $d_i = 0$
+					\item if there is an $i$ such that $m = m’ \cdot c^{2^i} \mod n$, then $d_i = 1$
+				\end{enumerate}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\newpage
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Test Infrastructure}
+	\begin{betterlist}
+		\item trade-off between testing and security
+		\begin{betterlist}
+			\item \underline{testing goal:} Make internal behaviour externally observable.
+			\item \underline{security goal:} Keep internal behaviour secret.
+		\end{betterlist}
+		\item \alert{test:} input for the circuit, that makes the fault effect visible at the outputs
+		\item \alert{single stuck-at fault:} exactly one wire in the entire circuit is defective. the faulty wire permanently has the value $0$ or $1$. The defect can be situated at the input / output of a gate or at a primary input
+		\item \underline{Testing requires internal signals of the circuit to be:}
+		\begin{betterlist}
+			\item \alert{controllable} (assign arbitrary values to the signal) and
+			\item \alert{observable} (observe signal changes at the circuit outputs)
+		\end{betterlist}
+		\item a fault is \alert{testable} iff it is controllable and observable at the same time
+		\item \alert{Design for Testability:} methods to increase controllability and observability
+		\item \alert{Scan chains:} Makes it possible to bring FlipFlops in sequential circuit into a given state for testing. Test structure (hardware) is added to the design: test control (TC) primary input, replace flip-flops with scan flip-flops (SFF) and connect them to one or more scan shift registers for the test mode and make input/output of every scan shift register controllable/observable from PI/PO
+
+		\includegraphics[width=0.6\linewidth]{./figures/scan_chain.png}
+		\includegraphics[width=0.4\linewidth]{./figures/test_point_insertion.png}
+		\item \alert{Test Point Insertion:} $sa-0$ (stuck-at) fault is not controllable. Make $sa0$ controllable by adding gate + additional primary
+		input
+		\item \alert{Boundary Scan:} Boundary scan applied to modules of a SoC (System-on-a-Chip). Used to isolate different modules in a circuit. Can be used to test the modules and the interconnects between them
+		\begin{betterlist}
+			\item Testing interconnects (EXTEST): Scan in data into $R$ out of one or several modules. Latch the results into $R_{in}$ of the following modules. Scan out the data stored in $R_{in}$.
+			\item Testing a module (INTEST): Scan in data into $R_{in}$ of a module. Latch the results into $R_{out}$ of the module. Scan out the data stored in $R_{out}$
+		\end{betterlist}
+
+		\includegraphics[width=\linewidth]{./figures/boundary_scan.png}
+		\item \alert{JTAG:}
+		\begin{betterlist}
+			\item \underline{Control:}
+			\begin{betterlist}
+				\item \underline{TDO:} Test Data Output
+				\item \underline{TDI:} Test Data Input
+				\item \underline{TMS:} Test Mode Select
+				\item \underline{TCK:} Test Clock
+				\item \underline{TRST:} Resets TAP Controller
+			\end{betterlist}
+			\item \underline{Three Basic Modes:}
+			\begin{betterlist}
+				\item \alert{EXTEST mode (external test):} Testing interconnects
+				\item \alert{INTEST mode (internal test):} Testing modules
+				\item \alert{BYPASS mode:} Replace scan chain of the module by a single FF. \underline{Purpose:} Skip module testing and Shorten overall scan chain
+			\end{betterlist}
+			\item Parts of shift register may be connected with \enquote{corresponding circuit register}
+			\begin{betterlist}
+				\item \underline{Update operation:} Copy from shift register into circuit register
+				\item \underline{Capture operation:} Copy from circuit register into shift register
+				\item \underline{Usual procedure:}
+				\begin{betterlist}
+					\item \alert{Test mode:} shift data in and update
+					\item \alert{Functional mode:} Perform normal circuit operations
+					\item \alert{Test mode:} Capture and Shift data out
+				\end{betterlist}
+
+				\includegraphics[width=0.3\linewidth]{./figures/internal_module_registers.png}
+				\includegraphics[width=0.7\linewidth]{./figures/connecting_jtag_devices.png}
+				\item \underline{Simplest version:}
+				\begin{betterlist}
+					\item \alert{Daisy chaining:} Serially connected via TDI, TDO. Control signals TMS, TCK, TRST are the same
+					\item Long chain, long delays
+					\item More complex structures possible
+				\end{betterlist}
+				\item \underline{Disadvantage of JTAG:} Structure is basically fixed, inflexible
+				% \item Reconfigurable Scan Networks (RSNs)
+			\end{betterlist}
+		\end{betterlist}
+		% \begin{betterlist}
+		% 	\item Difficulties to access input pins of chips on a board. E.g. because of Ball Grid Arrays. Make pins externally accessible
+		% \end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Attacking Design-for-Testability}
+	\begin{betterlist}
+		\item all DFT structures (scan, JTAG...) are potential side-channels. If the secret key is stored in a scan chain, the attacker can simply shift it out (or shift a new key in). If the register which holds the cipher state after each round is part of the scan chain, the attacker can shift out the states
+		\begin{betterlist}
+			\item different devices may come from different vendors with different trust levels. E.g. in functional mode device $2$ stores the key in it's register, in test mode the key is shifted out via device $3$
+		\end{betterlist}
+		\item \alert{Countermeasures}
+		\begin{enumerate}
+			\item \alert{Removal/Destruction of JTAG:} does not leave a way to in-field test
+			\begin{betterlist}
+				\item use BIST (Build-in Self Test) for testing instead
+
+				\includegraphics[width=0.4\linewidth]{./figures/bist.png}
+				\begin{betterlist}
+					\item \underline{Disadvantages:} if have to store test set + store test responses, then huge memory consumption. pseudo-random test sequences (Linear feedback shift registers) + compressed output signatures $\rightarrow$ low fault coverage. Fault diagnosis with BIST not possible
+				\end{betterlist}
+				\item Similarly to removal of JTAG one can use security fuses to disable JTAG before the hardware leaves the factory. There are different levels of disabled JTAG
+				\item \underline{Problem:} No further use of JTAG for debugging anymore
+			\end{betterlist}
+			\item \alert{Removal of sensitive data during test:} Two new modes of operation: \alert{Insecure mode:} Switching between test mode and normal mode allowed and \alert{Secure mode:} No switching into test mode. Loading secret key only possible in secure mode. No switching back from secure to insecure mode possible: Only via power-off reset. Power-off reset clears all register contents, including the register holding the key. Key cannot be shifted out in test mode
+
+			\includegraphics[width=\linewidth]{./figures/removal_of_sensitive_data.png}
+			\item \alert{Authentication for JTAG:} Only priviledged users should be able to use JTAG testing devices. Access to JTAG regulated using cryptographic functions
+			\begin{enumerate}
+				\item May be implemented with public / private key authentication: Tester/Updater needs a certificate of authentication signed by a designated third party. Authenticator’s public key is known to JTAG system. Using the known public key, the JTAG system can decrypt the certificate and determine whether the tester/updater is trusted. Trusted testers/updaters are allowed access to JTAG system, untrusted are blocked
+
+				\includegraphics[width=\linewidth]{./figures/authentication_for_jtag.png}
+				\item \alert{Lightweight Scan Protection:} Authorized user and secure scan chain have a common fixed key. If scan chain is accessed with wrong key, observed data are distorted / randomized. Key bits distributed into scan sequence (here several scan chains): dummy FFs! Compared with correct key by Key Checking Logic (KCL). Result of comparison saved into FF when changing from scan-in to functional mode. Random Bit Generator (RGB) used to generate $q$ random bits. Used to randomize output bit stream iff $secure = 0$ (wrong key was used). Replace AND by negated EXOR to flip input bit in case of $0$-input!
+
+				\includegraphics[width=0.6\linewidth]{./figures/lightweight_scan_protection0.png}
+
+				\includegraphics[width=\linewidth]{./figures/lightweight_scan_protection.png}
+			\end{enumerate}
+		\end{enumerate}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Counterfeiting}
+	\begin{betterlist}
+		\item \alert{Counterfeiting:} Customer receives a \enquote{fake chip}
+		\item \underline{different types of \enquote{faking} possible:}
+		\begin{enumerate}
+			\item \alert{original IC with same quality delivered:} Foundry can produce more parts (overproduction by external fab). Fake yield data and sell the extra chips to the market. Can produce extra chips without sending the information to the design house
+			% \begin{betterlist}
+			% \item from overproduction by external fab
+			% \end{betterlist}
+			\item \alert{original IC (from the expected manufacturer, with same functionality) delivered, but with lower quality than expected:}
+			\begin{enumerate}[label=\color{PrimaryColor}\bfseries\alph*.]
+				\item \alert{recycled (refurbished) ICs:} Earlier aging then expected: Chips wear-out and eventually break, have defects due to physical aging effects and have loss in performance until chip stops working
+				\begin{betterlist}
+					\item re-marked parts are either recycled components, new components to change the specification of the component (e. g. commercial grade $\rightarrow$ military grade)
+				\end{betterlist}
+				\item \alert{defective parts / out-of-spec parts by external fab or external tester:} Untrusted Foundry can sell defective parts and out-of-spec parts. \alert{Defective parts:} A chip may fail at one particular structural test pattern. (The number of test patterns may vary in between several thousands.). It is highly unlikely that defect will appear in normal operation of the chip in first few hours or days or months. Eventually, it will fail at some point of time. \alert{Out-of-spec parts:} Fail to perform at the design specification (leakage current, dynamic current, performance, etc.). The chip might fail at extreme physical/environmental conditions
+			\end{enumerate}
+			\item \alert{a functionally identical / similar IC delivered by another manufacturer (stolen IP, reverse engineered):} Unauthorized production of a part. \alert{Difference} between \alert{overproduction} and \alert{cloned} is that cloned parts do not have the authorized IP, could be fabricated in a different foundry. Cloned parts are either \alert{Pirated IP:} Counterfeiters acquire the IP in an illegal manner (saved the design cost of the IP) or \alert{Reversed Engineered:} Counterfeiters reverse engineer the design and make a new one just like the original design
+			\item \alert{different IC with similar functionality delivered, but degraded performance:} Several reasons for \enquote{ICs with similar functionality, but degraded performance}: Completely new fake design, does not reach the quality level of the original design. Parts are cloned, but some components designed from scratch. Inferior system integration of cloned components. Original parts, but sorted out, see (2b)
+			\item \alert{IC with malicious (added or modified) functionality delivered:} \alert{Hardware Trojan:}
+			\begin{betterlist}
+				\item malicious addition or modification to the existing functionality. \alert{What hardware Trojans can do:} Change the functionality, reduce the reliability and leak valuable information
+				\item \underline{IC/IP Trust Problem:}
+				\begin{betterlist}
+					\item IP Vendor and System Integrator. IP vendor may place a Trojan in the IP. \alert{IP Trust problem}
+					\item Designer and Foundry. Foundry may place a Trojan in the layout design. \alert{IC Trust problem}
+				\end{betterlist}
+				\item \alert{Back Door:} Adversary can add additional circuitry to leak information from the fabricated chip. Such a Trojan cannot be detected easily since it does not change the normal functionality of the circuit. \underline{Possible ways to leak information:} Adding an antenna for wireless information transmission, use existing interfaces of the chip to leak information when interfaces are not used by the application, more advanced information transport via side channels like power consumption, electromagnetic radiation or even path delay
+				\item \alert{Time Bomb:}
+				\begin{betterlist}
+					\item Time bomb may be \alert{actively triggered:} Activated when counter gets a specified value, Finite State Machine (FSM) goes into a certain state, A certain condition on data (like a key) is satisfied
+					\item \alert{Or passivley triggered:} modify wire / transistor widths violating design rules, causing reliability issues
+					\item Damage may be caused by overheating due to e.g. frequent switching operations
+				\end{betterlist}
+				\item \alert{Digital Trojans:}
+				\begin{betterlist}
+					\item \alert{Combinational Trojan:} or \alert{Sequential (Synchronous) or Sequential (Asynchronous):}
+
+					\includegraphics[width=0.33\linewidth]{./figures/combinational_trojan.png}
+					\includegraphics[width=0.33\linewidth]{./figures/sequential_synchronous.png}
+					\includegraphics[width=0.33\linewidth]{./figures/sequential_asynchronous.png}
+					\item \alert{Functional:} Addition or deletion of components
+					\item \alert{Parametric:} \underline{Modifications of existing components:} Wire: e.g. thinning of wires, Logic: Weakening of a transistor, modification to physical geometry of a gate, Modification to power distribution network. Sabotage reliability, increase the likelihood of a functional or performance failure
+				\end{betterlist}
+			\end{betterlist}
+		\end{enumerate}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Counterfeit / Trojan Detection and Avoidance}
+	\begin{betterlist}
+		\item \alert{Recycled / refurbished ICs, ICs with degraded performance:}
+		\begin{betterlist}
+			\item \alert{Visual inspection (Physical inspection / testing)}
+			\begin{betterlist}
+				\item \alert{External Visual Inspection (EVI):} \underline{Check of:} Date and Lot Codes, OEM Shipping labels, Lead quality, Dimensions \& Weight, Marking Quality. Optical examination at a suitable magnification and with suitable lighting with Microscopes, scanning electron microscopes (SEMs), ... Identify scratches from sanding, Ghost markings, Burnt markings from low quality laser. Results compared with reference sample images
+				\item \alert{X-Ray Inspection:} Determines: If the package contains a die, consistent size/shape of the die, consistent internal construction, if the die has all wire bonds attached. Exact die and bond wire location to avoid damage during decapsulation%. Works best if known good reference
+				dies are available
+				\item \alert{X-Ray Fluorescence (XRF) Spectroscopy:} Tool for material composition detection. Non destructive. Destructive, if internal material composition needed. Sampling required
+				\item \alert{Scanning Acoustic Microscopy:} Scanning Acoustic Microscopy is non-invasive, non-destructive. Reveals cracks, voids, delamination, metallization burnout, Uses de-ionized water or alcohol as medium
+			\end{betterlist}
+			\item \alert{Testing (Electrical testing)}, Main focus on Very-large-scale integration circuits and high cost parts like Microprocessor where counterfeiter will probably put much effort to counterfeit. \underline{Precondition:} Test sets (test programs for Automated Test Equipment (ATE)) must be available or be derived from HDL description of tested module that have to be available. Similar to manufacturing test after production of the chip
+			\begin{betterlist}
+				\item \alert{Electrical Tests:} \underline{Iddq testing:} measuring the supply current (Idd) in idle state (no switching). Many manufacturing faults lead to increased static power consumption
+				\item \alert{Logic and Delay Tests:}
+				\begin{betterlist}
+					\item \alert{Check whether the chip / SoC produces expected responses within expected delay:} Test patterns for logic tests may be produced by structural ATPG or may be functional tests, Dedicated test patterns for delay testing possible
+					\item \alert{Memory Tests (e.g. MARCH tests):} Read/write operations are performed on a memory to verify its functionality, Can also be applied for counterfeit detection.
+					\item \alert{Microprocessor Tests:} Microprocessors are binned in different groups depending on the maximum functional frequency ($f_{max}$)
+				\end{betterlist}
+				\item \alert{Temperature Cycling / Burn-In}
+				\begin{betterlist}
+					\item \alert{Testing the chip at extremes of operating range:} Military Grade, Industrial Grade, Commercial Grade
+					\item \alert{Burn-in:}
+					\begin{betterlist}
+						\item \underline{the device is operated at an elevated temperature (stress condition):} Normally used to find infant mortality failures, Also useful to assure reliability, Find out commercial grade components marked as military grade
+						\item find out defective components or components that were not designed to perform under stress conditions
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+		\item \alert{Cloned, over-produced, out-of-spec, and defective ICs:}
+		\begin{betterlist}
+			\item \alert{Hardware metering} is a set of security protocols that enable the design house to achieve post-fabrication control over their ICs.  Provides a way to uniquely fingerprint or tag each chip and/or each chip’s functionality. It is even possible to distinguish between different chips manufactured with the same mask
+			\item \alert{Passive Hardware Metering:} Give each IC a unique identifier. Foundry and IP owner have database with valid identifiers. Any chip without valid identifier is a counterfeit. Guessing valid ID's should not work. \underline{Disadvantage:} Overproduction / cloning can only be detected, not prevented. Overproduced chips can be detected, but are working. Low probability to observe two identical (copied) IDs in practice
+			\begin{betterlist}
+				\item \alert{Reproducible Identifiers:} Unique ID’s are stored on the chip package, on die, or in a memory on-chip, \underline{Examples:} Indented serial numbers, Digitally stored serial numbers, \underline{Advantages:} Do not depend on randomness, Easy to track / identify, \underline{Disadvantages:} Easy to clone/modify, Easy to overproduce
+				\item \alert{Unclonable Identifiers:} Uses random process variations in silicon to generate random unique numbers called \alert{fingerprints}. \underline{Advantages:} Values cannot be reproduced or altered deliberately due to randomness in process variations
+				\begin{betterlist}
+					\item \alert{Intrinsic Methods:} If no additional logic is needed. Unique identification if external test vectors can be applied, Uses IC leakage, power and timing (unique due to process variations)%, Does not need additional logic and can be readily used on existing designs
+					\item \alert{Extrinsic Methods:} If additional logic is required to generate these values (fingerprints)
+					\begin{betterlist}
+						\item \alert{Physical Unclonable Function (PUF):} Is a function that maps a set of challenges to a set of responses based on a complex physical system.  Generate IDs / keys from a complex physical system, The function can only be evaluated with the physical system, Is unique for each physical system because of random process variation., PUFs generate volatile secrets (only exist in a digital form when a chip is powered on and running), Harder for an invasive attack (must accurately measure PUF delays while power on)
+						\item \underline{Quality requirements:} \alert{Uniqueness:} Different output for each measured chip. \alert{Reliability:} Identical output for repeated measurement on same chip. Trade-off wrt. sensitivity of the PUF concerning small process variations
+						\item \alert{Arbiter-PUF:}
+						\begin{betterlist}
+							\item Compare two paths with an identical delay in design, Random process variation determines which path is faster, An arbiter outputs 1-bit digital response
+							\item Path delays in an IC are statistically distributed due to random manufacturing variations
+						\end{betterlist}
+
+						\includegraphics[width=0.6\linewidth]{./figures/arbiter_puf.png}
+						\item \alert{Ring-Oscillator PUF:}
+
+						\includegraphics[width=0.8\linewidth]{./figures/ring_oscillator.png}
+						\item \alert{Butterfly PUF}
+						\item \alert{SRAM PUF}
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+		\end{betterlist}
+		\item \alert{Hardware Trojans:}
+		\begin{betterlist}
+			\item \alert{Identification of HDL-level / netlist level modifications}
+			\begin{betterlist}
+				\item \alert{IP Trust:} targets malicious modifications in third-party IP cores. IPs from untrusted vendors need to be verified for trust before use in a system design
+				\item \alert{Formal verification:} Proves that a certain function is implemented correctly. Ensuring IP core is working exactly as specificied. \alert{Property/Model checking:} System is described in a formal model (HDL), The desired behavior is expressed as a set of (formal) properties, The properties are checked against the model. \alert{Equivalence checking:} Check the equivalence of RTL code, gate-level netlist and layout data
+				\item \alert{Design Validation Techniques:} Identifies areas that have been exercised / checked. \alert{(Incomplete) simulation}. \alert{Coverage Analysis for Simulation:} Produces metrics to \alert{Code coverage:} \underline{Line coverage:} Shows which lines of the RTL have been executed, \underline{Statement Coverage:} Spans multiple lines, more precise, \underline{FSM Coverage:} Show which state can be reached, \underline{Toggle:} Each signal in gate-level netlist should switch. \alert{Functional coverage:} Check assertions
+				% \item Ensuring IP core is working exactly as specificied, nothing less nothing more
+			\end{betterlist}
+			\item \alert{Identification layout level modifications}
+			\begin{betterlist}
+				\item \alert{IC Trust:} The objective is to ensure that the fabricated chip/system will carry out only our desired function and nothing more
+				\item \alert{Destructive Approaches:} Expensive and time consuming. Reverse engineering to extract layer-by-layer images (e.g. by using scanning electron microscope), Identify unexpected transistors, gates or routing elements by comparison with golden sample
+				\item \alert{Non-destructive Approaches:}
+				\begin{betterlist}
+					\item \alert{Run-time monitoring:} Monitor abnormal behavior during run-time. Add redundant components to ensure trust of critical computations
+					\item \alert{Test time:} Detect Trojans by testing
+					\begin{betterlist}
+						\item \alert{Logic-testing-based approaches:} \underline{focuses on test-vector generation for:} Activating a Trojan circuit, Observing its malicious effect on the payload at the primary outputs, Both functional and structural test vectors are applicable. \alert{Advantages:} Straightforward, re-use existing test vector computation. \alert{Disadvantages:} Difficulty in exciting or observing low controllability / observability nodes. It cannot trigger Trojans that are activated externally and can only observe functional Trojans
+						\begin{betterlist}
+							\item Approaches to improve Trojan detection:
+							\item Insert \alert{test points} to improve controllability / observability
+							\item \alert{Modified ATPG} (automatic test pattern generation): \enquote{Statistical Approach for Hardware Trojan Detection}, Generates a set of test vectors that can trigger each rare node to its rare value multiple times ($N$ times), \underline{Hope:} If a Trojan is triggered by a combination of rare events, then the test set has at least one triggering vector%, Similar to N-detect test used in stuck-at ATPG (automatic test pattern generation), where test set is generated to detect each single stuck-at fault in a circuit by at least N different patterns
+						\end{betterlist}
+						% \item Difficulty in exciting or observing low controllability / observability nodes, Intentionally inserted Trojans are often triggered under rare conditions
+						\item \alert{Side-channel analysis-based approaches:} \uline{are based on observing the effect of an inserted Trojan on a physical parameter such as:} \alert{IDDQ:} Extra gates will consume leakage power, \alert{IDDT:} Extra switching activities will consume more dynamic power, \alert{Path delay:} Additional gates and capacitance will increase path delay (\underline{Observing delay:} A change in physical dimension of the wires and transistors can also change path delay), \alert{EM:} Electromagnetic radiation due to switching activity. \underline{Advantages:} Effective for Trojans which do not cause observable malfunction in the circuits (e.g. since they are not activated yet), \underline{Disadvantages:} Large process variations and measurement noise can mask the effect of the Trojan circuits, especially for small Trojans
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+			\item \alert{Design for Hardware Trust approaches:} to support Trojan detection / prevention approaches
+			\begin{betterlist}
+				\item \underline{Design changes for improving hardware Trojan detection methods:} \alert{Design changes for improving detection of delay changes} (problem: reconvergent paths, avoid or break by test points), \alert{Rare event removal} (e.g. test point insertion)
+				\item \underline{Prevent hardware Trojan insertion}: \alert{Dead space elimination in layout}, \alert{Design obfuscation:} Transform design into functionally equivalent one, which it is much harder for attackers to understand, making reverse engineering much more difficult to perform
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Counterfeit / Trojan Detection and Avoidance Continue}
+	\begin{betterlist}
+		\item \alert{Cloned, over-produced, out-of-spec, and defective ICs continue:}
+		\begin{betterlist}
+			\item \alert{Active Hardware Metering:} Provides an active mechanism to control, monitor, lock, or unlock the ICs after fabrication, Foundry is only able to produce locked ICs, Only designer / IP owner can unlock the IC. \underline{Advantage:} Overproduced chips do not work. \underline{Disadvantage:} IC with stolen IP may be possibly produced without locking mechanism (if locking mechanism can be easily separated from remaining design). Additional effort for unlocking (communication between designer and foundry)
+			\begin{betterlist}
+				\item \alert{Booster FSM:} Foundry produces chip with FSM which is put into random initial state by PUF. Only IP owner with knowledge of FSM knows for each state an input sequence to bring FSM into the actual \alert{reset state}: IP owner reads out random initial state, Determines correct input sequence, Stores input sequence on chip. \underline{Disadvantages:} Additional memory for storing initializing input sequence, Additional control logic for initialization, Additional time, chip has to wait until entire sequence has been shifted in.
+
+				\includegraphics[width=0.8\linewidth]{./figures/booster_fsm.png}
+				\item \alert{EPIC:} This technique tries to allow IP Owner to have control over number of chips activated. Uses logic locking to lock correct functionality of chip, At the gate level. XOR gates are placed on selected non-critical paths. Path outputs modified s.t. XOR’ing path outputs with key bits is needed to obtain correct output bits. Requires that every chip is activated with the external key. Only IP owner knows and sends the key
+				\begin{betterlist}
+					\item \underline{Different kinds of keys in EPIC:} \alert{Common key CK}, Identical key to activate all chips, \alert{Random chip key RCK}, Pair of private and public key individually generated on each chip, To secure the transmission of CK, \alert{Master key MK}, Pair of private and public key of the IP owner, To sign the encrypted key message which activates a chip, To avoid attacks by sending fake keys CK'
+					\item Public Master Key (MK-Pub) is embedded in RTL. XOR gates are controlled by Common Key. Correct Common Key unlocks circuit's correct functionality, $k$-XOR gates need a common key of length $k$. TRNG (True Random Number Generator, e.g. PUF) used to generate Random Chip Keys (RCK) on start up, Upon power-up each chip generates a pair of private and public RCKs (RCK-private, RCK-public) which are burned into programmable fuses. Fab sends RCK-public to IP owner
+					\item IP owner generates Input Key (IK) by encrypting Common Key (CK) with RCK-public and signs it with MK-private. IP owner sends IK to the foundry, IK is only for a single chip owning RCK-private. When entered into the chip, IK is decrypted using RCK-private and the signature is checked using MK-public. Decrypting IK results in CK which unlocks the chip’s correct functionality
+				\end{betterlist}
+			\end{betterlist}
+
+			\includegraphics[width=0.2\linewidth]{./figures/epic_non_critical.png}
+			\includegraphics[width=0.8\linewidth]{./figures/epic_high_level.png}
+
+			\begin{minipage}[b]{0.5\linewidth}
+
+				\includegraphics[width=\linewidth]{./figures/signature_not_used.png}
+				% \includegraphics[width=0.5\linewidth]{./figures/signature_not_used.png} 
+			\end{minipage}
+			\begin{minipage}[b]{0.5\linewidth}
+
+				\includegraphics[width=\linewidth]{./figures/signature_not_used15.png}
+				\includegraphics[width=\linewidth]{./figures/signature_not_used2.png}
+			\end{minipage}
+
+			\item \underline{Analysis of Booster FSM and EPIC:}
+			\begin{betterlist}
+				\item \alert{Effective against cloned ICs:} ICs need individual information in order to be functional which only IP owner can generate
+				\item \alert{Problem, if testing is outsourced as well:} Chip has to be activated for testing. Not efficient against over-produced, out-of-Spec ICs and defective ICs! \underline{Over-produced:} Fab could claim low yield and request more activations than needed, IP Owner has no way to verify yield or number of functional chips. \underline{Out-of-Spec and defective ICs:} Foundry/assembly can send out chips that are out of spec or defective (they are activated), IP Owner has no more communication with foundry
+			\end{betterlist}
+			\item \alert{SST:} Adds multiple layers of communication between IP owner, foundry, and assembly. Ensures that IP owner will know exactly how many chips pass the test and how many have failed. \underline{Basic Idea:} Unlocking for test mode does not make chip fully functional, Only IP owner can decide whether test passed or not, Only good ICs are unlocked in the end
+			\begin{betterlist}
+				\item Three-input XOR logic added to non-critical paths. IN0 and IN1 need to be identical for functional operation. Input IN0 is connected to a TRNG (e.g. PUF). TRNG generates a random number TRN. \underline{Same TRN is needed at foundry and assembly:} TRNG outputs are burnt into fuses so same TRN can be read. Makes random number stable for reading it out
+				\item Second input IN1 gets modified Mod TRN. Only IP Owner knows how he has modified TRN. Only IP Owner can decide whether test responses are correct or not (because IP Owner knows what he did and therefore knows what would expect from correct chip, he would expect test results modified with modifications he did)
+				\item Testing of packaged chip as before with Mod TRN. For good ICs IP owner sends FKEY which is encrypted version of unmodified TRN. TRN applied to IN1 (and IN0). Encryption ensures that answer with (encrypted) TRN cannot come from third party
+				\item Relies on the fact that foundry / assembly cannot change functionality of the IC. Effective against overproduced ICs, cloned ICs, and defective ICs. \underline{Overproduced:} IP Owner has control over number of TRNs received and TKEY/FKEYS sent to foundry/assembly. \underline{Cloned:} Chips are not functional unless FKEY has been produced by IP Owner. \underline{Defective ICs:} Foundry sends test results to IP owner who checks results and decides if chip has correct test responses (chip is not yet functional at this stage)
+				\item no global key $ck$, individual key for each chip, use TRNG not for private public key, but for producing unlocking key. Wherever IP owner flipped key (TRN), there also output of 3-input XOR is flipped. IP-Owner knows the assembly has to deliver for each FKEY the IP-Owner send, the IP-Owner expects a fully working chip from the assembly. \underline{Advantage:} Protection against key-leakage, because individual to each chip can only unlock this chip. Old attack now possible: Just take overproduced chip, one does not have the FKEY, one just applies something and compare output with functional chip, then one could produce small correction circuit for the outputs. But only if using bad locking mechanism which locks at the outputs, need locking mechanism whichs distributes XOR into the circuit. %Other attack: Replace TRNG by deterministic one, generally one can remove any security mechanism
+
+				\includegraphics[width=0.5\linewidth]{./figures/xor_mask.png}
+				$TKEY = encrypt_{k\,priv\,IP-Owner}(mod\,TRN)$
+
+				\includegraphics[width=0.5\linewidth]{./figures/sst_communication_flow_foundry.png}
+				\includegraphics[width=0.5\linewidth]{./figures/sst_communication_flow_foundry2.png}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+
+
 \end{minipage}
 \end{document}

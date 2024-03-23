@@ -199,7 +199,7 @@
 		\end{minipage}
 		\begin{minipage}[b]{0.34\linewidth}
 			\includegraphics[width=0.5\linewidth]{./figures/fourtimesfourmatrix.png}
-			\includegraphics[width=\linewidth]{./figures/shiftrow_matrix.png}
+			\includegraphics[width=\linewidth]{./figures/shiftrow_matrix.png} (every field $B_i$ corresponds to $SubByte(A_{ShiftRow^{-1}(i)})$)
 			\includegraphics[width=\linewidth]{./figures/mixcolumn.png}
 			\includegraphics[width=\linewidth]{./figures/aes_algorithm.png}
 		\end{minipage}
@@ -288,7 +288,7 @@
 			\end{betterlist}
 			\item RETURN $k_{pub} = (n, e), k_{pr} = d$
 		\end{enumerate}
-		\item \alert{Ecnryption:} $y = x^e \mod n$, \alert{Descryption:} $x = y^d \mod n$
+		\item \alert{Ecnryption:} $y = x^e \mod n$, \alert{Decryption:} $x = y^d \mod n$
 		\item \alert{Authentication / Signing:}
 		\begin{betterlist}
 			\item $(x^e)^d = x^{ed} = (x^d)^e \equiv x \mod n$, thus it is also possible to encrypt with the private key and decrypt with the public key
@@ -775,7 +775,7 @@
 			\includegraphics[width=0.8\linewidth]{./figures/dpa_average.png}
 
 			\item order of applying patterns not unimportant, as there has to be a switch from $0$ to $1$ in order to have a increased power consumption, so one has the best result if one applies always one pattern from $S^+$, then one from $S^-$. If order is random it should also be ok, since on average \enquote{half of the transitions in $S^+$} go from $0$ to $1$ and other half from $1$ to $1$, in $S^-$ there's never a $0\rightarrow 1$ transition
-			\item \underline{\alert{one / single bit distiguisher} for partitioning into $S^+(k_s)$ and $S^−(k_s)$:} A location in the algorithm where knowledge on a small subset of key bits enables the computation of a bit value. Gate output, output bit of an operation which one can compute, if plain and / or cipher text + a (small) subset of the key is known. Hope something is correlated with key bit assumption, if correlation holds partitioning is ok, then can derive some information
+			\item \underline{\alert{one / single bit distinguisher} for partitioning into $S^+(k_s)$ and $S^−(k_s)$:} A location in the algorithm where knowledge on a small subset of key bits enables the computation of a bit value. Gate output, output bit of an operation which one can compute, if plain and / or cipher text + a (small) subset of the key is known. Hope something is correlated with key bit assumption, if correlation holds partitioning is ok, then can derive some information
 
 			% \includegraphics[width=\linewidth]{./figures/distinguisher_not_always_working.png}
 			\includegraphics[width=0.6\linewidth]{./figures/distinguisher_not_always_working_short.png}
@@ -784,14 +784,8 @@
 			\end{betterlist}
 			\item \alert{DPA attack on DES:}
 			\begin{betterlist}
-				\item with the correct assumption on $k_s$ the value of $(L_{15})_j (k_s, C_i)$ is correct with \enquote{probability $1$}
-				\begin{betterlist}
-					\item $AveragePower(S^+(k_s)) - AveragePower(S^−(k_s)) > 0$
-				\end{betterlist}
-				\item if assumption on $k_s$ is wrong, the value of $(L_{15})_j (k_s, C_i)$ is correct with \enquote{probability $\approx 0.5$}
-				\begin{betterlist}
-					\item $AveragePower(S^+(k_s)) - AveragePower(S^−(k_s)) \approx 0$
-				\end{betterlist}
+				\item with the correct assumption on $k_s$ the value of $(L_{15})_j (k_s, C_i)$ is correct with \enquote{probability $1$} $\Rightarrow$ $AveragePower(S^+(k_s)) - AveragePower(S^−(k_s)) > 0$
+				\item if assumption on $k_s$ is wrong, the value of $(L_{15})_j (k_s, C_i)$ is correct with \enquote{probability $\approx 0.5$} $\Rightarrow$ $AveragePower(S^+(k_s)) - AveragePower(S^−(k_s)) \approx 0$
 				\item since the point in time when exactly $(L_{15})_j$ is computed is unknown, DPA does not record \alert{single power values} for plain texts $P_i$, but \alert{power traces} over a certain amount of time
 				% \item the power traces for different plain texts $P_i$ have to be precisely synchronized wrt. the start time of the recording
 			\end{betterlist}
@@ -974,21 +968,26 @@
 		\end{betterlist}
 
 		\includegraphics[width=\linewidth]{./figures/boundary_scan.png}
-		\item \alert{JTAG continue:}
+		\item \alert{JTAG:}
 		\begin{betterlist}
 			\item \underline{Control:} \underline{TDO:} Test Data Output, \underline{TDI:} Test Data Input, \underline{TMS:} Test Mode Select, \underline{TCK:} Test Clock, \underline{TRST:} Resets TAP Controller
 			\item \underline{Three Basic Modes:} \alert{EXTEST mode (external test):} Testing interconnects, \alert{INTEST mode (internal test):} Testing modules, \alert{BYPASS mode:} Replace scan chain of the module by a single FF. \underline{Purpose:} Skip module testing and Shorten overall scan chain
 			\item \underline{Access to Internal Module Registers:} Parts of shift register may be connected with \enquote{corresponding circuit register}, \underline{Update operation:} Copy from shift register into circuit register, \underline{Capture operation:} Copy from circuit register into shift register, \underline{Usual procedure:} \alert{Test mode:} shift data in and update, \alert{Functional mode:} Perform normal circuit operations, \alert{Test mode:} Capture and Shift data out
+			\item \underline{Simplest version to connecting JTAG Devices:} \alert{Daisy chaining:} Serially connected via TDI, TDO. Control signals TMS, TCK, TRST are the same, Long chain, long delays, More complex structures possible
+			\item \underline{Disadvantage of JTAG:} Structure is basically fixed, inflexible
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
 		\item
-		\includegraphics[width=0.3\linewidth]{./figures/internal_module_registers.png}
-		\includegraphics[width=0.7\linewidth]{./figures/connecting_jtag_devices.png}
-		\item \underline{Simplest version:} \alert{Daisy chaining:} Serially connected via TDI, TDO. Control signals TMS, TCK, TRST are the same, Long chain, long delays, More complex structures possible
-		\item \underline{Disadvantage of JTAG:} Structure is basically fixed, inflexible
+		\begin{minipage}[b]{0.3\linewidth}
+			\includegraphics[width=\linewidth]{./figures/jtag_device.png}
+			\includegraphics[width=\linewidth]{./figures/internal_module_registers.png}
+		\end{minipage}
+		\begin{minipage}[b]{0.7\linewidth}
+			\includegraphics[width=\linewidth]{./figures/connecting_jtag_devices2.png}
+		\end{minipage}
 		% \item Reconfigurable Scan Networks (RSNs)
 		% \begin{betterlist}
 		% 	\item Difficulties to access input pins of chips on a board. E.g. because of Ball Grid Arrays. Make pins externally accessible

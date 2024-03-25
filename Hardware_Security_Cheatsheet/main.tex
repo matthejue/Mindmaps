@@ -62,7 +62,7 @@
 				\item \alert{Caesar Cipher:} each letter in $P$ is substituted by a fixed letter: $c_i = E(p_i) = no^{-1}((no(p_i) + 3) \mod 26)$. In this special case the \alert{key} is of length $1$, it is the shift amount
 				\begin{betterlist}
 					\item \underline{Attacks:}, \alert{Exhaustive search:} Try all possible keys until you find the right one. \enquote{Finding the right one} means \enquote{receiving a meaningful plain text}. Has $26$ possible keys. \alert{Brute-force attack} is a specific type of exhaustive search used in cybersecurity to crack passwords or encryption keys by trying all possible combinations until the correct one is found
-          \item \alert{Correlation based method:} $\varphi(i)=\sum_{0 \leq j \leq 25} f\left(n o^{-1}(j)\right) \cdot p\left(n o^{-1}((j-i) \bmod 26)\right)$. Can increase efficiency by only calculating correlations for most frequent letters. \underline{Advantages:} No need of dictionary check, Exhaustive Search possible (check for all keys $i$). \underline{Disadvantages:} Does not work if text is too short for meaningful letter frequency, Too time expensive for exhaustive search
+					\item \alert{Correlation based method:} $\varphi(i)=\sum_{0 \leq j \leq 25} f\left(n o^{-1}(j)\right) \cdot p\left(n o^{-1}((j-i) \bmod 26)\right)$. Can increase efficiency by only calculating correlations for most frequent letters. \underline{Advantages:} No need of dictionary check, Exhaustive Search possible (check for all keys $i$). \underline{Disadvantages:} Does not work if text is too short for meaningful letter frequency, Too time expensive for exhaustive search
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
@@ -965,7 +965,7 @@
 	\begin{betterlist}
 		\item \underline{trade-off between testing and security:} \underline{testing goal:} Make internal behaviour externally observable, \underline{security goal:} Keep internal behaviour secret
 		\item \alert{test:} input for the circuit, that makes the fault effect visible at the outputs
-    \item \alert{fault model:} Modeling of faults \alert{with high probability} (dependent on the chosen technology)
+		\item \alert{fault model:} Modeling of faults \alert{with high probability} (dependent on the chosen technology)
 		\item \alert{single stuck-at fault fault model:} exactly one wire in the entire circuit is defective. the faulty wire permanently has the value $0$ or $1$. The defect can be situated at the input / output of a gate or at a primary input
 		\item \underline{Testing requires internal signals of the circuit to be:}, \alert{controllable} (assign arbitrary values to the signal) and, \alert{observable} (observe signal changes at the circuit outputs)
 		\item \alert{Design for Testability:} methods to increase controllability and observability
@@ -996,17 +996,13 @@
 			\item \underline{Three Basic Modes:} \alert{EXTEST mode (external test):} Testing interconnects, \alert{INTEST mode (internal test):} Testing modules, \alert{BYPASS mode:} Replace scan chain of the module by a single FF. \underline{Purpose:} Skip module testing and Shorten overall scan chain
 			\item \underline{Access to Internal Module Registers:} Parts of shift register may be connected with \enquote{corresponding circuit register}, \underline{Update operation:} Copy from shift register into circuit register, \underline{Capture operation:} Copy from circuit register into shift register, \underline{Usual procedure:} \alert{Test mode:} shift data in and update, \alert{Functional mode:} Perform normal circuit operations, \alert{Test mode:} Capture and Shift data out
 			\item \underline{Simplest version to connecting JTAG Devices:} \alert{Daisy chaining:} Serially connected via TDI, TDO. Control signals TMS, TCK, TRST are the same, Long chain, long delays, More complex structures possible
+			\item \underline{Disadvantage of JTAG:} Structure is basically fixed, inflexible
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
-		\item \alert{JTAG continue:}
-		\begin{betterlist}
-			\item \underline{Disadvantage of JTAG:} Structure is basically fixed, inflexible
-		\end{betterlist}
-
-		\begin{minipage}[b]{0.3\linewidth}
+		\item \begin{minipage}[b]{0.3\linewidth}
 			\includegraphics[width=\linewidth]{./figures/jtag_device.png}
 			\includegraphics[width=\linewidth]{./figures/internal_module_registers.png}
 		\end{minipage}
@@ -1042,7 +1038,7 @@
 				\item \underline{May be implemented with public / private key authentication:} Tester/Updater needs a certificate of authentication signed by a designated third party. Authenticator’s public key is known to JTAG system. Using the known public key, the JTAG system can decrypt the certificate and determine whether the tester/updater is trusted. Trusted testers/updaters are allowed access to JTAG system, untrusted are blocked. \underline{Ensure that access level not changed:} If what comes out of decryption is not same as send information, then device not grant access. Not needed to make random number secret, just to make sure \alert{replay attack} not possible. \underline{Disadvantage:} central server and for each acess ot jtag device need this communication
 
 
-				\includegraphics[width=\linewidth]{./figures/authentication_for_jtag.png}
+				\includegraphics[width=0.9\linewidth]{./figures/authentication_for_jtag.png}
 				\item \alert{Lightweight Scan Protection:} \underline{Basic Idea:} Authorized user and secure scan chain have a common fixed key that has to be kept secret. \underline{Disadvantage:} If information leak, then security is compromised. If scan chain is accessed with wrong key, observed data are distorted / randomized. \underline{Technical realization:} Key bits distributed into scan sequence (here several scan chains): dummy FFs (FFs included in the scan chain but not connected to the circuit, only connected to key checking logic). Compared with correct key by Key Checking Logic (KCL). Result of comparison saved into FF when changing from scan-in to functional mode. Random Bit Generator (RGB) used to generate $q$ random bits. Used to randomize output bit stream iff $secure = 0$ (wrong key was used). Replace AND by negated EXOR to flip input bit in case of $0$-input, because else always in certain direction $0$ and attacker could notice more $0$s in output! Random bit has to be $0$ and secure signal has to be $0$. Attacker doesn't notice that attack didn't work, don't know easily when to use next key for testing. Result of comparison saved into FF when changing from scan-in to functional mode
 
 				% \includegraphics[width=0.6\linewidth]{./figures/lightweight_scan_protection0.png}
@@ -1080,6 +1076,7 @@
 					\item IP Vendor and System Integrator. IP vendor may place a Trojan in the IP. \alert{IP Trust problem}
 					\item Designer and Foundry. Foundry may place a Trojan in the layout design. \alert{IC Trust problem}
 					\item \alert{Back Door:} Adversary can add additional circuitry to leak information from the fabricated chip. Such a Trojan cannot be detected easily since it does not change the normal functionality of the circuit. \underline{Possible ways to leak information:} Adding an antenna for wireless information transmission, Use existing interfaces of the chip to leak information when interfaces are not used by the application, More advanced information transport via side channels like power consumption, electromagnetic radiation or even path delay
+					\item \alert{Time Bomb:} Time bomb may be \alert{actively triggered:} Activated when counter gets a specified value, Finite State Machine (FSM) goes into a certain state, A certain condition on data (like a key) is satisfied, \alert{Or passivley triggered:} modify wire / transistor widths violating design rules, Causing reliability issues. Damage may be caused by overheating due to e.g. frequent switching operations
 				\end{betterlist}
 			\end{betterlist}
 		\end{enumerate}
@@ -1087,9 +1084,8 @@
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
-  \item[\bfseries\alert{5.}] \alert{IC with malicious (added or modified) functionality delivered:} \alert{Hardware Trojan continue:}
+		\item[\bfseries\alert{5.}] \alert{IC with malicious (added or modified) functionality delivered:} \alert{Hardware Trojan continue:}
 		\begin{betterlist}
-			\item \alert{Time Bomb:} Time bomb may be \alert{actively triggered:} Activated when counter gets a specified value, Finite State Machine (FSM) goes into a certain state, A certain condition on data (like a key) is satisfied, \alert{Or passivley triggered:} modify wire / transistor widths violating design rules, Causing reliability issues. Damage may be caused by overheating due to e.g. frequent switching operations
 			\item \alert{Digital Trojans:}
 			\begin{betterlist}
 				\item \alert{Combinational Trojan:} or \alert{Sequential (Synchronous) or Sequential (Asynchronous):}
@@ -1155,6 +1151,7 @@
 						% \item Difficulty in exciting or observing low controllability / observability nodes, Intentionally inserted Trojans are often triggered under rare conditions
 						\item \alert{Side-channel analysis-based approaches:} \uline{are based on observing the effect of an inserted Trojan on a physical parameter such as:} \alert{IDDQ:} Extra gates will consume leakage power, \alert{IDDT:} Extra switching activities will consume more dynamic power, \alert{Path delay:} Additional gates and capacitance will increase path delay (\underline{Observing delay:} A change in physical dimension of the wires and transistors can also change path delay), \alert{EM:} Electromagnetic radiation due to switching activity. \underline{Advantages:} Effective for Trojans which do not cause observable malfunction in the circuits (e.g. since they are not activated yet), \underline{Disadvantages:} Large process variations and measurement noise can mask the effect of the Trojan circuits, especially for small Trojans
 					\end{betterlist}
+					\item \alert{Design for Hardware Trust approaches:} to support Trojan detection / prevention approaches. \underline{Design changes for improving hardware Trojan detection methods:} \alert{Design changes for improving detection of delay changes} (problem: reconvergent paths, avoid or break by test points), \alert{Rare event removal} (e.g. test point insertion), \underline{Prevent hardware Trojan insertion}: \alert{Dead space elimination in layout}, \alert{Design obfuscation:} Transform design into functionally equivalent one, which it is much harder for attackers to understand, making reverse engineering much more difficult to perform
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
@@ -1178,10 +1175,11 @@
 						\end{betterlist}
 
 						% \includegraphics[width=0.6\linewidth]{./figures/arbiter_puf.png}
-						\includegraphics[width=0.8\linewidth]{./figures/arbiter_puf.png}
+						\includegraphics[width=0.7\linewidth]{./figures/arbiter_puf.png}
 						\item \alert{Ring-Oscillator PUF:}
 
-						\includegraphics[width=0.8\linewidth]{./figures/ring_oscillator.png}
+						% \includegraphics[width=0.8\linewidth]{./figures/ring_oscillator.png}
+						\includegraphics[width=0.7\linewidth]{./figures/ring_oscillator.png}
 						\item \alert{Butterfly PUF}, \alert{SRAM PUF}
 					\end{betterlist}
 				\end{betterlist}
@@ -1201,7 +1199,7 @@
 				\item \alert{Ending Piracy of Integrated Circuits (EPIC):} This technique tries to allow IP Owner to have control over number of chips activated. Uses logic locking to lock correct functionality of chip, At the gate level. XOR gates are placed on selected non-critical paths. Path outputs modified s.t. XOR’ing path outputs with key bits is needed to obtain correct output bits. Requires that every chip is activated with the external key. Only IP owner knows and sends the key
 				\begin{betterlist}
 					\item \underline{Different kinds of keys in EPIC:} \alert{Common key CK}, Identical key to activate all chips \alert{(\underline{Disadvantage:} problem if this information is leaked)}, \alert{Random chip key RCK}, Pair of private and public key individually generated on each chip, \alert{To secure the transmission of CK}, \alert{Master key MK}, Pair of private and public key of the IP owner, To sign the encrypted key message which activates a chip, \alert{To avoid attacks by sending fake keys CK' (else could do Brute-Force Attack) and using bad version of logic locking mechanism, decrypt if signature is ok }
-          \item Public Master Key (MK-Pub) is embedded in RTL. XOR gates are controlled by Common Key. Correct Common Key unlocks circuit's correct functionality, $k$-XOR gates need a common key of length $k$. TRNG (True Random Number Generator, e.g. PUF) used to generate Random Chip Keys (RCK) on start up (\alert{\underline{Disadvantage:} need completely key generation procedure on the chip + prime number checker for TRNG used as seed}), Upon power-up each chip generates a pair of private and public RCKs (RCK-private, RCK-public) which are burned into programmable fuses. Fab sends RCK-public to IP owner
+					\item Public Master Key (MK-Pub) is embedded in RTL. XOR gates are controlled by Common Key. Correct Common Key unlocks circuit's correct functionality, $k$-XOR gates need a common key of length $k$. TRNG (True Random Number Generator, e.g. PUF) used to generate Random Chip Keys (RCK) on start up (\alert{\underline{Disadvantage:} need completely key generation procedure on the chip + prime number checker for TRNG used as seed}), Upon power-up each chip generates a pair of private and public RCKs (RCK-private, RCK-public) which are burned into programmable fuses. Fab sends RCK-public to IP owner
 					\item IP owner generates Input Key (IK) by encrypting Common Key (CK) with RCK-public and signs it with MK-private. IP owner sends IK to the foundry, IK is only for a single chip owning RCK-private. When entered into the chip, IK is decrypted using RCK-private and the signature is checked using MK-public. Decrypting IK results in CK which unlocks the chip’s correct functionality
 				\end{betterlist}
 			\end{betterlist}
@@ -1231,7 +1229,7 @@
 				\item Second input IN1 gets modified Mod TRN. Only IP Owner knows how he has modified TRN. Only IP Owner can decide whether test responses are correct or not (because IP Owner knows what he did and therefore knows what would expect from correct chip, he would expect test results modified with modifications he did)
 				\item Testing of packaged chip as before with Mod TRN. For good ICs IP owner sends FKEY which is encrypted version of unmodified TRN. TRN applied to IN1 (and IN0). Encryption ensures that answer with (encrypted) TRN cannot come from third party
 				\item \alert{Relies on the fact that foundry / assembly cannot change functionality of the IC:} Else could just take TRN and apply to IN1, only possible to bring decryptin of TKEY or FKEY to IN1
-        \item \alert{Effective against overproduced ICs, cloned ICs, and defective ICs:} \underline{Overproduced:} IP Owner has control over number of TRNs received and TKEY/FKEYS sent to foundry/assembly. \underline{Cloned:} Chips are not functional unless FKEY has been produced by IP Owner. \underline{Defective ICs:} Foundry sends test results to IP owner who checks results and decides if chip has correct test responses (chip is not yet functional at this stage)
+				\item \alert{Effective against overproduced ICs, cloned ICs, and defective ICs:} \underline{Overproduced:} IP Owner has control over number of TRNs received and TKEY/FKEYS sent to foundry/assembly. \underline{Cloned:} Chips are not functional unless FKEY has been produced by IP Owner. \underline{Defective ICs:} Foundry sends test results to IP owner who checks results and decides if chip has correct test responses (chip is not yet functional at this stage)
 				\item no global key $ck$, individual key for each chip, use TRNG not for private public key, but for producing unlocking key. Wherever IP owner flipped key (TRN), there also output of 3-input XOR is flipped. \underline{Advantage:} Just random number sufficient, is simpler, don't have generation of public and private key pair, Protection against key-leakage, because individual to each chip can only unlock this chip. Old attack now possible: Just take overproduced chip, one does not have the FKEY, one just applies something and compare output with functional chip, then one could produce small correction circuit for the outputs. But only if using bad locking mechanism which locks at the outputs, need locking mechanism whichs distributes XOR into the circuit %Other attack: Replace TRNG by deterministic one, generally one can remove any security mechanism%IP-Owner knows the assembly has to deliver for each FKEY the IP-Owner send, the IP-Owner expects a fully working chip from the assembly. 
 
 				\begin{minipage}[b]{0.5\linewidth}
@@ -1242,7 +1240,7 @@
 
 					$FKEY = encrypt_{k\,priv\,IP-Owner}(TRN)$
 
-          (probably $F$ like functional)
+					(probably $F$ like functional)
 				\end{minipage}
 
 				\includegraphics[width=0.5\linewidth]{./figures/sst_communication_flow_foundry.png}

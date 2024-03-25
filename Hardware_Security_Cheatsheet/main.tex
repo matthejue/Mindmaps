@@ -34,6 +34,9 @@
 			\item \alert{IP Vendors} are located across the world. No control on the design process. Safety and security problem
 		\end{betterlist}
 		\item \underline{Several parties may be untrusted:} IP vendors (untrusted IP), System integrator (untrusted system, IP piracy), Fab (untrusted IC, IC Piracy (Counterfeiting)), Assembly (IC Piracy (Counterfeiting))
+		\begin{betterlist}
+			\item \alert{foundry} produces chip and does first test, \alert{assembly} packages chip and does final tests
+		\end{betterlist}
 		\item  \alert{Counterfeit} chips are not restricted to Overproduced chips (foundry) and Defective / out-of-spec chips (assembly + test). The whole IC life cycle and supply chain is affected: \alert{Recycled ICs} and \alert{Cloned ICs}
 		\item \alert{Soft IP:} High Level Synthesis (RTL HDL code from other vendor). \alert{Firm IP:} Logic Synthesis. \alert{Hard IP:} Physical Synthesis (Place \& Route)
 	\end{betterlist}
@@ -50,21 +53,14 @@
 			\item \underline{Effects:} $C$ hides chars of $P$ (plaintext), If $> 1$ key alphabet (polyalphabetic), $C$ dissipates high frequency chars
 		\end{betterlist}
 		\begin{betterlist}
-			\item \alert{General Monoalphabetic substitution ciphers:} Each letter in $P$ is substituted by a fixed letter using a \alert{substitution table}, The \alert{key} is the substitution table, $26!=2^{88}$ substitution tables (= keys)
+			\item \alert{General Monoalphabetic substitution ciphers:} Each letter in $P$ is substituted by a fixed letter using a \alert{substitution table}, The \alert{key} is the substitution table, $26!=2^{88}$ substitution tables (= keys). Need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search
 			\begin{betterlist}
-				\item \underline{Attacks:} \sout{Exhaustive search:} Search through $2^{88}$ keys (substitution tables) is completely infeasible with today‘s computers!, \alert{Letter Frequency Attack:} In practice, not only frequencies of individual letters (\alert{1-gram} (unigram) model of a language) can be used for an attack, but also the frequency of letter pairs, letter triples, etc, The longer the ciphertext $C$, the more effective statistical analysis would be
-				\item need better concealing of statistical frequencies and probably also longer keys to avoid exhaustive search
+				\item \underline{Attacks:} \sout{Exhaustive search:} Search through $2^{88}$ keys (substitution tables) is completely infeasible with today‘s computers!, \alert{Letter Frequency Attack / Deterministic method:} In practice, not only frequencies of individual letters (\alert{1-gram} (unigram) model of a language) can be used for an attack, but also the frequency of letter pairs, letter triples, etc, The longer the ciphertext $C$, the more effective statistical analysis would be. \underline{Disadvantage:} frequencies of letteres in text doesn't need to match exactly 1-gram model
 			\end{betterlist}
 			\begin{betterlist}
 				\item \alert{Caesar Cipher:} each letter in $P$ is substituted by a fixed letter. In this special case the \alert{key} is of length $1$, it is the shift amount
 				\begin{betterlist}
-					\item \underline{Attacks:}
-					\begin{betterlist}
-						\item \alert{Exhaustive search:} Try all possible keys until you find the right one. \enquote{Finding the right one} means \enquote{receiving a meaningful plain text}.
-						\begin{betterlist}
-							\item has $26$ possible keys
-						\end{betterlist}
-					\end{betterlist}
+					\item \underline{Attacks:}, \alert{Exhaustive search:} Try all possible keys until you find the right one. \enquote{Finding the right one} means \enquote{receiving a meaningful plain text}. Has $26$ possible keys \item \alert{Correlation based method:} $\varphi(i)=\sum_{0 \leq j \leq 25} f\left(n o^{-1}(j)\right) \cdot p\left(n o^{-1}((j-i) \bmod 26)\right)$. Can increase efficiency by only calculating correlations for most frequent letters. \underline{Advantages:} No need of dictionary check, Exhaustive Search possible (check for all keys $i$). \underline{Disadvantages:} Does not work if text is too short for meaningful letter frequency, Too time expensive for exhaustive search
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
@@ -76,8 +72,7 @@
 			\begin{betterlist}
 				\item \alert{Vigenère Tableaux Method:} special case of polyalphabetic substitution with $n$ key alphabets. For each key alphabet the special case of Caesar cipher is chosen, i.e., each key alphabet can be represented by one letter%. One can describe a row either by the shift or by saying which letter $c_i$ it mapped to which letter $c_j$ and takes $b_j$ as name of the row, choosing the last choice one can describe $n$ keys by a word of length $n$
 				\begin{betterlist}
-					\item $26^n$ different keys, one has to choose $n$ large enough
-					\item \underline{Attack:} same problem as for polyalphabetic substitution ciphers
+					\item $26^n$ different keys, one has to choose $n$ large enough. \underline{Attack:} same problem as for polyalphabetic substitution ciphers. \underline{Extended correlation based method}
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
@@ -135,14 +130,15 @@
 		\end{betterlist}
 		\includegraphics[width=0.6\linewidth]{./figures/hybrid_assymetric-symmetric_systems.png}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Classification by type of encryption operations continue}
+	\begin{betterlist}
+		\item \underline{Extended correlation based method:} 1. Guess a period p and collect each p’th character from the text 2. Compute the character-frequencies 3. If the resulting distribution is: rather flat/random go to 1 and if it equals the 1-gram distribution correlate the distributions and extract the key, then start collecting every p’th character from the next position...
+	\end{betterlist}
 	\fbox{Classification by way to process plaintext}
 	\begin{betterlist}
 		\item \alert{Stream Ciphers:} Bitwise Encryption and Decryption. Encrypt bits individually. Encryption and decryption are simple additions modulo 2 (aka XOR). Encryption and decryption are the same functions
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\begin{betterlist}
-		\item \alert{Stream Ciphers continue}
 		\begin{betterlist}
 			\item \alert{Encryption:} $y_i = e_{si}(x_i) = s_i \oplus x_i$, where $x_i, y_i, s_i \in \{0, 1\}$. \alert{Decryption:} $x_i = e_{si}(y_i) = s_i \oplus y_i$
 			\begin{betterlist}
@@ -241,11 +237,11 @@
 		\begin{minipage}[b]{0.5\linewidth}
 			\includegraphics[width=0.7\linewidth]{./figures/inversemixcolumnlayer.png}
 		\end{minipage}
-		\item \underline{Attacks / Security:}, \sout{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible, \sout{Analytical attacks:} There is no analytical attack known that is better than brute-force, Side-channel attack
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
+		\item \underline{Attacks / Security:} \sout{Brute-force attack:} Due to the key length of $128$, $192$ or $256$ bits, a brute-force attack is not possible, \sout{Analytical attacks:} There is no analytical attack known that is better than brute-force, Side-channel attack
 		\item \underline{Encrypting longer plain text:}
 		\begin{betterlist}
 			\item \alert{ECB} = Electronic Code Book Mode (Straightforward application of block cipher)
@@ -275,7 +271,7 @@
 			\item compute $n = p \cdot q$
 			\item compute $\Phi(n) = (p - 1) \cdot (q - 1)$
 			\begin{betterlist}
-				\item $\Phi(n) = |\{a \mid a\in \{0, \ldots, n-1\}, gcd(a, n) = 1\}|$, is equal to the number of invertible / relatively prime elements in $\mathbb{Z}/n\mathbb{Z}$
+				\item Euler's totient function $\Phi(n) = |\{a \mid a\in \{0, \ldots, n-1\}, gcd(a, n) = 1\}|$, is equal to the number of invertible / relatively prime elements in $\mathbb{Z}/n\mathbb{Z}$. Prime number $p$ $Phi(p) = p - 1$
 			\end{betterlist}
 			\item select an arbitrary public exponent $e \in \{1, 2, \ldots, \Phi(n) - 1\}$ such that $gcd(e, \Phi(n) ) = 1$
 			\begin{betterlist}
@@ -633,7 +629,7 @@
 				\item fast cache memory storing page table entries recently accessed. Lookup in TLB first. Access page table only in case of TLB miss
 			\end{betterlist}
 
-			\includegraphics[width=0.8\linewidth]{./figures/associative_cache.png}
+			\includegraphics[width=0.8\linewidth]{./figures/associative_cache_inv.png}
 		\end{enumerate}
 		\item \underline{Steps:}
 		\begin{enumerate}
@@ -920,9 +916,10 @@
 	\end{betterlist}
 	\fbox{Using fault injections to extract secret information}
 	\begin{betterlist}
+		\item Also applicable to some non-crypto systems, e.g., jump over password check routine by changing its result bit
 		\item \alert{Differential Fault Injection Attacks}
 		\begin{betterlist}
-			\item \underline{Fundamental Idea:} Malicious modification of internal data during cipher execution leads to a change in data and final observable result. This often requires precise information on timing, algorithm, data used, etc... Comparison between faulty and fault free execution reveals secret information (e.g. derive secret key by differential cryptanalysis). Also applicable to some non-crypto systems, e.g., jump over password check routine by changing its result bit
+			\item \underline{Fundamental Idea:} Malicious modification of internal data during cipher execution leads to a change in data and final observable result. This often requires precise information on timing, algorithm, data used, etc... Comparison between faulty and fault free execution reveals secret information (e.g. derive secret key by differential cryptanalysis)
 			\item \alert{fault model:} E.g. Single/multiple bit-flips at positions chosen by attacker or Localized fault in, e.g., a byte of the cipher state: the attacker cannot influence which bits will be flipped, but can observe which bits have been flipped or same, but attacker doesn’t know which bits were flipped. Fault effect can last for one clock cycle, multiple clock cycles or forever (permanent fault)
 			\begin{betterlist}
 				\item \underline{in practise limited precision:} spatial (location) and temporal precision (timing). An attack with too strong assumptions not matched by the used equipment will yield invalid results

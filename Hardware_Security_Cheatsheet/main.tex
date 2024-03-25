@@ -967,17 +967,21 @@
 		\includegraphics[width=\linewidth]{./figures/boundary_scan.png}
 		\item \alert{JTAG:}
 		\begin{betterlist}
+			\item JTAG is a standardized communication channel to read out information from a chip in a structured way. Used to simplify testing after production. For products in the field which stop to work properly, JTAG ports can be used to identify the failure reason and thus improve the next iteration of the chip
 			\item \underline{Control:} \underline{TDO:} Test Data Output, \underline{TDI:} Test Data Input, \underline{TMS:} Test Mode Select, \underline{TCK:} Test Clock, \underline{TRST:} Resets TAP Controller
 			\item \underline{Three Basic Modes:} \alert{EXTEST mode (external test):} Testing interconnects, \alert{INTEST mode (internal test):} Testing modules, \alert{BYPASS mode:} Replace scan chain of the module by a single FF. \underline{Purpose:} Skip module testing and Shorten overall scan chain
 			\item \underline{Access to Internal Module Registers:} Parts of shift register may be connected with \enquote{corresponding circuit register}, \underline{Update operation:} Copy from shift register into circuit register, \underline{Capture operation:} Copy from circuit register into shift register, \underline{Usual procedure:} \alert{Test mode:} shift data in and update, \alert{Functional mode:} Perform normal circuit operations, \alert{Test mode:} Capture and Shift data out
-			\item \underline{Simplest version to connecting JTAG Devices:} \alert{Daisy chaining:} Serially connected via TDI, TDO. Control signals TMS, TCK, TRST are the same, Long chain, long delays, More complex structures possible
-			\item \underline{Disadvantage of JTAG:} Structure is basically fixed, inflexible
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
-		\item
+		\item \alert{JTAG continue:}
+		\begin{betterlist}
+			\item \underline{Simplest version to connecting JTAG Devices:} \alert{Daisy chaining:} Serially connected via TDI, TDO. Control signals TMS, TCK, TRST are the same, Long chain, long delays, More complex structures possible
+			\item \underline{Disadvantage of JTAG:} Structure is basically fixed, inflexible
+		\end{betterlist}
+
 		\begin{minipage}[b]{0.3\linewidth}
 			\includegraphics[width=\linewidth]{./figures/jtag_device.png}
 			\includegraphics[width=\linewidth]{./figures/internal_module_registers.png}
@@ -1053,18 +1057,18 @@
 					\item Designer and Foundry. Foundry may place a Trojan in the layout design. \alert{IC Trust problem}
 				\end{betterlist}
 				\item \alert{Back Door:} Adversary can add additional circuitry to leak information from the fabricated chip. Such a Trojan cannot be detected easily since it does not change the normal functionality of the circuit. \underline{Possible ways to leak information:} Adding an antenna for wireless information transmission, use existing interfaces of the chip to leak information when interfaces are not used by the application, more advanced information transport via side channels like power consumption, electromagnetic radiation or even path delay
-				\item \alert{Time Bomb:}
-				\begin{betterlist}
-					\item Time bomb may be \alert{actively triggered:} Activated when counter gets a specified value, Finite State Machine (FSM) goes into a certain state, A certain condition on data (like a key) is satisfied
-					\item \alert{Or passivley triggered:} modify wire / transistor widths violating design rules, causing reliability issues
-					\item Damage may be caused by overheating due to e.g. frequent switching operations
-				\end{betterlist}
 			\end{betterlist}
 		\end{enumerate}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
+		\item \alert{Time Bomb:}
+		\begin{betterlist}
+			\item Time bomb may be \alert{actively triggered:} Activated when counter gets a specified value, Finite State Machine (FSM) goes into a certain state, A certain condition on data (like a key) is satisfied
+			\item \alert{Or passivley triggered:} modify wire / transistor widths violating design rules, causing reliability issues
+			\item Damage may be caused by overheating due to e.g. frequent switching operations
+		\end{betterlist}
 		\item \alert{Digital Trojans:}
 		\begin{betterlist}
 			\item \alert{Combinational Trojan:} or \alert{Sequential (Synchronous) or Sequential (Asynchronous):}
@@ -1165,6 +1169,7 @@
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
+		\item 1 0001, 2 0010, 3 0011, 4 0100, 5 0101, 6 0110, 7 0111, 8 1000, 9 1001, A 10 1010, B 11 1011, C 12 1100, D 13 1101, E 14 1110, F 15 1111
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
@@ -1225,5 +1230,11 @@
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
+	\fontsize{6pt}{6pt}\selectfont
+	\begin{verbatim}
+1 2 3 4 5 6 7 8 9 1011121314151617181920212223242526
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+  \end{verbatim}
 \end{minipage}
 \end{document}

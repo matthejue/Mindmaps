@@ -683,7 +683,7 @@
 		\item \uline{Observable (physical, not logical) side channel \alert{outputs} for side channel attacks:}
 		\begin{betterlist}
 			\item \alert{Power consumption}, \underline{Two types:} \alert{static power (data independent):} typically leakage, \alert{dynamic power (data / activity dependent):} stems from circuit activity and each signal change consumes dynamic power, \underline{Dynamic CMOS Power Consumption:} \alert{Switching current} from VDD to load output capacitance when \alert{output} switches from $0$ to $1$, \alert{Through current} from VDD to GND when both p-channel transistor and n-channel transistor turned on briefly during switch $0 \rightarrow 1$ or $1 \rightarrow 0$
-			\item \alert{Electro-magnetic emissions}, \alert{Sound (accoustic)}, \alert{Light emissions (optical)}, \alert{Timing behavior, delay (timing and delay)}
+			\item \alert{Electro-magnetic emissions}, \alert{Sound (accoustic)}, \alert{Light emissions (optical)}, \alert{Timing behavior (timing and delay)}
 		\end{betterlist}
 	\end{betterlist}
 	\fbox{Timing Attacks}
@@ -878,6 +878,7 @@
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
+    \vspace{-0.2cm}
 		\item \underline{Other attacks:} \alert{Get physical access to all structures of the IC:} Decapsulation, Use of acids to remove layers one by one, Image each layer before removing it. \alert{Reverse Engineering:} Provide knowledge about design of IC, Layout reconstruction from images, Build netlist, Find out all functions of IC. \alert{Memory Extraction:} Read contents of ROM from layout reconstruction, Scan contents of EEPROM/FLASH. \alert{Micro Probing:} \uline{Microprobes can also provide side channel outputs:} Listen to control lines, Listen to data bus
 		\item \underline{IC Modifications:} \alert{Decapsulation}. \alert{Laser Cutting:} Not completely destructive, Selective exposure of lower layers, Selectively disconnect nets. \alert{Test Point Creation:} Cut test points into IC, More spots for micro probing / signal injection below top layer, Access more signals. \alert{Wire Bonding:} Use laser cutting to expose net / cut test point for bonding target, Add wire for signal insertion or for modifying circuit paths as needed
 	\end{betterlist}

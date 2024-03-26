@@ -786,7 +786,7 @@
 
 			% \includegraphics[width=\linewidth]{./figures/distinguisher_not_always_working.png}
 			% \includegraphics[width=0.6\linewidth]{./figures/distinguisher_not_always_working_short.png}
-			\includegraphics[width=0.9\linewidth]{./figures/distinguisher_not_always_working_short.png}
+			\includegraphics[width=0.8\linewidth]{./figures/distinguisher_not_always_working_short.png}
 			\begin{betterlist}
 				\item effects cancel out, because transition happens at almost the same time at both places
 			\end{betterlist}
@@ -838,8 +838,8 @@
 				\item assume we have $n$ \alert{power traces (of plain texts)}, each with $p$ data points $d_j^k$ $(1 \le k \le n, 1 \le j \le p)$. There are $m$ subkey guesses, for each subkey guess $i$ and each power trace the \alert{hamming weight of the guessed intermdiate value} (like output of first S-box in round $1$ of AES based on a certain key byte assumption) is $h_i^k$ $(1 \le k \le n, 1 \le i \le m)$. We have to compute $p \cdot m$ correlation coefficients $ρ_{j,i}$ for each time $j$ and each subkey guess $i$:
 
 				% \includegraphics[width=0.4\linewidth]{./figures/pearson_correlation_coefficient.png}
-				\includegraphics[width=0.5\linewidth]{./figures/pearson_correlation_coefficient.png}
-				\includegraphics[width=0.5\linewidth]{./figures/pearson_correlation_coefficient.png}
+				\includegraphics[width=0.4\linewidth]{./figures/pearson_correlation_coefficient.png}
+				\includegraphics[width=0.4\linewidth]{./figures/pearson_correlation_coefficient.png}
 				% \item \alert{Pearson‘s correlation coefficient:} $−1 \le \rho_{X,Y} \le 1$
 				%
 				% \includegraphics[width=0.1\linewidth]{./figures/pearson_symbol.png}
@@ -854,87 +854,37 @@
 	\end{betterlist}
 	\fbox{How to inject faults}
 	\begin{betterlist}
-		\item \underline{Usable (physical, not logical) side channel \alert{inputs} for fault injection:} Supply voltage. Clock frequency. Temperature. Light
-		\item \alert{Non-Invasive Fault Injection Attacks}
+		\item \alert{Fault Injection:} Temporarily changing a logic value in the circuit due to an attack. Intentionally cause errors in a system in order to compromise the security of the system running. Allow to influence a system while. \uline{Are a special case of \alert{physical attacks} which are classified into:}
+		\item \underline{Usable (physical, not logical) side channel \alert{inputs} for fault injection:} Supply voltage, Clock frequency, Temperature, Light
+		\item \alert{Non-Invasive Fault Injection Attacks:} Lowest cost (need oscilloscopes, waveform generators, ...). No damage to the target IC
 		\begin{betterlist}
-			\item Lowest cost (need oscilloscopes, waveform generators, ...). No damage to the target IC
-			\item \alert{Clock Glitching:} Increase clock speed for short time (one or more cycles). Prevent flip-flops from latching correct data and \enquote{skips instructions}. Requires knowledge on when to attack what
-			\item \alert{Voltage Glitching:} Burst of high or low voltage. Increase or decrease gate speeds. Extreme case: $VDD < VTH \Rightarrow$ Change behavior of transistors. Effects as for clock glitching + change control logic outputs / change memory outputs. Requires knowledge on when to attack what
+			\item \alert{Clock Glitching:} \underline{Increase clock speed for short time (one or more cycles):} Prevent flip-flops from latching correct data, \enquote{Skips instructions}. \underline{One possibility:} Just induce a single glitch on a clock signal to achieve premature latching. Requires knowledge on when to attack what
+			\item \alert{Voltage Glitching:} \underline{Burst of high or low voltage:} Increase or decrease gate speeds, Extreme case: $VDD < VTH \Rightarrow$ Change behavior of transistors, Effects as for clock glitching + change control logic outputs / change memory outputs. Requires knowledge on when to attack what
 		\end{betterlist}
-		\item \alert{Semi-Invasive Fault Injection Attacks}
+		\item \alert{Semi-Invasive Fault Injection Attacks:} Intermediate cost (need better oscilloscopes, logic analyzers, test boards, ...). Minimal physical tampering required.
 		\begin{betterlist}
-			\item Intermediate cost (need better oscilloscopes, logic analyzers, test boards, ...). Minimal physical tampering required.
 			\item Preceded by decapsulation of the IC ($\Rightarrow$ semi-invasive). Decapsulation with \alert{mechanical} or \alert{chemical} methods
 			\item \alert{Local Heating:}  High power laser is used to selectively heat small areas. Hot enough to change $V_{th}$ but not hot enough to damage. Trial and error with location is used to determine useful glitches
 			\item \alert{Flash Glitching:} Magnified camera flash can cause mass glitching. Tinfoil masks created to cause selective glitching. Trial and error with location and timing is used to determine useful glitches
 			\item \alert{Laser Glitching:} Infrared laser is used to selectively glitch small areas. Trial and error with location and timing is used to determine useful glitches. Process is more precise than Flash Glitching
-			\item \alert{Backside Imaging:} Substrate exposed to infrared light / X-ray. Transistor layout is visible through substrate. Reverse engineering of block-level functionality: determine size of data bus, determine location of control logic, determine location of security logic. With infrared light. Picture taken with standard low-cost monochrome CCD camera
+			\item \alert{Backside Imaging:} Substrate exposed to infrared light / X-ray. Transistor layout is visible through substrate. Reverse engineering of block-level functionality, e.g.: determine size of data bus, determine location of control logic, determine location of security logic. With infrared light. Picture taken with standard low-cost monochrome CCD camera
 			\item \alert{Laser Scanning:} See memory structures and read stored values
 		\end{betterlist}
 		\item \alert{Invasive Fault Injection Attacks:} High cost. E.g. Removing layers of an IC, scanning by electron microscopes, small microprobes. Destructive. Modifies attacked IC itself
 		\begin{betterlist}
-			\item \underline{Attacks:} \alert{Signal injection:} Use probes to enforce certain logical values / flip logical values. Purpose: Modify control signals / data values on the chip. Modify memory contents. Forcefully bypass security protection, \alert{Disconnect nets in the circuit by laser cutting}, \alert{Modify nets by wire bonding}, \alert{Destroy transistors / wires by high voltage between two probes}
+			\item \underline{Attacks:} \alert{Signal injection:} Use probes to enforce certain logical values / flip logical values, \underline{Purpose:} Modify control signals / data values on the chip, Modify memory contents, Forcefully bypass security protection. \alert{Disconnect nets in the circuit by laser cutting}, \alert{Modify nets by wire bonding}, \alert{Destroy transistors / wires by high voltage between two probes}
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
-		\item \underline{Other attacks:} \alert{Get physical access to all structures of the IC:} Decapsulation. Use of acids to remove layers one by one. Image each layer before removing it, \alert{Reverse Engineering:} Provide knowledge about design of IC. Layout reconstruction from images. Build netlist. Find out all functions of IC, \alert{Memory Extraction:} Read contents of ROM from layout reconstruction. Scan contents of EEPROM/FLASH, \alert{Micro Probing:} Microprobes can also provide side channel outputs. Listen to control lines. Listen to data bus
-		\item \underline{IC Modifications:}, \alert{Decapsulation}, \alert{Laser Cutting:} Not completely destructive. Selective exposure of lower layers. Selectively disconnect nets, \alert{Test Point Creation:} Cut test points into IC. More spots for micro probing / signal injection below top layer. Access more signals, \alert{Wire Bonding:} Use laser cutting to expose net / cut test point for bonding target. Add wire for signal insertion or for modifying circuit paths as needed
-	\end{betterlist}
-	\fbox{Fault injection countermeasures}
-	% \item it is currently believed that an attacker with infinite resources can break an arbitrary device by side-channel analysis and fault injection. Moreover, security must be balanced against performance, power consumption and cost, so countermeasures are subject to limitations
-	\begin{betterlist}
-		\item \alert{Non-Invasive Fault Injection countermeasures:} add voltage and frequency sensors to detect voltage / frequency glitching attacks
-		\item \alert{Semi-Invasive Fault Injection countermeasures:} ambient light sensors and switches against decapsulation of the device
-		\item \alert{Invasive Fault Injection counntermeasures}
-		\begin{betterlist}
-			\item \alert{Probing Attempt Detector:} to detect probing. \underline{Idea:} Frequency depends on delay. Based on a ring oscillator. A \alert{ring oscillator (RO)} with an attacked victim line temporarily oscillates with a reduced frequency. Use two ring oscillators with (almost) identical frequencies. Detect non-negligable frequency differences between reference RO and RO with victim line
-			% A probe on the victim line increases its capacity and thus the delay of the ring
-
-			% \includegraphics[width=0.8\linewidth]{./figures/probing_attempt_detector.png}
-			\includegraphics[width=\linewidth]{./figures/probing_attempt_detector.png}
-			\item \alert{Top-layer Sensor Meshes:} to avoid access to chip internals. Additional metallization layers form a sensor mesh above the actual circuit and do not carry any critical signals. All the paths in a sensor mesh are continuously monitored for interruptions and short-circuits while power is available. Prevents laser cutter or selective etching access to the bus lines. Mesh layer hides the lower layer which makes navigation on the chip surface for probing and FIB (Focused Ion Beam) editing more tedious
-		\end{betterlist}
-		\item \alert{All types of Fault Injection} use \enquote{standard} error detection / error correction methods
-		\begin{betterlist}
-			% \item Re-use of \enquote{classical} \alert{error detection / correction} techniques to \alert{detect} fault injection attacks
-			\item \alert{Soft Error:} temporarily changing a logic value in the circuit due to a random natural event
-			% \begin{betterlist}
-			%   \item while \alert{Fault Injection} temporarily changes a logic value in the circuit due to an attack
-			% \end{betterlist}
-			\item \alert{error detection:}
-			\begin{betterlist}
-				\item \alert{self-checking design:} Functional unit designed in a way that faults manifest themselves as invalid (error-space) outputs. Invalid outputs are detectable / correctable by an external code checker
-
-				% \includegraphics[width=0.8\linewidth]{./figures/self_checking_design.png}
-				\includegraphics[width=0.9\linewidth]{./figures/self_checking_design.png}
-				\item \alert{error-detecting codes:}  A simple error-detecting code (detects all single-bit errors): Attach an even parity bit to each $k$-bit data word. Check bit = XOR of all data bits. \alert{Data space:} All $2^k$ possible $k$-bit words. \alert{Code space:} All $2^k$ possible even-parity $(k + 1)$-bit codewords. \alert{Error space:} All $2^k$ possible odd-parity $(k + 1)$-bit noncodewords
-
-				\begin{betterlist}
-					\item many redundancy techniques can be considered as coding schemes. \alert{Duplex:} Using code $\{00, 11\}$. Bit $0$ encoded as $00$, $1$ as $11$. Detects any error in one version. \alert{Triplex:} Using code $\{000, 111\}$. Corrects all single errors. If we triplicate the voter to obtain 3 results, we perform $f(x)$ on coded inputs, getting coded outputs
-
-					% \includegraphics[width=0.6\linewidth]{./figures/error_detecting_codes.png}
-					% \includegraphics[width=0.4\linewidth]{./figures/redundancy_as_coding_scheme.png}
-					\item \alert{checkpointing \& recovery:} Store system state at checkpoint, revert if fault / attack is detected
-
-					% \includegraphics[width=0.6\linewidth]{./figures/checkpointing_recovery.png}
-					\item \alert{self-destruction:} When attack is detected: Destroy circuit
-				\end{betterlist}
-
-				% \includegraphics[width=0.3\linewidth]{./figures/parity_bit.png} 
-			\end{betterlist}
-			\item \alert{error correction:}
-			\begin{betterlist}
-				\item \alert{triple modular redundancy:} the voting element accepts the outputs from the three sources and delivers the \alert{majority vote as its output}. \underline{This is a $2$-of-$3$ system:} as long as a majority of the modules produce correct results, the system will be functional
-				% \includegraphics[width=0.6\linewidth]{./figures/triple_modular_redundancy.png}
-			\end{betterlist}
-		\end{betterlist}
+		\item \underline{Other attacks:} \alert{Get physical access to all structures of the IC:} Decapsulation, Use of acids to remove layers one by one, Image each layer before removing it. \alert{Reverse Engineering:} Provide knowledge about design of IC, Layout reconstruction from images, Build netlist, Find out all functions of IC. \alert{Memory Extraction:} Read contents of ROM from layout reconstruction, Scan contents of EEPROM/FLASH. \alert{Micro Probing:} \uline{Microprobes can also provide side channel outputs:} Listen to control lines, Listen to data bus
+		\item \underline{IC Modifications:} \alert{Decapsulation}. \alert{Laser Cutting:} Not completely destructive, Selective exposure of lower layers, Selectively disconnect nets. \alert{Test Point Creation:} Cut test points into IC, More spots for micro probing / signal injection below top layer, Access more signals. \alert{Wire Bonding:} Use laser cutting to expose net / cut test point for bonding target, Add wire for signal insertion or for modifying circuit paths as needed
 	\end{betterlist}
 	\fbox{Using fault injections to extract secret information}
 	\begin{betterlist}
-		\item Also applicable to some non-crypto systems, e.g., jump over password check routine by changing its result bit
-		\item \alert{Differential Fault Injection Attacks}
+		\item Target the \alert{hardware implementation} of a cipher. Perform encryption / decryption with a fault injected into the circuit by a physical disturbance. Derive secret key by \alert{differential cryptanalysis}, Also applicable to some \alert{non-crypto systems}, e.g., jump over password check routine by changing its result bit. \underline{Disadvantage:} Require very high precision
+		\item \alert{Differential Fault Injection Attacks:}
 		\begin{betterlist}
 			\item \underline{Fundamental Idea:} Malicious modification of internal data during cipher execution leads to a change in data and final observable result. This often requires precise information on timing, algorithm, data used, etc... Comparison between faulty and fault free execution reveals secret information (e.g. derive secret key by differential cryptanalysis)
 			\item \alert{fault model:} E.g. Single/multiple bit-flips at positions chosen by attacker or Localized fault in, e.g., a byte of the cipher state: the attacker cannot influence which bits will be flipped, but can observe which bits have been flipped or same, but attacker doesn’t know which bits were flipped. Fault effect can last for one clock cycle, multiple clock cycles or forever (permanent fault)
@@ -946,7 +896,7 @@
 				\item \alert{Fault model:} Suppose the adversary can change any bit $k_i$ of secret key $k$ to $0$ but not to $1$
 				\item \underline{Encrypt without any faults:} $y = e_K(x)$. Select a position $i$, change key bit $k_i$ to $0$, encrypt again: $y’ = e_{K’}(x)$. If $y = y'$, the key bit $k_i$ was $0$, otherwise it was $1$. To retrieve the complete key, repeat for all $i$
 				\begin{betterlist}
-					\item \underline{Alternative:} apply less fault injections; use brute-force search for the rest
+					\item \underline{Alternative:} apply less fault injections; use \alert{brute-force search} for the rest
 				\end{betterlist}
 			\end{betterlist}
 			\item \alert{Fault Attack on RSA:}
@@ -958,6 +908,58 @@
 					\item if there is an $i$ such that $m’ = m \cdot c^{2^i} \mod n$, then $d$ had $0$ at position $i$ and it was flipped to $1$: $d_i = 0$
 					\item if there is an $i$ such that $m = m’ \cdot c^{2^i} \mod n$, then $d_i = 1$
 				\end{enumerate}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Fault injection countermeasures}
+	% \item it is currently believed that an attacker with infinite resources can break an arbitrary device by side-channel analysis and fault injection. Moreover, security must be balanced against performance, power consumption and cost, so countermeasures are subject to limitations
+	\begin{betterlist}
+		\item \alert{Non-Invasive Fault Injection countermeasures:} add voltage and frequency sensors to detect voltage / frequency glitching attacks
+		\item \alert{Semi-Invasive Fault Injection countermeasures:} ambient light sensors and switches against decapsulation of the device
+		\item \alert{Invasive Fault Injection counntermeasures}
+		\begin{betterlist}
+			\item \alert{Probing Attempt Detector:} to detect probing.  A probe on the victim line increases its capacity and thus the delay of the ring. A \alert{ring oscillator (RO)} with an attacked victim line temporarily oscillates with a reduced frequency. \underline{Idea:} Use two ring oscillators with (almost) identical frequencies, Detect non-negligable frequency differences between reference RO and RO with victim line
+			% A probe on the victim line increases its capacity and thus the delay of the ring
+			% \underline{Idea:} Frequency depends on delay. Based on a ring oscillator. 
+
+			% \includegraphics[width=0.8\linewidth]{./figures/probing_attempt_detector.png}
+			\includegraphics[width=0.8\linewidth]{./figures/probing_attempt_detector.png}
+			\item \alert{Top-layer Sensor Meshes:} to avoid access to chip internals. Additional metallization layers form a sensor mesh above the actual circuit and do not carry any critical signals. All the paths in a sensor mesh are continuously monitored for interruptions and short-circuits while power is available, Prevents laser cutter or selective etching access to the bus lines. Mesh layer hides the lower layer which makes navigation on the chip surface for probing and FIB (Focused Ion Beam) editing more tedious
+		\end{betterlist}
+		\item \alert{All types of Fault Injection} use \enquote{standard} error detection / error correction methods
+		\begin{betterlist}
+			% \item Re-use of \enquote{classical} \alert{error detection / correction} techniques to \alert{detect} fault injection attacks
+			\item \alert{Soft Error:} temporarily changing a logic value in the circuit due to a random natural event
+			% \begin{betterlist}
+			%   \item while \alert{Fault Injection} temporarily changes a logic value in the circuit due to an attack
+			% \end{betterlist}
+			\item \alert{error detection:}
+			\begin{betterlist}
+				\item \alert{self-checking design:} Functional unit designed in a way that faults manifest themselves as invalid (error-space) outputs. Invalid outputs are \alert{detectable / correctable} by an external code checker
+
+				% \includegraphics[width=0.8\linewidth]{./figures/self_checking_design.png}
+				\includegraphics[width=0.9\linewidth]{./figures/self_checking_design.png}
+				\item \alert{error-detecting codes:}  A simple error-detecting code (detects all single-bit errors): Attach an \alert{even parity bit} to each $k$-bit data word, Check bit = XOR of all data bits, \alert{Data space:} All $2^k$ possible $k$-bit words, \alert{Code space:} All $2^k$ possible even-parity $(k + 1)$-bit codewords, \alert{Error space:} All $2^k$ possible odd-parity $(k + 1)$-bit noncodewords
+
+				\begin{betterlist}
+					\item many redundancy techniques can be considered as coding schemes. \alert{Duplex:} Using code $\{00, 11\}$, Bit $0$ encoded as $00$, $1$ as $11$, Detects any error in one version. \alert{Triplex:} Using code $\{000, 111\}$, Corrects all single errors, If we triplicate the voter to obtain 3 results, we perform $f(x)$ on coded inputs, getting coded outputs. \uline{If an error / fault injection has been detected, but could not be corrected:}
+
+					% \includegraphics[width=0.6\linewidth]{./figures/error_detecting_codes.png}
+					% \includegraphics[width=0.4\linewidth]{./figures/redundancy_as_coding_scheme.png}
+					\begin{betterlist}
+						\item \alert{checkpointing \& recovery:} Store system state at checkpoint, Revert if fault / attack is detected
+
+						% \includegraphics[width=0.6\linewidth]{./figures/checkpointing_recovery.png}
+						\item \alert{self-destruction:} \underline{When attack is detected:} Destroy circuit
+					\end{betterlist}
+				\end{betterlist}
+
+				% \includegraphics[width=0.3\linewidth]{./figures/parity_bit.png} 
+			\end{betterlist}
+			\item \alert{error correction:}
+			\begin{betterlist}
+				\item \alert{triple modular redundancy:} the voting element accepts the outputs from the three sources and delivers the \alert{majority vote as its output}. \underline{This is a $2$-of-$3$ system:} as long as a majority of the modules produce correct results, the system will be functional
+				% \includegraphics[width=0.6\linewidth]{./figures/triple_modular_redundancy.png}
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
@@ -1024,7 +1026,14 @@
 			\begin{betterlist}
 				\item use BIST (Build-in Self Test) for testing instead
 
-				\includegraphics[width=0.4\linewidth]{./figures/bist.png}
+				\begin{minipage}[b]{0.4\linewidth}
+					\includegraphics[width=\linewidth]{./figures/bist.png}
+				\end{minipage}
+				\begin{minipage}[b]{0.6\linewidth}
+					\includegraphics[width=\linewidth]{./figures/triple_modular_redundancy.png}
+
+					Triple modular redundancy
+				\end{minipage}
 				\begin{betterlist}
 					\item \underline{Disadvantages:} if have to store test set + store test responses, then huge memory consumption. pseudo-random test sequences (Linear feedback shift registers) + compressed output signatures $\rightarrow$ low fault coverage. Fault diagnosis with BIST not possible
 				\end{betterlist}

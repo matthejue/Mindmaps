@@ -1,0 +1,14 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerflakes}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/Nix_flakes_explained.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerflakes}[2]{\href{https://youtu.be/S3VBi6kHw5c?si=0YguQKEbR6eyWgTs&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/Nix_flakes_explained.md" "" vimjoyerflakes vimjoyerflakes
+- 00:00:53 \scriptvimjoyerflakes{1}{Enabling}
+- 00:01:28 \scriptvimjoyerflakes{2}{Shell environment}
+- 00:02:28 \scriptvimjoyerflakes{3}{shell.nix}
+- 00:02:53 \scriptvimjoyerflakes{4}{nix flake init}
+- 00:03:13 \scriptvimjoyerflakes{5}{basic flake}
+- 00:03:25 \scriptvimjoyerflakes{6}{More extensive flake}
+- 00:04:30 \scriptvimjoyerflakes{7}{shell.nix and nix flake comparison}
+- 00:05:38 \scriptvimjoyerflakes{8}{nix develop}
+- 00:06:00 \scriptvimjoyerflakes{9}{nix flake update}
+- 00:05:40 \scriptvimjoyerflakes{10}{in case devshell called bob}

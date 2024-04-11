@@ -1,0 +1,434 @@
+NYX is an amazing Linux distribution
+focusing on simple declarative
+configurations automic upgrades easy
+roll backs and unmatched
+reproducibility and this is the ultimate
+nyos guide by the end of which you will
+learn how to install nyos how to edit
+and upgrade NYX declaratively what
+flakes are and how to use them what is
+and how to use home manager and finally
+simple ways to structure your NYX files
+for ease of configuration and use on
+multiple machines so without further Ado
+let's begin when you use a traditional
+operating system you typically Auto
+remove features by installing packages
+modifying configuration files or
+enabling services this method of system
+configuration is known as the imperative
+approach in contrast to Nyx 's
+declarative approach on nyos everything
+can and should be declared in special
+NYX files which are then used to rebuild
+your system as if you were installing it
+from scratch the closest analogy I can
+think of is declaring note packages in
+package.json as opposed to having a
+script that imperatively installs all
+packages one by one script on the left
+is literally laughable because even
+though the result looks similar it will
+be much harder to reproduce modify or
+analyze declarative approach also allows
+you to easily share one configuration
+among multiple machines which means that
+a simple git pull command is all you
+need to deploy your existing
+configuration to a brand new machine
+worried about breaking important parts
+of your system when updating nyos has
+got you covered each time you rebuild
+your configuration a fresh version of
+nyos is created containing only the
+components you have declared all
+previous versions remain on your drive
+until you explicitly delete them this
+allows you to revert back to the last
+version fix any issues yourself or
+simply wait for them to resolve on their
+own thanks to the popular calamari
+installer getting NX is just as easy as
+any other Linux drro select the correct
+region keyboard layout username and
+password all the usual stuff you can
+also immediately choose one of the
+various desktop environments which will
+only slightly affect your initial
+configuration file I will choose gome
+but you can choose whichever one you
+prefer make sure to enable swap file and
+tick the unfree software option during
+the final step the installation might
+get stuck at exactly 46% but don't worry
+about it just wait a little
+bit reboot your computer and if your
+desktop environment loads correctly you
+have successfully created the first
+iteration of your system and from now on
+you will be able to roll back to it in
+case anything goes wrong so where is
+that fancy configuration file you keep
+hearing about by default it is located
+in/ Etsy n/c configuration.nix navigate
+to it by running cd/ et/ nixos or
+opening this directory in a graphical
+file manager you will also see a
+hardware configuration file there but
+you almost never want to modify it open
+the configuration file with pseudo edit
+and you will see a bunch of options
+defined in a special NYX syntax at this
+point you can think of it as not much
+different from Json but if you have any
+trouble understanding it throughout the
+guide make sure to to check out Nick's
+language video in the link in the
+description the first thing you usually
+want to do on a fresh system is install
+software you are already familiar with
+scroll down to the line that says
+environment. system packages and let's
+add something there if you want to know
+the names of available packages navigate
+to search. n.org website where you can
+choose any of the 80,000 available
+packages NYX packages is currently the
+largest software repository in the world
+and it absolutely dwarves all other
+repos both in terms of number of
+packages and number of fresh packages
+closely followed only by the mighty a in
+addition to packages default nio
+configuration file also includes a bunch
+of options depending on what you choose
+during installation the ones I got here
+include enabling gome cup sprting
+service pipe wire and some other
+essential desktop options obviously you
+cannot fit everything here so to
+discover new ones rightman
+configuration. n and then use SL key to
+search for your desired
+options I'll search for Bluetooth and
+see that hardware. bluetooth. enable is
+the option I need and judging by the
+Boolean type and default false value I
+can assume that all I need to do is set
+this option to true in the configuration
+if you cannot find something here feel
+free to use nyxi or Google NS has been
+around for more than 20 years already so
+99% of your use cases should already be
+covered with options now use Pudo NX
+rebuild switch command to rebuild your
+system and switch to the newest version
+we can immediately use Vim connect
+devices with Bluetooth and the
+bootloader will Now display two
+different system versions to choose from
+but wait doesen storing two slightly
+different versions of the system take a
+lot of storage and the answer is of
+course not because NYX package manager
+stores everything in a magical place
+called NYX store it is located under /n/
+store directory and every single package
+you install is going to be there try to
+locate any binary with which command and
+you will see that it is located in the
+bin folder of one of these Nick store
+directories this storage mechanism is
+what allows nyos to reuse packages
+between multiple system versions each
+time you rebuild your configuration your
+system's blueprint is created in the Nyx
+store as just another regular package
+and it simply holds references to other
+regular packages from the store on each
+startup nixos executes activation script
+from this blueprint to populate your
+root directory based on the options from
+the configuration file that was used to
+create it therefore the only thing that
+matters in terms of dis space is amount
+of packages you install across all
+present rebuilds it's not uncommon to
+have dozens or even hundreds of these
+system versions at once but if you want
+to keep things clear you can use pseudo
+nyxo rebuild test to rebuild your system
+activate it but don't add it to the boot
+loader even then you still want to clean
+up your storage once in a while and you
+can do that by running pseudo NYX
+collect garbage delete older than and 15
+days for example it will remove all
+system versions older than 15 days as
+well as all packages that are no longer
+used by new generations basic system
+configuration is covered but what about
+actually updating packages this is the
+toughest but definitely the most
+important part of the video what many
+beginners do not realize is that Nyo
+rebuild does not update any packages let
+me explain NYX packages the giant
+repository of well NYX packages is
+hosted on GitHub it's split into many
+different branches but the most
+important ones are Upstream unstable and
+the latest stable by default when you
+install nyos your system gets pinned to
+the latest commit in the stable Branch
+all packages you install and all NX
+options you apply are then taken from it
+this commit is called a channel and it
+stays the same until you explicitly
+update to a newer commit you might
+already see a problem with such approach
+if you were to share your configuration
+with another person there is no
+guarantee that their pinned commit will
+be the same they might be on an unstable
+Branch or a very old commit that might
+not even include the options that you
+are using yet this is where NYX flakes
+coming into play they are basically a
+special system for managing your NY code
+dependencies in a declarative way in a
+moment we will create a file that
+explicitly lists your preferred NX
+packages Branch as a dependency and
+Flake system will then automatically
+create a lock file to keep track of its
+updates like in any other modern package
+manager NYX flake update command can
+then be used to update all flake
+dependencies this way our flake
+configuration won't be dependent on a
+special systems Channel making it TR
+reproducible and reliable to begin using
+flakes you want to open your nyxo
+configuration and add this line anywhere
+you want NYX flakes are considered an
+experimental feature right now but they
+are already widely adopted by the
+community so there is literally no point
+in not using them rebuild your system
+and you now have access to latest and
+greatest NYX commands next CD into /c/
+nios and run this command to see a fl. n
+file appear in this directory open it
+with your preferred editor and you will
+see a bunch of Nyx code it might seem
+dting at first but don't worry like I
+mentioned before input set at the top
+defines sources that our flake needs to
+fetch and outputs holds chunks of Nyx
+code that can be evaluated after
+fetching all inputs the only source we
+have here is regular NYX packages from
+the unstable branch and the only output
+is this default NY configuration which
+references configuration. n module from
+the same directory you don't have to
+modify this file at all because
+everything is already done rebuild your
+system with a special-- flake argument
+which takes a path to your flakes Parent
+Directory wait for it to finish and take
+a look at the current directory with ls
+command again you will see flake. loock
+file appear confirming your undeniable
+success that is of course not the only
+advantage of using flakes because like
+I've said earlier inputs Define multiple
+sources that your flake needs to fetch
+which allows us to fetch other community
+flakes just like one of the most popular
+ones home manager home manager provides
+us with a very nice NYX module but
+before we can import it let's talk about
+what modules are modules are chunks of
+Nyx code that extend your configuration
+by setting options or providing new ones
+they usually look something like this
+which is equivalent to this piece of
+pseudo code that I wrote basically
+functions that take some arguments and
+return dictionaries with options if it
+looks familiar that is because your
+configuration.nix and Hardware
+configuration. n are both nyos modules
+configuration.nix here Imports Hardware
+configuration. N and is itself imported
+in our flake notice that Hardware
+configuration seems to get more
+arguments at the first glance but that
+is only because all other ones are
+hidden behind this amazing triple dot
+syntax making your own module with
+custom options is also really simple
+create a new NY file import it and fill
+it with whatever you want I'll make a
+module that defines my systems primary
+user and sets its shell to zsh wbp those
+options with config key and Define an
+option set above it now we can add
+custom options at the top and refer to
+them in config the first option will be
+used to toggle our module and the second
+one will determine our user's name these
+options can now be used in any other
+module so let's call them in our main
+configuration as you can see config
+basically refers to the options
+generally set in your configuration
+which allows you to set options based on
+other options to make our custom module
+cleaner we can also make an alas for
+config do main user at the top and put
+both of our options on under the same
+set every single module you import has
+access to options defined in all other
+modules so what we want to do now is
+download home manager module and import
+it anywhere so we can use its options to
+tell your flake that it needs to
+download home manager we want to add it
+to the inputs at the top and also
+optionally make home manager all NYX
+packages follow your NYX packages so you
+don't have to download two different
+versions of Nyx packages we can now
+import home manager module into our NX
+siiz configuration just by adding it to
+modules
+like I've said earlier it doesn't matter
+where we import our modules but the
+thing is we are going to be using
+options from this one in configuration.
+NX so let's import it there I've
+included this extra special ARS
+parameter in the config evaluating
+function and what it does is take all
+inputs of our flake and passes it to
+parameters of every single module
+meaning we can go to our configuration.
+n file bring the inputs parameter to the
+scope and import the module from the
+inputs now we have access to home
+manager and its modules option
+but what exactly does it do as the name
+suggests it provides us with a way to
+declaratively configure your home
+directory or more specifically program
+config files that are stored there yes
+you can already Define system settings
+and services but what if you could also
+have a universal configuration file for
+all your user programs like zsh neovim
+git or even your favorite tiling Window
+Manager the NX module we imported
+provides us with an option called home
+manager which lets us Define users that
+will have this special home
+configuration for most people it's just
+going to be their default user so write
+your primary user name here and import
+the home. N file from the same directory
+home. n will serve as an entry point to
+our home configuration just like
+configuration. n for nyos we do not have
+this file yet so to generate it around
+this command which you can find in the
+link in the description rebuild your
+system and you should now have a manome
+configuration. n command available in
+your terminal just like man
+configuration. n this command will show
+you all available options the only
+difference is they must be set in home.
+N or any of the modules that it Imports
+home manager modules follow the exact
+same structure as nixos modules but have
+slightly different options allowing you
+to create files with some content
+relatively linking files from the config
+to home directory and most importantly
+configuring your favorite programs with
+NYX the coolest part is home manager
+also works on any other drro or even
+maos so migrating your do files to home
+manager won't forever bind you to Nix
+with the way we installed it home
+manager will get rebuilt as part of your
+system on every nyos rebuil so you don't
+even have to run any additional commands
+we have already covered a lot of things
+but structuring your configuration is
+what differentiates a good configuration
+from the bad one here is the project
+structure that we have currently let's
+modify it a bit to make it much easier
+to navigate and extend we can start by
+creating a host directory which will
+contain a directory for every machine
+that we want to manage with our NYX
+project our first host is the Cur one so
+let's create a default directory for it
+and put these three files there don't
+forget to change relative pass pointing
+to it in the flake and we can now add
+new host simply by making new
+directories and defining configurations
+in the flake choosing which one you want
+to use for rebuilding is simply a matter
+of changing the last part of the flake
+command currently this setup does not
+reuse any code between configurations
+which makes them hard to maintain and
+synchronize to fix this issue let's also
+create a modules directory which will
+contain NX and home manager modules by
+splitting your configurations into
+smaller files you ensure that the only
+thing you need to do on a new machine is
+to choose the modules you need just like
+at a buffet these modules could be used
+to configure specific programs bigger
+parts of your system or even import
+other smaller modules lastly because we
+are using flakes we don't really have to
+store our configuration in /y/ NX
+anymore so you can move it anywhere you
+want like your home directory for
+example NX is a very deep rabbit hole
+and there is much much more to it than
+it might initially seem I recommend you
+to check out some more videos about it
+on my channel and also this cool video
+by a yoga Master which covers many
+additional steps you can take to really
+learn
+nixos everything you saw in this video
+can be found in the link in the
+description and now I would like to
+thank the sponsors of this video
+specifically Hoskin Linux rocks be easy
+not not uni kinaku lassus Thomas Thomas
+Brown aing B Ponder hening ker Cameron
+Vio friend Oakley cord dude
+9501 and also the people who supported
+this channel before this video is quite
+big because it took much more time to
+make than usual but don't worry making
+smaller 4 to 6 Minute videos is still my
+priority as usual don't forget to check
+out our Discord server leave a like or a
+comment if you enjoy this video or
+subscribe if you are feeling extra
+generous thanks for watching and I will
+see you in the next
+one

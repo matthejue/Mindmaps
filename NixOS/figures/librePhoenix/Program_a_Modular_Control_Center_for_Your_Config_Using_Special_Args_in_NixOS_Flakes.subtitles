@@ -1,0 +1,488 @@
+hello everyone and welcome back to the
+channel and another nyos video today
+we're going to be talking about a bit of
+an obscure topic with regards to Nyx OS
+configuration called special args uh
+special args really only uh apply to
+flakes so if you don't like flakes then
+this video probably isn't for you and if
+you don't understand flakes or you find
+them confusing or something like that uh
+you don't have them set up in your
+config ation but you'd like to learn I
+have several videos talking about flakes
+that I will link in the description and
+I'll have uh some popups on the you know
+the upper corner around this time in the
+video so uh definitely check those out
+if you're interested in flakes but back
+to the focus of this video are special
+args so special args what does that
+means a special argument cool fancy what
+does that do well I'll show
+you I really like using special args in
+my configuration because what they allow
+you to do is they allow you to make a
+sort of control center for your
+configuration uh to sort of make the
+modularity of the configuration a bit
+more quick and um easy to uh switch on
+the Fly what do I mean by this in my
+flake. NX file I have this section here
+in the output uh definition where I
+declare a bunch of variables you'll see
+these top variables are the quote
+unquote system settings and then these
+bottom variables are the quote unquote
+user settings now I have a very modular
+config to show you what I have going on
+here uh I'll just show you the
+directories I have my flake. Nix I have
+tons and tons of module NYX files for my
+system I have tons and tons of module
+files for user level applications uh
+like configurations and stuff like that
+I have various profile modules that I
+use I switch in and out of and all this
+stuff uh all in all my config probably
+has like 70 or 80 different files in it
+um which maybe like 40 of them are NYX
+files actually I have no idea but um
+I'll count them later uh anyways while
+this modularity is very powerful it can
+lead to configuration options and
+various things uh sort of being sprawled
+out across the entire config and this
+can sometimes make it difficult to see
+what's going on or to uh tweak various
+things for different systems where we
+want to install like the same kind of
+configuration just want to make minor
+tweaks here and there so what happens
+with these Special
+args what you can do with them is you
+declare these uh variables in your
+flake. next in one place and then you
+can import those variables into all of
+the modules now I'll show you an example
+here's a really good example I have a
+variable called the username variable
+now the username is something that needs
+to be accessed by a bunch of system
+level NYX files things that might be in
+a configuration. NX and then the
+username also needs to be accessed by
+things like home manager so what happens
+with this username variable is you can
+pass it in as a special AR
+to home manager via the extra special
+args and to just normal NYX OS via the
+special args and some inherits so you'll
+see both of these inherit the
+username and then inside of your other
+modules you can have these as arguments
+inside of those modules so for example
+if I head over to my configuration.nix
+you will see that at the the top of this
+config username is actually an argument
+to the overall function for the
+configuration.nix this can then get used
+inside of the
+configuration sort of like so so for
+example I use this substitution for
+users. users. username and that creates
+the definitions for my actual regular
+user this this same username variable
+can then be imported into any of the
+module files and it will be replicated
+across all of them like for example the
+home. N file which is again a completely
+separate file it also takes in the
+username as an
+actual argument to this file right there
+and then it can be used for example
+where I declare home. username equals
+the username variable and home. home
+directory is /home home plus whatever
+the username variable
+is this is really really really
+convenient because all you need to do
+then once you have some of these set up
+if you want to set up a new
+system with perhaps a different user
+name you can just change it in one place
+and then it replicates that amongst your
+entire system so this is super super
+powerful a lot of these variables that I
+declare here are probably ones that you
+might want to to set up and work with
+like for example the system variable or
+the host name variable or the time zone
+variable any of these sort of uh
+definitions that you want to be able to
+tweak or change for different systems
+and that may occur in multiple different
+module files or something like that you
+can use this to make a control panel of
+sorts and this again it's super super
+powerful I have the exact same
+configuration between my personal
+computer which is what you're seeing
+right now and my work computer and when
+I go over to my work computer all I need
+to do is pull down the
+configuration change the host name uh
+change the profile from personal to work
+and I think I probably changed my
+username to like first initial last name
+and then like my email to my actual work
+email which is not what you're seeing
+here and so on and so on I probably
+change the theme as well but it's
+basically the same just with those minor
+tweaks and changing the entire system
+configuration between those two things
+just happens in basically an instant uh
+because I have these all set up now if
+you've been following all of my videos
+one thing you may be wondering is oh
+well this can also be achieved by
+defining custom options which if you
+haven't seen that video about custom
+options I'll I'll link that as well and
+put a little uh thing up in the corner
+too uh yes that is definitely true all
+of this can be done with custom options
+however this method is also another tool
+in in your toolbox because with these
+variable declarations you don't have to
+go through the all the trouble of uh
+declaring that the option exists and
+then defining it and uh making sure that
+the type is correct and all that fun
+stuff uh you just sort of go running
+with it like a variable would be used in
+any other programming language and so
+it's a little easier to get running with
+which uh you know I set this up when I
+was still like you know in my infancy of
+learning NYX OS and it's just sort of
+worked and I haven't really bothered to
+change it now again just to go over some
+of the more technical details so that
+you sort of understand what's going on
+here in uh more full detail the way to
+set this up is you have the Declaration
+for your outputs and you have to define
+the outputs as an attribute set
+including the things that you want
+outputed by the flake for a NYX system
+this is going to include NYX
+configuration that would be the actual
+system level NEX configuration and it's
+also going to include the home
+configurations if you're using home
+manager now to have these special args
+be useful I think it's best to declare
+them as variables in a let binding and
+then just pass those variables into the
+home configurations and the Nyx
+configurations using the Lettin uh sort
+of binding like that so once you've
+declared some of the variables in the
+let binding and you pass them in you can
+use them in normal nyos by defining
+special args as an argument to the li.
+nios system function before all we had
+was you know declaring the system
+architecture and the module files that
+the nyos system should be built from and
+so this special AR argument is sort of
+an unnecessary argument that is passed
+to the function but when you do pass it
+you need to Define it as an attribute
+set sort of like so with these squiggly
+brackets now if you have defined all of
+your variables up above in a let binding
+you can just pass these all as inherits
+though also if you really wanted to you
+could pass in something like normal so
+for example random thing equals some
+stuff and then this could be of course
+included in your other modules just like
+any of the other ones and this variable
+would have the value some
+stuff this process is identical to home
+manager if I scroll up here except that
+we pass in the argument extra special
+args it's still an attribute set and so
+all the same rules apply you can use you
+can inherit the variable declarations
+from the let binding or you can of
+course create some new things like uh
+other thing equals some other
+stuff and the other thing could then be
+passed as an argument to your other
+modules and then would have the value
+some other
+stuff once you pass these as special
+args or extra special args then any of
+the module files that you define for the
+home configuration or for the Nyx
+configuration or any of the subsequent
+modules that get imported can use these
+arguments so for example my nyos system
+configuration uses this
+configuration.nix
+so this configuration.nix file would
+have access to all of these different uh
+inherence as special arguments which can
+again go on the top here but then any
+imported module file would also have
+access to all of these special arguments
+as well so for example if I open opened
+up my Hardware configuration.nix um
+while I don't include any of these in
+here I could include any of the
+arguments from before in here
+like username or name or host
+name or
+whatever it's the same exact deal with
+any home manager files or any home
+manager module files so I'm not going to
+go over that again it's just the exact
+same thing you you pass the arguments
+into special args or extra special args
+in that case you have them available to
+be used as arguments in these functions
+now one error you want to keep in mind
+is the uh the variable not defined error
+and you will definitely get that error
+if you do not import the actual variable
+into the arguments so if you're not
+including say for example I didn't
+include username as an argument I I use
+the username variable in this file and
+it's going to give an undefined variable
+error there so if you're getting any
+undefined variable errors it's most
+likely the case that you just forgot to
+uh include it in the argument at the the
+beginning of this function here now
+another thing that you'll probably
+notice with my configuration that uh
+it's it's kind of been annoying me and
+it may be annoying you is and this is
+especially the case with my home manager
+config uh I have about like 30 or maybe
+well I guess some of these are
+like I guess some of these are actually
+just like git repos that I've imported
+as inputs to the flake which that's a
+topic for another video uh but like I
+have like 15 or so variables yeah like
+yeah about 15 variables uh which that's
+a lot of uh different variables and do
+keep in mind every single variable that
+you want to use they must all be
+imported into the file so for example if
+I go into my uh home. n file here I'm
+pretty sure this one has yeah you'll
+you'll see here I have I think like 15
+arguments to the home. ni file config Li
+packages uh STD environment uh fetch URL
+all this stuff the username email files
+directory theme Window Manager browser
+editor spawn editor ter like there's all
+these different things that sort of get
+included
+and this can get really annoying to keep
+writing this out in all of your module
+files so when I had put this all
+together I actually didn't understand
+this idea but one thing that you can
+actually do is Define these as attribute
+sets again attribute sets they keep
+coming up over and over in NX OS uh and
+Nyx they're just super awesome and why
+they're super awesome is you could for
+example
+uh take I could take all my user
+settings here um which is like there's
+like 15 of them and I could Define them
+as one attribute set so for example user
+settings equals then I just Define these
+all as a single attribute set and so the
+thing that is nicer about
+this there we go is that this is now one
+thing it's not 15 things it's one thing
+with 15 different components
+meaning if I go down here to the
+inherits I no longer have to inherit 15
+things I can just
+inherit
+uh I can just oops uh inherit the user
+settings oh I cannot spell user settings
+there we go and now it's only one thing
+that needs to be imported as an argument
+into this function this function would
+no longer
+need all of this
+stuff it would just
+need user
+settings like so now this of course I
+would have to go in then and uh change
+all of these so um my home. username
+would not be just username as a variable
+anymore it would be the user settings.
+username and the same thing that would
+happen here so the sort of the reason
+that I haven't gone and updated this to
+be more clean and uh easy to read and
+easy to work with uh is cu I've been
+kind of lazy and but definitely before I
+post this video I am going to update my
+entire configuration to sort of use
+these uh actual but to sort of use these
+special args and extra special args
+these variable declarations as these
+full complete and useful attribute sets
+rather than than you know 15 or 20
+different variables I I personally think
+that that's probably the better way to
+go with this so when you get started
+with this you can think about uh how you
+want to chunk these variables and stuff
+like that into neat and manageable uh
+bits of you know sets I guess you could
+say attribute sets that's what they're
+called of course right uh so you don't
+run into the problem that I have where
+I'm you know writing functions that have
+20 arguments uh when I could write one
+function that has you know four or five
+arguments instead I mean this one still
+has like seven arguments so I I don't
+know what I'm talking about but um in
+any case I'll put some links to my
+config I'll put both a link to some of
+the commits where before I've done this
+change with the attribute sets because
+uh in some sense it is a little easier
+to look at and it's might be a little
+easier to understand uh how the code
+works but definitely using these
+attributes sets is a little bit more uh
+efficient writing wise I think
+especially when it comes to how many
+arguments you have to pass to your
+modules future emit here with a quick
+post edit uh so I went in and actually
+uh did the whole conversion where all of
+my uh special args these variables at
+least are uh contained in these uh two
+neat attribute sets uh system settings
+and user settings and as I was doing
+that I realized there was one thing I
+forgot to mention that is sort of an
+important trick that is not exclusive to
+this it's actually a whole attribute set
+idea uh so one of the things that I have
+in my config specifically is I have this
+variable called the spawn editor which
+which if you read it you can sort of
+figure out what it does uh basically
+what it's supposed to do is it's
+supposed to um take my uh editor
+variable and transform that into an
+actual command that can be run to
+actually spawn whatever editor that I
+decide to use so for example if I have
+emac client as my editor which is what
+it is 99% of the time uh the actual
+command to open an emac client window is
+not just emac client uh it is actually
+emac client dc- a and then uh emac and
+then similar thing if I wanted to set my
+Editor to Vim you can't just like run
+Vim uh and have it open uh in a terminal
+automatically necessarily um at least
+not from a tiling Window Manager binding
+so if it's Vim or neovim or whatever or
+Nano I guess uh then it's supposed to uh
+execute a terminal with the actual
+editor um otherwise it would just open
+whatever editor it is if if it's like vs
+codium or something if I happen to ever
+need to use that which I don't really
+want to but that long story aside
+essentially What's Happening Here is I
+am Computing the value of Spawn editor
+using another part of the attribute set
+editor and by default this won't really
+work in order to allow this to work you
+need to put a wreck I think that stands
+for recursive um as you declare the
+attribute set so you'll see my user
+settings attribute set is uh recursive
+attribute set meaning has uh this sort
+of designation with it meaning I can
+calculate the values of certain parts of
+that attribute set using other parts of
+the attribute set sort of within itself
+uh my system settings attribute set up
+here is not like that so I don't need to
+utilize that uh in any case uh I hope
+this was a helpful video for you I hope
+uh hope it wasn't too rambly uh I do
+apologize that I haven't been able to
+put out a video in quite a while I've
+sort of been getting over some sickness
+my whole family actually has been and uh
+you know
+you know busy with being sick and uh
+work and other stuff like that but I
+want to say just huge uh shout out of
+thanks to all of you that have been have
+subscribed and commented on my videos uh
+it's it's all you guys all of you that
+uh that keep keep this going because if
+it weren't for you guys I I probably
+would have quit quite a while ago uh but
+I I'm just blown away uh how I almost
+got 2,000 subscribers which is just
+absolutely uh absolutely amazing uh very
+very appreciative of all that I am
+especially thankful to my two channel
+members Gonzalo Rafael aosta and N Andre
+thank you very much for your monetary
+support uh it really helps keeping the
+channel going just to let you all know I
+I have uh I have activated the uh
+YouTube channel member feature I have I
+got three uh different levels that uh
+you could uh consider joining to to help
+me out uh level one $3 a month level two
+for $5 a month and level three for a
+whole $10 a month um and of course I uh
+I will give you this uh this shout out
+at the end of every video so if you're
+enjoying this content and you want to
+see more of it uh please consider uh
+joining as a uh Channel member if you
+like this video please leave a like and
+uh comment and subscribe for more of
+this Linux NYX OS content definitely
+more nyos on the horizon
+and uh I'm pretty soon I might start
+doing some uh some tiling Window Manager
+uh configuration tutorials probably
+starting with hyperland I know hyperland
+isn't a tiling window manager but it
+basically is a tiling window manager but
+anyways uh thank you all for your uh for
+your your time and attention your
+support and uh hope this is helpful to
+you and have a great rest of your day
+and take
+care

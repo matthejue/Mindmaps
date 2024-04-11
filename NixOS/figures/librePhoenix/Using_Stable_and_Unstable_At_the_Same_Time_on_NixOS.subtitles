@@ -1,0 +1,276 @@
+on Linux when you choose a distribution
+you have two primary groups of options
+you basically have stable distributions
+and rolling release distributions stable
+being things like auntu and rolling
+release being things like Arch or open
+Susa tumble weed the stable
+distributions obviously have the
+advantage of not breaking whereas the
+rolling release distributions have the
+advantage of giving you the latest and
+greatest which is really important
+especially if you're on newer Hardware
+or if you're a gamer now choosing
+between these two both have benefits but
+both have drawback but what if I told
+you you could have both at the same time
+using NYX OS that's going to be the
+discussion for today how you can install
+both stable and unstable packages at the
+exact same time with the power of nyos
+flakes now I'm going to assume you have
+NYX OS set up and I'm going to assume
+you have a flake setup uh if not check
+out my other videos on on how to do that
+but otherwise we're just going to get
+right into it so I'm going to start off
+uh showing you some of my show notes uh
+to get us started now this video sort of
+piggybacks off of my last video which is
+about special args and extra special
+args the idea with those being that you
+can pass basically arbitrary things
+things into any NYX module that you have
+using your flake and the tldr of that
+video uh is right here in your flake you
+can uh Define some variables in your let
+binding of uh your outputs section like
+I have here username and name and then
+you can pass those along to all of your
+modules via this special args argument
+of the nyos system function just using
+some inherits or something like that or
+via the extra special ARS argument of
+the home manager configuration function
+if you're using home manager which you
+should be it's a really awesome thing to
+manage your dot files so if you want to
+learn more about how that works and uh
+how to get that set up of course check
+out my latest video but we're actually
+going to need to use these in order to
+do this trick of installing packages
+from more than one NYX packages version
+at the same time which is essentially
+what we want to do we want to install
+from a stable branch and an unstable
+Branch at the exact same time so moving
+along here essentially how this trick is
+going to work we start with the inputs
+section actually when you first set up
+your NYX OS config as a flake you have
+to Define NYX packages uh in your inputs
+and then if you're using home manager
+you of course uh Define home manager as
+an input and this looks something like
+this um NYX packages. URL and then we
+give the URL to NY packages in this case
+this is the 23.0 5 stable release um I
+think actually we might be on 23.11
+right now um yeah we probably are this
+this might be from a little while ago um
+I actually run unstable so I I don't
+really keep up with which version is
+which but um in any case you put your
+version there for whatever stable Branch
+or unstable Branch you're using and
+that's all well and good we now have an
+input now these inputs can be literally
+any git repo like any git repo um and we
+can Define as many of these as we want
+so using this fact all we have to do is
+Define two inputs of Nyx packages with
+different branches the branch being this
+part right here so going ahead here your
+config could then look something like
+this where you have NYX packages. URL be
+the stable branch and then have
+something like NYX packages unstable.
+URL be the nyos unstable Branch now just
+adding this will only add the unstable
+Branch as an extra input but it doesn't
+necessarily add them to your config yet
+it doesn't install any packages using
+unstable yet so in order to do this this
+is where the special args and extra
+special args trick comes in so if we
+scroll down here packages pkgs is
+something that we Define in this let
+binding here as NYX packages. Legacy
+packages Dot and then this system that
+would be your architecture and as you
+can sort of see here uh packages is
+defined using the input NYX packages we
+can do the exact same thing to Define
+packages Dunstable right here and we do
+the exact same thing except we use the
+Nyx packages
+Dunstable input now you'll notice I have
+a slight error here and that's because I
+forgot to include NYX packages
+Dunstable as an input to this function
+so um if you're getting an error like
+that you got to make sure that
+you include that uh right there sort of
+like that and now that will uh that will
+sort of work once you have packages
+unstable defined you can then inherit it
+in special args of your nyos
+configuration so right
+here and the extra special args of your
+home manager configuration like this now
+we have access to both the stable
+packages and the unstable packages but
+we're still not actually installing any
+packages from the unstable Branch yet so
+to actually install packages from there
+you'd have to go to your NYX module
+files such as configuration.nix or home.
+ni and you would do something like this
+inside of those modules you're probably
+already using packages as an argument
+and that is the sort of attribute set
+you use to select which packages you
+actually install like maybe uh pkgs do
+zsh or pkgs dovm or whatever it's the
+same exact thing except now we just add
+an extra argument pkgs packages Das
+unstable and now we have access to both
+of them um the trick that I show you
+here is just some list
+concatenation so like here this is using
+with packages and so we have a list here
+and this is where you could list stable
+packages that you want to install and
+then we concatenate that with a list
+using packages unstable sort of like
+this so one thing I do want to mention
+um in case it isn't obvious you cannot
+install two versions of the exact same
+package so if you try to install um
+stable vim and then unstable Vim that
+probably wouldn't work the only way that
+this would work is if there is literally
+no difference between the stable and
+unstable version I don't know if that's
+the case with Vim um I don't I don't
+know if Vim gets updated that often
+actually uh so like it might work with
+something like the hello tutorial
+program but uh it would definitely not
+work for any program that actually
+receives updates another thing that I
+sort of want to point out uh that is
+actually happening uh so we Define two
+versions of Nyx packages in this example
+we're defining NYX packages as the
+stable one and Nyx packages Das unstable
+as the unstable one and then if we go to
+the flake here and we sort of see what
+parts of this let binding and these
+functions depend on so we have lib which
+is NYX packages. lib so this is using
+stable we have uh packages is stable
+packages D unstable is
+unstable so going along here and seeing
+uh lib is using this lib which is stable
+so the nexxos system builder function is
+from the stable branch and we're using
+that stable Builder function to install
+some unstable
+packages it's the same sort of deal with
+home manager if you're using home
+manager uh this hom manager. lib that
+that is from the input home
+manager and home manager uh in this case
+the inputs are following nyx's packages
+which is this one which is stable
+meaning that the home manager
+configuration Builder function is from
+stable but we are building both stable
+and unstable packages using the stable
+Builder function uh I'm just pointing
+this out so you can sort of see what's
+going on and you can also sort of of see
+that there is a potential for some
+breakages in this case to happen uh if
+there's some sort of deprecations that
+happen in between whatever two branches
+that you're uh messing around with it
+could lead to some packages not
+installing especially from whatever
+version of Nyx packages your Builder
+function uh is not using now NYX is sort
+of magical and most of the time I think
+this will sort of just work because you
+know it's NYX and uh it it's really cool
+but that is sort of something to be
+aware of uh in that this whole uh sort
+of idea this whole thing including two
+or more versions of Nyx packages at once
+uh it is still kind of a hack and uh
+it's not like supported stably at all in
+any real sense I recommend this process
+really only to install things uh that
+you wouldn't otherwise be able to
+install using a single version of Nyx
+packages so like for example if you're
+using the stable branch of Nyx
+packages um I know there's quite a few
+packages that do not exist in the stable
+branch of Nyx packages um they only
+exist in unstable at one point I don't
+know if this is changed by this point
+but uh there's a there's a program
+called keep menu which is like a a dmenu
+script
+uh for using key pass password databases
+and when I first tried to install that
+it was only an unstable and so I I
+couldn't install it until I switched to
+unstable or unless I used this uh trick
+so I switched to unstable cuz I am still
+an arch user at heart but the other
+reason that you might consider using
+this is if you're using the unstable
+branch and some program that you depend
+on received uh some sort of bad update
+and it no longer builds since I'm on
+unstable this happens to me
+probably like once a month um it's not
+always a program that I depend on so
+sometimes I can just like remove it
+temporarily but if it's something that I
+I really need around uh I can use this
+trick to keep it around in its stable
+form and still allow my system to
+rebuild uh and update in any case I hope
+you found this video helpful if you like
+this video please leave a like comment
+subscribe and let me know what you
+thought about it if you dislike the
+video please leave a dislike and let me
+know what you disliked about it if my
+content is really helping you out um
+please consider helping me out I now
+have three different platforms of which
+you could uh support me on if you want
+to support me with the YouTube join
+button you can do so right uh there on
+the join button I also have a libera pay
+and patreon which links will be down in
+the description below these kind of
+tutorial videos and discussions would
+not be possible without all my channel
+members and subscribers on these
+platforms so again if my content is
+helping you out please consider donating
+monthly as it really helps me out uh to
+keep this channel going so big thanks
+and shout out to all of you uh
+supporting my channel financially with
+those small monthly donations really
+helps out in any case that'll be it for
+today so have a good one and see you
+later

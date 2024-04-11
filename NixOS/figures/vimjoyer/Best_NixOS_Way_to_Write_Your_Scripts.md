@@ -1,0 +1,17 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerwritescripts}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/Best_NixOS_Way_to_Write_Your_Scripts.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerwritescripts}[2]{\href{https://youtu.be/diIh0P12arA?si=9C7Rx77Sr5US6RCf&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/Best_NixOS_Way_to_Write_Your_Scripts.md" "" vimjoyerwritescripts vimjoyerwritescripts
+- 00:00:21 \videovimjoyerwritescripts{21}{Create shell script in nix store, make it executable and returns it's path}
+- 00:00:52 \videovimjoyerwritescripts{52}{Includes sheband automatically}
+- 00:00:57 \videovimjoyerwritescripts{57}{Multiline string with two single quotes}
+- 00:01:01 \scriptvimjoyerwritescripts{1}{Syntax function}
+- 00:01:31 \scriptvimjoyerwritescripts{2}{Original script}
+- 00:01:49 \scriptvimjoyerwritescripts{3}{Adapted script}
+- 00:01:52 \scriptvimjoyerwritescripts{4}{Structure turned into nix path}
+- 00:02:47 \scriptvimjoyerwritescripts{5}{First way to find out name of binary}, will be removed once garbage collect system
+- 00:03:20 \videovimjoyerwritescripts{200}{nix-index}, nix-locate, nix-index-database
+- 00:03:55 \scriptvimjoyerwritescripts{6}{Add to configuration.nix}
+- 00:04:00 \scriptvimjoyerwritescripts{7}{With let in syntax}
+- 00:04:14 \scriptvimjoyerwritescripts{8}{Result}
+- 00:04:30 \scriptvimjoyerwritescripts{9}{What nix did}

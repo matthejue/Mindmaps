@@ -1,0 +1,968 @@
+hello everyone and welcome back to the
+channel today I wanted to do a quick
+video about um nxs config and git uh
+many of you saw my configuration hosted
+on GitHub and gitlab and you know those
+sorts of places and uh I've gotten some
+questions you know how do I how do I get
+this set up with Git and um stuff like
+that so today we're just going to walk
+through a uh we're going to walk through
+a a sort of quick setup of taking your
+config and posting it on GitHub or
+gitlab and near the end of this I'll
+also I want to talk about some of the
+special interactions that NYX and Nyx
+configs can have with Git uh including
+allowing you to run software with a
+single NYX command without having to
+actually install it and how you can sort
+of incorporate this into your own config
+if you're using a flake now this is not
+necessarily going to be a git tutorial
+so if you're interested in learning more
+about git and how it works and all of
+the amazing things that you can do with
+it there's plenty of amazing guides on
+how git works out there on YouTube so go
+look for them there's people that you
+know understand git to like a much
+higher degree than I do that will be
+able to explain it a lot better but what
+I'll provide you with here is just a a
+quick just a quick sequence of steps you
+can go through to get your config hosted
+on a remote like GitHub or gitlab and
+then that brief discussion about how you
+can set up these special Integrations
+with NYX and git and some of the gotas
+between NYX and git so I guess without
+further Ado I'm going to navigate to my
+uh old tutorial VM uh from like way back
+long ago and uh we'll uh we'll just
+start from there so at this point you of
+course uh have some some dot
+files and if you've been following my
+previous tutorials you probably have
+some directory like dot dot files with
+some configuration in it you know
+configuration.nix the home. ni blake.
+Nick if you've enabled that maybe some
+modules here and there and all of that
+uh you if you've kept your configuration
+in/ Etsy nixos um that's totally fine a
+lot of this will still work but there
+are just a few caveats about it so what
+do you do to start out well to start out
+you're going to make sure that you have
+git installed so you can open up your
+configuration.nix
+and just make sure that you have it
+installed so wherever environment.
+system packages or you can install it
+via home manager um that's fine so I'm
+just going to add it to the
+configuration.nix for now so that it is
+installed so here we go um P sudo NX
+build
+switch there you go so now we have
+git so now with Git installed we're not
+actually going to do anything with Git
+until we've properly configured it if we
+don't spend the time properly
+configuring it we're going to have some
+problems later on so there's two
+configurations that are mandatory and
+then there the third one that I just
+recommend based on how most git remotes
+which are like you know the sites that
+host your git repo um based on how they
+work I recommend a third thing the first
+two and these are the mandatory ones
+that you need to make is you need to
+tell git about your name and your email
+now technically these can be totally
+fake uh both of them uh these aren't
+this isn't the same as like giving your
+email to a service to sign up we're not
+signing up to get we're just telling get
+who we are in a sense because the way
+get works is it sort of takes these
+snapshots of your all of your files and
+all of your uh config and you know
+whatever is in the repo it'll take these
+snapshots and every time it takes a
+snapshot it attaches a name and an email
+to it so that you can go back in the git
+history and tell who was doing what on
+the specific repository if you don't
+have home manager um the quickest and
+easiest way to do this is probably just
+just to type in the commands like you
+would in a normal Linux distribution and
+those two commands are uh git config d-g
+Global user.name and this is where you
+put your name so I'd put uh my name
+right there and then the second one
+would be the email address so it's very
+similar uh get config D- Global user.
+email and then you'd give your email
+address so I'll just say example at
+example.com there we go so with those
+two options Set uh git will now
+work but this is NYX OS and we want to
+be doing things declaratively so if you
+have home manager which you should you
+can navigate to your home. n and we can
+instead set this up in a more
+declarative fashion so to do that we're
+going to go to some place in our
+configuration wherever we're putting our
+options and we'll write a definition for
+the programs. git option it this will be
+uh an attribute
+set and the first thing we need to do is
+enable equals true that will tell home
+manager manage my git do files for me
+and then we pass in this sort of the
+same two things the username and the
+email so username equals and then you
+put username and then user email
+equals uh there we go example at
+example.com
+so with that out of the way we can
+synchronize our home manager
+config like so and git will be
+configured git will be configured
+declaratively now those are the two
+mandatory options so you must configure
+those either of those two ways either on
+the command line or in your home. ni and
+home manager the next setting is one
+that is not technically required but
+I've had issues with uh pushing my git
+repos to GitHub or gitlab in the past
+when I didn't set this option so I just
+like to set this uh straight out of the
+bat and that is the in it. default
+Branch option so I'm going to uh I'm
+just going to show you uh the warning
+that it's going to give you don't follow
+this command yet because you'll you'll
+run into some problems but if you run
+get anit which would make a git repo
+it's going to give you this big warning
+message telling you that you haven't
+configured a initial default Branch name
+the initial default Branch name in git
+is called the master Branch but most of
+the popular git hosting sites use main
+as the default Branch name now again
+I've had problems pushing to uh get
+remotes because if the uh if the remote
+has a only has a branch named Main and
+uh locally you only have a branch named
+master it's going to like complain and
+tell you it's wrong and stuff so it's
+just kind of annoying so I just set it
+to be sort of like the same thing that's
+there um so that it's just easier to
+work with and quicker so in order to do
+this you can do it you know again two
+ways you can either run the uh command
+that is given here which is uh git
+config D- Global and then uh in it.
+default branch and then give the name
+I'm going to give it the name main so
+you can either do that or or you can go
+to your home manager so we go so real
+quick just to save us a hassle I'm going
+to remove that you can go to home
+manager and we'll add one more config
+option here and that is the extra
+config which is another attribute set
+inside of this attribute set and we will
+pass in it. default branch and set that
+to
+Main and once we synchronize our home
+manager config we will be all good to go
+so with all that configuration out of
+the way you can now navigate to wherever
+your dot files are and run Git
+andit it shouldn't give you any warning
+messages now and now it says initialized
+empty get repository in wherever it is
+on a side note if you keep all of your
+config in/ Etsy nios or if you have your
+configuration in a folder that is owned
+by root uh there are just a few extra
+steps that you're going to have to do so
+in that case I'll actually navigate to
+SL uh oops SL Etsy
+nixos and there they are that's just uh
+the sort of default config that's in
+there so if you want uh get to work this
+way and you want it to
+be um easiest to work with I would say
+and you don't want to run your git
+commands as root you can do this so
+before it was talking about the uh the
+git directory which is necessary for git
+to run and so if we want to run git as a
+normal user um inside of this folder
+owned by root we can do pseudo make
+directory.
+git so we make the git directory before
+initializing the repo then we change the
+ownership of this to whatever your
+username is uh so be my case lib Phoenix
+and then we change the group uh the
+default group for the users in nyos is
+just users uh so we change that and now
+we can run get a nit again and then at
+this point we also need to do one more
+thing um any if we try to run if we try
+to run any git commands um it'll give
+you this error that says uh detected
+dubious ownership that's because uh we
+have this thing owned by root and then
+there's this the git directory is owned
+by us and so it's weird so it just wants
+us to add this as a safe directory which
+you can uh configure that with this
+Command right here so something like
+this or if you want to do this in a
+declarative fashion like I do you would
+uh navigate to
+your home. ni and you would add this as
+another extra config option so we would
+PL so we'd pass something like init dot
+uh whoops
+what am I doing uh safe. directory
+equals and then the path to the actual
+then the path to the actual uh directory
+where the dot files are stored and if we
+go ahead and synchronize that
+again oops uh that's a that's an error
+that we'll come into later
+um so if we go and do that um and we add
+the the safe directory we can now run um
+we'll be able to run get commands like
+normal which we'll talk about that uh
+more later so so in any case whatever
+your situation is I'm going to be doing
+this work in the do files directory and
+I'll uh reinitialize this again because
+I had to Nuke it for a for a split
+moment there which we'll we'll talk
+about why that was in a little while now
+to just go over the basic workflow for
+git there's basically three steps that
+you do every time you uh make additions
+or changes to any of the files there's
+these three steps so the first step is
+called
+staging then you commit the staged
+changes and then you would push those
+changes to a remote so you can sort of
+think of it like this okay so you have
+your uh your dot files and you're con
+you know you might be making these
+changes to it you know uh a bunch of
+these changes
+once you've aggregated a bunch of
+changes and you want to make a new
+snapshot you stage all the changes that
+you want to be included in the snapshot
+and then the snapshot is a commit that
+you're you're like you're committing to
+it um you know this is the snapshot and
+then it gets set in stone so to say then
+once you have that that new snapshot set
+up you push the whole set of snapshots
+to the remote and that would be
+something like GitHub or lab so that
+what is on your machine and what is on
+GitHub or gitlab are the exact same they
+have the exact same set of snapshots so
+they're they're identical in a
+sense so how do we do all those steps
+well the first step that is the uh the
+staging step so that is going to be done
+with the git add command now when you're
+starting out here for your first commit
+you'll probably just pass get add star
+which means add
+everything if you want to add individual
+files you can do that as well so you
+could do something like get add
+configuration.nix uh n there we go um
+get ad home. n for example if you wanted
+to Stage the changes or um add like a
+specific new file that would be how you
+do it so that would be them being staged
+but they're not in a snapshot yet we
+could still unstage these or uh UNS
+snapshot them if we wanted to but um
+they're not they're not committed yet in
+order to commit them we're going to use
+the get commit command so get commit now
+this requires the- M option which is the
+commit message and so this would be a
+little message that goes along with the
+actual change so a very very brief
+description of what it uh the change was
+or or even better why you made the
+change cuz you can go into the code and
+read what the changes were but you might
+not remember why you made those changes
+so for this one I always make my first
+commits just say first commit so get
+commit DM first commit in quotes and
+then it'll tell you about all the
+changes so we literally added everything
+that is uh in here and now this last
+step will be to push these to a remote
+now before we push these to the remote
+we have to configure the remote in order
+to do this you're going to have to
+select a remote um so the most popular
+one out there by far is GitHub that's
+where most people are with their git
+repos um there's also gitlab um code
+Berg is another nice one there's also
+Source Hut um GitHub is owned by
+Microsoft so if you don't uh like the
+big Tech Giants all that much uh you
+might consider gitlab um Cod BG is
+actually a nonprofit and they're they're
+highly devoted to free and open source
+software
+um Source Hut well I don't think it is a
+nonprofit um they are very very uh boss
+you know free and open source friendly
+um all that good stuff so um select a
+select a remote of choice you know
+whatever one you'd like to use I'm just
+going to show this using GitHub because
+it's the most popular one so uh in any
+case you'll you'll navigate to whatever
+it is you'll sign up or or uh you'll
+sign up if you don't have an account
+already or log in and um what you'll
+want to do is set up an SSH key so in
+order to do that you're going to go to
+your uh your remote of choice and you'll
+have to find some sort of settings menu
+on GitHub you just go to your sort of uh
+profile picture here you'll go to uh
+settings I
+believe and then you're going to go to
+SSH and gpg keys so we're going to add
+an SSH key so we'll go to a new SSH key
+and you'll need to give it a title um
+I'm just going to call this one test VM
+and I'm actually going to destroy this
+SSH key later on the key part is
+something that you have to generate on
+your machine so to do that you're going
+to run
+ssh-key gen um it'll give you a a
+default path which this is fine and
+it'll also optionally offer you to give
+a passphrase this passphrase is sort of
+just like a local encryption of the
+actual key so if a hacker managed to
+steal the actual file associated with
+your associated with the keys like the
+actual uh private key um they still may
+not be able to get into it unless they
+brute forced that passphrase so once you
+do this they should be in SSH and
+there's two of them there's idor RSA and
+_ rs. hub now this is extremely
+important you have to copy the public
+key the contents of it into here anyone
+and everyone can see your public key and
+not hack you but the private key is like
+a password so if anyone gets access to
+the contents of the private key then
+they can pretend to be you that that is
+sort of the proof that you are um who
+you are so you'll want to uh open up or
+cap that file so
+Rd RSA Pub um and then grab the contents
+of
+this and paste them in here um I think
+that uh that didn't paste I did that
+paste all that well actually it did that
+pasted just fine with this terminal so
+that's fine um so you just copy and
+paste that in and once you have that
+there you should be able to add SSH key
+and this will just make things a lot
+easier for us later and SSH keys are
+generally more secure than just
+passwords I mean I think these default
+ones are like uh 4 4,096 bits or
+something um maybe I don't know if
+that's the default but they're they're
+much uh they're much longer and more
+complex than just like a normal password
+that you'd have to remember and enter on
+the command line every time you do a g
+uh operation so once you have the SSH
+key generated and you've uh set the
+settings on your git remote we are ready
+to create a repo on that remote so um on
+GitHub you can just go to create new
+here uh new repository is what we're
+going to want to do and I'm just going
+to call this
+um nyos config G test just as an
+example and you'll want to make this a
+blank repo so you don't want to add a
+read me you can add that later yourself
+and so uh just make sure it's blank and
+uh create the repository once you do
+this some of these sites like GitHub or
+gitlab will give you a quick blurb of
+how to actually get started um but I'm
+explaining to it uh it to you so you
+could also follow along with this so
+remember how we set up that SSH key uh
+you can know now go to uh SSH here um
+and grab the SSH get clone link so we'll
+just copy that and we're going to use
+this to configure the remote so if we
+navigate back to wherever our files are
+so I have them here so for me do files
+we're now going to run get remote ad
+then we have to give the the remote a
+name most people use something like
+origin if they're only pushing it to one
+place I actually push my DOT files to
+multiple places so I actually just give
+it the name of the place like GitHub
+whatever it is um remember that name so
+we give the remote a name and then we
+give it the flown link or the the git
+Link in this uh case here so there it is
+we have a remote at this point all we
+need to do now to uh push our one commit
+that we made to this is get push then we
+put the remote name so in that case that
+was the name here that we gave it here
+GitHub so I will put GitHub and then we
+put the branch name um if you're using
+the default Master Branch name you would
+put Master if you configured it like me
+and you're uh running have a main branch
+you would give it uh the name main oops
+I cannot type uh you put main uh so that
+is the command to push all of the
+commits that we've made to in this case
+GitHub or wherever that remote is
+located so we do that uh this will the
+first time you do this you got to do an
+authenticity check um yes is fine then
+put in your passphrase if you put a
+passphrase for your SSH
+key and then it'll run and if we go and
+refresh
+here look at that we have a uh a
+repository which is awesome so at this
+point every time you make a change to a
+file you'll stage the changes make a
+commit and then push those commits onto
+your remote so for example if I went
+here and and I don't know went to the
+home. Nix and uh I just I don't know
+this is uh change
+forg demonstration
+purposes uh there we go now I could go
+through the whole process again so get
+add I'll just add everything because you
+know why not get commit DM uh another
+commit for demonstration purpose
+and then I would push it so get push
+GitHub was my remote name main is my
+Branch name
+and there we
+go there we go another commit for
+demonstration purposes um there it is so
+we have now two commits now at this
+point you might be wondering gosh do I
+have to type in all of these commands
+and uh like all this stuff every single
+time I want to make a git commit and
+like what if I like make a few change
+like what if I make a bunch of changes
+and I want to like separate out the
+specific changes into separate commits
+so that they're sort of grouped together
+nicely and you know it makes sense uh
+how do I do that on git how do I do this
+advanced stuff well you could go and you
+know watch a bunch of git tutorials and
+learn about all of the amazing command
+line options that git has or you could
+be like me and use a git front end if
+you want to sort of easier way to work
+with Git that's maybe more Visual and
+helps you understand it better you need
+a git front end now to show you an
+example of a git front end I'm an emac
+user so on emac we have a tool called
+Magic it's like it's like magic but it's
+magit uh so if I go to my emac real
+quick um here are my actual dot files
+and this is the uh magit window and this
+is a nice sort of visual overview of the
+git
+repository if I go and uh make a change
+like um I don't know maybe I'll I'll
+edit my home. ni for example
+um uh here are a bunch of uh unnecessary
+changes blah blah
+blah okay all that uh meaningless um
+comments right there and if I go back to
+my git window it'll show okay these are
+some unstaged changes and I can view the
+unstaged changes and see this visual
+representation of what is new um I can
+choose to Stage these changes with one
+uh with a key press I can unstage them
+with a key press I can uh commit with a
+key press I don't actually want to
+commit that though that's uh don't need
+that I can even do things where I just
+like click around and only stage like
+part of the change so well let me
+unstage this real quick um I can just
+stage like only half of this if I wanted
+to so you can see there's a I only
+picked these ones and like these ones
+are still on stage so they wouldn't be
+part of the commit you can do all these
+things inside of command line git but
+it's kind of like more complex I think
+in order to do this you probably have to
+pass like line numbers and all sorts of
+random stuff to the git commit and or
+the git command and that it just gets
+needlessly complicated so I
+recommend um unless you like really want
+to learn like the internals of git I
+recommend that you go find a git front
+end not I know not all of you are emac
+users obviously so there are some other
+ones that are great um in my research I
+I found a tool called lazy git I haven't
+really tried it myself but if you're
+like a like a Neo Vim user uh definitely
+check out lazy git it's like a it's a
+terminal a terminal UI git uh front end
+that it probably works kind of similarly
+to uh magit here but it's uh you know
+Tui and stuff um and if you prefer like
+a a a gooey a graphical one uh the a
+good free and open source one is called
+ungit it's uh you just run it in your uh
+repo and then I think you like navigate
+to uh like a local host Link in your
+browser and it has this really uh nice
+graphical overview showing you the the
+git repo I can even show you if you get
+more advanced into Git it can show you
+you know the all the diverging branches
+and how they might merge back together
+and all this fancy stuff so those are
+two other ones that I recommend um
+several idees will also have native like
+built-in git support like I know Visual
+Studio code does I'm pretty sure um Kate
+from KDE has built in G support so
+definitely uh save yourself some uh save
+yourself some confusion and try out a
+git front end if you're new to get I I
+guarantee it'll help you learn yet a lot
+better than trying to figure out
+everything on the command line but
+anyways um back to our uh our discussion
+of the git
+repo one thing that you uh may want to
+be aware of is how do you like restore
+the git repo to a new system if like
+something happens to your system like so
+for example if I go here and I just nuke
+my do files directory uh oh um let me
+see here uh sud
+sudo I think I'm uh oh yeah I have this
+mounted externally so it's going to
+complain uh what if I just nuke
+everything in here uh sudu
+RM uh
+all hold
+up hold up am I like stupid uh is star
+dot oh I already nuked
+everything okay well I nuked everything
+so now that I've nuked everything and I
+lost all my DOT files how do I get them
+back well we can uh we can use a we can
+use the command get clone to clone the
+remote git repository onto the local
+machine so we can go ahead and grab the
+git clone link again so this is the same
+link that we used for the remote and all
+we got to
+do is run get clone the link and then if
+you want to add like an actual directory
+name to this you can so I I'm going to
+put dot do files otherwise it's going to
+be the name of the repo like in my case
+it'd be NX os-c config dg- test um so I
+wanted to be in the dot files directory
+so I'm going to do that there it is
+cloning into dot
+files and there it is we are back in
+business now one more thing that you
+want you might want to be aware of uh
+whenever you do this it might
+automatically name the remote something
+different so in this case it defaults to
+be named origin if you want to change
+this you can of course run git remote RM
+and then put that in and then just the
+previous step get remote ad give it a
+name I'll call it GitHub and then put
+that uh same link back in and then we're
+back to where we were before now this is
+something I've mentioned in Nick's
+videos before but it definitely needs to
+be mentioned again now there are some
+common errors that you may encounter now
+that your Nick's config is stored in a
+git repository NYX knows when your
+config is stored in a git Repository now
+there's a a big gotcha that uh you'll
+want to be aware of as you're especially
+if you're making module files in your
+NYX config so for example I have this um
+this hyperland NX uh file and that's a
+that's a module file that goes along I
+believe with my home. ni in this case
+right that's uh yeah there it is that's
+hyper.
+ni um I'm going to make another random
+uh module file so Bim random
+NX um we'll just give this a very
+barebone
+structure um what should I put in here
+actually uh I think I can just put
+nothing and it'll still it'll still give
+us the error so I've added this uh new
+module file and conceivably like you you
+would have some configuration in there
+and now I want to go add this module
+file to my home. ni so random. ni and
+now I want to uh evaluate my new config
+so home manager switch
+d-lake there we go now this is the error
+that will uh is confusing at first so
+it's going to tell us that random. Ni no
+such file or directory it doesn't exist
+but hey if I run LS there it is there's
+my random. NX file so like why is it
+making this mistake well what is
+happening here NYX knows that your
+config is stored in a git repository and
+it also knows when you haven't staged or
+committed files so if it finds a file
+that has never been staged or never been
+committed like it it doesn't currently
+exist in the git history um or the git
+uh staging uh area if it doesn't exist
+there it will refuse to evaluate a
+configuration that depends on that file
+and this is a feature not a bug the
+reason for this is you could have a
+bunch of you know your configuration
+depending on this one file that you
+forgot to stage and you forgot to commit
+and then when you go to rebuild your
+configuration on some other system it is
+going to be missing this file and so it
+won't be able to actually recreate your
+config because it is missing the file
+when it could have told you it was
+missing the file and refus to evaluate
+so the way you fix this of course is by
+adding it to the staging area so we do
+get add then whatever new file it is
+like that and at this point it will
+evaluate so we can run that now it'll uh
+it'll work there we go but again don't
+forget that you still have to commit
+this so get commit M um added useless
+file for demonstration
+purposes and then you still probably
+want to push it so get push uh GitHub
+main for my case again that being the
+repository or the the remote name and
+then the branch
+[Music]
+name now that that's the sort of uh NX
+and git interaction gacha but there's a
+really cool um git and Nyx interaction
+that deals with Flakes and this is where
+you can actually set up your uh config
+repository to allow you to like run
+scripts or actually just run software um
+in general uh with a single command on a
+NYX OS distribution without having to
+actually install the software and to
+sort of give you a um an idea of what
+this means I'm going to go back to emac
+and to my uh my legit config uh Here We
+Go and show you this so I made a short
+video uh just showing this off a few
+days ago but I went ahead for my system
+and I wrote this uh this little
+um autoinstall script that essentially
+clones my repository to do files where I
+like my uh config files to be and then
+it goes through the process of building
+the configuration and then switching
+into it both the system configuration
+with NYX OS um rebuild and home manager
+as well with a home manager switch now
+this whole thing here is a shell script
+but I have this integrated in my flake
+in this section here where I have it
+sort of declared as a a full-blown like
+application in a sense it's again it's
+just a shell script but I'm declaring it
+as this
+application and it's to the point where
+I can run this command this install
+script on any nyos system with just a
+single command um using this tool called
+NYX run now you might be wondering at
+this point uh well that's really cool
+that you can do this fancy Nyx magic but
+why don't you just like curl the script
+and pipe it into bash uh wouldn't that
+be simpler than doing all this NYX uh
+configuration well yes that would be
+simpler but the cool aspect of this is
+that you can add runtime inputs to your
+SC script now my script is kind of
+boring at the moment um I actually only
+have one runtime input and it's not it's
+actually not really doing anything
+because git is required to just start it
+so but in any case um you can imagine
+that you could put any package as a
+runtime input so for example if you
+wanted to you could make this a python
+script have Python and all of the python
+dependencies be part of your run onetime
+inputs and then you can run that python
+script on any nixos system even a nyos
+system that doesn't have python install
+uh and you can basically do this with
+any kind of uh any programming language
+python you know python Ruby whatever and
+even with like a shell script you could
+add command line dependencies say you
+need a specific command line program for
+that script you need that to be there in
+order for the script to run well you
+just include it right here and it will
+be automatically run with those
+dependencies like prepackaged just to
+run the single command which is really
+cool I'm not going to get too needlessly
+uh into the details with this but rather
+than just to sort of uh show you about
+this and then have uh then if you want
+to set something up like this yourself
+um I'll of course include some links to
+my blog post that has a little bit more
+detail on this and you know some more
+links on you know really how you can get
+this to work and uh you know do a lot of
+cool things so basically the tldr of
+this is you go to your uh flake. ni you
+go to your outputs and for your outputs
+you probably have
+a definition for home configurations and
+a definition for nyos configuration
+you're going to add two more definitions
+like this the first one being packages
+and the second one being
+apps now I uh I stole this function here
+there's a I have this function called
+for all systems and Nyx packages 4 um
+these two functions are functions I
+stole from um I was studying this repo
+called plasma manager it's a declarative
+uh KD plasma configuration for nixos and
+just looking through their flake they
+actually use these functions and
+actually just stole them which uh you'll
+want to declare them up
+here where uh You' want to declare them
+in your uh in your let binding before
+your output so have a let binding with
+uh for the outputs and here are these uh
+so we have for all systems so it'll be
+uh this one here and then Nick's
+packages 4 is uh that function right
+there again my config uh and my blog
+post will be linked in the description
+below and you'll in order for this to
+work you need to have a list of
+supported system architectures so I just
+added these three I think I just copied
+those straight out of plasma manager
+just straight up there so that would be
+like the list of system architectures
+that would be able to should be able to
+run the script so you set all that up in
+your Le findinding and now at this point
+we can get into the fun details of
+declaring the actual packages and the
+apps so packages are going to be created
+for every single one of those systems
+I'm using this uh again this like
+function here and so we have to declare
+at least at least two things so we'll
+want to cleare a default package and
+then an actual package so in my case I
+set up an install package which for for
+a nyos configuration uh like files
+repository this would probably be the
+thing that you're looking to to do so
+you would have your uh install equal and
+I use packages. WR shell application so
+this allows you to give it so you give
+it a name you give it a list of runtime
+inputs which would be which would be
+some packages from NYX packages and then
+you actually write some text if you want
+to have the text be an actual script
+that is external to the flake you would
+use this right
+here you'd use this substitution sort of
+uh method with uh the with the dollar
+sign and then the squiggly brackets and
+then this being you know whatever
+arguments are passed into it um or if
+you wanted to just write your entire
+your install script in here rather than
+in this you know external file you could
+do that as well once you've done that
+you declare apps and so uh we'll you'll
+need to declare a default app and uh an
+app that is associated with the package
+that you created so in this case install
+so this gets the type of app and then
+the then you have to give it a
+definition for program which which we
+can set up by just setting it to to the
+actual install package that gets created
+here using uh self. packages. system so
+getting the system Arch architecture
+then the install package and then
+wherever it and where it is which is in/
+bin
+install so once you have set all this up
+again you can essentially just copy uh
+the basic idea of this here and throw it
+into your config you know obviously
+changing the text for the install script
+and you know the name if you want to uh
+in all the appropriate places uh once
+you have this set up you would be able
+to run this script essentially directly
+from git and I'll show you in my install
+notes uh what it is so um in this case
+here I have my I have my my sort of the
+main version of my git repo is on gitlab
+so the command to run this would be NYX
+run gitlab Fen then my username which is
+just Libra Phoenix and then the repo is
+uh nx- config so I just run that and it
+would run the install script that I have
+set up and you know automatically
+including any dependencies that I
+declare in there um just sort of
+automatically now this being said
+running this on a new system is not
+going to work out of the box the reason
+being is that this whole feature is sort
+of an experimental thing and it also
+requires git to be installed git is not
+installed by uh default on a on a fresh
+install of nyos so if you want to get it
+down to a single a single command I have
+it uh run like this so uh this is sort
+of my full formulation for how I get
+this uh to sort of all work together
+here um you run Nick shell DPG so that
+puts you in a subshell with Git
+available then you give it the command
+NYX run
+we got to pass some experimental
+features it requires the experimental
+features nx- command and
+Flakes and then we just pass the last
+part here which is the actual name of
+the repo so you could set this up for
+yourself of course you know changing the
+repo name and of course writing your own
+install script cuz you may have you know
+a slightly different setup a slightly
+different way of installing the dot
+files to your system but you know this
+is you know another cool n feature that
+if you really get into using it can be
+very very powerful anyways uh this video
+sort of this video is dragged on for uh
+quite a while now so I think we're just
+going to end it here um as always I hope
+you found the video helpful and I hope
+it I hope it uh helps you set up your uh
+your NYX OS config on git if you have
+not done that already if you like the
+video please uh leave a like comment um
+and and subscribe for more NYX OS
+content uh if you dislike the video
+please leave a dislike and let me know
+why you disliked it and how I can
+improve if you guys want me to go uh in
+a little more depth of uh some of the
+git flakes um interaction and you know
+maybe do a few more maybe get into that
+a little more in depth rather than just
+you know looking at my example um
+definitely let me know I'll probably
+make a future video about that
+eventually big thanks to all of you that
+have been uh financially supporting me
+with uh with YouTube memberships or liay
+or patreon I really really app
+appreciate all of you for your financial
+support and so for for everyone uh if if
+you've been finding my content useful
+and uh it's been helping you uh learn
+NYX West Linux technology um please
+consider supporting me on Via the
+YouTube memberships patreon or liay
+links will be down in the description
+below anyways that'll be it for today
+and uh have a great rest of your day
+everyone see you next
+time

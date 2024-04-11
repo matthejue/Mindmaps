@@ -1,0 +1,46 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerultimate}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/Ultimate_NixOS_Guide_|_Flakes_|_Home_manager.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerultimate}[2]{\href{https://youtu.be/a67Sv4Mbxmc?si=Fccmv6JOHVTzDs1v&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/Ultimate_NixOS_Guide_|_Flakes_|_Home_manager.md" "" vimjoyerultimate vimjoyerultimate
+- 00:00:52 \scriptvimjoyerultimate{1}{imperate_declerative}
+- 00:03:51 \scriptvimjoyerultimate{2}{man configuration.nix}
+- 00:04:19 \scriptvimjoyerultimate{3}{bluetooth}
+- 00:05:33 \scriptvimjoyerultimate{4}{nix store}
+- 00:05:42 \scriptvimjoyerultimate{5}{nixos-rebuild test}
+- 00:05:58 \scriptvimjoyerultimate{6}{nix-collect-garbage --delete-older-than 15d}
+- 00:06:25 \scriptvimjoyerultimate{7}{nixpkgs}
+- 00:06:42 \scriptvimjoyerultimate{8}{Channel}, stable, stays same until explicitly updates to newer commit, nixos-rebuild does not update packages
+- 00:06:54 \videovimjoyerultimate{414}{Problem when person on other branch oder old commit of stable branch}, -> nix flakes
+- 00:07:10 \scriptvimjoyerultimate{9}{flake.nix}
+- 00:07:23 \scriptvimjoyerultimate{10}{flake.lock}
+- 00:07:30 \scriptvimjoyerultimate{11}{Reproducable and reliable}
+- 00:07:50 \scriptvimjoyerultimate{12}{Install flakes}
+- 00:07:57 \scriptvimjoyerultimate{13}{nix flake init}
+- 00:08:28 \scriptvimjoyerultimate{14}{flake.nix}
+- 00:08:49 \scriptvimjoyerultimate{15}{nixos-rebuild switch --flake /etc/nixos#default}
+- 00:09:04 \videovimjoyerultimate{544}{What modules are}, chunks of nix code that extend configuration by setting options or providing new ones
+- 00:09:15 \videovimjoyerultimate{555}{Functions that take some arguments and return dictionaries with options}
+- 00:09:20 \scriptvimjoyerultimate{16}{Modules}
+- 00:09:27 \scriptvimjoyerultimate{17}{configuration.nix and hardware-configuration.nix are modules}
+- 00:09:34 \scriptvimjoyerultimate{18}{Itself imported in flake}
+- 00:09:43 \scriptvimjoyerultimate{19}{Triple dot syntax for other arguments}
+- 00:10:17 \scriptvimjoyerultimate{20}{Make own module}
+- 00:10:32 \scriptvimjoyerultimate{21}{Cleaner with alias}
+- 00:10:30 \videovimjoyerultimate{630}{Every module import has access to options defined in all other modules}
+- 00:10:47 \scriptvimjoyerultimate{22}{Home-manager follow nixpgks}, don't have to download two different version of nixpkgs
+- 00:10:59 \videovimjoyerultimate{659}{It doesn't matter where one imports modules}
+- 00:11:09 \videovimjoyerultimate{669}{ExtraSpecialArgs}, take all inputs of flake and passes it to parameters of every single module
+- 00:11:30 \scriptvimjoyerultimate{23}{Add inputs parameter to configuration.nix}
+- 00:11:51 \scriptvimjoyerultimate{24}{Home-manager features}
+- 00:11:53 \scriptvimjoyerultimate{25}{Adapt configuration.nix}
+- 00:12:13 \scriptvimjoyerultimate{26}{Home-manager option from imported module}
+- 00:12:19 \scriptvimjoyerultimate{27}{Create home.nix file}
+- 00:12:25 \scriptvimjoyerultimate{28}{man home.configuration.nix}
+- 00:12:40 \scriptvimjoyerultimate{29}{home.nix}
+- 00:12:50 \scriptvimjoyerultimate{30}{Features}
+- 00:12:50 \videovimjoyerultimate{770}{Not bound to NixOS}, also macos
+- 00:13:21 \scriptvimjoyerultimate{31}{Current project strcuture}
+- 00:13:42 \scriptvimjoyerultimate{32}{New directory structure}
+- 00:13:44 \scriptvimjoyerultimate{33}{Choosing which one to rebuild is changing last part of nixos-rebuild switch}
+- 00:14:14 \scriptvimjoyerultimate{34}{Reuse code between configurations}
+- 00:14:22 \scriptvimjoyerultimate{35}{Because of flakes can store in home directory}

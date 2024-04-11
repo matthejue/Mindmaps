@@ -1,0 +1,51 @@
+# Timestamps
+- \newcommand{\scriptlibrephoenixhomemanager}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Manage_Your_Dotfiles_with_Home_Manager!.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videolibrephoenixhomemanager}[2]{\href{https://youtu.be/IiyBeR-Guqw?si=At59RYWw53-KCVY2&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Manage_Your_Dotfiles_with_Home_Manager!.md" "" librephoenixhomemanager librephoenixhomemanager
+- 00:00:06 \videolibrephoenixhomemanager{6}{What is home-manager}, philosophy of nix and nixos and applies it to dotfiles and user level applications, rather than effecting system wide configuration it's focused on user level configuration
+- 00:00:45 \videolibrephoenixhomemanager{45}{How home-manager works}, simlinks for dotfiles at normal locations
+- 00:01:09 \scriptlibrephoenixhomemanager{1}{Symlinks}
+- 00:01:39 \videolibrephoenixhomemanager{99}{Advantages}, 1) easy to roll back 2) managing multiple different setups and allows switching between them, bc whenever switch into new configuration it will tear down previous configuration files and put in new ones that one specifies
+- 00:03:20 \scriptlibrephoenixhomemanager{2}{Standalone installation}, completely managed by the user accounts, clear seperation between system configuration and user configuration, advantages don't need root
+- 00:03:22 \scriptlibrephoenixhomemanager{3}{Standalone installation 2}
+- 00:04:04 \scriptlibrephoenixhomemanager{4}{NixOS Module Installation}
+- 00:04:14 \scriptlibrephoenixhomemanager{5}{NixOS Module Installation 2}
+- 00:04:25 \videolibrephoenixhomemanager{265}{Advantage}, control all of the dotfiles of multiple users on the entire system at once, manage compute that multiple people are using
+- 00:05:56 \videolibrephoenixhomemanager{356}{Pull home-manager channel}, but does not install home-manager as a command
+- 00:06:04 \videolibrephoenixhomemanager{364}{Install home-manager as a command}
+- 00:06:14 \videolibrephoenixhomemanager{374}{Sometimes error at this step}, logout
+- 00:07:01 \scriptlibrephoenixhomemanager{6}{Sucessfull install}
+- 00:07:03 \videolibrephoenixhomemanager{423}{Why install home-manager package}, bootstrap in system so that home-manager can manage itself
+- 00:07:48 \scriptlibrephoenixhomemanager{7}{.config/home-manager}
+- 00:08:54 \scriptlibrephoenixhomemanager{8}{home-manager switch}
+- 00:09:40 \scriptlibrephoenixhomemanager{9}{make working with flake}
+- 00:10:27 \scriptlibrephoenixhomemanager{10}{Unstable is master branch}
+- 00:10:28 \videolibrephoenixhomemanager{628}{If version of nixpkgs different from version home-manager is using}, have problem
+- 00:11:04 \scriptlibrephoenixhomemanager{11}{Makes sure versions of nixpkgs used in both are the same}
+- 00:12:18 \scriptlibrephoenixhomemanager{12}{Outputs block}
+- 00:12:57 \scriptlibrephoenixhomemanager{13}{name of user}
+- 00:13:21 \scriptlibrephoenixhomemanager{14}{Other function}
+- 00:13:32 \videolibrephoenixhomemanager{812}{Module now home.nix}
+- 00:14:33 \scriptlibrephoenixhomemanager{15}{Change system argument}, into package set, doesn't take as argument
+- 00:14:21 \videolibrephoenixhomemanager{861}{What inherit does}, takes whatever the variable is declared as in the let binding passes that as an argument to the function
+- 00:16:05 \scriptlibrephoenixhomemanager{16}{Referencing architecture type twice}
+- 00:16:35 \scriptlibrephoenixhomemanager{17}{home-manager switch --flake .}
+- 00:17:01 \scriptlibrephoenixhomemanager{18}{Permission problem}
+- 00:17:07 \videolibrephoenixhomemanager{1027}{Effect}, then all version of all packages and of both the system and the home-manager configuration will be tied to the flake dot log file
+- 00:18:36 \scriptlibrephoenixhomemanager{19}{If home configuration not equal to user account}
+- 00:18:13 \scriptlibrephoenixhomemanager{20}{Analog to}
+- 00:17:57 \scriptlibrephoenixhomemanager{21}{Update flake.log file}
+- 00:19:53 \scriptlibrephoenixhomemanager{22}{Get all home-manager options for bash}
+- 00:22:53 \scriptlibrephoenixhomemanager{23}{Bash with aliases}
+- 00:23:34 \scriptlibrephoenixhomemanager{24}{Bashrc linking to nix store}
+- 00:23:18 \scriptlibrephoenixhomemanager{25}{Cat bashrc}
+- 00:25:07 \scriptlibrephoenixhomemanager{26}{Let binding for aliases}
+- 00:25:25 \scriptlibrephoenixhomemanager{27}{Place aliases}
+- 00:26:31 \scriptlibrephoenixhomemanager{28}{Default shell system level}
+- 00:26:52 \scriptlibrephoenixhomemanager{29}{User level search}
+- 00:26:57 \scriptlibrephoenixhomemanager{30}{System level search}
+- 00:28:09 \scriptlibrephoenixhomemanager{31}{home.file}
+- 00:28:05 \scriptlibrephoenixhomemanager{32}{home.file option}
+- 00:29:21 \scriptlibrephoenixhomemanager{33}{Write text into file as symlink}
+- 00:29:56 \scriptlibrephoenixhomemanager{34}{Source}
+- 00:31:06 \scriptlibrephoenixhomemanager{35}{How to rollback}, home-manager generations, activate

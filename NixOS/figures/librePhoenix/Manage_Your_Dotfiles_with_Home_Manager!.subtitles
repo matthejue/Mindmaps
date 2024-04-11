@@ -1,0 +1,663 @@
+hello everyone and welcome back to the
+channel today we're talking about home
+manager so what is home manager home
+manager takes the philosophy of Nyx and
+Nyx OS and applies it to all of your dot
+files and user level applications rather
+than affecting the systemwide
+configuration it's focused on the user
+level
+configuration so just like the rest of
+Nyx OS home manager makes distinctive
+generations of all of your dot files
+every time you switch into a new
+configuration making it very easy to
+roll back your configuration if
+something goes wrong and the way that
+home manager accomplishes this is by
+taking NYX files like home. Nix and
+translating them into generated dot
+files which occupy the normal locations
+that they would as siming
+so for example if I open up a terminal
+and I just list everything in my home
+directory for example my zshrc you see
+that it's a Sim link to this thing in
+the Nyx store same thing with the zsh
+environment file um same thing with a
+ton of other things The Bash RC as well
+and you can imagine then that all of the
+dot files on your system whether it be
+your bash RC your emac config your
+neovim config your tiling Window Manager
+config all of these become these Sim
+links that are managed through the power
+of Nyx and this has a number of
+advantages to it one we already
+mentioned that it's really easy to roll
+back all of these and another thing is
+that home manager is really good at
+managing multiple different setups and
+allowing you to switch back and forth
+between them because whenever you switch
+into a new configuration it will tear
+down all of the previous configuration
+files and then put in the new ones that
+you specify so it's really nice if you
+want to have a few different setups or
+configurations at your disposal or also
+if you're trying to migrate from one
+setup to another this actually helped me
+quite a bit when I was trying to switch
+from xmonad to hyperland I had my xmonad
+set up in NYX OS I got it working it was
+optimized to my workflow and then I
+wanted to try hyperland home manager
+allowed me to experiment with hyperland
+and start configuring it while still
+being able to switch back to my xmonad
+config to do actual work whenever I
+needed to so that's sort of what home
+manager is and why it might be useful
+but how do we get started with it so
+there's a nice install guide at the home
+manager website here's the home manager
+manual it'll be link linked down in the
+description below and there are actually
+multiple different ways of installing
+home manager the way I prefer to have it
+set up is using the Standalone
+installation but there's also the Nyx OS
+module installation essentially the
+difference between them is the
+Standalone installation is completely
+managed by the user accounts and there
+is a clear separation between the system
+configuration
+and the user configuration the system
+configuration will be in our
+configuration.nix from last time and the
+user level configuration will be in the
+home. NX file one of the advantages to
+this is that you don't actually require
+root to get this up and running so
+setting up your configuration this way
+is technically a little more portable
+because you could take your home manager
+configuration to a system that you don't
+have admin privileges on the nyos module
+setup on the other hand is slightly
+different instead of separating the user
+level config and the system level config
+they're actually in the same file
+they're both included in the
+configuration.nix file and so for this
+one you sort of have to have root
+privileges and so for this one you sort
+of have to have root privileges but the
+advantage to this is that you can
+control all of the dot files of multiple
+users on the entire system at once both
+of these will work for a single user
+system if you're like me and you think
+it's cleaner to have the system level
+and user level stuff separated I
+recommend doing the Standalone
+installation but if you're going to be
+using this to manage a computer that
+multiple people are using and you want
+to manage their dot files go ahead and
+use the n X module setup cuz that is
+definitely Superior in that use case
+since I use the Standalone installation
+this is the one we're going to go
+through in this video though later on I
+will make a nixos module home manager
+setup video if you guys want to see that
+so here we are we can click the
+instructions here and here they are so
+we're going to run these inside of our
+VM from last time okay so here we are
+again back in the VM I got the home
+manager manual here we're going to
+Standalone installation 1.1 the first
+decision you have to make is whether or
+not you're on the unstable or latest
+stable Channel if you're unstable like
+me go ahead and grab the top two
+commands and if you're running the
+latest stable grab the bottom two I
+actually think that this VM is running
+the stable channel so we're going to
+just grab these two put those into your
+terminal hit enter and what this will do
+is pull the home manager channel into
+your system system but it does not yet
+actually install home manager as a
+command in order to get home manager as
+a command we need to install it that'll
+be this Command right
+here now at this step there's a common
+error where it'll just say something
+like home manager is not found or Source
+not found if you see that error just go
+ahead and log out so do a full log out
+log back in and try it again it should
+fix it at that point there's sometimes
+just an error with like the environment
+variables and the user environment and
+stuff like that and Rel logging in will
+fix the issue once it finishes it should
+hopefully say starting home manager
+activation creating profile generation
+one and all that good stuff so if you
+see something like this it means that
+the home man manager install was
+successful now as an astute Observer you
+may be wondering wait uh isn't nixos
+like supposed to be declarative why are
+we running commands to install our
+packages I I thought we should be like
+putting the thing putting it into the
+configuration file and then switching
+well what happens with home manager is
+home manager declaratively manages
+itself and so you have to bootstrap it
+into the system before it is is fully
+declarative from here though the basic
+way of interacting with home manager is
+now declarative we can go Toc config
+slome manager and you should see a home.
+ni file and if you open this up and look
+at it you'll notice it Bears a
+resemblance to the configuration.nix
+file but now we have different sets of
+options like home. user username home.
+home directory and a few more things
+like home. packages if you want to have
+packages that are only available to your
+user account and not systemwide you
+could add them in here into this home.
+packages block just like the system
+packages block from configuration.nix
+now to show you real quick a basic
+configuration I'm just going to add the
+hello package to the home. packages
+block here it's already there you just
+need to uncomment it you can then save
+the file and then in order to switch
+into this new configuration and have
+access to the hello program which we do
+not have that right now there's a
+command similar to the nyos rebuild
+command but instead it's the home
+manager command so the command is just
+home- manager
+switch and when you do this it will read
+the home. nck file figure out what it
+needs to change and in this case it was
+just installing the hello program so now
+we have the hello program which is super
+awesome before we get too indepth into
+this I want to show you how to
+incorporate this home. NX file into the
+do files
+directory that we started last time so
+essentially what we're going to do is
+copy the home. Nix file that we just
+looked at into the do files
+directory so now everything is all in
+one place and from here if we want to
+make this work with our flake we're
+going to have to make a few edits to the
+flake switching back real quick into my
+host system I'm going to edit the flake.
+N inside of my fully set up emac config
+again so that we can see things just a
+little bit nicer so here it is here is
+our flake from from last time so in
+order to incorporate home manager into
+the flake we're going to need to add
+home manager as an input so home manager
+of course has a URL just like NYX
+packages does in this case it's going to
+be GitHub NYX Community Home manager and
+then we're using release-- 23.0 5 that
+is the branch if you're using unstable
+NYX packages this would just be the
+master
+Branch but home manager
+also takes in NYX packages as an input
+so if the version of Nyx packages right
+here is different from the version of
+Nyx packages that home manager is using
+we're going to have some problems so in
+order to fix that we have another line
+where it is hom manager. inputs. NX
+packages. follows equals NYX packages so
+what this says is make sure that the
+versions of Nyx packages that are being
+ref referenced in both of these are the
+exact same that will be it for the
+inputs block but now for the outputs
+Block in the outputs block we have this
+nice handy function here that is telling
+us how to build the Nyx OS system
+configuration but now we need to add
+another part of this that declares the
+home configurations in order to do this
+we're going to need to pass home manager
+as an input
+here because it needs home manager in
+order to build the home configuration
+and then we're going to make another
+section similar to Nyx OS configurations
+but in this case it's home
+configurations so right after the block
+that defines our nyos configurations
+we're going to make another block for
+home
+configurations and the structure for
+this is going to be very similar to what
+is happening in the Nyx OS
+configurations block so then to see this
+a little bit better I'm going to open up
+this view on the side here so you can
+see the hierarchy and one of the things
+that's really cool is that the structure
+of this home configurations block is
+going to be very similar to the
+structure of the nixos configurations
+block so we can actually copy all of
+this and just make some modifications in
+here so if you you can sort of see on
+the side they're going to have a similar
+structure but we're going to be
+modifying what these actual contents are
+so in the nyos configuration we wanted
+to define the configuration for the
+system so we used the host name of the
+system NYX os- tututorial but since this
+is configuration for the user we want to
+Define it for the particular user so so
+the default method of setting this up is
+just giving the name of your user in
+this case I have it as Libre Phoenix
+this configuration is not supposed to be
+a nyos system it's supposed to be a home
+manager configuration it's supposed to
+be a set of dot files that get activated
+on the system so we can't use the nyos
+system function anymore instead the
+function to use is right here hom
+manager. li. hom manager configuration
+now the home manager configuration has
+modules just like the system does but in
+this case the module is no longer the
+configuration a.n it is now the home. ni
+one more thing we got to do before this
+home manager configuration function
+works is change this system argument
+which it actually doesn't take as an
+argument into the package set which is
+what it needs in order to run the common
+way of doing this is by declaring
+packages or pkgs for short in the let
+binding and setting it to Nyx package P
+ages. Legacy packages Dot and then
+whatever the architecture type is in
+quotes So in this case it's going to be
+x86 64-
+Linux then in order for home manager
+configuration the function to know about
+that we can put in inherit packages what
+the inherit thing does is it takes
+whatever the variable is declared as in
+the let binding
+and passes that as an argument to the
+function or into wherever it is and so
+then one thing you probably noticing
+that might be driving you a bit insane
+is that we actually reference the
+architecture type twice here and here
+and what is perfect for abstracting out
+multiple Declarations of that another
+variable so to make this just a little
+bit more optimized we can actually
+declare the system architecture up here
+as system and set that to whatever
+architecture you're
+using and then instead of packages
+equals all of this at the end we're
+going to change this to dollar sign
+squiggly brackets and then
+system it's kind of like bash where the
+dollar sign and squiggly brackets can be
+used to expand whatever the variable
+means and then this should work and
+bonus points if you notice this early we
+can also now pass the system in to the
+nixos system function as an inherit by
+using inherit system and all of that
+should work nicely now the Declaration
+for the system architecture is just in
+one place which is very beautiful so
+assuming I did not forget any semicolons
+this should now be a functioning flake
+config with both the nyos configuration
+and the home manager configuration in it
+so then how do we work with this in the
+actual system well if we go back to the
+VM here and navigate back to the files
+directory we have everything together
+here the way we actually synchronize our
+configuration now now that we have the
+flake set up will be similar to how we
+changed the nyos rebuild command and
+that we're just going to run home
+manager switch d-lake and then pass in
+the directory and looks like I got an
+error here uh permission denied
+permission denied on the flake. loock
+file um yeah I have no idea why the
+flake. loock file is owned by root but I
+guess we can just fix that
+there okay and now we'll run that
+command again you should see some sort
+of output like this where it goes ahead
+and reinstalls stuff according to the
+actual flake. loock file and then all
+the versions of all the packages for
+both the system and the home manager
+configuration will be tied to the flake.
+loock file and whenever it decides to
+finish here we're
+good so there we go at this point
+we have a do files directory the system
+configuration is in it the user
+configuration is in it just as a quick
+recap if you're using flakes like me to
+update your system you can navigate to
+your do files directory or whatever
+directory you have all these in and run
+NYX flake update what this will do is go
+ahead and update the flake. loock file
+so any subsequent switches will be using
+updated packages to update the system
+you'll run pseudo Nix os- rebuild switch
+d-lake and then dot for the actual
+directory pound sign and then the name
+of the configuration if your
+configuration name is different from
+your host name and then it's a similar
+story for home
+manager home manager switch
+d-lake dot followed with a pound sign
+and the name of whatever the home
+manager configuration is if it's not the
+name of your user
+account okay so from here how do we get
+home manager to actually do useful stuff
+for us well this is going to involve us
+exploring the thousands and thousands of
+options that are out there for various
+programs and embedding them into the
+home. N we're going to go over bash and
+zsh as an example because probably
+everyone will want to be configuring
+their shell in some capacity and it's a
+very good example of how this
+configuring in the home. ni file
+actually does work so to do this you can
+open up the home. Nix file I'm going to
+open it up on my post system again
+inside my emac and there we are from
+here you'll also want to have my Nix
+os.com opened up on the as side because
+it's a very useful tool for exploring
+the kinds of configuration options we
+can now mess with so starting with bash
+what sort of things can we do to
+configure bash if you open up my nyos
+and then just search bash you will get a
+ton of different things but we can
+narrow this down a little bit further
+since we're concerned with home manager
+we can add a space home manager and then
+we get all the home manager options for
+bash so you can look through through
+these there's tons and tons of them but
+the most important thing to do if you
+want to have home manager manage any of
+your configurations is make sure that
+you set enable to true this one for
+example here programs. bash. enable if
+you set this to true then your bash RC
+and related bash files will be created
+by home manager as those Sim links that
+we were looking at earlier so we can
+start off by adding that into our config
+configuration wherever we would like
+I'll put it right over here so it's
+programs. bash. enable equals true with
+this any other options that we configure
+in the home. ni related to bash will
+then be reflected in The autogenerated
+Bash RC something that everyone should
+have in their bash RC are aliases so how
+do we get aliases in bash well if we
+search for aliases we're going to find
+programs. bash. shell
+aliases and if you look at this you'll
+see it is an attribute set of strings
+meaning it's going to be set to some
+squiggly brackets with a bunch of things
+set equal to each other so it's not
+necessarily the same syntax as you would
+see in a bash RC where it's actually you
+know Alias LL equals quots ls- L it's a
+slightly different syntax but this is
+the Nyx configuration syntax which makes
+it really nice so we could go ahead here
+and grab this configuration and just
+plug it into programs.
+bash. shell aliases I believe it
+was there we go making sure not to
+forget a semicolon maybe we want to
+format it a little bit nicer here and so
+then again as you're seeing here on the
+side this forms this hierarchy again so
+we have B
+enable is set to true and there's other
+property shell aliases and then within
+that there's another hierarchy which is
+really really cool and as we learned
+last time you could rewrite this in a
+slightly different way instead of
+repeating programs. bash twice we could
+instead write it like this programs.
+bash
+equals and then we have our
+brackets enable equals
+true and then shell aliases
+equals all of this fun stuff right
+here and those two things are
+functionally equivalent the dot just
+means go down one level in the hierarchy
+that we see over here on the right side
+now if we go back into to the VM so now
+with that updated bash configuration in
+the home. ni we could switch into this
+new configuration home manager switch
+d-lake and then passing in our
+directory and this works nicely if we
+navigate out and we cat the
+bashrc there's a bunch of other stuff in
+here but you will see it added in those
+two aliases and now if we run one of
+those aliases
+will get to see that the bash RC is in
+fact a Sim link linking to this thing in
+the Nyx store pretty awesome zsh is
+configured similarly if you want to use
+zsh you can just search
+zsh home manager and then you'll get all
+of the options for zsh and you can
+explore these as you like but some of
+these are similar enough to The Bash
+option
+that we could honestly just take the
+configuration from bash here copy
+it and just replace this with zsh go
+back into our
+VM switch into the new
+configuration and now it's doing
+something similar for zsh now again one
+of the things you'll notice here is that
+we're duplicating our definition of
+shell aliases they're the exact same
+thing for both bash and zsh in this
+example so if we wanted to we could
+abstract these out into a variable by
+going up to the top and using another
+let binding let bindings are used to
+pass in variables so we could say
+let my aliases equal and then we'll grab
+the definition
+here like
+so and then say in let my aliases equal
+all of this in this whole block here all
+we would have to do then is change both
+of these shell aliases equals to say my
+aliases and I think something went wrong
+with some of the squiggly brackets
+here there we go so with that then we
+can switch into the new configuration
+again and everything works like expected
+quick tip then on the side here if you
+want to switch your default shell from
+bash to something like zsh that is a
+system level configuration so that
+configuration so that configuration is
+not going to be in home. Nix but rather
+in configuration.nix
+and the relevant configuration looks
+something like
+this so environment. shells equals with
+packages and then whatever shells you
+want on the system bash zsh and fish or
+just one of them if you want the default
+shell whichever one you want zsh bash or
+fish and then just making sure to enable
+the one that you have selected as as the
+default shell and you'd be good to go
+from here on out there are lots and lots
+of options here that you can mess around
+with to search for options for a
+particular package I recommend just
+searching for the package say for
+example vim and along with searching
+home manager if you're trying to
+configure a user level dot file or NYX
+packages SL option if you're looking for
+a configuration that would be system
+level anything that's marked as NYX
+packages option would be in the
+configuration.nix and anything that is
+in home manager/ option would of course
+go in the home. Nix file now if you are
+a nerd like me and you have tons and
+tons of dot files for various things on
+your system it is a very daunting task
+to try and migrate all of those dot
+files into this home manager setup so of
+course if you're looking at migrating to
+home manager you can take it slow and
+migrate one thing at a time putting in
+the normal dot files in their normal
+places without home manager will still
+work totally fine but there is also one
+more trick that home manager has up its
+sleeve that allows very quick migration
+from a normal configuration file into
+home manager and that is with the home.
+file option which is a set of files to
+link into the user home there's two main
+ways of using this and this is again
+back in the home. Nix file the first way
+of using the home. file property is by
+just putting the contents of the file
+inside of Home manager and you do this
+by writing home home. file Dot and then
+in quotes the path to the actual file so
+if I was going to put in my hyperland
+config this would be Doc config
+hyperhyper land.com and then text
+equals we can then use these sets of
+double single
+quotes and between those single quotes
+paste in
+the entire contents of the config what
+this says is write this text into thec
+config hyperhyper land.com
+file as a siml file just like we saw in
+the bash RC now if you don't want your
+home. ni file to get absurdly large very
+quickly there's another method of doing
+this where instead of passing it the
+actual
+text we pass the source and the source
+would be a path to the actual config
+file so we could take an existing
+hyperland docon file or whatever
+configuration file once we have it
+available in the do files directory we
+can just Source it like
+this and that will work similarly one
+last thing I want to mention here before
+we wrap up is what to do if you end up
+breaking something because NYX OS and
+Nyx are supposed to allow you to roll
+back but home manager roll backs are not
+necessarily intuitive but they are
+pretty
+easy so in order to roll back into a
+previous configuration you start by
+running home manager
+generations and what this will do is
+output a list list of all of the
+generations you have previously switched
+into and they should be in Reverse
+chronological order with the most recent
+one being at the top so once you figured
+out which generation you want to roll
+back to all you have to do is copy the
+path to the Nick store for that
+generation and add slash activate and
+run that activate is a script that is in
+every single one of these generations
+and it is the activation script it is
+what sets up the system to have all the
+dot files and Sim links be in their
+correct places so I hope you learned
+something I hope that this was a good
+entry point into home manager next time
+we're going to be looking at how we can
+expand our configuration to be much more
+modular and after that I'll be taking
+requests for tutorials on how to
+configure specific applications maybe
+like emac or Neo Vim or Kling window
+managers or hyperland or whatever if
+there's a particular setup that you want
+me to go over how to get a basic
+configuration running in NYX OS and with
+home manager let me know down in the
+comments below so if you like the video
+please leave a like comment and
+subscribe if you dislike the video
+please leave a dislike and let me know
+what you disliked about the video video
+that's all for today and I hope you have
+a great rest of your
+day

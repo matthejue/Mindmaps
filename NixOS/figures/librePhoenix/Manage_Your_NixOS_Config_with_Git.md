@@ -1,0 +1,35 @@
+# Timestamps
+- \newcommand{\scriptlibrephoenixnixosconfigwithgit}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Manage_Your_NixOS_Config_with_Git.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videolibrephoenixnixosconfigwithgit}[2]{\href{https://youtu.be/20BN4gqHwaQ?si=0UmUOEYrNr1r83_3&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Manage_Your_NixOS_Config_with_Git.md" "" librephoenixnixosconfigwithgit librephoenixnixosconfigwithgit
+- 00:03:53 \videolibrephoenixnixosconfigwithgit{233}{why give name and email}, who is doing what
+- 00:05:13 \scriptlibrephoenixnixosconfigwithgit{1}{usual git command}
+- 00:06:03 \scriptlibrephoenixnixosconfigwithgit{2}{home-manager way}
+- 00:08:01 \scriptlibrephoenixnixosconfigwithgit{3}{default branch git command}
+- 00:08:26 \scriptlibrephoenixnixosconfigwithgit{4}{defaultBranch in home-manager}
+- 00:10:13 \scriptlibrephoenixnixosconfigwithgit{5}{in etc}
+- 00:10:42 \scriptlibrephoenixnixosconfigwithgit{6}{dubious ownership error}, with safe.directory
+- 00:11:10 \scriptlibrephoenixnixosconfigwithgit{7}{dubious ownership solution in home-manager}
+- 00:16:26 \scriptlibrephoenixnixosconfigwithgit{8}{add ssh key}
+- 00:17:03 \scriptlibrephoenixnixosconfigwithgit{9}{ssh-keygen}
+- 00:16:52 \videolibrephoenixnixosconfigwithgit{1012}{passphrase}, local encryption of actual key, if hacker can steal file still has to brute force passphrase
+- 00:18:06 \scriptlibrephoenixnixosconfigwithgit{10}{two files}
+- 00:18:22 \scriptlibrephoenixnixosconfigwithgit{11}{copy paste github}
+- 00:23:59 \scriptlibrephoenixnixosconfigwithgit{12}{Magit}
+- 00:29:42 \scriptlibrephoenixnixosconfigwithgit{13}{git clone change origin to github}
+- 00:31:18 \scriptlibrephoenixnixosconfigwithgit{14}{no such file or directory error}
+- 00:34:09 \scriptlibrephoenixnixosconfigwithgit{15}{install script}
+- 00:34:25 \scriptlibrephoenixnixosconfigwithgit{16}{install script 2}
+- 00:34:35 \scriptlibrephoenixnixosconfigwithgit{17}{integrated in flake}
+- 00:35:09 \videolibrephoenixnixosconfigwithgit{2109}{why not curl}, can add runtime inputs to script
+- 00:36:23 \videolibrephoenixnixosconfigwithgit{2183}{run with those dependencies repackaged just to run a single command}
+- 00:37:05 \videolibrephoenixnixosconfigwithgit{2225}{go to outputs}, besides homeConfigurations and nixosConfigurations add two more definitions
+- 00:38:09 \scriptlibrephoenixnixosconfigwithgit{18}{declare 2 functions}, forAllSystems and nixpkgsFor and supportedSystems
+- 00:38:50 \videolibrephoenixnixosconfigwithgit{2330}{other view}
+- 00:38:26 \videolibrephoenixnixosconfigwithgit{2306}{copie from plasma manager}
+- 00:39:35 \videolibrephoenixnixosconfigwithgit{2375}{if want text be actual script that is external to the flake}, substitution method with $ sign and {}
+- 00:39:51 \videolibrephoenixnixosconfigwithgit{2391}{this being whatever arguments are passed into it}
+- 00:40:07 \scriptlibrephoenixnixosconfigwithgit{19}{declare apps}
+- 00:40:27 \videolibrephoenixnixosconfigwithgit{2427}{setting it to install package that gets created above}
+- 00:41:12 \scriptlibrephoenixnixosconfigwithgit{20}{run directly from git}
+- 00:42:13 \scriptlibrephoenixnixosconfigwithgit{21}{down to single command}, install git

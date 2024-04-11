@@ -1,0 +1,20 @@
+# Timestamps
+- \newcommand{\scriptlibrephoenixcontrolcenter}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Program_a_Modular_Control_Center_for_Your_Config_Using_Special_Args_in_NixOS_Flakes.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videolibrephoenixcontrolcenter}[2]{\href{https://youtu.be/H_Qct7TVB6o?si=ZZVEGhlqTxu5qutx&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Program_a_Modular_Control_Center_for_Your_Config_Using_Special_Args_in_NixOS_Flakes.md" "" librephoenixcontrolcenter librephoenixcontrolcenter
+- 00:02:56 \scriptlibrephoenixcontrolcenter{1}{Declare variables}
+- 00:03:34 \scriptlibrephoenixcontrolcenter{2}{extraSpecialArgs home-manager}
+- 00:03:39 \scriptlibrephoenixcontrolcenter{3}{specialArgs nixos}
+- 00:04:12 \scriptlibrephoenixcontrolcenter{4}{inside other modules as arguments}
+- 00:04:20 \scriptlibrephoenixcontrolcenter{5}{use substituation ${spec.user}}
+- 00:04:53 \scriptlibrephoenixcontrolcenter{6}{in home.nix concat + spec.user}
+- 00:06:39 \videolibrephoenixcontrolcenter{399}{advantage of variables of custom options}, declaring option exists and defining it, making sure the type is correct
+- 00:09:26 \scriptlibrephoenixcontrolcenter{7}{could also pass something in like normal}
+- 00:10:10 \videolibrephoenixcontrolcenter{610}{passed as (extra) special args}, any of module files and subsequent modules that get imported can use this arguments
+- 00:11:40 
+- 00:11:40 \videolibrephoenixcontrolcenter{700}{variable not defined error}, if not import actual variable into the arguments
+- 00:14:30 \scriptlibrephoenixcontrolcenter{8}{define as attribute set}
+- 00:14:55 \scriptlibrephoenixcontrolcenter{9}{only inherit userSettings}
+- 00:17:05 \scriptlibrephoenixcontrolcenter{10}{only userSettings as argument}
+- 00:17:37 \scriptlibrephoenixcontrolcenter{11}{complete conversion}
+- 00:19:01 \scriptlibrephoenixcontrolcenter{12}{rec for recursive}, computing value of spawn editor using other part of the attribute set

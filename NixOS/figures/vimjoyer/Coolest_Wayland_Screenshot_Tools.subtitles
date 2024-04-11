@@ -1,0 +1,118 @@
+today we are going to take a look at a
+couple of incredibly useful Wayland
+screenshot screenshot editing and screen
+recording programs and the most popular
+program combination to make basic
+screenshots on Wayland is Green Plus
+slurp the first one is used to take the
+screenshots while the second is a screen
+selection tool and when used together
+they provide a similar result to what
+Mame does on xorg you just use by itself
+Grim will take a screenshot of your
+entire desktop but you can also select a
+specific monitor by providing a dash o
+flag on hyperland use a hyper CTL
+monitors command to find out your
+monitor names and on sui use this sway
+message command set the Dash D flag to
+select the file type and choose a file
+name with the last unnamed argument you
+can set it to dash to Output image into
+standard output which is quite useful
+for piping it into other commands Dash
+g-flag is interesting because it lets us
+specify screenshots geometry we can
+either write it out manually like this
+or let's slurp do it for you with this
+shell command substitution syntax now we
+can select a specific part of the screen
+with our Mouse if you then want to save
+your screenshot to clipboard install the
+video clipboard package and pipe the
+output of this command into real copy
+this is the command that you should
+generally use if you just want to take
+screenshots normally but I get annoyed
+by this weird black outline that is
+likely caused by storm fading out if you
+have the same problem let's fix it by
+installing image magic the powerful
+image editing terminal tool and piping
+the standard output of grim into a
+convert command that will shape 1 pixel
+from each side making our screenshots
+clean and borderless that's great but
+what if you want to quickly edit your
+screenshot put some text on it draw an
+arrow quickly and publish it somewhere
+straight away without using for
+example a gtk program called swappi is
+the tool that is going to help us with
+that pipe any of the previous commands
+into it instead of real copy then right
+after taking a screenshot a clean
+interface will appear it has a special
+menu with all of the tools available but
+you can also select them with intuitive
+key bindings like before brush T4 text
+air for rectangle over ellipse because
+it is round a for Arrow and D for
+blurring press on shift plus r g or B to
+select red green or blue color or add a
+custom one which you can get with a
+Capital C key after editing your picture
+copy to clipboard with Ctrl C or save it
+with Ctrl s the usual stuff it also has
+a simple configuration file which is an
+amazing touch for a GUI program if you
+ask me I usually include this command in
+my key bindings so I can not only edit
+my screenshots but also any other images
+that happen to be in my clipboard
+but now let me show you how two great
+minimal terminal tools that you can use
+if you don't want to install and setup
+entire OBS WF recorder and WL screen
+rack unfortunately I could not get the
+second one to work on my machines but
+they are both very similar in use and
+have almost the same Flags open the
+terminal begin recording just by running
+a command and finish it by terminating
+it with Ctrl C
+let me now open it with MPV to show you
+that it did in fact record everything
+both VF recorder and wheel screen rack
+can also record selected part of the
+screen just like with the screenshots
+same syntax and we can also use slurp to
+select it with a mouse you can also
+obviously record audio by using a dash
+dash audio flag and if you want to
+specify the name use the dash F flag and
+obviously because it is a terminal
+command you can do all sorts of cool
+stuff with it like delaying it with
+sleep terminating it in say 10 seconds
+and then doing some cool FFM pack magic
+with it possibilities are endless and I
+encourage you to experiment and find
+your own cool ways to use these programs
+to increase your productivity but now I
+have a small announcement I've made the
+coffee page for the channel where you
+can tip me if you enjoyed any of the
+videos and would like to support them I
+told you guys about it on a discard
+server and right away I saw the first
+monthly donation from Hoskins which I am
+super grateful for it really inspires me
+to put more work into these videos and
+hopefully improve the quality but once
+again if any of you guys just want to
+chat join our Discord server and if you
+like this video you can leave a like or
+a comment I read every single one
+subscribe if you enjoyed this video and
+I'll see you in the next one

@@ -1,0 +1,206 @@
+welcome back to the channel everyone
+today I wanted to talk about nyos so
+what is nyos essentially what nyos is is
+a Linux distribution that builds itself
+using configuration files rather than
+the normal Paradigm of installing apps
+via an app store or configuring things
+using a settings menu you write all your
+configuration all the apps you want all
+the system Services you want installed
+in into a configuration file or a set of
+configuration files and that then is
+your system you can sync the state of
+the system with whatever is written in
+the configuration file so this has a lot
+of benefits but also a lot of downsides
+downsides being oh it's really weird to
+use and the configuration setup is hard
+to learn and stuff like that but I think
+that the benefit
+outweigh the negatives so what are some
+of these benefits one of the first
+things that NS is really good at is
+modularity with nexos you can make your
+system highly
+modular so what do I mean this is my
+configuration and I have a bunch of
+modules in my configuration so all of
+the stuff in this user directory that I
+have are modules like for example my
+Doom emac module doom.
+NX so if I import this module into a
+configuration what it will do is install
+doom emac and configure it exactly the
+way that I like it and so you can
+imagine if you have tons and tons of
+modules you can create slight variations
+of your systems very easily and that
+sort of looks like this this
+so in your configuration you can put an
+Imports block and then import all the
+modules you want
+and comment out any modules that you
+might not want for example and so with
+this it makes it very easy to make
+multiple profiles like here I have a
+work profile and I also have a personal
+profile which is the one that you're
+seeing right now I have a home profile
+which is what I would install on a
+server it's very easy to just take these
+pieces and move them in and out of
+various systems and there's actually
+another level to this as well more than
+just these module files you can also set
+up your system via a flake to have sort
+of these kind of like Global variables
+in a sense that if you change one of
+them it will replicate that change
+amongst your entire
+system and I have here a very striking
+example with my theme variable so this
+is the theme of my entire system sort of
+the color scheme right now I'm using oo
+nicorn got that oooo action going on but
+if I wanted to become a slightly more
+respectable human being I could change
+this themee to a different one like for
+example Grove box and as soon as I sync
+my configuration like
+so you'll see the entire system is now
+using Grove
+box I know a lot of people are also
+solarized fans so here here's solarized
+dark boom entire system is now
+solarized
+so you can then imagine having a ton of
+these variables like I have here my
+username my theme my window manager
+default browser
+font and just by changing one of these
+you can replicate that change across the
+entire system which I think that's a
+really cool feature because it's
+managing the whole system you can do
+cool tricks like this okay so what's
+next what else is n that's really good
+at another thing that's really good at
+and this ties into the whole the entire
+system is managed by a configuration
+file is that it is very good at managing
+multiple
+systems and this is because of course
+your system is defined by a
+configuration file so all you need to do
+to replicate the system is move that
+configuration file to the new system if
+you're a business owner for example and
+you want to have a bunch of employ
+employee laptops all have the same
+configuration you write the
+configuration once and then you put that
+configuration on all the computers this
+is also really good for managing servers
+when I was first learning nyos I of
+course read a lot about nyos and one
+person who uses nyos is Henrik listner
+he is the Creator and maintainer of Doom
+emac and what he has to say about nyos
+the reason he uses nixos is because he
+manages hundreds of servers and without
+nyos it is quote the 10th circle of hell
+which I can totally believe that being
+the case so NX OS is very good at
+managing multiple systems so last bit
+that nixos is really good at is the
+ability to recover from a disaster
+scenario so because your entire system
+state is stored in the configuration
+file essentially this is very good for
+any sort of disaster with your system it
+could be something as simple as an
+update breaking some stuff on your
+system or it could be something as
+drastic as the computer starting on fire
+or being tossed into a lake everyone
+always says have good file backups and
+this is really good advice but what
+about the System state if you're someone
+like me who spends a bunch of time
+configuring and optimizing the system to
+your specific workflow then having that
+workflow be destroyed by some adverse
+event is something I get paranoid about
+but with NEX I don't need to be paranoid
+about this because the entire
+configuration is just here in my DOT
+files and if I for whatever reason lose
+this working state for my machine I can
+just go in and reinstall using my
+configuration files or even quicker if
+it was an update that broke the system
+there's a very quick roll back
+functionality that can boot your system
+into a working configuration while you
+figure out what update broke this
+happened with me personally well not me
+specifically but my wife uses NY OS as
+well and a few days ago update broke the
+full dis encryption on her machine now
+everything on the machine was still
+encrypted it's just the decryption
+passphrase that she normally uses was
+not functioning to open up the machine
+so she could not get into her system
+what did we do well we just got rid of
+the what was there reinstalled and got
+her configuration back because we had a
+backup of our configuration and a backup
+of all our files elsewhere so it was
+really quick to get it back and just to
+show you how quick it is literally to
+get it back how simple it is assuming
+you have your configuration files stored
+elsewhere here's what you do you clone
+your configuration from whatever other
+machine it is regenerate the hardware
+config for the new machine sync your
+system configuration install home
+manager and sync your user level
+configuration that's five steps when we
+reinstalled her system I think it was a
+grand total of like 15 minutes or 20
+minutes of actual effort and the rest of
+the time was just waiting for the system
+to build and waiting for her files to be
+restored so very very quick and easy to
+get back up and running again with the
+specific custom tailored setup using
+nyos so those are the three main reasons
+I think nyos is great it's very modular
+it's very easy to set up your system on
+multiple machines and it is very easy to
+reinstall your entire setup in the event
+that something terrible happens so if
+you like this content please like And
+subscribe I'm going to be starting a
+tutorial series on how I have my NYX OS
+set up because of the complexity of Nyx
+OS there's like a thousand and one
+different ways you can set up your
+configuration files so I wanted to
+Showcase my way that I do it and I'm
+going to try and make it as beginner
+friendly as possible because I still am
+a bit of a NYX OS beginner myself I've
+only been using it for six or seven
+months I think so look forward to that
+make sure you subscribed if you're
+interested in that if you disliked this
+video please leave a dislike and let me
+know what you disliked about the video
+in the comment section down below that's
+it for today though and have a great
+rest of your
+day

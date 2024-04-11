@@ -1,0 +1,154 @@
+suppose you want to create an ideal
+operating system where unnecessary
+packages don't pollute your user space
+as a bonus your shell scripts will also
+become entirely declarable so you can
+send them to your friends or colleagues
+without worrying about any dependencies
+you can accomplish this with NYX
+packages function called right shell
+script bin all it does is create a shell
+script in your next store makes it
+executable and returns its path so how
+can we Nexus users incorporate it into
+our workflow it's very simple let's
+begin by creating a file called
+myosumscript.nix
+all it will contain is a function that
+takes packages as an input and returns
+an output from packages.wrightshowscript
+right shell script bin itself takes two
+parameters the desired binary name and
+the content of the script it will
+include the shebang at the top
+automatically so you don't have to
+specify it notice that to make a
+multi-line string in Nix language we are
+using two double single quotes
+so let's say you want to make a simple
+script that Echoes hello world then
+pipes it into cow say to draw a funny
+ASCII image and then pipes it into
+lolcat to make it colorful our standard
+Unix way of doing it would look
+something like this
+but we cannot assume that the person
+running the script as kausai and LOL get
+installed we also do not want people who
+we share this script with to clutter
+their user Space by adding all of the
+dependencies to their configuration so
+let's move our script into the.nix file
+and address these issues we will add
+this special structure before each
+binary the packages.cause say variable
+when interpolated into a string with a
+dollar sign will turn into a next store
+path once our script is compiled so each
+of these variables will be replaced with
+something similar to this
+but how can I determine if a package cow
+say actually contains cow c binary it
+may be obvious in this case but the
+package name may not necessarily match
+the name of the binary
+for example if I want to install VL copy
+command I won't find a package with that
+exact name and instead will need to take
+it from a different package called VL
+clipboard there are many ways to find
+out which packages contain specific
+binaries but here are two easy methods
+that I recommend if you are already an
+experienced Linux user you may already
+know the package names and their
+contents from other distributions in
+this case you can use this NYX build
+command which builds your desired
+package in your next store and prints
+its path
+it's going to be removed once you
+garbage collect your system so don't
+worry about it taking some space
+then just CD into this directory and
+browse it to make sure that your
+required binary is there if you are
+unsure where your binary is located or
+don't want to wait for packages to build
+you can use the Nyx index package to
+index the entire next packages allowing
+you to locate any files stored within it
+I also recommend using NYX index
+database which is a wrapper for NYX
+index that is updated weekly with it you
+don't have to index next packages
+locally saving you a ton of time
+to add NYX index database to your Nexus
+configuration use the flag that provides
+it you can find a link to it in the
+description after rebuilding your system
+if you try to run next locate VL copy
+you will see where VL copy is located
+which is of course in VL clipboard
+package
+so now let's finally return to our
+script to make use of it we can put it
+in Nexus configuration Dev shell or its
+own derivation let's go over the first
+one because all of you probably already
+have your Nexus config ready
+all we have to do is import the next
+file relatively to our configuration.nix
+make it inherit packages because we
+defined it as a required parameter
+you can either add your import directly
+into packages or Define it as a variable
+at the top using the let and in syntax
+and then reference it in packages
+after rebuilding your system you'll
+notice that we can now run our script
+even though neither cow say nor lolcat
+is actually present in our users
+environment
+to fully understand what NYX did here
+let's check the content of the script
+the which command returns you the
+location of the executable and the bat
+is just a colored cat command
+as you can see NYX indeed added the
+shebang at the top and also replaced
+their package variables with the
+complete path linked to the next store
+you can import this shell script to any
+NYX expression that requires packages
+for example to spice up your Dev shells
+with fancy run or test scripts but the
+best thing is Concepts that you have
+learned or reminded yourself in this
+video will help you when we eventually
+come to derivations they are a way to
+describe process of building a NYX
+package and understanding them will
+grant you unlimited power but now I'm
+already getting ahead of myself
+so we have reached 1 000 subscribers
+which means that I am now obliged to
+create a Discord server the link to it
+is in the description make sure to join
+if you want to share and receive some
+nerd knowledge or vote for future video
+ideas I'm going to be setting it up
+right after this video goes public so
+come say hi if you want
+and what about the channel one case UPS
+in less than a month that's pretty good
+I think I didn't expect to reach it even
+in 5 months but here we are now how
+about this the first person who counts
+how many times I've said Nix in this
+video writes it in general chat on
+Discord and gets a colored name on the
+server I think it will be quite fun and
+thank you so much for watching sharing
+and subscribing really hope you enjoyed
+this video and see you in the next one

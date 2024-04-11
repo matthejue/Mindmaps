@@ -1,0 +1,20 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerhyprland}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/Nixos_and_Hyprland___Best_Match_Ever.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerhyprland}[2]{\href{https://youtu.be/61wGzIv12Ds?si=g5SKiQjCI30NbUau&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/Nixos_and_Hyprland___Best_Match_Ever.md" "" vimjoyerhyprland vimjoyerhyprland
+- 00:00:45 \scriptvimjoyerhyprland{1}{Example wayland compositors and x windows managers}
+- 00:00:51 \scriptvimjoyerhyprland{2}{enable}
+- 00:01:31 \scriptvimjoyerhyprland{3}{additional required or recommanded options}
+- 00:02:08 \scriptvimjoyerhyprland{4}{bars}
+- 00:02:21 \scriptvimjoyerhyprland{5}{correct workspaces}
+- 00:02:43 \scriptvimjoyerhyprland{6}{notification deamon}
+- 00:03:00 \scriptvimjoyerhyprland{7}{desktop portals}
+- 00:03:11 \scriptvimjoyerhyprland{8}{sound}
+- 00:03:19 \scriptvimjoyerhyprland{9}{wallpaper setter}
+- 00:03:40 \scriptvimjoyerhyprland{10}{terminal emulator}
+- 00:04:01 \scriptvimjoyerhyprland{11}{applauncher}
+- 00:04:35 \scriptvimjoyerhyprland{12}{hyprland config file}
+- 00:05:00 \scriptvimjoyerhyprland{13}{applauncher keybinding}
+- 00:05:22 \scriptvimjoyerhyprland{14}{start script 1}
+- 00:05:57 \scriptvimjoyerhyprland{16}{start script 2}
+- 00:06:15 \scriptvimjoyerhyprland{16}{make screenshot}

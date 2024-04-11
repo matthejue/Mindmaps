@@ -1,0 +1,22 @@
+# Timestamps
+- \newcommand{\scriptlibrephoenixflakesinstallation}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/You_Should_Use_Flakes_Right_Away_in_NixOS!.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videolibrephoenixflakesinstallation}[2]{\href{https://youtu.be/ACybVzRvDhs?si=fpn7QygS6LS1WRe7&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/You_Should_Use_Flakes_Right_Away_in_NixOS!.md" "" librephoenixflakesinstallation librephoenixflakesinstallation
+- 00:07:01 \videolibrephoenixflakesinstallation{421}{migrate method for configuring system from channels to flakes}, channels default way to menaging versions of packages on system
+- 00:08:20 \scriptlibrephoenixflakesinstallation{1}{Difference channels and flakes}
+- 00:09:03 \scriptlibrephoenixflakesinstallation{2}{Enable}
+- 00:11:14 \scriptlibrephoenixflakesinstallation{3}{Inputs and Outputs}
+- 00:15:04 \scriptlibrephoenixflakesinstallation{4}{nixpkgs branches}
+- 00:15:16 \scriptlibrephoenixflakesinstallation{5}{nixpkgs in flake.nix}
+- 00:15:27 \scriptlibrephoenixflakesinstallation{6}{remove github}
+- 00:15:31 \videolibrephoenixflakesinstallation{931}{Other non-special inputs need full path}
+- 00:16:52 \videolibrephoenixflakesinstallation{1012}{Function that makes nixos system}
+- 00:18:34 \videolibrephoenixflakesinstallation{1114}{Lib part of nixpkgs}
+- 00:21:34 \scriptlibrephoenixflakesinstallation{7}{Complete flake.nix}
+- 00:22:22 \scriptlibrephoenixflakesinstallation{8}{nixos-rebuild switch --flake .}
+- 00:23:03 \scriptlibrephoenixflakesinstallation{9}{hostname}
+- 00:23:38 \scriptlibrephoenixflakesinstallation{10}{Select name of configuration}
+- 00:23:57 \scriptlibrephoenixflakesinstallation{11}{flake.lock}
+- 00:24:17 \videolibrephoenixflakesinstallation{1457}{To update system update flake.lock file}
+- 00:24:58 \scriptlibrephoenixflakesinstallation{12}{Updates inputs to most recent version}, does not update system, only updates flake.lock file
+- 00:25:21 \scriptlibrephoenixflakesinstallation{13}{To update system both commands}

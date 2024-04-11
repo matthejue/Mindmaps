@@ -1,0 +1,180 @@
+\documentclass{standalone}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\begin{mindmap}
+	\begin{mindmapcontent}
+		\node (middle) at (current page.center) {Nix package manager
+			\resizebox{\textwidth}{!}{
+				\begin{minipage}[t]{12cm}
+					\begin{itemize}
+						\item \href{https://nixos.org/learn/}{\inlinebox{Overview}}
+						\item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/How Nix Works _ Nix & NixOS.html}{\inlinebox{How it works}}
+					\end{itemize}
+				\end{minipage}
+			}
+		}
+		child {
+				node {Nix language
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item \href{https://nixos.org/manual/nix/stable/}{\inlinebox{Manual}}
+									\item nix stores packages in the \alert{Nix store}, usually the directory \inlinebox{/nix/store}, where each package has its own unique subdirectory
+									\item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/Nix language basics — nix.dev documentation.html}{\inlinebox{Basics}}
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {Tools}
+						child {
+								node {Nix-instantiate -eval
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item use \inlinebox{nix-instantiate --eval} to evaluate the expression in a Nix file
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Nix repls
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item use \inlinebox{nix repl} to evaluate Nix expressions interactively
+													\begin{itemize}
+														\item for fully evaluated data structure for clarity prepending \inlinebox{:p} to the input expression
+														\item type \inlinebox{:q} to exit nix repl
+													\end{itemize}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+					}
+			}
+    child {
+      node {Home-Manager
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/Nix_home_manager_tutorial:_Declare_your_entire_home_directory.pdf}{\inlinebox{Explanation}}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+    }
+    child {
+      node {Flakes
+        \resizebox{\textwidth}{!}{
+          \begin{minipage}[t]{12cm}
+            \begin{itemize}
+              \item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/Nix_flakes_explained.pdf}{\inlinebox{Explanation}}
+            \end{itemize}
+          \end{minipage}
+        }
+      }
+    }
+		child {
+				node {NixOS
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item \href{https://search.nixos.org/options}{\inlinebox{Search Options}}
+									\item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/NixOS Manual.html}{\inlinebox{Manual}}
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {Tools}
+						child {
+								node {Nixos-rebuild switch
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \inlinebox{nixos-rebuild switch}
+													\item \inlinebox{nixos-rebuild switch --rollback}
+													\item \inlinebox{nixos-rebuild test}, \inlinebox{nixos-rebuild build-vm}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+					}
+			}
+		child {
+				node {Nixpkgs
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item \href{https://search.nixos.org/packages}{\inlinebox{Search Packages}}
+									\item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/Nixpkgs Manual.html}{\inlinebox{Manual}}
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {Ad hoc shell environments
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/Ad hoc shell environments — nix.dev documentation.html}{\inlinebox{Explanation}}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+						child {
+								node {Reproducible interpreted scripts
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/Reproducible interpreted scripts — nix.dev documentation.html}{\inlinebox{Explanation}}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Declarative shell environments with shell.nix
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \href{/home/areo/Documents/Studium/Summaries/NixOS/figures/Declarative shell environments with shell.nix — nix.dev documentation.html}{\inlinebox{Explanation}}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+					}
+				child {
+						node {Tools}
+						child {
+								node {Nix-env
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item \inlinebox{nix-env --install firefox}
+													\item \inlinebox{nix-env --upgrade some-packages}
+													\item \inlinebox{nix-env --uninstall firefox} and \inlinebox{nix-collect-garbage}
+													\item \inlinebox{nix-env --rollback}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+					}
+			}
+	\end{mindmapcontent}
+	% \begin{edges}
+	% 	\edge{viginere}{blockcipher}
+	% \end{edges}
+	% \annotation{test}{annotation}
+\end{mindmap}
+\end{document}

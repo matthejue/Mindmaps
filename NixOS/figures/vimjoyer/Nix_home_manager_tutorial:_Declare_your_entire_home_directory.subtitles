@@ -1,0 +1,165 @@
+there are many reasons to use Nick's
+home manager do you want to
+declaratively manage your system and
+other distros would you like to apply
+settings to all your favorite programs
+in one configuration file or perhaps you
+want to decouple your important stuff
+from the things you will be tweaking
+daily bone manager is the right tool for
+the job we'll go over two primary ways
+to set it up regular user installation
+and installation as a Unix OS module we
+will use flake for both so if you are
+unfamiliar with what they are please
+check out my video called flakes
+explained to start using home manager on
+Nexus we need to install the home
+manager package on other distros you
+will need to enter a shell with home
+manager for the initial configuration
+from there it will manage itself
+next run home manager init command which
+generates a flick.nix and a home.nix
+file if we check the flake file we can
+see that it's similar to what we've seen
+in the previous episodes the only
+difference is a new home manager input
+here with its own URL and its next
+packages input follows next packages it
+just means that it will use the same git
+revision as the main index packages in
+the file just like in previous video we
+have a set in outputs which holds all of
+our home manager configurations
+by default it puts our user key here as
+a string but we can also write it like
+this
+or even this
+and just like in previous video our
+relative reference to main configuration
+file home.nix is located in modules
+array
+to rebuild home manager configured in
+this way all we have to do is run home
+manager switch or home manager switch
+with the flake pointing to our
+configuration directory this method will
+also work on any other distro so you can
+bring your home with you anywhere
+now before we check out our home manager
+options let's take a look at configuring
+home manager sa Nix OS module this way
+your home manager will be rebuilt with
+your system but you are missing out on
+sudo less rebuilds and ability to use it
+on other distros I generally prefer the
+first method
+here is our NYX OS flake from the
+previous video We'll add the home
+manager input at the top just like in
+Standalone home managerflake it also
+follows next packages next we need to
+add inputs so we can access them
+throughout the set we could just pass
+home manager into a function but I
+figured it would be useful to show this
+Syntax for your future configurations we
+also need to expose it to our
+configuration.nics by adding it to
+special works to access it in our
+configuration.nix file we just added to
+the arguments at the top and now we can
+add the required import and actually use
+the home manager module you could write
+all of your options here but to keep it
+clean we are importing home.nix file
+from the same directory it needs to have
+the same structures Standalone one so
+you could just copy it with this setup
+homemanager will be revealed with your
+whole next OS system so the command is
+our usual sudanix OS rebuild switch
+so let's finally take a look at our
+home.nix file default configuration
+includes a ton of useful comments and I
+really recommend taking some time to
+read them before cleanup
+after some cleaning up we can see that
+the default options include our username
+and home directory
+our users packages which we can tweak
+frequently because of the rootless
+rebuild our environment variables like
+your favorite editor
+home.file which is a very great option
+it allows you to link files from your
+next store right into your home
+directory I'm personally using it for my
+zsh plugins because I have a very big
+dshrc and don't feel like moving it into
+home manager yet
+home.state version which is the version
+of your initial home manager
+installation it's not that important for
+desktop use I would say but it can
+protect your critical systems from
+breaking changes while migrating to
+newer versions
+programs.homemanager.enable equals true
+just lets your home manager manage
+itself
+if you are using non-nix OS distro you
+should also enable this option right
+here
+to find more home manager options right
+man home
+configuration.nix there you can find all
+the home managers options their data
+types and default values you can do the
+same thing with man configuration.nix
+command to get your index service
+options which I forgot to include in the
+previous video now to inspire you some
+great home manager options are
+programs.get so you don't have to stop
+each of your system installations to set
+your name and email imperatively gtk so
+your desktop looks fantastic and you
+don't have to install theme Changers
+mime types so your video and image files
+don't open in Vine
+and also your entire shell can be
+managed in a home.nix file you can use
+zsh bash fish New Shell you name it
+and also there is a ton of other options
+that will make your system configuration
+effortless and easily tweakable some of
+them of course are shared between nixos
+and home manager migrating your whole
+dot files to file manager is also not
+far-fetched on next week you can find
+many examples of people's repos filled
+with a bunch of Nyx files that configure
+everything and have you ever been
+dissatisfied with all of your programs
+being differently themed maybe you even
+written set scripts that change
+configuration files for you if you did I
+have a solution for you NYX colors is a
+great way to apply base 16 themes to
+your programs a link to each repo is
+going to be in the description
+home manager might not be an essential
+part of your system but it sure is one
+of my favorite ones it's quite simple to
+use so you can explore all of its
+options just by checking out demand page
+I see a lot of positive comments on my
+videos and I'm very thankful to all of
+you guys for it so leave a like if you
+like this video and if you want you can
+join those 721 absolute Giga chats by
+subscribing to the channel thanks for
+watching and I'll see you in the next
+one

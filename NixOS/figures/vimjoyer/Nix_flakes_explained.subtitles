@@ -1,0 +1,211 @@
+Nick slicks everybody uses them
+everybody talks how great they are yet
+if you try and go search for any
+information about them you quickly find
+yourself on the third page of your
+preferred search engine with no simple
+answer in this video I'm going to
+explain what flakes are why do you need
+them and how they are used I want to
+begin by clarifying that at the moment
+Flakes and Nick's command are an
+experimental feature of Nyx this doesn't
+mean that they are unstable don't be
+discouraged however it means that you
+will have to explicitly enable them on
+your system on mix OS you just have to
+set the experimental features option
+like you see on the screen on other
+distributions and Macos use the series
+of commands that you can also see on the
+screen they will create a package
+manager configuration directory if it
+does not exist yet and not the required
+settings to it
+don't forget to rebuild your Nix OS
+system afterwards with sudanix OS
+rebuild switch or restart the next
+Daemon if you are another distro
+so what exactly are flakes in simple
+terms they could be described as a new
+system for managing your Nix ecosystem
+including your nixa's configuration
+development environments derivations and
+other
+before we can understand flakes we need
+to have some comparison point so we will
+first start with regular Nick shell
+you may already know that by using this
+command you can create temporary shell
+environments with packages not present
+on your system for example by executing
+Nix shell Dash p python you are going to
+be dropped into a shell with python
+available right until you exit from it
+you can also have more complex shells by
+creating a shell.nix file with following
+content if you run Nick's shell in
+directory with it you are going to have
+neovium theme and a shell hook will be
+run as soon as it starts
+this feature is amazing for developers
+who want to have different environments
+for different projects and also for
+people who want to test some software
+without polluting their system with
+hundreds of packages
+but you might already see a huge problem
+with this approach specifically import
+next packages at the top this means that
+you are using your system's current
+Channel version to grab all of the
+packages and if you've seen my previous
+video you already know that you have to
+update it imperatively by running an
+update command so if you were to have a
+Channel with neovim version 081 and your
+friend had one with version zero nine
+both of you could end up with two
+completely different shells from
+evaluating the same file moreover this
+means that each time you update your
+channel you might break your precious
+python projects or get a new version of
+Nvidia driver that will break your
+desktop environment so now finally
+Nick's Flakes and their companion
+feature Nick's command are an easy and
+excellent solution to this problem
+to start using flakes around Nick's
+flake in it in an empty directory notice
+that NYX and Flake have a space between
+them this is of course because of Nick's
+command syntax which you are going to
+see more while you are using flakes
+after running the command you are going
+to get a flick techniques in your
+directory from first glance we can see
+that this file has a description and
+output the description is just some
+random text and outputs contains some
+Declaration of packages
+you could use this flake by running NYX
+run command with the space but for
+purposes of our tutorial we are going to
+continue constructing our shell
+environment
+I have modified the file in the
+following way quite a lot of new stuff
+appeared but I'm going to explain what
+we have going here firstly I renamed the
+description to some other random string
+there is nothing special about that next
+inputs this is what we were waiting for
+here you can Define multiple links to
+other flakes or package repositories but
+wait it looks like I have just a basic
+link to next packages and stable channel
+here no comment no specific date so how
+is it different from a regular way the
+fundamental difference is that when we
+run our evaluation command later NYX is
+going to create a second file called
+flake.lock in the same directory
+just like the lock files in other
+package managers like npm cargo it is
+going to have the exact version of Nyx
+packages that we had when we run the
+command
+this means that all of your flakes are
+going to have independent versions and
+after sharing two files with your friend
+like in previous example he is going to
+have exactly the same shell as you with
+the same python version now outputs is
+simply the part that you use to do
+whatever you did in a regular NYX files
+with a couple of differences in this
+example as you can see the middle part
+is the same function make shell that we
+used in shelled mix but it is located
+inside curly braces with some Arcane lat
+syntax
+all of this is also very simple the
+curly braces here are called the set
+which you could compare to a Lua table
+or JavaScript object
+the lat and in syntax is here just to
+hold some variables for us we can later
+use dollar sign to access them as you
+can see I've added the system variable
+which is just a type of system I'm using
+if you are using any 64-bit Linux
+operating system you can also put the
+same system variable here in the next
+line I'm using this variable to get
+correct type of Nyx packages for my
+system using the input we talked about
+earlier
+in the set itself we can see
+devshells.system.default indicating that
+we are once again using the same
+variable to make a default Dev shell
+used for 64-bit Linux you could also
+call it anything like Bob but it would
+just mean that the command for executing
+it would be a little different
+now let's try to actually use our flake
+once again we are going to use a NYX
+command with a space which is going to
+be Nix develop
+if you named your Dev shell Bob you're
+going to have to also add the dot sharp
+pop where dot is the current directory
+and Bob is the key in the set
+next is going to generate a flake.lock
+file in the directory and we are going
+to get our shell
+if we want to actually update the
+version of flake's inputs all we have to
+do is run Nick's flake update which is
+going to fill the log file with new
+versions of all of your dependencies
+from previous example you can see that
+flakes have many benefits also they are
+not nearly as hard to use as it might
+initially seem the Syntax for declaring
+your environments this time home manager
+Docker file packages and much much more
+tastes the same just with the addition
+of flake as a wrapper I highly recommend
+creating a git repository for each of
+your flakes you might be brain enough to
+remember all hundreds of lines here in
+your dot Nix file but you certainly
+don't want to lose hashes and revision
+IDs
+and if you are going to make a git
+repository keep in mind that flakes
+require all files in directory to be
+committed or staged
+this was one of the most basic ways of
+using a flake but if you want to see how
+you could use flakes in other ways
+please comment below I've seen a ton of
+positive feedback on their previous
+video and I really hope to continue
+sharing some NYX knowledge as well as
+some other Linux hockey terminal stuff
+in general
+my microphone is still horrible but at
+least in this video I've tried
+re-recording some parts until they
+sounded right leave a like if you like
+the tutorial leave dislike if you didn't
+also you can comment I'm reading
+everything subscribe if you feel extra
+generous and thank you so so much for
+watching
+the first person to account how many
+times I have set flake or Nyx in this
+video gets a cookie

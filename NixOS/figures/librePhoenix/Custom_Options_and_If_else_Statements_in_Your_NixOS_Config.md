@@ -1,0 +1,27 @@
+# Timestamps
+- \newcommand{\scriptlibrephoenixifelse}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Custom_Options_and_If_else_Statements_in_Your_NixOS_Config.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videolibrephoenixifelse}[2]{\href{https://youtu.be/Qull6TMQm4Q?si=2yWLAlYU8gGW6p53&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/Custom_Options_and_If_else_Statements_in_Your_NixOS_Config.md" "" librephoenixifelse librephoenixifelse
+- 00:01:56 \scriptlibrephoenixifelse{1}{can't make up option directly}
+- 00:02:18 \scriptlibrephoenixifelse{2}{can't make up option directly 2}
+- 00:04:51 \scriptlibrephoenixifelse{3}{mkOption}, lib.types.str
+- 00:04:59 \scriptlibrephoenixifelse{4}{top-level config or option error}
+- 00:06:00 \scriptlibrephoenixifelse{5}{actual full attribute set notation of options has top-level attribute config}
+- 00:06:16 \scriptlibrephoenixifelse{6}{write as config high level attribute set}
+- 00:06:23 \videolibrephoenixifelse{383}{full structure of nix module}
+- 00:06:39 \videolibrephoenixifelse{399}{options where define own new options}
+- 00:06:43 \videolibrephoenixifelse{403}{config is where all the of the actual declarations for options are placed}
+- 00:06:51 \videolibrephoenixifelse{411}{If don't put options and config attribute set directly it will assume that everything is part of config}
+- 00:07:16 \videolibrephoenixifelse{436}{options much more powerful than variables}
+- 00:07:56 \scriptlibrephoenixifelse{7}{directly use option}
+- 00:08:39 \scriptlibrephoenixifelse{8}{as soon as option defined in options section in at least one modules that's being included}, that option can be set in any module file
+- 00:10:42 \scriptlibrephoenixifelse{9}{data types for option values}
+- 00:11:01 \scriptlibrephoenixifelse{10}{all different types}
+- 00:14:45 \videolibrephoenixifelse{885}{it's not}, entire thing is expression that is what is setting the message variable, because nix is declarative not allowed to do sequence of things
+- 00:15:29 \scriptlibrephoenixifelse{11}{example if then else}
+- 00:15:37 \scriptlibrephoenixifelse{12}{nix eval --file}
+- 00:16:34 \scriptlibrephoenixifelse{13}{directly insert boolean value}
+- 00:22:02 \videolibrephoenixifelse{1322}{in nix need both if and else}
+- 00:22:55 \scriptlibrephoenixifelse{14}{optional in list}
+- 00:23:33 \videolibrephoenixifelse{1413}{can access values of options set in config by referencing them using this top-level attribute set config}
+- 00:25:11 \scriptlibrephoenixifelse{15}{example}, works same in home.nix

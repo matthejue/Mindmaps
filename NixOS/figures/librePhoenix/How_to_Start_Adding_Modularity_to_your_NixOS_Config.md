@@ -1,0 +1,31 @@
+# Timestamps
+- \newcommand{\scriptlibrephoenixaddingmodularity}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/How_to_Start_Adding_Modularity_to_your_NixOS_Config.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videolibrephoenixaddingmodularity}[2]{\href{https://youtu.be/bV3hfalcSKs?si=dYJ-AutQvY5u4gfE&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/librePhoenix/How_to_Start_Adding_Modularity_to_your_NixOS_Config.md" "" librephoenixaddingmodularity librephoenixaddingmodularity
+- 00:01:25 \videolibrephoenixaddingmodularity{85}{what nixos module is}, function that accecpts a attribute set of config and packages and returns an attribute set of configuration options
+- 00:03:11 \scriptlibrephoenixaddingmodularity{1}{nixos config repo}
+- 00:04:49 \scriptlibrephoenixaddingmodularity{2}{home.nix}
+- 00:09:31 \scriptlibrephoenixaddingmodularity{3}{nix functions}
+- 00:09:38 \scriptlibrephoenixaddingmodularity{4}{result}
+- 00:10:29 \scriptlibrephoenixaddingmodularity{5}{default value 4}
+- 00:10:32 \scriptlibrephoenixaddingmodularity{6}{result}
+- 00:10:49 \videolibrephoenixaddingmodularity{649}{file is function that takes attribute set containing at least config and pkgs inside of it and then it returns an attribute set itself}
+- 00:13:00 \videolibrephoenixaddingmodularity{780}{reason for sh.nix}, because shell.nix has special meaning
+- 00:13:45 \scriptlibrephoenixaddingmodularity{7}{create module for shells}
+- 00:16:01 \scriptlibrephoenixaddingmodularity{8}{file not found error}
+- 00:17:22 \scriptlibrephoenixaddingmodularity{9}{add file}
+- 00:18:02 \scriptlibrephoenixaddingmodularity{10}{Tree is dirty}, if not commited
+- 00:19:10 \scriptlibrephoenixaddingmodularity{11}{conflicting values}
+- 00:19:33 \scriptlibrephoenixaddingmodularity{12}{when build}
+- 00:21:47 \scriptlibrephoenixaddingmodularity{13}{mkDefault}, 1000
+- 00:22:43 \scriptlibrephoenixaddingmodularity{14}{mkForce}
+- 00:22:50 \scriptlibrephoenixaddingmodularity{15}{rebuild}
+- 00:22:54 \scriptlibrephoenixaddingmodularity{16}{no bashrc}
+- 00:23:29 \scriptlibrephoenixaddingmodularity{17}{conflict.nix and test.nix}, priority value 50 and 100
+- 00:23:50 \scriptlibrephoenixaddingmodularity{18}{order}
+- 00:24:29 \scriptlibrephoenixaddingmodularity{19}{mkOverride}
+- 00:26:59 \scriptlibrephoenixaddingmodularity{20}{with pkgs}
+- 00:27:13 \scriptlibrephoenixaddingmodularity{21}{with pkgs 2}
+- 00:26:05 \videolibrephoenixaddingmodularity{1565}{option that is an attribute set or a list it will automatically merge}
+- 00:28:47 \scriptlibrephoenixaddingmodularity{22}{will merge}
+- 00:29:03 \videolibrephoenixaddingmodularity{1743}{some packages related to xorg and wayland can't be installed alongside each other}

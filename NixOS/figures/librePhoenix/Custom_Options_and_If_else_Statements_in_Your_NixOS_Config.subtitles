@@ -1,0 +1,520 @@
+hello everyone and welcome back to the
+channel today we're going to be talking
+about how you can extend and have more
+powerful modularity in your nyos config
+by creating your own options and then
+using those options and some of the
+other options uh with if else statements
+to make a conditional config this would
+allow you to set the values of various
+options based Bas on the values of other
+options which is really powerful now
+this is sort of a direct sequel to my
+previous video on nyos modularity some
+of the stuff that we'll be glossing over
+in this video is what was gone over in
+depth in that video so uh definitely
+check out that video if you haven't
+already link will be in the description
+down below and I'll also have a little
+card uh pop up in the corner somewhere
+around now so in any case let's get get
+started first we're going to talk about
+how you can Define your own custom
+options so to do that let's go to our VM
+here and get to our
+config okay so the first thing you might
+try to do to Define your own custom
+option is just to set the option like
+you would normally as a variable in
+another programming language so for
+example you might try uh just in your
+configuration. Nick somewhere writing uh
+I don't know my
+arbitrary option equals and then setting
+it to some like um
+stuff now this is intuitive of course uh
+this is how you would probably do it in
+another language like python or
+JavaScript or something like that but
+you will notice pretty immediately that
+if if you try to rebuild using that so
+let's
+H rebuild
+here it will error
+out like so here's what it says the
+option my does not
+exist so again what this means
+here uh my is an attribute set that has
+arbitrary as an attribute set and then
+as part of that there's the option uh
+option which we're trying to declare as
+stuff now it's telling us that my does
+not exist as an option and there's a
+reason for that the only options that
+we're allowed to declare are the options
+that are defined in an attribute set
+called options okay that's quite a
+mouthful so what does that mean if we
+want to include our own custom option we
+must place
+definitions for what those options are
+in this special attribute set called
+options so we write options write in our
+attribute set notation here and then
+this is where we will place our own
+custom options the way that this options
+attribute set works is different from
+how we Define the rest of our config so
+instead of just setting the option to
+some sort of value we have to actually
+tell NYX what this option is what sort
+of things are we allowed to set it to
+what is the data type of the option and
+in order to do this we're going to need
+to use a function from lib so if you
+haven't already make sure you have lib
+up here in your arguments
+section and so we're going to use the
+make option function so my AR arbitary
+option equals lib doake
+option and from this we're going to have
+to pass two bits of information about
+the
+option the first being the type so in
+this case I want to make it a string so
+I'm going to use the type li.
+types. St for string and the second bit
+of information we need to pass it is the
+default so this is the default value
+that it will have if you don't set it
+anywhere else in your config so I will
+just give it a default value of stuff
+for this
+example now this is all well and great
+we have a custom option defined here in
+this options attribute set and so if we
+go ahead and save this here and we try
+rebuilding
+again we are going to notice that there
+is now a new error uh module blah blah
+blah has an unsupported
+attribute
+boot uh so what's going on here this is
+caused by introducing a top level config
+or options attribute so essentially what
+is happening here is this entire time
+that we've been writing our config we've
+been actually writing it in a bit of a
+shorthand see when we write the
+configuration declarations for these
+options we typically write you know we
+typically just write the option but
+technically the actual full path you
+might say or the full attribute set
+notation of these options actually has a
+top level attribute config so
+technically boot. loader. grr. enable is
+really config boot. loader. grub do
+enable and that's what all of these
+actually are so in normal attribute set
+notation with NYX we can write this as a
+top level attribute set like they were
+saying in the error
+message sort of like
+that and space these over and round that
+out and so you can sort of see now this
+is actually the technical full structure
+of a NYX OS module an Imports list
+an options attribute set and a config
+attribute set options is of course where
+we import other NYX files as modules
+options is where we Define our own new
+options and config is where all of the
+actual declarations for the options are
+placed if you don't put the options
+attribute set or the config attribute
+set directly if it will assume that
+everything is a part of config but this
+is really what's happening in the
+background so if we go ahead and try to
+rebuild
+now this should
+work so from here it's important to
+remember that options are much more
+powerful than something like
+variables going off the last tutorial
+about nyos modularity we can again
+we can set this option in multiple
+different locations in the config to be
+different values and then we can give
+those different values different
+priority levels so for example if I
+wanted to set the arbitrary option that
+we just uh declared here to something
+like um
+cool in this configuration.nix
+file but then in some other file some
+other module maybe like the hardware
+work
+configuration I wanted to sort of
+override that I could use something
+like lib
+doake force and maybe I wanted to make
+it uh awesome or something like that and
+so this li. make force makes it a higher
+priority for that value than just
+normally setting it so if we re rebuilt
+it like this the arbitrary option here
+would actually have the value awesome
+and another thing to note as well is we
+defined the arbitrary option as an
+option in this other configuration.nix
+file but as soon as it's defined in at
+least one module that's being included
+in an options section that option can be
+set in any module file and in fact this
+is where all of the options actually
+come from from if you go and look at the
+Nyx packages source code in the Nyx code
+for every single package the options are
+defined this way and at the end of the
+day we're just importing those modules
+so we have access to those options but
+in any case from here there might be two
+things that you're wondering one thing
+for the custom options is well it's
+great that we have access to Strings but
+what are the other types how do I
+include other types I put together a
+list of some common
+types
+here and so some notable ones are for
+example li. types. anything so accept
+anything uh strings are St Str uh if you
+want a string that can't be empty you
+could use the non-empty string uh Str
+Str uh Boolean kind of important um
+sometimes you might want to use numbers
+but maybe not that often in an xos
+config um paths you can actually have
+the type be a path to a file or
+directory on the system or in the config
+and then of course we have lists um
+and so on and so on these are a few that
+you may want to start with because
+they're sort of since they're the
+easiest to sort of understand and work
+with but if you want to explore more of
+the types uh I think actually the best
+way of learning about these is actually
+by reading the story
+code which is kind of
+unfortunate but if you want to explore
+more you can check out the source code
+and I'll link this uh specific file in
+the Nyx packages source code in the
+description but essentially if we go
+here and we scroll down to about uh I
+think it's like line 200
+something uh yep right around here
+so types equal and then these are all
+the different types that are by default
+included in the uh lib of nyx's packages
+that you can check out so like there's
+raw data type uh there's the anything
+data type unspecified uh buou bu by or a
+Boolean merged using or and many many
+more which you can explore uh at your
+you know on your own time but yeah
+definitely lots of interesting types
+that you could uh learn about and
+experiment
+with now another thing that you're
+probably wondering is how do I make this
+custom option useful because you
+probably realized that it's awesome you
+know that we uh were able to make a
+custom option and set it to some sort of
+value but right now it's not really
+doing anything for our config it's not
+really helping us at all and this is
+where we can start talking about
+some of the logic with uh if else
+statements if else statements
+conditionals are sort of a staple of
+programming in general so we need to be
+able to use them in NYX as well now
+since NYX is a declarative language the
+way the if else statements are sort of
+formulated is might not be super
+intuitive if you're used to if else
+statements in other programming
+languages especially imperative
+programming languages now
+imperative means it's a programming
+language that does a sequence of steps
+whereas in NX it's more declarative um
+meaning that you just declare things um
+and you're not really doing things in
+steps in a way so to show you the
+difference of what I'm talking about
+here bash is a imperative language so if
+we had an example
+sample bash
+script and we write uh just a quick if
+condition then do some action like a
+like a some body of uh commands right
+else do something else some other
+sequence or body of commands then we F
+to end the if else statement so again
+the idea of this is if some condition is
+satisfied then do a sequence of things
+otherwise do a different sequence of
+things now in NYX it's a little bit
+different you have to think about it
+slightly differently if L statements are
+not used to perform different sets of
+actions they're more so used to declare
+different values conditionally so I'll
+show you an example so we'll do example.
+NX and here we go so so let's
+say I just write an expression like
+let X =
+true and then I want to declare another
+variable message and I want the message
+variable its value to be dependent on
+whatever X's value is so to do this we
+would set the value of message to be the
+expression
+if x equal true then X is
+true else X is
+false so you can sort of see how you
+think about it differently it's not uh
+if x equals true message
+equals x is true it's more message
+equals if x equals equals true then X is
+true else X is false what's really going
+on here is that this entire thing is an
+expression that is what is setting the
+message variable again because NYX is
+declarative we're not allowed to do
+sequences of things we're not allowed to
+do anything it's why NYX is hard so the
+conditional statements are more so
+formulated like this so if we actually
+ran this uh we could just have the
+output be message we can actually run
+this and
+see since X is true when we actually run
+it it will report X is true and of
+course we set X to
+false then it'll say x is false on
+another note here as well you may have
+noticed this maybe not since X is
+actually just directly a Boolean here
+here we could just say
+ifx like if false then it's going to use
+the else here x is false um otherwise
+you know if we had X set to
+true it's sort of directly placing that
+Boolean value into the expression here
+so that is another trick that you can
+have up your sleeve as well now this uh
+NYX expression showing how NYX works is
+not exactly what you would include in
+your config so how could we use this in
+our own
+configuration a really good example
+showing this is by conditionally
+including different packages on your
+system in say the environment. system
+packages or home. packages if you're
+using home
+manager and I'll show you what I mean so
+if we go to the uh
+environment. system packages here it
+is and I'll uh this here like that let's
+say I wanted
+to optionally optionally add certain
+packages based on certain configuration
+options say I want a certain package if
+I'm using X11 or an X11 window manager
+and I want a totally different package
+if I'm running something like whan in my
+case the only two Window Manager
+configurations I have set up are xmonad
+and hyperland so if I was setting this
+up I might reference those two
+configurations so how would this work
+well we have a system packages block
+declared here already and one trick that
+we can use to add more packages to this
+conditionally is by using this Plus+
+operator which adds new things to the
+list so for example if I did
+Plus+ uh oops if I did plus plus and
+then I put in something like
+packages.
+roofy removing the semicolon there what
+this would do is it would have the
+environment. system packages be a list
+with uh packages. vvm packages. wget and
+packages. and then it would add on this
+packages. roofy at the end here now
+roofi is my app launcher of choice on
+xmonad but on hyperland I actually
+prefer a Wayland only one called fuzzle
+so if I wanted to conditionally have
+this additional package be based on
+whether or not I have xmonad or
+hyperland enabled what we would do is
+write an expression
+where this is that actually decides that
+for us so so I'm going to start by
+putting all of this in parentheses
+parentheses in NYX kind of work like
+parentheses in math they're kind of like
+you know order of operations or like
+containing Expressions inside of them
+that's how you can sort of think of
+them and to write the statement we need
+the if statement to be able to figure
+out whether or not xmet or hyper land is
+enabled so we can just access that
+information by calling it from the
+config attribute set so for example if
+config doservices
+dox server. window manager. xmon ed.
+enable equals equals true that's quite a
+bit of stuff
+there uh
+then this expression should return
+packages . roofy which would be what
+gets added on to the environment. system
+packages and in fact I'm going to put
+this in some parentheses as well just
+to show everything that's going
+on okay after this we're going to need
+an else part of this so else and for
+this I'm actually going to write another
+if statement and you'll see why in a
+moment uh if config do programs.
+hyperland do enable plus equals true and
+let's make sure that uh this is
+in parentheses as
+well uh then we want this to return
+packages.
+fuzzle otherwise we want to return an
+empty list so there we
+go again let's look at this whole phrase
+here here and in fact I can probably
+separate these out just a little bit so
+we can see more about what's going
+on we
+go so what we're doing is we're adding
+onto the environment. system packages
+list with an expression this is the if
+an if else
+expression we first ask if this config
+doservices dox server. window manager.
+xm. enable is true that is what would be
+enabling xmonad and if that is true then
+it Returns the roofi package and that
+gets added on to the system packages
+otherwise we check if hyperland is
+enabled then we add on the fuzzle
+package otherwise we don't add on
+anything now we have to have this last
+else statement and have else an empty
+list in this case here because in NYX
+when you use an if else statement you
+have to have both the if and the else
+you can't just have if then like there
+you could in say python or JavaScript
+you have to specify both options because
+if you don't specify the else then what
+does it know what to set it to it'll
+sort of just error out at that point so
+in my case here we could try rebuilding
+and this shouldn't actually technically
+do anything because in this test VM I
+actually got
+KDE but if we try rebuilding this let's
+see what
+happens I forgot
+a semicolon of
+course uh there we
+go no I had an extra parentheses that's
+what I had there we go
+okay we try rebuilding this
+then it'll of course at least rebuild uh
+telling us that the syntax is okay but
+it didn't really do anything for me
+right here because you know this is my
+VM tutorial setup but in any
+case then these of course are you know
+some tricks that you can use in your
+configuration these if else statements
+can of of course be used to set options
+just by
+themselves and you can access whatever
+the values are of options that you set
+in your config by referencing them using
+this top level attribute set config one
+more thing I do want to mention before
+we end off here is if you're using home
+manager and you got a home. n file all
+of the things that we talked about with
+regards to the configuration.nix work
+identically in the home. ni so for
+example if I wanted to add some custom
+options to my home manager config I can
+put this in an options attribute set
+like
+so
+and
+awesome home manager option uh is
+whatever libm make
+option
+if you do that just make sure that the
+rest of your configuration is in the top
+level config attribute
+set and then at this point if you want
+to reference the values of other options
+and use IFL statements like this in home
+manager you can of course do that by
+referencing things using the top level
+config attribute so let's say I wanted
+my new awesome home manager
+option to be set to whatever my username
+is I could set it to config doom.
+username and if I wanted to have an if
+else statement here I could of course do
+that as well but this will all work in
+similar fashion so once you learn how to
+do this with the configuration.nix and
+you know normal nyos it works the same
+way for home manager anyways I hope you
+liked the video I hope you learned uh
+some cool tricks that you can start
+incorporating into your NYX OS
+configuration if you liked the video
+please uh leave a like uh leave a
+comment letting me know what you liked
+about it or what other content you'd
+like to see me do if you dislike the
+video please leave a dislike on it and
+uh let me know what I can improve on
+next time and in fact next time another
+NYX OS tutorial we're going to extend
+this modularity even further on the
+topic of Nyx OS flake
+by talking about something called
+special args and extra special ARS so
+make sure you're subscribed and you got
+notifications on if you're interested in
+more NYX OS content anyways have a great
+rest of your day as always and I'll see
+you all next
+time

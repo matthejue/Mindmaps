@@ -1,0 +1,191 @@
+hyperland an amazing compositor that has
+experienced tremendous growth since its
+creation last year however since it is
+based on Weyland some long time ex-users
+have been hesitant to try it out today
+we shall take a look at a simple and
+straightforward NYX OS hyperlens setup
+that includes all the necessary
+components for a seamless transition
+so yes unlike all the standard window
+managers like bspvm I3 awesome or DVM
+hyperland is actually a valent protocol
+based compositor which means that it
+doesn't rely on the X server
+there are some advantages and
+disadvantages to it right now but
+undeniably Weyland is the future so
+let's begin the setup with enabling
+hyperlund itself if you have a not
+Nvidia system all you have to do is
+enable this option yes this is it only
+one line on Nvidia however you also want
+to enable special patches those two
+environment variables and a couple of
+Hardware options blr no Hardware cursors
+disables Hardware cursors you might not
+need this option but on my work machine
+for example mouse cursor becomes
+invisible without it just check how it
+works for you
+the sneaks OS ozone VL here hints your
+electron apps like Discord to use
+Wayland it should help you if you see a
+black screen in those
+opengl obviously enables opengl and the
+Nvidia mode setting is required by most
+valent compositors on Nexus if you plan
+on running any X applications which you
+probably do also enable this option here
+after rebuild and restart you should
+have your hyperlens available in display
+manager but don't do it just yet I plan
+this feature Rich but you probably want
+some additional software with it like a
+bar for example two standard choices for
+hyperland are way bar if you want
+something that works out of the box and
+is quite customizable and alcavar's
+wacky widgets if you want to have a
+completely DIY solution we're gonna go
+with the first one because El covers
+like a Regis would require its own video
+just to get started with the basics
+adding packages.way bar to your system
+packages should do but to have
+workspaces displayed correctly on
+hyperlens you also want to add a special
+override of attributes now you might not
+need this step depending on when you are
+watching this video but adding it won't
+do any harm anyway
+some other useful software pieces that
+you definitely want to have with
+hyperlund are
+a notification demon like danced or Maco
+X users should be familiar with the
+first one and second one is pure valent
+we will take a closer look at one of
+them later in the video
+they depend on leave notify so add that
+to your packages too desktop portals
+which handle your desktop program's
+interactions between each other screen
+sharing link opening file opening and
+such
+as an example I've added xdg desktop
+portal gtk but you could choose from any
+other one available in NYX packages
+these options right here which enable
+your sound if you've recently installed
+Nexus you should have them enabled by
+default by fire is also used on valent
+for screen sharing one of these
+wallpaper demons they all are great and
+have unique features but we're gonna
+take a closer look at swww
+as a confident terminal user you also
+want to have a great terminal emulator
+I've compiled a small list of my
+favorite ones but you should choose the
+one that suits your workflow the best
+ITI is listed first here because that's
+what hyperlan has set as a default with
+standard config so unless you have a
+radio config just put it there and
+remove later and of course an app
+launcher the menu is not available on
+valent but all the cool guys are using
+rofi anyway rophie Wayland is the
+Weyland compatible rophie package or you
+can choose Wolfie which is the gtk
+rophie version
+hyperland Wiki also suggests you try out
+P menu puzzle or toffee which are all
+available in next packages don't forget
+to add your favorite browser text editor
+messaging apps and that should suffice
+for our first boot this is what you're
+gonna see after booting up your hyperlan
+desktop for the first time at the top
+piperland will suggest you to edit its
+configuration file so let's do exactly
+that
+like I mentioned previously by default
+hyperlund assumes that you are using
+Kitty so let's open it by pressing super
+plus Q
+navigate to your dot config
+hyperdirectory where you will see the
+hyperlan.com file edit it with your
+favorite Text Editor to remove the nasty
+message we need to comment this Auto
+generated line if you scroll down you
+can also see all of your key bindings
+listed here to launch your application
+without opening a terminal we're gonna
+add rophie here like this
+you can edit other options to your
+liking the configuration is really not
+that difficult however if you'd like me
+to create an advanced hyperlink
+configuration tutorial please let me
+know in the comment section but now we
+want to actually make use of our other
+software let's begin by adding this line
+at the bottom of our hyperlink
+configuration file it will call a batch
+script on Startup so we can put all of
+the stuff there
+use Touch command to create a file you
+can also call it any other name you want
+but don't forget to mod it so it is
+executable
+here's what the file should look like we
+are initializing wallpaper Daemon and
+later setting the image to any path on
+your system
+I've also included network manager
+applet which is this handy thing right
+here
+waybar and Dunst are also here
+I've added ampersands to the end of each
+line to make them non-blocking make sure
+to also have slash user slash Bean slash
+and Bash here because nixos doesn't have
+Apache available in slash bin directory
+doing this is also a great practice on
+any other register
+now restart hyperlan by pressing super M
+or reboot your system
+this is how your newly acquired bar
+should look like take some time to
+customize it all of the documentation is
+available on the internet but if you
+want to see an advanced Weber
+configuration video please let me know
+here you can also see the command to
+make screenshots on your railout desktop
+now all of the basic stuff is set up all
+that's left is to tweak everything to
+your liking as you can see setting it up
+on Nexus is extremely easy and you don't
+risk to break your system by replacing
+some important component because you can
+always roll back my advice is to leave
+your leftover desktop environment option
+set to true for now because if you are
+not sure which software you are going to
+need it will probably be there already
+and now my favorite part of the video
+the one where I tell you how thankful I
+am and mention the subscription thing
+this time I also want to tell you about
+the Discord server which I'm going to
+make as soon as we hit 1000 subscribers
+that's not an unbeatable goal I think
+but more of a reason for me to delay it
+a bit because I'm constantly busy make
+sure to leave a like comment and expect
+more videos about Linux and Nyx thank
+you again for watching and see you

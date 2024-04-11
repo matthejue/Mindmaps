@@ -1,0 +1,219 @@
+are you ready to take your Nexus
+experience to the next level in this
+video we'll dive into Nexus streaming
+you won't get a readily themed system
+but you will learn how to do it your way
+we will use many home manager options so
+make sure to check out the home manager
+video If you haven't seen it already
+as you probably already know there are
+two major toolkits available for
+creating graphical user interfaces on
+Linux gtk and QT gtk is used extensively
+on gnome while QT is used on KDE today
+we are going to take a look at theming
+both of them on Nexus using declarative
+methods let's begin by adding these two
+lines to our home manager configuration
+first one enables gtk and the second one
+enables QT
+unless you want to use a specific engine
+theming QT is very easy you can just
+select a name for your QT theme from the
+ones that are automatically detected or
+Define your own package
+gtk themes are more interesting though
+and we have many more options available
+you can change mouse cursor overall
+theme and icon theme each of them can
+take a package and a name
+if you want to have a more traditional
+approach or have multiple gtk themes
+that you want to switch between without
+rebuilding you can also Define these
+packages in home.file set usually user
+defined icons and cursors are stored in
+dot icons directory so we are going to
+link
+packages.bibata cursors share icons we
+bought a modern classic to icons Flash B
+button to ensure that bibata cursor's
+package actually contains the share
+icons bibata modern classic path you can
+use the command from previous video to
+build it locally and CD into it
+then you can use the following command
+to visualize all the icon packs provided
+by this package
+all cursor.theme files indicate that
+those are actually cursor themes
+now you have probably already noticed
+that groovebox Blues in my configuration
+does not come from packages that is
+because many of the themes are not
+packaged in these packages
+it is instead defined with Latin syntax
+at the top by importing it from the file
+in the same directory
+let's take a look at this
+groupboxplus.nix file to learn how we
+can package our own icons cursors and
+gtk themes
+the file itself takes a set with
+packages as a parameter and returns
+output of
+packages.stdn.make derivation
+make derivation Is An Almighty function
+that is used to build packages in pixel
+s all of the packages you see in Nix
+packages are built with it or similar
+language specific ones
+this derivation is quite simple though
+so let's go through all of the options
+and see what it does make derivation
+takes a set with many key value pairs as
+its only parameter name is just a name
+for our package and it doesn't matter
+much for this use case so feel free to
+name it whatever you like
+SRC defines a source path that will be
+used in the installation phase of our
+package later
+we will use the defaultpackages.fetch
+URL fetcher here and all it does is
+download our icon packs zip file and
+checks the shot 256 hash to ensure that
+everything went fine
+I've taken this URL from the git
+releases page of groupbox plus icon pack
+you can use any other icon pack that you
+prefer ok but how do I know the correct
+shot 256 hash the simple method is to
+first run it with a fake one and after
+it fails take a correct one from the
+error message
+but a better way to do it is using a
+package called NYX prefetch as the name
+suggests you can use it to pre-fetch any
+file and get its shahesh in this case it
+looks like this and then you just put it
+in shot 256 field
+to tell NYX that we don't want it to
+unpack our ZIP archive we use the don't
+unpack option
+the install phase Works similarly to
+right shell script bin function from the
+previous video except that it also
+executes the script to install our
+package in this context a couple of
+variables are also exposed for us the
+variable SRC is the path to the zip
+archive from the SRC and out is the path
+to the output directory of our
+derivation
+afterwards everything becomes simple we
+ensure that our directory exists using
+make dear P option and then we use the
+unzip packages binary to extract the
+content of the zip archive into our
+output directory and just like that we
+have successfully packaged an icon theme
+let's go back to our home manager
+configuration file
+you can of course use any theme you want
+but I've selected the packages.adw gtk3
+theme
+to showcase the amazing capabilities of
+modern gtk theming if you didn't know
+you can configure your gtk color scheme
+by editing a gtk.css file in gtk4
+in.config
+a similar thing exists for gtk3 but it
+is configured differently so to make
+things easier with ADW gtk3 you can just
+simlink your dot config dtk4 slash
+gtk.css dot config gtk3 gtk.css and you
+will have a beautifully colored advice
+theme with your preferred colors which
+you can even generate with Bible or NYX
+colors you can find my gtk.css file in
+the link in the description and here is
+how my setup looks this is groovebox and
+the window on the left uses gtk3 while
+the window on the right uses gtk4 as you
+can see it looks amazing and there is no
+difference in the theming of the two
+you can also customize the appearance of
+your display manager which is the login
+screen that you see when you turn on
+your system
+we'll take a look at sddm theming
+because of its Simplicity and a wide
+selection of available designs
+once again not many of them are actually
+packaged in NYX packages so let's
+package one ourselves
+create an sddm theme.nix file in the
+same directory where your
+configuration.nix is and let's make
+another derivation
+I've chosen to package sddm sugar
+darkseam but you can select any other
+one you like
+it's very similar to the previous one
+except this time we are using fetch from
+GitHub to download the entire GitHub
+repo it has a different required set of
+keys but getting those is as easy as
+running NYX prefetch kit and the repo
+name this command of course comes from
+NYX prefetch git package
+install face is also a tiny bit
+different because instead of extracting
+an archive we copy the contents of
+current directory which in this case is
+going to be our clone GitHub repo into
+the dollar out directory
+dollar route is of course are output
+directory and dash R flag here means
+recursive copying
+you can now import your sddm theme in
+configuration.nix and here are the
+required options that you need to add
+but let's go back for a moment I'm going
+to show you how you can spice the theme
+up a bit we can create a variable at the
+top that is going to fetch another file
+which can be some PNG pictures stored in
+your GitHub repo and now during the
+install phase we can actually replace
+our sddm background with our image with
+this simple batch commands this way you
+can edit all the themes to your liking
+and with some set commands even change
+color or layout elements ok now rebuild
+and restart to check if the theme is
+working if it doesn't you might need to
+add a couple of additional packages to
+your nixos configuration file just like
+I have added these for sugar Dark theme
+you should be able to find all of the
+required dependencies on themes
+repository or as the DM itself should
+tell you which ones you are missing
+here you can see the result with my
+favorite group Box Mountain Village
+wallpaper in the background
+there is a lot more to Nexus theming and
+it is impossible to fit everything in
+one small video so make sure to
+subscribe so you don't miss future
+tutorials and if you want you can visit
+our Discord server we already have over
+50 members there and it's genuinely a
+very cozy place
+I'd like to thank everybody who watches
+likes shares and subscribes without you
+I would surely have no motivation to
+continue making this video thanks again
+and see you in the next one

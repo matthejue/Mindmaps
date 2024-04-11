@@ -1,0 +1,670 @@
+hello everyone and welcome back to the
+channel uh today's discussion is going
+to be on how you can make your NYX
+config and set up more modular by
+writing and importing your own NYX
+modules so if you've been following
+along with the previous tutorials or
+even if you haven't been um you should
+at the very least have a
+configuration.nix file and a hardware
+configuration.nix file
+uh you may also have the flake. Nix and
+the home. Nix which technically those
+won't really be necessary for this
+tutorial but um they're there as well
+but in any case by default the default
+NYX OS setup includes two NYX OS modules
+and those two of course are the
+configuration.nix and the hardware
+configuration.nix now what's going on
+here if we open up the configuration.nix
+you'll see that there is this list at
+the top which is Imports and by default
+this
+file Hardware configuration.nix
+here is imported into this configuration
+now both of these files are NYX modules
+and what a nyos module is is technically
+just a function which accepts an
+attribute set of config and
+packages which is that's what's on the
+top
+here um So that's its input that's the
+argument to the function and then what
+it returns is an attribute set of
+configuration options like these options
+here about the bootloader and these
+options here about the shell and the
+environment and the host name and all
+this fun stuff it's this way for the
+configuration.nix and it's also this way
+for the home. ni if you're using home
+manager so using this idea you can
+imagine that you could take specific
+portions of your config and separate
+them out into different files and then
+it would be very easy to include all
+those files in an Imports list in your
+configuration. NX or your home. ni and
+then just comment out or uncomment the
+the specific modules that you want to
+activate for that particular system or
+at a given moment now the benefit of
+modularity is the ability to take
+specific things and sort of slot them in
+and out turn them on and off at a
+moment's notice or very quickly so do
+keep in mind that as you're thinking
+about these modules and you're writing
+your modules it's most beneficial to
+write modules or configurations or
+things that you would imagine yourself s
+turning off or on for particular
+circumstances now to show you a real
+world full-blown example of this just to
+see how crazy you can get we could take
+a look at my configuration which I'll
+have this Linked In the description Down
+Below in my configuration I have two
+directories
+actually I have a system directory and a
+user directory and within each of these
+directories are module files for my
+configuration.nix in the system
+directory and module files for my home.
+ni in the user directory essentially we
+have the system level or root level
+modules in system and the user level
+modules inside of user and just to
+explore one of these uh user is probably
+more
+interesting I have it further separated
+into various things like app bin
+Hardware Lang all these sorts of things
+um app for example has configurations
+for various apps like I have browser
+configuration I have my Doom emac
+configurations I have configuration
+options if I want to install and load
+gaming software onto my computer another
+one that is important is my WM Window
+Manager directory which has
+configurations for various things
+related to window managers like
+hyperland pycom xmonad and and of course
+more to come as I Explore More of the
+window managers and set them up in nyos
+so you can sort of get a sense that you
+can have tons and tons of these and then
+in your main configuration. NX or home.
+ni as I'll show you right here you can
+just import all of those modules and
+move them around switch them around as
+need be so on a technical level then how
+do we get this to work how do we write
+new NYX files that are proper NYX
+modules that we can import into the
+configuration. NX or the home. NX well
+before we do that we need to talk a
+little bit about the Nyx programming
+language itself and so the first thing
+that we really need to understand are
+functions and to do this I'm just going
+to write a random uh file called test.
+n um and you'll see by default um it
+puts in this this default NYX module
+setup for the file but NYX files need
+not be like that so if we just get rid
+of all of this in proper NYX OS you
+define a function by writing an
+argument then a colon and then an
+expression for the thing being returned
+now this obviously is not really going
+to work but that's sort of the structure
+so as a real example so let's say we
+wanted to write a function that takes an
+integer argument X and then it returns
+that number + one well we would write
+that by putting X colon because X is the
+argument and then anything after the
+colon is the return so that would just
+be the expression x + one now
+technically in NYX every function only
+accepts one argument we can't actually
+put multiple arguments into the function
+directly like we would in a language
+like python or C or JavaScript so in
+order to make a function that accepts
+multiple arguments there's two primary
+ways of doing that the first way which
+doesn't get used as often is something
+called currying so currying is where we
+write a function inside of a function so
+let's say we wanted to write a function
+that adds two numbers like X and Y
+well we Define a function that takes the
+argument X and then that in turn defines
+a function that takes an argument
+Y and all of this just gets turned into
+x + y so we have a function that takes X
+as an argument and that function is
+embedded in another function which takes
+y as an argument and then returns x + y
+now that's kind of weird so there's
+another way of defining functions that
+take multiple inputs and that is by
+passing a single input as an attribute
+set and then using all of the pieces of
+the attribute set in the return and that
+would look something like this X Y in
+the squiggly brackets to denote that
+it's an attribute set followed by the
+colon and then the actual thing to
+return like that and this is actually uh
+this is actually kind of like the
+structure of Nix module because in a
+nios module the input is an attribute
+set requiring config and packages as
+part of it but of course you can have
+more things in this as well like lib now
+if you're used to other programming
+languages a function like this is
+missing one key detail that you would
+see in other programming languages and
+that is a name in other programming
+languages like C python Javas script all
+those other ones the functions typically
+have names but this declaration is a
+function without a name meaning it is an
+anonymous function also called a Lambda
+but we don't necessarily have to keep
+this as a Lambda we can actually store
+the function in a variable of sorts and
+then call it so as with NYX whenever we
+declare a variable we have to declare it
+in a let binding so we could write let
+and then we can give a name to this
+function like add
+numbers so now add numbers is a variable
+which is defined as the function which
+accepts X and Y in an attribute set as
+an argument and then returns x + y so if
+we actually ran this in the expression
+add numbers and then passing in actual
+numbers for these variables like 2 for x
+and two for
+y running this will
+return 4 which makes sense because 2 + 2
+equal 4 one more trick that I want to
+mention because it may be useful to you
+later is when you're defining a function
+you can actually specify a default for
+one of the arguments for one of the
+inputs so say for example I wanted to
+specify the default
+y as I don't know four we would write y
+question mark 4 and what this means is
+if we call the function and pass X and Y
+inside of the attribute set it will
+evaluate like normal like we would
+expect again returning four but if
+instead we don't pass in y it'll still
+run just fine and it will use that
+default value 4 so in this case
+evaluating we will get six because 2 + 4
+equal 6 okay so so we'll take that idea
+that understanding there and go back to
+the actual nyos modules again in order
+to write a nixos module the file itself
+must be just a function that takes an
+attribute set containing at least config
+and packages inside of it and then it
+returns see after this colon it returns
+an attribute set itself which is why we
+have everything after the colon inside
+of the squiggly brackets so why don't we
+go ahead and actually write a nyos
+module um I'm going to do this for the
+home. NX but this will work this will
+work identically with the
+configuration.nix so to start we're
+going to make a new file I'm going to
+call this uh sh. ni or uh shell. n CU
+I'm going to write a bash and zsh
+configuration inside of this module file
+to be included in the home manager so as
+you can see in emac it automatically
+creates this for me uh but you would
+start with your argument here which is
+this attribute set containing at least
+config and packages I'm not going to use
+lib in this file so I'm just going to
+remove it for now and then the dot dot
+dot means accept anything else that does
+happen to come in but anyways that's our
+argument this attribute set and then
+it's going to return this attribute set
+here which is all the configuration
+options written between the squiggly
+brackets and so for this I'm just going
+to go back to the home. N that we were
+working on last time and copy in some of
+this configuration so
+I'll copy in this programs.
+bash and programs. CSH section like
+that and as we had last time I think all
+this is in a let binding so we're going
+to need all of this let binding stuff as
+well okay so there we are we have a uh
+sh or shell. NX module file the reason I
+didn't call it shell. NX by the way is
+shell. NI actually has a special meaning
+you write out the whole you know shell
+word so sh. n um for configurations for
+bash and zsh now if I wanted to include
+this in the overall configuration we
+have to Define imports in the home. ni
+which is a list
+so like so and then we would actually
+specify a path to the file do select
+.n then if we take what we have here uh
+you know by putting all of the bash and
+zsh configuration into this sh. n file
+and importing it into the home. N let's
+go over to the VM and rebuild it like
+that so we just go in
+here go to our files directory as you
+can see they're both here we have the
+home do NX which
+is importing the sh. N file and then we
+have the sh. N module with all of the
+configuration for the shell and stuff
+like that running this then we have home
+manager
+switch d-lake
+Dot
+and there we go that worked so now with
+the ability to do this if you find your
+home. n file or your config
+configuration.nix file getting
+excessively large you can just separate
+out different portions of your config
+into logical sections by taking that
+portion of the configuration and just
+sliding it into a new module file so at
+this point uh with adding new files and
+being able to control these options from
+different files there's a few common
+errors that you may see one of the first
+and most common examples is the file not
+found error and this actually only
+occurs if you are tracking all of your
+configurations with Git um and at this
+point I actually haven't done this for
+this tutorial so I'm going to do that
+right
+now okay so there we go everything's in
+a uh sort of dummy git repository now uh
+so if I made a sort of dummy
+file like I don't know um here we'll
+make test. NX again so there it is and I
+just write some random option like uh
+bash. enable equals true um there we go
+and then I try to import this so test. n
+into the main home manager file what
+you're going to see
+now is if we try to rebuild the system
+now and with this importing this test.
+NX we have home manager switch d-lake
+Dot uh it is going to uh error out and
+say no such file or directory and it is
+specifically complaining about the test.
+ni file uh but like what the heck if I
+run LS there it is right there test. ni
+what do you mean the file doesn't exist
+uh so what's really happening here this
+is not a bug it is actually a feature
+see if NYX detects that your
+configuration is stored in a git
+repository it will refuse to build
+anything using any files not at least
+staged to the the staging area in git
+and the reason for this is you could
+have your entire system built and
+configuration set up but then there's
+one key file that you forgot to add to
+the repo and commit and then when you go
+to reinstall from that repository uh the
+entire configuration would break break
+because you don't have access to that
+file so in order to solve this error all
+we have to do is add that
+file add it to the staging area and
+there we go we run the build command
+whoops wrong option uh it's programs.
+bash.
+enable and there we go we run the uh
+switch command and it will work so okay
+uh NYX knows that my files are in a git
+repo um is it going to build changes to
+existing files that uh haven't been
+committed or haven't even been staged uh
+the answer is yes it does actually build
+stuff um so like for example right now
+if I run get status um you will see that
+there's these unstaged edits to home. ni
+and test. ni uh but it will actually
+build those again running this command
+again the only thing that will happen is
+it will give give you a warning that the
+git tree is dirty if everything is
+staged and there's no unstaged edits or
+files or anything like that it won't
+give you this error but that's if you
+see this warning that's what that means
+okay so with that error out of the way
+here is another common error so going
+back to my host system here now that we
+can include configuration options from
+various files you might be wondering
+what happens if we write conflicting
+definitions for those options well let's
+find out so I'm going to write a uh
+another module let's call it um
+conflict.
+Nix we're just going to directly
+conflict with the option from test. Nick
+so instead of programs. bash. enable
+equals true we're going to just set it
+to
+false um and this is the option that
+would be uh telling NYX and home manager
+to build our bash RC for us so we go in
+we write that there into that new
+conflict. Nix module and then we import
+it herec conflict. ni and then we go
+back to the
+BM and of course we got to make sure
+that that file is at least staged so
+that it recognizes the file and now if
+we go into
+rebuild it is going to say the option
+programs. bash. enable has conflicting
+definition
+values so conflict. ni wants it to be
+false and test. ni wants it to be true
+and so there's a few ways of solving
+this error uh the first and most logical
+way is just not to write any conflicts
+into your configuration um however there
+are certain times where you actually do
+want to be messing around with the same
+Val value for an option in different
+files and in those cases you have to use
+priorities so in the error message it'll
+actually tell you a few functions you
+can use um like libm make force and libm
+default um there's actually even another
+one as well uh called libm make override
+and we're going to take a look at every
+single one of
+those so in NYX OS anytime that you set
+the value for an option you're also
+giving a priority to it now the priority
+is just a number it's kind of like your
+place in a race if you have a lower
+number for your priority then that takes
+precedent like first place would take
+precedence over second place now taking
+a look at some of those functions that
+we have there uh they do use the lib
+part of Nick's packages U because it is
+lib do make default for
+example so in order to run this function
+you must include lib as an argument for
+the Nyx module but if we wrote it like
+this this is using the lib doake default
+function essentially what we're saying
+here is this is the default value I want
+you to use but if it's declared
+somewhere else then use that so this is
+saying make the default false but if
+it's declared somewhere else like
+for example test. NX it's declared true
+then take that as a higher priority if
+you want to get technical uh libm
+default sets a priority value of 1,000
+so this is almost never going to happen
+unless it's not declared anywhere else
+so with this written here going back to
+the
+VM we can
+rebuild and it should build now there we
+go and and if we go back here and we
+list out all of our files here um you
+can
+see that the bash RC is a Sim link to uh
+the home manager files um so bash.
+enable equals true is definitely
+happening here
+meaning the value here took priority
+okay so uh why don't we try uh li. make
+force so uh live. make force that's sort
+of trying to force the option to a
+particular value and so this actually
+sets the priority all the way down to 50
+so that's a lot more likely to actually
+set the value over other things so let's
+try running this one and see what
+happens so here we go
+um so in this case you will see if we
+run the ls uh command again uh you will
+notice that there is actually no bash RC
+anymore and the reason is that we forced
+the value of enabling bash uh you know
+enabling the generation of the bashrc to
+false so it it overrides the value that
+we specified in test. Ni so in this
+normal declaration programs. bash.
+enable equals true without using li.
+make default or li. make force this
+actually gives a priority value of
+100 so make force will override this
+normal declaration make default will be
+overridden by a normal declaration um so
+the order here is uh libm make default
+is least likely to be set just setting
+it like normal and then li. make force
+is most likely to be set so what if
+you're crazy and you have uh you know 10
+or 20 different module files that all
+interact with the same value and that
+may want to set it to slightly different
+things and different for different
+circumstances in that case you may want
+to try the make override function so in
+this case here if we wanted to specify
+an arbitrary priority value like I don't
+know 20 or something we could call make
+override and then give the priority
+right after it so that would be a
+priority of 20 so even more powerful or
+more precedent than make force and if we
+ran this inside of the
+VM that's going to
+again that's going to again ensure that
+that value that we set with the override
+is what it is actually set to again
+false meaning that there is no bash RC
+created by home manager one more example
+then if we set this to 200 the value
+specified in test. NX has has a priority
+of 100 and the value specified in
+conflict. Ni has a priority of 200 so
+100 has higher presidents in this case
+we go in and rebuild
+it now we should be seeing the actual
+bash RC pop up again there it is because
+it has a higher priority it is taking
+precedence over the false that we
+specified in conflict. net again you can
+use these ideas this these functions
+with priorities and all that stuff with
+any option in NYX Os or home manager and
+the tool that I use again to explore
+these options is my nx.com and we can
+search again for any option sort of like
+this here's the bash options and any of
+those could be set using these
+priorities essentially now another
+really useful trick or well it's not
+really a trick it's uh it's more of just
+a useful thing um is is going even
+further with this idea of defining the
+same option in more than one file if
+you're defining an option that is an
+attribute set or a list it will actually
+automatically merge which is super super
+helpful so the best example of this is
+with your environment. system packages
+in the configuration.nix or the home.
+packages in home.
+N so if I just get rid of these real
+quick
+home. packages is a list it's a list of
+packages so in this case we have just
+packages. hello we going get rid of this
+stuff just that's a little bit more
+readable and so now here we could of
+course include a list of packages so
+like maybe I want um W get maybe I want
+curl maybe I want vim and the brave
+browser there we go if we want to
+shorten this we can use a with statement
+actually um so if you've seen this
+somewhere uh if we write with packages
+before the definition of the list uh we
+can actually remove the packages Dot and
+this will work but in any case the idea
+here is we defined home. packages here
+with some base packages to install with
+this home. ni but we could go to some
+other arbitrary NYX module and redefine
+this home. packages list again so for
+example I could make a module called
+hyper.
+Nix and inside of this hyperland NX file
+I can Define home. packages again so
+home. packages equals with packages and
+then the list and I'm just going to take
+this from my notes real quick here those
+are all the packages that I want to go
+with hyperland
+now if I go ahead and import
+this hyperland ni file there's not going
+to be any sort of conflict between the
+home. packages in home. Ni and the home.
+packages in hyperland Nix um it's not
+going to you know error out and say oh
+you defined home. packages in both
+places they're different no what it
+actually does is it performs a merge so
+in the final configur ation it will set
+home. packages to include all five of
+these packages and all of these packages
+which is really handy you could imagine
+then that if you have other window
+manager setups or other configurations
+like for example I have a xmonad config
+that I don't really use anymore but it's
+there I could make another module like
+xmonad NX grab the packages that I like
+to have on xmonad
+put them in there and just have these
+modules sitting at the top here if I
+actually tried to run this by importing
+both of them I probably would get some
+kind of error because some of these
+packages especially some of them
+relating to xorg and Wayland can't
+really be installed alongside of each
+other because they have conflicting
+binaries but in any case if I wanted to
+switch between xmet and hyperland
+packages I could just comment out one of
+them and leave the other one there it's
+the same exact thing for all of the
+configuration options and while this
+isn't quite yet the tutorial on how to
+actually fully set up hyperland within
+nyos I will make that tutorial sometime
+but all of the options that you would
+want to include all of the configuration
+options for hyperland you could put in
+the hyper. N file and all of the
+configuration options for xmonad you
+could put in this file and if you have
+more modules like kd. ni or gnome. n or
+whatever you can set up the
+configurations independently and only
+call one of them at a time so I hope
+this discussion was uh understandable uh
+I I know it was a little uh esoteric uh
+here and there there wasn't a lot of um
+practical you know just do this this and
+this um so sort of your uh your homework
+assignment for this lesson uh is start
+making a list of modules of uh bits and
+pieces of configuration that you may
+want to start writing modules meaning
+chunks of system configuration that I
+might like to turn on and off here and
+there or mix and match or things like
+that if you'd like some inspiration for
+different kinds of modules um I've gone
+a little bit insane with
+mine um all of my modules for different
+configurations are in my DOT files again
+linked Down Below in the user and system
+directories I have tons and tons of
+these for various random things um I
+probably have too many but that's the
+way I like my system I make it a big
+Swiss army knife essentially one more
+note to keep track of um as you've
+probably already noticed and figured out
+um if you installed home manager using
+the Standalone installation method like
+I have the modules do have to sort of be
+separate like I have them separated in
+the system directory and the user
+directory but other than that come up
+with a list of these modules map out
+different ideas for configuration of
+your system and then go ahead and try
+actually writing those NYX modules
+embedding options and packages which you
+can search up using my ni.com or taking
+inspiration from other people's configs
+and once you have a few of these modules
+together you'll have a setup that you
+can call your own with these modules
+that you can shift around turn on and
+off and uh so on and so on in my next
+tutorial with nyos we're going to extend
+this modularity even further by creating
+custom options and learning how if else
+statements work inside of nexx which can
+be very powerful for making decisions
+and having certain parts of your
+configuration conditionally appear
+according to certain circumstances or
+other configuration options so anyways
+uh if you like this video please leave a
+like on the video If You disliked it
+please leave a dislike and let me know
+what I can improve on uh next time as
+always uh have a great rest of your day
+and see you next
+time

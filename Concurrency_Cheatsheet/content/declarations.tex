@@ -25,12 +25,17 @@
 % ┌───────┐
 % │ Boxes │
 % └───────┘
-\DeclareTotalTCBox{\inlinebox}{ s m }
-{verbatim,colback=PrimaryColorDimmed,colframe=PrimaryColor,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
-  right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
-{\IfBooleanTF{#1}%
-{\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}#2}%
-{#2}}
+% \DeclareTotalTCBox{\inlinebox}{ s m }
+% {verbatim,colback=PrimaryColorDimmed,colframe=PrimaryColor,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
+%   right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
+% {\IfBooleanTF{#1}%
+% {\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}#2}%
+% {#2}}
+
+\DeclareTotalTCBox{\inlinebox}{ m }
+{standard jigsaw,sharp corners,opacityback=0,colframe=SwitchColor,nobeforeafter,tcbox raise base,boxrule=0.01cm,top=0mm,bottom=0mm,right=0mm,left=0mm,boxsep=0cm}
+% ,arc=0cm
+{#1}
 
 \DeclareTotalTCBox{\key}{ m }
 {verbatim,colback=PrimaryColorDimmed,colframe=PrimaryColor,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
@@ -70,9 +75,11 @@ enhanced,colframe=PrimaryColor,colback=PrimaryColorDimmed,hbox,,fonttitle=\bfser
 % │ Paths │
 % └───────┘
 % \newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_1_Master/Hardware_Security_and_Trust/slides/Slides annotated/Hardware_Security_and_Trust_all_in_one.pdf:#1}{\inlinebox{#2}}}
-\newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/Concurrency_all_in_one.pdf:#1}{#2}}
-\newcommand{\lecturenotes}[2]{\href{opentext:#1}{#2}}
-\newcommand{\scriptnotes}[2]{\href{openpdf:#1:1}{#2}}
+\newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/Concurrency_all_in_one.pdf:#1}{\inlinebox{#2}}}
+\newcommand{\lecturenotes}[1]{\href{opentext:#1}{\inlinebox{Lecture Notes}}}
+\newcommand{\exercisenotes}[1]{\href{opentext:#1}{\inlinebox{Exercise Notes}}}
+\newcommand{\additionalslides}[1]{\href{openpdf:#1:1}{\inlinebox{Additional Slides}}}
+\newcommand{\solution}[2]{\href{opentext:#1}{\inlinebox{Solution #2}}}
 
 % /home/areo/Documents/Studium/Semester_2_Master/Concurrency/exercises/lec-01-exercises/01a.MutexWithBuffer.go
 % /home/areo/Documents/Studium/Semester_2_Master/Concurrency/exercises/lec-01-exercises/01b.MutexWithoutBuffer.go

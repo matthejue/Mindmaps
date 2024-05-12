@@ -8,7 +8,7 @@
 \fontsize{3pt}{3pt}\selectfont
 
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{General} \script{1}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_17_lecture_1.md}{Lecture Notes}
+	\fbox{General} \script{1}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_17_lecture_1.md}
 	\begin{betterlist}
 		\item \underline{keywords:} Rob Pike, Static type system, Higher-order functions, Garbage collection, Object orientation through type interface (no classes but methods can be attached to types), Support for concurrency and communication (Lightweight threads, Communication through channels with formal foundations: Communicating Sequential Processes, Philosophy: \enquote{Do not communicate by sharing memory. Instead, share by communicating})
 	\end{betterlist}
@@ -25,7 +25,7 @@
 		\item  \verb|go expression| starts a new thread to run \verb|expression|. \verb|expression| must be a function call or a method call; it cannot be parenthesized. The new thread executes concurrently to the following statements. Threads may run interleaved or on different CPUs (managed by the run-time system). As soon as the main thread terminates, all threads started by the main thread are terminated. Go calls threads \alert{goroutines}, other languages use \verb|fork| or \verb|spawn| instead of go
 		\item the \verb|=| operator is used for assignment to already declared variables, while \verb|:=| is used for declaring and initializing a new variable
 	\end{betterlist}
-	\fbox{Terminology} \href{https://wiki.haskell.org/Parallelism_vs._Concurrency}{Source} \href{https://go.dev/tour/concurrency/11}{Source 2}
+	\fbox{Terminology} \href{https://wiki.haskell.org/Parallelism_vs._Concurrency}{\inlinebox{Source}} \href{https://go.dev/tour/concurrency/11}{\inlinebox{Source 2}}
 	\begin{betterlist}
 		\item \underline{Concurrency versus Parallelism}
 		\begin{betterlist}
@@ -144,9 +144,9 @@
 		\end{betterlist}
 		\item \script{18}{Example}
 	\end{betterlist}
-	\fbox{Mutex} \script{20}{Exercise Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_19_tutorial_1.md}{Exercise Notes}
+	\fbox{Mutex} \script{20}{Exercise Slides} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_19_tutorial_1.md}
 	\begin{betterlist}
-		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01a.MutexWithBuffer.go}{Solution 1a}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01b.MutexWithoutBuffer.go}{Solution 1b}
+		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01a.MutexWithBuffer.go}{1a}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01b.MutexWithoutBuffer.go}{1b}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
@@ -199,7 +199,7 @@
 	\end{betterlist}
 	\fbox{Mutable Variable} \script{21}{Exercise Slides}
 	\begin{betterlist}
-		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02a.MVarWithBuffer.go}{Solution 2a}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02b.MVarWithoutBufferNoAnswers.go}{Solution 2b}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02c.MVarWithoutBuffer.go}{Solution 2c}
+		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02a.MVarWithBuffer.go}{2a}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02b.MVarWithoutBufferNoAnswers.go}{2b}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02c.MVarWithoutBuffer.go}{2c}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
@@ -255,7 +255,7 @@
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{Channels of Channels} \script{23}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_24_lecture_1.md}{Lecture Notes}
+  \fbox{Channels of Channels} \script{23}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_24_lecture_1.md}
 	\begin{betterlist}
 		\item \verb|var ch chan (chan int)|. A channel that accepts channels of integers
 
@@ -399,7 +399,7 @@
         %\end{noindent}   }
 		}
 	\end{betterlist}
-  \fbox{Where it can all go wrong} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}{Exercise Notes}
+  \fbox{Where it can all go wrong} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}
 	\begin{betterlist}
 		\item \alert{trace:} is a sequence of events and expresses the interleaved execution of individual threads
 		\begin{betterlist}
@@ -453,10 +453,10 @@
           %\end{noindent}   }
 			}
 			\item \script{52}{Reordering and data races}
-      \item \scriptnotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/ilias01_answers.pdf}{Ilias exercise solution}
+      \item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/ilias01_answers.pdf}{Ilias Quiz 1}
 		\end{betterlist}
 	\end{betterlist}
-	\fbox{Lists} \script{56}{Exercise Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_26_12_16_11.md}{Exercise Notes}
+	\fbox{Lists} \script{56}{Exercise Slides} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_26_12_16_11.md}
 
 	\adjustbox{scale=0.5}{
 		% \begin{noindent}
@@ -474,7 +474,7 @@
 	}
 	\begin{betterlist}
 		\item lists in Go are \alert{heterogeneous}. That is, when one takes an element from the list, one needs to cast its type explicitly
-		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/03.publishSubscribe.go}{Solution 3}
+		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/03.publishSubscribe.go}{3}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
@@ -602,12 +602,12 @@ func signal(qsem *QSem) {
     %\end{noindent}   }
 	}
 	\begin{betterlist}
-		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem1.go}{Solution 4.1}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem2.go}{Solution 4.2}
+		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem1.go}{4.1}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem2.go}{4.2}
 		\item mechanism with queues unnecessary, because in go blocked senders and recipients on channels are ordered and unblocked in order. Implementation does not need to keep track of which thread exactly is waiting, because we already know that threats themselves already know they're waiting. All we need to track is that there are threads waiting. Instead of using lists of mutual exclusions to indicate unblocking, one simply uses a single mutex for unblocking waits ans signals and keep track how many are waiting. lock on mutual exclusion, meaning that the first signal that called unlock will be unlocked and be done
 	\end{betterlist}
 	\fbox{Examples for Deadlocks, Livelocks and Starvation via Traces}
 	\begin{betterlist}
-		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/05.sleepingBarber2.go}{Solution 5}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/06.diningPhilosophers.md}{Solution 6}
+		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/05.sleepingBarber2.go}{5}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/06.diningPhilosophers.md}{6}
 
       \adjustbox{scale=0.5}{
         % \begin{noindent}
@@ -661,7 +661,7 @@ func signal(qsem *QSem) {
       %\end{noindent}   }
 	}
 	\begin{betterlist}
-		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/07.SantaClaus.go}{Solution 7}
+		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/07.SantaClaus.go}{7}
 		\item Santa gives priority to the reindeer in the case that there is both a group of elves and a group of reindeer waiting.
 	\end{betterlist}
 

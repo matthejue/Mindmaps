@@ -1,0 +1,117 @@
+NYX and ns are all about automation of
+installing tools and components required
+for your system but the very first step
+of installing anything is downloading
+and so in this video we will learn about
+many ways NYX allows us to fetch stuff
+from the internet the most basic way to
+fetch anything is of course to use fetch
+URL it is a simple function provided by
+NY packages and it takes a set as its
+only parameter this set must contain a
+URL of whatever you want to download and
+a hash that is used to verify the
+Integrity of hatched content this hash
+can be very easily determined using one
+of the scripts from NYX prefet scripts
+package run this command with a link to
+your file as the first parameter and it
+will download it into the nyck store to
+determine the hash now we can add the
+hash to the fetch URL function and
+successfully evaluate it it can be used
+to download sources for derivations
+template config files for home manager
+and files required to run your scripts
+just a reminder that Source in all three
+examples is the path to our content
+downloaded to n store if you don't want
+to use prefet script you can simply
+evaluate the function with a fake hash
+either by using something random that
+resembles it or with packages. li. fake
+has which will do it for you then you
+can use correct hash which will get
+thrown at you in the error message
+direct links can only get you so far
+though because sometimes you want to fet
+stuff from GitHub gitlab and other GTH
+hosting Services just using the project
+page links will obviously result in the
+HTML page being downloaded we can
+instead use a regular fute function or
+one of the various special functions for
+each each one of those services and the
+easy way to find the one that you need
+is to use an URL which given the link to
+any repo returns you the fch function
+with the correct hash and all other
+attributes already set all right we can
+now catch anything from the internet but
+when we need an even simpler and
+efficient way to do something who comes
+to save the day of course NYX flakes as
+if you expected something else not only
+do NYX flakes give us an easy way to
+fetch other flakes but they also allow
+us to download any other files and repos
+by adding a flake equals false attribute
+to an input we essentially turn it into
+a regular fetching function but with one
+special feature it hash is managed by
+Flakes and saved in flake. loock meaning
+we can use it right away without
+worrying about any additional steps if
+you want to try fetching something this
+way you can use this example NYX flake
+which you can find in the link in the
+description NYX flakes use a very simple
+URL like syntax capable of fetching
+other flakes G repos files and even
+relative fast The Familiar syntax for
+downloading G repos includes repo owner
+name of the repo and Branch or commit
+last part is obviously optional and you
+can also use this syntax with other
+similar services like gitlab or Source
+Hut regular HTTP links work similarly to
+fetch URL but they are automatically
+unpacked if they are identified as
+archives you can avoid that by adding a
+file Plus in the beginning of the URL
+making sure that you always download a
+file you can even fetch bypass here
+which interestingly enough can be Global
+it will only be evaluated if set pass
+exists so be extra careful with this one
+this video was pretty small and it did
+not have anything that we did not talk
+about on the channel previously I just
+wanted to make a separate one dedicated
+to fetching only taking advantage of the
+moment I'd like to wish everybody a
+Merry Christmas and happy Winter
+holidays I've been making videos more or
+less consistently for half a year now
+and I'm really excited to improve the
+video quality in the coming year and now
+I'd like to thank the sponsors of this
+video specifically Hoskin Linux rocks P
+easy not not Yi kinzoku Stefan schroer
+Magi 00 lassus 0x mouthless Thomas
+Thomas Brown aiding bonder heading
+kouser Cameron G cyber yo friend Uncle
+Pimon Master how to learn Xavier Oakley
+cord and the people who supported the
+channel previously thanks to all of
+these generous donations we managed to
+complete the goal on coffee so I
+purchased a nice ultra white monitor
+which finally allows me to see both
+video and code for it at the same time
+as usual don't forget to check out our
+Discord server leave a like or comment
+if you enjoyed this video or subscribe
+if you are feeling extra generous thanks
+for watching and I will see you in the
+next one

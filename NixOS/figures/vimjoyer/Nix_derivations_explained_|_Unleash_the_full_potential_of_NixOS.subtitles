@@ -1,0 +1,167 @@
+derivation a single most important next
+concept is a set of instructions that
+describe the build process of a package
+these instructions are used to create
+all of your system packages in a
+declarative and reproducible way we've
+already looked at the most basic
+derivations in the next steaming video
+but today we'll have a closer look at
+how to work with them let's begin by
+making the most basic derivation for a
+simple C plus plus hello world program
+I'll show you how to build it both with
+Flakes and without but for now let's
+assume that we have this project
+directory it contains SRC with our hello
+world.cpp obviously to build this
+program regular Linux way we would have
+to see the into it and run this command
+but to explain these to Nyx let's make
+use of the default.nix file which will
+return an output of a make derivation
+function make derivation is located in
+stdm so we have to get that from
+somewhere we could make a packages
+variable at the top with Latin in syntax
+and import our systems next packages
+that is cool but an even cooler solution
+would be turning this file into a
+function that takes a set with packages
+and in case packages are not provided
+uses the system once this way we can
+build the package with NYX build or
+included in some other NYX expressions
+like a fake for example by creating a
+regularflake.nix file and importing it
+in the default systems package key of
+our output
+you could also skip the default.nix file
+altogether and Define the function here
+this flake package can now be built with
+a NYX build command without a dash
+anyway our make derivation function
+takes a set with some required Keys such
+as name of our package which is Hello
+World in our case SRC which is the
+source for the package we'll just put
+dot slash SRC here because we want to
+use the entire SRC directory and there
+are also a bunch of optional Keys some
+of which we are going to take a look at
+the derivation has multiple phases which
+are essentially just bash scripts that
+it runs to unpack build or install the
+package let's define the build phase for
+this package it assumes that we are
+already in the SRC directory so all we
+have to do is run G plus plus command to
+get a compiled binary but that's of
+course not enough we want to add an
+install phase to tell NYX that we want
+user to be able to execute the binary
+all Nexus packages store their
+executable binaries in the out slash bin
+directory so we first make sure that it
+exists by running
+mkdir-b dollar out slash bin whoa whoa
+what is dollar route I hear you ask it
+is a regular bash variable exposed to us
+by NYX it is going to be turned into a
+final path to our package when we build
+it so mkdir Dash p out slash bin
+essentially becomes this very long Nick
+store path we are still in the source
+directory so we can now use CP command
+to copy our hello world binary into
+Outsource pin however to be explicit we
+could also write it like this the SRC
+variable expands into path to our SRC
+directory once it gets copied into the
+next store to be built we can now run
+the next build command to build our
+package and symboling it into the
+current directory from the next store
+here is the project structure after
+build
+if you don't specify a build phase NYX
+will attempt to use a make file from The
+Source directory so let's try to remove
+it create this simple make file and
+rebuild the package once again
+everything will work of course you
+probably won't just be making
+derivations for C plus plus programs
+without any libraries so to add runtime
+dependencies to our derivation we use
+the build inputs key let's modify our c
+plus program to use the ncursis library
+and add it to our derivation we will
+also modify the build command and boom
+the derivation is working as expected
+but let's say for example that we wanted
+to package a C plus plus program that
+invokes a cow say command for this to
+work the cow say binary needs to be
+available in the past just as if it was
+installed on the user's machine to
+achieve this we can use the make wrapper
+package which provides a wrap program
+program that lets us put other binaries
+inside batch scripts with specific
+environment variables we could put it in
+build inputs but a better place for it
+would be native build inputs packages
+defined here will only be available in
+your phases and not at runtime now we
+can add a post-fix subface and using
+this command Define a path variable that
+will only be set for the hello world
+binary but it doesn't even have to be
+called the post fix up phase because we
+can Define our own list of phase names
+making it a bit clearer especially if
+you are just learning to use derivations
+the packages.lib dot makebinpath will
+expand into a regular Linux pathway repo
+containing all the packages provided to
+it so in our case on the cow say let's
+now build their package and check it out
+the wrap program command from the last
+phase has moved our binary into dot
+hello world slash wrapped and hello
+world is now A bash command that wraps
+it containing Cow Say in the path if we
+run it cow say will be executed just as
+expected even though it's not present in
+our user's environment
+of course depending on the language the
+build process and runtime dependencies
+can be drastically different
+if you are using golang or rust you
+should check out the build and runtime
+dependencies on Nick's Wiki or use
+language specific packaging functions
+like build rust package oh yeah how am I
+checking out bats derivation Nicks file
+you can use an X edit command followed
+by a NYX packages sharp package name or
+just use
+search.nixos.org to check the Nix files
+of packages in next packages but beware
+because those are already part of Nyx
+packages they don't follow the structure
+shown in this tutorial but rather import
+everything separately
+even then you can still learn from them
+and this is probably the best way to do
+it just find a program written in your
+favorite language and take inspiration
+from it there is so much more to next
+derivations but I hope that this video
+gave you enough basic knowledge to
+experiment more on your own and learn
+from it as always don't forget to check
+out our Discord server and thank you so
+much for watching liking and subscribing
+I hope to see you in the next one

@@ -1,0 +1,12 @@
+# Timestamps
+- \newcommand{\scriptvimjoyernixosintoaflake}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Move_your_NixOS_into_a_Flake!.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyernixosintoaflake}[2]{\href{https://youtu.be/rEovNpg7J0M?si=h_45jKXOk8wNZsVb&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Move_your_NixOS_into_a_Flake!.md" "" vimjoyernixosintoaflake vimjoyernixosintoaflake
+- 00:00:38 \scriptvimjoyernixosintoaflake{1}{}
+- 00:00:58 \scriptvimjoyernixosintoaflake{2}{}
+- 00:01:32 \scriptvimjoyernixosintoaflake{3}{last time nixpkgs.legacyPackages}, but now also allowUnfree option, instaed import nixpkgs and inherit system type
+- 00:01:57 \scriptvimjoyernixosintoaflake{4}{inherig system so don't have to change old config file}
+- 00:02:04 \scriptvimjoyernixosintoaflake{5}{referenced relatively to flake.nix file}
+- 00:02:30 \scriptvimjoyernixosintoaflake{6}{}
+- 00:02:39 \scriptvimjoyernixosintoaflake{7}{}
+- 00:02:47 \scriptvimjoyernixosintoaflake{8}{}

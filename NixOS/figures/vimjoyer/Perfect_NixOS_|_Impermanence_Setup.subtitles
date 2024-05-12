@@ -1,0 +1,253 @@
+there are many reasons for someone to
+start using nixos whether it's the
+ability to synchronize your setup
+between multiple machines or easily roll
+back to a working version of your system
+but the thing we all have in common is
+we all want to create Hustle free
+systems that are easy to set up and
+reproduce and while just using NX
+already gets us almost all the way there
+there's still a couple of ways we can
+further improve your regular NX setup
+and so today we are going to use discod
+declarative Disk Management tool along
+with NSM permanence module to set up a
+system which gets wiped out route on
+every startup only keeping files and
+directories you declared allowing you to
+freely experiment with your system
+without worrying about program State
+polluting your drive it will also force
+you to declare all settings you want to
+retain ensuring that you never forget to
+include that one file in your
+configuration which obviously makes your
+system easier to reproduce the only
+thing you need before we start is either
+a USB stick with NX installer or an
+installer ISO image loaded into AVM so
+without further Ado let's begin and the
+first thing we want to do is close the
+official installer and open a terminal
+we'll do everything manually today and
+most of the commands will require root
+access so run sudo Su to log in as root
+user for our convenience we can also run
+NYX shell DP with your preferred Text
+Editor to temporarily borrow it from the
+Nyx store next thing we want to do is
+figure out which disc we want to use for
+the setup run lsblk command and as you
+can see it is vda for me but could be
+SDA or nvme Zer for you now we can
+download a special disco configuration
+with this command and check it out with
+your preferred text editor this disco. n
+file is structured very much like a n
+module and you will see why in a moment
+it defines a function that takes device
+name as a parameter and then formats it
+with all of the options defined below we
+will eventually pass our disc from lsblk
+here but for now let's go through it and
+see what it actually does here we Define
+our regular GPT partition table which
+includes partitions for booting with
+bias in DFI 4 GB swap partition and a
+root partition which takes the rest of
+the space our root partition is managed
+with lvm or logic iCal volume manager
+and it references a volume group called
+root VG this volume group is also
+defined in this file and if you scroll
+down you'll see that it only contains
+one volume named root where we create a
+better FS file system with a bunch of
+sub volumes if you don't know these sub
+volumes work just like regular
+directories but have their very own file
+trees allowing us to mount them anywhere
+we want here we are defining a sub
+volume named root which will get mounted
+at Route and eventually wiped on every
+startup persist sub volume which will
+get mounted at persist directory
+independently from Route and of course N
+Sub volume mounted at n stores location
+n has only need SL n and/ boot
+directories to successfully construct a
+working Linux system and with a setup
+like this we can preserve SL boot NYX
+store and all persistent data and then
+new cruit allowing Ness to basically
+heal itself now we can close the file
+and run the following command to format
+our dis with it make sure to pass your
+disk name with this D Das AR flag and
+afterwards run lsblk command again to
+see that our disc got partitioned
+correctly
+these sub volumes are now mounted at/
+MNT of the installer and we can run this
+command to generate configuration. n and
+Hardware configuration. n files notice
+that we are using-- no file systems flag
+here because this Cod n file we just
+used can also be imported into our
+configuration as a module it will handle
+all file system related options for us
+making this setup that much more
+portable let's move it from TMP to all
+other config files at mn/ NIS where we
+can import it at the top of
+configuration. n file
+but the only problem is none of the
+options from it exist in the regular nxs
+configuration so we also need to import
+disco module itself we can do it by
+fetching it from GitHub right here or an
+even better way is of course to use a
+flake you can make your own flake with
+required inputs or run this command to
+initialize a flake that I made
+specifically for this video it includes
+a bunch of inputs we need like disco
+itself as well as home manager and
+impermanence which we can uncomment a
+bit later this module is now imported at
+the bottom as well as it's config file
+which you can move here or leave in
+configuration. N just make sure to pass
+your dis to it next thing we want to do
+is go back to our configuration. n and
+include code responsible for wiping our
+device it might look complicated so
+let's go over it step by step here we
+are defining series of commands that
+will be run on every startup once all
+devices are ready to be used at first we
+are creating a temporary directory and
+mounting our better FS file system on it
+then making sure that it got mounted
+correctly and moving root sub volume
+into old roots with its new name being
+current time as you can see we are
+actually backing up our old roots here
+so even if something goes wrong you can
+still revisit them the only problem is
+they will eventually clutter our drive
+so next we are defining a function that
+will delete sub volumes recursively and
+running it on all root copies that are
+older than 30 days after that we are
+simply creating a new root sub volume in
+place of the one we just moved since we
+are now wiping our drive we also want to
+define a user with initial password so
+it won't get deleted with the rest of
+our system in in future you could manage
+its password with sop sneakes use hashed
+password or just persist it we haven't
+implemented impermanence yet meaning /c/
+ni will also get deleted for now let's
+back it up in persist and we can move it
+back once we are finished in the end
+this is how your mn/ et/ n should look
+like and you are finally ready to run n
+install command don't forget to adjust
+your configuration. n file according to
+your preference by adding your preferred
+desktop environment or Window Manager
+then run the command wait for it to
+finish and restart your system if
+everything goes right you'll be once
+again put into your preferred desktop
+environment and ready to continue
+setting up our system we could finish
+our n configuration before installing
+our system but I think it's better to do
+everything rally and now is the perfect
+time to check if everything is working
+let's try to create a test file in the
+root directory and after rebooting our
+system you will see that it's gone
+perfect so our next problem is we are
+getting rid of some pretty important and
+harmless state that you'd probably
+rather keep between reboots I'm sure you
+don't want to set up Wi-Fi networks or P
+Bluetooth devices every time you turn on
+your PC so to address this issue let's
+use NX as impermanence impermanence
+provides us with amazing nixus and home
+manager modules that let us choose what
+files and directories we want to keep
+between reboots it specifically requires
+you to have a root file system that gets
+wiped out on every reboot just like the
+one that we made right now enabling
+impermanence for nest is super simple
+just open your flake. n file include it
+at the top and import its module let's
+also enable home manager while we're at
+it because it also lets us seamlessly
+persist data in our home directory open
+your configuration. n where we now have
+access to a special option called
+persistence which defines files and
+directories we want to keep the path at
+the top specifies a persistent directory
+where our state will be backed up and
+these files and directories down there
+are just your regular Global pass I will
+add/ s/ Nest there because I want to
+move my Nest configuration there we also
+want to enable this needed for boot
+option for our persistent sub volume
+because in permanence won't let us boot
+without being able to mount all of its
+files and directories we can now rebuild
+and restart our system copy our niiz
+configuration to// n and reboot again to
+see that it stays there even after route
+gets wiped very nice and now our final
+optional but very useful step is to
+enable home manager impermanence module
+you don't have to do it since s module
+can also back up your home directories
+but configuring home manager modules
+along with their persistent data in the
+same files is very convenient let's
+enable home manager for our user and
+enable this option because home manager
+impermanence won't be able to mount its
+directories without it now create a
+home. n file and we can simply use
+persistence option there notice that the
+only difference here is that we are
+specifying a different backup directory
+at the top so two impermanency with each
+other rebuild your system and just like
+that your perfect setup is complete you
+choose what to keep and all of the
+garbage pollut in your home directory is
+no more just make sure to put your stuff
+in directories with specified and may
+your system serve you until you're try
+fails or Beyond and now I would like to
+thank the sponsors of this video
+specifically Hoskins PE easy aing B
+punder not nut Yi Xavier Albert C Pat
+3en adila Stefan schroer Magi 0000 ZX
+mouseless matis gimo cyber VOD Rose
+Bradley Davis Uncle Simon Master how to
+learn slim
+5782 chai Borg Liam creamers and of
+course the people who supported the
+channel previously as usual don't forget
+to check out our Discord server leave a
+like or a comment if you enjoyed this
+video or subscribe if you are feeling
+extra generous thanks for watching and
+I'll see you in the next one

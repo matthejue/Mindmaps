@@ -1,0 +1,15 @@
+# Timestamps
+- \newcommand{\scriptvimjoyercustomhomemanagermodules}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Custom_NIX_Home_Manager_Modules_For_Personalized_Setup.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyercustomhomemanagermodules}[2]{\href{https://youtu.be/EUiXzX7nthY?si=axS5kTb4l7tgrU1s&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Custom_NIX_Home_Manager_Modules_For_Personalized_Setup.md" "" vimjoyercustomhomemanagermodules vimjoyercustomhomemanagermodules
+- 00:00:40 \scriptvimjoyercustomhomemanagermodules{1}{add personal module}
+- 00:00:46 \scriptvimjoyercustomhomemanagermodules{2}{creates shell script in a home-directory which uses swww to change wallpaper}
+- 00:01:21 \scriptvimjoyercustomhomemanagermodules{3}{}
+- 00:01:41 \scriptvimjoyercustomhomemanagermodules{4}{}
+- 00:01:45 \scriptvimjoyercustomhomemanagermodules{5}{}
+- 00:02:07 \scriptvimjoyercustomhomemanagermodules{6}{}
+- 00:03:19 \scriptvimjoyercustomhomemanagermodules{7}{}
+- 00:03:24 \scriptvimjoyercustomhomemanagermodules{8}{}
+- 00:03:33 \scriptvimjoyercustomhomemanagermodules{9}{hyprland's config file gets generated automatically}, based on the fields that you provide in the settings
+- 00:03:49 \scriptvimjoyercustomhomemanagermodules{10}{}
+- 00:04:41 \scriptvimjoyercustomhomemanagermodules{11}{}

@@ -1,0 +1,189 @@
+LF is a minimalistic but highly
+extensible terminal file manager it does
+not do much by default and instead is
+configured with simple shell script
+which means that you can extend it with
+all kinds of useful CLI tools the more
+you use it the more cool aliases and
+functions you come up with which require
+more and more additional dependencies
+for traditional Linux systems this
+usually means having large personal
+installation scripts with those specific
+dependencies listed in a huge and hard
+to maintain list so today we are going
+to configure relap with Nick's home
+manager and get a simple but highly
+refactorable configuration that you can
+also bring with you to any other distro
+or even Mac OS we are going to use home
+manager so in case you don't have it
+configured check out the home manager
+video on the channel preferably create a
+separate module for a love and let's
+start the configuration with enabling LF
+with a simple
+programs.lf.enable equals true adding a
+left to packages is sufficient to
+install it but this way also lets home
+manager generate configuration for it we
+will Begin by adding a commands field
+which can hold all of our custom
+commands that we can later assign to
+cookies similarly to lf's standard
+syntax we are assigning commands to
+values except instead of using CMD
+keyboard we are just defining fields in
+a set I am 
+
+using multi-line strings for all of my commands because you don't have to escape any double or single quotes this way
+command you might want it has two dollar
+signs in the beginning but the syntax is
+pretty much the same as the regular LFR
+C1 so far so good but LF also supports
+multi-line commands which can be defined
+in this dollar sign and then double
+curly braces syntax which will
+definitely conflict with our new
+configuration because it looks a lot
+like next string interpolation to fix
+this issue let's just escape the dollar
+sign with two single quotes alright we
+moved our commands to home manager but
+what are the benefits the First Command
+I have here is using x-dragon program
+also known as dragon or Dragon draw I've
+talked about it on the channel more than
+a year ago it simply lets you drag and
+drop files from the terminal the only
+problem is we cannot assume that it is
+installed on the machine of whoever
+happens to use this file you probably
+don't want to maintain a list of
+hundreds of of small programs that your
+scripts may or may not even use anymore
+and what if somebody wants to try out
+your configuration are you going to
+cherry pick dependencies for them of
+course not we can simply tell NYX to
+take the binary from the package with
+this familiar syntax and the next thing
+is our key bindings you can already see
+a lot happening here because I've
+included specific examples to better
+showcase the sneaks set syntax use this
+crazy string to denote double quote key
+put the dot back tick or any field that
+includes special symbols in the string
+and a single quote does not need to be
+escaped in double quotes so it can look
+like this we can assign these keys to an
+empty string to unbind them built-in LF
+or user-defined commands just by using
+their names or even undefined scripts by
+adding a dollar sign in the beginning
+this Command right here opens bad in a
+paging mode and because it needs to have
+a dollar sign in the beginning and also
+a dollar sign to interpolate the package
+path into the string NYX gets confused
+and escapes both of them we can fix it
+simply by unescaping those two dollar
+signs with more double single quotes
+defining LF settings is super simple
+just check the manual by running
+manhomeconfiguration.nix and look for
+programs.lf.settings there you can check
+out data types of your desired options
+and then correctly assign them in the
+settings field I've added a couple of
+good ones to this configuration that you
+can also find in the description by the
+way and one of them is enabling icons LF
+supports file type specific icons and it
+sources them from a DOT config LF icons
+file home manager configuration does not
+seem to have a special option for that
+but it's not going to stop us because we
+can simply link a file there with this
+xdg.config file field LF slash icons
+here is the part that comes after full
+xdg config path and Dot slash icons
+looks for icons file in the same
+directory as the current Nix file this
+means that we need to get an icon file
+from somewhere and luckily it is not
+something that has to be updated
+frequently so we don't have to automate
+fetching it from the internet simply use
+this command to download official LF
+icons example from git once and put it
+in the current directory perfect the
+only thing that we are missing now is a
+previewer call manager configuration
+provides a way to set it as an option
+but to Showcase some more cool features
+and also include a cleaner script let's
+use the extra config field where we can
+dump all of the options that are not
+present in the default home manager
+configuration we could just link the
+previewer and cleaner scripts into dot
+config but let's do something even
+cooler nobody said that those two files
+have to be in the same directory as lfrc
+so we are going to use let and in syntax
+to Define two scripts with right shell
+script bin I took these two scripts from
+lsviki and interpolated the binaries
+inside with NYX it is using Kitty's
+image protocol to display images which
+also works in West term this is my
+favorite image previewing Solution on
+Weyland right now but if you know any
+other cool ways to achieve it let me
+know in the comment section as you can
+see the dollar signs are also escaped
+here and in case the file under the
+cursor is not an image the previewer
+script is going to use pistol instead
+pistol is a general purpose previewing
+program which I chose to use because I
+don't like maintaining a 100 line script
+for all of the possible mine types now
+the descripts are ready let's just let
+ellip know where they are with this
+standard LF syntax rebuild the home
+manager configuration and let's check
+out the lfrc that was generated from our
+NYX file all of our settings and options
+are here and each command that is using
+a specific binary is pointing to some
+next door path and what about our
+cleaner and previewer scripts they are
+also here and if you are using them you
+can use a GF key sequence to go and
+check them out
+and now I would like to thank the
+sponsors of this video specifically
+Victor Winters for a 20 euro per month
+subscription all skins for a 10 euro per
+month subscription Linux rocks for a 10
+euro per month subscription nothing not
+45 euro per month subscription and also
+jro M for a 50 Euro recent donation
+coffee supporter for a 10 euro recent
+donation gate on the page for a 5 Euro
+recent donation I sincerely hope that I
+am not mispronouncing your name please
+correct me in the comments if I do and
+yogurt for a one Euro recent donation
+it's crazy to think that exactly three
+months ago this channel had less than 80
+subscribers and has grown so much since
+as usual don't forget to check out our
+Discord server leave a like or a comment
+if you enjoyed this video or subscribe
+if you are feeling extra generous thanks
+for watching and I will see you in the
+next one

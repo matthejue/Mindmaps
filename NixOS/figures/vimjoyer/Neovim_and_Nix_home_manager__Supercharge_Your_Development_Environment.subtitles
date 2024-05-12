@@ -1,0 +1,196 @@
+in the previous nearby video we've
+created a very simple neovium
+configuration and use lazy.nv as a
+package manager and today we are going
+to expand upon it replace lazy with home
+manager learn to package your own neovie
+plugins with NYX and assign
+configuration files to the existing ones
+we are obviously going to use home
+manager for the configuration so if you
+don't have it set up check out the home
+manager video on the channel open your
+home manager config and let's start by
+simply enabling the open program option
+just adding neovium to your packages is
+sufficient to install it but this way
+also this home manager manage it
+configuring neovium is also extremely
+easy so let's get straight to it and the
+first thing we can do here is enable y
+vim and Vim div aliases so just in case
+some program wants to use one of those
+it will automatically be redirected to
+neovie Binary and the next thing is
+obviously adding some Lua configuration
+I've changed the directory structure a
+little bit because we no longer need
+plugin and plugin list files you can
+find both versions in the description by
+the way so if you need to copy anything
+shown in the video feel free to do so
+home manager provides us with a extra
+lower config option where we could
+simply dump all of our files from the
+previous video however we have not
+configured any plugins yet so let's
+simply start with options.lua we are
+going to use this built-ins read file
+function inside and as the name suggests
+it will simply read the entire content
+of the file and place it inside this
+string using string interpolation
+alright our neovium now has a bunch of
+default options set but further
+configuration obviously requires plugins
+so let's add them now using a plugins
+option we can place any of the plugins
+from NYX packages inside luckily
+packaging beam plugins is extremely
+simple and neoviem itself is very
+popular so most of the ones you want
+will already be inside next packages I
+am going to include all of the ones we
+had in the previous video and as usual
+you can make it more concise by using a
+width at the top three seater code
+highlighting grammars can also be
+installed here with this simple syntax
+and now we have a choice to make we can
+either just dump all of the plugin
+configuration files into the extra a
+config or we can make it a little bit
+cleaner by providing configs to the
+plugins directly in the packages making
+it extremely easy to manage them in the
+future all you have to do is simply
+Define a set anywhere in the plugins and
+add two keys inside plugin itself and
+the config which accepts a string with
+code so let's try adding comment.ndims
+configuration there looks great but
+there is a problem the simple Lua line
+won't work because beam plugins only
+accept beam script we could just use
+this special syntax to call lower code
+from inside vimscript and that would
+actually work but it looks horrible so
+let's address this issue we will use let
+in syntax somewhere at the top and
+Define a new variable there this
+variable is going to actually contain a
+function that will only take one
+parameter and return a simple string
+with this parameter interpolated inside
+and while we're at it let's also create
+another function to read file content
+and interpolate it into the same place
+now we can go back and make the
+configuration file a little bit cleaner
+use the function that we have just
+created to assign simple configurations
+to dual plugins our second function to
+link actual Lua files and plane strings
+for plugins that can be configured with
+simple wimscript onlineers and now our
+entire configuration from the previous
+video is ported to Nyx but we have not
+talked about one very important thing
+yet and that is adding your own plugins
+new neoving plugins are being created
+daily and there is no way next packages
+is going to get all of them immediately
+luckily for us though adding our plugins
+is extremely simple and it gets even
+simpler if you use flicks let's say that
+we want to use Wonder color scheme which
+is obviously already packaged in next
+packages but just pretend that it isn't
+all we have to do is open our flake and
+add a new input there this input is
+going to have one dark git reposit as a
+URL and also flake set to false we have
+just achieved the same thing that we
+could get by manually using a fetch from
+git function like shown here but with
+the flake doing all of the work for you
+and if you are wondering where this part
+went it is just going to be generated in
+the flake.lock file critically and it
+will also update on its own each time we
+update the flick
+now expose the inputs to the outputs and
+pass inputs to home manager with extra
+special orgs don't forget to also
+include inputs at the top of the home
+manager configuration file so we can use
+our plugin there what we are going to do
+next is extend next packages with our
+plugin this might look complicated but
+bear with me we are going to define a
+NYX packages field anywhere in the home
+manager configuration and it is going to
+contain overlays array where we can put
+all of our overlays we haven't talked
+about them on the channel yet but there
+is nothing complicated really as you can
+see it is just a function that accepts
+two arguments we could call them
+whatever we want but final and previous
+is generally the preferred ones think of
+them like this final is the next
+packages that you are going to get after
+modifying the previews next packages
+sounds simple right so what we are doing
+is just extending the Vim plugin set in
+NYX packages with our plugins by taking
+the previous version of it and using an
+update operator that is going to put
+missing elements from the next set into
+the previous one and inside this set we
+are just going to list all of our
+plugins like this plugin Wonder from the
+inputs which is going to be created with
+the next packages built-win plugin
+function it is required so NYX
+understands that this random git repo
+that we are trying to shove into plugins
+is actually a Wim plugin all of the code
+is in the link in the description by the
+way so you can simply copy this part and
+only worry about modifying a couple of
+lines inside after all of this we can
+simply add this plugin to plugins array
+the same way like we would do with any
+other plugin and we can even provide it
+with its own configuration
+our setup is looking amazing already but
+we can still improve it by also
+providing the required dependencies in
+extra packages we can't forget that NYX
+is a package manager after all so your
+neovibconfig can now be a batteries
+included experience simply use extra
+packages and place your desired programs
+there you probably want to have x-clip
+or VL clipboard to copy and paste on xor
+covalent and also some LSPs that you are
+sure you are going to use frequently
+like Lua LSP or arnix you can really
+Place anything there and not worry about
+forgetting that one dependencies on
+every new installation and now I would
+like to thank the sponsors of this video
+specifically Hoskins for 18 euro per
+month subscription Linux rocks free 10
+euro per month subscription nothing at
+45 euro per month subscription and also
+public relate for a recent one Euro
+donation as you can see we now have
+three Horsemen of keeping the channel
+going as usual don't forget to check out
+our Discord server leave a like or a
+comment if you enjoyed this video or
+subscribe if you are feeling extra
+generous thanks for watching and I will
+see you in the next one

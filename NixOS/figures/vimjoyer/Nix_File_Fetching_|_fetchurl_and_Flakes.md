@@ -1,0 +1,22 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerfilefetching}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nix_File_Fetching_|_fetchurl_and_Flakes.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerfilefetching}[2]{\href{https://youtu.be/IdHbRGB-yXI?feature=shared&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nix_File_Fetching_|_fetchurl_and_Flakes.md" "" vimjoyerfilefetching vimjoyerfilefetching
+- 00:00:30 \scriptvimjoyerfilefetching{1}{}
+- 00:00:41 \scriptvimjoyerfilefetching{2}{}
+- 00:00:47 \scriptvimjoyerfilefetching{3}{download sources for derivations}
+- 00:00:50 \scriptvimjoyerfilefetching{4}{template config files for home-manager}
+- 00:00:52 \scriptvimjoyerfilefetching{5}{files required to run scripts}
+- 00:00:56 \scriptvimjoyerfilefetching{6}{source in all three examples is the path to our content downloaded to nix store}
+- 00:01:03 \scriptvimjoyerfilefetching{7}{fake hash}
+- 00:01:07 \scriptvimjoyerfilefetching{8}{pkgs-lib.fakeHash}
+- 00:01:12 \scriptvimjoyerfilefetching{9}{correct hash in error-message}
+- 00:01:32 \scriptvimjoyerfilefetching{10}{fetch from github}
+- 00:01:44 \scriptvimjoyerfilefetching{11}{link to repo returns hash and all other attributes already set}
+- 00:02:18 \scriptvimjoyerfilefetching{12}{by adding flake=false attribute to an input we essentially turn into a regular fetching function}, with the special feature that it's hash is managed by flakes and saved in flake.lock
+- 00:02:34 \scriptvimjoyerfilefetching{13}{download repo}
+- 00:02:40 \scriptvimjoyerfilefetching{14}{sourcehut}
+- 00:02:43 \scriptvimjoyerfilefetching{15}{regular https links}
+- 00:02:47 \scriptvimjoyerfilefetching{16}{automatically unpacked if identified as archive}
+- 00:02:51 \scriptvimjoyerfilefetching{17}{adding file+ at beginning of url to make sure one is always downloading a file}
+- 00:02:55 \scriptvimjoyerfilefetching{18}{fetch by path}, can be global, only evaluated if path exists

@@ -1,0 +1,163 @@
+have you ever wanted to have different
+development environments for each
+Project without having to manage 20
+Ubuntu containers to Simply put the
+packages you need in a list and have
+them delivered to you each time you need
+them while not polluting your user space
+I'm not saying that this shell is the
+best solution to this problem but it
+might just be to start using Nick shell
+you need to create a shell.nix file this
+file should contain a function that
+takes a set with NYX packages the next
+packages can either be provided when
+calling the function or taken from the
+systems Channel it is going to return
+the output of a packages.nicial function
+which itself also takes a set with some
+keys that describe the resulting
+development environment even like this
+we can already launch our empty
+development Shell by running NYX shell
+you can also add it to a click.nix file
+either by importing it from the relative
+path or by declaring it straight in the
+system's Dev shows default key to enter
+your Dev shell declared in a flake run
+Nix develop either way let's now take a
+look at a mutual function and see what
+we can do with it the most important key
+you can add here is native build inputs
+just knowing about this one allows you
+to create dozens of development
+environments with each one having their
+specific packages let's say that you
+have a project using node.js all we have
+to do is add it into this array and we
+can also use this width syntax to avoid
+specifying packages for each element now
+if we enter this development shell with
+NYX shell or NYX develop we are going to
+be put in a shell with node.js available
+and as soon as we leave it it's gone
+once again and won't pollute the user
+space but the question I hear you ask is
+why am I being placed in a bash shell if
+you want to use your own shell just use
+the dash dash command flag to specify
+the First Command that will be run upon
+entering the development environment
+I'll use the dash dash command zsh which
+you can also shorten to just Dash czsh
+if you are using Nix develop and now I'm
+actually using the correct shell with
+all of my aliases and settings but what
+if you have a much larger command that
+you want to execute or one that every
+user of this shell should run then we
+can add a shell hook key and assign a
+multi-line string to it with this double
+single quote syntax inside we can
+execute a variety of bash commands such
+as displaying a greeting text sourcing
+necessary shell files and running other
+commands including those from these
+packages if you are curious about the
+purpose of this syntax I recommend
+watching a right shell script bin video
+on the channel now upon entering the
+show we will see the message and once
+again have access to our development
+packages another cool thing we can do is
+declare environment variables here let's
+say I have a color variable that I want
+to assign to color blue while it is
+possible to just put it in the Shelf
+hook you can declare it anywhere in the
+set just as you would do any other field
+for the sake of readability and you can
+also Source other NYX files which could
+for example contain some vulnerable
+information the password file here just
+contains a string and can be added 2.8
+ignore
+although that is great but because we
+are using NYX we can go above and beyond
+and even declare the specific versions
+of any package from the past for this to
+work you're gonna want to use NYX Flakes
+and if you don't know what they are feel
+free to check out the flake video on the
+channel this isn't necessarily limited
+to Nick's show and you can use it with
+any other playcraft project
+as you already know you can Define
+multiple sources in the inputs but you
+can also Define duplicate sources from
+different points in time yes we are
+going to do some Blackmagic time
+traveling and take a second next
+packages from the past my recommended
+method of finding out previous versions
+of packages is this amazing nyxhub.io
+website it's originally built for devbox
+but we can also use it for our regular
+NYX projects let's say that we have a
+package that is only supported on a
+specific old version of python we can
+just search for python select it and
+scroll to find out the desired version
+once we do we need to copy this commit
+hash and the package name
+we can now add it to inputs with this
+syntax where you only have to replace
+the last part depending on your package
+make sure to add the triple Dot and then
+add inputs after the outputs parameter
+so we can use inputs anywhere in our
+fake now in the native build inputs we
+can include this specific python package
+by referring to these old NYX packages
+grabbing the correct system version just
+like we did in the regular index
+packages up there and defining the
+package name that we copied from NYX hub
+every time you update this Lake your
+main next packages like node.js will be
+updated while this python package will
+stay Locked In Time
+but make sure to use the correct commit
+hash and package name because python
+package for example is nothing more than
+an alias which points to different
+python packages in different points in
+Nick's package's lifetime
+it could install python 3.6 in one day
+and python 3.7 on another after update
+Luckily everything is checked with
+Nick's flicks in the fling.lock file so
+you don't have to worry about that if
+you use them
+if you just want to get a shell with a
+couple of packages really quick you can
+use NYX shell Dash p on a noteflake
+system and Link Space Shell on a flick
+system I want to cover the second one
+because using NYX without flicks just
+makes me sad with Nick Space Shell you
+can get some packages from the X
+packages different commits of it and
+even from GitHub repos the syntax is the
+same as inputs of a flick so if you just
+want to try out some program you don't
+have to add it to your Nick size
+configuration or really any
+configuration if you enjoyed watching
+this video make sure to like And
+subscribe we already have almost 2000
+Giga Channel subscribe to this channel
+which is around 2 times more than I
+initially expected check out our discard
+server if you want and I'll see you in
+the next one

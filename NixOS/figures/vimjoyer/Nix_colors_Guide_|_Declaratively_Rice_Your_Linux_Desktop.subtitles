@@ -1,0 +1,154 @@
+everybody wants to have a beautiful
+dynamically colored Linux rice but not
+that many people want to put a lot of
+effort into creating custom theming
+scripts and so today we are going to
+check out amazing modules for Nix OS and
+home manager named Nick's colors that
+are meant to solve this issue in a
+simple practical and declarative way but
+before we begin you need to know what
+base 16 is it is a project meant to
+simplify the coloring of your programs
+and it includes hundreds of themes
+configuration templates for software and
+programs that apply these templates
+it might sound complicated but each
+theme is just a file containing 16 hex
+codes sub background and foreground
+colors and also some more colorful ones
+here you can see the groovebox color
+scheme file for example which has all of
+these colors in the yaml format and they
+look something like this
+and the base 16 templates are mustache
+piles which just contain the program
+specific configuration files or their
+parts just like this yaml file for
+electricity which has all of these
+pieces of syntax which are meant to be
+replaced with Colors by base 16 injector
+programs and now we come to Nyx colors a
+pair of amazing modules that use the
+base 16 color scheme but instead of
+templates just provide the color codes
+to be used within your NYX projects
+luckily nixos configuration file and
+home manager already provide the means
+to customize the colors of your favorite
+programs so let's install the Nyx colors
+as if leak and take a look at some
+example use cases I am going to use this
+basic NYX flake so if you don't know how
+it works or what flakes are check out
+the flake or home manager video on the
+channel
+let's simply include the Nyx colors
+flake in the inputs and then expose
+inputs to our entire output set with
+this add input syntax
+we can now simply pass next colors to
+home manager like this ornix
+configuration file like this
+make sure to add the inputs to the
+parameter set in your home manager
+configuration and then include the
+module in the Imports
+and now we have access to all of the
+schemes open the link in the description
+and here you can find all of them
+including my favorite group box as well
+as the popular one dark Tokyo Knight and
+ever Forest select any of them by simply
+writing inputs.nics colors dot color
+scheme dot whatever theme you want and
+we can now go and give our program some
+style we are going to make our
+configuration very clean and modular so
+let's include a features directory in
+the same location as the home manager
+configuration and put all of our
+programs there we can now import the
+modules inside this directory simply by
+adding them to the Imports array these
+modules are going to take a set
+containing packages and config as a
+parameter config is a part that we are
+interested in because it provides us
+with the values from the main
+configuration file meaning that we can
+get all of our colors from there as a
+very simple example we can start with
+the macro notification demon which has
+this border background and foreground
+colors in its home manager config
+we can simply pass our colors to it in a
+string because we also want to add the
+sharp symbol before each one of them so
+now writing this is equivalent to having
+these colors hard coded into the file
+except we can also easily affect them by
+changing the color scheme key in our
+main configuration file if we rebuild
+the home manager configuration we can
+now see that macro is colored with the
+groovebox colors
+one of the most used applications of any
+Linux power user is the terminal so
+let's add an electricity module to the
+Imports and create the corresponding NYX
+file
+alacritis config requires a 0x instead
+of a Sharp before each hexadecimal value
+so we can do it simply like that
+either terminal emulator can now also
+adapt its colors to whatever color
+scheme you choose to use today you can
+find all of the code blocks in the link
+in the description by the way because
+this one is quite big but let's say that
+we have some file that is so obscure and
+unusual that your machine is the only
+one that could have it maybe you have
+your own program that reads some color
+values from my super cool color values
+file.xml in the home directory let's
+simply create another module in the
+features and add it to the Imports in
+the main file here we can set a key in
+home.file.mysupercoolcolour values
+file.xml.txt which is going to create a
+file in the desired location and put
+whatever we provide in a string inside
+it means that now we have access to all
+of the next language features to use
+with this file and can simply
+interpolate our colors inside it like
+this now reveal your system use the cat
+command to check the content of this
+file and see that it actually contains
+all of your required colors you can use
+this technique to color any file that is
+not part of Home manager and there is
+also xdg.config file set it is used to
+declare files in your xdg config
+directory in case it is not set to dot
+config on your machine or in case you
+just want everything to be clean as you
+can see there is nothing complicated
+about using NYX colors at all and it can
+help you maintain your configuration
+files with your ever-changing color
+preferences now I would like to thank
+the sponsors of this video especially
+Hoskins for a 10 euro per month
+subscription and also public relate for
+a recent one Euro donation it truly
+motivates me to keep creating these
+videos
+as usual don't forget to check out our
+Discord server leave a like or comment
+if you enjoyed this video or subscribe
+in case you are feeling extra generous
+thanks for watching and I will see you
+in the next one

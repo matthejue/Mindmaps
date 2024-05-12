@@ -1,0 +1,21 @@
+# Timestamps
+- \newcommand{\scriptvimjoyernixvim}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nixvim:_Neovim_Distro_Powered_By_Nix.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyernixvim}[2]{\href{https://youtu.be/b641h63lqy0?si=LdLJfFPi3nzAHlkR&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nixvim__Neovim_Distro_Powered_By_Nix.md" "" vimjoyernixvim vimjoyernixvim
+- 00:00:32 \scriptvimjoyernixvim{1}{}
+- 00:00:53 \scriptvimjoyernixvim{2}{}
+- 00:01:00 \scriptvimjoyernixvim{3}{try out by running nix run}
+- 00:01:03 \scriptvimjoyernixvim{4}{documentation}
+- 00:01:21 \scriptvimjoyernixvim{5}{}
+- 00:01:28 \scriptvimjoyernixvim{6}{}
+- 00:01:40 \scriptvimjoyernixvim{7}{}
+- 00:01:44 \scriptvimjoyernixvim{8}{}
+- 00:01:49 \scriptvimjoyernixvim{9}{set keybindings}
+- 00:01:52 \scriptvimjoyernixvim{10}{}
+- 00:01:57 \scriptvimjoyernixvim{11}{}
+- 00:02:04 \scriptvimjoyernixvim{12}{}
+- 00:02:16 \scriptvimjoyernixvim{13}{}
+- 00:02:25 \scriptvimjoyernixvim{14}{}
+- 00:02:42 \scriptvimjoyernixvim{15}{}
+- 00:02:52 \scriptvimjoyernixvim{16}{run on any other computer with nix without polluting local environment}, local neovim configuration will be ignored this way
+- 00:03:18 \scriptvimjoyernixvim{17}{provides modules for Nixos, home-manager and nixDarwin}, allows to install and configure neovim system-wise as part of one of these 3 configs

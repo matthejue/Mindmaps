@@ -1,0 +1,129 @@
+since the release of my previous
+hyperland on N video from half a year
+ago the home manager and nixos modules
+received numerous updates with one of
+them being the ability to declare your
+entire hyperland configuration with NYX
+syntax and so in this video we are going
+to install hyperland on nyos configure
+it with NYX and even install some
+plugins for it declaratively so without
+further Ado let's begin with the special
+Nvidia patches option being removed
+installing hyperland is now just as easy
+as setting programs. hyperland enable
+option to through and rebuilding your
+system you will immediately have access
+to hyperland in your preferred display
+manager and in the TTI for purposes of
+this video I also recommend you to use
+hyperland package from the official
+hyperland flake because it will give us
+more control when we get to installing
+plugins we will obviously use home
+manager extensively today so if you
+don't have a home manager setup yet now
+is the perfect time to check out the
+ultimate guide video or install it
+yourself open your home. n file or any
+other Home manager module and let's
+begin configuring hyperland most of the
+magic happens in the settings option but
+if you check the home manager options
+list with manome configuration. n
+command you will see that none of its
+sub options are explicitly listed and
+that is because like many other Home
+manager options this one gets translated
+into hyperland syntax dynamically if we
+take a look at its example definition we
+can see that it Bears a strong
+resemblance to hyperland syntax meaning
+we only have to learn a few differences
+between them to begin declaring it
+firstly to avoid confusing mix language
+options with special symbols like dollar
+sign or dot need to be surrounded with
+double quotes secondly hyperland allows
+us to assign many key bindings with the
+same bind command which is not possible
+with Nick syntax due to the set Keys
+being unique this problem is solved by
+adding all values into a list and
+assigning it to a single bind attribute
+this also works for any other hyperon
+commands like animations or exact ones
+lastly the value part of every hyperline
+line is treated like a simple string
+with NYX syntax so even if it contains
+spaces commas or parentheses wrap
+between some double quotes and you are
+done you can now easily configure
+hyperland with commands and values found
+on the wiki simply by slightly adjusting
+the syntax but the obvious question is
+why would you want to configure
+hyperland with Nyx in the first place
+and the answer of course is to make use
+of the Nyx features with the most basic
+example being NYX colors just by
+interpolating Bas 16 colors into active
+and inactive borders you can synchronize
+your hyperland colors with the rest of
+your system a more complex example would
+be aligning entire shell scripts for key
+bindings or startup execution we can
+also interpolate binary path into those
+scripts to further improve our
+configuration finally we can expose
+options that will affect our
+configuration allowing us to have
+different layouts monitor setups or even
+key bindings on different machines while
+still reusing all other parts this
+example is pretty simple but if you
+include conditional logic in these
+Expressions you can come up with some
+very interesting results just like the
+monitors option from the home manager
+modules video which you can find in the
+link in the description another benefit
+of using NY to configure hyperland is
+the ease of installing plugins while
+recently introduced hyperm plugin
+manager is recommended to use on other
+dis rows the official hyperland plugins
+repo still includes a flake let's use it
+right now by including it in your flake
+inputs and making it follow hyperland
+flake to ensure that you never get
+version mismatches we can finally go
+back to our home manager module to
+install some plugins let's try it out by
+adding borders Plus+ plugin to our
+plug-in list and then configuring it as
+shown on the GitHub page rebuild your
+home manager configuration and as you
+can see we now have double borders
+around every window packaging your own
+plugins is also very simple because if
+you take a look at all default. NX files
+in the hyperland plugin repo you will
+see that all they do is compile C++ code
+against the hyperland version which we
+passed to it in the flake and now I
+would like to thank the sponsors of this
+video specifically Hoskins B is e aing b
+pund not nut Yi
+zavier Albert C atila Stefan schroer
+Magi 00 zerox mouthless matis jao cyber
+VOD Ros Uncle Simon Master how to learn
+slim
+5782 and also the people who supported
+the channel previously as usual don't
+forget to check out our Discord server
+leave a like or Rec comment if you
+enjoyed this video or subscribe if you
+are feeling extra generous thanks for
+watching and I will see you in the next
+one

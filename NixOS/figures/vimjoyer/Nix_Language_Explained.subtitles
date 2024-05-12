@@ -1,0 +1,257 @@
+NYX is the language that NX package
+manager and nxo is the distribution used
+to package software and build your
+system and it is one of the biggest
+discouragements for beginners because
+who wants to learn a whole programming
+language to use a computer am I right
+however it exists for a reason and if
+you learn to use it properly you'll
+understand exactly why it is so good for
+this task and so today we are going to
+go through the basics of Nyx language
+and learn how to read and write NYX code
+and the first thing you need to know is
+that NYX is a lazily evaluated
+functional programming language similar
+to other functional PR programming
+languages like hco it was specifically
+made to write packages but now obviously
+has many more use cases one of the
+biggest mistakes that I see many
+beginners do is assume that all of their
+options they apply in their NYX
+configuration is the programming
+language itself that is of course not
+true because NYX for nyos is basically
+the same thing as Lu for neovim nyos
+rebuild simply evaluates an expression
+inside your configuration. n and then
+uses the resulting value to build the
+system which means that learning all the
+available options in N configuration
+does not not mean you know NX and
+knowing how to read and write NX code
+does not mean that you will immediately
+know how to use every nxs option once
+again similar to how you can learn Lua
+and not know how to apply it with neovim
+and vice versa nyck language itself is
+quite small and very easy to learn
+especially if you have some experience
+with functional programming so let's
+begin and the first thing that you have
+probably noticed yourself already is
+that NYX does not care about entation
+new lines and the amount of spaces
+moreover every single NX piece of code
+that you can find can be written in one
+line because that is exactly how NYX
+code is evaluated anything you can put
+in a NYX file is called an expression
+your configuration file is an expression
+a string with interpolated values is an
+expression and so is 9 + 9 and even a
+simple number seven and any expression
+you put in a file can be evaluated with
+this NY instantiate eval command
+creating a file for each expression you
+want to test is quite tedious though so
+the good thing is there is a very
+convenient rle built into n which you
+can use to learn and experiment expent
+with the language it works in a similar
+way to other reel like the ones python
+or njs give you when you run them
+without any
+arguments here you can evaluate any NX
+expressions and find out their values we
+can type A7 for example and evaluate it
+to A7 same with any other simple values
+like booleans strings or paths wait
+paths you say of course NY was
+specifically made for configuring your
+system and defining packages so path
+have a first class citizen support in
+the language and if if you try to
+evaluate a/ do expression in the repple
+it will give you your current working
+directory primitive data types are cool
+but they are pretty useless by
+themselves so let's go through some more
+complex Expressions attribute sets are
+one of the most important data
+structures in Nix they are used to store
+key value Pairs and are very similar to
+dictionaries or hashmaps in other
+languages if we simply plug a set into
+the rapple it will spit it right back
+out just like with primitive values
+previously sets are frequently used to
+store other sets inside and luckily NYX
+syntax give us plenty of cool ways to
+Define them in this example we are
+assigning a key named X to a set that
+holds a and b attributes but we can also
+write it like this this or even this all
+these examples evaluate to exact same
+set so you can choose whichever one you
+like or whichever suits the most in
+specific
+situation to get a value from the set we
+can use a dokey syntax just like getting
+a field from an object in other program
+languages in NX repple we can also
+assign this set to a variable and then
+extract the attribute from it in the
+next expression that is not a feature
+available in regular NYX files because
+every NYX file can only contain one
+expression it may sound pretty weird
+given that some NYX files can contain
+hundreds of lines but we'll get to it if
+we want to Define variables before
+evaluating something we can make use of
+a very convenient let expression which I
+like to call let and in syntax here is a
+very simple example of its usage we can
+basically create as many variables as we
+want inside it and then evaluate an
+expression using those variables
+wrapping an expression with let an in
+syntax also makes Lettin in syntax part
+of the expression so if we want it we
+could simply assign set expression to a
+key in a set and optionally add
+parenthesis around it to highlight it
+the let and in expressions are pared
+recursively until all variables are
+evaluated this means that we can even
+use variables in the expressions of
+other variables a good example of this
+is when we Define a system variable in
+Flakes and then grab NY packages with a
+corresponding system type all within the
+same lend in expression the dollar sign
+here is only needed so NX uses R
+variable and not the literal system key
+all right but maybe you want to have the
+same recursive evaluation mechanism
+directly in sets fortunately in NX you
+can Define recursive attribute sets that
+can hold attributes referencing values
+from other attributes within the same
+set here is how they look the only thing
+you need to do is are a w keyword before
+your set sets are cool but sometimes you
+want a simple array type data structure
+like a list lists can be defined with
+square brackets and they contain
+anything from simple integers to sets
+and even complex Expressions as you can
+see every item in the list has to be
+separated by at least one space when we
+think about lists one very useful
+expression that comes to mind is width
+which is often used to define packages
+for nyos home manager or Dev shells
+basically it brings values a set to a
+scope of any expression as if they were
+variables defined in a lat and in syntax
+it can obviously also be used with any
+other Expressions not just lists hope
+you understood everything so far because
+we finally come to an interesting part
+functions NYX is a functional
+programming language after all so it
+only makes sense that functions would be
+a major part of it here is the most
+basic function it is defined by writing
+a name of the argument then column and
+any expression that it returns meaning
+that this function takes some expression
+as its own only argument and then adds
+one to it here's how we could use it
+with L an in syntax to have everything
+in a single expression to Define
+functions that take multiple arguments
+simply write them one by one with
+columns after each one of them
+interestingly enough we are actually
+nesting functions here this means that
+if we only pass one argument to such
+function we will get another function
+which takes the next argument kind of
+like peeling an onion but instead each
+layer is an argument if it makes sense
+if we want to have kind of real
+multi-argument functions though we can
+just use sets as parameters this
+function takes a set with two attributes
+for example and returns their sum if
+this structure looks familiar to you
+that is because your configuration. n
+nios module is also simply a function
+that takes a set as its only parameter
+and returns another set that contains
+all your configuration options the nface
+rebuild command simply passes a set with
+required attributes to it and then
+performs system mutations based on the
+resulting values let's come back to our
+simple functions though because we have
+some more things to talk about we we can
+use the question mark symbol to Define
+default values for any attribute it will
+be used in case the set we passed to the
+function does not contain attribute with
+the same name but what if we want to
+have a function that takes any set as
+long as it has two specific attributes
+in that case we can just add a triple
+dot at the end which means that any
+additional attributes will simply be
+ignored that is of course unless we
+include an add symbol at the end and
+some name this interesting structure
+that you may have seen in some of my
+previous videos tells Nick to also
+assign the input set to a variable with
+that name that comes after at symbol
+attributes can now either be taken the
+regular way or from the set without
+having to explicitly write all of them
+down in my previous videos we frequently
+use this technique to pass all NY flake
+inputs to home manager or NS modules oh
+and the inherit keyboard it's simply a
+short hand for bringing values in from
+the scope all right and now let's put
+the C attribute to use and try out an if
+then else expression with it it checks
+for a Boolean expression after the if
+keyword and then returns either
+expression after them or the one after
+else depending on whether it is true or
+false NYX language also includes a lot
+of useful built-in functions so if you
+want to see a video about those leave a
+comment down below and now I would like
+to thank the sponsors of this video
+specifically Victor VES for a €20 per
+month subscription HK for a € 10 EUR per
+month subscription Linux rocks for a €1
+EUR per month subscription not not for a
+5 per month subscription and also jom
+for a recent 50 donation coffee
+supporter for a € 10 recent donation NYX
+J for a 6 recent donation Magi 00 for a
+5 recent donation gate and Li page for a
+5 recent donation yogurt for a 1 recent
+donation and dude 9501 for a $2 super
+thanks on YouTube as usual don't forget
+to check out our Discord server leave a
+like or comment if you enjoy this video
+or subscribe if you are feeling extra
+generous thanks for watching and I will
+see you in the next one

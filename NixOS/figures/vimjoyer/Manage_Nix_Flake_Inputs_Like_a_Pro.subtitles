@@ -1,0 +1,140 @@
+next legs are amazing and if you learn
+how to work with them properly you will
+never want to make a project without
+them ever again so today we are going to
+learn about a bunch of cool
+built-inflake utilities and use cases
+that you probably did not know about and
+if you don't know what flakes are I have
+a simple introduction video on the
+channel that explains the basics of
+working with them so check that out and
+today we are going to start by
+initializing a simple flake and wait
+talking about initializing even before
+creating a flake we have something to
+talk about and that is templates if you
+did not know you don't have to remember
+all of the dev shell or Nixon's flake
+boiler played by heart and instead can
+use this simple command to initialize
+flakes from templates there is a lot of
+them to choose from but if you still
+miss something it is absolutely trivial
+to create your own templates like this
+basic right shell script build fake that
+I pushed to GitHub specifically for this
+video the GitHub repo has a following
+directory structure with the main flake
+being in the root and containing
+reference to this folder which holds the
+template itself let's try it out and as
+you can see it created a flake with a
+simple hello World script which we can
+now fill with some more useful code and
+turn into a real project you can have as
+many templates in your flake as you want
+so you can just maintain one for all
+your needs and purposes and share it
+with your friends or colleagues so they
+can also start their projects quickly
+after we finally initialized our flake
+let's add some inputs inputs can come
+from all sorts of places but as usual
+most are hosted on GitHub just like the
+regular Unix packages Lake itself and
+yes next packages here is also a flake
+because if you check out its git repo
+you will find a flake file there this
+means that like with any other plague we
+can check out its metadata with this
+nyxflake metadata command and see its
+revision hash description and the URL
+that was actually used to copy the flake
+into your next door meaning that you can
+even straight up replace your flake
+input with this URL you do not want to
+do it though because flakes are a system
+that is specifically made so you
+interact less with this long and
+impossible to remember hashes and they
+are instead automatically saved in a
+lock file and update to a newer version
+when you run nyxflake update but what if
+you have multiple inputs and it is
+absolutely critical for your project to
+only update one of them in this case we
+can once again use the Nix flake
+metadata command to find out more about
+the flakes stored in the current
+directory and see that it has multiple
+root inputs with different commit hashes
+we can now use a NYX flake lock dash
+dash update input command to update a
+specific input from this flake and after
+we do we are going to confirm this by
+running the metadata command again and
+checking that the input has changed all
+of that is cool but let's make this
+process more fun by making a super
+simple shell script that will give us a
+nice menu to select which input we want
+to update we are first going to pass a
+dash dash Json flag to metadata to
+Output everything in a format that we
+can easily parse and then we can pipe
+this output into a JQ command so we can
+select specific values from it we are
+not sure that JQ is installed on our
+system though so we'll make sure by
+borrowing it from the next store with
+this NYX run command and then we can use
+this selector to actually get all of
+software inputs let's then remove all of
+the unnecessary double quotes we said
+and finally pipe it into fzf to get a
+nice menu this is the result it
+automatically looks for the root inputs
+from the flake in the current directory
+and allows us to select one of them we
+can now put this command into a variable
+and just use the next flake lock command
+on its output I've also put this simple
+script into a flick and pushed it to
+GitHub so you can all use it by running
+NYX run GitHub called on webjer slash
+Nix update input and you can make sure
+that it exists with the next flake
+metadata command and also by running
+nyxflake show command to see that it
+indeed has a bunch of default packages
+for every default system all four of
+them were added there automatically with
+the help of Lake util's flake which
+probably deserves its own video so I
+will just briefly mention that this here
+
+is just a function that returns a set with all of the system specific packages set to this value for every system and
+the last small tip for today is that you
+can ask NYX to automatically commit the
+changes to if League after update with
+this commit lock file flag and now I
+would like to thank the sponsors of this
+video specifically Victor wintorez for a
+20 euro per month subscription Hoskins
+free 10 euro per month subscription
+Linux rocks for a 10 euro per month
+subscription not a not worry 5 euro per
+month subscription and also Jr om for an
+incredible 50 Euro recent donation and
+the yogurt and polygrillate for recent
+one Euro donations you guys are
+supporting the channel so much that I
+can barely fit everything on the screen
+massive respect to each person listed
+here as usual don't forget to check out
+our Discord server leave a like or a
+comment if you enjoyed this video or
+subscribe if you are feeling extra
+generous thanks for watching and I will
+see you in the next one

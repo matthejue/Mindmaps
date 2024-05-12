@@ -1,0 +1,20 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerbrowser}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Using_Nix_to_Declare_Your_Browser!.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerbroswer}[2]{\href{https://youtu.be/GaM_paeX7TI?feature=shared&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Using_Nix_to_Declare_Your_Browser!.md" "" vimjoyerbrowser vimjoyerbroswer
+- 00:01:01 \scriptvimjoyerbrowser{1}{define user profiles}
+- 00:01:04 \scriptvimjoyerbrowser{2}{user profiles found in about profiles page in the browser}
+- 00:01:19 \scriptvimjoyerbrowser{3}{bookmarks}
+- 00:01:24 \scriptvimjoyerbrowser{4}{browser settings from about config}
+- 00:01:25 \scriptvimjoyerbrowser{5}{search engines}
+- 00:01:30 \scriptvimjoyerbrowser{6}{userChrom.css}, change how browser looks
+- 00:01:55 \scriptvimjoyerbrowser{7}{firefox addon flake}
+- 00:02:00 \scriptvimjoyerbrowser{8}{nix user repository}, nur
+- 00:02:21 \scriptvimjoyerbrowser{9}{add inputs}
+- 00:02:24 \scriptvimjoyerbrowser{10}{inputs after outputs parameter}
+- 00:02:33 \scriptvimjoyerbrowser{11}{add to extraSpecialArgs}, expose flake inputs to home-manager configuration
+- 00:02:39 \scriptvimjoyerbrowser{12}{add inputs to home.nix set parameter}
+- 00:02:42 \videovimjoyerbroswer{162}{now can use outputs firefox addons flake}
+- 00:02:53 \scriptvimjoyerbrowser{13}{nix flake show }, find out content of flake, packages set all supported systems with the firefox addons inside
+- 00:03:07 \scriptvimjoyerbrowser{14}{simplified version}
+- 00:03:23 \scriptvimjoyerbrowser{15}{add extensions}

@@ -1,0 +1,104 @@
+I am sure that you can all agree that
+installing browser extensions every time
+you switch machines can be quite tedious
+moreover if you have some important
+bookmarks and customized settings these
+task can become exceedingly time
+consuming on a regular system this would
+typically involve navigating through
+about config page manually copying
+specific profile files transporting them
+via USB sticks and going through each
+extensions page you could technically do
+that on Nexus as well but why would you
+want to with the power of Nyx everything
+can be declared including your Firefox
+configuration I'm going to use a flake
+home manager setup for this video and if
+you want to know how it works check out
+the home manager setup video on the
+channel you can find all of the code in
+the link in the description but of
+course you can just use your own config
+to begin customizing Firefox with NYX
+you need to add this Firefox program key
+to your home configuration file which in
+my case is called home.nix Now set the
+enable field to true to allow home
+manager to install and manage Firefox
+inside you can Define user profiles
+found on your about profiles page in the
+browser usually Firefox automatically
+generates this for you which you can
+tell by their names consisting of random
+numbers and letters I don't have any of
+those but unless you have never opened
+Firefox that is not configured this way
+you probably will inside each profile
+you can Define bookmarks
+browser settings from about config
+search engines like this very handy next
+packages search from documentation user
+chrome.css to change how your browser
+looks and the coolest thing extensions
+this is probably the part that you have
+been waiting for since the beginning of
+this video but there's a thing next
+packages does not actually provide any
+Firefox extension packages so your only
+options are either packaging them
+yourself or using a separate input for
+it which fortunately does exist these
+Firefox add-ons flake maintained by
+Rising includes most of the extensions
+you may want and is updated very
+frequently it is a part of any Ur or NYX
+user repository which is a community NYX
+repository similar to Aur on Arch but
+today we only need Firefox extensions so
+this is a topic for another video the
+Firefox add-onflake is available on
+gitlab and the link is going to be in
+the description let's add it to our
+flake inputs with the familiar syntax
+and don't forget to include add inputs
+after outputs parameter so we can use
+inputs anywhere in our configuration to
+expose our flakes inputs to our home
+manager configuration let's also add it
+to extra special arcs by assigning it to
+a set that inherits inputs don't forget
+to also include inputs in the home.nix
+set parameter OK we can now use the
+outputs of the Firefox add-ons flake in
+our home.nix but how do we actually find
+out its content obviously you don't want
+to go and read all of the next files so
+let's use this nyxflick show command
+after running it with a flake location
+as an argument you will get a tree like
+structure where you will see a package
+is set containing all of the supported
+systems with the Firefox add-ons inside
+a simplified version of it looks
+something like this
+find the plugins that you need and let's
+go back to home.nix we can now include
+every plugin like this as you can see we
+are just taking the flake from inputs
+and following the tree like structure
+use this with syntax to avoid including
+the long path before each plugin
+afterwards just rebuild your home
+manager open Firefox and all of your
+plugins will be installed but Firefox
+might also prompt you to enable them
+this video was quite short but I
+sincerely hope that you enjoyed it like
+the video if you liked it write a
+comment down below if you want me to
+cover a specific Nix use case or
+generally any other open source piece of
+software don't forget to check out our
+Discord server and see you in the next
+one

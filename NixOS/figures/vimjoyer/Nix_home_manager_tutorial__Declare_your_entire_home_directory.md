@@ -1,7 +1,7 @@
 # Timestamps
 - \newcommand{\scriptvimjoyerhomemanager}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/Nix_home_manager_tutorial:_Declare_your_entire_home_directory.pdf:#1}{\inlinebox{#2}}}
 - \newcommand{\videovimjoyerhomemanager}[2]{\href{https://youtu.be/FcC2dzecovw?si=ds84qYlqopczDT_m&t=#1}{\inlineboxtwo{#2}}}
-- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/Nix_home_manager_tutorial:_Declare_your_entire_home_directory.md" "" vimjoyerhomemanager vimjoyerhomemanager
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/Nix_home_manager_tutorial__Declare_your_entire_home_directory.md" "" vimjoyerhomemanager vimjoyerhomemanager
 - 00:00:41 \scriptvimjoyerhomemanager{1}{home-manager package both ways}
 - 00:00:46 \scriptvimjoyerhomemanager{2}{home-manager init}
 - 00:01:26 \scriptvimjoyerhomemanager{3}{flake.nix}

@@ -1,0 +1,17 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerxremap}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Setup_Xremap_with_Nix_|_Best_Linux_Key_Remapper_+_NixOS.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerxremap}[2]{\href{https://youtu.be/UPWkQ3LUDOU?feature=shared&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Setup_Xremap_with_Nix_|_Best_Linux_Key_Remapper_+_NixOS.md" "" vimjoyerxremap vimjoyerxremap
+- 00:00:31 \scriptvimjoyerxremap{1}{add nix-flake url to inputs}
+- 00:00:36 \scriptvimjoyerxremap{2}{inputs exposed to entire flakes outputs}
+- 00:00:42 \scriptvimjoyerxremap{3}{pass inputs to nixos configuration}
+- 00:00:49 \scriptvimjoyerxremap{4}{add inputs to parameters}
+- 00:00:56 \scriptvimjoyerxremap{5}{include xremaps modules in imports}
+- 00:01:11 \scriptvimjoyerxremap{6}{configure}, add yaml confiruation file
+- 00:01:16 \scriptvimjoyerxremap{7}{define with special nix syntax}
+- 00:01:22 \scriptvimjoyerxremap{8}{enable features}
+- 00:01:28 \videovimjoyerxremap{88}{xremap on any distro with home-manager}, run xremap as an user
+- 00:01:39 \scriptvimjoyerxremap{9}{include 3 lines in configuration.nix}
+- 00:01:43 \scriptvimjoyerxremap{10}{same for home-manager}, pass inputs to home-manager
+- 00:01:46 \scriptvimjoyerxremap{11}{import module in home.nix}
+- 00:02:00 \scriptvimjoyerxremap{12}{import module in home.nix}, same service also available in home-manager

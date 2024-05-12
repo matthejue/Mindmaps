@@ -1,0 +1,93 @@
+so you are using Nix OS and want to move
+your configuration.nicks into a flake
+how are you supposed to do that pretty
+simple actually but first if you haven't
+seen the previous video in which I
+explained what flakes are or just have
+no idea what OS I'm talking about make
+sure to check out the channel this video
+is going to be quite short so let's
+start already by default your
+configuration.nix file is located in
+Etsy nixai configuration.nix alongside
+hardwareconfiguration.nix second one
+gets generated during setup and is not
+usually changed so our goal today is
+going to be moving those two files into
+a flick with minimum effort the good
+thing is we don't even have to change
+them everything we need to do is to wrap
+them like we did with the shell from
+previous video start by making an empty
+directory anywhere in your system I
+created one in my home and named it my
+system
+now inside it we are going to initialize
+the flake by running flick init or just
+manually creating flake.nix file to copy
+our old at synix directory we can use
+the CP command with dash airflac for
+recursive copying now let's write the
+flake itself our input is going to
+contain your preferred NYX packages
+Channel I went with unstable one but you
+could choose something like 2305 we
+don't have to change the outputs
+parameters but we are going to add some
+variables inside let and in expression
+here we Define our system type which is
+going to be
+x8664 Linux for all 64-bit Nix OS
+installations next up we need to get our
+correct packages in previous video we
+used nyxpackages.legacy packages but now
+we also want to add an allow on free
+option so instead we are going to import
+NYX packages and inherit our system type
+we are also providing it at a config
+with allowance free key set to true in
+output set itself we are declaring next
+configuration subset which is going to
+hold all our next OS configurations if
+we choose to have multiple for now we
+are only giving it one key with any name
+you want I called it mining source for
+Simplicity reasons but you could call it
+something else once again we are
+inheriting system here so we don't have
+to change our old configuration file
+modules is going to hold our system
+configuration file itself it is
+referenced relatively to your flake.nix
+file with a DOT meaning current
+directory
+it is an array here but you pretty much
+always want to have just one reference
+to your main configuration.nix file so
+just like that we have finished our
+flake to rebuild our system we are going
+to have to run sudo Nix OS rebuild
+switch dash dash flake and then the path
+to our flake with the sharp and
+afterwards the key that you assign to
+your configuration if you want to see
+some great practices for structuring
+your Nexus play configuration I highly
+recommend checking out Mysterio 77
+starter Nexus configurations which you
+can find in the description I've
+personally used them as an inspiration
+for mine I'm also linking Nexus flicks
+Wiki page where you can find this output
+schema you can use it to find out
+standard Keys you have to declare for
+different xflake projects I really hope
+you enjoyed this small tutorial consider
+giving it a like if you want to see more
+NYX OS videos and also I'm planning to
+review some more useful Linux tools as
+well as window managers and their
+configurations thank you so much for
+watching and the cookie from previous
+video rightfully belongs to becoming
+human

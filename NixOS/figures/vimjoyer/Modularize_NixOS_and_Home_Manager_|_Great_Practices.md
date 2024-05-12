@@ -1,0 +1,29 @@
+# Timestamps
+- \newcommand{\scriptvimjoyermodularizenixos}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Modularize_NixOS_and_Home_Manager_|_Great_Practices.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyermodularizenixos}[2]{\href{https://youtu.be/vYc6IzKvAJQ?si=p-PPhmlrrwA0kk87&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Modularize_NixOS_and_Home_Manager_|_Great_Practices.md" "" vimjoyermodularizenixos vimjoyermodularizenixos
+- 00:00:42 \scriptvimjoyermodularizenixos{1}{modules imported relative to each other}
+- 00:01:26 \scriptvimjoyermodularizenixos{2}{}
+- 00:01:47 \scriptvimjoyermodularizenixos{3}{grouping modules by purpose}
+- 00:02:15 \scriptvimjoyermodularizenixos{4}{don't want steam on work machine}, but currently no way to disable it, solution is to make configs toggle-able
+- 00:02:43 \scriptvimjoyermodularizenixos{5}{the top part can now be used to define new nixos options and bottom part can be used to declare these or any other nixos options}
+- 00:02:57 \scriptvimjoyermodularizenixos{6}{useful functions for manipulating config}
+- 00:03:04 \scriptvimjoyermodularizenixos{7}{used to access these or any other options values}
+- 00:03:29 \scriptvimjoyermodularizenixos{8}{}
+- 00:03:49 \scriptvimjoyermodularizenixos{9}{}
+- 00:03:55 \scriptvimjoyermodularizenixos{10}{can use conditional logic to enable and disable this modules based on other nixos options}
+- 00:04:01 \scriptvimjoyermodularizenixos{11}{declare with options enabled by default by lib.mkDefault}
+- 00:04:12 \scriptvimjoyermodularizenixos{12}{this values can be overriden in other nixos modules}
+- 00:04:21 \scriptvimjoyermodularizenixos{13}{allows to declare options twice}, is mkOverride function with first parameter filled in
+- 00:04:45 \scriptvimjoyermodularizenixos{14}{900 stronger than 1000}
+- 00:04:55 \scriptvimjoyermodularizenixos{15}{mk function are aliases for mkOverride with some priority value already assigned}
+- 00:05:15 \scriptvimjoyermodularizenixos{16}{mkForce}, is safe and forces module to be disabled
+- 00:05:47 \scriptvimjoyermodularizenixos{17}{default.nix module in nixos modules}, only purpose importing all other modules have here
+- 00:05:58 \scriptvimjoyermodularizenixos{18}{bundling by their purpose}
+- 00:06:02 \scriptvimjoyermodularizenixos{19}{passing default module to all hosts}
+- 00:06:20 \scriptvimjoyermodularizenixos{20}{}
+- 00:06:25 \scriptvimjoyermodularizenixos{21}{same also applied to home-manager}
+- 00:06:42 \scriptvimjoyermodularizenixos{22}{when using-home-manager standalone}
+- 00:06:55 \scriptvimjoyermodularizenixos{23}{when using-home-manager as a module}
+- 00:07:13 \scriptvimjoyermodularizenixos{24}{pass default module to all home-manager modules}
+- 00:07:16 \scriptvimjoyermodularizenixos{25}{home-manager config is now modular}

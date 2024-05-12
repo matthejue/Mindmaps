@@ -1,0 +1,22 @@
+# Timestamps
+- \newcommand{\scriptvimjoyersecretsmanagment}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/NixOS_Secrets_Management_|_SOPS_NIX.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyersecretsmanagment}[2]{\href{https://youtu.be/G5f6GC7SnhU?feature=shared&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/NixOS_Secrets_Management__SOPS_NIX.md" "" vimjoyersecretsmanagment vimjoyersecretsmanagment
+- 00:00:26 \scriptvimjoyersecretsmanagment{1}{}
+- 00:00:34 \scriptvimjoyersecretsmanagment{2}{age encryption method}
+- 00:01:11 \scriptvimjoyersecretsmanagment{3}{}
+- 00:01:00 \videovimjoyersecretsmanagment{60}{for 2nd command ssh key needs to have no passphrase}
+- 00:01:14 \scriptvimjoyersecretsmanagment{4}{also want to get public version of this key}
+- 00:01:54 \scriptvimjoyersecretsmanagment{5}{}
+- 00:00:43 \scriptvimjoyersecretsmanagment{6}{}
+- 00:03:05 \scriptvimjoyersecretsmanagment{7}{default file}
+- 00:03:12 \scriptvimjoyersecretsmanagment{8}{}
+- 00:03:39 \scriptvimjoyersecretsmanagment{9}{}
+- 00:04:53 \scriptvimjoyersecretsmanagment{10}{}
+- 00:04:59 \scriptvimjoyersecretsmanagment{11}{}
+- 00:05:14 \scriptvimjoyersecretsmanagment{12}{}
+- 00:05:34 \scriptvimjoyersecretsmanagment{13}{}
+- 00:04:05 \scriptvimjoyersecretsmanagment{14}{}
+- 00:04:55 \scriptvimjoyersecretsmanagment{15}{}
+- 00:05:25 \scriptvimjoyersecretsmanagment{16}{}
+- 00:05:35 \scriptvimjoyersecretsmanagment{17}{}

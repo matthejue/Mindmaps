@@ -1,0 +1,165 @@
+home manager modules are amazing they
+provide us with convenience of being
+able to configure programs declaratively
+and make our configurations modular but
+did you know that those same modules can
+also be used to declare personal per
+system differences maybe you'd like to
+have different wallpapers on two systems
+using the same configuration include
+some small window manager specific
+config differences or even big personal
+shell extending options today we are
+going to make some simple home manager
+modules to make your configurations
+clean easy to refactor and most
+importantly even more declarative
+let's begin with a regular home. n file
+the only thing we are going to do here
+for now is import a newly created module
+from a sub directory called modules myy
+module. n naming is not important here
+you can call it anything you want
+usually your personal modules look
+something like this a simple file
+containing a function which has some
+home manager options declared in a set
+that it returns this module for example
+creates a shell script in a home
+directory which uses s sww to change
+your wallpaper to the one defined here
+that is perfect perfectly fine but we
+want to add some custom functionality
+how cool would it be if we simply
+exposed an option which could quickly
+change our wallpaper later to do it
+let's wrap everything we have here in
+the config field and also declare an
+options field at the top we have just
+separated our modules logic from the
+options that it will provide to us when
+we import it everything contained in a
+config field will still work the same
+way as it did before so let's spice it
+up with our custom options we will
+Define a wallpaper option here it will
+default to/ wallpaper 1.png have some
+disc description and a path type for
+extra confidence notice that both make
+option function and types come from home
+manager sleep field which is going to be
+passed to any module in the parameter
+set so don't forget to include it at the
+top our config part of the file can now
+make use of this option so let's
+reference it in the script just like
+that we can now return to home. n or any
+other file that might import this module
+and simply add the wallpaper option
+assign it to some value or remove it
+completely to get a default one rebuild
+your home manager config and a script
+with your desired wallpaper will appear
+now changing your wallpaper is just a
+matter of editing one line in the entry
+module for a specific user not bad but
+there are certainly more important use
+cases like defining monitors for example
+sometimes you have multiple setups with
+two or three monitors and you want to
+use the same configuration on all of
+them if you were using hyperland on a
+traditional Linux disto for example this
+would mean creating a special script
+that would parse user specific files to
+get those monitor settings and then
+apply them on each startup with Hyper
+City
+that's not too bad really but the NY
+declarative way sounds much more clean
+to me so let's begin by making another
+module file which is going to hold some
+options it doesn't matter if we separate
+options and their usage in two files
+because home manager is still going to
+find everything as long as we import
+them somewhere the monitors. N module is
+also going to be a function which
+returns a set containing options.
+monitors I must admit that this part was
+shamelessly borrowed from Mysterio 77s
+config even if only partially for
+Simplicity reasons you can find a bigger
+and better example in the link in the
+description this time our options type
+is much more interesting because it's
+going to be a list of sub modules so we
+can later just list many sets containing
+fields in a single option sub modules
+itself will also have an options field
+inside which is going to contain options
+for each specific monitor for example
+this width height refresh rate X and Y
+coordinates and whether or not it is
+enabled all of these options have their
+own types so NY can warn you if you
+screw up later import this module
+somewhere and open your hyperlens NYX
+configuration hyperlens configuration
+file gets generated automatically based
+on the fields that you provide in the
+settings so we will Define a top level
+monitor field which has to be assigned
+to a list because NY sets can only
+contain one value whereas hyperland
+config begins each monitor definition
+with a monitor keyword the list itself
+is obviously going to be generated
+automatically using a builtin NX map
+function it takes a function and a list
+as two parameters and applies the
+function to each element to get a new
+list basically the same way as in any
+other programming language our function
+will build strings from monitors so
+let's first interpolate the name into
+this string the whole line will be
+pretty long so we can use Latin in
+syntax to Define resolution and position
+on separate lines they are also
+interpolated into the strings here but
+notice that a two string built-in
+function is used to convert integer type
+values to Strings finally we can simply
+interpolate resolution and position into
+this string and also check whether or
+not the monitor is abled to know if we
+need to put a disabled word into the
+string instead this cool piece of Nyx
+code results in a correctly formatted
+hyperland config lines which can loud be
+generated from as many monitors as you
+wish there are obviously many more use
+cases for home manager modules so
+experiment with your own configurations
+or even share your modules with other
+people to further expand the already
+giant ecosystem NYX really sounds like a
+cult doesn't it and now I would like to
+thank the sponsors of this video
+specifically Victor vores for a 20 per
+month subscription Hoskins for a € 10
+per month subscription leing rocks for a
+€1 per month subscription not nut for A5
+per month subscription and also jom for
+a 50 recent donation coffee supporter
+for a € 10 recent donation a fellow NY
+joyer for a 6 recent donation Magi 00
+for a 5 recent donation gate on the page
+for a 5 recent donation and yogurt for a
+1 recent donation as usual don't forget
+to check out our Discord server leave a
+like or a comment if you enjoyed this
+video or subscribe if you are feeling
+extra generous thanks for watching and I
+will see you in the next one

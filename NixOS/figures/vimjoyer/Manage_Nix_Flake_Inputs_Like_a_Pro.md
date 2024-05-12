@@ -1,0 +1,28 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerflakeinputs}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Manage_Nix_Flake_Inputs_Like_a_Pro.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerflakeinputs}[2]{\href{https://youtu.be/4ZoBGlkMPWI?si=e1pO-T1rjJk2IdKb&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Manage_Nix_Flake_Inputs_Like_a_Pro.md" "" vimjoyerflakeinputs vimjoyerflakeinputs
+- 00:00:21 \scriptvimjoyerflakeinputs{1}{initialising a flake}
+- 00:00:39 \scriptvimjoyerflakeinputs{2}{initial flakes from templates}
+- 00:00:43 \scriptvimjoyerflakeinputs{3}{create own template}, holds reference to this folder which holds the template itself
+- 00:00:57 \scriptvimjoyerflakeinputs{4}{}
+- 00:01:04 \scriptvimjoyerflakeinputs{5}{}
+- 00:01:04 \videovimjoyerflakeinputs{64}{can have many templates in flake}, can just mentain one for all needs
+- 00:01:29 \scriptvimjoyerflakeinputs{6}{nixpkgs itself is a flake}
+- 00:01:36 \scriptvimjoyerflakeinputs{7}{nix flake metadata}
+- 00:01:43 \scriptvimjoyerflakeinputs{8}{}
+- 00:01:45 \scriptvimjoyerflakeinputs{9}{could replace flake input with url}, but flake.lock saves them so one does not have to interact with them, this hashes updated to newer version when run nix flake update
+- 00:02:33 \scriptvimjoyerflakeinputs{10}{only update one of the inputs}
+- 00:02:50 \scriptvimjoyerflakeinputs{11}{not sure jq is installed}
+- 00:03:02 \scriptvimjoyerflakeinputs{12}{borrow it from nix store with nix run command}, use this selector to get all of our inputs
+- 00:03:06 \scriptvimjoyerflakeinputs{13}{remove all unnecessary double quotes with sed}, pipe it into fzf to get a nice menu
+- 00:03:08 \scriptvimjoyerflakeinputs{14}{final}
+- 00:03:09 \scriptvimjoyerflakeinputs{15}{}
+- 00:03:09 \videovimjoyerflakeinputs{189}{automatically looks for root inputs for flake in current directory}
+- 00:03:12 \scriptvimjoyerflakeinputs{16}{put command into variable}
+- 00:03:22 \scriptvimjoyerflakeinputs{17}{simple script into flake on github}
+- 00:03:34 \scriptvimjoyerflakeinputs{18}{can run this flake by}
+- 00:03:37 \scriptvimjoyerflakeinputs{19}{nix flake show to see that it has default packages for every default system}
+- 00:03:38 \videovimjoyerflakeinputs{218}{all four added automatically by flake-utils flake}
+- 00:03:45 \scriptvimjoyerflakeinputs{20}{is just a function that returns a set with all of the system specific packages set to this value (packages.default) for every system}
+- 00:03:55 \scriptvimjoyerflakeinputs{21}{git automatically commit changes to its flake after update with --commit-lock-file flag}

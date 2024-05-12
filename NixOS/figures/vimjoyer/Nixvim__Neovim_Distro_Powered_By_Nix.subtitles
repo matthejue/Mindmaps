@@ -1,0 +1,123 @@
+getting into Neo's configuration
+ecosystem is notoriously difficult with
+so many plugins package managers guides
+and even complete distributions out
+there it can literally take weeks for
+someone without the configuration to
+arrive at a usable solution but fear not
+because if you happen to know a little
+bit about NYX you can make use of the
+amazing distribution called NYX viim
+unlike anything that we usually call a
+neim distribution NYX viim comes Bare
+Bones looking exactly the same as a
+regular unconfigured Neo the only
+difference is it's super simple to
+configure only taking a couple of lines
+to enable most popular plugins install
+and configure LSP servers and set
+options or color schemes without having
+to do any GitHub plugin hunting and the
+fastest way to begin using nxm is to run
+this command in an empty directory it
+will initialize an example niwi
+configuration with play. n responsible
+for fetching all dependencies and files
+in config being the configuration itself
+try it out immediately simply by running
+NYX run in the flake directory it
+doesn't include much at the moment so
+let's add some options open the official
+documentation page which you can find in
+the link in the description and there
+you will see a list of all options and
+plugins provided by default let's start
+with the most important one and set a
+color scheme NYX Wim is very smart so
+other plugins will automatically adapt
+to it with no extra steps required I
+enabled luine and buffer line. en was
+included in template configuration by
+default if we try to run NX run again we
+will see that both of them adopt to
+group box automatically now let's say
+that we want to get some real work done
+ASAP and get the configuration out of
+the way in just a couple of seconds in
+that case we can quickly enable and
+install our required language server
+with just one line enable completion for
+LSP and some other sources while we're
+ated it and also set some key bindings
+by copy pasting this chunk of code from
+the documentation try it out with a file
+written in your favorite language with
+this command and just like that we have
+an easy to maintain working setup with
+fancy completion and error checking we
+can improve it even further by including
+some more popular plugins like telescope
+oil. envm and three Seer with each one
+of them having their own special options
+not just plugins niim also allows you to
+easily set options and globals with
+corresponding attribute sets assign
+keymaps by adding them to kaps list
+declaratively Define Auto commands and
+even set highlight groups making
+tweaking your ni swi configuration just
+as easy as home manager or NX ones all
+of that is great but what if you find
+some of your favorite plugins to be
+missing from nxm options fortunately for
+you nxm allows you to add plugins simply
+by adding them to the extra plugins list
+where you can even configure them
+straight away by using this plugin and
+config structure we explored packaging
+neovin plugins for Nyx in more detail in
+the previous ni and Neo video which you
+can find in the link in the description
+basic configuration aside one of the
+biggest advantages of using ni wi for me
+is that your configuration can be easily
+uploaded to GitHub and run on any other
+computer with NX without polluting local
+environment local neovim configuration
+will be ignored this way meaning that
+theoretically multiple developers could
+connect to the same server with SSH and
+have their own development environments
+available to them
+simultaneously talking about local Nim
+configurations nixim also provides
+modules for nxs home manager and NX
+Darin allowing you to install and
+configure nxm system wise as a part of
+one of these three configs in the end NX
+is a niche distribution of a niche text
+editor so just like NX itself it's a
+Weir novelty for some and absolute gold
+for others I absolutely love it and the
+way it handle CS piece is genuinely so
+much better than the Alternatives and so
+now I would like to thank gate on the
+page maintainer of NIV for helping me
+out with some parts of this video and of
+course the sponsors of this video
+specifically Hoskins PE easy not not uni
+zavier whom I accidentally put in the
+recent donations in the previous video
+so I apologize Albert C Stefan schroer
+Magi 00 lelus 0x mouthless Mattis Thomas
+Brown hening ker Cameron J Mo cyber V
+Rose yo friend UNC Simon Master how to
+learn Oakley
+cord and also the people who supported
+the channel previously as usual don't
+forget to check out our Discord server
+leave a like or comment if you enjoy
+this video or subscribe if you are
+feeling extra generous thanks for
+watching and I will see you in the next
+one

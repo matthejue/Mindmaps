@@ -1,0 +1,22 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerhyprland}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Declare_Hyprland_Config_With_Nix_Home_Manager.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerhyprland}[2]{\href{https://youtu.be/zt3hgSBs11g?si=Y-iLBerM1SEYJ6Im&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Declare_Hyprland_Config_With_Nix_Home_Manager.md" "" vimjoyerhyprland vimjoyerhyprland
+- 00:00:22 \videovimjoyerhyprland{22}{specialNvideoPatches removed}
+- 00:00:44 \scriptvimjoyerhyprland{1}{}
+- 00:01:03 \scriptvimjoyerhyprland{2}{}
+- 00:01:10 \scriptvimjoyerhyprland{3}{man home-configuration.nix}
+- 00:01:10 \videovimjoyerhyprland{70}{translated into hyprland syntax dynamically}, thus suboptions not explicitly listed
+- 00:01:29 \scriptvimjoyerhyprland{4}{options with specials symbols like $ or . need to be surrounded by double quotes}
+- 00:01:35 \scriptvimjoyerhyprland{5}{assign many keybindings with same bindm command, which is not possible with nix syntax due to the set keys being unique}, solved by adding all values into a list and assigning it to a single bind attribute
+- 00:02:09 \scriptvimjoyerhyprland{6}{}
+- 00:02:23 \scriptvimjoyerhyprland{7}{synchronize colors with rest of system}, active and inactive borders
+- 00:02:35 \scriptvimjoyerhyprland{8}{aligning entire shell scripts for key bindings or startup execution}
+- 00:02:39 \scriptvimjoyerhyprland{9}{interpolate binary path into those scripts}
+- 00:02:42 \scriptvimjoyerhyprland{10}{}
+- 00:02:53 \scriptvimjoyerhyprland{11}{}
+- 00:03:17 \scriptvimjoyerhyprland{12}{}
+- 00:03:24 \scriptvimjoyerhyprland{13}{follow hyprland's flake to never get version mismatches}
+- 00:03:35 \scriptvimjoyerhyprland{14}{}
+- 00:03:38 \scriptvimjoyerhyprland{15}{double borders around every window}
+- 00:03:45 \scriptvimjoyerhyprland{16}{packaging own plugins}

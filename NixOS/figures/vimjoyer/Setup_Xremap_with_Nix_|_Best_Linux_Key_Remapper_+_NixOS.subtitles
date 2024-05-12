@@ -1,0 +1,63 @@
+this is a companion video to the extreme
+of video which has been released on the
+channel at the same time here I am only
+going to talk about installation on Nix
+OS without going through its awesome
+features so check out the extra map
+video first and then come back to this
+one I am also going to cover home
+manager setup later in this video so
+also check out the home manager video if
+you don't have it set up now that I have
+driven away the majority of the people
+watching this video we can begin open
+your flake and let's add an additional
+input at the top paste this extreme
+uplake URL which you can find in the
+description next thing you want to do is
+make sure that inputs are exposed to
+your entire Flex outputs with this add
+input syntax now we can pass inputs to
+our Nexus configuration by inheriting
+inputs in the special Arc set in your
+nixos function go to the configuration
+itself and add inputs to the next rest
+configuration files parameters and then
+finally include the X-ray Maps flakes
+Nix OS module in the Imports now we have
+an access to a extreme app service which
+we don't have to able but to make use of
+it let's add a services.xre map set
+somewhere here write your primary user's
+name in the username field and then we
+can put the whole yaml configuration
+file into a yaml config key with a
+multi-lane string you can also Define it
+with a special NYX syntax which uses the
+same names just instead of yaml keys you
+have the Nyx arrays sets and values you
+can also enable features here like with
+Hyper for hyperland with sway for sway
+and so on now if you want to use extreme
+up with home manager on any distro make
+sure to follow the instructions on how
+to run x-ray map as a user from the main
+video on Nexus you just need to include
+these three lines in your
+configuration.nix go to your home
+manager flake and pass your inputs to
+home manager then import the module in
+the home configuration file now the same
+service is also available in home
+manager except you don't have to specify
+username because home manager obviously
+already knows it you can also just add
+this package to your packages and use
+extreme app normally as a regular binary
+instead of a serving just like in the
+main video I'd like to thank the
+sponsors of this video Hoskins for an
+amazing 10 euro per month subscription
+and polycrylate for A1 Euro one of
+thanks for watching and I'll see you in
+the next one

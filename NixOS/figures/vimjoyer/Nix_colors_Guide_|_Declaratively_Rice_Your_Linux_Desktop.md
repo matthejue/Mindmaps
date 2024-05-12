@@ -1,0 +1,22 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerxnixcolors}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nix_colors_Guide_|_Declaratively_Rice_Your_Linux_Desktop.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyernixcolors}[2]{\href{https://youtu.be/jO2o0IN0LPE?si=njlYSgeuZV03dj8l&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nix_colors_Guide_|_Declaratively_Rice_Your_Linux_Desktop.md" "" vimjoyerxnixcolors vimjoyernixcolors
+- 00:00:19 \scriptvimjoyerxnixcolors{1}{base 16 repo}
+- 00:00:37 \scriptvimjoyerxnixcolors{2}{each theme}
+- 00:00:49 \scriptvimjoyerxnixcolors{3}{base 16 templates}, yaml file for allacrity, all pieces of syntax replaced by base 16 colors
+- 00:01:03 \videovimjoyernixcolors{63}{what it does}, provide colorcodes to be used in nix projects
+- 00:01:40 \scriptvimjoyerxnixcolors{4}{pass nix-inputs to home-manager}
+- 00:01:43 \scriptvimjoyerxnixcolors{5}{or to nix config file}
+- 00:01:51 \scriptvimjoyerxnixcolors{6}{add to parameters and include module in imports}
+- 00:02:02 \scriptvimjoyerxnixcolors{7}{now can use all themes}
+- 00:02:22 \scriptvimjoyerxnixcolors{8}{select a theme and add features dir}
+- 00:02:24 \scriptvimjoyerxnixcolors{8}{}
+- 00:02:33 \videovimjoyernixcolors{153}{config provides with values from main config file}, get all colors from there
+- 00:03:02 \scriptvimjoyerxnixcolors{9}{add colors to make notification deamon}
+- 00:03:19 \scriptvimjoyerxnixcolors{10}{add alacritty module}
+- 00:03:23 \scriptvimjoyerxnixcolors{11}{alacritty config}
+- 00:03:52 \scriptvimjoyerxnixcolors{12}{custom program}
+- 00:04:06 \scriptvimjoyerxnixcolors{13}{create file at desired location}
+- 00:04:25 \scriptvimjoyerxnixcolors{14}{test}
+- 00:04:27 \videovimjoyernixcolors{267}{also xdg.configfileset}, used to declare files in xdg config directory in case it's not set to .config one ones machine

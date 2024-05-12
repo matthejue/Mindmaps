@@ -1,0 +1,226 @@
+structuring your NX siiz configuration
+can be a very daunting task there's no
+Universal way to do things right and in
+the end every configuration will be
+unique but putting everything in one
+file is clearly not a good option and so
+today I will showcase a bunch of
+patterns you can use to make your
+configuration scalable and easy to
+maintain firstly let's take a look at
+the most simple modular configuration
+example it basically looks like
+something you would end up with after
+your first couple of days of using
+nxs here we have our configuration. ni
+Hardware configuration. n and a bunch of
+other modules in the N modules directory
+in a single host configuration like this
+we can simply import everything we need
+straight in the configuration. NX or in
+one of the other modules notice that
+modules in nyos are imported relative to
+each other which means that to import
+module 2 in module one we don't have to
+go any deeper into the directory
+structure since we only have one PC to
+manage in this example we don't really
+have to come up with any conditional
+logic and can just UT remove modules
+whenever we want but now let's take a
+look at a more complex setup here we
+have multiple machines so if we want to
+share some modules between them it would
+only make sense to keep them in a
+separate place like a n modules
+directory located in one of their parent
+directories once again NX modules are
+imported relative to each other so in
+this case all we have to do is add a
+bunch of double dots to go up the
+directory hierarchy we don't have to
+touch other modules because relative to
+each other they did not move there's
+nothing wrong with a structure like this
+and as long as you keep it simple you
+could keep adding more and more
+configurations and modules but you
+probably already noticed that importing
+a bunch of modules like this looks a bit
+messy and gets complicated once you
+start expanding your configuration one
+simple solution to this problem would be
+grouping all modules by purpose here I
+have an example with a bunch of desktop
+apps so a logical thing to do would be
+to put all of them into a desktop apps
+module now we only have to import this
+one module on every machine that needs
+desktop apps keeping your config nice
+and clean right wrong let's put it to
+the test and make two configurations for
+two different machines one for your
+workstation and one for your home
+computer you probably don't want to have
+Steam on your work machine but with a
+current config structure there is no way
+to just disable it meaning that we have
+to go and regroup everything in a
+different way which will only get more
+TDs as your config is expanding so
+what's the solution to this problem of
+course making your configs toggleable
+remember how many built-in NS modules
+come with an enable option well we can
+apply this exact pattern to our own
+custom nxo modules all we have to do is
+open one of the modules wrap all the
+options or module declares with a config
+attribute and include an options
+attribute in the same file the top part
+can now be used to define new NS options
+and the bottom part can be used to
+declare these or any other NS options
+next thing we want to do is include
+liand config in the parameter set at the
+top first one will provide us with some
+useful functions for manipulating our
+config and the second one can be used to
+access these or any other options values
+let's create a simple Boolean option
+with a lip. make enable option function
+and then use lip. make IF function to
+conditionally enable our entire module
+if this option is set to true in this
+example our option will be called module
+1. enable but you can call it however
+you like this pattern can now be applied
+to all modules you want to make
+toggleable which is probably the first
+step you want to take to make your
+configuration scalable if we now import
+a module like this into our
+configuration. n we can easily enable or
+disable it with one simple line with an
+approach like this we can once again
+bundle a bunch of modules in a single
+parent module and then import it in our
+configuration. n allowing us to enable
+and disable its sub modules whenever you
+want and the best part is we can now use
+conditional logic to enable and disable
+these modules based on other NS options
+making your configuration that much more
+flexible we could even declare which
+modules should be enabled by default
+with a li that make default function
+like in this example where modules 1 and
+four are disabled by default and modules
+2 and three are enabled these values can
+then be overridden in other nze modules
+talking about this leave. make default
+function if you ever tried to use it you
+have probably already noticed that it
+essentially allows you to declare
+options twice and that is because lip.
+make default is basically a li. makeover
+rate function with the first parameter
+filled in the make overrate function I'm
+talking about lets you assign priority
+to option values which is very useful if
+you have multiple modules declaring the
+same option options with lower values
+are prioritized meaning that in this
+example modu one will get enabled since
+makeover right 900 is stronger than
+makeover right 1,000 functions like make
+default make force and some other
+functions from lib are also basically
+just LSS for make override with some
+priority value already assigned it is
+good to know about them but make sure to
+be extra careful when working with lower
+values because nixo will not question
+your choice and you may end up with a
+system that misses essential components
+or even flood out refuses to roll back
+scary stories aside applying make force
+to your own options is generally pretty
+safe and in this example it would force
+module 2 to be disabled and now the
+moment you all have been waiting for
+let's finally use the techniques we
+learned throughout the video and come up
+with a structured NX has flake
+containing a bunch of n configurations
+the directory structure of such flake
+can look something like this
+at the top level we have our fake. n
+file host directory containing all of
+our hosts and a NS modules directory
+with the modules we want to share
+between our
+configurations to save yourself from
+having to import dozens of modules on
+every host later let's also create a
+default n module in nxs modules its only
+purpose will be importing all other
+modules we have here after making all
+modules in NS modules to Global and
+bundling them by their purpose the only
+thing we have left to do is finally
+passing the modules default module to
+all of your hosts your configuration. n
+files will then be able to enable
+modules they need finally making your
+system truly modular I advise you to
+create modules for every little part of
+your system but in the end the way you
+separate everything largely depends on
+your preference and the only way to find
+your style is to go in and get your
+hands dirty by the way everything we
+learned today can also be applied to
+home manager so you can go ahead and
+also make your home manager modules
+toggleable group them and hopefully end
+up with a structure that looks something
+like
+this your next step will be different
+depending on how you install home
+manager if you're using Standalone pass
+the home manager default module directly
+to your configuration like this and if
+you using home manager as a module we
+can expose the default module in our fak
+outputs and then take it from here in
+the nxs module that declares home
+manager there are multiple ways to do it
+but here is what I consider to be the
+simplest approach we first want to apply
+an add syntax to our parameter and pass
+it to all of our modules with special
+arcs then open EXs module that declares
+your home manager config include inputs
+in the parameter set at the top and
+finally pass the default module to all
+home manager modules your home manager
+config is now
+modular and now I would like to thank
+the sponsors of this video specifically
+Hoskin Bey aing b
+Ponder noty not uni
+Xavier Al Albert C pan debal M Shen zet
+workflow Zak beer Aila Bradley
+Davis zth Urban Zan glitched
+code anub Simon slim 5782 chai
+Borg Liam creamers Shori Suzuki and
+Anonymous
+donations I would also like to thank
+people who supported the channel
+previously and as usual don't forget to
+check out our Discord server leave a
+like or comment if you enjoy this video
+or subscribe if you are feeling extra
+generous thanks for watching and I'll
+see you in the next one

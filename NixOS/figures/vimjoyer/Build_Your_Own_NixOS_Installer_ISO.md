@@ -1,0 +1,15 @@
+# Timestamps
+- \newcommand{\scriptvimjoyernixosinstalleriso}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Build_Your_Own_NixOS_Installer_ISO.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyernixosinstalleriso}[2]{\href{https://youtu.be/-G8mN6HJSZE?si=xVXKHSsgSpTgArQ1&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Build_Your_Own_NixOS_Installer_ISO.md" "" vimjoyernixosinstalleriso vimjoyernixosinstalleriso
+- 00:00:52 \scriptvimjoyernixosinstalleriso{1}{flake}, configuration alongside existing ones
+- 00:01:15 \scriptvimjoyernixosinstalleriso{2}{}
+- 00:01:28 \scriptvimjoyernixosinstalleriso{3}{}
+- 00:01:32 \scriptvimjoyernixosinstalleriso{4}{result directory with iso image appearing in cwd}
+- 00:01:36 \scriptvimjoyernixosinstalleriso{5}{alternative nixos-generators command}, comes with benefit of being able to choose the image format and even cross compile to other architectures with some additional setup
+- 00:01:55 \scriptvimjoyernixosinstalleriso{6}{if using no flake}
+- 00:02:01 \scriptvimjoyernixosinstalleriso{7}{reference configuration.nix}
+- 00:02:10 \scriptvimjoyernixosinstalleriso{8}{same result}
+- 00:02:16 \scriptvimjoyernixosinstalleriso{9}{close to minimal image on installation page}
+- 00:02:38 \scriptvimjoyernixosinstalleriso{10}{include anything}, also entire desktop configuration
+- 00:02:56 \scriptvimjoyernixosinstalleriso{11}{autologin user nixos}, also i.e. to recover damaged system with preferred tools

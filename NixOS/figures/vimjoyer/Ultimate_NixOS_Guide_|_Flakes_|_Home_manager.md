@@ -44,3 +44,5 @@
 - 00:13:44 \scriptvimjoyerultimate{33}{Choosing which one to rebuild is changing last part of nixos-rebuild switch}
 - 00:14:14 \scriptvimjoyerultimate{34}{Reuse code between configurations}
 - 00:14:22 \scriptvimjoyerultimate{35}{Because of flakes can store in home directory}
+
+# So, the flake.nix file in the video uses extraSpecialArgs, instead of specialArgs that Nix uses, so I got "error: function 'anonymous lambda' called with unexpected argument 'extraSpecialArgs'". For everyone getting the same issue, please replace "extraSpecialArgs = {inherit inputs;};" from the flake.nix file with "specialArgs = {inherit inputs;};". (Although, I am pretty sure that @Vimjoyer already fixed the template flake)

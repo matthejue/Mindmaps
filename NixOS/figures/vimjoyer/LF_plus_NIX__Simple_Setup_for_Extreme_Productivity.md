@@ -1,0 +1,28 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerlfplusnix}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/LF_+_NIX:_Simple_Setup_for_Extreme_Productivity.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerlfplusnix}[2]{\href{https://youtu.be/z8y_qRUYEWU?si=4kCnnqS2PAUq3-2D&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/LF_plus_NIX__Simple_Setup_for_Extreme_Productivity.md" "" vimjoyerlfplusnix vimjoyerlfplusnix
+- 00:01:15 \scriptvimjoyerlfplusnix{6}{two dolar signs}
+- 00:02:11 \scriptvimjoyerlfplusnix{1}{commands fields for custom commands that can later assign to keys}
+- 00:01:08 \videovimjoyerlfplusnix{68}{using multi-line strings for all of my commands because you don't have to escape any double or single quotes this way}
+- 00:01:24 \videovimjoyerlfplusnix{84}{lf multiline commands}, dolar sign and double curly braces syntax, fix dolar sign with 2 single quotes
+- 00:02:57 \scriptvimjoyerlfplusnix{2}{}
+- 00:03:04 \scriptvimjoyerlfplusnix{3}{}
+- 00:03:05 \scriptvimjoyerlfplusnix{4}{}
+- 00:03:49 \scriptvimjoyerlfplusnix{5}{}
+- 00:02:24 \scriptvimjoyerlfplusnix{7}{double quote key}
+- 00:02:26 \scriptvimjoyerlfplusnix{9}{put any field that includes special symbols in a string}
+- 00:02:33 \scriptvimjoyerlfplusnix{8}{can assign keys to empty string to unbind them}
+- 00:02:28 \scriptvimjoyerlfplusnix{10}{single quote does not need to be escaped in double quotes}
+- 00:03:33 \videovimjoyerlfplusnix{213}{link a file to right place}, lf/icons is part that comes after full xdg config path and lf/icons looks for icons file in the same directory as the current nix file
+- 00:03:55 \scriptvimjoyerlfplusnix{11}{icons from internet}, not updated so dont need to fetch from internet
+- 00:04:04 \scriptvimjoyerlfplusnix{12}{previewer}, provided by home-manager
+- 00:04:15 \scriptvimjoyerlfplusnix{13}{more interesting way}
+- 00:04:27 \scriptvimjoyerlfplusnix{14}{two scripts not in same folder as lfrc}
+
+- 00:04:48 \scriptvimjoyerlfplusnix{15}{dolar signs also escaped}
+- 00:05:10 \scriptvimjoyerlfplusnix{16}{standard lf syntax}
+- 00:05:21 \scriptvimjoyerlfplusnix{17}{final result}
+- 00:05:23 \scriptvimjoyerlfplusnix{18}{final result preview scripts}
+- 00:05:25 \scriptvimjoyerlfplusnix{19}{gf}
+- 00:05:29 \scriptvimjoyerlfplusnix{20}{gf}

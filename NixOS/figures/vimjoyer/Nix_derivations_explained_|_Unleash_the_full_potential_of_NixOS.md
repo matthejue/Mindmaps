@@ -1,0 +1,39 @@
+# Timestamps
+- \newcommand{\scriptvimjoyerderivations}[2]{\href{openpdf:///home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nix_derivations_explained_|_Unleash_the_full_potential_of_NixOS.pdf:#1}{\inlinebox{#2}}}
+- \newcommand{\videovimjoyerderivations}[2]{\href{https://youtu.be/WT75jfETWRg?si=rS-xo6UqT2ix5aBN&t=#1}{\inlineboxtwo{#2}}}
+- set_as_timestamps_file "/home/areo/Documents/Studium/Summaries/NixOS/figures/vimjoyer/Nix_derivations_explained_|_Unleash_the_full_potential_of_NixOS.md" "" vimjoyerderivations vimjoyerderivations
+- 00:00:03 \videovimjoyerderivations{3}{set of instructions that describe the build process of a package}
+- 00:00:24 \scriptvimjoyerderivations{1}{}
+- 00:00:33 \scriptvimjoyerderivations{2}{}
+- 00:00:39 \scriptvimjoyerderivations{3}{}
+- 00:00:57 \scriptvimjoyerderivations{4}{first solution}
+- 00:01:06 \scriptvimjoyerderivations{5}{better solution}, turn file into function that takes set of packages and in case packages not provided use system ones
+- 00:01:09 \scriptvimjoyerderivations{6}{build package with nix-build}
+- 00:01:13 \scriptvimjoyerderivations{7}{or include in other nix expression like a flake for example}
+- 00:01:23 \scriptvimjoyerderivations{8}{could also skip default.nix and define function in flake}
+- 00:01:27 \scriptvimjoyerderivations{9}{nix build without dash for flake}
+- 00:01:43 \scriptvimjoyerderivations{10}{use entire src directory}
+- 00:02:28 \scriptvimjoyerderivations{11}{build phase assumes already in src directory, get compiled binary}, install phase, tell nix that we want users to be able to execute the binary, all nixos packages store their binary in the out/bin directory
+- 00:02:37 \scriptvimjoyerderivations{12}{$out is regular bash variable exposed by nix}, is going to be turned into a final path to our package when we build it
+- 00:02:50 \scriptvimjoyerderivations{13}{could also write like this}, $src expands into path to our src directory once it gets copied into the nix store to be build
+- 00:03:04 \scriptvimjoyerderivations{14}{}
+- 00:03:08 \scriptvimjoyerderivations{15}{project structure after build}
+- 00:03:16 \scriptvimjoyerderivations{16}{if don't specify a build phase}, nix will attempt to use a makefile from the source directory}
+- 00:03:18 \scriptvimjoyerderivations{17}{create simple makefile}
+- 00:03:19 \scriptvimjoyerderivations{18}{}
+- 00:03:31 \scriptvimjoyerderivations{19}{add dependencies to derivation}
+- 00:03:35 \scriptvimjoyerderivations{20}{}
+- 00:03:39 \scriptvimjoyerderivations{21}{modify build command}
+- 00:03:45 \scriptvimjoyerderivations{22}{}
+- 00:03:45 \scriptvimjoyerderivations{23}{}
+- 00:03:45 \scriptvimjoyerderivations{24}{}
+- 00:03:58 \scriptvimjoyerderivations{25}{}
+- 00:04:15 \scriptvimjoyerderivations{26}{packages defined here will only be available in phases and not at runtime}
+- 00:04:20 \scriptvimjoyerderivations{27}{define path variable that will only be set for the hello world binary}
+- 00:04:27 \scriptvimjoyerderivations{28}{define own list of phase names}
+- 00:04:39 \scriptvimjoyerderivations{29}{makeBinPath will be expanded into a regular Linux path variable containing all the packages provided to it}, in this case cowsay
+- 00:04:53 \scriptvimjoyerderivations{30}{wrap program command from the last phase has moved our binary into .hello-world-wrapped}, and helloworld is now a bash command that wraps it containing cowsay in the path. If we run it, cowsay will be executed just as expected even tough it's not present in our user's environment
+- 00:05:05 \videovimjoyerderivations{305}{depending on the language, the build process and runtime dependencies can be drastically different}
+- 00:05:20 \scriptvimjoyerderivations{32}{language specific packaging functions}
+- 00:05:26 \scriptvimjoyerderivations{33}{check out nix files of packages in nixpkgs}, search.nixos.org to check the nix files of packages in nixpkgs
+- 00:05:35 \videovimjoyerderivations{335}{because they are already part of nixpkgs}, they don't follow the structure shown in this tutorial

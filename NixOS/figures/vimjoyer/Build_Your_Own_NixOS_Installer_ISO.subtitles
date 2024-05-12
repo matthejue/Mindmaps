@@ -1,0 +1,110 @@
+I'm sure we can all agree that
+installing nyos is very easy the calaris
+installer included by default is well
+known among Linux users and does a
+pretty good job of abstracting the basic
+installation process however when you
+dive deeper into the nxs ecosystem you
+may find yourself wanting to have
+something a bit more personalized like
+an installation media bundled with your
+favorite commands your custom
+documentation or even your entire
+customized environment and so today we
+are going to learn how to build your
+very own nixos installer ISO image I
+will show case both Flakes and nonfakes
+methods today so feel free to skip parts
+of the video that are irrelevant to your
+setup to begin declaring it we want to
+create a new configuration if you are
+using flakes you can define a new
+configuration alongside your existing
+ones and import a new empty
+configuration. n module inside you can
+call it however you want but make sure
+to remember its name as we will lead it
+in a moment create a new configuration.
+n file at the reference location and
+fill it with basic module boiler plate
+now we want to include modules but in
+the parameter set at the top and we are
+finally ready to import the installation
+CD module it will do all of the heavy
+lifting for us so we can focus on
+personalizing our installer plages
+require us to be super explicit about
+everything so we also need to set the
+host platform here we are going to
+include more options later but for now
+to build the iso image we can use this
+Command right here make sure that the
+part that comes after n configurations
+is set to your configuration name wait
+for the command to finish and you will
+see a result directory with your your
+ISO image appear in your current working
+directory you can also use this
+alternative nxs generators Command right
+here it comes with a benefit of being
+able to choose the image format and even
+cross compile to other architectures
+with some additional setup now in case
+you're not using flakes yet create a new
+configuration. n file anywhere you want
+and fill it with module boiler plate
+include module SPS at the top and import
+the installation CD module then use one
+of these two commands and don't forget
+to reference your configuration file
+here or here and just like with the
+flakes method the result with your ISO
+image will be seam linked into your
+current working directory you can use
+this ISO image straight away and in its
+current state it closely resembles the
+minimal image available on the official
+nyos installation page let's go back to
+the configuration and tweak it a bit
+more here we can include anything you
+want including various programs desktop
+environments custom modules or even your
+entire desktop configuration for now
+let's simply add some use ful utilities
+you may need during n installation
+enable flakes to save you some time
+later and throw in your favorite desktop
+environment or window manager after
+building the image and loading it into
+AVM we can see that everything works
+just as expected the installation CD
+module comes with an autolin user named
+nyos so after booting the system we can
+immediately utilize this image to
+install nyos or recover any damage
+system with your preferred
+tools before I finish this video I'd
+like to thank every everybody who
+subscribed to the channel because today
+is the day we finally hit a 10,000
+subscribers mark this is pretty crazy
+but what's even crazier is that we also
+hit a 1,000 Members Mark on our Discord
+server at roughly the same time it's
+wild to think that all of this happened
+in just 8 months but this surely is just
+the beginning and now I would like to
+thank the sponsors of this video
+specifically Hoskins PE easy aiding b
+punder z not not uni Xavier Albert C p3m
+theal M Shen
+workflow AA Bradley Davis Z once again
+Urban Zen Uncle Simon slim
+5782 chibber Liam creamers chori
+Suzuki and Anonymous donations as usual
+don't forget to check out our Discord
+server leave a like or comment if you
+enjoyed this video or subscribe if
+you're feeling extra generous thanks for
+watching and I'll see you in the next
+one

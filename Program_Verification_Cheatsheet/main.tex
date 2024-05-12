@@ -1,0 +1,199 @@
+\documentclass[landscape, a4paper]{article}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\fontsize{3pt}{3pt}\selectfont
+
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{General} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/1._Introduction.md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/1._Introduction.pdf}
+	\begin{betterlist}
+		\item \alert{Program Verifier:} Takes program and specification and determines whether the program satisfies or if it violates the specification. Tells that in all executions of program specification holds. Also want indication of how specification is violated (i.e. counter example, e.g. inputs to violate assert statement) and also in case of yes want proof, because the program verifier itself could have a bug. \underline{Typical specifications:} No division by zero, Array only accessed within its bounds, Termination, Memory safety, No assert statement is violated
+		\item \href{https://ultimate-pa.org/?ui=tool&tool=automizer}{Ultimate Automizer}
+		\item \underline{Challenges:}
+		\begin{enumerate}
+			\item \alert{Undecidability:} The program verification problem is undecidable. There's no algorithm that verify the program and always hold (\underline{compromise:} verification algorithm that always tells correct resutl when it terminates but may not terminate or algorithm that sometimes terminates and says it could not prove the program). \underline{Solution:} Do not try to develop algorithms that solve the problem for all programs. Algorithms that solve the problem for some programs are also helpful.
+			\item \alert{Ambiguities:} Different programming languages disagree what should happen for a piece of code. \underline{Solution:} Use mathematical logic to give programming languages a precise semantics
+			\item \alert{Correctness Proofs are Hard to Find:} We cannot track all executions.
+		\end{enumerate}
+	\end{betterlist}
+	\fbox{Propositional Logic (PL)} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/2._Propositional_Logic.md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/2._Propositional_Logic.pdf}
+	\begin{betterlist}
+		\item \script{29}{Syntax} and \script{31}{Semantics}, \script{32}{Examples}
+		\begin{betterlist}
+			\item \alert{Abbreviations:} $true := \neg false$, $(F_1 \lor F2 ) := \neg (\neg F_1 \land \neg F2)$, $(F_1 \rightarrow F2) := (\neg F_1 \lor F2)$, $(F_1 \leftrightarrow F2) := ((F_1 \rightarrow F2) \land (F2 \rightarrow F_1))$
+			\item \underline{Terminology:} We call true, false \alert{atoms}, If $X \in V_{PL}$, we call $X$ an \alert{atom}, If $F$ is an atom, we call $F$ and $\neg F$ a \alert{literal}, We call the symbols $\neg$, $\wedge$, $\vee$, $\rightarrow$, $\leftrightarrow$ \alert{logical connectives}
+			\item order of \alert{precedence} for logical connectives: $\neg, \land, \lor, \rightarrow, \leftrightarrow$. Binary operators are \alert{right-associative} ($F_1 \rightarrow F_2 \rightarrow F_3$ is $F_1 \rightarrow (F_2 \rightarrow F_3 )$)
+		\end{betterlist}
+		\item We call a PL formula $F$ \alert{satisfiable} if there is a variable assignment $\rho$ such that the evaluation $[[F]]_\rho$ is true. Otherwise, we say that $F$ is \alert{unsatisfiable}. We call a PL formula $F$ \alert{valid} if for all variable assignments $\rho$ the evaluation $[[F]]\rho$ is true
+		\begin{betterlist}
+			\item Deciding \alert{satisfiability} of a PL formula is an \alert{NP-complete} problem. \alert{Truth table} has problem of limited applicability, because a truth table has one row per variable assignment, and there are $2^n$ (exponential) variable assignments for $n$ variables. There are many algorithms that work well in practice and that are known to be \alert{polynomial} on relevant \alert{subclasses of PL formulas}. \alert{SAT solver} for propositional logic. \alert{SMT solver} (satisfiability modulo theories) for first order logic modulo theories
+		\end{betterlist}
+		\item Let $\Gamma = \{F_1, \ldots F_n\}$ be a set of PL formulas, and let $F′$ be another PL formula $F′$. We say that $\Gamma$ \alert{entails} $F'$ if for all variable assignments $\rho$ we have that if $[[F_i]]\rho = true$ holds for all $i \in \{1, \ldots n\}$, then also $[[F′]]\rho = true$ holds. We use $\models$ to denote this entailment relation and we say that the entailment $\Gamma \models F′$ holds if $\Gamma$ entails $F′$. \script{38}{Examples}. Prove that $\{F_1, \ldots F_n\}$ entails $F′$:
+		\begin{betterlist}
+			\item truth table (Not doable if number of variables is high)
+			\item prove that the PL formula $F_1 \land \ldots \land F_n \rightarrow F′$ is valid (Requires algorithm for checking validity)
+			\item prove that the PL formula $\neg(F_1 \land . . . \land F_n \rightarrow F′)$ is not satisfiable (Requires algorithm for checking satisfiability, implemented in SMT solvers)
+			\begin{betterlist}
+				\item the PL formula $F$ is valid iff the PL formula $\neg F$ is unsatisfiable. \script{39}{Proof}
+			\end{betterlist}
+			\item proof system
+		\end{betterlist}
+		\item We call two PL formulas $F_1$ and $F_2$ \alert{equivalent}, denoted $F_1 \equiv F_2$, if they evaluate to the same truth value under each variable assignment. $F_1 \equiv F_2 \text{iff} \{F_1\} \models F_2 \text{and} \{F_2\} \models F_1$
+	\end{betterlist}
+	\fbox{PL Proof system}
+	\begin{betterlist}
+		\item template for giving a proof. Reasoning according to a fixed number of rules. Prove once that every rule is \enquote{correct}. Check a proof $\leadsto$ check if every step is an instance of a rule. Find a proof $\leadsto$ find a sequence of rules
+		\item $\mathcal{N}_{PL}$: Proof system for entailments between PL formulas. Proof rules are $(n + 1)$-ary relations over entailments denoted as: $\frac{\Gamma_1 \vDash F_1 \quad \ldots \quad \Gamma_n \vDash F_n}{\Gamma_{n+1} \vDash F_{n+1}}$.  If $\Gamma_i$ entails $F_i$ for all $i \in \{1, \ldots n\}$, then $\Gamma_{n+1}$ entails $F_{n+1}$
+		\includegraphics[width=0.7\linewidth]{./figures/proof_rules.png}  (called inference rules)
+		\begin{betterlist}
+			\item can find a derivation and conclude that the entailment holds
+		\end{betterlist}
+		\item A \alert{derivation} is a tree whose nodes are labelled by entailments such that the following holds: If a node labelled by entailment $\Gamma_{n+1} \models F_{n+1}$ has children that are labelled by entailments $\Gamma_1 ⊨ F_1 \ldots \Gamma_n ⊨ F_n$, then $\frac{\Gamma_1 \vDash F_1 \quad \ldots \quad \Gamma_n \vDash F_n}{\Gamma_{n+1} \vDash F_{n+1}}$ must be an instance of some rule. \script{44}{Example}. \script{45}{Remarks (f.)}
+		\begin{betterlist}
+			\item  \script{48}{Example: Construction of a Derivation}, \script{49}{Guide for proving entailments (f.)}
+		\end{betterlist}
+		\item \alert{Theorem (Soundness of $N_{PL}$):} If a node in a derivation is labelled by $\Gamma \models F$, then the entailment $\Gamma \models F$ holds. \script{47}{Proof}
+		\item \alert{Theorem (Completeness of $N_{PL}$):} If the entailment $\Gamma \models F$ holds, then there exists a derivation where the root is labelled by $\Gamma \models F$
+	\end{betterlist}
+	\fbox{First-Order Logic (FOL)}
+	\begin{betterlist}
+		\item \script{56}{Examples (f.)}
+		\item \underline{syntax:} \script{58}{Vocabulary and Terms}, \script{59}{Formulas}
+		\begin{betterlist}
+			\item $\forall x:\phi) := \neg(\exists x:\neg\phi)$, abbreviate $\exists x1 .\exists x2 .\phi$ to $\exists x1 , x2 .\phi$ and similarly for $\forall$
+			\item \alert{quantifiers:}$\exists$ and $\forall$. \alert{atoms:} $true$, $false$, and $p(t_1, \ldots, t_n)$
+			\item \alert{precedence} of quantifiers is lower than the precedence of logical connectives
+			\item \script{60}{Model and $f \triangleleft \{\tilde{x}\rightarrow \tilde{y}\}$ notation}
+			\item \underline{evaluation:} \script{61}{of terms} and \script{62}{of  formulas}
+		\end{betterlist}
+		\item we call a formula $\varphi$ \alert{satisfiable} if there exists a model $M$ and a variable assignment $\rho$ such that $[[\varphi]]_{M,\rho} = true$. Otherwise, $\varphi$ is \alert{unsatisfiable}. We call a formula $\varphi$ \alert{valid} if $[[\varphi]]_{M,\rho} = true$ for all models $M$ and for all variable assignments $\rho$
+		\begin{betterlist}
+			\item $\varphi$ is valid iff $\neg \varphi$ is unsatisfiable
+		\end{betterlist}
+		\item given a (possibly infinite) set of FOL formulas $\Gamma$ and a FOL formula $\psi$, we say that $\Gamma$ \alert{entails} $\psi$ if for all models $M$ and for all variable assignments $\rho$ we have that if $[[\phi]]_{M,\rho} = true$ holds for all $\phi \in \Gamma$ then also $[[\psi]]_{M,\rho} = true$ holds
+		\begin{betterlist}
+			\item we use $\models$ to denote this entailment relation and we say that \alert{the entailment $\Gamma \models \psi$ holds} if $\Gamma$ entails $\psi$
+		\end{betterlist}
+		\item \script{66}{Free Variables, Bound Variables, Closed Formulas}
+		\item \script{67}{Substitution}
+		\begin{betterlist}
+			\item \underline{notation:}
+			\begin{betterlist}
+				\item given a function $f$, we use $dom(f)$ to denote the domain of $f$. Given a function $f$ that maps variables to terms, we use $vars(f)$ to denote the set that contains $dom(f)$ and all variables of all terms in the range of $f$. I.e., $\displaystyle vars(f) = dom(f) \cup \bigcup_{x\in dom(f)} freevars(f(x))$
+				\item if we do not want to specify the substitution function $\sigma$ separately, we write $\varphi[x_1 \mapsto t_1, \ldots, x_n \mapsto t_n ]$ instead of $\varphi\sigma$ if $\sigma$ is the function that maps $x_i$ to $t_i$ for $i \in \{1, \ldots , n\}$.
+				\item we sometimes use $\varphi[x]$ to refer to a formula and a variable. We may then use in this context $\varphi[t]$ to denote $\varphi[x \mapsto t]$
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{FOL Proof system}
+	\begin{betterlist}
+		\item $N_{FOL}$ (natural deduction for first order logic):
+
+		\includegraphics[width=0.7\linewidth]{./figures/nfol.png}
+		\begin{betterlist}
+			\item two of these rules have additional \alert{side conditions} that are written right beneath the rule. A tree is only a \textit{derivation} if all side conditions are satisfied. \script{72}{All rules}
+		\end{betterlist}
+		\item \underline{derivation:} \script{71}{Example}
+		\begin{betterlist}
+			\item use derivation (this tree) as a proof
+		\end{betterlist}
+		\item \script{80}{When use infix notation}
+	\end{betterlist}
+	\fbox{First-Order Theories}
+	\begin{betterlist}
+		\item \script{81}{Motivation (pr.)}
+		\item \alert{first-order theory T} consists of:
+		\begin{betterlist}
+			\item a signature $\Sigma$ - set of constant, function, and predicate symbols
+			\item a set of axioms $A_T$ - set of closed (no free variables) $\Sigma$-formulae
+		\end{betterlist}
+		\item a \alert{$\Sigma$-formula} is a formula constructed of constants, functions, and predicate symbols from $\Sigma$, and variables, logical connectives, and quantifiers
+		\item \underline{idea:} the symbols of $\Sigma$ are just symbols without prior meaning. The axioms of $T$ provide their meaning
+		\item \alert{$T$-model:} a model $M$ is a \alert{$T$ -model}, if $[[\varphi]]_{M,\rho} = true$ for all $\varphi \in A_T$ and for all variable assignments $\rho$
+		\item \alert{$T$-valid:} a $\Sigma$-formula $\varphi$ is \alert{valid in theory $T$} (\alert{$T$ -valid}), if for every $T$ -model $M$ and variable assignment $\rho$, it holds that $[[\varphi]]_{M,\rho} = true$
+		\item \alert{$T$-satisfiable:} a $\Sigma$-formula $\varphi$ is \alert{satisfiable} in $T$ (\alert{$T$ -satisfiable}), if there is a $T$ -model $M$ and variable assignment $\rho$ such that $[[\varphi]]_{M,\rho} = true$
+		\item \alert{$T$-equivalent:} two $\Sigma$-formulae $\varphi_1$ and $\varphi_2$ are \alert{equivalent in $T$} (\alert{$T$ -equivalent}), if $\varphi_1 \leftrightarrow \varphi_2$ is $T$ -valid
+		\item \script{90}{\alert{Axiom Schemata}}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Collection of First-Order Theories and their decidability} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/06._First_Order_Theories.md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/06._First_Order_Theories.pdf}
+	\begin{betterlist}
+		\item \script{89}{Theory of Equality (pr.)}, \script{93}{Theory of Rock-Paper-Scissors (pr.)}
+		\item \alert{Decidability}: We call a problem \alert{decidable} if there exists an algorithm that terminates on all instances of the problem and gives a correct yes/no answer.
+		\begin{betterlist}
+			\item \uline{example undecidable problem:} Halting Problem for Turing machines, \uline{prove decidability:} give an algorithm and prove its correctness, \uline{prove undecidability:} reduction from a known undecidable problem
+			\item \alert{Satisfiability} of PL formulas is \alert{decidable}, \alert{Satisfiability} of FOL formulas is \alert{undecidable}
+			\item \alert{$T_{E}$-validity} is \alert{undecidable}, For a \alert{quantifier-free formula $T_E$-validity} is \alert{decidable}
+			\item \script{100}{Peano Arithmetic $T_{PA}$ (first-order arithmetic) (ff.)}: natural numbers with addition and multiplication
+			\begin{betterlist}
+				\item \script{101}{Definition of $\le$ etc.}, \script{102}{$EXP[x, n, r]$}
+				\item \alert{$T_{PA}$} is \alert{undecidable}, \alert{quantifier-free fragment of $T_{PA}$} is \alert{undecidable}
+				\item \script{103}{\alert{Gödel’s first incompleteness theorem}}: \uline{Peano arithmetic $T_{PA}$ does not capture true arithmetic:} There exist closed $\Sigma_{PA}$-formulae representing valid propositions of number theory that are not $T_{PA}$-valid. \uline{The reason:} $T_{PA}$ actually admits nonstandard interpretations. \underline{For decidability:} \alert{no multiplication}
+			\end{betterlist}
+
+			\item \script{104}{Presburger Arithmetic $T_{\mathbb{N}}$}: natural numbers with addition
+			\begin{betterlist}
+				\item \alert{$T_{\mathbb{N}}$-satisfiability} and \alert{$T_{\mathbb{N}}$-validity} are \alert{decidable}
+			\end{betterlist}
+			\item \script{106}{Theory of Integers $T_{\mathbb{Z}}$ (pr.)}: integers with $+$, $−$, $>$
+			\begin{betterlist}
+				\item \alert{$T_{\mathbb{Z}}$-satisfiability} and \alert{$T_{\mathbb{Z}}$-validity} are \alert{decidable}
+			\end{betterlist}
+			\item \script{108}{Theory of Arrays $T^=_A$ (with extensionality)}, \script{109}{Theory of Bit-vectors (f.)}, \script{111}{Theory of Floats}
+			\item \script{113}{Overview decidability}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{SMT-LIB} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/07._Boogie_and_Boostan.md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/07._Boogie_and_Boostan.pdf}
+	\begin{betterlist}
+		\item \script{117}{What it is}, \script{118}{SMT Script}, \script{119}{Theories}, \script{122}{Logics (f.)}
+		\item \script{124}{Terms definined in lecture and SMT-LIB (pr.)}, \script{126}{Terms (pr.)}
+		\item \script{127}{Links to solvers}
+		\item \script{129}{Commands (pr.)}
+	\end{betterlist}
+	\fbox{Boogie and Boostan}
+	\begin{betterlist}
+		\item \script{138}{Boogie and Boogaloo (prr.)}, \script{139}{Examples (f.)}, \script{141}{Options}
+		\item \script{142}{Boostan}
+		\item \script{146}{Context-free grammar}, \script{147}{Derivation tree}, \script{148}{Derived word}
+		\item \script{152}{Grammar for Numbers}, \script{153}{Grammar for Variables}, \script{154}{Grammar for Integer Expressions}, \script{156}{Grammar for Boolean Expressions}, \script{157}{Grammar for Statements}
+		\begin{betterlist}
+			\item \underline{we call}: A subword that is derived from $X_{var}$ a (program) \alert{variable}, A subword that is derived from $X_{iexpr}$ or $X_{bexpr}$ an \alert{expression}, A subword that is derived from $X_{stmt}$ a (program) \alert{statement}
+		\end{betterlist}
+		\item \script{159}{Boostan program}
+		\item \script{161}{Problem with C Semantics (ff.)}
+		\item \script{167}{Relational semantics (f.)}
+		\item \script{169}{Program State}, \script{170}{Sets of Program States}
+		\item \script{171}{Semantics of Expressions}
+		\begin{betterlist}
+			\item \underline{idea:} Assign each expression an SMT formula. Given an expression $expr$, we define the semantics of the expression, denoted $[[expr]]$ as the SMT formula that is denoted by the same string
+      \item \script{171}{Convention $expr$ instead of $[[expr]]$, Exceptions}
+			\item \script{172}{Semantics of the Assignment Statement (f.)}
+		\end{betterlist}
+
+	\end{betterlist}
+
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+
+\newpage
+
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\end{document}

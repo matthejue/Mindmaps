@@ -1,0 +1,107 @@
+%!Tex Root = ../main.tex
+
+% ┌────────────┐
+% │ Formatting │
+% └────────────┘
+\usepackage[english]{babel}
+\usepackage[top=0.2cm,bottom=0.3cm,left=0.3cm,right=0.5cm]{geometry}
+\usepackage[export]{adjustbox} % use c, l, r for images
+\usepackage{csquotes}
+\usepackage[parfill]{parskip}
+\usepackage{fontspec}
+% \usepackage{anyfontsize}
+\usepackage{enumitem}
+
+% % ┌──────┐
+% % │ Math │
+% % └──────┘
+\usepackage{amssymb} % for black triangleright, https://tex.stackexchange.com/questio/570303/use-blacktriangleright-as-itemize-label
+\usepackage{amsmath}
+% \usepackage{mathtools} % for \mathclap and
+% \usepackage{breqn}
+\usepackage{unicode-math}
+
+% ┌────────┐
+% │ Tables │
+% └────────┘
+\usepackage{tabularray}
+ % \UseTblrLibrary{diagbox}
+
+% ┌────────┐
+% │ Images │
+% └────────┘
+\usepackage{graphicx}
+% \usepackage{float} % for the letter H
+% \graphicspath{figures/}
+\usepackage{subcaption}
+
+% ┌────────┐
+% │ Graphs │
+% └────────┘
+\usepackage{tikzit}
+\input{tikzit.tikzstyles}
+
+% ┌────────┐
+% │ Citing │
+% └────────┘
+% \usepackage[style=authortitle]{biblatex}
+% \addbibresource{./Graph_Theory.bib}
+% \usepackage{cleveref}
+
+% ┌──────────┐
+% │ Diagrams │
+% └──────────┘
+% \usepackage{tikz}
+% \usetikzlibrary{shadows, backgrounds} % , calc
+
+% ┌──────────────────┐
+% │ Multiple columns │
+% └──────────────────┘
+% \usepackage{multicol}
+
+% ┌────────────────────┐
+% │ Code hightligthing │
+% └────────────────────┘
+% \usepackage{minted}
+
+% ┌────────────────────────┐
+% │ Latex Programming Help │
+% └────────────────────────┘
+\usepackage{etoolbox}
+\usepackage{xparse}
+% https://tex.stackexchange.com/questions/358292/creating-a-subcounter-to-a-counter-i-created
+\usepackage{chngcntr}
+
+% ┌───────────────┐
+% │ Pretty Boxes  │
+% └───────────────┘
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{theorems}
+\usepackage[bold=1]{xfakebold}
+\tcbuselibrary{minted}
+
+% ┌──────────────┐
+% │ Pseudo Code  │
+% └──────────────┘
+% \usepackage{pseudo}
+
+% \usepackage{background}
+% \usepackage{gradient-text}
+% \usepackage{rotating}
+
+% \newlength\mylen
+% \setlength\mylen{\dimexpr\paperwidth/80\relax}
+%
+% \SetBgScale{1}
+% \SetBgAngle{0}
+% \SetBgColor{blue!30}
+% \SetBgContents{\tikz{\draw[step=\mylen] (-.5\paperwidth,-.5\paperheight) grid (.5\paperwidth,.5\paperheight);}}
+
+% ┌────────────┐
+% │ Misc Tools │
+% └────────────┘
+\usepackage{lipsum}
+\usepackage[normalem]{ulem}
+% \usepackage[soul]{lua-ul}

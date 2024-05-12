@@ -1,0 +1,690 @@
+\documentclass[landscape, a4paper]{article}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\fontsize{3pt}{3pt}\selectfont
+
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{General} \script{1}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_17_lecture_1.md}{Lecture Notes}
+	\begin{betterlist}
+		\item \underline{keywords:} Rob Pike, Static type system, Higher-order functions, Garbage collection, Object orientation through type interface (no classes but methods can be attached to types), Support for concurrency and communication (Lightweight threads, Communication through channels with formal foundations: Communicating Sequential Processes, Philosophy: \enquote{Do not communicate by sharing memory. Instead, share by communicating})
+	\end{betterlist}
+	\fbox{Execution}
+	\begin{betterlist}
+		\item \verb|go run hello.go| (compile and run), \verb|go build hello.go| (compile separately), \href{https://golang.org/}{Website}
+		\item \alert{\enquote{pretty printer}:} \verb|gofmt hello.go| (outputs to console), \verb|gofmt -w hello.go| (writes to same file)
+	\end{betterlist}
+	\fbox{Syntax}
+	\begin{betterlist}
+		\item package corresponds to modules in other packages
+		\item one statement per line, Semicolons are redundant
+		\item \verb|var x int|, \verb|var varName varType|
+		\item  \verb|go expression| starts a new thread to run \verb|expression|. \verb|expression| must be a function call or a method call; it cannot be parenthesized. The new thread executes concurrently to the following statements. Threads may run interleaved or on different CPUs (managed by the run-time system). As soon as the main thread terminates, all threads started by the main thread are terminated. Go calls threads \alert{goroutines}, other languages use \verb|fork| or \verb|spawn| instead of go
+		\item the \verb|=| operator is used for assignment to already declared variables, while \verb|:=| is used for declaring and initializing a new variable
+	\end{betterlist}
+	\fbox{Terminology} \href{https://wiki.haskell.org/Parallelism_vs._Concurrency}{Source} \href{https://go.dev/tour/concurrency/11}{Source 2}
+	\begin{betterlist}
+		\item \underline{Concurrency versus Parallelism}
+		\begin{betterlist}
+			\item \alert{Parallelism:} Make programs run faster by making use of additional CPUs (parallel hardware)
+			\item \alert{Concurrency:} Program organized into multiple threads of control. Threads may work independently or work on a common task.
+		\end{betterlist}
+		\item \alert{Thread:} independently sequentially executing code
+		\item \underline{Thread state:}
+		\begin{betterlist}
+			\item Running (currently executing)
+			\item Waiting (ready to execute, but no CPU is available)
+			\item Blocked (waiting for thread-external condition)
+		\end{betterlist}
+		\item \alert{Multithreading:} Alternating execution of multiple threads on one CPU
+		\item \alert{Scheduling:} Strategy to switch between running and waiting threads
+		\begin{betterlist}
+			\item \alert{Preemptive scheduling:} Every thread gets a certain slice of time to run, then it is preempted and a waiting thread is selected to run
+			\item \alert{Cooperative scheduling:} A thread runs until a blocking command is encountered, then a waiting thread is selected to run
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Multi-threading}
+	\begin{betterlist}
+		\item \underline{Blocking commands:}
+		\begin{betterlist}
+			\item Making the thread sleep (delay/sleep)
+			\item Receiving from a channel (potentially blocking as the channel may be \enquote{empty})
+			\item Sending on a channel (potentially blocking as a channel may be \enquote{full})
+		\end{betterlist}
+		\item \underline{State-based execution:}
+		\begin{betterlist}
+			\item Notation similar to the execution of UPPAAL/communicating automata. The program state consists of the states of individual threads. For example: \verb|(Main.Running, A.Waiting, B.Waiting)|. Creation of a thread (via the go keyword) adds a new thread, initially in wait-state
+			\item a \alert{path of execution} is described by a sequence of individual program states. The transition between the current and the next states is indicated with \verb|-->|. E.g. \verb|Main.Running --> (Main.Running, A.Waiting)|
+			\item \script{5}{Example}, path of execution at the bottom
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Lambda's (anonymous functions)}
+
+	\adjustbox{scale=0.5}{
+		% https://github.com/cmhughes/latexindent.pl/issues/132
+		% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}]
+      go func() {
+        // content
+      }()
+      bFunc := func() {
+        // content
+      }
+      go bFunc()
+    \end{dnumberedcodebox}
+    %\end{noindent}
+	}
+	\begin{betterlist}
+		\item \script{9}{Example}
+	\end{betterlist}
+
+	\fbox{Channels}
+	\begin{betterlist}
+		\item Threads can communicate using channels, which is a datatype
+		\item \alert{message:} a value sent or received over a channel
+		\item channel can be \alert{unbuffered} or \alert{buffered}. A buffered channel can hold a finite number of messages in its buffer
+		\item \underline{principles holding:}
+		\begin{enumerate}
+			\item a thread can send and receive messages on any channel it holds.
+			\item a message can be received by exactly one thread.
+			\item a recipient must necessarily wait for a message, unless a buffered message is available
+			\item a sender can continue, as long as the channel still has a buffer available. If the buffer is full (or the channel is unbuffered), the sender is blocked until a message is received from the channel.
+		\end{enumerate}
+		\item \alert{typed channels:} \verb|var ch chan int|
+		\begin{betterlist}
+			\item \verb|var ch chan int| attaches a closed channel to ch on which no operations can be executed
+		\end{betterlist}
+		\item \alert{creation:} \verb|ch = make(chan int)|
+		\item \alert{with/without buffer:} \verb|ch1 = make(chan int)| (unbuffered), \verb|ch2 = make(chan int, 50)| (buffered)
+		\begin{betterlist}
+			\item a buffer is a queue of messages
+			\item \underline{rules for exchanging messages:}
+			\begin{betterlist}
+				\item channel without buffer (synchronous communication, synchronous channel):
+				\begin{betterlist}
+					\item sender blocks if no recipient is available
+					\item recipient blocks if no sender is available
+					\item direct (synchronous) communication between sender and recipient
+					\item sender passes message to recipient
+					% \item recipient blocks until there is a sender.
+					% \item Similarly for the sender (as there is no buffer available)
+				\end{betterlist}
+				\item channel with buffer (asynchronous communication, asynchronous channel):
+				\begin{betterlist}
+					\item sender blocks if buffer is full
+					\item recipient blocks if buffer is empty
+					\item indirect (asynchronous) communication between sender and recipient
+					\item sender puts message in buffer, recipient takes message from buf
+					\item the buffer is organized as a queue (FIFO)
+					% \item recipient blocks if there is no message available in the buffer
+					% \item sender blocks only if the buffer is full
+				\end{betterlist}
+			\end{betterlist}
+			% \item \underline{difference as follows:}
+			%   \begin{betterlist}
+			%     \item for an unbuffered channel, a sender always has to \alert{synchronize} with a recipient. Sender and recipient always block. The Go runtime system checks if there are blocking sender and recipient for the same channel. If so, they communicate with each other and become unblocked
+			%     \item for a buffered channel, the sender behaves \alert{asynchronously} and tries to write the message to the buffer. The sender only blocks if the buffer is full, then it tries again. The recipient always synchronizes with the buffer. If the buffer is empty, the recipient blocks. Otherwise, a message is taken from the buffer
+			%   \end{betterlist}
+			\item both modes of communication are equivalent. That is, a channel with buffer can be emulated by channels without buffers
+			\item \alert{Send value \texttt{y} on channel \texttt{ch}:} \verb|ch <- y|
+			\item \alert{Receive from channel \texttt{ch} and save the value in \texttt{x}:} \verb|x = <- ch|
+			\begin{betterlist}
+				\item an expression, i.e., \verb|<-| is a unary operator on channels
+				\item \script{13}{Example}
+			\end{betterlist}
+			\item \alert{Restricted communication:}
+			\begin{betterlist}
+				\item channel types can be annotated
+				\item \alert{only sending:} \verb|func snd(ch chan <- int) {}|
+				\item \alert{only receiving:} \verb|func rcv(ch <- chan int) {}|
+			\end{betterlist}
+		\end{betterlist}
+		\item \script{18}{Example}
+	\end{betterlist}
+	\fbox{Mutex} \script{20}{Exercise Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_19_tutorial_1.md}{Exercise Notes}
+	\begin{betterlist}
+		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01a.MutexWithBuffer.go}{Solution 1a}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01b.MutexWithoutBuffer.go}{Solution 1b}
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        type Mutex (chan int)
+
+        func newMutex() Mutex {
+          var ch = make(chan int, 1)
+          return ch
+        }
+
+        func lock(m Mutex) {
+          m <- 1
+        }
+
+        func unlock(m Mutex) {
+          <- m
+        }
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      type Mutex (chan int)
+      
+      func mutex(ch chan int) {
+        for {
+          <- ch
+          ch <- 1
+        }
+      }
+      
+      func newMutex() Mutex {
+        var ch = make(chan int) 
+        go mutex(ch)
+        return ch
+      }
+      
+      func lock(m Mutex) {
+        m <- 1
+      }
+      
+      func unlock(m Mutex) {
+        <- m
+      }
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+	\end{betterlist}
+	\fbox{Mutable Variable} \script{21}{Exercise Slides}
+	\begin{betterlist}
+		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02a.MVarWithBuffer.go}{Solution 2a}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02b.MVarWithoutBufferNoAnswers.go}{Solution 2b}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02c.MVarWithoutBuffer.go}{Solution 2c}
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      type MVar (chan int)
+      
+      func newMVar(x int) MVar {
+        var ch = make(chan int, 1)
+        ch <- x
+        return ch
+      }
+      
+      func takeMVar(m MVar) int {
+        var x int
+        x = <- m
+        return x
+      }
+      
+      func putMVar(m MVar, x int) {
+        m <- x
+      }
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      type MVar (chan int)
+
+      func newMVar(x int) MVar {
+        var ch = make(chan int)
+        go func() {
+          for {
+            ch <- x
+            x = <- ch
+          }
+        }()
+        return ch
+      }
+
+      func takeMVar(m MVar) int {
+        var x int
+        x = <- m
+        return x
+      }
+
+      func putMVar(m MVar, x int) {
+        go func() { m <- x }()
+      }
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Channels of Channels} \script{23}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_24_lecture_1.md}{Lecture Notes}
+	\begin{betterlist}
+		\item \verb|var ch chan (chan int)|. A channel that accepts channels of integers
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+    type Request struct {
+        id  int
+        ack chan int
+    }
+
+    func worker(req chan Request) {
+        var c Request
+        for {
+            c = <-req
+            fmt.Printf("received from %d \n", c.id)
+            time.Sleep(1 * 1e9)
+            c.ack <- 1
+        }
+    }
+
+    func client(id int, req chan Request) {
+        var ack = make(chan int)
+        for {
+            c := Request{id, ack}
+            req <- c
+            <-ack
+        }
+
+    }
+
+    func main() {
+        var req = make(chan Request)
+        go worker(req)
+        go client(1, req)
+        client(2, req)
+    }
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\item \script{25}{Example: Worker and Client} and  \script{26}{Example: Sleeping barber}
+	\end{betterlist}
+	\fbox{Non-deterministic Choice (\texttt{select})}
+	\begin{betterlist}
+		\item one wants to continue, as soon as one of the events occurs. The \verb|select| primitive allows simultaneous waiting for multiple events
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      select {
+        case x = <-ch1:
+            ...
+        case y = <-ch2:
+            ...
+        case ch3 <- 1:
+            ...
+      }
+      \end{dnumberedcodebox}
+    %\end{noindent}   }
+		}
+		\item \underline{select works as follows:}
+		\begin{betterlist}
+			\item select blocks if all events (cases) block
+			\item if one event (case) occurs, the corresponding case is chosen
+			\item if multiple events (cases) occur, one corresponding case is chosen randomly
+			\item the remaining cases are no longer available!
+		\end{betterlist}
+		\item events that were not chosen remain available. The order of cases does not matter. The choice is random and almost equally distributed.
+		\item \script{32}{Example: \enquote{Random} Choice}, \script{34}{Example: Selection is \enquote{Fair}}, \script{35}{Example: Attempt at emulating select in Newsreader} and \script{39}{Example: Execution of multiple tasks}
+		\item \underline{Selection with prioritization:} put the case that should be priotised several times
+		\item \underline{\texttt{default}:}
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        select {
+          case <-ch1:
+          case ch2<-1:
+          default:
+        }
+      \end{dnumberedcodebox}
+    %\end{noindent}   }
+		}
+		\begin{betterlist}
+			\item If none of the cases occurs, select blocks. It is also possible to prevent blocking using \texttt{default}
+			\item If none of the first two cases occurs, then the third (\texttt{default}) case is selected
+		\end{betterlist}
+		\item \underline{\texttt{timeout}:}
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        timeout := time.After(4 * 1e9)
+        select {
+          case <-ch:
+          case <-timeout:
+            fmt.Println("timed out")
+          return
+        }
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+		}
+		\item \underline{\alert{Berrier} pattern:}
+		\begin{betterlist}
+			\item multiple tasks will be executed simultaneously. The program will continue as soon as all tasks are done. Effectively a \alert{counting semaphore} is modeled
+		\end{betterlist}
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          func barrier() {
+            var ch = make(chan int)
+            // run all three tasks concurrently
+            go func() {
+                task1()
+                ch <- 1 // signal done
+            }()
+            go func() {
+                task2()
+                ch <- 1
+            }()
+            go func() {
+                task3()
+                ch <- 1
+            }()
+
+            // collect results concurrently
+            timeout := time.After(4 * 1e9)
+            for i := 0; i < 3; i++ {
+                select {
+                  case <-ch:
+                  case <-timeout:
+                      fmt.Println("timed out")
+                      return
+                }
+
+            }
+            fmt.Println("done")
+          }
+
+          \end{dnumberedcodebox}
+        %\end{noindent}   }
+		}
+	\end{betterlist}
+  \fbox{Where it can all go wrong} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}{Exercise Notes}
+	\begin{betterlist}
+		\item \alert{trace:} is a sequence of events and expresses the interleaved execution of individual threads
+		\begin{betterlist}
+			\item \uline{\alert{trace-based description of program execution} is related to the \alert{state-based execution}:} both notations/concepts have the goal to describe (concurrent) program execution. The relationship between the two is somewhat like regular expressions versus finite machines
+		\end{betterlist}
+
+		\item \alert{Deadlock:} Occurs when all threads are blocked. Go runtime system recognizes such a situation and aborts
+		\begin{betterlist}
+			\item \verb|pre(ch?)|: wanting to receive on channel \verb|ch|
+			% \begin{betterlist}
+			%   \item \verb|pre| describes the event before the corresponding operation takes place
+			% \end{betterlist}
+			\item \verb|post(ch?)|: having received on channel \verb|ch|
+			% \begin{betterlist}
+			%   \item \verb|post| describes the event after the corresponding operation has taken place
+			% \end{betterlist}
+			\item \verb|pre(ch!)|: wanting to send on channel \verb|ch|
+			\item \verb|post(ch!)|: having sent on channel \verb|ch|
+			\item in case of communication (send-receive), we assume that in the trace the post event of the send always occurs before the post event of the receive
+			\item \script{45}{Examples for deadlock and no deadlock}, code found at a previous page
+		\end{betterlist}
+		\item \alert{Starvation:}
+		\begin{betterlist}
+			\item \script{48}{Example} where Main starves (does not progress), because S and R always communicate with each other. Such a situation is considered starvation
+		\end{betterlist}
+		\item \alert{Livelock:} Describes a situation in which always at least one thread is not blocked, but no thread progresses. A livelock does not occur in \script{48}{Example}
+		\item \alert{Data race:} Situation in which two unprotected, conflicting memory operations (at least one write) occur simultaneously
+		\begin{betterlist}
+			\item one writes \verb|w(x)| to denote a write event on variable \verb|x|, and \verb|r(x)| for a read event. One does not distinguish pre and post events; all events are post events. Ones simplifies the operation \verb|x++| to \verb|w(x)| (is reading and then writing but that much detail not interesting)
+			\item in a program execution (represented as trace), a data race occurs when two conflicting write/read events occur directly after one another:
+
+			\adjustbox{scale=0.5}{
+				% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top, title=data race visible]
+                 Main        T
+            1.               y!
+            2.               w(x)
+            3.   w(x)
+            \end{dnumberedcodebox}
+          %\end{noindent}   }
+			}
+			\adjustbox{scale=0.5}{
+				% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top, title=data race not visible]
+                 Main        T
+            1.               y!
+            2.               w(x)
+            3.               y?
+            4.   w(x)
+            \end{dnumberedcodebox}
+          %\end{noindent}   }
+			}
+			\item \script{52}{Reordering and data races}
+      \item \scriptnotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/ilias01_answers.pdf}{Ilias exercise solution}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Lists} \script{56}{Exercise Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_26_12_16_11.md}{Exercise Notes}
+
+	\adjustbox{scale=0.5}{
+		% \begin{noindent}
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        subs := list.New()
+        subs.PushBack(s)
+        for e := subs.Front(); e != nil; e = e.Next() {
+          s := e.Value.(Sub)
+          if s.topic == m.topic {
+            s.news <- m
+          }
+        }
+      \end{dnumberedcodebox}
+    %\end{noindent}   }
+	}
+	\begin{betterlist}
+		\item lists in Go are \alert{heterogeneous}. That is, when one takes an element from the list, one needs to cast its type explicitly
+		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/03.publishSubscribe.go}{Solution 3}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Quantified Semaphor}
+
+	\adjustbox{scale=0.5}{
+		% \begin{noindent}
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+type QSem struct {
+  q              int
+  curr           int
+  m              Mutex
+  blockedWaits   *list.List
+  blockedSignals *list.List
+}
+
+func newQSem(q int) QSem {
+  var m = newMutex()
+  qsem := QSem{q, q, m, list.New(), list.New()}
+  return qsem
+}
+
+// down
+func wait(qsem *QSem) {
+  lock(qsem.m)
+  if qsem.curr > 0 {
+    if qsem.blockedSignals.Len() > 0 {
+      var s = qsem.blockedSignals.Front()
+      qsem.blockedSignals.Remove(s)
+      unlock(qsem.m)
+      lock(s.Value.(Mutex))
+    } else {
+      qsem.curr--
+      unlock(qsem.m)
+    }
+  } else {
+    var w = newMutex()
+    qsem.blockedWaits.PushBack(w)
+    unlock(qsem.m)
+    unlock(w) 
+  }
+}
+
+// up
+func signal(qsem *QSem) {
+  lock(qsem.m)
+  if qsem.curr < qsem.q {
+    if qsem.blockedWaits.Len() > 0 {
+      var w = qsem.blockedWaits.Front()
+      qsem.blockedWaits.Remove(w)
+      unlock(qsem.m)
+      lock(w.Value.(Mutex))
+    } else {
+      qsem.curr++
+      unlock(qsem.m)
+    }
+  } else {
+    var s = newMutex()
+    qsem.blockedSignals.PushBack(s)
+    unlock(qsem.m)
+    unlock(s)
+  }
+}
+      \end{dnumberedcodebox}
+    %\end{noindent}
+	}
+	\adjustbox{scale=0.5}{
+		% \begin{noindent}
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+type QSem struct {
+  q              int
+  curr           int
+  m              Mutex
+  signalWaits    Mutex
+  signalSignals  Mutex
+  noBlockedWaits int
+  noBlockedSignals int
+}
+
+func newQSem(q int) QSem {
+  var m = newMutex()
+  qsem := QSem{q, q, m, newMutex(), newMutex(), 
+               0, 0}
+  return qsem
+}
+
+// down
+func wait(qsem *QSem) {
+  lock(qsem.m)
+  if qsem.curr > 0 {
+    if qsem.noBlockedSignals > 0 {
+      qsem.noBlockedSignals--
+      unlock(qsem.m)
+      lock(qsem.signalSignals)
+    } else {
+      qsem.curr--
+      unlock(qsem.m)
+    }
+  } else {
+    qsem.noBlockedWaits++
+    unlock(qsem.m)
+    unlock(qsem.signalWaits)
+  }
+}
+
+// up
+func signal(qsem *QSem) {
+  lock(qsem.m)
+  if qsem.curr < qsem.q {
+    if qsem.noBlockedWaits > 0 {
+      qsem.noBlockedWaits--
+      unlock(qsem.m)
+      lock(qsem.signalWaits)
+    } else {
+      qsem.curr++
+      unlock(qsem.m)
+    }
+  } else {
+    qsem.noBlockedSignals++
+    unlock(qsem.m)
+    unlock(qsem.signalSignals)
+  }
+}
+      \end{dnumberedcodebox}
+    %\end{noindent}   }
+	}
+	\begin{betterlist}
+		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem1.go}{Solution 4.1}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem2.go}{Solution 4.2}
+		\item mechanism with queues unnecessary, because in go blocked senders and recipients on channels are ordered and unblocked in order. Implementation does not need to keep track of which thread exactly is waiting, because we already know that threats themselves already know they're waiting. All we need to track is that there are threads waiting. Instead of using lists of mutual exclusions to indicate unblocking, one simply uses a single mutex for unblocking waits ans signals and keep track how many are waiting. lock on mutual exclusion, meaning that the first signal that called unlock will be unlocked and be done
+	\end{betterlist}
+	\fbox{Examples for Deadlocks, Livelocks and Starvation via Traces}
+	\begin{betterlist}
+		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/05.sleepingBarber2.go}{Solution 5}, \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/06.diningPhilosophers.md}{Solution 6}
+
+      \adjustbox{scale=0.5}{
+        % \begin{noindent}
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+                  import (
+                    "time"
+                    "math/rand"
+                  )
+                  n := rand.Intn(4)
+                  time.Sleep(time.Duration(n) * time.Second)
+                  time.Sleep(100 * time.Millisecond)
+          \end{dnumberedcodebox}
+        %\end{noindent}   }
+      }
+	\end{betterlist}
+	\fbox{Priorisation}
+
+	\adjustbox{scale=0.5}{
+		% \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          select {
+            case <-deer:
+              numOfDeerSeen++
+            case <-elves:
+              numOfElvesSeen++
+              select {
+                case <-deer:
+                  numOfDeerSeen++
+                default:
+              }
+          }
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+	}
+	\adjustbox{scale=0.5}{
+		% \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          select {
+            case <-deer:
+              numOfDeerSeen++
+            case <-elves:
+              select {
+              case <-deer:
+                numOfDeerSeen++
+                go func() { elves <- 1 }()
+              default:
+                numOfElvesSeen++
+              }
+            }
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+	}
+	\begin{betterlist}
+		\item \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/07.SantaClaus.go}{Solution 7}
+		\item Santa gives priority to the reindeer in the case that there is both a group of elves and a group of reindeer waiting.
+	\end{betterlist}
+
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+
+\newpage
+
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Tricks}
+	\begin{betterlist}
+		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\end{document}

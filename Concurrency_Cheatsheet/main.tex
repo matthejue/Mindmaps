@@ -255,7 +255,7 @@
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-  \fbox{Channels of Channels} \script{23}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_24_lecture_1.md}
+	\fbox{Channels of Channels} \script{23}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_24_lecture_1.md}
 	\begin{betterlist}
 		\item \verb|var ch chan (chan int)|. A channel that accepts channels of integers
 
@@ -399,7 +399,7 @@
         %\end{noindent}   }
 		}
 	\end{betterlist}
-  \fbox{Where it can all go wrong} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}
+	\fbox{Where it can all go wrong} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}
 	\begin{betterlist}
 		\item \alert{trace:} is a sequence of events and expresses the interleaved execution of individual threads
 		\begin{betterlist}
@@ -453,7 +453,7 @@
           %\end{noindent}   }
 			}
 			\item \script{52}{Reordering and data races}
-      \item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/ilias01_answers.pdf}{Ilias Quiz 1}
+			\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/ilias01_answers.pdf}{Ilias Quiz 1}
 		\end{betterlist}
 	\end{betterlist}
 	\fbox{Lists} \script{56}{Exercise Slides} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_26_12_16_11.md}
@@ -609,8 +609,8 @@ func signal(qsem *QSem) {
 	\begin{betterlist}
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/05.sleepingBarber2.go}{5}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/06.diningPhilosophers.md}{6}
 
-      \adjustbox{scale=0.5}{
-        % \begin{noindent}
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
           \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
                   import (
                     "time"
@@ -621,7 +621,7 @@ func signal(qsem *QSem) {
                   time.Sleep(100 * time.Millisecond)
           \end{dnumberedcodebox}
         %\end{noindent}   }
-      }
+		}
 	\end{betterlist}
 	\fbox{Priorisation}
 
@@ -664,9 +664,117 @@ func signal(qsem *QSem) {
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/07.SantaClaus.go}{7}
 		\item Santa gives priority to the reindeer in the case that there is both a group of elves and a group of reindeer waiting.
 	\end{betterlist}
+	\fbox{Dynamic data race prediction}
+	\begin{betterlist}
+		\item \alert{Dynamic analysis}: Execute the program and observe its behavior, Determine if there is any potential bad behavior based on this specific program run
+		\item \alert{Static analysis}: Predict all possible program runs without actually executing the program, (usually) sound, \underline{but overapproximative:} if there is a bug, it will be flagged, but also non-bug may be flagged
+		\item events are collected in a program \alert{trace}. A trace is a linear sequence of events and represents an interleaved execution of the program
+		\begin{betterlist}
+			\item there is a \alert{tabular notation} for traces with a separate \alert{column} for each \alert{thread} and separate \alert{row} for each \alert{event}. The trace \alert{position} of an event corresponds to the row number
+		\end{betterlist}
+		\item an \alert{event} registers interesting program behavior. Each event is connected to one of the operations we are interested in
+		\begin{betterlist}
+			\item for each event, the trace records the \alert{thread} where the event happened. Each event can be identified by its position in the trace
+			\item two events are \alert{conflicting events} if they are read/write events for the same variable that come from different threads and at least one of them is a write event
+			% \begin{betterlist}
+			%   \item \underline{in other words:} two read/write operations on some shared variable are \alert{conflicting} if the operations happen in different threads and at least one of the operations is a write
+			% \end{betterlist}
+			\item a \alert{data race} arises if two conflicting events appear right next to each other in the trace. That implies that both events may happen in any order
+		\end{betterlist}
+		\item \script{80}{Example}
+		\item instead of rerunning the program to obtain other traces, another method is to consider \alert{valid trace reorderings} that result from a trace. Reordering of a trace means that we change the order of its events such that the resulting sequence of events still represents a sensible execution sequence. \underline{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. \underline{Conditions for a valid trace reordering}:
+		\begin{betterlist}
+			\item The elements in the reordered trace must be part of the original trace
+			\begin{betterlist}
+				\item A valid reordering only needs to include a subset of the events of the original trace
+			\end{betterlist}
 
+			\item \alert{Program order must be maintained}:
+			\begin{betterlist}
+				\item \underline{the \alert{Program order Condition} states}: Let $P$ be some trace and $P'$ be a permutation of $P$. $P'$ preserves program order if, for each thread $T$, $P \downarrow T = P' \downarrow T$
+				\begin{betterlist}
+					\item \underline{notation}: for a trace $P$ and thread $T$, we write $P \downarrow T$ for the list of events in thread $T$ contained in $P$
+				\end{betterlist}
+				\item \script{85}{Example}
+			\end{betterlist}
+			\item \alert{Lock semantics must be maintained}:
+			\begin{betterlist}
+				\item \underline{the \alert{Lock Semantics Condition} states:} Let $P$ be some trace and $P'$ be some reordering of $P$. If $𝑃' = P_1 acq(y) P_2 acq(y) P_3$, then there must be some event $rel(y)$ in $P_2$. If $P' = P_1 rel(y) P_2$, then there must be some $acq(y)$ such that $P_1 = P'_1 acq(y) P''_1$ and there is no $rel(y)$ in $𝑃''_1$
+				\item \script{87}{Example}
+			\end{betterlist}
+			\item \alert{Last writer must be maintained}:
+			\begin{betterlist}
+				\item \underline{the \alert{Last Writer Condition} states}: Let $P$ be some trace with a read event $r(x)$ and $P'$ be some reordering of $P$. The event $r(x)$ must have the same \alert{last writer} in $P'$ as in $P$
+				\begin{betterlist}
+					\item If $P_1 r(𝑥) P_2$ is a trace, then the \alert{last writer} of $r(x)$ is some $w(x)$ such that $P_1 = P_1' w(x) P_1^{''}$ and $P_1^{''}$ does not contain another $w(x)$
+				\end{betterlist}
+
+				\item \script{89}{Example}
+			\end{betterlist}
+			\item \script{99}{Example}
+			\item \script{100}{Summary in other words}
+		\end{betterlist}
+		\item \alert{dynamic data race prediction}: we record the trace of a specific program run. Two conflicting events may not appear in the trace right next to each other. However, we may be able to predict that there is some trace reordering under which the two conflicting events appear right next to each other (in the reordered trace)
+		\begin{betterlist}
+			% \item to identify conflicting events that are in a race, we could check if there is a valid reordering of the trace under which both events occur right next to each other
+			% Exhaustive predictive methods attempt to identify as many reorderings as possible. 
+			\item a \enquote{simple} data race prediction method seems to compute all possible (valid) reorderings and checks if they contain any data race. Such exhaustive methods do not scale to real-world settings because program runs and the resulting traces may be large and considering all possible reorderings generally leads to an exponential blow up. As we favor efficiency (by efficient we mean a run-time that is linear in the size of the trace) over exhaustiveness, we may compromise \alert{completeness} and \alert{soundness}:
+			\begin{betterlist}
+				\item \alert{Complete} means that all valid reorderings that exhibit some race can be predicted. If a method is incomplete, we call every race that is not reported race a \alert{false negative}
+				\item \alert{Sound} means that all races reported by the method can be exhibited with some valid reordering of the trace. If a method is unsound, it may report a trace as racy even if there is no valid reordering that exhibits a race. Such a report is a \alert{false positive}
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Efficient dynamic data race prediction methods}
+	\begin{betterlist}
+		\item Lamport's \alert{happens-before (HB, incomplete) relation}:
+		\begin{betterlist}
+			\item Efficient methods approximate by only considering certain reorderings. Instead of explicitly constructing a reordering, we calculate a happens before relation%, it approximates the possible reorderings. The HB relation can be computed efficiently but may lead to false positives and false negatives
+			\item \alert{a partial order} on events to determine if one event happens before another event. If events are unordered, we assume that these events may happen concurrently (i.e., in any order). \uline{Ground truth:} the \alert{must happen before relation (mhb)}
+			\item any \alert{happens-before (partial) order} (HB relation) approximates the must happen before relation (the possible reorderings)
+			\begin{betterlist}
+				\item if the order is \alert{too large}, it orders events that may not be ordered by mhb: it misses data races and may yield false negatives
+				\item if the order is \alert{too small}, it does not order events that may be ordered by mhb: it hallucinates data races and may thus yield false positives
+			\end{betterlist}
+			\item \alert{Vector clocks}: A distributed time stamp, A representation for a happens-before relation
+			\item if two conflicting operations are unordered under the happens-before relation, then we report that these operations are in a (data) race
+			% \item in practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available
+		\end{betterlist}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
+	\begin{betterlist}
+		\item Lamport's \alert{happens-before (HB, incomplete) relation} continue:
+		\begin{betterlist}
+			\item Let $T$ be a trace. We define the HB relation $<$ as the smallest strict partial order that satisfies the following conditions:
+			\begin{betterlist}
+				\item \alert{Program order:} If $t\#e_i$, $t\#f_{i + n} \in T$ for some $n > 0$, then $t\#e_i < t\#f_{i + n}$
+				\begin{betterlist}
+					\item \alert{Trace and event notation}: We write $t\#e_i$ to denote event $e$ at trace position $i$ in thread $t$. \script{98}{Example}
+				\end{betterlist}
+				\item \alert{Critical section order:} If $t_1\#rel(x)_k, t_2\#acq(x)_{k + n} \in T$ with $t_1 \ne t_2$ and $n > 0$, then $t_1\#rel(x)_k < t_2\#acq(x)_{k + n}$
+				\item \script{102}{Additional rephrasing of above conditions and example}
+			\end{betterlist}
+			\item \alert{Happens-before data race check:} If there are conflicting events $e$ and $f$ but neither $e < f$ nor $f < e$ , then $(e, f)$ is a HB data race pair
+			\begin{betterlist}
+				\item the argument is that if neither $e < f$ nor $f < e$ we are able to reorder the trace such that $e$ and $f$ appear right next to each other (in some reordered trace)
+				\item \underline{note}: if $(e, f)$ is a HB data race pair then so is $(f, e)$. In such a situation, we consider $(e, f)$ and $(f, e)$ as two distinct representative for the same data race. When reporting (and counting) HB data races we only consider a specific representative
+			\end{betterlist}
+			\item \alert{Event set $ES_e$}: set of events that happen up-to and including event $e$. That is, $ES_e = \{ f ∣ f < e \} \cup \{e\}$
+			\begin{betterlist}
+				\item \underline{Observations:} To enforce the critical section order we add the event set $ES_{rel(y)}$ of some release event to the event set $ES_{acq}(y)$ of some subsequent acquire event, To enforce the program order, we accumulate events within one thread (in essence, building the transitive closure)
+				\item to decide if $e < f$ we can check for $ES_{e} \subset ES_{f}$. Consider two conflicting events $e$ and $f$ where $e$ appears before $f$ in the trace. To decide if $e$ and $f$ are in a race, we check for $e \in ES_f$ or $f \in ES_e$. If yes, then there is no race (because $e < f$ or $f < e$). Otherwise, there is a race.
+				\item \script{104}{Example}
+				\item \alert{Set-based race predictor:}
+				\begin{betterlist}
+					\item we compute event sets by processing the events in the trace from beginning to end. We maintain the following state variables when processing event $e_i$: \script{105}{Overview}
+					\item each event invokes its processing function: \script{106}{Overview}. We write $e@operation$ for the processing function for event $e$ of the form $operation$. We add thread information as an additional argument
+				\end{betterlist}
+			\end{betterlist}
+      \item \script{107}{Example}
+		\end{betterlist}
+		\item \alert{Lockset (unsound)}:
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

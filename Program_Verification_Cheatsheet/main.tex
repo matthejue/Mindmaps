@@ -43,9 +43,9 @@
 		\end{betterlist}
 		\item We call two PL formulas $F_1$ and $F_2$ \alert{equivalent}, denoted $F_1 \equiv F_2$, if they evaluate to the same truth value under each variable assignment. $F_1 \equiv F_2 \text{iff} \{F_1\} \models F_2 \text{and} \{F_2\} \models F_1$
 	\end{betterlist}
-  \fbox{PL Proof system ($N_{PL}$)}
+	\fbox{PL Proof system ($N_{PL}$)}
 	\begin{betterlist}
-    \item proof system for deriving valid PL entailments $\Gamma \models F$
+		\item proof system for deriving valid PL entailments $\Gamma \models F$
 		\item template for giving a proof. Reasoning according to a fixed number of rules. Prove once that every rule is \enquote{correct}. Check a proof $\leadsto$ check if every step is an instance of a rule. Find a proof $\leadsto$ find a sequence of rules
 		\item $\mathcal{N}_{PL}$: Proof system for entailments between PL formulas. Proof rules are $(n + 1)$-ary relations over entailments denoted as: $\frac{\Gamma_1 \vDash F_1 \quad \ldots \quad \Gamma_n \vDash F_n}{\Gamma_{n+1} \vDash F_{n+1}}$.  If $\Gamma_i$ entails $F_i$ for all $i \in \{1, \ldots n\}$, then $\Gamma_{n+1}$ entails $F_{n+1}$
 		\includegraphics[width=0.7\linewidth]{./figures/proof_rules.png}  (called inference rules)
@@ -89,9 +89,9 @@
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
-  \fbox{FOL Proof system ($N_{FOL}$)}
+	\fbox{FOL Proof system ($N_{FOL}$)}
 	\begin{betterlist}
-    \item proof system for deriving valid FOL entailments $\Gamma \models \varphi$
+		\item proof system for deriving valid FOL entailments $\Gamma \models \varphi$
 		\item $N_{FOL}$ (natural deduction for first order logic):
 
 		\includegraphics[width=0.7\linewidth]{./figures/nfol.png}
@@ -192,39 +192,85 @@
 	\end{betterlist}
 	\fbox{Hoare Proof System}
 	\begin{betterlist}
-    \item proof system for deriving valid Hoare triples $\{\varphi\} st \{\psi\}$
+		\item proof system for deriving valid Hoare triples $\{\varphi\} st \{\psi\}$
 		\item a program $P$ \alert{satisfies the precondition-postcondition pair} $(\{\varphi_{pre}\}, \{\varphi_{post}\})$ if the inclusion $post(\{\varphi_{pre}\}, [[st]]) \subseteq \{\varphi_{post}\}$ holds (\script{189}{Precondition-Postcondition Pairs})
 		\begin{betterlist}
 			\item given a binary relation $R$ over the set $X$ and a subset of $Y \subseteq X$, the \alert{postimage of $Y$ under $R$},
 			denoted $post(Y , R)$, is the set $\{x \in X \mid \text{ exists } y \in Y \text{ such that } (y, x) \in R\}$. \script{190}{Example}
 			\item \script{191}{Full Example}
 		\end{betterlist}
-    \item given a set of states $\{\varphi\}$, a program statement st and a set of states $\{\psi\}$, we call the triple $\{\varphi\}$ st $\{\psi\}$ a \alert{Hoare triple}
-    \item we call a Hoare triple $\{\varphi\}$ st $\{\psi\}$ \alert{valid} if st satisfies the precondition-postcondition pair $(\{\varphi\}, \{\psi\})$. \script{197}{Example}
-    \item \underline{\script{200}{Rules}:}
+		\item given a set of states $\{\varphi\}$, a program statement $st$ and a set of states $\{\psi\}$, we call the triple $\{\varphi\} st \{\psi\}$ a \alert{Hoare triple}
+		\item we call a Hoare triple $\{\varphi\} st \{\psi\}$ \alert{valid} if $st$ satisfies the precondition-postcondition pair $(\{\varphi\}, \{\psi\})$. \script{197}{Example}
+		\item \underline{\script{200}{Rules}:}
 
-      \includegraphics[width=0.7\linewidth]{./figures/hoare_rules.png} 
-      \begin{betterlist}
-        \item \script{202}{Example: Assignment axiom}
-        \item \script{203}{Example: Conditional Rule}
-        \item \script{204}{Example: While Rule}
-        \item \script{205}{Full Example}
-      \end{betterlist}
-    \item We define a \alert{derivation} as a tree whose nodes are labelled by Hoare triples such that the following holds. If a node that is labelled by a Hoare triple $\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}$ has children that are labelled by Hoare triples $\{\varphi_1\} st_1 \{\psi_1\} \ldots \{\varphi_n\} st_n \{\psi_n\}$, then the following must be an instance of some rule: $\frac{\{\varphi_1\} st_1 \{\psi_1\} \ldots \{\varphi_n\} st_n \{\psi_n\}}{\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}}$ (\script{201}{Derivation in context hoare proof system})
-    \item \alert{Soundness of the Hoare Proof System:} If there is a derivation whose root is labelled by $\{φ\} st \{ψ\}$, then the statement $st$ satisfies the precondition-postcondition pair $(\{φ\}, \{ψ\})$
-      \begin{betterlist}
-      \item We call a rule of the form $\frac{\{\varphi_{1}\} st_{1} \{\psi_{1}\} \ldots \{\varphi_{n}\} st_{n} \{\psi_{n}\}}{\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}}$ \alert{sound} if the following holds: If for all $i \in\{1, \ldots, n\}$ the Hoare triple ${\varphi_i} st_i {\psi_i}$ is valid, then the Hoare triple ${\varphi_{n+1}} st_{n+1} {\psi_{n+1}}$ is also valid. (\script{209}{Sound rule})
-        \item \script{210}{Soundness of the Assignment Axiom}
-        \item \script{211}{Soundness of the Composition Rule}
-        \item \script{212}{Soundness of the Strengthen Precondition Rule}
-        \item \script{213}{Soundness of the Weakening Postcondition Rule}
-        \item \script{214}{Soundness of the Conditional Rule}
-        \item \script{215}{Soundness of the While Rule (ff.)}
-        \item \script{218}{Soundness of the Hoare Proof System (f.)}
-      \end{betterlist}
+		\includegraphics[width=0.7\linewidth]{./figures/hoare_rules.png}
+		\begin{betterlist}
+			\item \script{202}{Example: Assignment axiom}
+			\item \script{203}{Example: Conditional Rule}
+			\item \script{204}{Example: While Rule}
+			\item \script{205}{Full Example}
+		\end{betterlist}
+		\item we define a \alert{derivation} as a tree whose nodes are labelled by Hoare triples such that the following holds. If a node that is labelled by a Hoare triple $\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}$ has children that are labelled by Hoare triples $\{\varphi_1\} st_1 \{\psi_1\} \ldots \{\varphi_n\} st_n \{\psi_n\}$, then the following must be an instance of some rule: $\frac{\{\varphi_1\} st_1 \{\psi_1\} \ldots \{\varphi_n\} st_n \{\psi_n\}}{\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}}$ (\script{201}{Derivation in context hoare proof system})
+		\item \alert{Soundness of the Hoare Proof System:} If there is a derivation whose root is labelled by $\{φ\} st \{ψ\}$, then the statement $st$ satisfies the precondition-postcondition pair $(\{φ\}, \{ψ\})$
+		\begin{betterlist}
+			\item we call a rule of the form $\frac{\{\varphi_{1}\} st_{1} \{\psi_{1}\} \ldots \{\varphi_{n}\} st_{n} \{\psi_{n}\}}{\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}}$ \alert{sound} if the following holds: If for all $i \in\{1, \ldots, n\}$ the Hoare triple ${\varphi_i} st_i {\psi_i}$ is valid, then the Hoare triple ${\varphi_{n+1}} st_{n+1} {\psi_{n+1}}$ is also valid. (\script{209}{Sound rule})
+			\item \script{210}{Soundness of the Assignment Axiom}
+			\item \script{211}{Soundness of the Composition Rule}
+			\item \script{212}{Soundness of the Strengthen Precondition Rule}
+			\item \script{213}{Soundness of the Weakening Postcondition Rule}
+			\item \script{214}{Soundness of the Conditional Rule}
+			\item \script{215}{Soundness of the While Rule (ff.)}
+			\item \script{218}{Soundness of the Hoare Proof System (f.)}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Boostan Extended Syntax}
+	\begin{betterlist}
+		\item \script{242}{Arrays}
+		\begin{betterlist}
+			\item \script{243}{SMT-LIB}
+			\item \script{244}{Memory via Arrays}
+			\item \script{249}{Grammar}
+		\end{betterlist}
+		\item \script{255}{Havoc Statement (f.)}
+		\begin{betterlist}
+			\item \href{https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/krml178.pdf}{\inlinebox{Section 9.4 of Specification}}
+			\item \script{258}{Grammar}
+		\end{betterlist}
+		\item \script{264}{Assume Statement}
+		\begin{betterlist}
+			\item \href{https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/krml178.pdf}{\inlinebox{Section 9.2 of Specification}}
+			\item \script{266}{Grammar}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Boostan Extended Semantics}
+	\begin{betterlist}
+		\item \script{250}{Arrays}
+		\item \script{259}{Havoc Statement}
+		\item \script{267}{Assume Statement}
+	\end{betterlist}
+	\fbox{Hoare Proof System Extended}
+	\begin{betterlist}
+		\item \underline{Rules:}
+
+		\includegraphics[width=0.5\linewidth]{./figures/arrassig.png}
+
+		\includegraphics[width=0.325\linewidth]{./figures/havoc.png}
+
+		\includegraphics[width=0.4\linewidth]{./figures/assu.png}
+		\begin{betterlist}
+			\item \script{252}{Soundness of the Array Assignment Axiom}
+			\item \script{261}{Soundness of the Havoc Axiom}
+			\item \script{269}{Soundness of the Assume Axiom}
+		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
+	\fbox{Ultimate Referee}
+	\begin{betterlist}
+		\item \script{227}{Guide for Finding a Derivation in the Hoare Proof System}
+		\item \script{230}{What it is and example (ff.)}
+		\item \script{233}{Interactive verification, Deductive verification, Automated verification}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

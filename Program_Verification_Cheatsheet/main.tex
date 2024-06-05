@@ -271,6 +271,43 @@
 		\item \script{230}{What it is and example (ff.)}
 		\item \script{233}{Interactive verification, Deductive verification, Automated verification}
 	\end{betterlist}
+	\fbox{Control-flow graphs}
+	\begin{betterlist}
+		\item \script{279}{Control-Flow Graph}, \script{279}{Control-Flow Graph for a Program}, \script{280}{Example}
+		\begin{betterlist}
+			\item \underline{useful for automated verification:} apply algorithms from graph theory / automata theory
+			\item captures only one aspect of a program, it defines the way in which the programmer arranged the statements in the code
+			\item focused solely on the program’s data but it is not sufficient to specify the situation in which a program currently is, because the state does not provide information about the next statements that can be executed
+			\item \script{281}{Notational Conventions}
+			\item all control-flow graphs for a given statement are \alert{isomorphic} to each other
+		\end{betterlist}
+		\item \script{282}{Sequential Composition}, \script{283}{Example}
+		\item \script{284}{Conditional Statement}, \script{285}{Example}
+		\item \script{286}{While Statement}, \script{287}{While Statement}
+		\item we call a pair $(\ell, s)$ a \alert{program configuration} of $P$ if $\ell \in Loc$ is a location and $s$ is a state of $P$
+		\item we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}
+		\begin{betterlist}
+			\item Executions do not have to start at the initial location and do not have to end at the exit location
+		\end{betterlist}
+		\item we call the program configuration $(\ell, s)$
+		\begin{betterlist}
+			\item \alert{initial}, if $\ell= \ell_{init}$ and $s \in\{\varphi_{pre}\}$
+			\item an \alert{error configuration} if $\ell= \ell_{ex}$ and $s \not\in \{\varphi_{post}\}$
+		\end{betterlist}
+		\item \alert{Theorem PppSatAndExec:} The program $P = (V, \mu, st)$ satisfies the precondition-postcondition pair $(\varphi_{pre}, \varphi_{post})$ iff there exists no execution $(\ell_0, s_0), \ldots, (\ell_n, s_n)$ such that $(\ell_0, s0)$ is an initial configuration and $(\ell_n, sn)$ is an error configuration
+		\begin{betterlist}
+			\item so far we only had one way to formally show that $(\varphi_{pre}, \varphi_{post})$ is not satisfied: compute the binary relation over states for this program to check if every pair satisfies the precondition-postcondition pair. By Theorem PppSatAndExec we now have an alternative within our formal setting: we can give an execution
+			\item \script{296}{Example program that shows need for Theorem CorrectIffNoErrorReach}
+		\end{betterlist}
+		\item \alert{Reachable Program Configuration:} We call a configuration $(\ell, s)$ \alert{reachable} if there exists a program execution $(\ell_0, s_0), . . . , (\ell_n, s_n)$ such that $(\ell_0, s_0)$ is an initial configuration and $(\ell_n, s_n) = (\ell, s)$
+		\item \alert{Theorem CorrectIffNoErrorReach:} A program satisfies a given precondition-postcondition pair iff the set of reachable configurations does not contain an error configuration
+		\item the \alert{set of reachable configurations $RC$} is the smallest set such that
+		\begin{betterlist}
+			\item each initial configuration is an element of RC
+			\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$ then $(\ell′, s′) \in RC$
+		\end{betterlist}
+    \item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell′, s′)) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

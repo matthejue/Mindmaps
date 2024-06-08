@@ -664,13 +664,18 @@ func signal(qsem *QSem) {
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/07.SantaClaus.go}{7}
 		\item Santa gives priority to the reindeer in the case that there is both a group of elves and a group of reindeer waiting.
 	\end{betterlist}
-  \fbox{Dynamic data race prediction} \script{74}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_08_16_12_53.md}
+	\fbox{Go-style mutexes behave like semaphores}
+	\begin{betterlist}
+		\item It's often the case that a thread that acquires lock $x$ must also release $x$. This assumption holds for Java and C++. However, Go-style mutexes behave differently as they act more like semaphores. In Go, the acquire and release of a lock is not tied to a single thread. Go-style mutexes behave like semaphores
+	\end{betterlist}
+	\fbox{Dynamic data race prediction} \script{74}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_08_16_12_53.md}
 	\begin{betterlist}
 		\item \alert{Dynamic analysis}: Execute the program and observe its behavior, Determine if there is any potential bad behavior based on this specific program run
 		\item \alert{Static analysis}: Predict all possible program runs without actually executing the program, (usually) sound, \underline{but overapproximative:} if there is a bug, it will be flagged, but also non-bug may be flagged
 		\item events are collected in a program \alert{trace}. A trace is a linear sequence of events and represents an interleaved execution of the program
 		\begin{betterlist}
 			\item there is a \alert{tabular notation} for traces with a separate \alert{column} for each \alert{thread} and separate \alert{row} for each \alert{event}. The trace \alert{position} of an event corresponds to the row number
+			\item \script{80}{Example}
 		\end{betterlist}
 		\item an \alert{event} registers interesting program behavior. Each event is connected to one of the operations we are interested in
 		\begin{betterlist}
@@ -681,9 +686,8 @@ func signal(qsem *QSem) {
 			% \end{betterlist}
 			\item a \alert{data race} arises if two conflicting events appear right next to each other in the trace. That implies that both events may happen in any order
 		\end{betterlist}
-		\item \script{80}{Example}
-		\item instead of rerunning the program to obtain other traces, another method is to consider \alert{valid trace reorderings} that result from a trace. Reordering of a trace means that we change the order of its events such that the resulting sequence of events still represents a sensible execution sequence. \underline{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. \underline{Conditions for a valid trace reordering}:
-		\begin{betterlist}
+		\item instead of rerunning the program to obtain other traces, another method is to consider \alert{valid trace reorderings} that result from a trace. Reordering of a trace means that we change the order of its events such that the resulting sequence of events still represents a sensible execution sequence. \textcolor{gray}{Reordering the trace means that one simply permutes the elements}. \underline{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. \underline{Conditions for a valid trace reordering}:
+		\begin{enumerate}
 			\item The elements in the reordered trace must be part of the original trace
 			\begin{betterlist}
 				\item A valid reordering only needs to include a subset of the events of the original trace
@@ -711,72 +715,376 @@ func signal(qsem *QSem) {
 
 				\item \script{89}{Example}
 			\end{betterlist}
-			\item \script{99}{Example}
-			\item \script{100}{Summary in other words}
-		\end{betterlist}
+			\item[$\textcolor{PrimaryColor}{\bullet}$] \script{99}{Example}
+			\item[$\textcolor{PrimaryColor}{\bullet}$] \script{100}{Summary in other words and example for subset}. \textcolor{gray}{A valid reordering only needs to include a subset of the events of the original trace}
+		\end{enumerate}
 		\item \alert{dynamic data race prediction}: we record the trace of a specific program run. Two conflicting events may not appear in the trace right next to each other. However, we may be able to predict that there is some trace reordering under which the two conflicting events appear right next to each other (in the reordered trace)
 		\begin{betterlist}
 			% \item to identify conflicting events that are in a race, we could check if there is a valid reordering of the trace under which both events occur right next to each other
 			% Exhaustive predictive methods attempt to identify as many reorderings as possible. 
-			\item a \enquote{simple} data race prediction method seems to compute all possible (valid) reorderings and checks if they contain any data race. Such exhaustive methods do not scale to real-world settings because program runs and the resulting traces may be large and considering all possible reorderings generally leads to an exponential blow up. As we favor efficiency (by efficient we mean a run-time that is linear in the size of the trace) over exhaustiveness, we may compromise \alert{completeness} and \alert{soundness}:
+			\item \alert{Exhaustive data race prediction methods:} A \enquote{simple} data race prediction method seems to compute all possible (valid) reorderings and checks if they contain any data race. Such exhaustive methods do not scale to real-world settings because program runs and the resulting traces may be large and considering all possible reorderings generally leads to an \alert{exponential blow up}
+			\item \alert{Approximative data race prediction methods:} As we favor efficiency (by efficient one means a run-time that is \alert{linear} in the size of the trace. \alert{Efficient methods} approximate by only considering certain reorderings) over exhaustiveness, we may compromise \alert{completeness} and \alert{soundness}:
 			\begin{betterlist}
-				\item \alert{Complete} means that all valid reorderings that exhibit some race can be predicted. If a method is incomplete, we call every race that is not reported race a \alert{false negative}
-				\item \alert{Sound} means that all races reported by the method can be exhibited with some valid reordering of the trace. If a method is unsound, it may report a trace as racy even if there is no valid reordering that exhibits a race. Such a report is a \alert{false positive}
+				\item \alert{Complete} means that all valid reorderings that exhibit some race can be predicted. If a method is \alert{incomplete}, we call every race that is not reported race a \alert{false negative}
+				\item \alert{Sound} means that all races reported by the method can be exhibited with some valid reordering of the trace. If a method is \alert{unsound}, it may report a trace as racy even if there is no valid reordering that exhibits a race. Such a report is a \alert{false positive}
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Efficient dynamic data race prediction methods}
 	\begin{betterlist}
-		\item Lamport's \alert{happens-before (HB, incomplete) relation}:
+		\item Lamport's \alert{happens-before (HB method, incomplete and unsound) relation}:
 		\begin{betterlist}
-			\item Efficient methods approximate by only considering certain reorderings. Instead of explicitly constructing a reordering, we calculate a happens before relation%, it approximates the possible reorderings. The HB relation can be computed efficiently but may lead to false positives and false negatives
+			\item Instead of explicitly constructing a reordering, we calculate a happens before relation. It approximates the possible reorderings and thus can be computed efficiently but may lead to \alert{false positives} and \alert{false negatives}%, it approximates the possible reorderings. The HB relation can be computed efficiently but may lead to false positives and false negatives
 			\item \alert{a partial order} on events to determine if one event happens before another event. If events are unordered, we assume that these events may happen concurrently (i.e., in any order). \uline{Ground truth:} the \alert{must happen before relation (mhb)}
 			\item any \alert{happens-before (partial) order} (HB relation) approximates the must happen before relation (the possible reorderings)
 			\begin{betterlist}
 				\item if the order is \alert{too large}, it orders events that may not be ordered by mhb: it misses data races and may yield false negatives
 				\item if the order is \alert{too small}, it does not order events that may be ordered by mhb: it hallucinates data races and may thus yield false positives
 			\end{betterlist}
-			\item \alert{Vector clocks}: A distributed time stamp, A representation for a happens-before relation
 			\item if two conflicting operations are unordered under the happens-before relation, then we report that these operations are in a (data) race
+			% \item \textcolor{gray}{One ignores the details of how to instrument programs to carry out tracing of events. In practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available}
 			% \item in practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available
-		\end{betterlist}
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\begin{betterlist}
-		\item Lamport's \alert{happens-before (HB, incomplete) relation} continue:
-		\begin{betterlist}
 			\item Let $T$ be a trace. We define the HB relation $<$ as the smallest strict partial order that satisfies the following conditions:
 			\begin{betterlist}
 				\item \alert{Program order:} If $t\#e_i$, $t\#f_{i + n} \in T$ for some $n > 0$, then $t\#e_i < t\#f_{i + n}$
 				\begin{betterlist}
+					\item states that events in the same thread are ordered according to their trace position
 					\item \alert{Trace and event notation}: We write $t\#e_i$ to denote event $e$ at trace position $i$ in thread $t$. \script{98}{Example}
 				\end{betterlist}
 				\item \alert{Critical section order:} If $t_1\#rel(x)_k, t_2\#acq(x)_{k + n} \in T$ with $t_1 \ne t_2$ and $n > 0$, then $t_1\#rel(x)_k < t_2\#acq(x)_{k + n}$
-				\item \script{102}{Additional rephrasing of above conditions and example}
+				\begin{betterlist}
+					\item states that critical sections are ordered according to their trace position
+					\item for each acquire the matching release must be in the same thread. Hence, the critical section order only needs to consider a release and a subsequent acquire
+				\end{betterlist}
+				\item \script{102}{Example}
 			\end{betterlist}
 			\item \alert{Happens-before data race check:} If there are conflicting events $e$ and $f$ but neither $e < f$ nor $f < e$ , then $(e, f)$ is a HB data race pair
 			\begin{betterlist}
 				\item the argument is that if neither $e < f$ nor $f < e$ we are able to reorder the trace such that $e$ and $f$ appear right next to each other (in some reordered trace)
 				\item \underline{note}: if $(e, f)$ is a HB data race pair then so is $(f, e)$. In such a situation, we consider $(e, f)$ and $(f, e)$ as two distinct representative for the same data race. When reporting (and counting) HB data races we only consider a specific representative
 			\end{betterlist}
-			\item \alert{Event set $ES_e$}: set of events that happen up-to and including event $e$. That is, $ES_e = \{ f ∣ f < e \} \cup \{e\}$
+			\item \alert{Event set $ES_e$}: Set of events that happen up-to and including event $e$. That is, $ES_e = \{ f ∣ f < e \} \cup \{e\}$. \script{104}{Example}
 			\begin{betterlist}
 				\item \underline{Observations:} To enforce the critical section order we add the event set $ES_{rel(y)}$ of some release event to the event set $ES_{acq}(y)$ of some subsequent acquire event, To enforce the program order, we accumulate events within one thread (in essence, building the transitive closure)
 				\item to decide if $e < f$ we can check for $ES_{e} \subset ES_{f}$. Consider two conflicting events $e$ and $f$ where $e$ appears before $f$ in the trace. To decide if $e$ and $f$ are in a race, we check for $e \in ES_f$ or $f \in ES_e$. If yes, then there is no race (because $e < f$ or $f < e$). Otherwise, there is a race.
-				\item \script{104}{Example}
 				\item \alert{Set-based race predictor:}
 				\begin{betterlist}
-					\item we compute event sets by processing the events in the trace from beginning to end. We maintain the following state variables when processing event $e_i$: \script{105}{Overview}
-					\item each event invokes its processing function: \script{106}{Overview}. We write $e@operation$ for the processing function for event $e$ of the form $operation$. We add thread information as an additional argument
+					% \item we compute event sets by processing the events in the trace from beginning to end. We maintain the following state variables when processing event $e_i$: \script{105}{Overview}
+					\item \alert{state variables:}
+					% \item each event invokes its processing function: \script{106}{Overview}. We write $e@operation$ for the processing function for event $e$ of the form $operation$. We add thread information as an additional argument
+					\begin{betterlist}
+						\item $D(t)$: Each thread $t$ maintains the set of events that happen before $e_i$. (initially empty)
+						\item $R(x)$: Most recent set of concurrent read events on $x$. (initially empty)
+						\item $W(x)$: Most recent write event on $x$. (initially undefined)
+						\item $Rel(y)$: Contains the event set of the most recent release event on lock $y$. (initially empty)
+					\end{betterlist}
+					\item \underline{e@operation for the \alert{processing function} for event e of the form operation:}
+
+					\adjustbox{scale=0.5}{
+						% \begin{noindent}
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+                  e@acq(t,y) {
+                    D(t) = D(t) U Rel(y) U { e }
+                  }
+                  e@rel(t,y) {
+                    D(t) = D(t) U { e }
+                    Rel(y) = D(t)
+                  }
+                  e@fork(t1,t2) {
+                    D(t1) = D(t1) U { e }
+                    D(t2) = D(t1)
+                  }
+                  e@join(t1,t2) {
+                    D(t1) = D(t1) U D(t2) U { e }
+                    }
+                  e@write(t,x) {
+                    If W(x) exists and W(x) not in D(t)
+                    then write-write race (W(x),e)
+
+                    For each r in R(x),
+                    if r not in D(t)
+                    then read-write race  (r,e)
+
+                    D(t) = D(t) U { e }
+                    W(x) = e
+                  }
+                  e@read(t,x) {
+                    If W(x) exists and W(x) not in D(t)
+                    then write-read race (W(x),e)
+
+                    R(x) = {e} U (R(x) \ D(t))
+                    D(t) = D(t) cup { e }
+                  }
+                  \end{dnumberedcodebox}
+                %\end{noindent}   }
+					}
+					\item \script{107}{Example}
+					\item The size of $D(t)$ may grow linearly in the size of the trace. To check for a race we check if some element is in $D(t)$. If there are $n$ events, set-based race prediction requires $O(n^2)$ time
 				\end{betterlist}
 			\end{betterlist}
-      \item \script{107}{Example}
+			\item \alert{Vector clocks}: A distributed time stamp, A representation for a happens-before relation
+			\begin{betterlist}
+				\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$. \script{111}{Example}
+				\begin{betterlist}
+					\item Let $e$ be an event in thread $t$ and $j$ its timestamp. Then, we can uniquely identify $e$ via $t$ and $j$. We write $t\#j$ to represent event $e$. In the literature, $t\#j$ is called an \alert{epoch}. \script{111}{Example}
+					\begin{betterlist}
+						\item we generallly use the timestamp \enquote{before} processing the event
+					\end{betterlist}
+					\item \alert{set of epochs:} We group together epochs belonging to the same thread. For example, in case of $\{1\#1, 1\#2\}$ we write $\{1\#\{1, 2\}\}$. \script{112}{Example}
+				\end{betterlist}
+				\item for each thread only keep most recent timestamp. E.g. in case of $\{1\#\{1, 2\}\}$ we write $\{1\#2\}$. \script{113}{Example}
+				\item a \alert{vector clock} encodes a set of most recent timestamps from $n$ threads as a vector of length $n$. $V ::= [i_1,\ldots ,i_n]$ is vector clock with $n$ time stamps. The entry $i_t$ is the timestamp for thread $t$. The above vector clock $V$ stands for the set of timestamps $V  \sim\sim  \{1\#i_1, \ldots, n\#i_n\}$. We use the entry $0$ to indicate missing information about a thread. \script{114}{Example}
+				\begin{betterlist}
+					\item mapping $\Phi$ from event sets to vector clocks as follows: $\Phi({1\#E_1 , \ldots, n\#E_n}) = [max(E_1), \ldots, max(E_n)]$
+					\begin{betterlist}
+						\item each event set can be represented as the set $\{1\#E_1, \ldots, 𝑛\#E_n\}$ where sets $E_j$ are of the form $\{1, \ldots, k\}$
+					\end{betterlist}
+					\item \alert{Properties:}
+					\begin{enumerate}
+						\item $D_e \subset D_f$ iff $\phi(D_e) < \phi(D_f)$
+						\begin{betterlist}
+							\item strict order on vector clocks $[i_1,...,i_n]  < [j_1,...,j_n])$ if $i_k<=j_k$ for all $k=1\ldots n$ and there exists $k$ such that $i_k<j_k$
+						\end{betterlist}
+						\item $(D_e \cup D_f) = sync(\phi(D_e), \phi(D_f))$
+						\begin{betterlist}
+							\item synchronize two vector clocks by taking the larger time stamp: $sync([i_1,...,i_n],[j_1,...,j_n]) = [max(i_1,j_1), ..., max(i_n,j_n)]$
+						\end{betterlist}
+						\item Let $e, f$ be two events where $e$ appears before $f$ and $e = t\#k$. Then, $e \not\in D_f$ iff $k > \phi(D_f)(t)$
+					\end{enumerate}
+					\item \alert{FastTrack:} a race detector based on vector clocks
+					\begin{betterlist}
+						\item Lookup of time stamp: $[i_1,\ldots,i_t,\ldots,i_n](t) = i_t$
+						\item Increment the time stamp of thread $t$: $inc([\ldots,i_t,\ldots],t) = [\ldots,i_t+1,\ldots]$
+						\item \alert{State variables:}
+						\begin{betterlist}
+							\item $Th(t)$: Vector clock of thread $t$
+							\item $R(x)$: Vector clock for reads from $x$
+							\item $W(x)$: Epoch of most recent write on $x$
+							\item $Rel(y)$: Vector clock of the most recent release on lock $y$
+						\end{betterlist}
+						\item initially, the timestamps in $R(x)$, $W(x)$, and $Rel(y)$ are all set to zero
+						\item in $Th(t)$, all time stamps are set to zero except the time stamp for entry $t$, which is set to one
+						\item \alert{Event processing:}
+
+						\adjustbox{scale=0.5}{
+							% \begin{noindent}
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+                acq(t,y) {
+                  Th(t) = sync(Th(t), Rel(y))
+                  inc(Th(t),t)
+                }
+                rel(t,y) {
+                  Rel(y) = Th(t)
+                  inc(Th(t),t)
+                }
+                fork(t1,t2) {
+                  Th(t2) = sync(Th(t1), Th(t2))
+                  inc(Th(t1),t1)
+                }
+                join(t1,t2) {
+                  Th(t1) = sync(Th(t1),Th(t2))
+                  inc(Th(t1),t1)
+                  }
+                write(t,x) {
+                  If not (R(x) < Th(t))
+                  then write-read race detected
+                  If W(x) != 0
+                  then let j#k = W(x)
+                      if k > Th(t)(j)
+                      then write-write race detected
+                  W(x) = t#Th(t)(t)
+                  inc(Th(t),t)
+                }
+                read(t,x) {
+                  If W(x) != 0
+                  then let j#k = W(x)
+                      if k > Th(t)(j)
+                      then read-write race detected
+                  R(x) = sync(Th(t), R(x))
+                }
+                \end{dnumberedcodebox}
+              %\end{noindent}   }
+						}
+						\item \script{117}{Examples}
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
 		\end{betterlist}
-		\item \alert{Lockset (unsound)}:
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
+	\begin{betterlist}
+		\item \underline{HB method continue:}
+		\begin{betterlist}
+			\item \underline{False negatives and False positives:}
+			\begin{betterlist}
+				\item the HB method has \alert{false negatives} because the textual order between critical sections is preserved. That is, valid reorderings that swap critical sections are ignored. \script{119}{Example}
+				\item the first race reported by the HB method is an \enquote{actual} race. However, subsequent races may be \alert{false positives}. \script{120}{Example}
+				\begin{betterlist}
+					\item the HB relation does not take into account write-read dependencies and therefore HB data races may not correspond to actual data races
+					\item we say \enquote{may not} because based on the trace alone we cannot decide if the write-read dependency actually affects the control flow
+				\end{betterlist}
+
+			\end{betterlist}
+		\end{betterlist}
+		\item \alert{Lockset Method (complete but unsound)}:
+		\begin{betterlist}
+			\item \alert{lockset:} is the set of locks that are held when processing a read/write event
+			\item if the locksets of two conflicting events $e$ and $f$ are \alert{disjoint}, then $(e, f)$ is a \alert{Lockset data race pair}
+			\begin{betterlist}
+				\item if two conflicting events hold the same lock $y$, then both events must belong to two distinct critical sections involving lock $y$. As critical sections are mutually exclusive, two conflicting events that share the same lock cannot be in a data race
+			\end{betterlist}
+			\item $(t1\#acq(y)k, t2\#rel(y)l)$ is a matching acquire/release pair if
+			\begin{enumerate}
+				\item $t1 = t2$, and
+				\begin{betterlist}
+					\item states that $acq(y)$ and $rel(y)$ belong to the same thread
+				\end{betterlist}
+				\item $k < l$ and there is no $t\#rel(y)_m$ where $k < m < l$
+				\begin{betterlist}
+					\item states that there is no other $rel(y)$ between $acq(y)_k$ and $rel(y)_l$
+					\item $t\#e_k$ denotes some event $e$ in thread $t$ at trace position $k$
+				\end{betterlist}
+			\end{enumerate}
+			\item $CS(t\#acq(y)_k, t\#rel(y)_l)$ denotes the set of events that are part of the critical section for a matching acquire/release pair $(t\#acq(y)k, t\#rel(y)l)$. We only accept events from the same thread $t$
+			\begin{betterlist}
+				\item $t'\#e_m \in CS(t\#acq(y)_k, t\#rel(y)_l)$ if $t = t'$ and $k \le m \le l$
+				\item $acq(y)$ and $rel(y)$ are part of the critical section; and any event in the same thread between them is also part of this critical section
+			\end{betterlist}
+			\item \alert{lockset of an event $e$:} $LS(e) = \{y \mid \exists a = t\#acq(y)_k, r = t\#rel(y)_l .e \in CS(a, r)\}$. \script{133}{Example}
+			\begin{betterlist}
+				\item consists of all locks $y$ such that $e$ appears in a critical section belonging to lock $y$
+			\end{betterlist}
+			\item \underline{state variables:}
+			\begin{betterlist}
+				\item $ls(t): Set(Lock)$: The set of locks held by thread $t$ at a certain time
+				\item $LS : Event -> Set(Lock)$: A mapping from an event $e$ to its lockset
+			\end{betterlist}
+			\item \underline{Lockset computation}:
+
+			\adjustbox{scale=0.5}{
+				% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+              e@acq(t,y) {
+                ls(t) = ls(t) U {y}
+              }
+              e@rel(t,y) {
+                ls(t) = ls(t) - {y}
+              e@fork(t1,t2) {
+              }
+              e@join(t1,t2) {
+              }
+              e@write(t,x) {
+                LS(e) = ls(t)
+              }
+              e@read(t,x) {
+                LS(e) = ls(t)
+              }
+            \end{dnumberedcodebox}
+          %\end{noindent}   }
+			}
+			\begin{betterlist}
+				\item $S_1 - S_2$ is set difference
+				\item the computation of locksets is agnostic to the presence of fork and join events
+			\end{betterlist}
+
+			\item \alert{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
+			\item \alert{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness \script{120}{example} also applies to lockset)
+			\begin{betterlist}
+				\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock. \script{134}{Example}
+			\end{betterlist}
+		\end{betterlist}
+		\item \underline{comparison and combination with HB method:}
+		\begin{betterlist}
+			\item in practice, it appears that the lockset method gives rise to significantly \alert{more false positives} than the HB method
+			\item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
+		\end{betterlist}
+		\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \alert{not affected} if we \alert{reorder critical sections}. \script{136}{Example}
+		\item \underline{\script{136}{Examples}:}
+		\begin{betterlist}
+			\item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets. \script{137}{Example}
+			\item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives. \script{137}{Example}
+			\item Lock variable only included if the write is in that trace. \script{138}{Example}
+		\end{betterlist}
+	\end{betterlist}
+	\fbox{Dynamic deadlock prediction}
+	\begin{betterlist}
+		% \item \underline{assumptions:} 
+		% \begin{betterlist}
+		% 	\item concurrent programs making use of acquire and release (mutex operations)
+		% 	\item single program run where events that took place are recorded in some trace
+		% \end{betterlist}
+		\item a \alert{resource deadlock} arises if a set of threads are blocked and each thread in the set is waiting to acquire a lock held by another thread in the set
+		\begin{betterlist}
+			\item whenever we say deadlock we refer to a resource deadlock
+		\end{betterlist}
+		\item \alert{communication deadlocks} arise if threads are blocked due to (missing) channel events such as send and receive
+		\item \alert{Lock graphs}:
+		\begin{betterlist}
+			\item \underline{Construction:} Locks are nodes. There is an edge from lock x to lock y if a thread holds lock $x$ while it acquires lock $y$. \script{151}{Example}
+			\begin{betterlist}
+				\item $B-acq$ to denote that the acquire is blocked
+			\end{betterlist}
+
+			% \item This can be calculated based on lock sets. Check for cycles in the lock graph. If there is a \alert{cycle}, we report that there is a \alert{potential deadlock}
+			\item If the lock graph contains a cycle, then there is a potential deadlock
+			\item \underline{Precision:} False positive possible. All events take place in the same thread: \script{153}{Example 1}. Common guard lock z: \script{154}{Example 2}
+			\begin{betterlist}
+				\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives. \script{163}{Example}
+			\end{betterlist}
+		\end{betterlist}
+		\item \alert{Lock dependencies}:
+		\begin{betterlist}
+			\item instead of a lock graph we compute lock dependencies on a \alert{per thread} basis. Thus, we can eliminate some of the false positives that arise using lock graphs (but not all)%. A lock dependency $𝐷 = (t, l, ls)$ is constructed if thread $t$ acquires lock $l$ while holding locks $ls$ . 
+			\item we write $D = (id, l, ls)$ to refer to some lock dependency in thread $id$ where lock $l$ is acquired while holding locks $ls$
+			\item \underline{state variables}:
+			\begin{betterlist}
+				\item $ls(t)$: The set of locks hold by thread t at a certain time
+				\item $Ds$: The set of lock dependencies
+			\end{betterlist}
+			\item \underline{processing function}:
+
+			\adjustbox{scale=0.5}{
+				% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+            acq(t,y) {
+                Ds = Ds U { (t,y,ls(t)) } if ls(t) != emptyset
+                ls(t) = ls(t) U {y}
+            }
+            rel(t,y) {
+                ls(t) = ls(t) \ {y}
+            }
+            fork(t1,t2) {
+            }
+            ...
+            \end{dnumberedcodebox}
+          %\end{noindent}   }
+			}
+			\begin{betterlist}
+				\item \underline{set difference:} $S_1 \setminus S_2$ contains all elements in $S_1$ that are not in $S_2$
+			\end{betterlist}
+			\item \alert{Cycle check}: A deadlock (warning) is issued if there is a cyclic lock dependency chain $D_1, \ldots, D_n$ (each $D_i$ results from some distinct thread $i$):
+			\begin{betterlist}
+				\item $(LD-1)$ $ls_i \cap ls_j = \emptyset$ for $i \ne j$, and
+				\item $(LD-2)$ $l_i \in ls_{i + 1}$ for $i = 1, \ldots, 𝑛 − 1$, and
+				\item $(LD-3)$ $l_𝑛 \in ls_1$
+			\end{betterlist}
+			\item \underline{\script{158}{Examples}:}
+			\begin{betterlist}
+				\item No deadlock warning is issued if the dependencies are from the same thread. \script{158}{Example}
+				\item No deadlock warning is issued for common guard lock $z$. \script{158}{Example}
+			\end{betterlist}
+			\item \underline{Precision:}
+			\begin{betterlist}
+				\item \underline{False positive possible:} Due to the \alert{write-read dependency}, events in thread $T_1$ must happen before the events in thread $T_2$. \script{160}{Example}
+				\item \underline{False negative possible:} \alert{Cross-thread critical} section that includes several events due to the \alert{fork/join dependency}. However, the computation of lock dependencies is \alert{agnostic} to \alert{cross-thread critical sections}. \script{161}{Example}
+			\end{betterlist}
+
+		\end{betterlist}
+    \item \script{168}{Some implementation in Go}
+	\end{betterlist}
 \end{minipage}
 
 \newpage
@@ -785,6 +1093,56 @@ func signal(qsem *QSem) {
 	\fbox{Tricks}
 	\begin{betterlist}
 		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
+	\end{betterlist}
+	\fbox{Confusion Matrix}
+	\begin{betterlist}
+		\item $1$st part is about whether \alert{actual condition $==$ predicted condition} and the $2$nd part is about the \alert{predicted condition}
+	\end{betterlist}
+
+	\vspace{0.4cm}
+	\begin{longtblr}[
+		label = none,
+		entry = none,
+		]{
+		width = \linewidth,
+		colspec = {Q[267]Q[319]Q[337]},
+		cells = {PrimaryColor,c},
+		cell{1}{2} = {fg=white},
+		cell{1}{3} = {fg=white},
+		cell{2}{1} = {fg=white},
+		cell{2}{2} = {BoxColor},
+		cell{2}{3} = {BoxColor},
+		cell{3}{1} = {fg=white},
+		cell{3}{2} = {BoxColor},
+		cell{3}{3} = {BoxColor},
+		}
+		                & Predicted Positive  & Predicted Negative  \\
+		Actual Positive & True Positive (TP)  & False Negative (FN) \\
+		Actual Negative & False Positive (FP) & True Negative (TN)
+	\end{longtblr}
+	\vspace{-0.5cm}
+
+	\begin{betterlist}
+		\item \alert{True Positive (TP):} Correctly predicted as positive (correct alarm)
+		\begin{betterlist}
+			\item all actual positives predicted correctly (no false positives) if \alert{sound}
+			\item $pred=True, real=True$, if the tool detects the hypothesis it's present in reality, thus it can't happen that the tool detects the hyptothesis but it's not present in reality, because else the tool wouldn't always be right when detecting the hypothesis
+		\end{betterlist}
+		\item \alert{True Negative (TN):} Correctly predicted as negative (correct non-detection)
+		\begin{betterlist}
+			\item all actual negatives predicted correctly (no false negatives) if \alert{complete}
+			\item $pred=False, real=False$, if the tool does not detect the hypothesis it isn't present in reality, thus it can't happen that the hypothesis is present in reality but can't be detected by the tool because else the tool wouldn't always be right when not detecting the hypothesis
+		\end{betterlist}
+		\item \alert{False Positive (FP):} Incorrectly predicted as positive (false alarm)
+		\begin{betterlist}
+			\item appear if \alert{unsound }
+			\item $pred=True, real=False$, if the tool sometimes detects the hypothesis but it's not present reality
+		\end{betterlist}
+		\item \alert{False Negative (FN):} Incorrectly predicted as negative (missed detection)
+		\begin{betterlist}
+			\item appear if \alert{incomplete}
+			\item $pred=False, real=True$, if the hypothesis is present in reality but it can't always be detected by the tool
+		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}

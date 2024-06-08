@@ -306,7 +306,11 @@
 			\item each initial configuration is an element of RC
 			\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$ then $(\ell′, s′) \in RC$
 		\end{betterlist}
-    \item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell′, s′)) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$
+		\item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell′, s′)) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$
+		\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
+    \begin{betterlist}
+      \item \script{111}{Example}
+    \end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}

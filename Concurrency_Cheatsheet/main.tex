@@ -1083,12 +1083,478 @@ func signal(qsem *QSem) {
 			\end{betterlist}
 
 		\end{betterlist}
-    \item \script{168}{Some implementation in Go}
+		\item \script{168}{Some implementation in Go}
 	\end{betterlist}
 \end{minipage}
 
 \newpage
 
+\begin{minipage}[t]{0.2\linewidth}
+	\fbox{Futures and Promises}
+	\begin{betterlist}
+		\item high-level concurrency constructs to support asynchronous programming
+		\item a \alert{promise} is a placeholder for a computation that is explicitly provided by the programmer. A \alert{future} can be viewed as a placeholder for a computation that will eventually become available. A future is then a \alert{specific kind of promise} where the computation is provided at initialization
+		\item \underline{implementation of futures via channels:}
+		\begin{betterlist}
+			\item \verb|interface{}| to represent a value of arbitrary type
+      \item asynchronously execute some http request. Don't have to wait for the request to complete
+		\end{betterlist}
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          type Comp struct {
+              val    interface{}
+              status bool
+          }
+
+          type Future chan Comp
+
+          func future(f func() (interface{}, bool)) Future {
+              ch := make(chan Comp)
+              go func() {
+                  r, s := f()
+                  v := Comp{r, s}
+                  for {
+                      ch <- v
+                  }
+              }()
+              return ch
+          }
+
+          func (ft Future) get() (interface{}, bool) {
+          }
+
+          func (ft Future) onSuccess(cb func(interface{})) {
+              go func() {
+                  c := <- ft
+                  v, o := c.val, c.status
+                  if o {
+                      cb(v)
+                  }
+              }()
+          }
+
+          func (ft Future) onFailure(cb func()) {
+              go func() {
+                  c := <- ft
+                  _, o := c.val, c.status
+                  if !o {
+                      cb()
+                  }
+              }()
+          }
+          \end{dnumberedcodebox}
+        %\end{noindent}   }
+		}
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+            func getSite(url string) Future {
+                return future(func() (interface{}, bool) {
+                    resp, err := http.Get(url)
+                    if err == nil {
+                        return resp, true
+                    }
+                    return nil, false
+                })
+            }
+
+            func printResponse(response *http.Response) {
+                fmt.Println(response.Request.URL)
+                date := response.Header.Get("Date")
+                fmt.Println(date)
+            }
+
+            // asynchronously execute some http request
+            func example1() {
+                stern := getSite("http://www.stern.de")
+
+                stern.onSuccess(func(result interface{}) {
+                    response := result.(*http.Response)
+                    printResponse(response)
+                })
+
+                stern.onFailure(func() {
+                    fmt.Println("failure")
+                })
+
+                fmt.Printn("do something else")
+                time.Sleep(2 * time.Second)
+            }
+                        \end{dnumberedcodebox}
+          %\end{noindent}   }
+		}
+
+		\item \underline{simultaneously waiting for multiple futures:}
+      \begin{betterlist}
+        \item suppose one has e.g. several http requests and would like to retrieve the first available result. A naive (inefficient) solution would check for each result one after the other. One can be more efficient by using \verb|select| to check for the first available future result
+      \end{betterlist}
+      
+
+      \adjustbox{scale=0.5}{
+        % \begin{noindent}
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          func (ft1 Future) first(ft2 Future) Future {
+              return future(func() (interface{}, bool) {
+                  var v interface{}
+                  var o bool
+
+                  select {
+                  case x1 := <-ft1:
+                      v = x1.val
+                      o = x1.status
+
+                  case x2 := <-ft2:
+                      v = x2.val
+                      o = x2.status
+                  }
+
+                  return v, o
+              })
+          }
+
+          func (ft1 Future) firstSucc(ft2 Future) Future {
+              return future(func() (interface{}, bool) {
+                  var v interface{}
+                  var o bool
+
+                  select {
+                  case x1 := <-ft1:
+                      if x1.status {
+                          v = x1.val
+                          o = x1.status
+                      }
+                      else {
+                          v, o = ft2.get()
+                      }
+
+                  case x2 := <-ft2:
+                      if x2.status {
+                          v = x2.val
+                          o = x2.status
+                      }
+                      else {
+                          v, o = ft.get()
+                      }
+                  }
+
+                  return v, o
+              })
+          }
+          \end{dnumberedcodebox}
+        %\end{noindent}   }
+      }
+      \adjustbox{scale=0.5}{
+        % \begin{noindent}
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          func example2() {
+              spiegel := getSite("http://www.spiegel.de")
+              stern := getSite("http://www.stern.de")
+              welt := getSite("http://www.welt.com")
+
+              req := spiegel.first(stern.first(welt))
+
+              req.onSuccess(func(result interface{}) {
+                  response := result.(*http.Response)
+                  printResponse(response)
+              })
+
+              req.onFailure(func() {
+                  fmt.Println("failure")
+              })
+
+              fmt.Println("do something else")
+              time.Sleep(2 * time.Second)
+          }
+
+          func example3() {
+              booking := func() (int, bool) {
+                  time.Sleep((time.Duration)(rand.Intn(999)) 
+                    * time.Millisecond)
+                  return rand.Intn(50), true
+              }
+
+              ft1 := future(func() (interface{}, bool) {
+                  return booking()
+              })
+
+              ft2 := future(func() (interface{}, bool) {
+                  return booking()
+              })
+
+              ft := ft1.firstSucc(ft2)
+
+              ft.onSuccess(func(result interface{}) {
+                  quote := result.(int)
+                  fmt.Printf("Hotel asks for %d Euros\n", 
+                    quote)
+              })
+
+              time.Sleep(2 * time.Second)
+          }
+          \end{dnumberedcodebox}
+        %\end{noindent}   }
+      }
+		\item \underline{implementation with generics:}
+		\begin{betterlist}
+			\item \verb|interface{}| entails explicit type assertions
+		\end{betterlist}
+    \adjustbox{scale=0.5}{
+      % \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        type Comp[T any] struct {
+            val    T
+            status bool
+        }
+
+        type Future[T any] chan Comp[T]
+
+        func future[T any](f func() (T, bool)) Future[T] {
+            ch := make(chan Comp[T])
+            go func() {
+                r, s := f()
+                v := Comp{r, s}
+                for {
+                    ch <- v
+                }
+            }()
+            return ch
+        }
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+    }
+    % func future[T any](f func() (T, bool)) *Future[T] {
+    %     p := newPromise[T]()
+    %     go func() {
+    %         r, s := f()
+    %         if s {
+    %             p.setSucc(r)
+    %         } else {
+    %             p.setFail()
+    %         }
+    %     }()
+    %     return p
+    % }
+    \adjustbox{scale=0.5}{
+      % \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        func example3b() {
+            booking := func() (int, bool) {
+                time.Sleep((time.Duration)(rand.Intn(999)) 
+                  * time.Millisecond)
+                return rand.Intn(50), true
+            }
+
+            ft1 := future[int](booking)
+
+            ft2 := future[int](booking)
+
+            ft := ft1.firstSucc(ft2)
+
+            ft.onSuccess(func(quote int) {
+                fmt.Printf("Hotel asks for %d euros\n", 
+                  quote)
+            })
+
+            time.Sleep(2 * time.Second)
+        }
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+    }
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+  \begin{betterlist}
+		\item \underline{implementation of promises:}
+		\begin{betterlist}
+			\item redefine futures in terms of promises. In the process, one \alert{reduces} the \alert{number of goroutines} which optimizes performance.
+      \item previous implementation uses a lot of goroutines: Each future creates a goroutine. Each onSuccess/onFailure call creates a goroutine. first/firstSucc create further futures and therefore further goroutines. \textcolor{gray}{Goroutines in Go are relatively cheap. Still, one should avoid them if possible}. Idea: Each future maintains a list of callback functions. One list for the success case. Another list for the failure case. Each onSuccess/onFailure call adds the callback to the respective list. If the \enquote{future} value is already present there’s no need to register the callback. We can immediately apply the \enquote{future} value and process the callback
+      \item instead of providing a computation at initialization, promises are futures that are set explicitly (at any time) by the user
+		\end{betterlist}
+    \adjustbox{scale=0.5}{
+      % \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        package main
+
+        import "fmt"
+        import "time"
+        import "math/rand"
+
+        type Promise[T any] struct {
+            val           T
+            status        bool
+            m             chan int
+            succCallBacks []func(T)
+            failCallBacks []func()
+            empty         bool
+        }
+
+        func newPromise[T any]() *Promise[T] {
+            p := Promise[T]{empty: true, m: 
+              make(chan int, 1), succCallBacks: 
+              make([]func(T), 0), failCallBacks: 
+              make([]func(), 0)}
+            return &p
+        }
+
+        func (p *Promise[T]) setSucc(v T) {
+            p.m <- 1
+            if p.empty {
+                p.val = v
+                p.status = true
+                p.empty = false
+                succs := p.succCallBacks
+                p.succCallBacks = make([]func(T), 0)
+                <- p.m
+                go func() {
+                    for _, cb := range succs {
+                        cb(v)
+                    }
+                }()
+            }
+            else {
+                <- p.m
+            }
+        }
+
+        func (p *Promise[T]) setFail() {
+            p.m <- 1
+            if p.empty {
+                p.status = false
+                p.empty = false
+                fails := p.failCallBacks
+                p.failCallBacks = make([]func(), 0)
+                <- p.m
+                go func() {
+                    for _, cb := range fails {
+                        cb()
+                    }
+                }()
+            } 
+            else {
+                <-p.m
+            }
+        }
+
+        func future[T any](f func() (T, bool)) *Promise[T] {
+            p := newPromise[T]()
+            go func() {
+                r, s := f()
+                if s {
+                    p.setSucc(r)
+                } else {
+                    p.setFail()
+                }
+            }()
+            return p
+        }
+
+        func (p *Promise[T]) complete(f func() (T, bool)) {
+            go func() {
+                r, s := f()
+                if s {
+                    p.setSucc(r)
+                } 
+                else {
+                    p.setFail()
+                }
+            }()
+        }
+
+        func (p *Promise[T]) onSuccess(cb func(T)) {
+            p.m <- 1
+            if p.empty {
+                p.succCallBacks = append(p.succCallBacks, 
+                  cb)
+            }
+            else if !p.empty && p.status {
+                go cb(p.val)
+            }
+            else { }
+            <-p.m
+        }
+
+        func (p *Promise[T]) onFailure(cb func()) {
+            p.m <- 1
+            if p.empty {
+                p.failCallBacks = append(p.failCallBacks, 
+                  cb)
+            }
+            else if !p.empty && !p.status {
+                go cb()
+            }
+            else {}
+            <-p.m
+        }
+
+        func (p1 *Promise[T]) tryCompleteWith(p2 
+          *Promise[T]) {
+            p2.onSuccess(func(v T) {
+                p1.setSucc(v)
+            })
+        }
+
+        func (p1 *Promise[T]) firstSucc(p2 *Promise[T]) 
+          *Promise[T] {
+            p := newPromise[T]()
+            p.tryCompleteWith(p1)
+            p.tryCompleteWith(p2)
+            return p
+        }
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+    }
+    \adjustbox{scale=0.5}{
+      % \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        func example1() {
+            booking := func() (int, bool) {
+                time.Sleep((time.Duration)(rand.Intn(999))
+                  * time.Millisecond)
+                return rand.Intn(50), true
+            }
+
+            p1 := newPromise[int]()
+            p1.complete(booking)
+
+            p2 := newPromise[int]()
+            p2.complete(booking)
+
+            p := p1.firstSucc(p2)
+
+            p.onSuccess(func(quote int) {
+                fmt.Printf("Hotel asks for %d euros\n", 
+                  quote)
+            })
+
+            time.Sleep(2 * time.Second)
+        }
+
+        func example2() {
+            booking := func() (int, bool) {
+                time.Sleep((time.Duration)(rand.Intn(999)) 
+                  * time.Millisecond)
+                return rand.Intn(50), true
+            }
+
+            ft1 := future[int](booking)
+
+            ft2 := future[int](booking)
+
+            ft := ft1.firstSucc(ft2)
+
+            ft3.onSuccess(func(quote int) {
+                fmt.Printf("Hotel asks for %d euros\n", 
+                  quote)
+            })
+
+            time.Sleep(2 * time.Second)
+        }
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+    }
+  \end{betterlist}
+\end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\fbox{Tricks}
 	\begin{betterlist}
@@ -1144,10 +1610,6 @@ func signal(qsem *QSem) {
 			\item $pred=False, real=True$, if the hypothesis is present in reality but it can't always be detected by the tool
 		\end{betterlist}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

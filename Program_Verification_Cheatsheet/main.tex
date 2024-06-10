@@ -298,6 +298,17 @@
 		\begin{betterlist}
 			\item so far we only had one way to formally show that $(\varphi_{pre}, \varphi_{post})$ is not satisfied: compute the binary relation over states for this program to check if every pair satisfies the precondition-postcondition pair. By Theorem PppSatAndExec we now have an alternative within our formal setting: we can give an execution
 			\item \script{296}{Example program that shows need for Theorem CorrectIffNoErrorReach}
+			\item \underline{Proof via lemma \alert{RelAndExec}:} Let $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ be a control-flow graph for $st$, then there exists a program execution $(\ell_0, s_0), . . . , (\ell_n, s_n)$ with $\ell_0 = \ell_{init}$ and $\ell_n = \ell_{ex}$, iff $(s_0, s_n) \in [[st]]$
+			\begin{betterlist}
+				\item Proof by induction over the height of st’s derivation tree. Using the following five lemmas, the proof can be carried out analogously to the soundness proof for the Hoare proof system:
+				\begin{betterlist}
+					\item \script{303}{Single assignment, array, havoc or assume statement}
+					\item \script{304}{Sequential composition of statements}
+					\item \script{305}{Conditional statement}
+					\item \script{306}{While Statement (ff.)}
+				\end{betterlist}
+			\end{betterlist}
+			\item The theorem Theorem PppSatAndExec follows directly from 1) the lemma Lemma RelAndExec, 2) the definition of an error configuration, and 3) the definition of satisfiability of precondition-postcondition pairs
 		\end{betterlist}
 		\item \alert{Reachable Program Configuration:} We call a configuration $(\ell, s)$ \alert{reachable} if there exists a program execution $(\ell_0, s_0), . . . , (\ell_n, s_n)$ such that $(\ell_0, s_0)$ is an initial configuration and $(\ell_n, s_n) = (\ell, s)$
 		\item \alert{Theorem CorrectIffNoErrorReach:} A program satisfies a given precondition-postcondition pair iff the set of reachable configurations does not contain an error configuration
@@ -308,10 +319,51 @@
 		\end{betterlist}
 		\item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell′, s′)) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$
 		\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
-    \begin{betterlist}
-      \item \script{111}{Example}
-    \end{betterlist}
+		\begin{betterlist}
+			\item \script{111}{Example}
+		\end{betterlist}
 	\end{betterlist}
+	\fbox{Predicate Transformers}
+	\begin{betterlist}
+		\item main means for analyzing the effect of statements in the control-flow graph-based view on programs
+		\item execute a loop-free program symbolically (i.e., on all inputs in parallel). Set of all states that are reachable after each of the statements. User formulas whose satisfying variable assignments are exactly the reachable sets of states. Define the strongest post predicate transfomer which allows to compute these formulas
+		\item \alert{Strongest Postcondition:} Given a set of states $S$ and a statement $st$ the strongest postcondition is the post image of $S$ under the relation $[[st]]$, i.e. $sp(S, st) = post(S, [[st]])$
+		\begin{betterlist}
+			\item \underline{Idea:} Given a set of states $S$ and a statement \verb|st|, the strongest postcondition $sp(S, \verb|st|)$ is the set of states for which the following holds. If there is a state $s \in S$
+			\begin{betterlist}
+				\item in which we can execute \verb|st|,
+				\item in which \verb|st| terminates, and
+				\item $s'$ is a successor after executing \verb|st|
+			\end{betterlist}
+			then $s' \in sp(S, \verb|st|)$
+			\item \alert{Assignment Statement:} $sp(\{\varphi\}, \verb|x := expr;| )$ is $\{\exists \hat x:\varphi[x \mapsto \hat x] \land x = expr[x \mapsto \hat x]\}$. \script{332}{Proof} and \script{333}{Example}
+			\item \alert{Havoc Statement:} $sp(\{\varphi\}, \verb|havoc x;| )$ is $\{\exists x:\varphi\}$. \script{334}{Proof idea}
+			\item \alert{Assume Statement:} $sp(\{\varphi\}, \verb|assume expr;| )$ is $\{\varphi \land expr\}$. \script{335}{Proof}
+			\item \alert{Sequential Composition:} If $st$ is an sequential composition of the form $st_1st_2$, then $sp(S, st)$ is $sp(sp(S, st_1), st_2)$. \script{336}{Proof}
+			\item \alert{Conditional Statement:} $sp(\{\varphi\}, \verb|if (expr) { st1 } else { st2 }|)$ is $sp(sp(S, \verb|assume expr;|), \verb|st1|)\cup sp(sp(S, \verb|assume !expr;|), \verb|st2|)$
+			\item In general, we cannot express the strongest post of the \alert{while statement} as a formula
+			\begin{betterlist}
+				\item If \verb|st| is a while statement of the form \verb|while(expr){st}| then $sp(S, \verb|st|)$ is $\displaystyle \bigcup_{k\in \mathbb{N}} sp(sp^k(S, \verb|assume expr; st|), \verb|assume !expr;| )$
+				\begin{betterlist}
+					\item \uline{$k$-th iterative application application of the strongest post operator:}\\ $s p^k(S, s t)= \begin{cases}S & \text { if } k=0 \\ s p\left(s p^{k-1}(S, s t), s t\right) & \text { if } k>0\end{cases}$
+				\end{betterlist}
+				\item There are \script{340}{examples} in which the strongest post of a while statement can be expressed by a formula
+			\end{betterlist}
+      \item \script{318}{Example 1} and \script{338}{Example 2}
+		\end{betterlist}
+		\item \alert{Quantifier Elimination:} finding an equivalent quanfitier-free formula for a given formula
+		\begin{betterlist}
+			\item \alert{Destructive Equality Resolution 1:} If the variable $x$ does not occur in the term $t$ then the formula $\exists x:\varphi \land x = t$ and the formula $\varphi[x \mapsto t]$ are equivalent. \script{328}{Example and proof idea}
+			\item \alert{Destructive Equality Resolution 2:} If the variable $x$ does not occur in the term $t$ then the formula $\forall x:\varphi \lor x \ne t$ and the formula $\varphi[x\mapsto t]$ are equivalent. \script{329}{Proof idea}
+		\end{betterlist}
+		\item Let $st$ be a statement, and let $\varphi$, $\psi$ be formulas. The following statements are equivalent:
+		\begin{betterlist}
+			\item $\{\varphi\} st \{\psi\}$ is a valid Hoare triple
+			\item $sp(\{\varphi\}, st) \subseteq \{\psi\}$
+			\item $\{\varphi\} \subseteq wp(\{\psi\}, st)$
+		\end{betterlist}
+	\end{betterlist}
+
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

@@ -31,11 +31,11 @@
 		\begin{betterlist}
 			\item Deciding \alert{satisfiability} of a PL formula is an \alert{NP-complete} problem. \alert{Truth table} has problem of limited applicability, because a truth table has one row per variable assignment, and there are $2^n$ (exponential) variable assignments for $n$ variables. There are many algorithms that work well in practice and that are known to be \alert{polynomial} on relevant \alert{subclasses of PL formulas}. \alert{SAT solver} for propositional logic. \alert{SMT solver} (satisfiability modulo theories) for first order logic modulo theories
 		\end{betterlist}
-		\item Let $\Gamma = \{F_1, \ldots F_n\}$ be a set of PL formulas, and let $F′$ be another PL formula $F′$. We say that $\Gamma$ \alert{entails} $F'$ if for all variable assignments $\rho$ we have that if $[[F_i]]\rho = true$ holds for all $i \in \{1, \ldots n\}$, then also $[[F′]]\rho = true$ holds. We use $\models$ to denote this entailment relation and we say that the entailment $\Gamma \models F′$ holds if $\Gamma$ entails $F′$. \script{38}{Examples}. Prove that $\{F_1, \ldots F_n\}$ entails $F′$:
+		\item Let $\Gamma = \{F_1, \ldots F_n\}$ be a set of PL formulas, and let $F'$ be another PL formula $F'$. We say that $\Gamma$ \alert{entails} $F'$ if for all variable assignments $\rho$ we have that if $[[F_i]]\rho = true$ holds for all $i \in \{1, \ldots n\}$, then also $[[F']]\rho = true$ holds. We use $\models$ to denote this entailment relation and we say that the entailment $\Gamma \models F'$ holds if $\Gamma$ entails $F'$. \script{38}{Examples}. Prove that $\{F_1, \ldots F_n\}$ entails $F'$:
 		\begin{betterlist}
 			\item truth table (Not doable if number of variables is high)
-			\item prove that the PL formula $F_1 \land \ldots \land F_n \rightarrow F′$ is valid (Requires algorithm for checking validity)
-			\item prove that the PL formula $\neg(F_1 \land . . . \land F_n \rightarrow F′)$ is not satisfiable (Requires algorithm for checking satisfiability, implemented in SMT solvers)
+			\item prove that the PL formula $F_1 \land \ldots \land F_n \rightarrow F'$ is valid (Requires algorithm for checking validity)
+			\item prove that the PL formula $\neg(F_1 \land . . . \land F_n \rightarrow F')$ is not satisfiable (Requires algorithm for checking satisfiability, implemented in SMT solvers)
 			\begin{betterlist}
 				\item the PL formula $F$ is valid iff the PL formula $\neg F$ is unsatisfiable. \script{39}{Proof}
 			\end{betterlist}
@@ -211,7 +211,7 @@
 			\item \script{205}{Full Example}
 		\end{betterlist}
 		\item we define a \alert{derivation} as a tree whose nodes are labelled by Hoare triples such that the following holds. If a node that is labelled by a Hoare triple $\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}$ has children that are labelled by Hoare triples $\{\varphi_1\} st_1 \{\psi_1\} \ldots \{\varphi_n\} st_n \{\psi_n\}$, then the following must be an instance of some rule: $\frac{\{\varphi_1\} st_1 \{\psi_1\} \ldots \{\varphi_n\} st_n \{\psi_n\}}{\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}}$ (\script{201}{Derivation in context hoare proof system})
-		\item \alert{Soundness of the Hoare Proof System:} If there is a derivation whose root is labelled by $\{φ\} st \{ψ\}$, then the statement $st$ satisfies the precondition-postcondition pair $(\{φ\}, \{ψ\})$
+		\item \alert{Soundness of the Hoare Proof System:} If there is a derivation whose root is labelled by $\{\varphi\} st \{\psi\}$, then the statement $st$ satisfies the precondition-postcondition pair $(\{\varphi\}, \{\psi\})$
 		\begin{betterlist}
 			\item we call a rule of the form $\frac{\{\varphi_{1}\} st_{1} \{\psi_{1}\} \ldots \{\varphi_{n}\} st_{n} \{\psi_{n}\}}{\{\varphi_{n+1}\} st_{n+1} \{\psi_{n+1}\}}$ \alert{sound} if the following holds: If for all $i \in\{1, \ldots, n\}$ the Hoare triple ${\varphi_i} st_i {\psi_i}$ is valid, then the Hoare triple ${\varphi_{n+1}} st_{n+1} {\psi_{n+1}}$ is also valid. (\script{209}{Sound rule})
 			\item \script{210}{Soundness of the Assignment Axiom}
@@ -315,9 +315,9 @@
 		\item the \alert{set of reachable configurations $RC$} is the smallest set such that
 		\begin{betterlist}
 			\item each initial configuration is an element of RC
-			\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$ then $(\ell′, s′) \in RC$
+			\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$ then $(\ell', s') \in RC$
 		\end{betterlist}
-		\item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell′, s′)) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s′) \in [[st]]$
+		\item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell', s')) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$
 		\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
 		\begin{betterlist}
 			\item \script{111}{Example}
@@ -349,7 +349,7 @@
 				\end{betterlist}
 				\item There are \script{340}{examples} in which the strongest post of a while statement can be expressed by a formula
 			\end{betterlist}
-      \item \script{318}{Example 1} and \script{338}{Example 2}
+			\item \script{318}{Example 1} and \script{338}{Example 2}
 		\end{betterlist}
 		\item \alert{Quantifier Elimination:} finding an equivalent quanfitier-free formula for a given formula
 		\begin{betterlist}
@@ -363,7 +363,29 @@
 			\item $\{\varphi\} \subseteq wp(\{\psi\}, st)$
 		\end{betterlist}
 	\end{betterlist}
-
+	\fbox{Bounded Model Checking}
+	\begin{betterlist}
+		\item an \alert{abstract (program) configuration} is a pair $(\ell, \{\varphi\})$ where $\ell$ is a location and $\varphi$ is a formula over the program’s variables
+		\item an \alert{abstract reachability graph} is a graph $(AC, T)$ where AC is a set of abstract configurations and $T ⊆AC × Stmt × AC$, such that
+		\begin{enumerate}
+			\item for each edge $((\ell, {\varphi}), st, (\ell', \{\varphi'\})) \in T$, we have $(\ell, st, \ell') \in \Delta$ and $sp(\{\varphi\}, st) \subseteq \{\varphi'\}$,
+			\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ with $\varphi\not\equiv false$ and $(\ell, st, \ell') \in ∆$, there exists an abstract configuration $(\ell', \{\varphi'\}) \in AC$ such that $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$,
+			\item there exists $(\ell_{init}, \{\varphi_{init}\}) \in AC$ with $\{\varphi_{pre}\} \subseteq \{\varphi_{init}\}$, and
+			\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ there is a path from $(\ell_{init}, \{\varphi_{init}\})$ to $(\ell, \{\varphi\})$, using edges in $T$
+		\end{enumerate}
+		\item a \alert{precise abstract reachability graph} is an abstract reachability graph $(AC, T)$ such that for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\}))$ the equality $sp(\{\varphi\}, st) = \{\varphi'\}$ holds, and $\{\varphi_{init}\} = \{\varphi_{pre}\}$
+		\begin{betterlist}
+			\item a precise abstract reachability graph for a given control-flow graph is unique up to the formulas that represent the set of states at each location
+		\end{betterlist}
+    \item \script{352}{Example: Implementation of the GCD (ff.)}. None of the three tests shows a violation of the postcondition. if one starts to build the precise abstract reachability graph, one sees after a few iterations that there is an abstract program configuration whose set of states is not a subset of the postcondition
+    
+		\item \alert{Abstract Error Configuration}: Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an abstract error configuration if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}
+		\item \underline{Lemma:} The set of reachable configurations contains an error configuration \alert{iff} the precise abstract reachability graph for $G$ contains an abstract error configuration
+		\begin{betterlist}
+			\item $G$ is a control-flow graph for $P$
+		\end{betterlist}
+		\item \underline{Theorem:} Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. The program $P$ satisfies $(\varphi_{pre}, \varphi_{post})$ iff the precise abstract reachability graph for $G$ does not contain an abstract error configuration
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

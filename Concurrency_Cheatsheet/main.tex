@@ -1411,8 +1411,7 @@ func signal(qsem *QSem) {
                         cb(v)
                     }
                 }()
-            }
-            else {
+            } else {
                 <- p.m
             }
         }
@@ -1430,8 +1429,7 @@ func signal(qsem *QSem) {
                         cb()
                     }
                 }()
-            } 
-            else {
+            } else {
                 <-p.m
             }
         }
@@ -1454,8 +1452,7 @@ func signal(qsem *QSem) {
                 r, s := f()
                 if s {
                     p.setSucc(r)
-                } 
-                else {
+                } else {
                     p.setFail()
                 }
             }()
@@ -1466,11 +1463,9 @@ func signal(qsem *QSem) {
             if p.empty {
                 p.succCallBacks = append(p.succCallBacks, 
                   cb)
-            }
-            else if !p.empty && p.status {
+            } else if !p.empty && p.status {
                 go cb(p.val)
-            }
-            else { }
+            } else { }
             <-p.m
         }
 
@@ -1479,11 +1474,9 @@ func signal(qsem *QSem) {
             if p.empty {
                 p.failCallBacks = append(p.failCallBacks, 
                   cb)
-            }
-            else if !p.empty && !p.status {
+            } else if !p.empty && !p.status {
                 go cb()
-            }
-            else {}
+            } else {}
             <-p.m
         }
 
@@ -1543,7 +1536,7 @@ func signal(qsem *QSem) {
 
             ft := ft1.firstSucc(ft2)
 
-            ft3.onSuccess(func(quote int) {
+            ft.onSuccess(func(quote int) {
                 fmt.Printf("Hotel asks for %d euros\n", 
                   quote)
             })

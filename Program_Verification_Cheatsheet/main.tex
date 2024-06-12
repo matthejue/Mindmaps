@@ -377,8 +377,7 @@
 		\begin{betterlist}
 			\item a precise abstract reachability graph for a given control-flow graph is unique up to the formulas that represent the set of states at each location
 		\end{betterlist}
-    \item \script{352}{Example: Implementation of the GCD (ff.)}. None of the three tests shows a violation of the postcondition. if one starts to build the precise abstract reachability graph, one sees after a few iterations that there is an abstract program configuration whose set of states is not a subset of the postcondition
-    
+    \item \script{352}{Example: Implementation of the GCD (ff.)}. None of the three tests shows a violation of the postcondition. If one starts to build the precise abstract reachability graph, one sees after a few iterations that there is an abstract program configuration whose set of states is not a subset of the postcondition
 		\item \alert{Abstract Error Configuration}: Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an abstract error configuration if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}
 		\item \underline{Lemma:} The set of reachable configurations contains an error configuration \alert{iff} the precise abstract reachability graph for $G$ contains an abstract error configuration
 		\begin{betterlist}

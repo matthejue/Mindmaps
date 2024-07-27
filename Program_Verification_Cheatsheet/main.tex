@@ -283,7 +283,7 @@
 		\end{betterlist}
 		\item \script{282}{Sequential Composition}, \script{283}{Example}
 		\item \script{284}{Conditional Statement}, \script{285}{Example}
-		\item \script{286}{While Statement}, \script{287}{While Statement}
+		\item \script{286}{While Statement}, \script{287}{Example}
 		\item we call a pair $(\ell, s)$ a \alert{program configuration} of $P$ if $\ell \in Loc$ is a location and $s$ is a state of $P$
 		\item we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}
 		\begin{betterlist}
@@ -318,6 +318,9 @@
 			\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$ then $(\ell', s') \in RC$
 		\end{betterlist}
 		\item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell', s')) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$
+		\begin{betterlist}
+			\item \script{362}{Algorithm}
+		\end{betterlist}
 		\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
 		\begin{betterlist}
 			\item \script{111}{Example}
@@ -373,11 +376,21 @@
 			\item there exists $(\ell_{init}, \{\varphi_{init}\}) \in AC$ with $\{\varphi_{pre}\} \subseteq \{\varphi_{init}\}$, and
 			\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ there is a path from $(\ell_{init}, \{\varphi_{init}\})$ to $(\ell, \{\varphi\})$, using edges in $T$
 		\end{enumerate}
+		\begin{betterlist}
+			\item we call an abstract reachability graph for G a \alert{safety proof} if is does not contain an abstract error configuration
+			\begin{betterlist}
+				\item \script{372}{Example}
+			\end{betterlist}
+		\end{betterlist}
 		\item a \alert{precise abstract reachability graph} is an abstract reachability graph $(AC, T)$ such that for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\}))$ the equality $sp(\{\varphi\}, st) = \{\varphi'\}$ holds, and $\{\varphi_{init}\} = \{\varphi_{pre}\}$
 		\begin{betterlist}
 			\item a precise abstract reachability graph for a given control-flow graph is unique up to the formulas that represent the set of states at each location
+			\item \script{354}{Example: Implementation of the GCD (pr.)}. None of the three tests shows a violation of the postcondition. If one starts to build the precise abstract reachability graph, one sees after a few iterations that there is an abstract program configuration whose set of states is not a subset of the postcondition
+			\item \script{363}{Algorithm}
+			\begin{betterlist}
+				\item \script{364}{Modifications}
+			\end{betterlist}
 		\end{betterlist}
-    \item \script{352}{Example: Implementation of the GCD (ff.)}. None of the three tests shows a violation of the postcondition. If one starts to build the precise abstract reachability graph, one sees after a few iterations that there is an abstract program configuration whose set of states is not a subset of the postcondition
 		\item \alert{Abstract Error Configuration}: Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an abstract error configuration if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}
 		\item \underline{Lemma:} The set of reachable configurations contains an error configuration \alert{iff} the precise abstract reachability graph for $G$ contains an abstract error configuration
 		\begin{betterlist}
@@ -387,6 +400,141 @@
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
+	\fbox{Abstract Interpretation}
+	\begin{betterlist}
+		\item given a set $X$, a partial order is a binary relation $\sqsubseteq$ that is
+		\begin{betterlist}
+			\item reflexive (for any $x \in X$, $x \sqsubseteq x$ holds),
+			\item antisymmetric, (if $x \sqsubseteq y$ and $y \sqsubseteq x$ then $x = y$) and
+			\item transitive (if $x \sqsubseteq y$ and $y \sqsubseteq z$ then $x \sqsubseteq z$)
+			\item \script{381}{Examples}
+		\end{betterlist}
+		\item Let $X$ be a set, $\sqsubseteq$ some partial order over $X$ and $M \subseteq X$ be a subset
+		\begin{betterlist}
+			\item we call $x \in X$ a \alert{lower bound} for $M$ if $x \sqsubseteq m$ for all $m \in M$
+			\item we call a lower bound $y$ the \alert{greatest lower bound} for $M$ if for each lower bound $x$ of $M$ the inequality $x \sqsubseteq y$ holds
+			\begin{betterlist}
+				\item we use $\sqcap M$ to denote the \alert{greatest lower bound}. If $M = \{x, y\}$ we may also write $x \sqcap y$
+			\end{betterlist}
+			\item we call $x \in X$ an \alert{upper bound} for $M$ if $m \sqsubseteq x$ for all $m \in M$
+			\item we call an upper bound $y$ the \alert{least upper bound} for $M$ if for each upper bound $x$ of $M$ the inequality $y \sqsubseteq x$ holds
+			\begin{betterlist}
+				\item we use $\sqcup M$ to denote the \alert{least upper bound}. If $M = \{x, y\}$ we may also write $x \sqcup y$
+			\end{betterlist}
+		\end{betterlist}
+		\item a \alert{complete lattice} is a tuple (L, \sqsubseteq ) such that
+		\begin{betterlist}
+			\item $L$ is a set,
+			\item $\sqsubseteq $ is a \alert{partial order} over $L$,
+			\item every subset $M$ of $L$ has a \alert{greatest lower bound} $\sqcap M$ w.r.t. $\sqsubseteq$
+			\item every subset $M$ of $L$ has a \alert{least upper bound} $\sqcup M$ w.r.t. $\sqsubseteq$
+			\item \script{383}{Examples}
+		\end{betterlist}
+		\item \alert{Monotonicity:} Given partially ordered sets $(X, \sqsubseteq_X)$ and $(Y, \sqsubseteq_Y)$, we call a function $f:X\rightarrow Y$ \alert{monotone} if for all $x_1, x_2 \in X$ the inequality $x_1 \sqsubseteq_X x_2$ implies $f(x_1) \sqsubseteq_Y f(x_2)$
+		\begin{betterlist}
+			\item \script{385}{Examples}
+		\end{betterlist}
+		\item \alert{Galois connection:} Let $(A, \sqsubseteq_A)$ and $(B, \sqsubseteq_B)$ be partially ordered sets, and let $F : A \rightarrow B$ and $G : B \rightarrow A$ be functions. The pair $(F, G)$ is a Galois connection for $(A, \sqsubseteq_A)$ and $(B, \sqsubseteq_B)$ if for all $a \in A$ and $b \in B$ it holds that $F(a) \sqsubseteq_B b$ iff $a \sqsubseteq_A G(b)$
+		\item \alert{GaloisProp:} If $(F, G)$ is a \alert{Galois connection} for $(A, \sqsubseteq A)$ and $(B, \sqsubseteq B)$, then:
+		\begin{betterlist}
+			\item $F$ and $G$ are \alert{monotone},
+			\item $a \sqsubseteq_A G(F(a))$ holds for all $a \in A$, and
+			\item $F(G(b)) \sqsubseteq_B b$ holds for all $b \in B$
+			\item \script{394}{Proof}
+		\end{betterlist}
+		\item an \alert{abstract domain} is a tuple $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$, such that
+		\begin{betterlist}
+			\item $(\mathbb{A}, \sqsubseteq)$ is a complete lattice
+			\item $(\alpha, \gamma)$ is a Galois connection for $(\mathbb{A}, \sqsubseteq)$ and $(2^{S_{V ,\mu}}, \subseteq)$
+			\item \underline{Sidenotes:}
+			\begin{betterlist}
+				\item we call elements of $\mathbb{A}$ \alert{abstract states}, $\gamma$ the \alert{concretization function}, and $\alpha$ the \alert{abstraction function}
+				\item an abstract state $s^\# \in \mathbb{A}$ represents the set of concrete states $\gamma(s^\#)$
+				\item for a set $S \subseteq S_{V,\mu}$, the abstract state $\alpha(S)$ is the abstraction of $S$
+				\item the relation $\sqsubseteq$ orders abstract states from \enquote{less abstract} to \enquote{more abstract}
+				\item \underline{properties:}
+				\begin{betterlist}
+					\item by Lemma GaloisProp, $\gamma$ is monotone. This means that $s^\#_1 \sqsubseteq s^\#_2$ implies $\gamma(s^\#_1) \subseteq \gamma(s^\#_2)$
+					\item by Lemma GaloisProp, $\alpha$ is monotone. This means that $S_1 \subseteq S_2$ implies $\alpha(S_1) \sqsubseteq \alpha(S_2)$
+					\item by condition $2$ of Lemma GaloisProp, we have $S \subseteq \gamma(\alpha(S))$
+					\item by condition $3$ of Lemma GaloisProp, we have $\alpha(\gamma(s^\#)) \sqsubseteq s^\#$
+				\end{betterlist}
+			\end{betterlist}
+			\item \script{389}{Examples (ff.)}
+		\end{betterlist}
+		\item \alert{Abstract Post:} An \alert{abstract post operator} $post^\#$ for an abstract domain $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ is a monotone function that takes an abstract state $s^\# \in \mathbb{A}$ and a simple statement $st$ and returns a new abstract state, such that the following holds: $sp(\gamma(s^\#), st)\subseteq \gamma(post^\#(s^\#, st))$
+		\begin{betterlist}
+			\item \script{392}{Illustration}
+			\item \script{393}{Example}
+		\end{betterlist}
+		\item \alert{Value abstraction (Towards Non-relational Domains):} A value abstraction for a set of values $\mathbb{V}$ is a tuple $(A_{\mathbb{V}}, \sqsubset_{\mathbb{V}}, \gamma_{\mathbb{V}}, \alpha_{\mathbb{V}})$ such that:
+		\begin{betterlist}
+			\item $(A_{\mathbb{V}}, \sqsubseteq_{\mathbb{V}})$ is a complete lattice
+			\item $(\alpha_{\mathbb{V}}, \gamma_{\mathbb{V}})$ is a Galois connection for $(A_{\mathbb{V}}, \sqsubseteq_{\mathbb{V}})$ and $(2^{\mathbb{V}}, \subseteq)$
+		\end{betterlist}
+		\item \script{396}{Sign abstraction}
+		\begin{betterlist}
+			\item \script{401}{Abstract Evaluation}
+			\item sign abstraction satisfies ACC
+		\end{betterlist}
+		\item \script{398}{Explicit-Value Domain}
+		\begin{betterlist}
+			\item explicit-value abstraction satisfies ACC
+		\end{betterlist}
+		\item \script{399}{Interval Domain}
+		\begin{betterlist}
+			\item \script{402}{Abstract Evaluation}
+			\item interval abstraction does not satisfy ACC
+			\item \alert{Widening Operator:} A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that
+			\begin{betterlist}
+				\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
+				\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$
+			\end{betterlist}
+			\item Kleene iteration with $F_{\triangledown}$ always terminates. The result is an abstract annotation
+			\begin{betterlist}
+      \item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F\triangledown(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$
+			\end{betterlist}
+		\end{betterlist}
+		\item \alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
+		\begin{betterlist}
+			\item $\mathbb{A} = V \rightarrow A_{\mathbb{Z}}$
+			\item $s^\#_1 \sqsubseteq s^\#_2$ iff for all $x \in V$ it holds that $s^\#_1(x) \sqsubseteq_{\mathbb{Z}} s^\#_2(x)$
+			\item $\gamma(s^\#) = \{s \in S_{V ,\mu} | \text{ for all } x \in V, s(x) \in \gamma_{\mathbb{Z}}(s^\#(x))\}$
+			\item $\alpha(S) = \{x \mapsto \alpha_{\mathbb{Z}}(\{s(x) | s \in S\}) \mid x \in V\}$
+			\item \script{397}{Example}
+			\item the following rules define an abstract post operator for the non-relational domain induced by a value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$:
+			\begin{betterlist}
+				\item $post^\#(s^\#, \verb|x:=expr|) := s^\#\{x \mapsto eval^\#(expr, s^\#)\} \sqsupseteq \alpha(sp(\gamma(s^\#), \verb|x:=expr|))$
+				\item $post^\#(s^\#, \verb|havoc x|) := s^\#\{x \mapsto \top\} = \alpha(sp(\gamma(s^\#), \verb|havoc x|))$
+				\item $post^\#(s^\#, \verb|assume expr|) := \alpha(\gamma(s^\#) \cap \{expr\}) = \alpha(sp(\gamma(s^\#), \verb|assume expr|))$
+			\end{betterlist}
+			where $\top= \bigsqcup_{\sqsubseteq_{\mathbb{Z}}} A_{\mathbb{Z}}$ is the greatest element of $A_{\mathbb{Z}}$. \script{405}{Proof}
+		\end{betterlist}
+		\item an \alert{abstract evaluation function} for a value abstraction $(A_{\mathbb{Z}}, \sqsubset_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ is a monotone function $eval^\#$ that takes an (integer) expression $expr$ and an abstract state $s^\#: V \rightarrow A_{\mathbb{Z}}$ and returns an element of $A_{\mathbb{Z}}$ such that
+		\begin{betterlist}
+			\item if $s \in \gamma(s^\#)$ and $[[expr]]_{M,\rho} = v$ for $\rho = s$ then $v \in \gamma_{\mathbb{Z}}(eval^\#(expr, s^\#))$
+		\end{betterlist}
+		\item \alert{Abstract Annotation}: For a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an \alert{abstract annotation} is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$
+		\begin{betterlist}
+			\item let $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ be a control-flow graph, and let $f$ be an abstract annotation for $G$. Assume that for every $\ell\in Loc$ there exists a formula $\varphi_{\ell}$ such that $\gamma(f(\ell)) = \{\varphi_{\ell}\}$. Then the graph $(AC, T)$ with $AC = \{(\ell, \{\varphi_{\ell}\}) \mid \ell \in Loc\}$ and $T = \{((\ell, \{\varphi_{\ell}\}), st, (\ell', \{\varphi_{\ell'}\})) \mid (\ell, st, \ell') \in \Delta\}$ is an abstract reachability graph. \script{411}{Proof (f.)}
+		\end{betterlist}
+		\item given a set $X$ and a function $f:X \rightarrow X$ we call an element $x \in X$ a \alert{fixpoint} of $f$ if $f(x) = x$. \script{418}{Examples}
+		\item given a set $X$ and a partial order $\sqsubseteq$ and a function $f:X \rightarrow X$, we call an element $x$ the \alert{least fixpoint} of $f$ if $x$ is a fixpoint of $f$ and for all fixpoints $y$ of $f$ the inclusion $x \sqsubseteq y$ holds. \script{419}{Examples}
+		\begin{betterlist}
+			\item \alert{Knaster-Tarski Fixpoint Theorem}: Let $(X, \sqsubseteq)$ be a complete lattice. If $f:X \rightarrow X$ is monotone then $f$ has a least fixpoint and this fixpoint is $\bigsqcap \{x \mid f(x) \sqsubseteq x\}$. \script{420}{Proof}
+			\item \script{421}{Abstract Annotations as (Least) Fixpoints}
+		\end{betterlist}
+		\item Kleene Chains
+		\begin{betterlist}
+			\item it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$
+			\item \alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$
+			\item \alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time. \script{424}{Proof}
+			\item \alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$
+			\item \script{426}{Example (f.)}
+		\end{betterlist}
+		\item If $(Y, \sqsubseteq_Y)$ is a complete lattice, and $X$ is any set, then $(X\rightarrow Y, \sqsubseteq)$ is also a complete lattice, where $X \rightarrow Y$ is the set of all functions from $X \rightarrow Y$, and $f \sqsubseteq g$ iff for all $x \in X$, we have $f(x) \sqsubseteq_Y g(x)$. \script{429}{Proof}
+		\item If a complete lattice $(Y , \sqsubseteq_Y)$ satisfies the ACC, then for any finite set $X$, the complete lattice $(X \rightarrow Y , \sqsubseteq)$ also satisfies the ACC
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

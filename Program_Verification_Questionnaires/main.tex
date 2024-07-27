@@ -1,0 +1,449 @@
+\documentclass[landscape, a4paper]{article}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\fontsize{2.5pt}{2.5pt}\selectfont
+
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Pen-and-paper proofs using the program's relational semantics}
+	\begin{betterlist}
+		\item Give a short description of the technique.
+
+		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+				A human consults the definitions of the semantics, and the program text. They then prove properties about the semantic relation using normal mathematical reasoning, expressed in a mixture of formal notation and natural language.
+			}}
+		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
+
+		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+				Precondition-postcondition pairs can definitely be checked. For assert statements, we would first have to extend the relational semantics. But in principle, such conditions (and similarly, division-by-zero) are also possible; and one can even formulate and prove many properties (e.g. the precise function/relation calculated by the program).
+
+				Termination however cannot be expressed with our big-step relational semantics.
+			}}
+		\item \alert{Soundness}
+		\begin{betterlist}
+			\item \underline{For correct programs}
+			\begin{betterlist}
+				\item In which circumstances does the technique claim that a program is correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						When the human conducting the proof has managed to prove correctness, and has convinced themselves that the proof is  complete and all cases are covered.
+					}}
+				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						If the proof is not checked carefully, there might be mistakes. Otherwise, if there are no flaws in the proof, there can be no false negatives.
+					}}
+			\end{betterlist}
+			\item \underline{For incorrect programs}
+			\begin{betterlist}
+				\item In which circumstances does the technique claim that a program is correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						When the human conducting the proof has managed to prove incorrectness, and has convinced themselves that the proof is  complete and all cases are covered.
+					}}
+				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						Similar to the answer for false negatives. However, it is often considered much easier to confirm that the program is incorrect (as one can point to a specific sequence of program states leading to the error), so a problem in the proof after careful checking seems less likely.
+					}}
+			\end{betterlist}
+			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          As always, we have to assume that our definition of the semantics actually captures what happens at runtime -- they might differ to compiler bugs, or bugs in the OS or CPU where the program is executed.
+				}}
+		\end{betterlist}
+		\item \alert{Completeness}
+		\begin{betterlist}
+			\item \underline{UNKNOWN verdicts}
+			\begin{betterlist}
+				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+            Yes, the human can fail to find a proof and eventually give up.
+					}}
+				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+            Same answer as above.
+					}}
+			\end{betterlist}
+			\item \underline{Termination}
+			\begin{betterlist}
+				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+            No, the human may fail to find a proof but keep trying (and even after the human's eventual death, others may keep trying to prove the correctness).
+					}}
+				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+            Same answer as above.
+					}}
+			\end{betterlist}
+			\item Are there any programs which the technique does not support at all?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          Not that I could see (with the exception of programs with assert statements, already mentioned for specifications above). Generally, if we want to add more programming constructs (concurrency, recursion, ...) we need to extend the semantics.
+
+          Plus, there is a scalability issue for very large programs.
+				}}
+		\end{betterlist}
+		\item \alert{User Input:} How much / which user input is needed for the technique?
+		\begin{betterlist}
+			\item \checkboxChecked the program
+			\item \checkboxChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          It can be very detailed and complex, as we specify it in terms of the semantic relation -- any mathematical statement about this relation is a possible specification.
+				}}
+			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          -
+				}}
+			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          -
+				}}
+			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          -
+				}}
+			\item \checkboxUnchecked the proof is completely manual
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          -
+				}}
+		\end{betterlist}
+		\item \alert{Provided Output}
+		\begin{betterlist}
+			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          We would then have produced a full proof of incorrectness. This can take many forms, but e.g. a failing execution would be the best output.
+				}}
+			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          We have a human-readable (hopefully) proof. It is not directly usable by machines.
+				}}
+			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          One can examine failed / stalled proof attempts. It is unclear whether they will be helpful.
+				}}
+			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          Same answer as for UNKNOWN.
+				}}
+		\end{betterlist}
+		\item \alert{Efficiency}
+		\begin{betterlist}
+			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          ...
+				}}
+			\item Are there particularly important optimizations?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          If the proof is complex, one should try to formulate and prove helpful lemmas first instead of directly going for the full proof.
+				}}
+		\end{betterlist}
+		\item \alert{Further Aspects}
+		\begin{betterlist}
+			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be bro- ken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the mod- ularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          See previous comment: One can break down the proof into smaller lemmas. The lemmas may talk about parts of the program, parts of the specification, or both. If we have multiple humans, we can then parallelize the proofs of these lemmas.
+				}}
+			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          Yes, a successful proof can in many cases be modified, if the modifications to the program are small and preserve correctness.
+				}}
+			\item Which techniques are used? E.g. SMT solving, automata, ...
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          human mind, pen, paper
+				}}
+			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+          The material costs (pen, paper) are low. But we need one or more very skilled humans to perform the mathematical reasoning about the program; and for complex programs, it may take a long time. So the overall cost is high -- we need to automate and simplify parts of this process.
+				}}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Hoare proof system}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Deductive Verification}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{building the reachability graph (Explicit-State Model Checking)}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{building the precise ARG / Bounded Model Checking}
+\end{minipage}
+
+\newpage
+
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Abstract Interpretation}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{CEGAR with Predicate Abstraction}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Trace Abstraction Refinement}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Invariant Synthesis}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Ranking Function Synthesis}
+\end{minipage}
+\newpage
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Terminator}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\raggedright
+	\fbox{Template}
+	\begin{betterlist}
+		\item Give a short description of the technique.
+
+		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+				response
+
+				response
+			}}
+		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
+
+		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+				response
+
+				response
+			}}
+		\item \alert{Soundness}
+		\begin{betterlist}
+			\item \underline{For correct programs}
+			\begin{betterlist}
+				\item In which circumstances does the technique claim that a program is correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+			\end{betterlist}
+			\item \underline{For incorrect programs}
+			\begin{betterlist}
+				\item In which circumstances does the technique claim that a program is correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+			\end{betterlist}
+			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+		\end{betterlist}
+		\item \alert{Completeness}
+		\begin{betterlist}
+			\item \underline{UNKNOWN verdicts}
+			\begin{betterlist}
+				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+			\end{betterlist}
+			\item \underline{Termination}
+			\begin{betterlist}
+				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+						response
+
+						response
+					}}
+			\end{betterlist}
+			\item Are there any programs which the technique does not support at all?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+		\end{betterlist}
+		\item \alert{User Input:} How much / which user input is needed for the technique?
+		\begin{betterlist}
+			\item \checkboxChecked the program
+			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item \checkboxUnchecked the proof is completely manual
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+		\end{betterlist}
+		\item \alert{Provided Output}
+		\begin{betterlist}
+			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+		\end{betterlist}
+		\item \alert{Efficiency}
+		\begin{betterlist}
+			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item Are there particularly important optimizations?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+		\end{betterlist}
+		\item \alert{Further Aspects}
+		\begin{betterlist}
+			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be bro- ken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the mod- ularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item Which techniques are used? E.g. SMT solving, automata, ...
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
+
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					response
+
+					response
+				}}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\end{document}

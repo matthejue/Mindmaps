@@ -241,6 +241,11 @@
 			\item \href{https://www.microsoft.com/en-us/research/wp-content/uploads/2016/12/krml178.pdf}{\inlinebox{Section 9.2 of Specification}}
 			\item \script{266}{Grammar}
 		\end{betterlist}
+		\item Assert Statement
+		\begin{betterlist}
+			\item \script{436}{Grammar}
+		\end{betterlist}
+
 	\end{betterlist}
 	\fbox{Boostan Extended Semantics}
 	\begin{betterlist}
@@ -391,7 +396,7 @@
 				\item \script{364}{Modifications}
 			\end{betterlist}
 		\end{betterlist}
-		\item \alert{Abstract Error Configuration}: Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an abstract error configuration if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}
+		\item Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an \alert{abstract error configuration} if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}
 		\item \underline{Lemma:} The set of reachable configurations contains an error configuration \alert{iff} the precise abstract reachability graph for $G$ contains an abstract error configuration
 		\begin{betterlist}
 			\item $G$ is a control-flow graph for $P$
@@ -492,7 +497,7 @@
 			\end{betterlist}
 			\item Kleene iteration with $F_{\triangledown}$ always terminates. The result is an abstract annotation
 			\begin{betterlist}
-      \item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F\triangledown(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$
+				\item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F\triangledown(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$
 			\end{betterlist}
 		\end{betterlist}
 		\item \alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
@@ -535,8 +540,93 @@
 		\item If $(Y, \sqsubseteq_Y)$ is a complete lattice, and $X$ is any set, then $(X\rightarrow Y, \sqsubseteq)$ is also a complete lattice, where $X \rightarrow Y$ is the set of all functions from $X \rightarrow Y$, and $f \sqsubseteq g$ iff for all $x \in X$, we have $f(x) \sqsubseteq_Y g(x)$. \script{429}{Proof}
 		\item If a complete lattice $(Y , \sqsubseteq_Y)$ satisfies the ACC, then for any finite set $X$, the complete lattice $(X \rightarrow Y , \sqsubseteq)$ also satisfies the ACC
 	\end{betterlist}
+	\fbox{Predicate Abstraction}
+	\begin{betterlist}
+    \item Way to design custom domain
+		\item Let $B$ a finite set of formulas over program variables. The \alert{predicate abstraction for $B$} is the abstract domain $(\mathbb{A}_B, \sqsubseteq, \gamma_B, \alpha_B)$ where
+		\begin{betterlist}
+			\item the abstract states are the subsets of $B$: $\mathbb{A}_B = 2^B$,
+			\item the order $\sqsubseteq$ is subset inclusion $\subseteq$,
+			\item the concretization is $\gamma_B(X) = \{\bigwedge X\}$,
+			\item and the abstraction is $\alpha_B(S) = \{\varphi \in B \mid S \subseteq \{\varphi\}\}$
+		\end{betterlist}
+		\item The following defines an abstract post operator for predicate abstraction for $B$: $post^\#_B(X, st) = \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\}$
+		\item Given a finite set of formulas $B$ we define the \alert{abstract strongest post} operator as follows: $sp^\#_B(S, st) = \{\bigwedge \{\varphi \in B \mid sp(S, st) \subseteq \{\varphi\}\}\}$
+		\begin{betterlist}
+			\item $sp^\#_B(\{ \psi \} , st) = \{\bigwedge \{\varphi \in B \mid sp(\{ \psi \}, st) \subseteq \{ \varphi \}\}\}$
+		\end{betterlist}
+		\item We call an abstract reachability graph $(AC, T)$ \alert{precise for $B$} if for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$ the equality $sp^\#_B(\{\varphi\}, st) = \{\varphi'\}$ holds
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
+	\fbox{Infeasability Proofs}
+	\begin{betterlist}
+		\item A \alert{control-flow graph with error locations} is a tuple $G = (Loc, \Delta, \ell_{init}, \ell_{ex}, Loc_{err})$ where
+		\begin{betterlist}
+			\item $(Loc, \Delta, \ell_{init}, \ell_{ex})$ is a control-flow graph and
+			\item $Loc_{err} \subseteq Loc$ is a subset of locations that we call \alert{error locations}
+		\end{betterlist}
+		\item Given a program $P = (V, \mu, st)$ we define the \alert{control-flow graph with error locations for $P$} analogously to the control-flow graph for $P$. We always take the union of error locations for sub-statements, and define the control-flow graph for an assert statement below
+		\begin{betterlist}
+			\item \script{438}{Example}
+		\end{betterlist}
+		\item We call a program configuration $(\ell, s)$ an \alert{error configuration} if $\ell \in Loc_{err}$
+		\item An abstract configuration $(\ell, \{\varphi\})$ is an \alert{abstract error configuration} if $\ell \in Loc_{err}$ and $\{\varphi\}\ne \emptyset$
+		\item We call a sequence of statements a \alert{trace}
+		\begin{betterlist}
+			\item We call a trace $\pi$ \alert{feasible} if there is some execution for $\pi$
+		\end{betterlist}
+		\item Given a trace $\pi = st_1, \ldots, st_n$, we call a sequence of formulas $\varphi_0, . . . , \varphi_n$ \alert{inductive for $\pi$} if $sp(\{\varphi_i\}, st_{i+1}) \subseteq \{\varphi_{i+1}\}$ for all $i \in \{0, \ldots, n−1\}$ %(Inductive sequence of formulas)
+		\item If there exists a sequence of formulas $\varphi_0, \ldots , \varphi_n$ that is inductive for $\pi$ such that $\varphi_0$ is $true$ and $\varphi_n$ is $false$, then $\pi$ is infeasible
+		\item We call a sequence of formulas $\varphi_0, \ldots , \varphi_n$ a \alert{proof of infeasibility} if the sequence is inductive for $\pi$, $\varphi_0$ is $true$, and $\varphi_n$ is $false$
+		\item We define the \alert{abstraction of a statement} $abstract(st)$ as follows:
+
+		$abstract(st) = \begin{cases}
+				\verb|assume true| & \text{if st is of the form } \verb|assume |\psi \\
+				\verb|havoc x|     & \text{if st is of the form } \verb|x:=e|        \\
+				\verb|havoc a|     & \text{if st is of the form } \verb|a[k]:=v|     \\
+				\verb|havoc x|     & \text{if st is of the form } \verb|havoc x|
+			\end{cases}$
+		\item We call a trace $\pi^\# = st^\#_1 \ldots st^\#_n$ an \alert{abstraction of a trace} $\pi = st_1, \ldots, st_n$ if each $st^\#_i$ is either the statement $st_i$ or the abstraction $abstract(st_i)$
+		\begin{betterlist}
+			\item If $\pi^\#$ is an abstraction of $\pi$ and $\varphi_0, \ldots , \varphi_n$ is a proof of infeasibility for $\pi^\#$, then $\varphi_0, \ldots , \varphi_n$ is a proof of infeasibility for $\pi$
+		\end{betterlist}
+		\item For $i = 0, \ldots, n$, let $\sigma_i$ be the substitution such that for any $x \in V$, we have $\sigma_i(x) = x_k$ iff there are exactly $k$ statements of the form \verb|x:=expr|, \verb|x[k]:=v| or \verb|havoc x| in the prefix trace $st_1 \ldots st_i$.
+
+		We define the \alert{static single-assignment form (SSA)} as the set of formulas $SSA(\pi) := \{\psi_1, \ldots, \psi_n\}$, where
+
+		$\psi_i =
+			\begin{cases}
+				expr\;\sigma_i                                    & \text{if } st_i \text{ is } \verb|assume expr| \\
+				\sigma_i(x) = (expr\;\sigma_{i−1})                & \text{if } st_i \text{ is } \verb|x:=expr|     \\
+				\sigma_i(a) = (a⟨k \triangleleft v⟩) \sigma_{i−1} & \text{if } st_i \text{ is } \verb|a[k]:=v|     \\
+				true                                              & \text{if } st_i \text{ is } \verb|havoc x|
+			\end{cases}$
+		\begin{betterlist}
+			\item $\bigwedge SSA(\pi )$ is unsatisfiable iff $\pi$ is infeasible
+		\end{betterlist}
+		\item Given a finite set of formulas $\mathbb{F}$ where $\bigwedge \mathbb{F}$ is unsatisfiable, we call a subset $X \subseteq \mathbb{F}$ an \alert{unsatisfiable core} if $\bigwedge X$ is also unsatisfiable
+		\begin{betterlist}
+			\item An unsatisfiable core $X$ is \alert{minimal} if no strict subset of $X$ is an unsatisfiable core
+		\end{betterlist}
+		\item Let $\pi = st_1\ldots st_n$ be an infeasible trace, with $SSA(\pi ) = \{ \psi_1,\ldots , \psi_n\}$ as on the previous slide. Let $X$ be an unsatisfiable core of $SSA(\pi )$, and let $\pi^\# = st^\#_1 \ldots st^\#_n$ such that $st^\#_i = st_i$ if $\psi_i \in X$, and $st^\#_i = abstract(st_i)$ otherwise. Then the trace $\pi^\#$ is infeasible
+	\end{betterlist}
+  \fbox{CEGAR}
+	\begin{betterlist}
+		\item Given an abstract reachability graph $(AC, T)$, we call a sequence of statements $st_1,\ldots , st_n$ an \alert{error trace in $(AC, T)$} if there exists a sequence of abstract configurations $(\ell_0, \{ \varphi_0\} ),\ldots , (\ell_n, \{ \varphi_n\})$ such that
+		\begin{betterlist}
+			\item $(\ell_0, \{ \varphi_0\} )$ is the initial abstract configuration $(\ell_{init}, \{ true\} )$,
+			\item $( (\ell_i, \{ \varphi_i\} ), st_{i+1}, (\ell_{i+1}, \{ \varphi_{i+1}\} ) ) \in T$ for $i \in \{ 0,\ldots , n −1\}$, and
+			\item $(\ell_n, \{ \varphi_n\} )$ is an abstract error configuration
+		\end{betterlist}
+		\item Let $\pi$  be a trace. If $\varphi_0,\ldots , \varphi_n$ is an infeasibility proof for $\pi$  and $B \supseteq \{ \varphi_0,\ldots \varphi_n\}$  then $\pi$  is not an error trace in an abstract reachability graph that is precise for $B$. \script{487}{Proof}
+		\item \alert{Progress property:} In the CEGAR algorithm, if $\pi$ is the error trace that is analyzed in iteration $i$, then $\pi$ will not be an error trace of the abstract reachability graph in further iterations
+	\end{betterlist}
+  \fbox{Trace Abstraction}
+  \begin{betterlist}
+    \item TODO
+  \end{betterlist}
+  
 \end{minipage}
 
 \newpage

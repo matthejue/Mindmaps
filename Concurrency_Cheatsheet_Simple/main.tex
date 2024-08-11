@@ -4,78 +4,81 @@
 \input{./content/desgin}
 \input{./content/declarations}
 
+\setmainfont{Annie Use Your Telescope}
+\setmonofont{Annie Use Your Telescope}
+% \setmathfont{Annie Use Your Telescope}
+
 \begin{document}
-\fontsize{3pt}{3pt}\selectfont
+\fontsize{5pt}{5pt}\selectfont
 
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{General} \script{1}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_17_lecture_1.md}
+	\inlinebox{General}
 	\begin{betterlist}
-		\item \underline{keywords:} Rob Pike, Static type system, Higher-order functions, Garbage collection, Object orientation through type interface (no classes but methods can be attached to types), Support for concurrency and communication (Lightweight threads, Communication through channels with formal foundations: Communicating Sequential Processes, Philosophy: \enquote{Do not communicate by sharing memory. Instead, share by communicating})
+    \item \nul{keywords:} Rob Pike, Static type system, Higher-order functions, Garbage collection, Object orientation through type interface (no classes but methods can be attached to types), Support for concurrency and communication (Lightweight threads, Communication through channels with formal foundations: Communicating Sequential Processes, Philosophy: \enquote{Do not communicate by sharing memory. Instead, share by communicating})
 	\end{betterlist}
-	\fbox{Execution}
+	\inlinebox{Execution}
 	\begin{betterlist}
 		\item \verb|go run hello.go| (compile and run), \verb|go build hello.go| (compile separately), \href{https://golang.org/}{Website}
-		\item \alert{\enquote{pretty printer}:} \verb|gofmt hello.go| (outputs to console), \verb|gofmt -w hello.go| (writes to same file)
+		\item \cul{pretty printer:} \verb|gofmt hello.go| (outputs to console), \verb|gofmt -w hello.go| (writes to same file)
 	\end{betterlist}
-	\fbox{Syntax}
+	\inlinebox{Syntax}
 	\begin{betterlist}
 		\item package corresponds to modules in other packages
 		\item one statement per line, Semicolons are redundant
 		\item \verb|var x int|, \verb|var varName varType|
-		\item  \verb|go expression| starts a new thread to run \verb|expression|. \verb|expression| must be a function call or a method call; it cannot be parenthesized. The new thread executes concurrently to the following statements. Threads may run interleaved or on different CPUs (managed by the run-time system). As soon as the main thread terminates, all threads started by the main thread are terminated. Go calls threads \alert{goroutines}, other languages use \verb|fork| or \verb|spawn| instead of go
+		\item  \verb|go expression| starts a new thread to run \verb|expression|. \verb|expression| must be a function call or a method call; it cannot be parenthesized. The new thread executes concurrently to the following statements. Threads may run interleaved or on different CPUs (managed by the run-time system). As soon as the main thread terminates, all threads started by the main thread are terminated. Go calls threads \cul{goroutines}, other languages use \verb|fork| or \verb|spawn| instead of go
 		\item the \verb|=| operator is used for assignment to already declared variables, while \verb|:=| is used for declaring and initializing a new variable
 	\end{betterlist}
-	\fbox{Terminology} \href{https://wiki.haskell.org/Parallelism_vs._Concurrency}{\inlinebox{Source}} \href{https://go.dev/tour/concurrency/11}{\inlinebox{Source 2}}
+	\inlinebox{Terminology}
 	\begin{betterlist}
-		\item \underline{Concurrency versus Parallelism}
+		\item \nul{Concurrency versus Parallelism}
 		\begin{betterlist}
-			\item \alert{Parallelism:} Make programs run faster by making use of additional CPUs (parallel hardware)
+			\item \cul{Parallelism:} Make programs run faster by making use of additional CPUs (parallel hardware)
 			\begin{betterlist}
 				\item parallelism is about executing multiple tasks at once
 				\item parallelism focuses on boosting performance by handling computation heavy task simultaneously
 			\end{betterlist}
-			\item \alert{Concurrency:} Program organized into multiple threads of control. Threads may work independently or work on a common task
+			\item \cul{Concurrency:} Program organized into multiple threads of control. Threads may work independently or work on a common task
 			\begin{betterlist}
 				\item concurrency is about managing multiple tasks at once
 				\item concurrency is about efficiently managing multiple tasks to keep your program responsive
 			\end{betterlist}
 			\item while concurrency doesn't automatically lead to parallelism it provides a foundation that make parallelism easier to achieve. Concurrency can enable parallelism by structuring programs to allow for efficient parallel execution. Using concurrency we can break down a program into smaller independent tasks making it easier to take advantage of parallelism. These concurrent task can be distributed across multiple CPU cores and executed simultaneously. Concurrency can enable parallelism by structuring programs to allow for efficient parallel
 		\end{betterlist}
-		\item \alert{Thread:} Independently sequentially executing code
-		\item \underline{Thread state:}
+		\item \cul{Thread:} Independently sequentially executing code
+		\item \nul{Thread state:}
 		\begin{betterlist}
 			\item Running (currently executing)
 			\item Waiting (ready to execute, but no CPU is available)
 			\item Blocked (waiting for thread-external condition)
 		\end{betterlist}
-		\item \alert{Multithreading:} Alternating execution of multiple threads on one CPU
-		\item \alert{Scheduling:} Strategy to switch between running and waiting threads
+		\item \cul{Multithreading:} Alternating execution of multiple threads on one CPU
+		\item \cul{Scheduling:} Strategy to switch between running and waiting threads
 		\begin{betterlist}
-			\item \alert{Preemptive scheduling:} Every thread gets a certain slice of time to run, then it is preempted and a waiting thread is selected to run
-			\item \alert{Cooperative scheduling:} A thread runs until a blocking command is encountered, then a waiting thread is selected to run
+			\item \cul{Preemptive scheduling:} Every thread gets a certain slice of time to run, then it is preempted and a waiting thread is selected to run
+			\item \cul{Cooperative scheduling:} A thread runs until a blocking command is encountered, then a waiting thread is selected to run
 		\end{betterlist}
 	\end{betterlist}
-	\fbox{Multi-threading}
+	\inlinebox{Multi-threading}
 	\begin{betterlist}
-		\item \underline{Blocking commands:}
+		\item \nul{Blocking commands:}
 		\begin{betterlist}
 			\item Making the thread sleep (delay/sleep)
 			\item Receiving from a channel (potentially blocking as the channel may be \enquote{empty})
 			\item Sending on a channel (potentially blocking as a channel may be \enquote{full})
 		\end{betterlist}
-		\item \underline{State-based execution:}
+		\item \nul{State-based execution:}
 		\begin{betterlist}
 			\item Notation similar to the execution of UPPAAL/communicating automata. The program state consists of the states of individual threads. For example: \verb|(Main.Running, A.Waiting, B.Waiting)|. Creation of a thread (via the go keyword) adds a new thread, initially in wait-state
-			\item a \alert{path of execution} is described by a sequence of individual program states. The transition between the current and the next states is indicated with \verb|-->|. E.g. \verb|Main.Running --> (Main.Running, A.Waiting)|
-			\item \script{5}{Example}, path of execution at the bottom
+			\item a \cul{path of execution} is described by a sequence of individual program states. The transition between the current and the next states is indicated with \verb|-->|. E.g. \verb|Main.Running --> (Main.Running, A.Waiting)|
 		\end{betterlist}
 	\end{betterlist}
-	\fbox{Lambda's (anonymous functions)}
+	\inlinebox{Lambda's (anonymous functions)}
 
 	\adjustbox{scale=0.5}{
 		% https://github.com/cmhughes/latexindent.pl/issues/132
 		% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}]
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}]
       go func() {
         // content
       }()
@@ -86,16 +89,13 @@
     \end{dnumberedcodebox}
     %\end{noindent}
 	}
-	\begin{betterlist}
-		\item \script{9}{Example}
-	\end{betterlist}
 
-	\fbox{Channels}
+	\cul{Channels}
 	\begin{betterlist}
 		\item Threads can communicate using channels, which is a datatype
 		\item \alert{message:} a value sent or received over a channel
 		\item channel can be \alert{unbuffered} or \alert{buffered}. A buffered channel can hold a finite number of messages in its buffer
-		\item \underline{principles holding:}
+		\item \nul{principles holding:}
 		\begin{enumerate}
 			\item a thread can send and receive messages on any channel it holds.
 			\item a message can be received by exactly one thread.
@@ -110,7 +110,7 @@
 		\item \alert{with/without buffer:} \verb|ch1 = make(chan int)| (unbuffered), \verb|ch2 = make(chan int, 50)| (buffered)
 		\begin{betterlist}
 			\item a buffer is a queue of messages
-			\item \underline{rules for exchanging messages:}
+			\item \nul{rules for exchanging messages:}
 			\begin{betterlist}
 				\item channel without buffer (synchronous communication, synchronous channel):
 				\begin{betterlist}
@@ -132,7 +132,7 @@
 					% \item sender blocks only if the buffer is full
 				\end{betterlist}
 			\end{betterlist}
-			% \item \underline{difference as follows:}
+			% \item \nul{difference as follows:}
 			%   \begin{betterlist}
 			%     \item for an unbuffered channel, a sender always has to \alert{synchronize} with a recipient. Sender and recipient always block. The Go runtime system checks if there are blocking sender and recipient for the same channel. If so, they communicate with each other and become unblocked
 			%     \item for a buffered channel, the sender behaves \alert{asynchronously} and tries to write the message to the buffer. The sender only blocks if the buffer is full, then it tries again. The recipient always synchronizes with the buffer. If the buffer is empty, the recipient blocks. Otherwise, a message is taken from the buffer
@@ -142,7 +142,6 @@
 			\item \alert{Receive from channel \texttt{ch} and save the value in \texttt{x}:} \verb|x = <- ch|
 			\begin{betterlist}
 				\item an expression, i.e., \verb|<-| is a unary operator on channels
-				\item \script{13}{Example}
 			\end{betterlist}
 			\item \alert{Restricted communication:}
 			\begin{betterlist}
@@ -151,15 +150,14 @@
 				\item \alert{only receiving:} \verb|func rcv(ch <- chan int) {}|
 			\end{betterlist}
 		\end{betterlist}
-		\item \script{18}{Example}
 	\end{betterlist}
-	\fbox{Mutex} \script{20}{Exercise Slides} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_19_tutorial_1.md}
+	\inlinebox{Mutex}
 	\begin{betterlist}
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01a.MutexWithBuffer.go}{1a}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01b.MutexWithoutBuffer.go}{1b}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         type Mutex (chan int)
 
         func newMutex() Mutex {
@@ -179,7 +177,7 @@
 		}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
       type Mutex (chan int)
       
       func mutex(ch chan int) {
@@ -206,13 +204,13 @@
     %\end{noindent}
 		}
 	\end{betterlist}
-	\fbox{Mutable Variable} \script{21}{Exercise Slides}
+	\inlinebox{Mutable Variable}
 	\begin{betterlist}
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02a.MVarWithBuffer.go}{2a}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02b.MVarWithoutBufferNoAnswers.go}{2b}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02c.MVarWithoutBuffer.go}{2c}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
       type MVar (chan int)
       
       func newMVar(x int) MVar {
@@ -235,7 +233,7 @@
 		}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
       type MVar (chan int)
 
       func newMVar(x int) MVar {
@@ -264,13 +262,13 @@
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{Channels of Channels} \script{23}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_24_lecture_1.md}
+	\inlinebox{Channels of Channels}
 	\begin{betterlist}
 		\item \verb|var ch chan (chan int)|. A channel that accepts channels of integers
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
     type Request struct {
         id  int
         ack chan int
@@ -305,15 +303,14 @@
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \script{25}{Example: Worker and Client} and  \script{26}{Example: Sleeping barber}
 	\end{betterlist}
-	\fbox{Non-deterministic Choice (\texttt{select})}
+	\inlinebox{Non-deterministic Choice (\texttt{select})}
 	\begin{betterlist}
 		\item one wants to continue, as soon as one of the events occurs. The \verb|select| primitive allows simultaneous waiting for multiple events
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
       select {
         case x = <-ch1:
             ...
@@ -325,7 +322,7 @@
       \end{dnumberedcodebox}
     %\end{noindent}   }
 		}
-		\item \underline{select works as follows:}
+		\item \nul{select works as follows:}
 		\begin{betterlist}
 			\item select blocks if all events (cases) block
 			\item if one event (case) occurs, the corresponding case is chosen
@@ -333,13 +330,12 @@
 			\item the remaining cases are no longer available!
 		\end{betterlist}
 		\item events that were not chosen remain available. The order of cases does not matter. The choice is random and almost equally distributed.
-		\item \script{32}{Example: \enquote{Random} Choice}, \script{34}{Example: Selection is \enquote{Fair}}, \script{35}{Example: Attempt at emulating select in Newsreader} and \script{39}{Example: Execution of multiple tasks}
-		\item \underline{Selection with prioritization:} put the case that should be priotised several times
-		\item \underline{\texttt{default}:}
+		\item \nul{Selection with prioritization:} put the case that should be priotised several times
+		\item \nul{\texttt{default}:}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         select {
           case <-ch1:
           case ch2<-1:
@@ -352,11 +348,11 @@
 			\item If none of the cases occurs, select blocks. It is also possible to prevent blocking using \texttt{default}
 			\item If none of the first two cases occurs, then the third (\texttt{default}) case is selected
 		\end{betterlist}
-		\item \underline{\texttt{timeout}:}
+		\item \nul{\texttt{timeout}:}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         timeout := time.After(4 * 1e9)
         select {
           case <-ch:
@@ -367,13 +363,13 @@
         \end{dnumberedcodebox}
       %\end{noindent}   }
 		}
-		\item \underline{\alert{Berrier} pattern:}
+		\item \nul{Berrier pattern:}
 		\begin{betterlist}
 			\item multiple tasks will be executed simultaneously. The program will continue as soon as all tasks are done. Effectively a \alert{counting semaphore} is modeled
 		\end{betterlist}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
           func barrier() {
             var ch = make(chan int)
             // run all three tasks concurrently
@@ -408,7 +404,7 @@
         %\end{noindent}   }
 		}
 	\end{betterlist}
-	\fbox{Where it can all go wrong} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}
+	\inlinebox{Where it can all go wrong} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}
 	\begin{betterlist}
 		\item \alert{trace:} is a sequence of events and expresses the interleaved execution of individual threads
 		\begin{betterlist}
@@ -428,11 +424,10 @@
 			\item \verb|pre(ch!)|: wanting to send on channel \verb|ch|
 			\item \verb|post(ch!)|: having sent on channel \verb|ch|
 			\item in case of communication (send-receive), we assume that in the trace the post event of the send always occurs before the post event of the receive
-			\item \script{45}{Examples for deadlock and no deadlock}, code found at a previous page
 		\end{betterlist}
 		\item \alert{Starvation:}
 		\begin{betterlist}
-			\item \script{48}{Example} where Main starves (does not progress), because S and R always communicate with each other. Such a situation is considered starvation
+			\item Thread starves (does not progress), because the other threads always communicate with each other. Such a situation is considered starvation
 		\end{betterlist}
 		\item \alert{Livelock:} Describes a situation in which always at least one thread is not blocked, but no thread progresses. A livelock does not occur in \script{48}{Example}
 		\item \alert{Data race:} Situation in which two unprotected, conflicting memory operations (at least one write) occur simultaneously
@@ -442,7 +437,7 @@
 
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top, title=data race visible]
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top, title=data race visible]
                  Main        T
             1.               y!
             2.               w(x)
@@ -452,7 +447,7 @@
 			}
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top, title=data race not visible]
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top, title=data race not visible]
                  Main        T
             1.               y!
             2.               w(x)
@@ -461,15 +456,14 @@
             \end{dnumberedcodebox}
           %\end{noindent}   }
 			}
-			\item \script{52}{Reordering and data races}
 			\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/ilias01_answers.pdf}{Ilias Quiz 1}
 		\end{betterlist}
 	\end{betterlist}
-	\fbox{Lists} \script{56}{Exercise Slides} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_04_26_12_16_11.md}
+	\inlinebox{Lists}
 
 	\adjustbox{scale=0.5}{
 		% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         subs := list.New()
         subs.PushBack(s)
         for e := subs.Front(); e != nil; e = e.Next() {
@@ -487,11 +481,11 @@
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{Quantified Semaphor}
+	\inlinebox{Quantified Semaphor}
 
 	\adjustbox{scale=0.5}{
 		% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
 type QSem struct {
   q              int
   curr           int
@@ -552,7 +546,7 @@ func signal(qsem *QSem) {
 	}
 	\adjustbox{scale=0.5}{
 		% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
 type QSem struct {
   q              int
   curr           int
@@ -613,19 +607,19 @@ func signal(qsem *QSem) {
 	\begin{betterlist}
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem1.go}{4.1}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem2.go}{4.2}
 		\item mechanism with queues unnecessary, because in go blocked senders and recipients on channels are ordered and unblocked in order. Implementation does not need to keep track of which thread exactly is waiting, because we already know that threats themselves already know they're waiting. All we need to track is that there are threads waiting. Instead of using lists of mutual exclusions to indicate unblocking, one simply uses a single mutex for unblocking waits ans signals and keep track how many are waiting. lock on mutual exclusion, meaning that the first signal that called unlock will be unlocked and be done
-		\item \underline{Differences to Mutex:}
+		\item \nul{Differences to Mutex:}
 		\begin{betterlist}
 			\item \alert{Mutex:} A mutex has the concept of ownership, meaning the thread that locks a mutex must be the one to unlock it. This is crucial for preventing issues like deadlocks or priority inversions.
 			\item \alert{Semaphore:} A semaphore does not have ownership rules. Any thread can increment or decrement the semaphore, making it more flexible but also easier to misuse.
 		\end{betterlist}
 	\end{betterlist}
-	\fbox{Examples for Deadlocks, Livelocks and Starvation via Traces}
+	\inlinebox{Examples for Deadlocks, Livelocks and Starvation via Traces}
 	\begin{betterlist}
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/05.sleepingBarber2.go}{5}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/06.diningPhilosophers.md}{6}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
                   import (
                     "time"
                     "math/rand"
@@ -637,11 +631,11 @@ func signal(qsem *QSem) {
         %\end{noindent}   }
 		}
 	\end{betterlist}
-	\fbox{Priorisation}
+	\inlinebox{Priorisation}
 
 	\adjustbox{scale=0.5}{
 		% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
           select {
             case <-deer:
               numOfDeerSeen++
@@ -658,7 +652,7 @@ func signal(qsem *QSem) {
 	}
 	\adjustbox{scale=0.5}{
 		% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
           select {
             case <-deer:
               numOfDeerSeen++
@@ -678,29 +672,28 @@ func signal(qsem *QSem) {
 		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/07.SantaClaus.go}{7}
 		\item Santa gives priority to the reindeer in the case that there is both a group of elves and a group of reindeer waiting.
 	\end{betterlist}
-	\fbox{Go-style mutexes behave like semaphores}
+	\inlinebox{Go-style mutexes behave like semaphores}
 	\begin{betterlist}
 		\item It's often the case that a thread that acquires lock $x$ must also release $x$. This assumption holds for Java and C++. However, Go-style mutexes behave differently as they act more like semaphores. In Go, the acquire and release of a lock is not tied to a single thread. Go-style mutexes behave like semaphores
 	\end{betterlist}
-	\fbox{Dynamic data race prediction} \script{74}{Lecture Slides} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_08_16_12_53.md}
+	\inlinebox{Dynamic data race prediction}
 	\begin{betterlist}
 		\item \alert{Dynamic analysis}: Execute the program and observe its behavior, Determine if there is any potential bad behavior based on this specific program run
-		\item \alert{Static analysis}: Predict all possible program runs without actually executing the program, (usually) sound, \underline{but overapproximative:} if there is a bug, it will be flagged, but also non-bug may be flagged
+		\item \alert{Static analysis}: Predict all possible program runs without actually executing the program, (usually) sound, \nul{but overapproximative:} if there is a bug, it will be flagged, but also non-bug may be flagged
 		\item events are collected in a program \alert{trace}. A trace is a linear sequence of events and represents an interleaved execution of the program
 		\begin{betterlist}
 			\item there is a \alert{tabular notation} for traces with a separate \alert{column} for each \alert{thread} and separate \alert{row} for each \alert{event}. The trace \alert{position} of an event corresponds to the row number
-			\item \script{80}{Example}
 		\end{betterlist}
 		\item an \alert{event} registers interesting program behavior. Each event is connected to one of the operations we are interested in
 		\begin{betterlist}
 			\item for each event, the trace records the \alert{thread} where the event happened. Each event can be identified by its position in the trace
 			\item two events are \alert{conflicting events} if they are read/write events for the same variable that come from different threads and at least one of them is a write event
 			% \begin{betterlist}
-			%   \item \underline{in other words:} two read/write operations on some shared variable are \alert{conflicting} if the operations happen in different threads and at least one of the operations is a write
+			%   \item \nul{in other words:} two read/write operations on some shared variable are \alert{conflicting} if the operations happen in different threads and at least one of the operations is a write
 			% \end{betterlist}
 			\item a \alert{data race} arises if two conflicting events appear right next to each other in the trace. That implies that both events may happen in any order
 		\end{betterlist}
-		\item instead of rerunning the program to obtain other traces, another method is to consider \alert{valid trace reorderings} that result from a trace. Reordering of a trace means that we change the order of its events such that the resulting sequence of events still represents a sensible execution sequence. \textcolor{gray}{Reordering the trace means that one simply permutes the elements}. \underline{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. \underline{Conditions for a valid trace reordering}:
+		\item instead of rerunning the program to obtain other traces, another method is to consider \alert{valid trace reorderings} that result from a trace. Reordering of a trace means that we change the order of its events such that the resulting sequence of events still represents a sensible execution sequence. \textcolor{gray}{Reordering the trace means that one simply permutes the elements}. \nul{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. \nul{Conditions for a valid trace reordering}:
 		\begin{enumerate}
 			\item The elements in the reordered trace must be part of the original trace
 			\begin{betterlist}
@@ -709,25 +702,21 @@ func signal(qsem *QSem) {
 
 			\item \alert{Program order must be maintained}:
 			\begin{betterlist}
-				\item \underline{the \alert{Program order Condition} states}: Let $P$ be some trace and $P'$ be a permutation of $P$. $P'$ preserves program order if, for each thread $T$, $P \downarrow T = P' \downarrow T$
+				\item \cul{Program order Condition}: Let $P$ be some trace and $P'$ be a permutation of $P$. $P'$ preserves program order if, for each thread $T$, $P \downarrow T = P' \downarrow T$
 				\begin{betterlist}
-					\item \underline{notation}: for a trace $P$ and thread $T$, we write $P \downarrow T$ for the list of events in thread $T$ contained in $P$
+					\item \nul{notation}: for a trace $P$ and thread $T$, we write $P \downarrow T$ for the list of events in thread $T$ contained in $P$
 				\end{betterlist}
-				\item \script{85}{Example}
 			\end{betterlist}
 			\item \alert{Lock semantics must be maintained}:
 			\begin{betterlist}
-				\item \underline{the \alert{Lock Semantics Condition} states:} Let $P$ be some trace and $P'$ be some reordering of $P$. If $𝑃' = P_1 acq(y) P_2 acq(y) P_3$, then there must be some event $rel(y)$ in $P_2$. If $P' = P_1 rel(y) P_2$, then there must be some $acq(y)$ such that $P_1 = P'_1 acq(y) P''_1$ and there is no $rel(y)$ in $𝑃''_1$
-				\item \script{87}{Example}
+				\item \cul{Lock Semantics Condition}: Let $P$ be some trace and $P'$ be some reordering of $P$. If $𝑃' = P_1 acq(y) P_2 acq(y) P_3$, then there must be some event $rel(y)$ in $P_2$. If $P' = P_1 rel(y) P_2$, then there must be some $acq(y)$ such that $P_1 = P'_1 acq(y) P''_1$ and there is no $rel(y)$ in $𝑃''_1$
 			\end{betterlist}
 			\item \alert{Last writer must be maintained}:
 			\begin{betterlist}
-				\item \underline{the \alert{Last Writer Condition} states}: Let $P$ be some trace with a read event $r(x)$ and $P'$ be some reordering of $P$. The event $r(x)$ must have the same \alert{last writer} in $P'$ as in $P$
+				\item \cul{Last Writer Condition}: Let $P$ be some trace with a read event $r(x)$ and $P'$ be some reordering of $P$. The event $r(x)$ must have the same \alert{last writer} in $P'$ as in $P$
 				\begin{betterlist}
 					\item If $P_1 r(𝑥) P_2$ is a trace, then the \alert{last writer} of $r(x)$ is some $w(x)$ such that $P_1 = P_1' w(x) P_1^{''}$ and $P_1^{''}$ does not contain another $w(x)$
 				\end{betterlist}
-
-				\item \script{89}{Example}
 			\end{betterlist}
 			\item[$\textcolor{PrimaryColor}{\bullet}$] \script{99}{Example}
 			\item[$\textcolor{PrimaryColor}{\bullet}$] \script{100}{Summary in other words and example for subset}. \textcolor{gray}{A valid reordering only needs to include a subset of the events of the original trace}
@@ -746,7 +735,7 @@ func signal(qsem *QSem) {
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{Efficient dynamic data race prediction methods}
+	\inlinebox{Efficient dynamic data race prediction methods}
 	\begin{betterlist}
 		\item Lamport's \alert{happens-before (HB method, incomplete and unsound) relation}:
 		\begin{betterlist}
@@ -765,23 +754,22 @@ func signal(qsem *QSem) {
 				\item \alert{Program order:} If $t\#e_i$, $t\#f_{i + n} \in T$ for some $n > 0$, then $t\#e_i < t\#f_{i + n}$
 				\begin{betterlist}
 					\item states that events in the same thread are ordered according to their trace position
-					\item \alert{Trace and event notation}: We write $t\#e_i$ to denote event $e$ at trace position $i$ in thread $t$. \script{98}{Example}
+					\item \alert{Trace and event notation}: We write $t\#e_i$ to denote event $e$ at trace position $i$ in thread $t$
 				\end{betterlist}
 				\item \alert{Critical section order:} If $t_1\#rel(x)_k, t_2\#acq(x)_{k + n} \in T$ with $t_1 \ne t_2$ and $n > 0$, then $t_1\#rel(x)_k < t_2\#acq(x)_{k + n}$
 				\begin{betterlist}
 					\item states that critical sections are ordered according to their trace position
 					\item for each acquire the matching release must be in the same thread. Hence, the critical section order only needs to consider a release and a subsequent acquire
 				\end{betterlist}
-				\item \script{102}{Example}
 			\end{betterlist}
 			\item \alert{Happens-before data race check:} If there are conflicting events $e$ and $f$ but neither $e < f$ nor $f < e$ , then $(e, f)$ is a HB data race pair
 			\begin{betterlist}
 				\item the argument is that if neither $e < f$ nor $f < e$ we are able to reorder the trace such that $e$ and $f$ appear right next to each other (in some reordered trace)
-				\item \underline{note}: if $(e, f)$ is a HB data race pair then so is $(f, e)$. In such a situation, we consider $(e, f)$ and $(f, e)$ as two distinct representative for the same data race. When reporting (and counting) HB data races we only consider a specific representative
+				\item \nul{note}: if $(e, f)$ is a HB data race pair then so is $(f, e)$. In such a situation, we consider $(e, f)$ and $(f, e)$ as two distinct representative for the same data race. When reporting (and counting) HB data races we only consider a specific representative
 			\end{betterlist}
-			\item \alert{Event set $ES_e$}: Set of events that happen up-to and including event $e$. That is, $ES_e = \{ f ∣ f < e \} \cup \{e\}$. \script{104}{Example}
+			\item \alert{Event set $ES_e$}: Set of events that happen up-to and including event $e$. That is, $ES_e = \{ f ∣ f < e \} \cup \{e\}$
 			\begin{betterlist}
-				\item \underline{Observations:} To enforce the critical section order we add the event set $ES_{rel(y)}$ of some release event to the event set $ES_{acq}(y)$ of some subsequent acquire event, To enforce the program order, we accumulate events within one thread (in essence, building the transitive closure)
+				\item \nul{Observations:} To enforce the critical section order we add the event set $ES_{rel(y)}$ of some release event to the event set $ES_{acq}(y)$ of some subsequent acquire event, To enforce the program order, we accumulate events within one thread (in essence, building the transitive closure)
 				\item to decide if $e < f$ we can check for $ES_{e} \subset ES_{f}$. Consider two conflicting events $e$ and $f$ where $e$ appears before $f$ in the trace. To decide if $e$ and $f$ are in a race, we check for $e \in ES_f$ or $f \in ES_e$. If yes, then there is no race (because $e < f$ or $f < e$). Otherwise, there is a race.
 				\item \alert{Set-based race predictor:}
 				\begin{betterlist}
@@ -794,11 +782,11 @@ func signal(qsem *QSem) {
 						\item $W(x)$: Most recent write event on $x$. (initially undefined)
 						\item $Rel(y)$: Contains the event set of the most recent release event on lock $y$. (initially empty)
 					\end{betterlist}
-					\item \underline{e@operation for the \alert{processing function} for event e of the form operation:}
+					\item \nul{e@operation for the processing function for event e of the form operation}:
 
 					\adjustbox{scale=0.5}{
 						% \begin{noindent}
-                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
                   e@acq(t,y) {
                     D(t) = D(t) U Rel(y) U { e }
                   }
@@ -834,22 +822,21 @@ func signal(qsem *QSem) {
                   \end{dnumberedcodebox}
                 %\end{noindent}   }
 					}
-					\item \script{107}{Example}
 					\item The size of $D(t)$ may grow linearly in the size of the trace. To check for a race we check if some element is in $D(t)$. If there are $n$ events, set-based race prediction requires $O(n^2)$ time
 				\end{betterlist}
 			\end{betterlist}
 			\item \alert{Vector clocks}: A distributed time stamp, A representation for a happens-before relation
 			\begin{betterlist}
-				\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$. \script{111}{Example}
+				\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
 				\begin{betterlist}
-					\item Let $e$ be an event in thread $t$ and $j$ its timestamp. Then, we can uniquely identify $e$ via $t$ and $j$. We write $t\#j$ to represent event $e$. In the literature, $t\#j$ is called an \alert{epoch}. \script{111}{Example}
+					\item Let $e$ be an event in thread $t$ and $j$ its timestamp. Then, we can uniquely identify $e$ via $t$ and $j$. We write $t\#j$ to represent event $e$. In the literature, $t\#j$ is called an \alert{epoch}
 					\begin{betterlist}
 						\item we generallly use the timestamp \enquote{before} processing the event
 					\end{betterlist}
-					\item \alert{set of epochs:} We group together epochs belonging to the same thread. For example, in case of $\{1\#1, 1\#2\}$ we write $\{1\#\{1, 2\}\}$. \script{112}{Example}
+					\item \alert{set of epochs:} We group together epochs belonging to the same thread. For example, in case of $\{1\#1, 1\#2\}$ we write $\{1\#\{1, 2\}\}$
 				\end{betterlist}
-				\item for each thread only keep most recent timestamp. E.g. in case of $\{1\#\{1, 2\}\}$ we write $\{1\#2\}$. \script{113}{Example}
-				\item a \alert{vector clock} encodes a set of most recent timestamps from $n$ threads as a vector of length $n$. $V ::= [i_1,\ldots ,i_n]$ is vector clock with $n$ time stamps. The entry $i_t$ is the timestamp for thread $t$. The above vector clock $V$ stands for the set of timestamps $V  \sim\sim  \{1\#i_1, \ldots, n\#i_n\}$. We use the entry $0$ to indicate missing information about a thread. \script{114}{Example}
+				\item for each thread only keep most recent timestamp. E.g. in case of $\{1\#\{1, 2\}\}$ we write $\{1\#2\}$
+				\item a \alert{vector clock} encodes a set of most recent timestamps from $n$ threads as a vector of length $n$. $V ::= [i_1,\ldots ,i_n]$ is vector clock with $n$ time stamps. The entry $i_t$ is the timestamp for thread $t$. The above vector clock $V$ stands for the set of timestamps $V  \sim\sim  \{1\#i_1, \ldots, n\#i_n\}$. We use the entry $0$ to indicate missing information about a thread
 				\begin{betterlist}
 					\item mapping $\Phi$ from event sets to vector clocks as follows: $\Phi({1\#E_1 , \ldots, n\#E_n}) = [max(E_1), \ldots, max(E_n)]$
 					\begin{betterlist}
@@ -884,7 +871,7 @@ func signal(qsem *QSem) {
 
 						\adjustbox{scale=0.5}{
 							% \begin{noindent}
-                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
                 acq(t,y) {
                   Th(t) = sync(Th(t), Rel(y))
                   inc(Th(t),t)
@@ -921,7 +908,6 @@ func signal(qsem *QSem) {
                 \end{dnumberedcodebox}
               %\end{noindent}   }
 						}
-						\item \script{117}{Examples}
 					\end{betterlist}
 				\end{betterlist}
 			\end{betterlist}
@@ -930,12 +916,12 @@ func signal(qsem *QSem) {
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
-		\item \underline{HB method continue:}
+		\item \nul{HB method continue:}
 		\begin{betterlist}
-			\item \underline{False negatives and False positives:}
+			\item \nul{False negatives and False positives:}
 			\begin{betterlist}
-				\item the HB method has \alert{false negatives} because the textual order between critical sections is preserved. That is, valid reorderings that swap critical sections are ignored. \script{119}{Example}
-				\item the first race reported by the HB method is an \enquote{actual} race. However, subsequent races may be \alert{false positives}. \script{120}{Example}
+				\item the HB method has \alert{false negatives} because the textual order between critical sections is preserved. That is, valid reorderings that swap critical sections are ignored
+				\item the first race reported by the HB method is an \enquote{actual} race. However, subsequent races may be \alert{false positives}
 				\begin{betterlist}
 					\item the HB relation does not take into account write-read dependencies and therefore HB data races may not correspond to actual data races
 					\item we say \enquote{may not} because based on the trace alone we cannot decide if the write-read dependency actually affects the control flow
@@ -967,20 +953,20 @@ func signal(qsem *QSem) {
 				\item $t'\#e_m \in CS(t\#acq(y)_k, t\#rel(y)_l)$ if $t = t'$ and $k \le m \le l$
 				\item $acq(y)$ and $rel(y)$ are part of the critical section; and any event in the same thread between them is also part of this critical section
 			\end{betterlist}
-			\item \alert{lockset of an event $e$:} $LS(e) = \{y \mid \exists a = t\#acq(y)_k, r = t\#rel(y)_l .e \in CS(a, r)\}$. \script{133}{Example}
+			\item \alert{lockset of an event $e$:} $LS(e) = \{y \mid \exists a = t\#acq(y)_k, r = t\#rel(y)_l .e \in CS(a, r)\}$
 			\begin{betterlist}
 				\item consists of all locks $y$ such that $e$ appears in a critical section belonging to lock $y$
 			\end{betterlist}
-			\item \underline{state variables:}
+			\item \nul{state variables:}
 			\begin{betterlist}
 				\item $ls(t): Set(Lock)$: The set of locks held by thread $t$ at a certain time
 				\item $LS : Event -> Set(Lock)$: A mapping from an event $e$ to its lockset
 			\end{betterlist}
-			\item \underline{Lockset computation}:
+			\item \nul{Lockset computation}:
 
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
               e@acq(t,y) {
                 ls(t) = ls(t) U {y}
               }
@@ -1010,25 +996,22 @@ func signal(qsem *QSem) {
 			\item \alert{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
 			\item \alert{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness \script{120}{example} also applies to lockset)
 			\begin{betterlist}
-				\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock. \script{134}{Example}
+				\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock
 			\end{betterlist}
 		\end{betterlist}
-		\item \underline{comparison and combination with HB method:}
+		\item \nul{comparison and combination with HB method:}
 		\begin{betterlist}
 			\item in practice, it appears that the lockset method gives rise to significantly \alert{more false positives} than the HB method
 			\item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
 		\end{betterlist}
-		\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \alert{not affected} if we \alert{reorder critical sections}. \script{136}{Example}
-		\item \underline{\script{136}{Examples}:}
-		\begin{betterlist}
-			\item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets. \script{137}{Example}
-			\item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives. \script{137}{Example}
-			\item Lock variable only included if the write is in that trace. \script{138}{Example}
-		\end{betterlist}
+		\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \alert{not affected} if we \alert{reorder critical sections}
+		\item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets. \script{137}{Example}
+		\item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives
+		\item Lock variable only included if the write is in that trace
 	\end{betterlist}
-	\fbox{Dynamic deadlock prediction}
+	\inlinebox{Dynamic deadlock prediction}
 	\begin{betterlist}
-		% \item \underline{assumptions:} 
+		% \item \nul{assumptions:} 
 		% \begin{betterlist}
 		% 	\item concurrent programs making use of acquire and release (mutex operations)
 		% 	\item single program run where events that took place are recorded in some trace
@@ -1040,32 +1023,32 @@ func signal(qsem *QSem) {
 		\item \alert{communication deadlocks} arise if threads are blocked due to (missing) channel events such as send and receive
 		\item \alert{Lock graphs}:
 		\begin{betterlist}
-			\item \underline{Construction:} Locks are nodes. There is an edge from lock x to lock y if a thread holds lock $x$ while it acquires lock $y$. \script{151}{Example}
+			\item \nul{Construction:} Locks are nodes. There is an edge from lock x to lock y if a thread holds lock $x$ while it acquires lock $y$
 			\begin{betterlist}
 				\item $B-acq$ to denote that the acquire is blocked
 			\end{betterlist}
 
 			% \item This can be calculated based on lock sets. Check for cycles in the lock graph. If there is a \alert{cycle}, we report that there is a \alert{potential deadlock}
 			\item If the lock graph contains a cycle, then there is a potential deadlock
-			\item \underline{Precision:} False positive possible. All events take place in the same thread: \script{153}{Example 1}. Common guard lock z: \script{154}{Example 2}
+			\item \nul{Precision:} False positive possible. All events take place in the same thread. Common guard lock z.
 			\begin{betterlist}
-				\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives. \script{163}{Example}
+				\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives
 			\end{betterlist}
 		\end{betterlist}
 		\item \alert{Lock dependencies}:
 		\begin{betterlist}
 			\item instead of a lock graph we compute lock dependencies on a \alert{per thread} basis. Thus, we can eliminate some of the false positives that arise using lock graphs (but not all)%. A lock dependency $𝐷 = (t, l, ls)$ is constructed if thread $t$ acquires lock $l$ while holding locks $ls$ . 
 			\item we write $D = (id, l, ls)$ to refer to some lock dependency in thread $id$ where lock $l$ is acquired while holding locks $ls$
-			\item \underline{state variables}:
+			\item \nul{state variables}:
 			\begin{betterlist}
 				\item $ls(t)$: The set of locks hold by thread t at a certain time
 				\item $Ds$: The set of lock dependencies
 			\end{betterlist}
-			\item \underline{processing function}:
+			\item \nul{processing function}:
 
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
             acq(t,y) {
                 Ds = Ds U { (t,y,ls(t)) } if ls(t) != emptyset
                 ls(t) = ls(t) U {y}
@@ -1080,7 +1063,7 @@ func signal(qsem *QSem) {
           %\end{noindent}   }
 			}
 			\begin{betterlist}
-				\item \underline{set difference:} $S_1 \setminus S_2$ contains all elements in $S_1$ that are not in $S_2$
+				\item \nul{set difference:} $S_1 \setminus S_2$ contains all elements in $S_1$ that are not in $S_2$
 			\end{betterlist}
 			\item \alert{Cycle check}: A deadlock (warning) is issued if there is a cyclic lock dependency chain $D_1, \ldots, D_n$ (each $D_i$ results from some distinct thread $i$):
 			\begin{betterlist}
@@ -1088,23 +1071,21 @@ func signal(qsem *QSem) {
 				\item $(LD-2)$ $l_i \in ls_{i + 1}$ for $i = 1, \ldots, 𝑛 − 1$, and
 				\item $(LD-3)$ $l_𝑛 \in ls_1$
 			\end{betterlist}
-			\item \underline{\script{158}{Examples}:}
 			\begin{betterlist}
-				\item No deadlock warning is issued if the dependencies are from the same thread. \script{158}{Example}
-				\item No deadlock warning is issued for common guard lock $z$. \script{158}{Example}
+				\item No deadlock warning is issued if the dependencies are from the same thread
+				\item No deadlock warning is issued for common guard lock $z$
 			\end{betterlist}
-			\item \underline{Precision:}
+			\item \nul{Precision:}
 			\begin{betterlist}
-				\item \underline{False positive possible:} Due to the \alert{write-read dependency}, events in thread $T_1$ must happen before the events in thread $T_2$. \script{160}{Example}
-				\item \underline{False negative possible:} \alert{Cross-thread critical} section that includes several events due to the \alert{fork/join dependency}. However, the computation of lock dependencies is \alert{agnostic} to \alert{cross-thread critical sections}. \script{161}{Example}
+				\item \nul{False positive possible:} Due to the \alert{write-read dependency}, events in thread $T_1$ must happen before the events in thread $T_2$
+				\item \nul{False negative possible:} \alert{Cross-thread critical} section that includes several events due to the \alert{fork/join dependency}. However, the computation of lock dependencies is \alert{agnostic} to \alert{cross-thread critical sections}. \script{161}{Example}
 			\end{betterlist}
 
 		\end{betterlist}
-		\item \script{168}{Some implementation in Go}
 	\end{betterlist}
-	\fbox{Dining Philosophers}
+	\inlinebox{Dining Philosophers}
 	\begin{betterlist}
-		\item \underline{Solutions:}
+		\item \nul{Solutions:}
 		\begin{betterlist}
 			\item in general break the cycle
 			\item avoid deadlock by controlling the number of philosophers:
@@ -1115,7 +1096,7 @@ func signal(qsem *QSem) {
 			\item avoid deadlock by changing the order in which the philosophers pick up forks:
 			\begin{betterlist}
 				\item there has to be at least one leftie and at least one rightie at the table
-				\item \underline{proof by contradiction:} First, assume that deadlock is possible. Then choose one of the supposedly deadlocked philosophers. If she’s a leftie, you can prove that the philosophers are all lefties, which is a contradiction. Similarly, if she’s a rightie, you can prove that they are all righties. Either way you get a contradiction; therefore, deadlock is not possible
+				\item \nul{proof by contradiction:} First, assume that deadlock is possible. Then choose one of the supposedly deadlocked philosophers. If she’s a leftie, you can prove that the philosophers are all lefties, which is a contradiction. Similarly, if she’s a rightie, you can prove that they are all righties. Either way you get a contradiction; therefore, deadlock is not possible
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
@@ -1125,18 +1106,18 @@ func signal(qsem *QSem) {
 \newpage
 
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{Futures and Promises}
+	\inlinebox{Futures and Promises}
 	\begin{betterlist}
 		\item high-level concurrency constructs to support asynchronous programming
 		\item a \alert{promise} is a placeholder for a computation that is explicitly provided by the programmer. A \alert{future} can be viewed as a placeholder for a computation that will eventually become available. A future is then a \alert{specific kind of promise} where the computation is provided at initialization
-		\item \underline{implementation of futures via channels:}
+		\item \nul{implementation of futures via channels:}
 		\begin{betterlist}
 			\item \verb|interface{}| to represent a value of arbitrary type
 			\item asynchronously execute some http request. Don't have to wait for the request to complete
 		\end{betterlist}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
           type Comp struct {
               val    interface{}
               status bool
@@ -1183,7 +1164,7 @@ func signal(qsem *QSem) {
 		}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+            \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
             func getSite(url string) Future {
                 return future(func() (interface{}, bool) {
                     resp, err := http.Get(url)
@@ -1220,7 +1201,7 @@ func signal(qsem *QSem) {
           %\end{noindent}   }
 		}
 
-		\item \underline{simultaneously waiting for multiple futures:}
+		\item \nul{simultaneously waiting for multiple futures:}
 		\begin{betterlist}
 			\item suppose one has e.g. several http requests and would like to retrieve the first available result. A naive (inefficient) solution would check for each result one after the other. One can be more efficient by using \verb|select| to check for the first available future result
 		\end{betterlist}
@@ -1228,7 +1209,7 @@ func signal(qsem *QSem) {
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
           func (ft1 Future) first(ft2 Future) Future {
               return future(func() (interface{}, bool) {
                   var v interface{}
@@ -1281,7 +1262,7 @@ func signal(qsem *QSem) {
 		}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
           func example2() {
               spiegel := getSite("http://www.spiegel.de")
               stern := getSite("http://www.stern.de")
@@ -1330,13 +1311,13 @@ func signal(qsem *QSem) {
           \end{dnumberedcodebox}
         %\end{noindent}   }
 		}
-		\item \underline{implementation with generics:}
+		\item \nul{implementation with generics:}
 		\begin{betterlist}
 			\item \verb|interface{}| entails explicit type assertions
 		\end{betterlist}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         type Comp[T any] struct {
             val    T
             status bool
@@ -1372,7 +1353,7 @@ func signal(qsem *QSem) {
 		% }
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         func example3b() {
             booking := func() (int, bool) {
                 time.Sleep((time.Duration)(rand.Intn(999)) 
@@ -1400,7 +1381,7 @@ func signal(qsem *QSem) {
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 	\begin{betterlist}
-		\item \underline{implementation of promises:}
+		\item \nul{implementation of promises:}
 		\begin{betterlist}
 			\item redefine futures in terms of promises. In the process, one \alert{reduces} the \alert{number of goroutines} which optimizes performance.
 			\item previous implementation uses a lot of goroutines: Each future creates a goroutine. Each onSuccess/onFailure call creates a goroutine. first/firstSucc create further futures and therefore further goroutines. \textcolor{gray}{Goroutines in Go are relatively cheap. Still, one should avoid them if possible}. Idea: Each future maintains a list of callback functions. One list for the success case. Another list for the failure case. Each onSuccess/onFailure call adds the callback to the respective list. If the \enquote{future} value is already present there’s no need to register the callback. We can immediately apply the \enquote{future} value and process the callback
@@ -1408,7 +1389,7 @@ func signal(qsem *QSem) {
 		\end{betterlist}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         package main
 
         import "fmt"
@@ -1534,7 +1515,7 @@ func signal(qsem *QSem) {
 		}
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
         func example1() {
             booking := func() (int, bool) {
                 time.Sleep((time.Duration)(rand.Intn(999))
@@ -1584,21 +1565,21 @@ func signal(qsem *QSem) {
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{Message Passing Concurrency} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/Message_Passing_Concurrency_(2024_06_26).md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/Message_Passing_Concurrency_(2024_06_26).pdf}
+	\inlinebox{Message Passing Concurrency} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/Message_Passing_Concurrency_(2024_06_26).md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/Message_Passing_Concurrency_(2024_06_26).pdf}
 	\begin{betterlist}
-		\item \underline{Concurrency Flavors}
+		\item \nul{Concurrency Flavors}
 		\begin{betterlist}
 			\item \alert{Shared Memory Concurrency}:
 			\begin{betterlist}
 				\item processes interact by reading and writing shared variables
 				\item locking etc. needed to demarcate critical regions
-				\item \underline{expressiveness:} message passing may be implemented using shared variables (viz. consumer/producer message queue implementations)
+				\item \nul{expressiveness:} message passing may be implemented using shared variables (viz. consumer/producer message queue implementations)
 			\end{betterlist}
 			\item \alert{Message Passing Concurrency}:
 			\begin{betterlist}
 				\item processes interact by sending and receiving messages on
 				\item shared communication channels
-				\item \underline{expressiveness:} shared variables may be implemented using message passing
+				\item \nul{expressiveness:} shared variables may be implemented using message passing
 				\begin{betterlist}
 					\item model a reference by a thread and channels for reading and writing
 					\item reading on the \enquote{read} channel returns the current value
@@ -1606,7 +1587,7 @@ func signal(qsem *QSem) {
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
-		\item \underline{Synchronous vs. Asynchronous}
+		\item \nul{Synchronous vs. Asynchronous}
 		\begin{betterlist}
 			\item receive operation blocks either way
 			\item given a channel with synchronous operations,
@@ -1623,22 +1604,21 @@ func signal(qsem *QSem) {
 
 		\includegraphics[width=0.6\linewidth]{./figures/csp.png}
 		\begin{betterlist}
-			\item \underline{Special events}
+			\item \nul{Special events}
 			\begin{betterlist}
 				\item $c!v$ output $v$ on channel $c$
 				\item $c?x$ read from channel $c$ and bind to variable $x$
 			\end{betterlist}
-			\item \script{934}{Example}
 		\end{betterlist}
 		\item \alert{$\pi$-Calculus}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-	\fbox{Tricks}
+	\inlinebox{Tricks}
 	\begin{betterlist}
 		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
 	\end{betterlist}
-	\fbox{Confusion Matrix}
+	\inlinebox{Confusion Matrix}
 	\begin{betterlist}
 		\item $1$st part is about whether \alert{actual condition $==$ predicted condition} and the $2$nd part is about the \alert{predicted condition}
 	\end{betterlist}

@@ -1,0 +1,65 @@
+%!Tex Root = ../main.tex
+
+% ┌────────────┐
+% │ Formatting │
+% └────────────┘
+\setlength{\parskip}{0.0cm} % space between paragraphs, https://latexref.xyz/bs-par.html
+\setlength{\parindent}{0.0cm}
+\setlength{\parsep}{0.0cm}
+\setlength{\partopsep}{0.0cm}
+
+% ┌───────┐
+% │ Fonts │
+% └───────┘
+% \newfontfamily\gyre{DejaVu Math TeX Gyre}
+% colored bold
+% \newcommand\alert[1]{\textcolor{SwitchColor}{\textbf{#1}}}
+\newcommand\alert[1]{\textcolor{SwitchColor}{#1}}
+% \setmainfont{Latin Modern Roman} % select a suitable text font
+\setmainfont{DejaVu Sans}
+\setmathfont{Latin Modern Math}[Scale=1] % set scaling factor
+\setmonofont{SourceCodePro}[Scale=1] % set scaling factor
+\setsansfont{SourceCodePro}[Scale=1] % set scaling factor
+
+% ┌──────────────┐
+% │ Pseudo Code  │
+% └──────────────┘
+\newcounter{algorithm}
+\setcounter{algorithm}{0}
+\newtcbtheorem[use counter=algorithm]{algorithm}{\color{SecondaryColor}Algorithm}{pseudo/ruled}{alg}
+% \newcommand{\ma}[1]{$\mathcal{#1}$}
+% \renewcommand{\tt}[1]{{\small\texttt{#1}}}
+
+% ┌────────┐
+% │ Colors │
+% └────────┘
+\definecolor{PrimaryColor}{HTML}{047997}
+\definecolor{Highlight}{HTML}{dff169}
+\definecolor{PrimaryColorDimmed}{HTML}{78CDF4}
+\definecolor{SecondaryColor}{HTML}{006BB6}
+\definecolor{SecondaryColorDimmed}{HTML}{E5F0F8}
+\definecolor{SwitchColor}{named}{PrimaryColor}
+\colorlet{BoxColor}{gray!10!white}
+
+% ┌───────┐
+% │ Links │
+% └───────┘
+\usepackage[allbordercolors=PrimaryColor, pdfborder={0 0 .2}]{hyperref}
+% \usepackage[hidelinks]{hyperref}
+
+% ┌─────────┐
+% │ Mindmap │
+% └─────────┘
+% \renewcommand{\labelitemi}{}
+% \renewcommand{\labelitemii}{}
+% \renewcommand{\labelitemiii}{}
+% \renewcommand{\labelitemiv}{}
+\newlist{betterlist}{enumerate}{20}
+\setlist[betterlist,1]{label=$\textcolor{SwitchColor}{\raisebox{-0.04cm}{\scalebox{2}{$\cdot$}}}$}
+\setlist[betterlist,2]{label=$\textcolor{SwitchColor}{\raisebox{-0.04cm}{\scalebox{2}{$\cdot$}}}$}
+\setlist[betterlist,3]{label=$\textcolor{SwitchColor}{\raisebox{-0.04cm}{\scalebox{2}{$\cdot$}}}$}
+\setlist[betterlist,4]{label=$\textcolor{SwitchColor}{\raisebox{-0.04cm}{\scalebox{2}{$\cdot$}}}$}
+\setlist[betterlist,5]{label=$\textcolor{SwitchColor}{\raisebox{-0.04cm}{\scalebox{2}{$\cdot$}}}$}
+\setlist[betterlist,6]{label=$\textcolor{SwitchColor}{\raisebox{-0.04cm}{\scalebox{2}{$\cdot$}}}$}
+\setlist[betterlist]{itemsep=0cm, topsep=0cm, leftmargin=0.1cm, labelsep=0cm, listparindent=0cm}
+\setlist[enumerate]{itemsep=0cm, topsep=0cm, leftmargin=0.1cm, labelsep=0cm, listparindent=0cm, label=\bfseries\color{SwitchColor}\arabic*.}

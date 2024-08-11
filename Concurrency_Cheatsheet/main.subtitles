@@ -1,0 +1,110 @@
+00:00:00 today we're exploring an important topic
+00:00:01 in system design concurrency versus
+00:00:04 parallelism understanding the difference
+00:00:06 between these Concepts is essential for
+00:00:08 building efficient and responsive
+00:00:11 applications let's start with
+00:00:12 concurrency imagine a program that
+00:00:15 handles multiple tasks like processing
+00:00:17 user inputs reading files and making
+00:00:20 Network requests concurrencies allows
+00:00:22 your program to juggle these tasks
+00:00:24 efficiently even on a single CPU core
+00:00:27 here's how it works the CPU rapidly
+00:00:29 switches between tasks working on each
+00:00:31 one for a short amount of time before
+00:00:33 moving to the next this process known as
+00:00:36 contact switching creates the illusion
+00:00:38 their task of progressing simultaneously
+00:00:40 though they are not think of it like
+00:00:42 Chef working on multiple dishes they
+00:00:44 prepare dish for a bit then switch to
+00:00:46 another and keep alternating while the
+00:00:49 dishes aren finished simultaneously
+00:00:51 progress is made on all of them however
+00:00:54 contact switching comes with overhead
+00:00:56 the CPU must save and restore the state
+00:00:58 of each task which takes time
+00:01:00 excessive contact switching can hurt
+00:01:02 performance now let's talk about
+00:01:04 parallelism this is where multiple tasks
+00:01:07 execut a simultaneously using multiple
+00:01:09 CPU cores each core handles a different
+00:01:12 task independently at the same time
+00:01:14 imagine a kitchen with Two Chefs one
+00:01:16 chops vegetables while the other cook
+00:01:18 meat both tasks happen in parallel and
+00:01:20 the meal is ready faster in system
+00:01:23 design concurrency is great for tasks
+00:01:25 that involve waiting like IO operations
+00:01:28 it allows other tasks to to progress
+00:01:30 during the weight improving overall
+00:01:32 efficiency for example a web server can
+00:01:35 handle multiple requests concurrently
+00:01:37 even on a single core in contrast
+00:01:40 Paralis excels at heavy computations
+00:01:42 like data analysis or rendering Graphics
+00:01:45 these task can be divided into smaller
+00:01:47 independent subtasks and executed
+00:01:50 simultaneously on different cores
+00:01:52 significantly speeding up the process
+00:01:55 let's look at some practical examples
+00:01:57 web applications use concurrency to
+00:01:59 handle user inputs database queries and
+00:02:02 background task smoothly providing a
+00:02:04 responsive user experience machine
+00:02:06 learning leverages parallelism for
+00:02:08 training large models by Distributing
+00:02:10 the training data across multiple cores
+00:02:13 or machines you can significantly reduce
+00:02:15 computation Time video rendering
+00:02:18 benefits from parallelism by processing
+00:02:20 multiple frames simultaneously across
+00:02:23 different cores speeding up the
+00:02:24 rendering process scientific simulations
+00:02:27 utilize parallelism to model comp Lex
+00:02:30 phenomena like weather patterns or
+00:02:32 molecular interactions across multiple
+00:02:35 processors big data processing
+00:02:37 Frameworks such as Hadoop and Spark
+00:02:39 leverage parallelism to process large
+00:02:41 data sets quickly and efficiently it's
+00:02:44 important to note that while concurrency
+00:02:46 and parallelism are different concepts
+00:02:48 they are closely related concurrency is
+00:02:51 about managing multiple tasks at once
+00:02:53 while parallelism is about executing
+00:02:55 multiple tasks at once concurrency can
+00:02:58 enable parallelism by structuring
+00:03:00 programs to allow for efficient parallel
+00:03:02 execution using concurrency we can break
+00:03:05 down a program into smaller independent
+00:03:07 tasks making it easier to take advantage
+00:03:09 of parallelism these concurrent task can
+00:03:12 be distributed across multiple CPU cores
+00:03:14 and executed
+00:03:16 simultaneously so while concurrency
+00:03:18 doesn't automatically lead to
+00:03:20 parallelism it provides a foundation
+00:03:22 that make parallelism easier to achieve
+00:03:24 programming languages with strong
+00:03:26 concurrency Primitives simplify writing
+00:03:28 concurrent programs that can be
+00:03:30 efficiently paralyzed concurrency is
+00:03:32 about efficiently managing multiple
+00:03:34 tasks to keep your program responsive
+00:03:36 especially with I Bank operations
+00:03:39 Paralis focuses on boosting performance
+00:03:41 by handling computation heavy task
+00:03:44 simultaneously by understanding the
+00:03:46 differences and interplay between
+00:03:47 concurrency and parallelism and
+00:03:49 leveraging the power of concurrency to
+00:03:51 enable parallelism we can design more
+00:03:54 efficient systems and create better
+00:03:56 performing
+00:03:57 applications if you like our video you
+00:03:59 like a system design newsletter as well
+00:04:02 it covers topics and Trends in large
+00:04:04 scale system design trusted by 500,000
+00:04:07 readers subscribe that blog. byby go.com

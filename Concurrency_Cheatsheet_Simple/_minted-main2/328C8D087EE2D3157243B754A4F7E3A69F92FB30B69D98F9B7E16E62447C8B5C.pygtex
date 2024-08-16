@@ -1,0 +1,49 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{ft1}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{first}\PYG{p}{(}\PYG{n+nx}{ft2}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{future}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{},}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{v}\PYG{+w}{ }\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{        }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{k+kt}{bool}
+
+\PYG{+w}{        }\PYG{k}{select}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{case}\PYG{+w}{ }\PYG{n+nx}{x1}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{ft1}\PYG{p}{:}
+\PYG{+w}{            }\PYG{n+nx}{v}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x1}\PYG{p}{.}\PYG{n+nx}{val}
+\PYG{+w}{            }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x1}\PYG{p}{.}\PYG{n+nx}{status}
+
+\PYG{+w}{        }\PYG{k}{case}\PYG{+w}{ }\PYG{n+nx}{x2}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{ft2}\PYG{p}{:}
+\PYG{+w}{            }\PYG{n+nx}{v}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x2}\PYG{p}{.}\PYG{n+nx}{val}
+\PYG{+w}{            }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x2}\PYG{p}{.}\PYG{n+nx}{status}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{v}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{o}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{ft1}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{firstSucc}\PYG{p}{(}\PYG{n+nx}{ft2}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{future}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{},}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{v}\PYG{+w}{ }\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{        }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{k+kt}{bool}
+
+\PYG{+w}{        }\PYG{k}{select}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{case}\PYG{+w}{ }\PYG{n+nx}{x1}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{ft1}\PYG{p}{:}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{x1}\PYG{p}{.}\PYG{n+nx}{status}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n+nx}{v}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x1}\PYG{p}{.}\PYG{n+nx}{val}
+\PYG{+w}{                }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x1}\PYG{p}{.}\PYG{n+nx}{status}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{            }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n+nx}{v}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{ft2}\PYG{p}{.}\PYG{n+nx}{get}\PYG{p}{()}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{k}{case}\PYG{+w}{ }\PYG{n+nx}{x2}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{ft2}\PYG{p}{:}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{x2}\PYG{p}{.}\PYG{n+nx}{status}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n+nx}{v}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x2}\PYG{p}{.}\PYG{n+nx}{val}
+\PYG{+w}{                }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{x2}\PYG{p}{.}\PYG{n+nx}{status}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{            }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n+nx}{v}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{ft}\PYG{p}{.}\PYG{n+nx}{get}\PYG{p}{()}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{v}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{o}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

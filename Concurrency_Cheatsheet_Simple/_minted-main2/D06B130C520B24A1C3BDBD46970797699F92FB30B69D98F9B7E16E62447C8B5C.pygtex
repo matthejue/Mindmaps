@@ -1,0 +1,53 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{type}\PYG{+w}{ }\PYG{n+nx}{QSem}\PYG{+w}{ }\PYG{k+kd}{struct}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nx}{q}\PYG{+w}{              }\PYG{k+kt}{int}
+\PYG{+w}{  }\PYG{n+nx}{curr}\PYG{+w}{           }\PYG{k+kt}{int}
+\PYG{+w}{  }\PYG{n+nx}{m}\PYG{+w}{              }\PYG{n+nx}{Mutex}
+\PYG{+w}{  }\PYG{n+nx}{signalWaits}\PYG{+w}{    }\PYG{n+nx}{Mutex}
+\PYG{+w}{  }\PYG{n+nx}{signalSignals}\PYG{+w}{  }\PYG{n+nx}{Mutex}
+\PYG{+w}{  }\PYG{n+nx}{noBlockedWaits}\PYG{+w}{ }\PYG{k+kt}{int}
+\PYG{+w}{  }\PYG{n+nx}{noBlockedSignals}\PYG{+w}{ }\PYG{k+kt}{int}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{newQSem}\PYG{p}{(}\PYG{n+nx}{q}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{QSem}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{m}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{newMutex}\PYG{p}{()}
+\PYG{+w}{  }\PYG{n+nx}{qsem}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{QSem}\PYG{p}{\PYGZob{}}\PYG{n+nx}{q}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{q}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{m}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{newMutex}\PYG{p}{(),}\PYG{+w}{ }\PYG{n+nx}{newMutex}\PYG{p}{(),}
+\PYG{+w}{               }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{qsem}
+\PYG{p}{\PYGZcb{}}
+\PYG{c+c1}{// down}
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{wait}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{QSem}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nx}{lock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{curr}\PYG{+w}{ }\PYG{p}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{noBlockedSignals}\PYG{+w}{ }\PYG{p}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{noBlockedSignals}\PYG{o}{\PYGZhy{}\PYGZhy{}}
+\PYG{+w}{      }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{      }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{signalSignals}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{curr}\PYG{o}{\PYGZhy{}\PYGZhy{}}
+\PYG{+w}{      }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{noBlockedWaits}\PYG{o}{++}
+\PYG{+w}{    }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{lock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{signalWaits}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\PYG{c+c1}{// up}
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{signal}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{QSem}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n+nx}{lock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{curr}\PYG{+w}{ }\PYG{p}{\PYGZlt{}}\PYG{+w}{ }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{q}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{noBlockedWaits}\PYG{+w}{ }\PYG{p}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{noBlockedWaits}\PYG{o}{\PYGZhy{}\PYGZhy{}}
+\PYG{+w}{      }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{      }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{signalWaits}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{curr}\PYG{o}{++}
+\PYG{+w}{      }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{noBlockedSignals}\PYG{o}{++}
+\PYG{+w}{    }\PYG{n+nx}{unlock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{m}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{lock}\PYG{p}{(}\PYG{n+nx}{qsem}\PYG{p}{.}\PYG{n+nx}{signalSignals}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

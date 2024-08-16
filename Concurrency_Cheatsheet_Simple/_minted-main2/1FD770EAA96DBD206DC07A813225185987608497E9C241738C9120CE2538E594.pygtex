@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+acq(t,y) \PYGZob{}
+    Ds = Ds U \PYGZob{} (t,y,ls(t)) \PYGZcb{} if ls(t) != emptyset
+    ls(t) = ls(t) U \PYGZob{}y\PYGZcb{}
+\PYGZcb{}
+rel(t,y) \PYGZob{}
+    ls(t) = ls(t) \PYGZbs{} \PYGZob{}y\PYGZcb{}
+\PYGZcb{}
+fork(t1,t2) \PYGZob{}
+\PYGZcb{}
+...
+\end{Verbatim}

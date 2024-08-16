@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+e@acq(t,y) \PYGZob{}
+  ls(t) = ls(t) U \PYGZob{}y\PYGZcb{}
+\PYGZcb{}
+e@rel(t,y) \PYGZob{}
+  ls(t) = ls(t) \PYGZhy{} \PYGZob{}y\PYGZcb{}
+e@fork(t1,t2) \PYGZob{}
+\PYGZcb{}
+e@join(t1,t2) \PYGZob{}
+\PYGZcb{}
+e@write(t,x) \PYGZob{}
+  LS(e) = ls(t)
+\PYGZcb{}
+e@read(t,x) \PYGZob{}
+  LS(e) = ls(t)
+\PYGZcb{}
+\end{Verbatim}

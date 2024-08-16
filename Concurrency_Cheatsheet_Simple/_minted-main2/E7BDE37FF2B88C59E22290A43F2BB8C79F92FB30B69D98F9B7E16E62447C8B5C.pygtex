@@ -1,0 +1,47 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{example2}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{spiegel}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{getSite}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}http://www.spiegel.de\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{stern}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{getSite}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}http://www.stern.de\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{welt}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{getSite}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}http://www.welt.com\PYGZdq{}}\PYG{p}{)}
+
+\PYG{+w}{    }\PYG{n+nx}{req}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{spiegel}\PYG{p}{.}\PYG{n+nx}{first}\PYG{p}{(}\PYG{n+nx}{stern}\PYG{p}{.}\PYG{n+nx}{first}\PYG{p}{(}\PYG{n+nx}{welt}\PYG{p}{))}
+
+\PYG{+w}{    }\PYG{n+nx}{req}\PYG{p}{.}\PYG{n+nx}{onSuccess}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{(}\PYG{n+nx}{result}\PYG{+w}{ }\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{})}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{response}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{result}\PYG{p}{.(}\PYG{o}{*}\PYG{n+nx}{http}\PYG{p}{.}\PYG{n+nx}{Response}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n+nx}{printResponse}\PYG{p}{(}\PYG{n+nx}{response}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+
+\PYG{+w}{    }\PYG{n+nx}{req}\PYG{p}{.}\PYG{n+nx}{onFailure}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{fmt}\PYG{p}{.}\PYG{n+nx}{Println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}failure\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+
+\PYG{+w}{    }\PYG{n+nx}{fmt}\PYG{p}{.}\PYG{n+nx}{Println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}do something else\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Sleep}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Second}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{example3}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{booking}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Sleep}\PYG{p}{((}\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Duration}\PYG{p}{)(}\PYG{n+nx}{rand}\PYG{p}{.}\PYG{n+nx}{Intn}\PYG{p}{(}\PYG{l+m+mi}{999}\PYG{p}{))}
+\PYG{+w}{          }\PYG{o}{*}\PYG{+w}{ }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Millisecond}\PYG{p}{)}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{rand}\PYG{p}{.}\PYG{n+nx}{Intn}\PYG{p}{(}\PYG{l+m+mi}{50}\PYG{p}{),}\PYG{+w}{ }\PYG{k+kc}{true}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{    }\PYG{n+nx}{ft1}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{future}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{},}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{booking}\PYG{p}{()}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+
+\PYG{+w}{    }\PYG{n+nx}{ft2}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{future}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{},}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{booking}\PYG{p}{()}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+
+\PYG{+w}{    }\PYG{n+nx}{ft}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{ft1}\PYG{p}{.}\PYG{n+nx}{firstSucc}\PYG{p}{(}\PYG{n+nx}{ft2}\PYG{p}{)}
+
+\PYG{+w}{    }\PYG{n+nx}{ft}\PYG{p}{.}\PYG{n+nx}{onSuccess}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{(}\PYG{n+nx}{result}\PYG{+w}{ }\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{})}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{quote}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{result}\PYG{p}{.(}\PYG{k+kt}{int}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n+nx}{fmt}\PYG{p}{.}\PYG{n+nx}{Printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Hotel asks for \PYGZpc{}d Euros\PYGZbs{}n\PYGZdq{}}\PYG{p}{,}
+\PYG{+w}{          }\PYG{n+nx}{quote}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+
+\PYG{+w}{    }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Sleep}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Second}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

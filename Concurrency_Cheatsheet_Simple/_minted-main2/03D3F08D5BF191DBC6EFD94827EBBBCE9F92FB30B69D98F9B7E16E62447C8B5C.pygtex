@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{select}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{ch1}\PYG{p}{:}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{n+nx}{ch2}\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{:}
+\PYG{+w}{  }\PYG{k}{default}\PYG{p}{:}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

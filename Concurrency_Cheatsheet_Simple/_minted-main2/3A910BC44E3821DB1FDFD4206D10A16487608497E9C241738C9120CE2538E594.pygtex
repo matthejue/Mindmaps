@@ -1,0 +1,35 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+acq(t,y) \PYGZob{}
+  Th(t) = sync(Th(t), Rel(y))
+  inc(Th(t),t)
+\PYGZcb{}
+rel(t,y) \PYGZob{}
+  Rel(y) = Th(t)
+  inc(Th(t),t)
+\PYGZcb{}
+fork(t1,t2) \PYGZob{}
+  Th(t2) = sync(Th(t1), Th(t2))
+  inc(Th(t1),t1)
+\PYGZcb{}
+join(t1,t2) \PYGZob{}
+  Th(t1) = sync(Th(t1),Th(t2))
+  inc(Th(t1),t1)
+\PYGZcb{}
+write(t,x) \PYGZob{}
+  If not (R(x) \PYGZlt{} Th(t))
+  then write\PYGZhy{}read race detected
+  If W(x) != 0
+  then let j\PYGZsh{}k = W(x)
+      if k \PYGZgt{} Th(t)(j)
+      then write\PYGZhy{}write race detected
+  W(x) = t\PYGZsh{}Th(t)(t)
+  inc(Th(t),t)
+\PYGZcb{}
+read(t,x) \PYGZob{}
+  If W(x) != 0
+  then let j\PYGZsh{}k = W(x)
+      if k \PYGZgt{} Th(t)(j)
+      then read\PYGZhy{}write race detected
+  R(x) = sync(Th(t), R(x))
+\PYGZcb{}
+\end{Verbatim}

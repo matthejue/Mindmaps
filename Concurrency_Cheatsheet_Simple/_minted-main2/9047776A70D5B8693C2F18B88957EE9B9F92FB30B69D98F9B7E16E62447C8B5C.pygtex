@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{type}\PYG{+w}{ }\PYG{n+nx}{Request}\PYG{+w}{ }\PYG{k+kd}{struct}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{id}\PYG{+w}{  }\PYG{k+kt}{int}
+\PYG{+w}{    }\PYG{n+nx}{ack}\PYG{+w}{ }\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{k+kt}{int}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{worker}\PYG{p}{(}\PYG{n+nx}{req}\PYG{+w}{ }\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{n+nx}{Request}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{c}\PYG{+w}{ }\PYG{n+nx}{Request}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{c}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{req}
+\PYG{+w}{        }\PYG{n+nx}{fmt}\PYG{p}{.}\PYG{n+nx}{Printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}received from \PYGZpc{}d \PYGZbs{}n\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{id}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Sleep}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{l+m+mf}{1e9}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{ack}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{client}\PYG{p}{(}\PYG{n+nx}{id}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{req}\PYG{+w}{ }\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{n+nx}{Request}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{ack}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{make}\PYG{p}{(}\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{c}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{Request}\PYG{p}{\PYGZob{}}\PYG{n+nx}{id}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{ack}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{n+nx}{req}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nx}{c}
+\PYG{+w}{        }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{ack}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+
+\PYG{p}{\PYGZcb{}}
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{main}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{req}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{make}\PYG{p}{(}\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{n+nx}{Request}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{go}\PYG{+w}{ }\PYG{n+nx}{worker}\PYG{p}{(}\PYG{n+nx}{req}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{go}\PYG{+w}{ }\PYG{n+nx}{client}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{req}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{client}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{req}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

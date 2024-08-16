@@ -4,239 +4,90 @@
 \input{./content/desgin}
 \input{./content/declarations}
 
-\setmainfont{Annie Use Your Telescope}
-\setmonofont{Annie Use Your Telescope}
-% \setmathfont{Annie Use Your Telescope}
-
 \begin{document}
-\fontsize{5pt}{5pt}\selectfont
+\fontsize{6.5pt}{6.5pt}\selectfont
 
-\begin{minipage}[t]{0.2\linewidth}
-	\inlinebox{General}
-	\begin{betterlist}
-    \item \nul{keywords:} Rob Pike, Static type system, Higher-order functions, Garbage collection, Object orientation through type interface (no classes but methods can be attached to types), Support for concurrency and communication (Lightweight threads, Communication through channels with formal foundations: Communicating Sequential Processes, Philosophy: \enquote{Do not communicate by sharing memory. Instead, share by communicating})
-	\end{betterlist}
-	\inlinebox{Execution}
-	\begin{betterlist}
-		\item \verb|go run hello.go| (compile and run), \verb|go build hello.go| (compile separately), \href{https://golang.org/}{Website}
-		\item \cul{pretty printer:} \verb|gofmt hello.go| (outputs to console), \verb|gofmt -w hello.go| (writes to same file)
-	\end{betterlist}
-	\inlinebox{Syntax}
-	\begin{betterlist}
-		\item package corresponds to modules in other packages
-		\item one statement per line, Semicolons are redundant
-		\item \verb|var x int|, \verb|var varName varType|
-		\item  \verb|go expression| starts a new thread to run \verb|expression|. \verb|expression| must be a function call or a method call; it cannot be parenthesized. The new thread executes concurrently to the following statements. Threads may run interleaved or on different CPUs (managed by the run-time system). As soon as the main thread terminates, all threads started by the main thread are terminated. Go calls threads \cul{goroutines}, other languages use \verb|fork| or \verb|spawn| instead of go
-		\item the \verb|=| operator is used for assignment to already declared variables, while \verb|:=| is used for declaring and initializing a new variable
-	\end{betterlist}
-	\inlinebox{Terminology}
-	\begin{betterlist}
-		\item \nul{Concurrency versus Parallelism}
-		\begin{betterlist}
-			\item \cul{Parallelism:} Make programs run faster by making use of additional CPUs (parallel hardware)
-			\begin{betterlist}
-				\item parallelism is about executing multiple tasks at once
-				\item parallelism focuses on boosting performance by handling computation heavy task simultaneously
-			\end{betterlist}
-			\item \cul{Concurrency:} Program organized into multiple threads of control. Threads may work independently or work on a common task
-			\begin{betterlist}
-				\item concurrency is about managing multiple tasks at once
-				\item concurrency is about efficiently managing multiple tasks to keep your program responsive
-			\end{betterlist}
-			\item while concurrency doesn't automatically lead to parallelism it provides a foundation that make parallelism easier to achieve. Concurrency can enable parallelism by structuring programs to allow for efficient parallel execution. Using concurrency we can break down a program into smaller independent tasks making it easier to take advantage of parallelism. These concurrent task can be distributed across multiple CPU cores and executed simultaneously. Concurrency can enable parallelism by structuring programs to allow for efficient parallel
-		\end{betterlist}
-		\item \cul{Thread:} Independently sequentially executing code
-		\item \nul{Thread state:}
-		\begin{betterlist}
-			\item Running (currently executing)
-			\item Waiting (ready to execute, but no CPU is available)
-			\item Blocked (waiting for thread-external condition)
-		\end{betterlist}
-		\item \cul{Multithreading:} Alternating execution of multiple threads on one CPU
-		\item \cul{Scheduling:} Strategy to switch between running and waiting threads
-		\begin{betterlist}
-			\item \cul{Preemptive scheduling:} Every thread gets a certain slice of time to run, then it is preempted and a waiting thread is selected to run
-			\item \cul{Cooperative scheduling:} A thread runs until a blocking command is encountered, then a waiting thread is selected to run
-		\end{betterlist}
-	\end{betterlist}
-	\inlinebox{Multi-threading}
-	\begin{betterlist}
-		\item \nul{Blocking commands:}
-		\begin{betterlist}
-			\item Making the thread sleep (delay/sleep)
-			\item Receiving from a channel (potentially blocking as the channel may be \enquote{empty})
-			\item Sending on a channel (potentially blocking as a channel may be \enquote{full})
-		\end{betterlist}
-		\item \nul{State-based execution:}
-		\begin{betterlist}
-			\item Notation similar to the execution of UPPAAL/communicating automata. The program state consists of the states of individual threads. For example: \verb|(Main.Running, A.Waiting, B.Waiting)|. Creation of a thread (via the go keyword) adds a new thread, initially in wait-state
-			\item a \cul{path of execution} is described by a sequence of individual program states. The transition between the current and the next states is indicated with \verb|-->|. E.g. \verb|Main.Running --> (Main.Running, A.Waiting)|
-		\end{betterlist}
-	\end{betterlist}
-	\inlinebox{Lambda's (anonymous functions)}
+\centering
 
-	\adjustbox{scale=0.5}{
-		% https://github.com/cmhughes/latexindent.pl/issues/132
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+	\inlinebox{Important Terms}
+	\begin{betterlist}
+		\item \nul{State-based execution:} a \cul{path of execution} is described by a sequence of individual program states. The transition between the current and the next states is indicated with \verb|-->|. E.g. \verb|Main.Running --> (Main.Waiting, A.Blocked)|, \nul{Trace-based description of program execution}, \cul{Starvation:} Thread starves (does not progress), because the other threads always communicate with each other, \cul{Livelock:} Describes a situation in which always at least one thread is not blocked, but no thread progresses, \cul{Preemptive scheduling}, \cul{Cooperative scheduling}, Multithreading, \cul{Concurrency}, \cul{Parallelism}, \nul{only sending:} \verb|func snd(ch chan <- int) {}|, \nul{only receiving:} \verb|func rcv(ch <- chan int) {}|, \cul{Dynamic analysis}: Execute the program and observe its behavior, Determine if there is any potential bad behavior based on this specific program run, \cul{Static analysis}: Predict all possible program runs without actually executing the program, events are collected in a program \cul{trace}. A trace is a linear sequence of events and represents an interleaved execution of the program (of individual threads), an \cul{event} registers interesting program behavior. Each event is connected to one of the operations we are interested in, two events are \cul{conflicting events} if they are read/write events for the same variable that come from different threads and at least one of them is a write event, a \cul{data race} arises if two conflicting events appear right next to each other in the trace. That implies that both events may happen in any order, \cul{valid trace reorderings}: Reordering of a trace means that we change the order of its events such that the resulting sequence of events still represents a sensible execution sequence, \cul{Complete} means that all valid reorderings that exhibit some race can be predicted. If a method is \nul{incomplete}, we call every race that is not reported race a \nul{false negative}, \cul{Sound} means that all races reported by the method can be exhibited with some valid reordering of the trace. If a method is \nul{unsound}, it may report a trace as racy even if there is no valid reordering that exhibits a race. Such a report is a \nul{false positive}. A \cul{resource deadlock} arises if a set of threads are blocked and each thread in the set is waiting to acquire a lock held by another thread in the set, whenever we say deadlock we refer to a resource deadlock, \cul{communication deadlocks} arise if threads are blocked due to (missing) channel events such as send and receive, a \cul{promise} is a placeholder for a computation that is explicitly provided by the programmer. A \cul{future} can be viewed as a placeholder for a computation that will eventually become available. A future is then a \cul{specific kind of promise} where the computation is provided at initialization, \cul{Shared Memory Concurrency}: Processes interact by reading and writing shared variables, Locking etc. needed to demarcate critical regions, \cul{Message Passing Concurrency}: processes interact by sending and receiving messages on shared communication channels
+		% \begin{betterlist}
+		% \item \verb|pre(ch?)|/\verb|post(ch?)|: Wanting to receive / having received on channel \verb|ch|
+		% \begin{betterlist}
+		%   \item \verb|pre| describes the event before the corresponding operation takes place
+		% \end{betterlist}
+		% \begin{betterlist}
+		%   \item \verb|post| describes the event after the corresponding operation has taken place
+		% \end{betterlist}
+		% \item \verb|pre(ch!)|/\verb|post(ch!)|: Wanting to send / having sent on channel \verb|ch|
+		% \item in case of communication (send-receive), we assume that in the trace the post event of the send always occurs before the post event of the receive
+		% \item \cul{Trace:} Sequence of events, expresses interleaved execution of threads
+		% \item \cul{Deadlock:} Occurs when all threads are blocked
+		% \item \cul{Data race:} Situation in which two unprotected, conflicting memory operations (at least one write) occur simultaneously
+		% \begin{betterlist}
+		% 	\item all events are post events. Ones simplifies the operation \verb|x++| to \verb|w(x)|
+		% 	% \item in a program execution (represented as trace), a data race occurs when two conflicting write/read events occur directly after one another
+		% \end{betterlist}
+		% \end{betterlist}
+	\end{betterlist}
+	% \inlinebox{Channels}
+	% \begin{betterlist}
+	% 	\item \nul{Restricted communication:} \nul{only sending:} \verb|func snd(ch chan <- int) {}|, \nul{only receiving:} \verb|func rcv(ch <- chan int) {}|
+	% 	% \item \nul{difference as follows:}
+	% 	%   \begin{betterlist}
+	% 	%     \item for an unbuffered channel, a sender always has to \cul{synchronize} with a recipient. Sender and recipient always block. The Go runtime system checks if there are blocking sender and recipient for the same channel. If so, they communicate with each other and become unblocked
+	% 	%     \item for a buffered channel, the sender behaves \cul{asynchronously} and tries to write the message to the buffer. The sender only blocks if the buffer is full, then it tries again. The recipient always synchronizes with the buffer. If the buffer is empty, the recipient blocks. Otherwise, a message is taken from the buffer
+	% 	%   \end{betterlist}
+	% 	% \item \nul{Send value \texttt{y} on channel \texttt{ch}:} \verb|ch <- y|
+	% 	% \item \nul{Receive from channel \texttt{ch} and save the value in \texttt{x}:} \verb|x = <- ch|
+	% \end{betterlist}
+	\inlinebox{Mutex and Mutable Variable}
+	\vspace{-0.25cm}
+
+	\adjustbox{scale=0.48}{
 		% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}]
-      go func() {
-        // content
-      }()
-      bFunc := func() {
-        // content
-      }
-      go bFunc()
-    \end{dnumberedcodebox}
-    %\end{noindent}
-	}
-
-	\cul{Channels}
-	\begin{betterlist}
-		\item Threads can communicate using channels, which is a datatype
-		\item \alert{message:} a value sent or received over a channel
-		\item channel can be \alert{unbuffered} or \alert{buffered}. A buffered channel can hold a finite number of messages in its buffer
-		\item \nul{principles holding:}
-		\begin{enumerate}
-			\item a thread can send and receive messages on any channel it holds.
-			\item a message can be received by exactly one thread.
-			\item a recipient must necessarily wait for a message, unless a buffered message is available
-			\item a sender can continue, as long as the channel still has a buffer available. If the buffer is full (or the channel is unbuffered), the sender is blocked until a message is received from the channel.
-		\end{enumerate}
-		\item \alert{typed channels:} \verb|var ch chan int|
-		\begin{betterlist}
-			\item \verb|var ch chan int| attaches a closed channel to ch on which no operations can be executed
-		\end{betterlist}
-		\item \alert{creation:} \verb|ch = make(chan int)|
-		\item \alert{with/without buffer:} \verb|ch1 = make(chan int)| (unbuffered), \verb|ch2 = make(chan int, 50)| (buffered)
-		\begin{betterlist}
-			\item a buffer is a queue of messages
-			\item \nul{rules for exchanging messages:}
-			\begin{betterlist}
-				\item channel without buffer (synchronous communication, synchronous channel):
-				\begin{betterlist}
-					\item sender blocks if no recipient is available
-					\item recipient blocks if no sender is available
-					\item direct (synchronous) communication between sender and recipient
-					\item sender passes message to recipient
-					% \item recipient blocks until there is a sender.
-					% \item Similarly for the sender (as there is no buffer available)
-				\end{betterlist}
-				\item channel with buffer (asynchronous communication, asynchronous channel):
-				\begin{betterlist}
-					\item sender blocks if buffer is full
-					\item recipient blocks if buffer is empty
-					\item indirect (asynchronous) communication between sender and recipient
-					\item sender puts message in buffer, recipient takes message from buf
-					\item the buffer is organized as a queue (FIFO)
-					% \item recipient blocks if there is no message available in the buffer
-					% \item sender blocks only if the buffer is full
-				\end{betterlist}
-			\end{betterlist}
-			% \item \nul{difference as follows:}
-			%   \begin{betterlist}
-			%     \item for an unbuffered channel, a sender always has to \alert{synchronize} with a recipient. Sender and recipient always block. The Go runtime system checks if there are blocking sender and recipient for the same channel. If so, they communicate with each other and become unblocked
-			%     \item for a buffered channel, the sender behaves \alert{asynchronously} and tries to write the message to the buffer. The sender only blocks if the buffer is full, then it tries again. The recipient always synchronizes with the buffer. If the buffer is empty, the recipient blocks. Otherwise, a message is taken from the buffer
-			%   \end{betterlist}
-			\item both modes of communication are equivalent. That is, a channel with buffer can be emulated by channels without buffers
-			\item \alert{Send value \texttt{y} on channel \texttt{ch}:} \verb|ch <- y|
-			\item \alert{Receive from channel \texttt{ch} and save the value in \texttt{x}:} \verb|x = <- ch|
-			\begin{betterlist}
-				\item an expression, i.e., \verb|<-| is a unary operator on channels
-			\end{betterlist}
-			\item \alert{Restricted communication:}
-			\begin{betterlist}
-				\item channel types can be annotated
-				\item \alert{only sending:} \verb|func snd(ch chan <- int) {}|
-				\item \alert{only receiving:} \verb|func rcv(ch <- chan int) {}|
-			\end{betterlist}
-		\end{betterlist}
-	\end{betterlist}
-	\inlinebox{Mutex}
-	\begin{betterlist}
-		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01a.MutexWithBuffer.go}{1a}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/01b.MutexWithoutBuffer.go}{1b}
-
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
         type Mutex (chan int)
-
+        func mutex(ch chan int) {
+          for {
+            <- ch
+            ch <- 1
+          }
+        }
         func newMutex() Mutex {
           var ch = make(chan int, 1)
           return ch
         }
-
+        func newMutex 2 () Mutex {
+          var ch = make(chan int) 
+          go mutex(ch)
+          return ch
+        }
         func lock(m Mutex) {
           m <- 1
         }
-
         func unlock(m Mutex) {
           <- m
         }
-    \end{dnumberedcodebox}
-    %\end{noindent}
-		}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-      type Mutex (chan int)
-      
-      func mutex(ch chan int) {
-        for {
-          <- ch
-          ch <- 1
+        func putMVar2(m MVar, x int) {
+          go func() { m <- x }()
         }
-      }
-      
-      func newMutex() Mutex {
-        var ch = make(chan int) 
-        go mutex(ch)
-        return ch
-      }
-      
-      func lock(m Mutex) {
-        m <- 1
-      }
-      
-      func unlock(m Mutex) {
-        <- m
-      }
     \end{dnumberedcodebox}
     %\end{noindent}
-		}
-	\end{betterlist}
-	\inlinebox{Mutable Variable}
-	\begin{betterlist}
-		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02a.MVarWithBuffer.go}{2a}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02b.MVarWithoutBufferNoAnswers.go}{2b}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-01-exercises/02c.MVarWithoutBuffer.go}{2c}
-
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
+	}
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
       type MVar (chan int)
-      
       func newMVar(x int) MVar {
         var ch = make(chan int, 1)
         ch <- x
         return ch
       }
-      
-      func takeMVar(m MVar) int {
-        var x int
-        x = <- m
-        return x
-      }
-      
-      func putMVar(m MVar, x int) {
-        m <- x
-      }
-    \end{dnumberedcodebox}
-    %\end{noindent}
-		}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-      type MVar (chan int)
-
-      func newMVar(x int) MVar {
+      func newMVar2(x int) MVar {
         var ch = make(chan int)
         go func() {
           for {
@@ -246,34 +97,45 @@
         }()
         return ch
       }
-
       func takeMVar(m MVar) int {
         var x int
         x = <- m
         return x
       }
-
       func putMVar(m MVar, x int) {
-        go func() { m <- x }()
+        m <- x
       }
     \end{dnumberedcodebox}
     %\end{noindent}
-		}
-	\end{betterlist}
+	}
+	% \inlinebox{Quantified Semaphor}
+	%
+	% \begin{betterlist}
+	% 	\item \nul{Difference Mutex and Semaphore:}
+	% 	\begin{betterlist}
+	% 		\item \cul{Mutex:} A mutex has the concept of ownership, meaning the thread that locks a mutex must be the one to unlock it. This is crucial for preventing issues like deadlocks or priority inversions.
+	% 		\item \cul{Semaphore:} A semaphore does not have ownership rules. Any thread can increment or decrement the semaphore, making it more flexible but also easier to misuse.
+	% 	\end{betterlist}
+	% \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\inlinebox{Channels of Channels}
-	\begin{betterlist}
-		\item \verb|var ch chan (chan int)|. A channel that accepts channels of integers
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
 
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
+	\inlinebox{Channels of Channels and Quantified Semaphor}
+	\begin{betterlist}
+		\item \verb|var ch chan (chan int)|: channel that accepts channels of integers
+
+		\vspace{-0.25cm}
+		\begin{minipage}[t]{0.48\textwidth}
+			\vspace{0.01cm}
+
+			\adjustbox{scale=0.5}{
+				% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
     type Request struct {
         id  int
         ack chan int
     }
-
     func worker(req chan Request) {
         var c Request
         for {
@@ -283,7 +145,6 @@
             c.ack <- 1
         }
     }
-
     func client(id int, req chan Request) {
         var ack = make(chan int)
         for {
@@ -293,7 +154,6 @@
         }
 
     }
-
     func main() {
         var req = make(chan Request)
         go worker(req)
@@ -302,251 +162,71 @@
     }
     \end{dnumberedcodebox}
     %\end{noindent}
-		}
-	\end{betterlist}
-	\inlinebox{Non-deterministic Choice (\texttt{select})}
-	\begin{betterlist}
-		\item one wants to continue, as soon as one of the events occurs. The \verb|select| primitive allows simultaneous waiting for multiple events
+			}
+			\inlinebox{Non-determ. Choice (\texttt{select}), Priorisation}
+			\vspace{-0.5cm}
 
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-      select {
-        case x = <-ch1:
-            ...
-        case y = <-ch2:
-            ...
-        case ch3 <- 1:
-            ...
-      }
-      \end{dnumberedcodebox}
-    %\end{noindent}   }
-		}
-		\item \nul{select works as follows:}
-		\begin{betterlist}
-			\item select blocks if all events (cases) block
-			\item if one event (case) occurs, the corresponding case is chosen
-			\item if multiple events (cases) occur, one corresponding case is chosen randomly
-			\item the remaining cases are no longer available!
-		\end{betterlist}
-		\item events that were not chosen remain available. The order of cases does not matter. The choice is random and almost equally distributed.
-		\item \nul{Selection with prioritization:} put the case that should be priotised several times
-		\item \nul{\texttt{default}:}
-
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-        select {
-          case <-ch1:
-          case ch2<-1:
-          default:
-        }
-      \end{dnumberedcodebox}
-    %\end{noindent}   }
-		}
-		\begin{betterlist}
-			\item If none of the cases occurs, select blocks. It is also possible to prevent blocking using \texttt{default}
-			\item If none of the first two cases occurs, then the third (\texttt{default}) case is selected
-		\end{betterlist}
-		\item \nul{\texttt{timeout}:}
-
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-        timeout := time.After(4 * 1e9)
-        select {
-          case <-ch:
-          case <-timeout:
-            fmt.Println("timed out")
-          return
-        }
+			\adjustbox{scale=0.5}{
+				% \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+          select {
+            case <-deer:
+              numOfDeerSeen++
+            case <-elves:
+              numOfElvesSeen++
+              select {
+                case <-deer:
+                  numOfDeerSeen++
+                default:
+              }
+          }
+          select {
+            case <-deer:
+              numOfDeerSeen++
+            case <-elves:
+              select {
+              case <-deer:
+                numOfDeerSeen++
+                go func() { elves <- 1 }()
+              default:
+                numOfElvesSeen++
+              }
+            }
         \end{dnumberedcodebox}
       %\end{noindent}   }
-		}
-		\item \nul{Berrier pattern:}
-		\begin{betterlist}
-			\item multiple tasks will be executed simultaneously. The program will continue as soon as all tasks are done. Effectively a \alert{counting semaphore} is modeled
-		\end{betterlist}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-          func barrier() {
-            var ch = make(chan int)
-            // run all three tasks concurrently
-            go func() {
-                task1()
-                ch <- 1 // signal done
-            }()
-            go func() {
-                task2()
-                ch <- 1
-            }()
-            go func() {
-                task3()
-                ch <- 1
-            }()
-
-            // collect results concurrently
-            timeout := time.After(4 * 1e9)
-            for i := 0; i < 3; i++ {
-                select {
-                  case <-ch:
-                  case <-timeout:
-                      fmt.Println("timed out")
-                      return
-                }
-
-            }
-            fmt.Println("done")
-          }
-
-          \end{dnumberedcodebox}
-        %\end{noindent}   }
-		}
-	\end{betterlist}
-	\inlinebox{Where it can all go wrong} \exercisenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/2024_05_03_tutorial_1.md}
-	\begin{betterlist}
-		\item \alert{trace:} is a sequence of events and expresses the interleaved execution of individual threads
-		\begin{betterlist}
-			\item \uline{\alert{trace-based description of program execution} is related to the \alert{state-based execution}:} both notations/concepts have the goal to describe (concurrent) program execution. The relationship between the two is somewhat like regular expressions versus finite machines
-		\end{betterlist}
-
-		\item \alert{Deadlock:} Occurs when all threads are blocked. Go runtime system recognizes such a situation and aborts
-		\begin{betterlist}
-			\item \verb|pre(ch?)|: wanting to receive on channel \verb|ch|
-			% \begin{betterlist}
-			%   \item \verb|pre| describes the event before the corresponding operation takes place
-			% \end{betterlist}
-			\item \verb|post(ch?)|: having received on channel \verb|ch|
-			% \begin{betterlist}
-			%   \item \verb|post| describes the event after the corresponding operation has taken place
-			% \end{betterlist}
-			\item \verb|pre(ch!)|: wanting to send on channel \verb|ch|
-			\item \verb|post(ch!)|: having sent on channel \verb|ch|
-			\item in case of communication (send-receive), we assume that in the trace the post event of the send always occurs before the post event of the receive
-		\end{betterlist}
-		\item \alert{Starvation:}
-		\begin{betterlist}
-			\item Thread starves (does not progress), because the other threads always communicate with each other. Such a situation is considered starvation
-		\end{betterlist}
-		\item \alert{Livelock:} Describes a situation in which always at least one thread is not blocked, but no thread progresses. A livelock does not occur in \script{48}{Example}
-		\item \alert{Data race:} Situation in which two unprotected, conflicting memory operations (at least one write) occur simultaneously
-		\begin{betterlist}
-			\item one writes \verb|w(x)| to denote a write event on variable \verb|x|, and \verb|r(x)| for a read event. One does not distinguish pre and post events; all events are post events. Ones simplifies the operation \verb|x++| to \verb|w(x)| (is reading and then writing but that much detail not interesting)
-			\item in a program execution (represented as trace), a data race occurs when two conflicting write/read events occur directly after one another:
+			}
+			% \adjustbox{scale=0.48}{
+			% 	% \begin{noindent}
+			%    \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+			%      select {
+			%        case <-ch1:
+			%        case ch2<-1:
+			%        default:
+			%      }
+			%    \end{dnumberedcodebox}
+			%  %\end{noindent}   }
+			% }
+			%
+			% \adjustbox{scale=0.48}{
+			% 	% \begin{noindent}
+			%      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+			%      timeout := time.After(4 * 1e9)
+			%      select {
+			%        case <-ch:
+			%        case <-timeout:
+			%          fmt.Println("timed out")
+			%        return
+			%      }
+			%      \end{dnumberedcodebox}
+			%    %\end{noindent}   }
+			% }
+		\end{minipage}
+		\begin{minipage}[t]{0.48\textwidth}
+			\vspace{0.01cm}
 
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top, title=data race visible]
-                 Main        T
-            1.               y!
-            2.               w(x)
-            3.   w(x)
-            \end{dnumberedcodebox}
-          %\end{noindent}   }
-			}
-			\adjustbox{scale=0.5}{
-				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top, title=data race not visible]
-                 Main        T
-            1.               y!
-            2.               w(x)
-            3.               y?
-            4.   w(x)
-            \end{dnumberedcodebox}
-          %\end{noindent}   }
-			}
-			\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/ilias01_answers.pdf}{Ilias Quiz 1}
-		\end{betterlist}
-	\end{betterlist}
-	\inlinebox{Lists}
-
-	\adjustbox{scale=0.5}{
-		% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-        subs := list.New()
-        subs.PushBack(s)
-        for e := subs.Front(); e != nil; e = e.Next() {
-          s := e.Value.(Sub)
-          if s.topic == m.topic {
-            s.news <- m
-          }
-        }
-      \end{dnumberedcodebox}
-    %\end{noindent}   }
-	}
-	\begin{betterlist}
-		\item lists in Go are \alert{heterogeneous}. That is, when one takes an element from the list, one needs to cast its type explicitly
-		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/03.publishSubscribe.go}{3}
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\inlinebox{Quantified Semaphor}
-
-	\adjustbox{scale=0.5}{
-		% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-type QSem struct {
-  q              int
-  curr           int
-  m              Mutex
-  blockedWaits   *list.List
-  blockedSignals *list.List
-}
-
-func newQSem(q int) QSem {
-  var m = newMutex()
-  qsem := QSem{q, q, m, list.New(), list.New()}
-  return qsem
-}
-
-// down
-func wait(qsem *QSem) {
-  lock(qsem.m)
-  if qsem.curr > 0 {
-    if qsem.blockedSignals.Len() > 0 {
-      var s = qsem.blockedSignals.Front()
-      qsem.blockedSignals.Remove(s)
-      unlock(qsem.m)
-      lock(s.Value.(Mutex))
-    } else {
-      qsem.curr--
-      unlock(qsem.m)
-    }
-  } else {
-    var w = newMutex()
-    qsem.blockedWaits.PushBack(w)
-    unlock(qsem.m)
-    unlock(w) 
-  }
-}
-
-// up
-func signal(qsem *QSem) {
-  lock(qsem.m)
-  if qsem.curr < qsem.q {
-    if qsem.blockedWaits.Len() > 0 {
-      var w = qsem.blockedWaits.Front()
-      qsem.blockedWaits.Remove(w)
-      unlock(qsem.m)
-      lock(w.Value.(Mutex))
-    } else {
-      qsem.curr++
-      unlock(qsem.m)
-    }
-  } else {
-    var s = newMutex()
-    qsem.blockedSignals.PushBack(s)
-    unlock(qsem.m)
-    unlock(s)
-  }
-}
-      \end{dnumberedcodebox}
-    %\end{noindent}
-	}
-	\adjustbox{scale=0.5}{
-		% \begin{noindent}
-      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
+      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
 type QSem struct {
   q              int
   curr           int
@@ -556,14 +236,12 @@ type QSem struct {
   noBlockedWaits int
   noBlockedSignals int
 }
-
 func newQSem(q int) QSem {
   var m = newMutex()
   qsem := QSem{q, q, m, newMutex(), newMutex(), 
                0, 0}
   return qsem
 }
-
 // down
 func wait(qsem *QSem) {
   lock(qsem.m)
@@ -582,7 +260,6 @@ func wait(qsem *QSem) {
     lock(qsem.signalWaits)
   }
 }
-
 // up
 func signal(qsem *QSem) {
   lock(qsem.m)
@@ -603,190 +280,194 @@ func signal(qsem *QSem) {
 }
       \end{dnumberedcodebox}
     %\end{noindent}   }
-	}
-	\begin{betterlist}
-		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem1.go}{4.1}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/04.qsem2.go}{4.2}
-		\item mechanism with queues unnecessary, because in go blocked senders and recipients on channels are ordered and unblocked in order. Implementation does not need to keep track of which thread exactly is waiting, because we already know that threats themselves already know they're waiting. All we need to track is that there are threads waiting. Instead of using lists of mutual exclusions to indicate unblocking, one simply uses a single mutex for unblocking waits ans signals and keep track how many are waiting. lock on mutual exclusion, meaning that the first signal that called unlock will be unlocked and be done
-		\item \nul{Differences to Mutex:}
-		\begin{betterlist}
-			\item \alert{Mutex:} A mutex has the concept of ownership, meaning the thread that locks a mutex must be the one to unlock it. This is crucial for preventing issues like deadlocks or priority inversions.
-			\item \alert{Semaphore:} A semaphore does not have ownership rules. Any thread can increment or decrement the semaphore, making it more flexible but also easier to misuse.
-		\end{betterlist}
+			}
+		\end{minipage}
 	\end{betterlist}
-	\inlinebox{Examples for Deadlocks, Livelocks and Starvation via Traces}
-	\begin{betterlist}
-		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/05.sleepingBarber2.go}{5}, \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercises/06.diningPhilosophers.md}{6}
+	% \inlinebox{Berrier pattern}
+	% % \begin{betterlist}
+	% % 	\item 
+	% % 	\begin{betterlist}
+	% % 		\item multiple tasks will be executed simultaneously. The program will continue as soon as all tasks are done. Effectively a \alert{counting semaphore} is modeled
+	% % \end{betterlist}
+	% \vspace{-0.25cm}
+	%
+	% \adjustbox{scale=0.48}{
+	% 	% \begin{noindent}
+	%          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%          func barrier() {
+	%            var ch = make(chan int)
+	%            go func() {
+	%                task1()
+	%                ch <- 1 // signal done
+	%            }()
+	%            go func() {
+	%                task2()
+	%                ch <- 1
+	%            }()
+	%            go func() {
+	%                task3()
+	%                ch <- 1
+	%            }()
+	%          \end{dnumberedcodebox}
+	%        %\end{noindent}   }
+	% }
+	% \adjustbox{scale=0.48}{
+	% 	% \begin{noindent}
+	%          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%          func barrier() {
+	%            var ch = make(chan int)
+	%            timeout := time.After(4 * 1e9)
+	%            for i := 0; i < 3; i++ {
+	%                select {
+	%                  case <-ch:
+	%                  case <-timeout:
+	%                      fmt.Println("timed out")
+	%                      return
+	%                }
+	%
+	%            }
+	%            fmt.Println("done")
+	%          }
+	%          \end{dnumberedcodebox}
+	%        %\end{noindent}   }
+	% }
+	% \end{betterlist}
+	% \inlinebox{Priorisation}
+	% \vspace{-0.25cm}
 
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-                  import (
-                    "time"
-                    "math/rand"
-                  )
-                  n := rand.Intn(4)
-                  time.Sleep(time.Duration(n) * time.Second)
-                  time.Sleep(100 * time.Millisecond)
-          \end{dnumberedcodebox}
-        %\end{noindent}   }
-		}
-	\end{betterlist}
-	\inlinebox{Priorisation}
+	% \inlinebox{Lists}
+	%
+	% \adjustbox{scale=0.5}{
+	% 	% \begin{noindent}
+	%      \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%        subs := list.New()
+	%        subs.PushBack(s)
+	%        for e := subs.Front(); e != nil; e = e.Next() {
+	%          s := e.Value.(Sub)
+	%          if s.topic == m.topic {
+	%            s.news <- m
+	%          }
+	%        }
+	%      \end{dnumberedcodebox}
+	%    %\end{noindent}   }
+	% }
+	% \begin{betterlist}
+	% 	\item lists in Go are \alert{heterogeneous}. That is, when one takes an element from the list, one needs to cast its type explicitly
+	% \end{betterlist}
+	\inlinebox{Conditions for a valid trace reordering}:
+	% \textcolor{gray}{Reordering the trace means that one simply permutes the elements}
+	\begin{enumerate}
+		\item The elements in the reordered trace must be part of the original trace
+		\begin{betterlist}
+			\item A valid reordering only needs to include a subset of the events of the original trace
+		\end{betterlist}
 
-	\adjustbox{scale=0.5}{
-		% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-          select {
-            case <-deer:
-              numOfDeerSeen++
-            case <-elves:
-              numOfElvesSeen++
-              select {
-                case <-deer:
-                  numOfDeerSeen++
-                default:
-              }
-          }
-        \end{dnumberedcodebox}
-      %\end{noindent}   }
-	}
-	\adjustbox{scale=0.5}{
-		% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-          select {
-            case <-deer:
-              numOfDeerSeen++
-            case <-elves:
-              select {
-              case <-deer:
-                numOfDeerSeen++
-                go func() { elves <- 1 }()
-              default:
-                numOfElvesSeen++
-              }
-            }
-        \end{dnumberedcodebox}
-      %\end{noindent}   }
-	}
-	\begin{betterlist}
-		\item \solution{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/solutions/lec-02-exercisesb/07.SantaClaus.go}{7}
-		\item Santa gives priority to the reindeer in the case that there is both a group of elves and a group of reindeer waiting.
-	\end{betterlist}
-	\inlinebox{Go-style mutexes behave like semaphores}
-	\begin{betterlist}
-		\item It's often the case that a thread that acquires lock $x$ must also release $x$. This assumption holds for Java and C++. However, Go-style mutexes behave differently as they act more like semaphores. In Go, the acquire and release of a lock is not tied to a single thread. Go-style mutexes behave like semaphores
-	\end{betterlist}
-	\inlinebox{Dynamic data race prediction}
-	\begin{betterlist}
-		\item \alert{Dynamic analysis}: Execute the program and observe its behavior, Determine if there is any potential bad behavior based on this specific program run
-		\item \alert{Static analysis}: Predict all possible program runs without actually executing the program, (usually) sound, \nul{but overapproximative:} if there is a bug, it will be flagged, but also non-bug may be flagged
-		\item events are collected in a program \alert{trace}. A trace is a linear sequence of events and represents an interleaved execution of the program
+		\item \cul{Program order Condition}: Let P be some trace and P' be a permutation of P. P' preserves program order if, for each thread T, P arrowdown T = P' arrowdown T
 		\begin{betterlist}
-			\item there is a \alert{tabular notation} for traces with a separate \alert{column} for each \alert{thread} and separate \alert{row} for each \alert{event}. The trace \alert{position} of an event corresponds to the row number
+			\item \nul{notation}: for a trace P and thread T, we write P arrowdown T for the list of events in thread T contained in P
 		\end{betterlist}
-		\item an \alert{event} registers interesting program behavior. Each event is connected to one of the operations we are interested in
+		\item \cul{Lock Semantics Condition}: Let P be some trace and P' be some reordering of P. If P' = P\textsubscript{1} acq(y) P\textsubscript{2} acq(y) P\textsubscript{3}, then there must be some event rel(y) in P\textsubscript{2}. If P' = P\textsubscript{1} rel(y) P\textsubscript{2}, then there must be some acq(y) such that P\textsubscript{1} = P'\textsubscript{1} acq(y) P''\textsubscript{1} and there is no rel(y) in P''\textsubscript{1}
+		\item \cul{Last Writer Condition}: Let P be some trace with a read event r(x) and P' be some reordering of P. The event r(x) must have the same \cul{last writer} in P' as in P
 		\begin{betterlist}
-			\item for each event, the trace records the \alert{thread} where the event happened. Each event can be identified by its position in the trace
-			\item two events are \alert{conflicting events} if they are read/write events for the same variable that come from different threads and at least one of them is a write event
-			% \begin{betterlist}
-			%   \item \nul{in other words:} two read/write operations on some shared variable are \alert{conflicting} if the operations happen in different threads and at least one of the operations is a write
-			% \end{betterlist}
-			\item a \alert{data race} arises if two conflicting events appear right next to each other in the trace. That implies that both events may happen in any order
+			\item If P\textsubscript{1} r(x) P\textsubscript{2} is a trace, then the \cul{last writer} of r(x) is some w(x) such that P\textsubscript{1} = P\textsubscript{1}' w(x) P\textsubscript{1}'' and P\textsubscript{1}'' does not contain another w(x)
 		\end{betterlist}
-		\item instead of rerunning the program to obtain other traces, another method is to consider \alert{valid trace reorderings} that result from a trace. Reordering of a trace means that we change the order of its events such that the resulting sequence of events still represents a sensible execution sequence. \textcolor{gray}{Reordering the trace means that one simply permutes the elements}. \nul{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. \nul{Conditions for a valid trace reordering}:
-		\begin{enumerate}
-			\item The elements in the reordered trace must be part of the original trace
-			\begin{betterlist}
-				\item A valid reordering only needs to include a subset of the events of the original trace
-			\end{betterlist}
-
-			\item \alert{Program order must be maintained}:
-			\begin{betterlist}
-				\item \cul{Program order Condition}: Let $P$ be some trace and $P'$ be a permutation of $P$. $P'$ preserves program order if, for each thread $T$, $P \downarrow T = P' \downarrow T$
-				\begin{betterlist}
-					\item \nul{notation}: for a trace $P$ and thread $T$, we write $P \downarrow T$ for the list of events in thread $T$ contained in $P$
-				\end{betterlist}
-			\end{betterlist}
-			\item \alert{Lock semantics must be maintained}:
-			\begin{betterlist}
-				\item \cul{Lock Semantics Condition}: Let $P$ be some trace and $P'$ be some reordering of $P$. If $𝑃' = P_1 acq(y) P_2 acq(y) P_3$, then there must be some event $rel(y)$ in $P_2$. If $P' = P_1 rel(y) P_2$, then there must be some $acq(y)$ such that $P_1 = P'_1 acq(y) P''_1$ and there is no $rel(y)$ in $𝑃''_1$
-			\end{betterlist}
-			\item \alert{Last writer must be maintained}:
-			\begin{betterlist}
-				\item \cul{Last Writer Condition}: Let $P$ be some trace with a read event $r(x)$ and $P'$ be some reordering of $P$. The event $r(x)$ must have the same \alert{last writer} in $P'$ as in $P$
-				\begin{betterlist}
-					\item If $P_1 r(𝑥) P_2$ is a trace, then the \alert{last writer} of $r(x)$ is some $w(x)$ such that $P_1 = P_1' w(x) P_1^{''}$ and $P_1^{''}$ does not contain another $w(x)$
-				\end{betterlist}
-			\end{betterlist}
-			\item[$\textcolor{PrimaryColor}{\bullet}$] \script{99}{Example}
-			\item[$\textcolor{PrimaryColor}{\bullet}$] \script{100}{Summary in other words and example for subset}. \textcolor{gray}{A valid reordering only needs to include a subset of the events of the original trace}
-		\end{enumerate}
-		\item \alert{dynamic data race prediction}: we record the trace of a specific program run. Two conflicting events may not appear in the trace right next to each other. However, we may be able to predict that there is some trace reordering under which the two conflicting events appear right next to each other (in the reordered trace)
-		\begin{betterlist}
-			% \item to identify conflicting events that are in a race, we could check if there is a valid reordering of the trace under which both events occur right next to each other
-			% Exhaustive predictive methods attempt to identify as many reorderings as possible. 
-			\item \alert{Exhaustive data race prediction methods:} A \enquote{simple} data race prediction method seems to compute all possible (valid) reorderings and checks if they contain any data race. Such exhaustive methods do not scale to real-world settings because program runs and the resulting traces may be large and considering all possible reorderings generally leads to an \alert{exponential blow up}
-			\item \alert{Approximative data race prediction methods:} As we favor efficiency (by efficient one means a run-time that is \alert{linear} in the size of the trace. \alert{Efficient methods} approximate by only considering certain reorderings) over exhaustiveness, we may compromise \alert{completeness} and \alert{soundness}:
-			\begin{betterlist}
-				\item \alert{Complete} means that all valid reorderings that exhibit some race can be predicted. If a method is \alert{incomplete}, we call every race that is not reported race a \alert{false negative}
-				\item \alert{Sound} means that all races reported by the method can be exhibited with some valid reordering of the trace. If a method is \alert{unsound}, it may report a trace as racy even if there is no valid reordering that exhibits a race. Such a report is a \alert{false positive}
-			\end{betterlist}
-		\end{betterlist}
-	\end{betterlist}
+	\end{enumerate}
 \end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\inlinebox{Efficient dynamic data race prediction methods}
-	\begin{betterlist}
-		\item Lamport's \alert{happens-before (HB method, incomplete and unsound) relation}:
-		\begin{betterlist}
-			\item Instead of explicitly constructing a reordering, we calculate a happens before relation. It approximates the possible reorderings and thus can be computed efficiently but may lead to \alert{false positives} and \alert{false negatives}%, it approximates the possible reorderings. The HB relation can be computed efficiently but may lead to false positives and false negatives
-			\item \alert{a partial order} on events to determine if one event happens before another event. If events are unordered, we assume that these events may happen concurrently (i.e., in any order). \uline{Ground truth:} the \alert{must happen before relation (mhb)}
-			\item any \alert{happens-before (partial) order} (HB relation) approximates the must happen before relation (the possible reorderings)
-			\begin{betterlist}
-				\item if the order is \alert{too large}, it orders events that may not be ordered by mhb: it misses data races and may yield false negatives
-				\item if the order is \alert{too small}, it does not order events that may be ordered by mhb: it hallucinates data races and may thus yield false positives
-			\end{betterlist}
-			\item if two conflicting operations are unordered under the happens-before relation, then we report that these operations are in a (data) race
-			% \item \textcolor{gray}{One ignores the details of how to instrument programs to carry out tracing of events. In practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available}
-			% \item in practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available
-			\item Let $T$ be a trace. We define the HB relation $<$ as the smallest strict partial order that satisfies the following conditions:
-			\begin{betterlist}
-				\item \alert{Program order:} If $t\#e_i$, $t\#f_{i + n} \in T$ for some $n > 0$, then $t\#e_i < t\#f_{i + n}$
-				\begin{betterlist}
-					\item states that events in the same thread are ordered according to their trace position
-					\item \alert{Trace and event notation}: We write $t\#e_i$ to denote event $e$ at trace position $i$ in thread $t$
-				\end{betterlist}
-				\item \alert{Critical section order:} If $t_1\#rel(x)_k, t_2\#acq(x)_{k + n} \in T$ with $t_1 \ne t_2$ and $n > 0$, then $t_1\#rel(x)_k < t_2\#acq(x)_{k + n}$
-				\begin{betterlist}
-					\item states that critical sections are ordered according to their trace position
-					\item for each acquire the matching release must be in the same thread. Hence, the critical section order only needs to consider a release and a subsequent acquire
-				\end{betterlist}
-			\end{betterlist}
-			\item \alert{Happens-before data race check:} If there are conflicting events $e$ and $f$ but neither $e < f$ nor $f < e$ , then $(e, f)$ is a HB data race pair
-			\begin{betterlist}
-				\item the argument is that if neither $e < f$ nor $f < e$ we are able to reorder the trace such that $e$ and $f$ appear right next to each other (in some reordered trace)
-				\item \nul{note}: if $(e, f)$ is a HB data race pair then so is $(f, e)$. In such a situation, we consider $(e, f)$ and $(f, e)$ as two distinct representative for the same data race. When reporting (and counting) HB data races we only consider a specific representative
-			\end{betterlist}
-			\item \alert{Event set $ES_e$}: Set of events that happen up-to and including event $e$. That is, $ES_e = \{ f ∣ f < e \} \cup \{e\}$
-			\begin{betterlist}
-				\item \nul{Observations:} To enforce the critical section order we add the event set $ES_{rel(y)}$ of some release event to the event set $ES_{acq}(y)$ of some subsequent acquire event, To enforce the program order, we accumulate events within one thread (in essence, building the transitive closure)
-				\item to decide if $e < f$ we can check for $ES_{e} \subset ES_{f}$. Consider two conflicting events $e$ and $f$ where $e$ appears before $f$ in the trace. To decide if $e$ and $f$ are in a race, we check for $e \in ES_f$ or $f \in ES_e$. If yes, then there is no race (because $e < f$ or $f < e$). Otherwise, there is a race.
-				\item \alert{Set-based race predictor:}
-				\begin{betterlist}
-					% \item we compute event sets by processing the events in the trace from beginning to end. We maintain the following state variables when processing event $e_i$: \script{105}{Overview}
-					\item \alert{state variables:}
-					% \item each event invokes its processing function: \script{106}{Overview}. We write $e@operation$ for the processing function for event $e$ of the form $operation$. We add thread information as an additional argument
-					\begin{betterlist}
-						\item $D(t)$: Each thread $t$ maintains the set of events that happen before $e_i$. (initially empty)
-						\item $R(x)$: Most recent set of concurrent read events on $x$. (initially empty)
-						\item $W(x)$: Most recent write event on $x$. (initially undefined)
-						\item $Rel(y)$: Contains the event set of the most recent release event on lock $y$. (initially empty)
-					\end{betterlist}
-					\item \nul{e@operation for the processing function for event e of the form operation}:
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
 
-					\adjustbox{scale=0.5}{
-						% \begin{noindent}
-                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
+	% \inlinebox{Examples for Deadlocks, Livelocks and Starvation via Traces}
+	%
+	% \adjustbox{scale=0.5}{
+	% 	% \begin{noindent}
+	%          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%                  import (
+	%                    "time"
+	%                    "math/rand"
+	%                  )
+	%                  n := rand.Intn(4)
+	%                  time.Sleep(time.Duration(n) * time.Second)
+	%                  time.Sleep(100 * time.Millisecond)
+	%          \end{dnumberedcodebox}
+	%        %\end{noindent}   }
+	% }
+
+	% \begin{betterlist}
+	% 	\item Santa gives priority to the reindeer in the case that there is both a group of elves and a group of reindeer waiting.
+	% \end{betterlist}
+	% \inlinebox{Dynamic data race prediction}
+	% \item for each event, the trace records the \alert{thread} where the event happened. Each event can be identified by its position in the trace
+	% \nul{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. 
+	\inlinebox{Lamport's \cul{happens-before (HB method, incomplete and unsound) relation}}
+	\begin{betterlist}
+		% \item Instead of explicitly constructing a reordering, we calculate a happens before relation. It approximates the possible reorderings and thus can be computed efficiently but may lead to \nul{false positives} and \nul{false negatives}%, it approximates the possible reorderings. The HB relation can be computed efficiently but may lead to false positives and false negatives
+		% \item \cul{a partial order} on events to determine if one event happens before another event. If events are unordered, we assume that these events may happen concurrently (i.e., in any order). \nul{Ground truth:} the \cul{must happen before relation (mhb)}
+		\item any \nul{happens-before (partial) order} (HB relation) approximates the \nul{must happen before relation} (the possible reorderings)
+		\begin{betterlist}
+			\item if the order is \nul{too large}, it orders events that may not be ordered by mhb: it misses data races and may yield false negatives
+			\item if the order is \nul{too small}, it does not order events that may be ordered by mhb: it hallucinates data races and may thus yield false positives
+		\end{betterlist}
+		% \item if two \nul{conflicting operations} are unordered under the happens-before relation, then we report that these operations are in a \nul{(data) race}
+		% \item \textcolor{gray}{One ignores the details of how to instrument programs to carry out tracing of events. In practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available}
+		% \item in practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available
+		\item Let T be a trace. We define the HB relation < as the smallest strict partial order that satisfies the following conditions:
+		\begin{enumerate}
+			\item \cul{Program order:} If t\#e\textsubscript{i}, t\#f\textsubscript{i + n} € T for some n > 0, then t\#e\textsubscript{i} < t\#f\textsubscript{i + n}
+			\begin{betterlist}
+				\item states that events in the same thread are ordered according to their trace position
+				\item \cul{Trace and event notation}: We write t\#e\textsubscript{i} to denote event e at trace position i in thread t
+			\end{betterlist}
+			\item \cul{Critical section order:} If t\textsubscript{1}\#rel(x)\textsubscript{k}, t\textsubscript{2}\#acq(x)\textsubscript{k + n} € T with t\textsubscript{1} != t\textsubscript{2} and n > 0, then t\textsubscript{1}\#rel(x)\textsubscript{k} < t\textsubscript{2}\#acq(x)\textsubscript{k + n}
+			\begin{betterlist}
+				\item states that critical sections are ordered according to their trace position
+				\item for each acquire the matching release must be in the same thread. Hence, the critical section order only needs to consider a release and a subsequent acquire
+			\end{betterlist}
+		\end{enumerate}
+		\item \cul{Happens-before data race check:} If there are conflicting events e and f but neither e < f nor f < e , then (e, f) is a HB data race pair. The argument is that if neither e < f nor f < e we are able to reorder the trace such that e and f appear right next to each other (in some reordered trace)
+		% \begin{betterlist}
+		% \item \nul{note}: if (e, f) is a HB data race pair then so is (f, e). In such a situation, we consider (e, f) and (f, e) as two distinct representative for the same data race. When reporting (and counting) HB data races we only consider a specific representative
+		% \end{betterlist}
+		\item \nul{False negatives and False positives:}
+		\begin{betterlist}
+			\item the HB method has \cul{false negatives} because the textual order between critical sections is preserved. That is, valid reorderings that swap critical sections are ignored
+			\item the first race reported by the HB method is an \enquote{actual} race. However, subsequent races may be \cul{false positives}
+			\begin{betterlist}
+				\item the HB relation does not take into account write-read dependencies and therefore HB data races may not correspond to actual data races
+				\item we say \enquote{may not} because based on the trace alone we cannot decide if the write-read dependency actually affects the control flow
+			\end{betterlist}
+		\end{betterlist}
+	\end{betterlist}
+	% \item \cul{dynamic data race prediction}: we record the trace of a specific program run. Two conflicting events may not appear in the trace right next to each other. However, we may be able to predict that there is some trace reordering under which the two conflicting events appear right next to each other (in the reordered trace)
+	% \begin{betterlist}
+	% \item to identify conflicting events that are in a race, we could check if there is a valid reordering of the trace under which both events occur right next to each other
+	% Exhaustive predictive methods attempt to identify as many reorderings as possible. 
+	% \item \cul{Exhaustive data race prediction methods:} A \enquote{simple} data race prediction method seems to compute all possible (valid) reorderings and checks if they contain any data race. Such exhaustive methods do not scale to real-world settings because program runs and the resulting traces may be large and considering all possible reorderings generally leads to an \nul{exponential blow up}
+	% \item \cul{Approximative data race prediction methods:} As we favor efficiency (by efficient one means a run-time that is \nul{linear} in the size of the trace. \nul{Efficient methods} approximate by only considering certain reorderings) over exhaustiveness, we may compromise \nul{completeness} and \nul{soundness}:
+	% \end{betterlist}
+	\inlinebox{Event sets}
+	\begin{betterlist}
+		\item \cul{Event set }ES\textsubscript{e}: Set of events that happen up-to and including event e. That is, ES\textsubscript{e} = \{ f | f < e \} U \{e\}
+		% \item \nul{Observations:} To enforce the critical section order we add the event set ES\textsubscript{rel(y)} of some release event to the event set ES\textsubscript{acq}(y) of some subsequent acquire event, To enforce the program order, we accumulate events within one thread (in essence, building the transitive closure)
+		\item to decide if e < f we can check for ES\textsubscript{e} C ES\textsubscript{f}. Consider two conflicting events e and f where e appears before f in the trace. To decide if e and f are in a race, we check for e € ES\textsubscript{f} or f € ES\textsubscript{e}. If yes, then there is no race (because e < f or f < e). Otherwise, there is a race.
+
+		\item \cul{Set-based race predictor:}
+		% \begin{betterlist}
+		% \item we compute event sets by processing the events in the trace from beginning to end. We maintain the following state variables when processing event $e_i$: \script{105}{Overview}
+		% \item \cul{state variables:}
+		% \item each event invokes its processing function: \script{106}{Overview}. We write $e@operation$ for the processing function for event $e$ of the form $operation$. We add thread information as an additional argument
+		% \begin{betterlist}
+		% 	\item D(t): Each thread t maintains the set of events that happen before e\textsubscript{i}. (initially empty)
+		% 	\item R(x): Most recent set of concurrent read events on x. (initially empty)
+		% 	\item W(x): Most recent write event on x. (initially undefined)
+		% 	\item Rel(y): Contains the event set of the most recent release event on lock y. (initially empty)
+		% \end{betterlist}
+		% \end{betterlist}
+		% \item \nul{e@operation for the processing function for event e of the form operation}:
+		\vspace{-0.25cm}
+
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\large}, box align=top]
                   e@acq(t,y) {
                     D(t) = D(t) U Rel(y) U { e }
                   }
@@ -800,7 +481,13 @@ func signal(qsem *QSem) {
                   }
                   e@join(t1,t2) {
                     D(t1) = D(t1) U D(t2) U { e }
-                    }
+                  }
+                  \end{dnumberedcodebox}
+                %\end{noindent}   }
+		}
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\large}, box align=top]
                   e@write(t,x) {
                     If W(x) exists and W(x) not in D(t)
                     then write-write race (W(x),e)
@@ -821,57 +508,64 @@ func signal(qsem *QSem) {
                   }
                   \end{dnumberedcodebox}
                 %\end{noindent}   }
-					}
-					\item The size of $D(t)$ may grow linearly in the size of the trace. To check for a race we check if some element is in $D(t)$. If there are $n$ events, set-based race prediction requires $O(n^2)$ time
-				\end{betterlist}
-			\end{betterlist}
-			\item \alert{Vector clocks}: A distributed time stamp, A representation for a happens-before relation
-			\begin{betterlist}
-				\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
-				\begin{betterlist}
-					\item Let $e$ be an event in thread $t$ and $j$ its timestamp. Then, we can uniquely identify $e$ via $t$ and $j$. We write $t\#j$ to represent event $e$. In the literature, $t\#j$ is called an \alert{epoch}
-					\begin{betterlist}
-						\item we generallly use the timestamp \enquote{before} processing the event
-					\end{betterlist}
-					\item \alert{set of epochs:} We group together epochs belonging to the same thread. For example, in case of $\{1\#1, 1\#2\}$ we write $\{1\#\{1, 2\}\}$
-				\end{betterlist}
-				\item for each thread only keep most recent timestamp. E.g. in case of $\{1\#\{1, 2\}\}$ we write $\{1\#2\}$
-				\item a \alert{vector clock} encodes a set of most recent timestamps from $n$ threads as a vector of length $n$. $V ::= [i_1,\ldots ,i_n]$ is vector clock with $n$ time stamps. The entry $i_t$ is the timestamp for thread $t$. The above vector clock $V$ stands for the set of timestamps $V  \sim\sim  \{1\#i_1, \ldots, n\#i_n\}$. We use the entry $0$ to indicate missing information about a thread
-				\begin{betterlist}
-					\item mapping $\Phi$ from event sets to vector clocks as follows: $\Phi({1\#E_1 , \ldots, n\#E_n}) = [max(E_1), \ldots, max(E_n)]$
-					\begin{betterlist}
-						\item each event set can be represented as the set $\{1\#E_1, \ldots, 𝑛\#E_n\}$ where sets $E_j$ are of the form $\{1, \ldots, k\}$
-					\end{betterlist}
-					\item \alert{Properties:}
-					\begin{enumerate}
-						\item $D_e \subset D_f$ iff $\phi(D_e) < \phi(D_f)$
-						\begin{betterlist}
-							\item strict order on vector clocks $[i_1,...,i_n]  < [j_1,...,j_n])$ if $i_k<=j_k$ for all $k=1\ldots n$ and there exists $k$ such that $i_k<j_k$
-						\end{betterlist}
-						\item $(D_e \cup D_f) = sync(\phi(D_e), \phi(D_f))$
-						\begin{betterlist}
-							\item synchronize two vector clocks by taking the larger time stamp: $sync([i_1,...,i_n],[j_1,...,j_n]) = [max(i_1,j_1), ..., max(i_n,j_n)]$
-						\end{betterlist}
-						\item Let $e, f$ be two events where $e$ appears before $f$ and $e = t\#k$. Then, $e \not\in D_f$ iff $k > \phi(D_f)(t)$
-					\end{enumerate}
-					\item \alert{FastTrack:} a race detector based on vector clocks
-					\begin{betterlist}
-						\item Lookup of time stamp: $[i_1,\ldots,i_t,\ldots,i_n](t) = i_t$
-						\item Increment the time stamp of thread $t$: $inc([\ldots,i_t,\ldots],t) = [\ldots,i_t+1,\ldots]$
-						\item \alert{State variables:}
-						\begin{betterlist}
-							\item $Th(t)$: Vector clock of thread $t$
-							\item $R(x)$: Vector clock for reads from $x$
-							\item $W(x)$: Epoch of most recent write on $x$
-							\item $Rel(y)$: Vector clock of the most recent release on lock $y$
-						\end{betterlist}
-						\item initially, the timestamps in $R(x)$, $W(x)$, and $Rel(y)$ are all set to zero
-						\item in $Th(t)$, all time stamps are set to zero except the time stamp for entry $t$, which is set to one
-						\item \alert{Event processing:}
+		}
+		\item The size of D(t) may grow linearly in the size of the trace. To check for a race we check if some element is in D(t). If there are n events, set-based race prediction requires O(n\textsuperscript{2}) time
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
 
-						\adjustbox{scale=0.5}{
-							% \begin{noindent}
-                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
+	\inlinebox{Vector Clocks}
+	\begin{betterlist}
+		% \item \cul{Vector clocks}: A distributed timestamp, A representation for a happens-before relation
+		\item Let e be an event in thread t and j its timestamp. Then, we can uniquely identify e via t and j. We write t\#j to represent event e. In the literature, t\#j is called an \cul{epoch}
+		\begin{betterlist}
+			\item \cul{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number% One generallly uses the timestamp \enquote{before} processing the event, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is 1. 
+			\item for each thread only keep most recent timestamp. E.g. in case of \{1\#\{1, 2\}\} we write \{1\#2\}
+		\end{betterlist}
+		% \item \cul{set of epochs:} We group together epochs belonging to the same thread. For example, in case of \{1\#1, 1\#2\} we write \{1\#\{1, 2\}\}
+		\item a \cul{vector clock} encodes a set of most recent timestamps from n threads as a vector of length n. V ::= [i\textsubscript{1},\ldots ,i\textsubscript{n}] is vector clock with n time stamps. The entry i\textsubscript{t} is the timestamp for thread t. The above vector clock V stands for the set of timestamps V  \sim\sim  \{1\#i\textsubscript{1}, \ldots, n\#i\textsubscript{n}\} % We use the entry 0 to indicate missing information about a thread
+		\begin{betterlist}
+			\item mapping Phi from event sets to vector clocks as follows: Phi({1\#E\textsubscript{1} , \ldots, n\#E\textsubscript{n}}) = [max(E\textsubscript{1}), \ldots, max(E\textsubscript{n})]
+			\begin{betterlist}
+				\item each event set can be represented as the set \{1\#E\textsubscript{1}, \ldots, 𝑛\#E\textsubscript{n}\} where sets E\textsubscript{j} are of the form \{1, \ldots, k\}
+			\end{betterlist}
+			\item \cul{Properties:}
+			\begin{enumerate}
+				\item D\textsubscript{e} C D\textsubscript{f} iff Phi(D\textsubscript{e}) < Phi(D\textsubscript{f})
+				\begin{betterlist}
+					\item strict order on vector clocks [i\textsubscript{1},...,i\textsubscript{n}]  < [j\textsubscript{1},...,j\textsubscript{n}]) if i\textsubscript{k}<=j\textsubscript{k} for all k=1\ldots n and there exists k such that i\textsubscript{k}<j\textsubscript{k}
+				\end{betterlist}
+				\item (D\textsubscript{e} U D\textsubscript{f}) = sync(Phi(D\textsubscript{e}), Phi(D\textsubscript{f}))
+				\begin{betterlist}
+					\item synchronize two vector clocks by taking the larger time stamp: sync([i\textsubscript{1},...,i\textsubscript{n}],[j\textsubscript{1},...,j\textsubscript{n}]) = [max(i\textsubscript{1},j\textsubscript{1}), ..., max(i\textsubscript{n},j\textsubscript{n})]
+				\end{betterlist}
+				\item Let e, f be two events where e appears before f and e = t\#k. Then, e !€ D\textsubscript{f} iff k > Phi(D\textsubscript{f})(t)
+			\end{enumerate}
+		\end{betterlist}
+		\item \cul{FastTrack:} A race detector based on vector clocks
+		% \begin{betterlist}
+		% \item Lookup of time stamp: $[i_1,\ldots,i_t,\ldots,i_n](t) = i_t$
+		% \item Increment the time stamp of thread $t$: $inc([\ldots,i_t,\ldots],t) = [\ldots,i_t+1,\ldots]$
+		% \item \alert{State variables:}
+		% \begin{betterlist}
+		% 	\item $Th(t)$: Vector clock of thread $t$
+		% 	\item $R(x)$: Vector clock for reads from $x$
+		% 	\item $W(x)$: Epoch of most recent write on $x$
+		% 	\item $Rel(y)$: Vector clock of the most recent release on lock $y$
+		% \end{betterlist}
+		% \item initially, the timestamps in $R(x)$, $W(x)$, and $Rel(y)$ are all set to zero
+		% \item in $Th(t)$, all time stamps are set to zero except the time stamp for entry $t$, which is set to one
+		% \item \alert{Event processing:}
+		\vspace{-0.25cm}
+
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\large}, box align=top]
                 acq(t,y) {
                   Th(t) = sync(Th(t), Rel(y))
                   inc(Th(t),t)
@@ -888,6 +582,12 @@ func signal(qsem *QSem) {
                   Th(t1) = sync(Th(t1),Th(t2))
                   inc(Th(t1),t1)
                 }
+                \end{dnumberedcodebox}
+              %\end{noindent}   }
+		}
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+                \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\large}, box align=top]
                 write(t,x) {
                   If not (R(x) < Th(t))
                   then write-read race detected
@@ -907,66 +607,48 @@ func signal(qsem *QSem) {
                 }
                 \end{dnumberedcodebox}
               %\end{noindent}   }
-						}
-					\end{betterlist}
-				\end{betterlist}
-			\end{betterlist}
-		\end{betterlist}
+		}
+		% \end{betterlist}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
+	\inlinebox{Lockset Method (complete but unsound)}
 	\begin{betterlist}
-		\item \nul{HB method continue:}
+		% \item \alert{lockset:} is the set of locks that are held when processing a read/write event
+		% \item if the locksets of two conflicting events $e$ and $f$ are \alert{disjoint}, then $(e, f)$ is a \alert{Lockset data race pair}
+		% \begin{betterlist}
+		% 	\item if two conflicting events hold the same lock $y$, then both events must belong to two distinct critical sections involving lock $y$. As critical sections are mutually exclusive, two conflicting events that share the same lock cannot be in a data race
+		% \end{betterlist}
+		% \item $(t1\#acq(y)_k, t2\#rel(y)_l)$ is a matching acquire/release pair if
+		% \begin{enumerate}
+		% 	\item $t1 = t2$, and
+		% 	\begin{betterlist}
+		% 		\item states that $acq(y)$ and $rel(y)$ belong to the same thread
+		% 	\end{betterlist}
+		% 	\item $k < l$ and there is no $t\#rel(y)_m$ where $k < m < l$
+		% 	\begin{betterlist}
+		% 		\item states that there is no other $rel(y)$ between $acq(y)_k$ and $rel(y)_l$
+		% 		\item $t\#e_k$ denotes some event $e$ in thread $t$ at trace position $k$
+		% 	\end{betterlist}
+		% \end{enumerate}
+		% \item $CS(t\#acq(y)_k, t\#rel(y)_l)$ denotes the set of events that are part of the critical section for a matching acquire/release pair $(t\#acq(y)k, t\#rel(y)l)$. We only accept events from the same thread $t$
+		% \begin{betterlist}
+		% 	\item $t'\#e_m \in CS(t\#acq(y)_k, t\#rel(y)_l)$ if $t = t'$ and $k \le m \le l$
+		% 	\item $acq(y)$ and $rel(y)$ are part of the critical section; and any event in the same thread between them is also part of this critical section
+		% \end{betterlist}
+		% \item \alert{lockset of an event $e$:} $LS(e) = \{y \mid \exists a = t\#acq(y)_k, r = t\#rel(y)_l .e \in CS(a, r)\}$
+		% \begin{betterlist}
+		% 	\item consists of all locks $y$ such that $e$ appears in a critical section belonging to lock $y$
+		% \end{betterlist}
+		\item \nul{state variables:}
 		\begin{betterlist}
-			\item \nul{False negatives and False positives:}
-			\begin{betterlist}
-				\item the HB method has \alert{false negatives} because the textual order between critical sections is preserved. That is, valid reorderings that swap critical sections are ignored
-				\item the first race reported by the HB method is an \enquote{actual} race. However, subsequent races may be \alert{false positives}
-				\begin{betterlist}
-					\item the HB relation does not take into account write-read dependencies and therefore HB data races may not correspond to actual data races
-					\item we say \enquote{may not} because based on the trace alone we cannot decide if the write-read dependency actually affects the control flow
-				\end{betterlist}
-
-			\end{betterlist}
+			\item ls(t): Set(Lock): The set of locks held by thread t at a certain time
+			\item LS : Event -> Set(Lock): A mapping from an event e to its lockset
 		\end{betterlist}
-		\item \alert{Lockset Method (complete but unsound)}:
-		\begin{betterlist}
-			\item \alert{lockset:} is the set of locks that are held when processing a read/write event
-			\item if the locksets of two conflicting events $e$ and $f$ are \alert{disjoint}, then $(e, f)$ is a \alert{Lockset data race pair}
-			\begin{betterlist}
-				\item if two conflicting events hold the same lock $y$, then both events must belong to two distinct critical sections involving lock $y$. As critical sections are mutually exclusive, two conflicting events that share the same lock cannot be in a data race
-			\end{betterlist}
-			\item $(t1\#acq(y)_k, t2\#rel(y)_l)$ is a matching acquire/release pair if
-			\begin{enumerate}
-				\item $t1 = t2$, and
-				\begin{betterlist}
-					\item states that $acq(y)$ and $rel(y)$ belong to the same thread
-				\end{betterlist}
-				\item $k < l$ and there is no $t\#rel(y)_m$ where $k < m < l$
-				\begin{betterlist}
-					\item states that there is no other $rel(y)$ between $acq(y)_k$ and $rel(y)_l$
-					\item $t\#e_k$ denotes some event $e$ in thread $t$ at trace position $k$
-				\end{betterlist}
-			\end{enumerate}
-			\item $CS(t\#acq(y)_k, t\#rel(y)_l)$ denotes the set of events that are part of the critical section for a matching acquire/release pair $(t\#acq(y)k, t\#rel(y)l)$. We only accept events from the same thread $t$
-			\begin{betterlist}
-				\item $t'\#e_m \in CS(t\#acq(y)_k, t\#rel(y)_l)$ if $t = t'$ and $k \le m \le l$
-				\item $acq(y)$ and $rel(y)$ are part of the critical section; and any event in the same thread between them is also part of this critical section
-			\end{betterlist}
-			\item \alert{lockset of an event $e$:} $LS(e) = \{y \mid \exists a = t\#acq(y)_k, r = t\#rel(y)_l .e \in CS(a, r)\}$
-			\begin{betterlist}
-				\item consists of all locks $y$ such that $e$ appears in a critical section belonging to lock $y$
-			\end{betterlist}
-			\item \nul{state variables:}
-			\begin{betterlist}
-				\item $ls(t): Set(Lock)$: The set of locks held by thread $t$ at a certain time
-				\item $LS : Event -> Set(Lock)$: A mapping from an event $e$ to its lockset
-			\end{betterlist}
-			\item \nul{Lockset computation}:
+		\item \nul{Lockset computation}:
+		\vspace{-0.25cm}
 
-			\adjustbox{scale=0.5}{
-				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\large}, box align=top]
               e@acq(t,y) {
                 ls(t) = ls(t) U {y}
               }
@@ -974,6 +656,12 @@ func signal(qsem *QSem) {
                 ls(t) = ls(t) - {y}
               e@fork(t1,t2) {
               }
+            \end{dnumberedcodebox}
+          %\end{noindent}
+		}
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\large}, box align=top]
               e@join(t1,t2) {
               }
               e@write(t,x) {
@@ -983,72 +671,68 @@ func signal(qsem *QSem) {
                 LS(e) = ls(t)
               }
             \end{dnumberedcodebox}
-          %\end{noindent}   }
-			}
-			\begin{betterlist}
-				\item $S_1 - S_2$ is set difference
-				\item the computation of locksets is agnostic to the presence of fork and join events
-			\end{betterlist}
-			\item after lockset computation for a program finished one considers all possible pairs of confliciting events (read-write ($r(x)_i$, $w(x)_j$) and write-write events ($w(x)_i$ and $w(x)_j$)) and checks:
-			\begin{betterlist}
-				\item if two locksets are disjoint: $LS(c(x)_i) \cap LS(c(x)_j) = \{\}$ then the conflicting events $c(x)_i$ and $c(x)_j$ represent a data race
-			\end{betterlist}
-			\item \alert{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
-			\item \alert{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness \script{120}{example} also applies to lockset)
-			\begin{betterlist}
-				\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock
-			\end{betterlist}
+          %\end{noindent}
+		}
+		% \begin{betterlist}
+		% \item $S_1 - S_2$ is set difference
+		% \item the computation of locksets is agnostic to the presence of fork and join events
+		% \end{betterlist}
+		% \item after lockset computation for a program finished one considers all possible pairs of confliciting events (read-write ($r(x)_i$, $w(x)_j$) and write-write events ($w(x)_i$ and $w(x)_j$)) and checks:
+		\begin{betterlist}
+			\item if two locksets are disjoint: LS(c(x)\textsubscript{i}) n LS(c(x)\textsubscript{j}) = \{\} then the conflicting events c(x)\textsubscript{i} and c(x)\textsubscript{j} represent a data race
+		\end{betterlist}
+		\item \cul{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
+		\item \cul{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness example also applies to lockset)
+		\begin{betterlist}
+			\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock
 		\end{betterlist}
 		\item \nul{comparison and combination with HB method:}
 		\begin{betterlist}
-			\item in practice, it appears that the lockset method gives rise to significantly \alert{more false positives} than the HB method
-			\item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
+			\item in practice, it appears that the lockset method gives rise to significantly \cul{more false positives} than the HB method
+			% \item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
+			\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \cul{not affected} if we \cul{reorder critical sections}
 		\end{betterlist}
-		\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \alert{not affected} if we \alert{reorder critical sections}
-		\item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets. \script{137}{Example}
-		\item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives
-		\item Lock variable only included if the write is in that trace
+		% \item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets
+		% \item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives
+		% \item Lock variable only included if the write is in that trace
 	\end{betterlist}
-	\inlinebox{Dynamic deadlock prediction}
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
+	\inlinebox{Lock graphs (Dynamic deadlock prediction)}
 	\begin{betterlist}
 		% \item \nul{assumptions:} 
 		% \begin{betterlist}
 		% 	\item concurrent programs making use of acquire and release (mutex operations)
 		% 	\item single program run where events that took place are recorded in some trace
 		% \end{betterlist}
-		\item a \alert{resource deadlock} arises if a set of threads are blocked and each thread in the set is waiting to acquire a lock held by another thread in the set
+		\item \nul{Construction:} Locks are nodes. There is an edge from lock x to lock y if a thread holds lock $x$ while it acquires lock $y$
 		\begin{betterlist}
-			\item whenever we say deadlock we refer to a resource deadlock
+			\item $B-acq$ to denote that the acquire is blocked
 		\end{betterlist}
-		\item \alert{communication deadlocks} arise if threads are blocked due to (missing) channel events such as send and receive
-		\item \alert{Lock graphs}:
-		\begin{betterlist}
-			\item \nul{Construction:} Locks are nodes. There is an edge from lock x to lock y if a thread holds lock $x$ while it acquires lock $y$
-			\begin{betterlist}
-				\item $B-acq$ to denote that the acquire is blocked
-			\end{betterlist}
 
-			% \item This can be calculated based on lock sets. Check for cycles in the lock graph. If there is a \alert{cycle}, we report that there is a \alert{potential deadlock}
-			\item If the lock graph contains a cycle, then there is a potential deadlock
-			\item \nul{Precision:} False positive possible. All events take place in the same thread. Common guard lock z.
-			\begin{betterlist}
-				\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives
-			\end{betterlist}
+		% \item This can be calculated based on lock sets. Check for cycles in the lock graph. If there is a \alert{cycle}, we report that there is a \alert{potential deadlock}
+		\item If the lock graph contains a cycle, then there is a potential deadlock
+		\item \nul{Precision:} False positive possible. All events take place in the same thread. Common guard lock z.
+		\begin{betterlist}
+			\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives
 		\end{betterlist}
-		\item \alert{Lock dependencies}:
+	\end{betterlist}
+	\inlinebox{Lock dependencies}
+	\begin{betterlist}
+		\item instead of a lock graph we compute lock dependencies on a \cul{per thread} basis. Thus, we can eliminate some of the false positives that arise using lock graphs (but not all)%. A lock dependency 𝐷 = (t, l, ls) is constructed if thread t acquires lock l while holding locks ls . 
+		\item we write D = (id, l, ls) to refer to some lock dependency in thread id where lock l is acquired while holding locks ls
+		\item \nul{state variables}:
 		\begin{betterlist}
-			\item instead of a lock graph we compute lock dependencies on a \alert{per thread} basis. Thus, we can eliminate some of the false positives that arise using lock graphs (but not all)%. A lock dependency $𝐷 = (t, l, ls)$ is constructed if thread $t$ acquires lock $l$ while holding locks $ls$ . 
-			\item we write $D = (id, l, ls)$ to refer to some lock dependency in thread $id$ where lock $l$ is acquired while holding locks $ls$
-			\item \nul{state variables}:
-			\begin{betterlist}
-				\item $ls(t)$: The set of locks hold by thread t at a certain time
-				\item $Ds$: The set of lock dependencies
-			\end{betterlist}
-			\item \nul{processing function}:
+			\item ls(t): The set of locks hold by thread t at a certain time
+			\item Ds: The set of lock dependencies
+		\end{betterlist}
+		\item \nul{processing function}:
 
-			\adjustbox{scale=0.5}{
-				% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\small}, box align=top]
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\large}, box align=top]
             acq(t,y) {
                 Ds = Ds U { (t,y,ls(t)) } if ls(t) != emptyset
                 ls(t) = ls(t) U {y}
@@ -1061,70 +745,66 @@ func signal(qsem *QSem) {
             ...
             \end{dnumberedcodebox}
           %\end{noindent}   }
-			}
-			\begin{betterlist}
-				\item \nul{set difference:} $S_1 \setminus S_2$ contains all elements in $S_1$ that are not in $S_2$
-			\end{betterlist}
-			\item \alert{Cycle check}: A deadlock (warning) is issued if there is a cyclic lock dependency chain $D_1, \ldots, D_n$ (each $D_i$ results from some distinct thread $i$):
-			\begin{betterlist}
-				\item $(LD-1)$ $ls_i \cap ls_j = \emptyset$ for $i \ne j$, and
-				\item $(LD-2)$ $l_i \in ls_{i + 1}$ for $i = 1, \ldots, 𝑛 − 1$, and
-				\item $(LD-3)$ $l_𝑛 \in ls_1$
-			\end{betterlist}
-			\begin{betterlist}
-				\item No deadlock warning is issued if the dependencies are from the same thread
-				\item No deadlock warning is issued for common guard lock $z$
-			\end{betterlist}
-			\item \nul{Precision:}
-			\begin{betterlist}
-				\item \nul{False positive possible:} Due to the \alert{write-read dependency}, events in thread $T_1$ must happen before the events in thread $T_2$
-				\item \nul{False negative possible:} \alert{Cross-thread critical} section that includes several events due to the \alert{fork/join dependency}. However, the computation of lock dependencies is \alert{agnostic} to \alert{cross-thread critical sections}. \script{161}{Example}
-			\end{betterlist}
-
-		\end{betterlist}
-	\end{betterlist}
-	\inlinebox{Dining Philosophers}
-	\begin{betterlist}
-		\item \nul{Solutions:}
+		}
+		% \begin{betterlist}
+		% 	% \item \nul{set difference:} $S_1 \setminus S_2$ contains all elements in $S_1$ that are not in $S_2$
+		% \end{betterlist}
+		\item \cul{Cycle check}: A deadlock (warning) is issued if there is a cyclic lock dependency chain D\textsubscript{1}, \ldots, D\textsubscript{n} (each D\textsubscript{i} results from some distinct thread i):
 		\begin{betterlist}
-			\item in general break the cycle
-			\item avoid deadlock by controlling the number of philosophers:
-			\begin{betterlist}
-				\item if there are only four philosophers at the table, then in the worst case each one picks up a fork. Even then, there is a fork left on the table, and that fork has two neighbors, each of which is holding another fork. Therefore, either of these neighbors can pick up the remaining fork and eat
-				\item in addition to avoiding deadlock, this solution also guarantees that no philosopher starves. Imagine that you are sitting at the table and both of your neighbors are eating. You are blocked waiting for your right fork. Eventually your right neighbor will put it down, because eat can’t run forever. Since you are the only thread waiting for that fork, you will necessarily get it next. By a similar argument, you cannot starve waiting for your left fork
-			\end{betterlist}
-			\item avoid deadlock by changing the order in which the philosophers pick up forks:
-			\begin{betterlist}
-				\item there has to be at least one leftie and at least one rightie at the table
-				\item \nul{proof by contradiction:} First, assume that deadlock is possible. Then choose one of the supposedly deadlocked philosophers. If she’s a leftie, you can prove that the philosophers are all lefties, which is a contradiction. Similarly, if she’s a rightie, you can prove that they are all righties. Either way you get a contradiction; therefore, deadlock is not possible
-			\end{betterlist}
+			\item (LD-1) ls\textsubscript{i} n ls\textsubscript{j} = \{\} for i != j, and
+			\item (LD-2) l\textsubscript{i} € ls\textsubscript{i + 1} for i = 1, \ldots, n − 1, and
+			\item (LD-3) l\textsubscript{n} € ls\textsubscript{1}
+		\end{betterlist}
+		\item \nul{Precision:}
+		\begin{betterlist}
+			\item No deadlock warning is issued if the dependencies are from the same thread
+			\item No deadlock warning is issued for common guard lock $z$
+			\item \nul{False positive possible:} Due to the \cul{write-read dependency}, events in thread T\textsubscript{1} must happen before the events in thread T\textsubscript{2}
+			\item \nul{False negative possible:} \cul{Cross-thread critical} section that includes several events due to the \cul{fork/join dependency}. However, the computation of lock dependencies is \cul{agnostic} to \cul{cross-thread critical sections}
 		\end{betterlist}
 	\end{betterlist}
-
+	% \inlinebox{Dining Philosophers}
+	% \begin{betterlist}
+	% 	\item \nul{Solutions:}
+	% 	\begin{betterlist}
+	% 		\item in general break the cycle
+	% 		\item avoid deadlock by controlling the number of philosophers:
+	% 		\begin{betterlist}
+	% 			\item if there are only four philosophers at the table, then in the worst case each one picks up a fork. Even then, there is a fork left on the table, and that fork has two neighbors, each of which is holding another fork. Therefore, either of these neighbors can pick up the remaining fork and eat
+	% 			\item in addition to avoiding deadlock, this solution also guarantees that no philosopher starves. Imagine that you are sitting at the table and both of your neighbors are eating. You are blocked waiting for your right fork. Eventually your right neighbor will put it down, because eat can’t run forever. Since you are the only thread waiting for that fork, you will necessarily get it next. By a similar argument, you cannot starve waiting for your left fork
+	% 		\end{betterlist}
+	% 		\item avoid deadlock by changing the order in which the philosophers pick up forks:
+	% 		\begin{betterlist}
+	% 			\item there has to be at least one leftie and at least one rightie at the table
+	% 			\item \nul{proof by contradiction:} First, assume that deadlock is possible. Then choose one of the supposedly deadlocked philosophers. If she’s a leftie, you can prove that the philosophers are all lefties, which is a contradiction. Similarly, if she’s a rightie, you can prove that they are all righties. Either way you get a contradiction; therefore, deadlock is not possible
+	% 		\end{betterlist}
+	% 	\end{betterlist}
+	% \end{betterlist}
 \end{minipage}
 
 \newpage
 
-\begin{minipage}[t]{0.2\linewidth}
-	\inlinebox{Futures and Promises}
-	\begin{betterlist}
-		\item high-level concurrency constructs to support asynchronous programming
-		\item a \alert{promise} is a placeholder for a computation that is explicitly provided by the programmer. A \alert{future} can be viewed as a placeholder for a computation that will eventually become available. A future is then a \alert{specific kind of promise} where the computation is provided at initialization
-		\item \nul{implementation of futures via channels:}
-		\begin{betterlist}
-			\item \verb|interface{}| to represent a value of arbitrary type
-			\item asynchronously execute some http request. Don't have to wait for the request to complete
-		\end{betterlist}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
+	\inlinebox{Future}
+	% \begin{betterlist}
+	% \item high-level concurrency constructs to support asynchronous programming
+	% \item \nul{implementation of futures via channels:}
+	% \begin{betterlist}
+	% 	% \item \verb|interface{}| to represent a value of arbitrary type
+	% 	% \item asynchronously execute some http request. Don't have to wait for the request to complete
+	% \end{betterlist}
+	\vspace{-0.25cm}
+
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
           type Comp struct {
               val    interface{}
               status bool
           }
-
           type Future chan Comp
-
           func future(f func() (interface{}, bool)) Future {
               ch := make(chan Comp)
               go func() {
@@ -1136,10 +816,8 @@ func signal(qsem *QSem) {
               }()
               return ch
           }
-
           func (ft Future) get() (interface{}, bool) {
           }
-
           func (ft Future) onSuccess(cb func(interface{})) {
               go func() {
                   c := <- ft
@@ -1149,7 +827,6 @@ func signal(qsem *QSem) {
                   }
               }()
           }
-
           func (ft Future) onFailure(cb func()) {
               go func() {
                   c := <- ft
@@ -1161,10 +838,10 @@ func signal(qsem *QSem) {
           }
           \end{dnumberedcodebox}
         %\end{noindent}   }
-		}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
+	}
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
             func getSite(url string) Future {
                 return future(func() (interface{}, bool) {
                     resp, err := http.Get(url)
@@ -1174,228 +851,218 @@ func signal(qsem *QSem) {
                     return nil, false
                 })
             }
-
             func printResponse(response *http.Response) {
                 fmt.Println(response.Request.URL)
                 date := response.Header.Get("Date")
                 fmt.Println(date)
             }
-
-            // asynchronously execute some http request
             func example1() {
                 stern := getSite("http://www.stern.de")
-
                 stern.onSuccess(func(result interface{}) {
                     response := result.(*http.Response)
                     printResponse(response)
                 })
-
                 stern.onFailure(func() {
                     fmt.Println("failure")
                 })
-
                 fmt.Printn("do something else")
                 time.Sleep(2 * time.Second)
             }
                         \end{dnumberedcodebox}
           %\end{noindent}   }
-		}
+	}
 
-		\item \nul{simultaneously waiting for multiple futures:}
-		\begin{betterlist}
-			\item suppose one has e.g. several http requests and would like to retrieve the first available result. A naive (inefficient) solution would check for each result one after the other. One can be more efficient by using \verb|select| to check for the first available future result
-		\end{betterlist}
-
-
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-          func (ft1 Future) first(ft2 Future) Future {
-              return future(func() (interface{}, bool) {
-                  var v interface{}
-                  var o bool
-
-                  select {
-                  case x1 := <-ft1:
-                      v = x1.val
-                      o = x1.status
-
-                  case x2 := <-ft2:
-                      v = x2.val
-                      o = x2.status
-                  }
-
-                  return v, o
-              })
-          }
-
-          func (ft1 Future) firstSucc(ft2 Future) Future {
-              return future(func() (interface{}, bool) {
-                  var v interface{}
-                  var o bool
-
-                  select {
-                  case x1 := <-ft1:
-                      if x1.status {
-                          v = x1.val
-                          o = x1.status
-                      }
-                      else {
-                          v, o = ft2.get()
-                      }
-
-                  case x2 := <-ft2:
-                      if x2.status {
-                          v = x2.val
-                          o = x2.status
-                      }
-                      else {
-                          v, o = ft.get()
-                      }
-                  }
-
-                  return v, o
-              })
-          }
-          \end{dnumberedcodebox}
-        %\end{noindent}   }
-		}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-          func example2() {
-              spiegel := getSite("http://www.spiegel.de")
-              stern := getSite("http://www.stern.de")
-              welt := getSite("http://www.welt.com")
-
-              req := spiegel.first(stern.first(welt))
-
-              req.onSuccess(func(result interface{}) {
-                  response := result.(*http.Response)
-                  printResponse(response)
-              })
-
-              req.onFailure(func() {
-                  fmt.Println("failure")
-              })
-
-              fmt.Println("do something else")
-              time.Sleep(2 * time.Second)
-          }
-
-          func example3() {
-              booking := func() (int, bool) {
-                  time.Sleep((time.Duration)(rand.Intn(999)) 
-                    * time.Millisecond)
-                  return rand.Intn(50), true
-              }
-
-              ft1 := future(func() (interface{}, bool) {
-                  return booking()
-              })
-
-              ft2 := future(func() (interface{}, bool) {
-                  return booking()
-              })
-
-              ft := ft1.firstSucc(ft2)
-
-              ft.onSuccess(func(result interface{}) {
-                  quote := result.(int)
-                  fmt.Printf("Hotel asks for %d Euros\n", 
-                    quote)
-              })
-
-              time.Sleep(2 * time.Second)
-          }
-          \end{dnumberedcodebox}
-        %\end{noindent}   }
-		}
-		\item \nul{implementation with generics:}
-		\begin{betterlist}
-			\item \verb|interface{}| entails explicit type assertions
-		\end{betterlist}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-        type Comp[T any] struct {
-            val    T
-            status bool
-        }
-
-        type Future[T any] chan Comp[T]
-
-        func future[T any](f func() (T, bool)) Future[T] {
-            ch := make(chan Comp[T])
-            go func() {
-                r, s := f()
-                v := Comp{r, s}
-                for {
-                    ch <- v
-                }
-            }()
-            return ch
-        }
-        \end{dnumberedcodebox}
-      %\end{noindent}   }
-		}
-		% func future[T any](f func() (T, bool)) *Future[T] {
-		%     p := newPromise[T]()
-		%     go func() {
-		%         r, s := f()
-		%         if s {
-		%             p.setSucc(r)
-		%         } else {
-		%             p.setFail()
-		%         }
-		%     }()
-		%     return p
-		% }
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-        func example3b() {
-            booking := func() (int, bool) {
-                time.Sleep((time.Duration)(rand.Intn(999)) 
-                  * time.Millisecond)
-                return rand.Intn(50), true
-            }
-
-            ft1 := future[int](booking)
-
-            ft2 := future[int](booking)
-
-            ft := ft1.firstSucc(ft2)
-
-            ft.onSuccess(func(quote int) {
-                fmt.Printf("Hotel asks for %d euros\n", 
-                  quote)
-            })
-
-            time.Sleep(2 * time.Second)
-        }
-        \end{dnumberedcodebox}
-      %\end{noindent}   }
-		}
-	\end{betterlist}
+	% 	\item \nul{simultaneously waiting for multiple futures:}
+	% 	\begin{betterlist}
+	% 		\item suppose one has e.g. several http requests and would like to retrieve the first available result. A naive (inefficient) solution would check for each result one after the other. One can be more efficient by using \verb|select| to check for the first available future result
+	% 	\end{betterlist}
+	%
+	%
+	% 	\adjustbox{scale=0.5}{
+	% 		% \begin{noindent}
+	%          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%          func (ft1 Future) first(ft2 Future) Future {
+	%              return future(func() (interface{}, bool) {
+	%                  var v interface{}
+	%                  var o bool
+	%
+	%                  select {
+	%                  case x1 := <-ft1:
+	%                      v = x1.val
+	%                      o = x1.status
+	%
+	%                  case x2 := <-ft2:
+	%                      v = x2.val
+	%                      o = x2.status
+	%                  }
+	%
+	%                  return v, o
+	%              })
+	%          }
+	%
+	%          func (ft1 Future) firstSucc(ft2 Future) Future {
+	%              return future(func() (interface{}, bool) {
+	%                  var v interface{}
+	%                  var o bool
+	%
+	%                  select {
+	%                  case x1 := <-ft1:
+	%                      if x1.status {
+	%                          v = x1.val
+	%                          o = x1.status
+	%                      }
+	%                      else {
+	%                          v, o = ft2.get()
+	%                      }
+	%
+	%                  case x2 := <-ft2:
+	%                      if x2.status {
+	%                          v = x2.val
+	%                          o = x2.status
+	%                      }
+	%                      else {
+	%                          v, o = ft.get()
+	%                      }
+	%                  }
+	%
+	%                  return v, o
+	%              })
+	%          }
+	%          \end{dnumberedcodebox}
+	%        %\end{noindent}   }
+	% 	}
+	% 	\adjustbox{scale=0.5}{
+	% 		% \begin{noindent}
+	%          \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%          func example2() {
+	%              spiegel := getSite("http://www.spiegel.de")
+	%              stern := getSite("http://www.stern.de")
+	%              welt := getSite("http://www.welt.com")
+	%
+	%              req := spiegel.first(stern.first(welt))
+	%
+	%              req.onSuccess(func(result interface{}) {
+	%                  response := result.(*http.Response)
+	%                  printResponse(response)
+	%              })
+	%
+	%              req.onFailure(func() {
+	%                  fmt.Println("failure")
+	%              })
+	%
+	%              fmt.Println("do something else")
+	%              time.Sleep(2 * time.Second)
+	%          }
+	%
+	%          func example3() {
+	%              booking := func() (int, bool) {
+	%                  time.Sleep((time.Duration)(rand.Intn(999)) 
+	%                    * time.Millisecond)
+	%                  return rand.Intn(50), true
+	%              }
+	%
+	%              ft1 := future(func() (interface{}, bool) {
+	%                  return booking()
+	%              })
+	%
+	%              ft2 := future(func() (interface{}, bool) {
+	%                  return booking()
+	%              })
+	%
+	%              ft := ft1.firstSucc(ft2)
+	%
+	%              ft.onSuccess(func(result interface{}) {
+	%                  quote := result.(int)
+	%                  fmt.Printf("Hotel asks for %d Euros\n", 
+	%                    quote)
+	%              })
+	%
+	%              time.Sleep(2 * time.Second)
+	%          }
+	%          \end{dnumberedcodebox}
+	%        %\end{noindent}   }
+	% 	}
+	% 	\item \nul{implementation with generics:}
+	% 	\begin{betterlist}
+	% 		\item \verb|interface{}| entails explicit type assertions
+	% 	\end{betterlist}
+	% 	\adjustbox{scale=0.5}{
+	% 		% \begin{noindent}
+	%        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%        type Comp[T any] struct {
+	%            val    T
+	%            status bool
+	%        }
+	%
+	%        type Future[T any] chan Comp[T]
+	%
+	%        func future[T any](f func() (T, bool)) Future[T] {
+	%            ch := make(chan Comp[T])
+	%            go func() {
+	%                r, s := f()
+	%                v := Comp{r, s}
+	%                for {
+	%                    ch <- v
+	%                }
+	%            }()
+	%            return ch
+	%        }
+	%        \end{dnumberedcodebox}
+	%      %\end{noindent}   }
+	% 	}
+	% 	% func future[T any](f func() (T, bool)) *Future[T] {
+	% 	%     p := newPromise[T]()
+	% 	%     go func() {
+	% 	%         r, s := f()
+	% 	%         if s {
+	% 	%             p.setSucc(r)
+	% 	%         } else {
+	% 	%             p.setFail()
+	% 	%         }
+	% 	%     }()
+	% 	%     return p
+	% 	% }
+	% 	\adjustbox{scale=0.5}{
+	% 		% \begin{noindent}
+	%        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+	%        func example3b() {
+	%            booking := func() (int, bool) {
+	%                time.Sleep((time.Duration)(rand.Intn(999)) 
+	%                  * time.Millisecond)
+	%                return rand.Intn(50), true
+	%            }
+	%
+	%            ft1 := future[int](booking)
+	%
+	%            ft2 := future[int](booking)
+	%
+	%            ft := ft1.firstSucc(ft2)
+	%
+	%            ft.onSuccess(func(quote int) {
+	%                fmt.Printf("Hotel asks for %d euros\n", 
+	%                  quote)
+	%            })
+	%
+	%            time.Sleep(2 * time.Second)
+	%        }
+	%        \end{dnumberedcodebox}
+	%      %\end{noindent}   }
+	% 	}
+	% % \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\begin{betterlist}
-		\item \nul{implementation of promises:}
-		\begin{betterlist}
-			\item redefine futures in terms of promises. In the process, one \alert{reduces} the \alert{number of goroutines} which optimizes performance.
-			\item previous implementation uses a lot of goroutines: Each future creates a goroutine. Each onSuccess/onFailure call creates a goroutine. first/firstSucc create further futures and therefore further goroutines. \textcolor{gray}{Goroutines in Go are relatively cheap. Still, one should avoid them if possible}. Idea: Each future maintains a list of callback functions. One list for the success case. Another list for the failure case. Each onSuccess/onFailure call adds the callback to the respective list. If the \enquote{future} value is already present there’s no need to register the callback. We can immediately apply the \enquote{future} value and process the callback
-			\item instead of providing a computation at initialization, promises are futures that are set explicitly (at any time) by the user
-		\end{betterlist}
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-        package main
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
 
-        import "fmt"
-        import "time"
-        import "math/rand"
+	\inlinebox{Promises}
+	% \begin{betterlist}
+	% \item redefine futures in terms of promises. In the process, one \alert{reduces} the \alert{number of goroutines} which optimizes performance.
+	% \item previous implementation uses a lot of goroutines: Each future creates a goroutine. Each onSuccess/onFailure call creates a goroutine. first/firstSucc create further futures and therefore further goroutines. \textcolor{gray}{Goroutines in Go are relatively cheap. Still, one should avoid them if possible}. Idea: Each future maintains a list of callback functions. One list for the success case. Another list for the failure case. Each onSuccess/onFailure call adds the callback to the respective list. If the \enquote{future} value is already present there’s no need to register the callback. We can immediately apply the \enquote{future} value and process the callback
+	% \item instead of providing a computation at initialization, promises are futures that are set explicitly (at any time) by the user
+	\vspace{-0.25cm}
 
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
         type Promise[T any] struct {
             val           T
             status        bool
@@ -1404,7 +1071,6 @@ func signal(qsem *QSem) {
             failCallBacks []func()
             empty         bool
         }
-
         func newPromise[T any]() *Promise[T] {
             p := Promise[T]{empty: true, m: 
               make(chan int, 1), succCallBacks: 
@@ -1412,7 +1078,6 @@ func signal(qsem *QSem) {
               make([]func(), 0)}
             return &p
         }
-
         func (p *Promise[T]) setSucc(v T) {
             p.m <- 1
             if p.empty {
@@ -1431,7 +1096,6 @@ func signal(qsem *QSem) {
                 <- p.m
             }
         }
-
         func (p *Promise[T]) setFail() {
             p.m <- 1
             if p.empty {
@@ -1449,7 +1113,6 @@ func signal(qsem *QSem) {
                 <-p.m
             }
         }
-
         func future[T any](f func() (T, bool)) *Promise[T] {
             p := newPromise[T]()
             go func() {
@@ -1462,7 +1125,6 @@ func signal(qsem *QSem) {
             }()
             return p
         }
-
         func (p *Promise[T]) complete(f func() (T, bool)) {
             go func() {
                 r, s := f()
@@ -1473,7 +1135,44 @@ func signal(qsem *QSem) {
                 }
             }()
         }
-
+        \end{dnumberedcodebox}
+      %\end{noindent}   }
+	}
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\large}, box align=top]
+        func example1() {
+            booking := func() (int, bool) {
+                time.Sleep((time.Duration)(rand.Intn(999))
+                  * time.Millisecond)
+                return rand.Intn(50), true
+            }
+            p1 := newPromise[int]()
+            p1.complete(booking)
+            p2 := newPromise[int]()
+            p2.complete(booking)
+            p := p1.firstSucc(p2)
+            p.onSuccess(func(quote int) {
+                fmt.Printf("Hotel asks for %d euros\n", 
+                  quote)
+            })
+            time.Sleep(2 * time.Second)
+        }
+        func example2() {
+            booking := func() (int, bool) {
+                time.Sleep((time.Duration)(rand.Intn(999)) 
+                  * time.Millisecond)
+                return rand.Intn(50), true
+            }
+            ft1 := future[int](booking)
+            ft2 := future[int](booking)
+            ft := ft1.firstSucc(ft2)
+            ft.onSuccess(func(quote int) {
+                fmt.Printf("Hotel asks for %d euros\n", 
+                  quote)
+            })
+            time.Sleep(2 * time.Second)
+        }
         func (p *Promise[T]) onSuccess(cb func(T)) {
             p.m <- 1
             if p.empty {
@@ -1484,7 +1183,6 @@ func signal(qsem *QSem) {
             } else { }
             <-p.m
         }
-
         func (p *Promise[T]) onFailure(cb func()) {
             p.m <- 1
             if p.empty {
@@ -1495,14 +1193,12 @@ func signal(qsem *QSem) {
             } else {}
             <-p.m
         }
-
         func (p1 *Promise[T]) tryCompleteWith(p2 
           *Promise[T]) {
             p2.onSuccess(func(v T) {
                 p1.setSucc(v)
             })
         }
-
         func (p1 *Promise[T]) firstSucc(p2 *Promise[T]) 
           *Promise[T] {
             p := newPromise[T]()
@@ -1512,163 +1208,235 @@ func signal(qsem *QSem) {
         }
         \end{dnumberedcodebox}
       %\end{noindent}   }
-		}
+	}
+	% \end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
+	\inlinebox{Pi Calculus}
+	\begin{betterlist}
+		\item TODO: syntax a sind channels, y, z sind variablen
+		\item \cul{alpha-conversion} (written P =alpha  Q) is the consistent renaming of bound variables or bound names. It must not change or hide free variables/names
+		\item A \cul{substitution} [x := a] applied to a process P (as in P[x := a]) replaces all free occurrences of variable x by name a. Substitution is \cul{capture-avoiding}, that is, it alpha-converts bound names as needed.
+		\item \cul{Structural Congruence (Axioms):}
+		\begin{betterlist}
+			\item P equiv  P (reflexivity)
+			\item P equiv  Q =>  Q equiv  P (symmetry)
+			\item P equiv  R and R equiv  Q =>  P equiv  Q (transitivity)
+			\vspace{0.25cm}
+			\item P equiv  Q =>  (v a)P equiv  (v a)Q (congruence-res)
+			\item P equiv  Q =>  P | R equiv  Q | R (congruence-par)
+			\item P equiv  Q =>  pi .P equiv  pi .Q (congruence-comm)
+			\item P equiv  Q => !P equiv !Q (congruence-repl)
+			\item P =a  Q => P equiv  Q
+		\end{betterlist}
+		\item \nul{Structural congruence equiv is the smallest congruence on terms P of the monadic pi-calculus}:
+		\begin{betterlist}
+			\item  P + 0 equiv  P, P + Q equiv  Q + P, P + (Q + R) equiv  (P + Q) + R
+			\item  P | 0 equiv  P, P | Q equiv  Q | P, P | (Q | R) equiv  (P | Q) | R \nul{(same for ST)}
+			\item (v a)(P | Q) equiv  P | (v a)Q if a !€ fn(P), (v a)0 equiv  0, (v a)(v b)P equiv  (v b)(v a)P (\nul{same for ST, Condition x, y !€ fv(Q) not necessary by variable convention})
+			\item !P equiv P |!P
+		\end{betterlist}
+		\item \nul{The reduction relation is the smallest binary relation $\rightarrow$ on terms satisfying}:
+		\begin{betterlist}
+			\item (TAU) tau.P -> P (unobservable action)
+			\item $\text{(STRUCT)}\dfrac{\text{P' equiv P\quad P-> Q\quad Q equiv Q'}}{\text{P'-> Q'}}$ (\nul{same for ST})
+			\item (REACT) (a<v>.P1 + Q) | (a(z).P2 + R) -> P1 | P2 [z := v ]
+			\item $\text{(PAR)}\dfrac{\text{P -> P'}}{\text{P | Q -> P' | Q}}$ (\nul{same for ST})
+			\item $\text{(RES)}\dfrac{\text{P -> P'}}{\text{(nu a)P -> (nu a)P'}}$ (\nul{same for ST})
+		\end{betterlist}
+	\end{betterlist}
+	% \begin{betterlist}
+	% \item \nul{Expressiveness:} message passing may be implemented using shared variables (viz. consumer/producer message queue implementations)
+	% \item \nul{expressiveness:} shared variables may be implemented using message passing
+	% \end{betterlist}
+	% \item \nul{Synchronous vs. Asynchronous}
+	% \begin{betterlist}
+	% 	\item receive operation blocks either way
+	% 	\item given a channel with synchronous operations,
+	% 	\begin{betterlist}
+	% 		\item send asynchronously by sending in a spawned thread
+	% 	\end{betterlist}
+	% 	\item given a channel with asynchronous operations.
+	% 	\begin{betterlist}
+	% 		\item establish a protocol to acknowledge receipts
+	% 		\item pair each send operation with a receive for the acknowledgment
+	% 	\end{betterlist}
+	% \end{betterlist}
+	% \item \alert{Hoare’s Communicating Sequential Processes (CSP)}:
+
+	% \includegraphics[width=0.6\linewidth]{./figures/csp.png}
+	% \inlinebox{Confusion Matrix}
+	% \begin{betterlist}
+	% 	\item $1$st part is about whether \alert{actual condition $==$ predicted condition} and the $2$nd part is about the \alert{predicted condition}
+	% \end{betterlist}
+	%
+	% \vspace{0.4cm}
+	% \begin{longtblr}[
+	% 	label = none,
+	% 	entry = none,
+	% 	]{
+	% 	width = \linewidth,
+	% 	colspec = {Q[267]Q[319]Q[337]},
+	% 	cells = {c},
+	% 	hlines = {0.1mm},
+	% 	vlines = {0.1mm},
+	% 	}
+	% 	                & Predicted Positive  & Predicted Negative  \\
+	% 	Actual Positive & True Positive (TP)  & False Negative (FN) \\
+	% 	Actual Negative & False Positive (FP) & True Negative (TN)
+	% \end{longtblr}
+	% \vspace{-0.5cm}
+	%
+	% \begin{betterlist}
+	% 	\item \alert{True Positive (TP):} Correctly predicted as positive (correct alarm)
+	% 	\begin{betterlist}
+	% 		\item all actual positives predicted correctly (no false positives) if \alert{sound}
+	% 		\item $pred=True, real=True$, if the tool detects the hypothesis it's present in reality, thus it can't happen that the tool detects the hyptothesis but it's not present in reality, because else the tool wouldn't always be right when detecting the hypothesis
+	% 	\end{betterlist}
+	% 	\item \alert{True Negative (TN):} Correctly predicted as negative (correct non-detection)
+	% 	\begin{betterlist}
+	% 		\item all actual negatives predicted correctly (no false negatives) if \alert{complete}
+	% 		\item $pred=False, real=False$, if the tool does not detect the hypothesis it isn't present in reality, thus it can't happen that the hypothesis is present in reality but can't be detected by the tool because else the tool wouldn't always be right when not detecting the hypothesis
+	% 	\end{betterlist}
+	% 	\item \alert{False Positive (FP):} Incorrectly predicted as positive (false alarm)
+	% 	\begin{betterlist}
+	% 		\item appear if \alert{unsound }
+	% 		\item $pred=True, real=False$, if the tool sometimes detects the hypothesis but it's not present reality
+	% 	\end{betterlist}
+	% 	\item \alert{False Negative (FN):} Incorrectly predicted as negative (missed detection)
+	% 	\begin{betterlist}
+	% 		\item appear if \alert{incomplete}
+	% 		\item $pred=False, real=True$, if the hypothesis is present in reality but it can't always be detected by the tool
+	% 	\end{betterlist}
+	% \end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
+	\inlinebox{Session Types}
+	\begin{betterlist}
+		\item \nul{Processes:} P, Q ::= x<v>.P (send) | qx(y).P (receive) | P | Q (parallel composition) | if v then P else Q (conditional) | 0 (inaction) | (nu x y)P (scope restriction) | x < l.P (selection) | x > \{i : P\textsubscript{i}\}\textsubscript{i€I} (branching)
+		\item \nul{Values:} v ::= x (variable) | true | false (boolean values)
+		\item x is the server end and y the client end. x and y are \cul{co-variables}
+		\begin{betterlist}
+			\item \cul{Capture-free substitution} of x by v in P : P [v/x] ([x := v])
+			\item \cul{Barendregt’s variable convention:} bound variables are pairwise distinct and distinct from free variables
+			\item !P \^= (v x1 x2)(x1<x2> | un x2(y).(P | x1<y>)) where x1, x2, y !€ fv(P) where where x1 = mu a.un!a.a and x2 = mu b.un?b.b
+		\end{betterlist}
+		\item \nul{Reduction rules (P -> P):}
+		\begin{betterlist}
+			\item (R-LinCom) $\dfrac{}{\text{(nu x y)(xv.P | lin y(z).Q | R) -> (nu x y)(P | Q[v/z] | R)}}$
+			\item (R-UnCom) $\dfrac{}{\text{(nu x y)(xv.P | un y(z).Q | R) -> (nu x y)(P | Q[v/z] | un y(z).Q | R)}}$
+			\item (R-IfT / IfF) $\dfrac{}{\text{if true / false then P else Q -> P / Q}}$
+			\item (R-Case) $\dfrac{\text{j€ I}}{\text{(nu x y)(x < j.P | y > \{i: Q\textsubscript{i}\}\textsubscript{i€I} | R) -> (nu x y)(P | Q\textsubscript{j} | R)}}$
+		\end{betterlist}
+		\item \nul{Types:}
+		\begin{betterlist}
+			\item \nul{Qualifiers:} q ::= lin (linear) | un (unrestricted)
+			\item \nul{Pretypes:} p ::= ?T.S (receive) | !T.S (send) | +\{i : S\textsubscript{i}\}\textsubscript{i€I} (select) | \&\{i : S\textsubscript{i}\}\textsubscript{i€I} (branch)
+			\item \nul{Types:} S, T, U ::= bool (boolean) | end (termination) | qp (qualified pretype) | a (type variable) | mu a.T (recursive type)
+			\item \nul{Contexts:} gamma ::= {} (empty context) | gamma, x : T (assumption)
+		\end{betterlist}
+		\begin{betterlist}
+			\item \cul{Linearity:} value of type lin T must be used exactly once
+			\item \cul{Unrestricted:} value of type un T can be used zero or more times
+			\item Variable x for \cul{(arbitrarily) qualified type}, a for \cul{unrestricted type}, c for \cul{linear type}
+			\item mu a.T equiv T [mu a.T /a], *U \^= mu a.U.a.
+      \item q\textsubscript{syntax} = un implies q\textsubscript{type} = un (only: {(un, un), (lin, lin), (lin, un)})
+		\end{betterlist}
+		\item \nul{server’s type is dual to the client’s type:}
+		\begin{betterlist}
+			\item dual(q?T.U) = q!T.dual(U) \quad dual(q!T.U) = q?T.dual(U) \quad dual(end) = end \quad dual(mu a.T) = mu a.dual(T) \quad dual(a) = a \quad dual(q+\{i : S\textsubscript{i}\}\textsubscript{i€I}) = q\&\{i : dual(S\textsubscript{i})\}\textsubscript{i€I} \quad dual(q\&\{i : S\textsubscript{i}\}\textsubscript{i€I}) = q+\{i : dual(S\textsubscript{i})\}\textsubscript{i€I}
+		\end{betterlist}
+		\item \nul{sending a channel:}
+		\vspace{-0.25cm}
+
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
-        \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\small}, box align=top]
-        func example1() {
-            booking := func() (int, bool) {
-                time.Sleep((time.Duration)(rand.Intn(999))
-                  * time.Millisecond)
-                return rand.Intn(50), true
-            }
+    \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+      (nu x1 x2) // !(!bool.end).end
+      (nu y1 y2) // ?bool.end
+      x1!y2 | x2?z.z!true. | y1?z.printBoolean!z.0
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\item \nul{recursion with unrestricted type:}
+		\vspace{-0.25cm}
 
-            p1 := newPromise[int]()
-            p1.complete(booking)
+		% \adjustbox{scale=0.5}{
+		% 	% \begin{noindent}
+		%   \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+		%     (nu client server)( // mu s.un?(lin!integer.lin!integer.end).s
+		%     (nu d1 d2)( // mu a.un!a.a
+		%     un d2(e)(
+		%     (nu reader writer)( // lin?integer.lin?integer.end
+		%     server!writer.reader?x.reader?y.printInteger!x+y) 
+		%     | d1<e>) | d1<d2>)
+		%     | client?c.c!5.c!7.client?c.c!5.c!7
+		%     | client?c.c!3.c!7)
+		%   \end{dnumberedcodebox}
+		%   %\end{noindent}
+		% }
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+      (nu client server)( // mu s.un+{max: lin?(lin!integer.lin!integer.lin?integer.end).s}
+                       //          quit: end}
+      (nu d1 d2)( // mu a.un!a.a
+      un d2(e)(
+      server > {max:
+                (nu writer reader)( // lin!integer.lin!integer.lin?integer.end
+                server!writer.reader?x.reader?y if x > y then reader!x else reader!y),
+                quit: 0} | d1<e>) | d1<d2>)
+      | client > max.client?c.c!-4.c!2.c?x.printInteger!x.client > quit
+      | client > max.client?c.c!3.c!7.c?x.printInteger!x.client > quit)
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\item \nul{recursion with linear type:}
+		\vspace{-0.25cm}
 
-            p2 := newPromise[int]()
-            p2.complete(booking)
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+(nu client server) // mu s.lin +{max: lin!integer!integer.?integer.s,
+                //           quit: end}
+client < abs.client!-4.client!2.client?x. printInteger!x.client < quit
+| (nu d1 d2)( // mu a.un!a.a
+  un d2(e)(server > {max server?x.server?y.if x > y then server!x else server!y,
+                   quit: 0} | d1<e>) | d1<d2>)
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\item \nul{unrestricted syntax with linear type:}
+		\vspace{-0.25cm}
 
-            p := p1.firstSucc(p2)
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+      asdf
+    \end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\item \nul{linear syntax with unrestricted type:}
 
-            p.onSuccess(func(quote int) {
-                fmt.Printf("Hotel asks for %d euros\n", 
-                  quote)
-            })
-
-            time.Sleep(2 * time.Second)
-        }
-
-        func example2() {
-            booking := func() (int, bool) {
-                time.Sleep((time.Duration)(rand.Intn(999)) 
-                  * time.Millisecond)
-                return rand.Intn(50), true
-            }
-
-            ft1 := future[int](booking)
-
-            ft2 := future[int](booking)
-
-            ft := ft1.firstSucc(ft2)
-
-            ft.onSuccess(func(quote int) {
-                fmt.Printf("Hotel asks for %d euros\n", 
-                  quote)
-            })
-
-            time.Sleep(2 * time.Second)
-        }
-        \end{dnumberedcodebox}
-      %\end{noindent}   }
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+    \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+      asdf
+    \end{dnumberedcodebox}
+    %\end{noindent}
 		}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\inlinebox{Message Passing Concurrency} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/Message_Passing_Concurrency_(2024_06_26).md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Concurrency/slides/bonus/Message_Passing_Concurrency_(2024_06_26).pdf}
-	\begin{betterlist}
-		\item \nul{Concurrency Flavors}
-		\begin{betterlist}
-			\item \alert{Shared Memory Concurrency}:
-			\begin{betterlist}
-				\item processes interact by reading and writing shared variables
-				\item locking etc. needed to demarcate critical regions
-				\item \nul{expressiveness:} message passing may be implemented using shared variables (viz. consumer/producer message queue implementations)
-			\end{betterlist}
-			\item \alert{Message Passing Concurrency}:
-			\begin{betterlist}
-				\item processes interact by sending and receiving messages on
-				\item shared communication channels
-				\item \nul{expressiveness:} shared variables may be implemented using message passing
-				\begin{betterlist}
-					\item model a reference by a thread and channels for reading and writing
-					\item reading on the \enquote{read} channel returns the current value
-					\item writing on the \enquote{write} channel spawns a new thread with the new value that manages the two channels from then on
-				\end{betterlist}
-			\end{betterlist}
-		\end{betterlist}
-		\item \nul{Synchronous vs. Asynchronous}
-		\begin{betterlist}
-			\item receive operation blocks either way
-			\item given a channel with synchronous operations,
-			\begin{betterlist}
-				\item send asynchronously by sending in a spawned thread
-			\end{betterlist}
-			\item given a channel with asynchronous operations.
-			\begin{betterlist}
-				\item establish a protocol to acknowledge receipts
-				\item pair each send operation with a receive for the acknowledgment
-			\end{betterlist}
-		\end{betterlist}
-		\item \alert{Hoare’s Communicating Sequential Processes (CSP)}:
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
 
-		\includegraphics[width=0.6\linewidth]{./figures/csp.png}
-		\begin{betterlist}
-			\item \nul{Special events}
-			\begin{betterlist}
-				\item $c!v$ output $v$ on channel $c$
-				\item $c?x$ read from channel $c$ and bind to variable $x$
-			\end{betterlist}
-		\end{betterlist}
-		\item \alert{$\pi$-Calculus}
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 	\inlinebox{Tricks}
 	\begin{betterlist}
 		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
 	\end{betterlist}
-	\inlinebox{Confusion Matrix}
-	\begin{betterlist}
-		\item $1$st part is about whether \alert{actual condition $==$ predicted condition} and the $2$nd part is about the \alert{predicted condition}
-	\end{betterlist}
-
-	\vspace{0.4cm}
-	\begin{longtblr}[
-		label = none,
-		entry = none,
-		]{
-		width = \linewidth,
-		colspec = {Q[267]Q[319]Q[337]},
-		cells = {PrimaryColor,c},
-		cell{1}{2} = {fg=white},
-		cell{1}{3} = {fg=white},
-		cell{2}{1} = {fg=white},
-		cell{2}{2} = {BoxColor},
-		cell{2}{3} = {BoxColor},
-		cell{3}{1} = {fg=white},
-		cell{3}{2} = {BoxColor},
-		cell{3}{3} = {BoxColor},
-		}
-		                & Predicted Positive  & Predicted Negative  \\
-		Actual Positive & True Positive (TP)  & False Negative (FN) \\
-		Actual Negative & False Positive (FP) & True Negative (TN)
-	\end{longtblr}
-	\vspace{-0.5cm}
-
-	\begin{betterlist}
-		\item \alert{True Positive (TP):} Correctly predicted as positive (correct alarm)
-		\begin{betterlist}
-			\item all actual positives predicted correctly (no false positives) if \alert{sound}
-			\item $pred=True, real=True$, if the tool detects the hypothesis it's present in reality, thus it can't happen that the tool detects the hyptothesis but it's not present in reality, because else the tool wouldn't always be right when detecting the hypothesis
-		\end{betterlist}
-		\item \alert{True Negative (TN):} Correctly predicted as negative (correct non-detection)
-		\begin{betterlist}
-			\item all actual negatives predicted correctly (no false negatives) if \alert{complete}
-			\item $pred=False, real=False$, if the tool does not detect the hypothesis it isn't present in reality, thus it can't happen that the hypothesis is present in reality but can't be detected by the tool because else the tool wouldn't always be right when not detecting the hypothesis
-		\end{betterlist}
-		\item \alert{False Positive (FP):} Incorrectly predicted as positive (false alarm)
-		\begin{betterlist}
-			\item appear if \alert{unsound }
-			\item $pred=True, real=False$, if the tool sometimes detects the hypothesis but it's not present reality
-		\end{betterlist}
-		\item \alert{False Negative (FN):} Incorrectly predicted as negative (missed detection)
-		\begin{betterlist}
-			\item appear if \alert{incomplete}
-			\item $pred=False, real=True$, if the hypothesis is present in reality but it can't always be detected by the tool
-		\end{betterlist}
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 \end{minipage}
 \end{document}

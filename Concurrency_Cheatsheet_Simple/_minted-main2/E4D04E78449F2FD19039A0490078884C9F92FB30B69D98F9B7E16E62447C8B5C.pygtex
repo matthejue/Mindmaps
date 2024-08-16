@@ -1,0 +1,43 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{type}\PYG{+w}{ }\PYG{n+nx}{Comp}\PYG{+w}{ }\PYG{k+kd}{struct}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{val}\PYG{+w}{    }\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{    }\PYG{n+nx}{status}\PYG{+w}{ }\PYG{k+kt}{bool}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{type}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{+w}{ }\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{n+nx}{Comp}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{future}\PYG{p}{(}\PYG{n+nx}{f}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{},}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{))}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{ch}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nb}{make}\PYG{p}{(}\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{n+nx}{Comp}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{r}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{s}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{f}\PYG{p}{()}
+\PYG{+w}{        }\PYG{n+nx}{v}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{Comp}\PYG{p}{\PYGZob{}}\PYG{n+nx}{r}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{s}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{ch}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nx}{v}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}()}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{ch}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{ft}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{get}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{},}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{ft}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{onSuccess}\PYG{p}{(}\PYG{n+nx}{cb}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{(}\PYG{k+kd}{interface}\PYG{p}{\PYGZob{}\PYGZcb{}))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{c}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nx}{ft}
+\PYG{+w}{        }\PYG{n+nx}{v}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{val}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{status}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{cb}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}()}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{ft}\PYG{+w}{ }\PYG{n+nx}{Future}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nx}{onFailure}\PYG{p}{(}\PYG{n+nx}{cb}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{c}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nx}{ft}
+\PYG{+w}{        }\PYG{n+nx}{\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{o}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{val}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{c}\PYG{p}{.}\PYG{n+nx}{status}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{!}\PYG{n+nx}{o}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{cb}\PYG{p}{()}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}()}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{barrier}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{ch}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{make}\PYG{p}{(}\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n+nx}{timeout}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{After}\PYG{p}{(}\PYG{l+m+mi}{4}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{l+m+mf}{1e9}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{for}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{+w}{ }\PYG{p}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{o}{++}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{k}{select}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{case}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{ch}\PYG{p}{:}
+\PYG{+w}{        }\PYG{k}{case}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{timeout}\PYG{p}{:}
+\PYG{+w}{            }\PYG{n+nx}{fmt}\PYG{p}{.}\PYG{n+nx}{Println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}timed out\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{            }\PYG{k}{return}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n+nx}{fmt}\PYG{p}{.}\PYG{n+nx}{Println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}done\PYGZdq{}}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

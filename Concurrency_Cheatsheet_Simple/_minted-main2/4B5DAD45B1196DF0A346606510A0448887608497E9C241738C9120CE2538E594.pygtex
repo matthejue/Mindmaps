@@ -1,0 +1,34 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+e@acq(t,y) \PYGZob{}
+  D(t) = D(t) U Rel(y) U \PYGZob{} e \PYGZcb{}
+\PYGZcb{}
+e@rel(t,y) \PYGZob{}
+  D(t) = D(t) U \PYGZob{} e \PYGZcb{}
+  Rel(y) = D(t)
+\PYGZcb{}
+e@fork(t1,t2) \PYGZob{}
+  D(t1) = D(t1) U \PYGZob{} e \PYGZcb{}
+  D(t2) = D(t1)
+\PYGZcb{}
+e@join(t1,t2) \PYGZob{}
+  D(t1) = D(t1) U D(t2) U \PYGZob{} e \PYGZcb{}
+  \PYGZcb{}
+e@write(t,x) \PYGZob{}
+  If W(x) exists and W(x) not in D(t)
+  then write\PYGZhy{}write race (W(x),e)
+
+  For each r in R(x),
+  if r not in D(t)
+  then read\PYGZhy{}write race  (r,e)
+
+  D(t) = D(t) U \PYGZob{} e \PYGZcb{}
+  W(x) = e
+\PYGZcb{}
+e@read(t,x) \PYGZob{}
+  If W(x) exists and W(x) not in D(t)
+  then write\PYGZhy{}read race (W(x),e)
+
+  R(x) = \PYGZob{}e\PYGZcb{} U (R(x) \PYGZbs{} D(t))
+  D(t) = D(t) cup \PYGZob{} e \PYGZcb{}
+\PYGZcb{}
+\end{Verbatim}

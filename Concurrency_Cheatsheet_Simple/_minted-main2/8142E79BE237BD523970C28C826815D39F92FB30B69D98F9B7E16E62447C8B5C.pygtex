@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{select}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{deer}\PYG{p}{:}
+\PYG{+w}{    }\PYG{n+nx}{numOfDeerSeen}\PYG{o}{++}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{elves}\PYG{p}{:}
+\PYG{+w}{    }\PYG{k}{select}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{deer}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nx}{numOfDeerSeen}\PYG{o}{++}
+\PYG{+w}{      }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{n+nx}{elves}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{p}{\PYGZcb{}()}
+\PYG{+w}{    }\PYG{k}{default}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nx}{numOfElvesSeen}\PYG{o}{++}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

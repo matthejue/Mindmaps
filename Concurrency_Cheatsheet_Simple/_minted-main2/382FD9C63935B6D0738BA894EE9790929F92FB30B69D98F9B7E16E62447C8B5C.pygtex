@@ -1,0 +1,122 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{package}\PYG{+w}{ }\PYG{n+nx}{main}
+
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}fmt\PYGZdq{}}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}time\PYGZdq{}}
+\PYG{k+kn}{import}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}math/rand\PYGZdq{}}
+
+\PYG{k+kd}{type}\PYG{+w}{ }\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{+w}{ }\PYG{k+kt}{any}\PYG{p}{]}\PYG{+w}{ }\PYG{k+kd}{struct}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{val}\PYG{+w}{           }\PYG{n+nx}{T}
+\PYG{+w}{    }\PYG{n+nx}{status}\PYG{+w}{        }\PYG{k+kt}{bool}
+\PYG{+w}{    }\PYG{n+nx}{m}\PYG{+w}{             }\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{k+kt}{int}
+\PYG{+w}{    }\PYG{n+nx}{succCallBacks}\PYG{+w}{ }\PYG{p}{[]}\PYG{k+kd}{func}\PYG{p}{(}\PYG{n+nx}{T}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{failCallBacks}\PYG{+w}{ }\PYG{p}{[]}\PYG{k+kd}{func}\PYG{p}{()}
+\PYG{+w}{    }\PYG{n+nx}{empty}\PYG{+w}{         }\PYG{k+kt}{bool}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{newPromise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{+w}{ }\PYG{k+kt}{any}\PYG{p}{]()}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{]}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{]\PYGZob{}}\PYG{n+nx}{empty}\PYG{p}{:}\PYG{+w}{ }\PYG{k+kc}{true}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{m}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nb}{make}\PYG{p}{(}\PYG{k+kd}{chan}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n+nx}{succCallBacks}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nb}{make}\PYG{p}{([]}\PYG{k+kd}{func}\PYG{p}{(}\PYG{n+nx}{T}\PYG{p}{),}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{),}\PYG{+w}{ }\PYG{n+nx}{failCallBacks}\PYG{p}{:}
+\PYG{+w}{      }\PYG{n+nb}{make}\PYG{p}{([]}\PYG{k+kd}{func}\PYG{p}{(),}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n+nx}{p}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{n+nx}{setSucc}\PYG{p}{(}\PYG{n+nx}{v}\PYG{+w}{ }\PYG{n+nx}{T}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{val}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nx}{v}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{status}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{k+kc}{true}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{k+kc}{false}
+\PYG{+w}{        }\PYG{n+nx}{succs}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{succCallBacks}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{succCallBacks}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{make}\PYG{p}{([]}\PYG{k+kd}{func}\PYG{p}{(}\PYG{n+nx}{T}\PYG{p}{),}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{        }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}
+\PYG{+w}{        }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{for}\PYG{+w}{ }\PYG{n+nx}{\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{cb}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{k}{range}\PYG{+w}{ }\PYG{n+nx}{succs}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n+nx}{cb}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{)}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}()}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{n+nx}{setFail}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{status}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{k+kc}{false}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{k+kc}{false}
+\PYG{+w}{        }\PYG{n+nx}{fails}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{failCallBacks}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{failCallBacks}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{make}\PYG{p}{([]}\PYG{k+kd}{func}\PYG{p}{(),}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{        }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}
+\PYG{+w}{        }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{k}{for}\PYG{+w}{ }\PYG{n+nx}{\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{cb}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{k}{range}\PYG{+w}{ }\PYG{n+nx}{fails}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n+nx}{cb}\PYG{p}{()}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}()}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{future}\PYG{p}{[}\PYG{n+nx}{T}\PYG{+w}{ }\PYG{k+kt}{any}\PYG{p}{](}\PYG{n+nx}{f}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{T}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{))}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{]}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{newPromise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{]()}
+\PYG{+w}{    }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{r}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{s}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{f}\PYG{p}{()}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{s}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{setSucc}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{setFail}\PYG{p}{()}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}()}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{p}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{n+nx}{complete}\PYG{p}{(}\PYG{n+nx}{f}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{T}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{r}\PYG{p}{,}\PYG{+w}{ }\PYG{n+nx}{s}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{f}\PYG{p}{()}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{s}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{setSucc}\PYG{p}{(}\PYG{n+nx}{r}\PYG{p}{)}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{            }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{setFail}\PYG{p}{()}
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}()}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{n+nx}{onSuccess}\PYG{p}{(}\PYG{n+nx}{cb}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{(}\PYG{n+nx}{T}\PYG{p}{))}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{succCallBacks}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{append}\PYG{p}{(}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{succCallBacks}\PYG{p}{,}
+\PYG{+w}{          }\PYG{n+nx}{cb}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{!}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{status}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{go}\PYG{+w}{ }\PYG{n+nx}{cb}\PYG{p}{(}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{val}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{n+nx}{onFailure}\PYG{p}{(}\PYG{n+nx}{cb}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{())}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{failCallBacks}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n+nb}{append}\PYG{p}{(}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{failCallBacks}\PYG{p}{,}
+\PYG{+w}{          }\PYG{n+nx}{cb}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{!}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{empty}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{p}{!}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{status}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{k}{go}\PYG{+w}{ }\PYG{n+nx}{cb}\PYG{p}{()}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}\PYGZcb{}}
+\PYG{+w}{    }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{m}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{p1}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{n+nx}{tryCompleteWith}\PYG{p}{(}\PYG{n+nx}{p2}
+\PYG{+w}{  }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p2}\PYG{p}{.}\PYG{n+nx}{onSuccess}\PYG{p}{(}\PYG{k+kd}{func}\PYG{p}{(}\PYG{n+nx}{v}\PYG{+w}{ }\PYG{n+nx}{T}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{        }\PYG{n+nx}{p1}\PYG{p}{.}\PYG{n+nx}{setSucc}\PYG{p}{(}\PYG{n+nx}{v}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{})}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kd}{func}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nx}{p1}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}\PYG{+w}{ }\PYG{n+nx}{firstSucc}\PYG{p}{(}\PYG{n+nx}{p2}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{])}
+\PYG{+w}{  }\PYG{o}{*}\PYG{n+nx}{Promise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{]}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{n+nx}{newPromise}\PYG{p}{[}\PYG{n+nx}{T}\PYG{p}{]()}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{tryCompleteWith}\PYG{p}{(}\PYG{n+nx}{p1}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nx}{p}\PYG{p}{.}\PYG{n+nx}{tryCompleteWith}\PYG{p}{(}\PYG{n+nx}{p2}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n+nx}{p}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

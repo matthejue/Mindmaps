@@ -1382,16 +1382,16 @@ func signal(qsem *QSem) {
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
-      (nu client server)( // mu s.un+{max: lin?(lin!integer.lin!integer.lin?integer.end).s}
-                       //          quit: end}
-      (nu d1 d2)( // mu a.un!a.a
-      un d2(e)(
-      server > {max:
-                (nu writer reader)( // lin!integer.lin!integer.lin?integer.end
-                server!writer.reader?x.reader?y if x > y then reader!x else reader!y),
-                quit: 0} | d1<e>) | d1<d2>)
-      | client > max.client?c.c!-4.c!2.c?x.printInteger!x.client > quit
-      | client > max.client?c.c!3.c!7.c?x.printInteger!x.client > quit)
+(nu d1 d2)( // mu s.un !bool.s
+(nu client server)( // mu s.un+{max: lin?(lin!integer.lin!integer.lin?integer.end).s}
+                  //          quit: end}
+un d2?_.server > {max:
+          (nu writer reader)( // lin!integer.lin!integer.lin?integer.end
+          server!writer.reader?x.reader?y if x > y then reader!x else reader!y),
+          quit: 0}
+| d1!true.client < max.client?c.c!-4.c!2.c?x.printInteger!x.d1!true.client > quit
+| d1!true.client < max.client?c.c!3.c!7.c?x.printInteger!x.d1!true.client > quit)
+)
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
@@ -1401,31 +1401,37 @@ func signal(qsem *QSem) {
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+(nu d1 d2)( // mu s.un !bool.s
 (nu client server) // mu s.lin +{max: lin!integer!integer.?integer.s,
                 //           quit: end}
-client < abs.client!-4.client!2.client?x. printInteger!x.client < quit
-| (nu d1 d2)( // mu a.un!a.a
-  un d2(e)(server > {max server?x.server?y.if x > y then server!x else server!y,
-                   quit: 0} | d1<e>) | d1<d2>)
+d1!true.client < abs.client!-4.client!2.client?x. printInteger!x.d1!true.client < quit
+|  un d2?_.server > {max server?x.server?y.if x > y then server!x else server!y,
+                   quit: 0}
+)
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \nul{unrestricted syntax with linear type:}
+		\item \nul{linear syntax with unrestricted type:}
 		\vspace{-0.25cm}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
-      asdf
+      (nu x1 x2)( // x1 = un ?bool
+        lin x1(y) | x2<true> | x2<true>
+      )
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \nul{linear syntax with unrestricted type:}
+		\item \nul{linear syntax with linear type:}
+		\vspace{-0.25cm}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
-      asdf
+      (nu x1 x2)( // x1 = lin ?bool
+        lin x1(y) | x2<true>
+      )
     \end{dnumberedcodebox}
     %\end{noindent}
 		}

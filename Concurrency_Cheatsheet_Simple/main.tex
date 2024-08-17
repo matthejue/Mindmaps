@@ -766,6 +766,9 @@ func signal(qsem *QSem) {
 	\inlinebox{Tricks}
 	\begin{betterlist}
 		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
+    \item am Ende muss true ingesamt rauskommen, damit trace satisfied bei LTL
+    \item bei a U B geht es nur darum, dass in dem Trace etwas existiert, was es erfüllt
+    \item bei a v b, angeben welcher Trace von welchem von beiden erfüllt ist, falls von beiden ist es unnötig, bei oder reicht einer von beiden. Formel mit einem von beiden Operanden entfernt schreiben
 	\end{betterlist}
 	% \inlinebox{Dining Philosophers}
 	% \begin{betterlist}
@@ -1256,9 +1259,10 @@ func signal(qsem *QSem) {
 		% \end{betterlist}
 		\item sigma |\raisebox{0.5mm}{=} []<>phi iff there are \nul{infinitely many} j >= 0 s.t. A j A j+1 A j+2 \ldots |\raisebox{0.5mm}{=} phi
 		\item sigma |\raisebox{0.5mm}{=} <>[]phi iff for \nul{almost all} j >= 0 we have Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
-    \item path = state0 state1 state2  \ldots |\raisebox{0.4mm}{=} \cul{phi} iff \cul{trace(path) |}\raisebox{0.4mm}{=} \cul{phi} iff \cul{trace(path) }€ \cul{Words(phi)}
-    \item \cul{state |}\raisebox{0.4mm}{=} phi iff trace(path) |\raisebox{0.4mm}{=} phi for all path € Paths(state) iff \cul{Traces(state) C}\raisebox{0.3mm}{=} \cul{Words(phi)}
+    \item inf. path fragment = state0 state1 state2  \ldots |\raisebox{0.4mm}{=} phi iff \cul{trace(inf. path fragment) |}\raisebox{0.4mm}{=} \cul{phi} iff \cul{trace(path) }€ \cul{Words(phi)} (inf. path fragment doesn't need to start at initial state)
+    \item \cul{state |}\raisebox{0.4mm}{=} \cul{phi} iff trace(path) |\raisebox{0.4mm}{=} phi for all path € Paths(state) iff \cul{Traces(state) C}\raisebox{0.3mm}{=} \cul{Words(phi)}
     \item \cul{T |}\raisebox{0.4mm}{=} \cul{phi} iff s\textsubscript{0} |\raisebox{0.4mm}{=} phi for all s\textsubscript{0} € S\textsubscript{0} iff trace(path) |\raisebox{0.4mm}{=} phi for all path € Paths(T) iff \cul{Traces(T) C}\raisebox{0.3mm}{=}\cul{ Words(phi)} iff T |\raisebox{0.4mm}{=} Words(phi)
+    \item TODO: Die Sache mit maximal und initial execution / path fragment auch aufs Cheatsheet, trace genaue Definition
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\linewidth}

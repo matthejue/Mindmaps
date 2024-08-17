@@ -1214,6 +1214,53 @@ func signal(qsem *QSem) {
 \begin{minipage}[t]{0.19\linewidth}
 	\raggedright
 
+	\inlinebox{Linear Temporal Logic (LTL)}
+	\begin{betterlist}
+		\item \nul{syntax:}
+		\begin{betterlist}
+			\item phi  ::= true | a | phi\textsubscript{1} \raisebox{-0.5mm}{\^{}} phi\textsubscript{2} | \raisebox{-0.5mm}{\~{}}phi | ()p (next) | phi\textsubscript{1} U phi\textsubscript{2} (until)
+			\item <>phi = true U phi (eventually)\quad []phi = true U phi (always)
+			\item{} []<>phi (infinitely often)\quad <>[]phi (almost always)
+		\end{betterlist}
+		\item \nul{semantics:}
+		\begin{betterlist}
+			\item sigma |\raisebox{0.5mm}{=} true
+			\item sigma |\raisebox{0.5mm}{=} a iff A\textsubscript{0} |\raisebox{0.5mm}{=} a ,i.e., a € A\textsubscript{0}
+			\item sigma |\raisebox{0.5mm}{=} phi\textsubscript{1} \raisebox{-0.5mm}{\^{}} phi\textsubscript{2} iff sigma |\raisebox{0.5mm}{=} phi\textsubscript{1} and sigma |\raisebox{0.5mm}{=} phi\textsubscript{2}
+			\item sigma |\raisebox{0.5mm}{=} \raisebox{-0.5mm}{\~{}}phi iff sigma !|\raisebox{0.5mm}{=} phi
+			\item sigma |\raisebox{0.5mm}{=} ()phi iff suffix(sigma, 1) = A1 A2 A3 \ldots |\raisebox{0.5mm}{=}phi
+			\item sigma |\raisebox{0.5mm}{=} phi\textsubscript{1} U phi\textsubscript{2} iff there exists j >= 0 s.t.
+			\begin{betterlist}
+				\item suffix(sigma, j) = Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi\textsubscript{2} and
+				\item suffix(sigma, i) = Ai Ai+1 Ai+2 \ldots |\raisebox{0.5mm}{=} phi\textsubscript{1} for 0 <= i < j
+			\end{betterlist}
+		\end{betterlist}
+		% \item sigma |\raisebox{0.5mm}{=} phi 1 U phi 2 iff there exists j >= 0 such that
+		% \begin{betterlist}
+		% 	\item Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi\textsubscript{2} and
+		% 	\item Ai Ai+1 Ai+2 \ldots |\raisebox{0.5mm}{=} phi\textsubscript{1} for 0 <= i < j
+		% \end{betterlist}
+		\item sigma |\raisebox{0.5mm}{=} <>phi iff there exists j >= 0 s.t. Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=}phi
+		\item sigma |\raisebox{0.5mm}{=} []phi iff for all j >= 0 we have Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
+		% \item sigma |\raisebox{0.5mm}{=} ♦phi iff there exists j >= 0 such that
+		% \begin{betterlist}
+		% 	\item Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
+		% \end{betterlist}
+		% \item sigma |\raisebox{0.5mm}{=} phi iff for all j >= 0 we have:
+		% \begin{betterlist}
+		% 	\item Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
+		% \end{betterlist}
+		\item sigma |\raisebox{0.5mm}{=} []<>phi iff there are \cul{infinitely many} j >= 0 s.t. A j A j+1 A j+2 \ldots |\raisebox{0.5mm}{=} phi
+		\item sigma |\raisebox{0.5mm}{=} <>[]phi iff for \cul{almost all} j >= 0 we have Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
+	\end{betterlist}
+	\inlinebox{Tricks}
+	\begin{betterlist}
+		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
 	\inlinebox{Pi Calculus}
 	\begin{betterlist}
 		\item TODO: syntax a sind channels, y, z sind variablen
@@ -1344,7 +1391,7 @@ func signal(qsem *QSem) {
 			\item \cul{Unrestricted:} value of type un T can be used zero or more times
 			\item Variable x for \cul{(arbitrarily) qualified type}, a for \cul{unrestricted type}, c for \cul{linear type}
 			\item mu a.T equiv T [mu a.T /a], *U \^= mu a.U.a.
-      \item q\textsubscript{syntax} = un implies q\textsubscript{type} = un (only: {(un, un), (lin, lin), (lin, un)})
+			\item q\textsubscript{syntax} = un implies q\textsubscript{type} = un (only: {(un, un), (lin, lin), (lin, un)})
 		\end{betterlist}
 		\item \nul{server’s type is dual to the client’s type:}
 		\begin{betterlist}
@@ -1362,7 +1409,7 @@ func signal(qsem *QSem) {
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \nul{server with unrestricted type:}
+		\item \nul{unrestricted server:}
 		\vspace{-0.25cm}
 
 		% \adjustbox{scale=0.5}{
@@ -1383,32 +1430,49 @@ func signal(qsem *QSem) {
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
 (nu d1 d2)( // mu s.un !bool.s
-(nu client server)( // mu a.un+{max: un?(lin!integer.lin!integer.lin?integer.end).a}
-                 //          quit: end}
-un d2?_.server > {max:
-          (nu writer reader)( // lin!integer.lin!integer.lin?integer.end
-          server!writer.reader?x.reader?y if x > y then reader!x else reader!y),
-          quit: 0}
-| d1!true.client < max.client?c.c!-4.c!2.c?x.printInteger!x.d1!true.client > quit
-| d1!true.client < max.client?c.c!3.c!7.c?x.printInteger!x.d1!true.client > quit)
+  (nu client server)( // mu a.un+{max: un?(lin!integer.lin!integer.lin?integer.end).a}, 
+                   //          quit: end}
+    un d2?_.server > 
+      {max: (nu writer reader)( // lin!integer.lin!integer.lin?integer.end
+              server!writer.reader?x.reader?y if x > y then reader!x else reader!y
+             ),
+       quit: 0}
+    | d1!true.client < max.client?c.c!-4.c!2.c?x.printInteger!x.d1!true.client > quit
+    | d1!true.client < max.client?c.c!3.c!7.c?x.printInteger!x.d1!true.client > quit
+  )
 )
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \nul{server with linear type:}
+		\item \nul{linear server:}
 		\vspace{-0.25cm}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
-(nu client server) // mu a.lin +{max: lin!integer!integer.?integer.a,
-                //           quit: end}
-client < quit.client!-4.client!2.client?x.printInteger!x.client < quit
-| server > {max server?x.server?y.if x > y then server!x else server!y,
-                   quit: 0}
+(nu d1 d2)( // mu s.un!(mu a.lin+{max: lin!integer.lin!integer.lin?integer.a, quit: end}).s
+  (nu client server)( // mu a.lin+{max: lin!integer.lin!integer.lin?integer.a, quit: end}
+    un d2?s.s > {max: s?x.s?y if x > y then s!x.d1!s else s!y.d1!s, quit: 0}
+    | d1!server.client < max.client!-4.client!2.client?x.printInteger!x.client > quit
+  )
+)
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
+		% 		\item \nul{server with linear type:}
+		% 		\vspace{-0.25cm}
+		%
+		% 		\adjustbox{scale=0.5}{
+		% 			% \begin{noindent}
+%     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+% (nu client server) // mu a.lin +{max: lin!integer!integer.?integer.a,
+%                 //           quit: end}
+% client < quit.client!-4.client!2.client?x.printInteger!x.client < quit
+% | server > {max server?x.server?y.if x > y then server!x else server!y,
+%                    quit: 0}
+%     \end{dnumberedcodebox}
+%     %\end{noindent}
+		% 		}
 		\item \nul{linear syntax with unrestricted type:}
 		\vspace{-0.25cm}
 
@@ -1433,14 +1497,6 @@ client < quit.client!-4.client!2.client?x.printInteger!x.client < quit
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
-	\raggedright
-
-	\inlinebox{Tricks}
-	\begin{betterlist}
-		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
 	\end{betterlist}
 \end{minipage}
 \end{document}

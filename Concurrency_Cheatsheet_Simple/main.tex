@@ -1219,7 +1219,7 @@ func signal(qsem *QSem) {
 		\item \nul{syntax:}
 		\begin{betterlist}
 			\item phi  ::= true | a | phi\textsubscript{1} \raisebox{-0.5mm}{\^{}} phi\textsubscript{2} | \raisebox{-0.5mm}{\~{}}phi | ()p (next) | phi\textsubscript{1} U phi\textsubscript{2} (until)
-			\item <>phi = true U phi (eventually)\quad []phi = true U phi (always)
+      \item <>phi = true U phi (eventually)\quad []phi = \raisebox{-0.5mm}{\~{}}<>\raisebox{-0.5mm}{\~{}}phi (always)
 			\item{} []<>phi (infinitely often)\quad <>[]phi (almost always)
 		\end{betterlist}
 		\item \nul{semantics:}
@@ -1250,8 +1250,8 @@ func signal(qsem *QSem) {
 		% \begin{betterlist}
 		% 	\item Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
 		% \end{betterlist}
-		\item sigma |\raisebox{0.5mm}{=} []<>phi iff there are \cul{infinitely many} j >= 0 s.t. A j A j+1 A j+2 \ldots |\raisebox{0.5mm}{=} phi
-		\item sigma |\raisebox{0.5mm}{=} <>[]phi iff for \cul{almost all} j >= 0 we have Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
+		\item sigma |\raisebox{0.5mm}{=} []<>phi iff there are \nul{infinitely many} j >= 0 s.t. A j A j+1 A j+2 \ldots |\raisebox{0.5mm}{=} phi
+		\item sigma |\raisebox{0.5mm}{=} <>[]phi iff for \nul{almost all} j >= 0 we have Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
 	\end{betterlist}
 	\inlinebox{Tricks}
 	\begin{betterlist}

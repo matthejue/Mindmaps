@@ -709,7 +709,7 @@ func signal(qsem *QSem) {
 		% \end{betterlist}
 		\item \nul{Construction:} Locks are nodes. There is an edge from lock x to lock y if a thread holds lock $x$ while it acquires lock $y$
 		\begin{betterlist}
-			\item $B-acq$ to denote that the acquire is blocked
+			\item B-acq to denote that the acquire is blocked
 		\end{betterlist}
 
 		% \item This can be calculated based on lock sets. Check for cycles in the lock graph. If there is a \alert{cycle}, we report that there is a \alert{potential deadlock}
@@ -1337,7 +1337,7 @@ func signal(qsem *QSem) {
 			\item \nul{Qualifiers:} q ::= lin (linear) | un (unrestricted)
 			\item \nul{Pretypes:} p ::= ?T.S (receive) | !T.S (send) | +\{i : S\textsubscript{i}\}\textsubscript{i€I} (select) | \&\{i : S\textsubscript{i}\}\textsubscript{i€I} (branch)
 			\item \nul{Types:} S, T, U ::= bool (boolean) | end (termination) | qp (qualified pretype) | a (type variable) | mu a.T (recursive type)
-			\item \nul{Contexts:} gamma ::= {} (empty context) | gamma, x : T (assumption)
+			\item \nul{Contexts:} gamma ::= \{\} (empty context) | gamma, x : T (assumption)
 		\end{betterlist}
 		\begin{betterlist}
 			\item \cul{Linearity:} value of type lin T must be used exactly once
@@ -1362,7 +1362,7 @@ func signal(qsem *QSem) {
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \nul{recursion with unrestricted type:}
+		\item \nul{server with unrestricted type:}
 		\vspace{-0.25cm}
 
 		% \adjustbox{scale=0.5}{
@@ -1383,8 +1383,8 @@ func signal(qsem *QSem) {
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
 (nu d1 d2)( // mu s.un !bool.s
-(nu client server)( // mu s.un+{max: lin?(lin!integer.lin!integer.lin?integer.end).s}
-                  //          quit: end}
+(nu client server)( // mu a.un+{max: un?(lin!integer.lin!integer.lin?integer.end).a}
+                 //          quit: end}
 un d2?_.server > {max:
           (nu writer reader)( // lin!integer.lin!integer.lin?integer.end
           server!writer.reader?x.reader?y if x > y then reader!x else reader!y),
@@ -1395,19 +1395,17 @@ un d2?_.server > {max:
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \nul{recursion with linear type:}
+		\item \nul{server with linear type:}
 		\vspace{-0.25cm}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
-(nu d1 d2)( // mu s.un !bool.s
-(nu client server) // mu s.lin +{max: lin!integer!integer.?integer.s,
+(nu client server) // mu a.lin +{max: lin!integer!integer.?integer.a,
                 //           quit: end}
-d1!true.client < abs.client!-4.client!2.client?x. printInteger!x.d1!true.client < quit
-|  un d2?_.server > {max server?x.server?y.if x > y then server!x else server!y,
+client < quit.client!-4.client!2.client?x.printInteger!x.client < quit
+| server > {max server?x.server?y.if x > y then server!x else server!y,
                    quit: 0}
-)
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
@@ -1417,19 +1415,19 @@ d1!true.client < abs.client!-4.client!2.client?x. printInteger!x.d1!true.client 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
-      (nu x1 x2)( // x1 = un ?bool
+      (nu x1 x2)( // x1 = mu a.un ?bool.a = *?bool
         lin x1(y) | x2<true> | x2<true>
       )
     \end{dnumberedcodebox}
     %\end{noindent}
 		}
-		\item \nul{linear syntax with linear type:}
+		\item \nul{linear syntax with linear / unrestricted type:}
 		\vspace{-0.25cm}
 
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
-      (nu x1 x2)( // x1 = lin ?bool
+      (nu x1 x2)( // x1 = lin ?bool or x1 = un ?bool
         lin x1(y) | x2<true>
       )
     \end{dnumberedcodebox}

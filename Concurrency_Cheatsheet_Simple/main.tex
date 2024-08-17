@@ -509,7 +509,7 @@ func signal(qsem *QSem) {
                   \end{dnumberedcodebox}
                 %\end{noindent}   }
 		}
-		\item The size of D(t) may grow linearly in the size of the trace. To check for a race we check if some element is in D(t). If there are n events, set-based race prediction requires O(n\textsuperscript{2}) time
+		\item the size of D(t) may grow linearly in the size of the trace. To check for a race we check if some element is in D(t). If there are n events, set-based race prediction requires O(n\textsuperscript{2}) time
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\linewidth}
@@ -762,6 +762,10 @@ func signal(qsem *QSem) {
 			\item \nul{False positive possible:} Due to the \cul{write-read dependency}, events in thread T\textsubscript{1} must happen before the events in thread T\textsubscript{2}
 			\item \nul{False negative possible:} \cul{Cross-thread critical} section that includes several events due to the \cul{fork/join dependency}. However, the computation of lock dependencies is \cul{agnostic} to \cul{cross-thread critical sections}
 		\end{betterlist}
+	\end{betterlist}
+	\inlinebox{Tricks}
+	\begin{betterlist}
+		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
 	\end{betterlist}
 	% \inlinebox{Dining Philosophers}
 	% \begin{betterlist}
@@ -1252,10 +1256,9 @@ func signal(qsem *QSem) {
 		% \end{betterlist}
 		\item sigma |\raisebox{0.5mm}{=} []<>phi iff there are \nul{infinitely many} j >= 0 s.t. A j A j+1 A j+2 \ldots |\raisebox{0.5mm}{=} phi
 		\item sigma |\raisebox{0.5mm}{=} <>[]phi iff for \nul{almost all} j >= 0 we have Aj Aj+1 Aj+2 \ldots |\raisebox{0.5mm}{=} phi
-	\end{betterlist}
-	\inlinebox{Tricks}
-	\begin{betterlist}
-		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht
+    \item path = s0 s1 s2  \ldots |\raisebox{0.4mm}{=} phi iff trace(path) |\raisebox{0.4mm}{=} phi iff trace(path) € Words(phi)
+    \item s |\raisebox{0.4mm}{=} phi iff trace(path) |\raisebox{0.4mm}{=} phi for all path € Paths(s) iff Traces(s) C\raisebox{0.3mm}{=} Words(phi)
+    \item T |\raisebox{0.4mm}{=} phi iff s\textsubscript{0} |\raisebox{0.4mm}{=} phi for all s\textsubscript{0} € S\textsubscript{0} iff trace(path) |\raisebox{0.4mm}{=} phi for all path € Paths(T) iff Traces(T) C\raisebox{0.3mm}{=} Words(phi) iff T |\raisebox{0.4mm}{=} Words(phi)
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\linewidth}

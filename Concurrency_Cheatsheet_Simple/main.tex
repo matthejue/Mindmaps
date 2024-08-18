@@ -33,10 +33,39 @@
 		% \end{betterlist}
 		% \end{betterlist}
 	\end{betterlist}
-	\inlinebox{Tricks}
+	\inlinebox{Lockset Method (complete but unsound)}
 	\begin{betterlist}
-		\item immer bis zu einer Stelle wo es nicht mehr weitergeht ausführen und dann threads ansehen wo blockierender Channel drin steht, dann kann entweder Blockade behoben werden oder ein wartender Channel wird active gemacht. Channels fangen bei 0 an zu zählen und x <- 1 ist solange bis buffer voll ist und <- ch ist 0 mal möglich am Anfang.
- % (active, waiting, blocked)
+		% \item \alert{lockset:} is the set of locks that are held when processing a read/write event
+		% \item if the locksets of two conflicting events $e$ and $f$ are \alert{disjoint}, then $(e, f)$ is a \alert{Lockset data race pair}
+		% \begin{betterlist}
+		% 	\item if two conflicting events hold the same lock $y$, then both events must belong to two distinct critical sections involving lock $y$. As critical sections are mutually exclusive, two conflicting events that share the same lock cannot be in a data race
+		% \end{betterlist}
+		% \item $(t1\#acq(y)_k, t2\#rel(y)_l)$ is a matching acquire/release pair if
+		% \begin{enumerate}
+		% 	\item $t1 = t2$, and
+		% 	\begin{betterlist}
+		% 		\item states that $acq(y)$ and $rel(y)$ belong to the same thread
+		% 	\end{betterlist}
+		% 	\item $k < l$ and there is no $t\#rel(y)_m$ where $k < m < l$
+		% 	\begin{betterlist}
+		% 		\item states that there is no other $rel(y)$ between $acq(y)_k$ and $rel(y)_l$
+		% 		\item $t\#e_k$ denotes some event $e$ in thread $t$ at trace position $k$
+		% 	\end{betterlist}
+		% \end{enumerate}
+		% \item $CS(t\#acq(y)_k, t\#rel(y)_l)$ denotes the set of events that are part of the critical section for a matching acquire/release pair $(t\#acq(y)k, t\#rel(y)l)$. We only accept events from the same thread $t$
+		% \begin{betterlist}
+		% 	\item $t'\#e_m \in CS(t\#acq(y)_k, t\#rel(y)_l)$ if $t = t'$ and $k \le m \le l$
+		% 	\item $acq(y)$ and $rel(y)$ are part of the critical section; and any event in the same thread between them is also part of this critical section
+		% \end{betterlist}
+		% \item \alert{lockset of an event $e$:} $LS(e) = \{y \mid \exists a = t\#acq(y)_k, r = t\#rel(y)_l .e \in CS(a, r)\}$
+		% \begin{betterlist}
+		% 	\item consists of all locks $y$ such that $e$ appears in a critical section belonging to lock $y$
+		% \end{betterlist}
+		\item \nul{state variables:}
+		\begin{betterlist}
+			\item ls(t): Set(Lock): The set of locks held by thread t at a certain time
+			\item LS : Event -> Set(Lock): A mapping from an event e to its lockset
+		\end{betterlist}
 	\end{betterlist}
 	% \inlinebox{Channels}
 	% \begin{betterlist}
@@ -144,16 +173,51 @@
 			\item If P\textsubscript{1} r(x) P\textsubscript{2} is a trace, then the \cul{last writer} of r(x) is some w(x) such that P\textsubscript{1} = P\textsubscript{1}' w(x) P\textsubscript{1}'' and P\textsubscript{1}'' does not contain another w(x)
 		\end{betterlist}
 	\end{enumerate}
-	\inlinebox{Tricks}
-  \begin{betterlist} 
-		\item am Ende muss true ingesamt rauskommen, damit trace satisfied bei LTL
-		\item bei \cul{a U B} geht es nur darum, dass in dem Trace etwas existiert, was es erfüllt. Bei \nul{a v b}, angeben welcher Trace von welchem von beiden erfüllt ist, falls von beiden ist es unnötig, bei oder reicht einer von beiden. Formel mit einem von beiden Operanden entfernt schreiben
-		\item alpha-Conversion Vorgehen:
+	\inlinebox{Lockset Method cont.}
+	\begin{betterlist}
+		\item \nul{Lockset computation}:
+		\vspace{-0.25cm}
+
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\Large}, box align=top]
+              e@acq(t,y) {
+                ls(t) = ls(t) U {y}
+              }
+              e@rel(t,y) {
+                ls(t) = ls(t) - {y}
+              e@fork(t1,t2) {
+              }
+            \end{dnumberedcodebox}
+          %\end{noindent}
+		}
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
+            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\Large}, box align=top]
+              e@join(t1,t2) {
+              }
+              e@write(t,x) {
+                LS(e) = ls(t)
+              }
+              e@read(t,x) {
+                LS(e) = ls(t)
+              }
+            \end{dnumberedcodebox}
+          %\end{noindent}
+		}
+		% \begin{betterlist}
+		% \item $S_1 - S_2$ is set difference
+		% \item the computation of locksets is agnostic to the presence of fork and join events
+		% \end{betterlist}
+		% \item after lockset computation for a program finished one considers all possible pairs of confliciting events (read-write ($r(x)_i$, $w(x)_j$) and write-write events ($w(x)_i$ and $w(x)_j$)) and checks:
 		\begin{betterlist}
-			\item schauen, ob free variables/channels gibt welche auch genau der varaiblen oder channel entsprechend zu dem geändert wird entsprechen -> wenn ja, umbenennen oder anderen Namen für Umbennenung wähllen
-			\item schauen, ob es freie Variablen/Channels gibt,die durch Änderung zur/m neuen Variable/Channel im Subprocess einem/r nu Channel / assign Variable entsprechen? -> wenn ja, umbenennen
+			\item if two locksets are disjoint: LS(c(x)\textsubscript{i}) n LS(c(x)\textsubscript{j}) = \{\} then the conflicting events c(x)\textsubscript{i} and c(x)\textsubscript{j} represent a data race
 		\end{betterlist}
-  \end{betterlist}
+		\item \cul{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
+		% \item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets
+		% \item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives
+		% \item Lock variable only included if the write is in that trace
+	\end{betterlist}
 	% \inlinebox{Berrier pattern}
 	% % \begin{betterlist}
 	% % 	\item 
@@ -251,7 +315,7 @@
 	% \inlinebox{Dynamic data race prediction}
 	% \item for each event, the trace records the \alert{thread} where the event happened. Each event can be identified by its position in the trace
 	% \nul{Motivation}: Rerunning a program over and over again to encounter a trace that detects a data race is very time consuming. 
-	\inlinebox{Channels of Channels and Quantified Semaphor}
+	\inlinebox{Quantified Semaphor}
 	\begin{betterlist}
 		\item \verb|var ch chan (chan int)|: channel that accepts channels of integers
 
@@ -262,39 +326,54 @@
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\Large}, box align=top]
-    type Request struct {
-        id  int
-        ack chan int
-    }
-    func worker(req chan Request) {
-        var c Request
-        for {
-            c = <-req
-            fmt.Printf("received from %d \n", c.id)
-            time.Sleep(1 * 1e9)
-            c.ack <- 1
-        }
-    }
-    func client(id int, req chan Request) {
-        var ack = make(chan int)
-        for {
-            c := Request{id, ack}
-            req <- c
-            <-ack
-        }
-
-    }
-    func main() {
-        var req = make(chan Request)
-        go worker(req)
-        go client(1, req)
-        client(2, req)
-    }
+type QSem struct {
+  q              int
+  curr           int
+  m              Mutex
+  signalWaits    Mutex
+  signalSignals  Mutex
+  noBlockedWaits int
+  noBlockedSignals int
+}
+func newQSem(q int) QSem {
+  var m = newMutex()
+  qsem:=QSem{q, q, m, newMutex(),
+               newMutex(), 0, 0}
+  return qsem
+}
     \end{dnumberedcodebox}
     %\end{noindent}
 			}
-			\inlinebox{Non-determ. Choice (\texttt{select}), Priorisation}
-			\vspace{-0.5cm}
+			% type Request struct {
+			%     id  int
+			%     ack chan int
+			% }
+			% func worker(req chan Request) {
+			%     var c Request
+			%     for {
+			%         c = <-req
+			%         fmt.Printf("received from %d \n", c.id)
+			%         time.Sleep(1 * 1e9)
+			%         c.ack <- 1
+			%     }
+			% }
+			% func client(id int, req chan Request) {
+			%     var ack = make(chan int)
+			%     for {
+			%         c := Request{id, ack}
+			%         req <- c
+			%         <-ack
+			%     }
+			%
+			% }
+			% func main() {
+			%     var req = make(chan Request)
+			%     go worker(req)
+			%     go client(1, req)
+			%     client(2, req)
+			% }
+			\inlinebox{Non-determ. Choice (\texttt{select})}
+			\vspace{-0.25cm}
 
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
@@ -309,18 +388,18 @@
                 default:
               }
           }
-          select { case <-deer:
-              numOfDeerSeen++
-            case <-elves:
-              select {
-              case <-deer:
-                numOfDeerSeen++
-                go func() { elves <- 1 }()
-              default:
-                numOfElvesSeen++
-              }
-            }
         \end{dnumberedcodebox}
+          % select { case <-deer:
+          %     numOfDeerSeen++
+          %   case <-elves:
+          %     select {
+          %     case <-deer:
+          %       numOfDeerSeen++
+          %       go func() { elves <- 1 }()
+          %     default:
+          %       numOfElvesSeen++
+          %     }
+          %   }
       %\end{noindent}   }
 			}
 			% \adjustbox{scale=0.48}{
@@ -355,21 +434,6 @@
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
       \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\Large}, box align=top]
-type QSem struct {
-  q              int
-  curr           int
-  m              Mutex
-  signalWaits    Mutex
-  signalSignals  Mutex
-  noBlockedWaits int
-  noBlockedSignals int
-}
-func newQSem(q int) QSem {
-  var m = newMutex()
-  qsem := QSem{q, q, m, newMutex(), newMutex(), 
-               0, 0}
-  return qsem
-}
 // down
 func wait(qsem *QSem) {
   lock(qsem.m)
@@ -411,13 +475,26 @@ func signal(qsem *QSem) {
 			}
 		\end{minipage}
 	\end{betterlist}
+	\inlinebox{Lockset Method cont.}
+	\begin{betterlist}
+		\item \cul{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness also applies)
+		\begin{betterlist}
+			\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock
+		\end{betterlist}
+		\item \nul{comparison and combination with HB method:}
+		\begin{betterlist}
+			\item in practice, it appears that the lockset method gives rise to significantly \cul{more false positives} than the HB method
+			% \item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
+			\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \cul{not affected} if we \cul{reorder critical sections}
+		\end{betterlist}
+	\end{betterlist}
 	\inlinebox{Lamport's \cul{happens-before (HB, incomplete and unsound) relation}}
-  \begin{betterlist}
+	\begin{betterlist}
 		\item any \nul{happens-before (partial) order} (HB relation) approximates the \nul{must happen before relation} (the possible reorderings)
 		\begin{betterlist}
 			\item \nul{if} the order is \nul{too large}, it orders events that may not be ordered by mhb: it misses data races and may yield false negatives. \nul{If} the order is \nul{too small}, it does not order events that may be ordered by mhb: it hallucinates data races and may thus yield false positives
 		\end{betterlist}
-  \end{betterlist}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\linewidth}
 	\raggedright
@@ -533,9 +610,9 @@ func signal(qsem *QSem) {
 \begin{minipage}[t]{0.19\linewidth}
 	\raggedright
 
-  \begin{betterlist}
+	\begin{betterlist}
 		\item the size of D(t) may grow linearly in the size of the trace. To check for a race we check if some element is in D(t). If there are n events, set-based race prediction requires O(n\textsuperscript{2}) time
-  \end{betterlist}
+	\end{betterlist}
 	\inlinebox{Vector Clocks}
 	\begin{betterlist}
 		% \item \cul{Vector clocks}: A distributed timestamp, A representation for a happens-before relation
@@ -626,7 +703,7 @@ func signal(qsem *QSem) {
               %\end{noindent}   }
 		}
 		% \end{betterlist}
-  \end{betterlist}
+	\end{betterlist}
 	\inlinebox{Lock graphs (Dynamic deadlock prediction)}
 	\begin{betterlist}
 		% \item \nul{assumptions:} 
@@ -1163,88 +1240,8 @@ func signal(qsem *QSem) {
 		\end{betterlist}
 		% \item TODO: Die Sache mit maximal und initial execution / path fragment auch aufs Cheatsheet, trace genaue Definition
 		% \item TODO: Die Sache mit free variables und free names bei Pi Calculus
+		% \item TODO: den einen Pi Calculus Beweis
 	\end{betterlist}
-	\inlinebox{Lockset Method (complete but unsound)}
-	\begin{betterlist}
-		% \item \alert{lockset:} is the set of locks that are held when processing a read/write event
-		% \item if the locksets of two conflicting events $e$ and $f$ are \alert{disjoint}, then $(e, f)$ is a \alert{Lockset data race pair}
-		% \begin{betterlist}
-		% 	\item if two conflicting events hold the same lock $y$, then both events must belong to two distinct critical sections involving lock $y$. As critical sections are mutually exclusive, two conflicting events that share the same lock cannot be in a data race
-		% \end{betterlist}
-		% \item $(t1\#acq(y)_k, t2\#rel(y)_l)$ is a matching acquire/release pair if
-		% \begin{enumerate}
-		% 	\item $t1 = t2$, and
-		% 	\begin{betterlist}
-		% 		\item states that $acq(y)$ and $rel(y)$ belong to the same thread
-		% 	\end{betterlist}
-		% 	\item $k < l$ and there is no $t\#rel(y)_m$ where $k < m < l$
-		% 	\begin{betterlist}
-		% 		\item states that there is no other $rel(y)$ between $acq(y)_k$ and $rel(y)_l$
-		% 		\item $t\#e_k$ denotes some event $e$ in thread $t$ at trace position $k$
-		% 	\end{betterlist}
-		% \end{enumerate}
-		% \item $CS(t\#acq(y)_k, t\#rel(y)_l)$ denotes the set of events that are part of the critical section for a matching acquire/release pair $(t\#acq(y)k, t\#rel(y)l)$. We only accept events from the same thread $t$
-		% \begin{betterlist}
-		% 	\item $t'\#e_m \in CS(t\#acq(y)_k, t\#rel(y)_l)$ if $t = t'$ and $k \le m \le l$
-		% 	\item $acq(y)$ and $rel(y)$ are part of the critical section; and any event in the same thread between them is also part of this critical section
-		% \end{betterlist}
-		% \item \alert{lockset of an event $e$:} $LS(e) = \{y \mid \exists a = t\#acq(y)_k, r = t\#rel(y)_l .e \in CS(a, r)\}$
-		% \begin{betterlist}
-		% 	\item consists of all locks $y$ such that $e$ appears in a critical section belonging to lock $y$
-		% \end{betterlist}
-		\item \nul{state variables:}
-		\begin{betterlist}
-			\item ls(t): Set(Lock): The set of locks held by thread t at a certain time
-			\item LS : Event -> Set(Lock): A mapping from an event e to its lockset
-		\end{betterlist}
-		\item \nul{Lockset computation}:
-		\vspace{-0.25cm}
-
-		\adjustbox{scale=0.48}{
-			% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\Large}, box align=top]
-              e@acq(t,y) {
-                ls(t) = ls(t) U {y}
-              }
-              e@rel(t,y) {
-                ls(t) = ls(t) - {y}
-              e@fork(t1,t2) {
-              }
-            \end{dnumberedcodebox}
-          %\end{noindent}
-		}
-		\adjustbox{scale=0.48}{
-			% \begin{noindent}
-            \begin{dnumberedcodebox}[minted language=text,minted options={autogobble, fontsize=\Large}, box align=top]
-              e@join(t1,t2) {
-              }
-              e@write(t,x) {
-                LS(e) = ls(t)
-              }
-              e@read(t,x) {
-                LS(e) = ls(t)
-              }
-            \end{dnumberedcodebox}
-          %\end{noindent}
-		}
-		% \begin{betterlist}
-		% \item $S_1 - S_2$ is set difference
-		% \item the computation of locksets is agnostic to the presence of fork and join events
-		% \end{betterlist}
-		% \item after lockset computation for a program finished one considers all possible pairs of confliciting events (read-write ($r(x)_i$, $w(x)_j$) and write-write events ($w(x)_i$ and $w(x)_j$)) and checks:
-		\begin{betterlist}
-			\item if two locksets are disjoint: LS(c(x)\textsubscript{i}) n LS(c(x)\textsubscript{j}) = \{\} then the conflicting events c(x)\textsubscript{i} and c(x)\textsubscript{j} represent a data race
-		\end{betterlist}
-		\item \cul{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
-		% \item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets
-		% \item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives
-		% \item Lock variable only included if the write is in that trace
-		\item \cul{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness example also applies to lockset)
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
-	\raggedright
-
 	\inlinebox{Pi Calculus}
 	\begin{betterlist}
 		\item \nul{Syntax:}
@@ -1258,14 +1255,23 @@ func signal(qsem *QSem) {
 				\item \nul{Recursion by Replication:} A = acode.A(x).acode -> A' = acode.a<x>.acode, P = pcode.A(x).pcode -> P' = pcode.a<x>.pcode, A' | P' -> (nu a)(P' | !a(x).A')
 			\end{betterlist}
 		\end{betterlist}
-		\item \cul{alpha-conversion} (written P =alpha  Q) is the consistent renaming of bound variables or bound names. It must not change or hide free variables/names
-		\item A \cul{substitution} [x := a] applied to a process P (as in P[x := a]) replaces all free occurrences of variable x by name a. Substitution is \cul{capture-avoiding}, that is, it alpha-converts bound names as needed.
+		\item \cul{alpha-conversion} (written P =alpha  Q) is the consistent renaming of \nul{bound variables} or \nul{bound names}. It must not change or hide free variables/names
+		\item a \cul{substitution} [x := a] applied to a process P (as in P[x := a]) replaces all free occurrences of \nul{variable} x by name a. Substitution is \cul{capture-avoiding}, that is, it alpha-converts bound names as needed.
 		\item \cul{Structural Congruence (Axioms):}
 		\begin{betterlist}
 			\item P equiv  P (reflexivity)
 			\item P equiv  Q =>  Q equiv  P (symmetry)
 			\item P equiv  R and R equiv  Q =>  P equiv  Q (transitivity)
-			\vspace{0.25cm}
+		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
+	\inlinebox{Pi Calculus}
+	\begin{betterlist}
+		\item \cul{Structural Congruence (Axioms) cont.:}
+		\begin{betterlist}
 			\item P equiv  Q =>  (v a)P equiv  (v a)Q (congruence-res)
 			\item P equiv  Q =>  P | R equiv  Q | R (congruence-par)
 			\item P equiv  Q =>  pi .P equiv  pi .Q (congruence-comm)
@@ -1288,20 +1294,6 @@ func signal(qsem *QSem) {
 			\item $\text{(RES)}\dfrac{\text{P -> P'}}{\text{(nu a)P -> (nu a)P'}}$ (\nul{same for ST})
 		\end{betterlist}
 	\end{betterlist}
-	\inlinebox{Lockset Method (complete but unsound) cont.}
-  \begin{betterlist}
-    \item unsound cont.
-		\begin{betterlist}
-			\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock
-		\end{betterlist}
-		\item \nul{comparison and combination with HB method:}
-		\begin{betterlist}
-			\item in practice, it appears that the lockset method gives rise to significantly \cul{more false positives} than the HB method
-			% \item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
-			\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \cul{not affected} if we \cul{reorder critical sections}
-		\end{betterlist}
-  \end{betterlist}
-  
 	% \begin{betterlist}
 	% \item \nul{Expressiveness:} message passing may be implemented using shared variables (viz. consumer/producer message queue implementations)
 	% \item \nul{expressiveness:} shared variables may be implemented using message passing
@@ -1366,10 +1358,6 @@ func signal(qsem *QSem) {
 	% 		\item $pred=False, real=True$, if the hypothesis is present in reality but it can't always be detected by the tool
 	% 	\end{betterlist}
 	% \end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
-	\raggedright
-
 	\inlinebox{Session Types}
 	\begin{betterlist}
 		\item \nul{Processes:} P, Q ::= x<v>.P (send) | qx(y).P (receive) | P | Q (parallel composition) | if v then P else Q (conditional) | 0 (inaction) | (nu x y)P (scope restriction) | x < l.P (selection) | x > \{i : P\textsubscript{i}\}\textsubscript{i€I} (branching)
@@ -1394,34 +1382,39 @@ func signal(qsem *QSem) {
 			\item \nul{Types:} S, T, U ::= bool (boolean) | end (termination) | qp (qualified pretype) | a (type variable) | mu a.T (recursive type)
 			\item \nul{Contexts:} gamma ::= \{\} (empty context) | gamma, x : T (assumption)
 		\end{betterlist}
-		\begin{betterlist}
-			\item \cul{Linearity:} value of type lin T must be used exactly once
-			\item \cul{Unrestricted:} value of type un T can be used zero or more times
-			\item Variable x for \cul{(arbitrarily) qualified type}, a for \cul{unrestricted type}, c for \cul{linear type}
-			\item mu a.T equiv T [mu a.T /a], *U \^= mu a.U.a.
-			\item q\textsubscript{syntax} = un implies q\textsubscript{type} = un (only: {(un, un), (lin, lin), (lin, un)})
-		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.19\linewidth}
+	\raggedright
+
+	\inlinebox{Session Types}
+	\begin{betterlist}
+		\item \cul{Linearity:} value of type lin T must be used exactly once
+		\item \cul{Unrestricted:} value of type un T can be used zero or more times
+		\item Variable x for \cul{(arbitrarily) qualified type}, a for \cul{unrestricted type}, c for \cul{linear type}
+		\item mu a.T equiv T [mu a.T /a], *U \^= mu a.U.a.
+		\item q\textsubscript{syntax} = un implies q\textsubscript{type} = un (only: {(un, un), (lin, lin), (lin, un)})
 		\item \nul{server’s type is dual to the client’s type:}
 		\begin{betterlist}
 			\item dual(q?T.U) = q!T.dual(U) \quad dual(q!T.U) = q?T.dual(U) \quad dual(end) = end \quad dual(mu a.T) = mu a.dual(T) \quad dual(a) = a \quad dual(q+\{i : S\textsubscript{i}\}\textsubscript{i€I}) = q\&\{i : dual(S\textsubscript{i})\}\textsubscript{i€I} \quad dual(q\&\{i : S\textsubscript{i}\}\textsubscript{i€I}) = q+\{i : dual(S\textsubscript{i})\}\textsubscript{i€I}
 		\end{betterlist}
-		% \item \nul{sending a channel:}
-		% \vspace{-0.25cm}
-		%
-		% \adjustbox{scale=0.5}{
-		% 	% \begin{noindent}
-		%   \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
-		%     (nu x1 x2) // !(!bool.end).end
-		%     (nu y1 y2) // ?bool.end
-		%     x1!y2 | x2?z.z!true. | y1?z.printBoolean!z.0
-		%   \end{dnumberedcodebox}
-		%   %\end{noindent}
-		% }
-% 		\item \nul{unrestricted server:}
-% 		\vspace{-0.25cm}
+		\item \nul{sending a channel:}
+		\vspace{-0.25cm}
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+		    (nu x1 x2) // !(!bool.end).end
+		    (nu y1 y2) // ?bool.end
+		    x1!y2 | x2?z.z!true. | y1?z.printBoolean!z.0
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+		}
+% 				\item \nul{unrestricted server:}
+% 				\vspace{-0.25cm}
 %
-% 		\adjustbox{scale=0.5}{
-% 			% \begin{noindent}
+% 				\adjustbox{scale=0.5}{
+% 					% \begin{noindent}
 %     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
 % (nu d1 d2)( // mu s.un !bool.s
 %   (nu client server)( // mu a.un+{max: un?(lin!integer.lin!integer.lin?integer.end).a}, 
@@ -1437,7 +1430,7 @@ func signal(qsem *QSem) {
 % )
 %     \end{dnumberedcodebox}
 %     %\end{noindent}
-% 		}
+% 				}
 		% \adjustbox{scale=0.5}{
 		% 	% \begin{noindent}
 		%   \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
@@ -1458,12 +1451,12 @@ func signal(qsem *QSem) {
 		\adjustbox{scale=0.5}{
 			% \begin{noindent}
     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
-(nu d1 d2)( // mu s.un!(mu a.lin+{max: lin!integer.lin!integer.lin?integer.a, 
-           //                  quit: end}).s
-  (nu client server)( // mu a.lin+{max: lin!integer.lin!integer.lin?integer.a, 
-                   //         quit: end}
-    un d2?s.s > {max: s?x.s?y if x > y then s!x.d1!s else s!y.d1!s,
-                quit: 0}
+(nu d1 d2)( // mu s.un!(mu a.lin+{max: lin!integer.lin!integer. 
+           //                  lin?integer.a, quit: end}).s
+  (nu client server)( // mu a.lin+{max: lin!integer.lin!integer.
+                   //          lin?integer.a, quit: end}
+    un d2?s.s > {max: s?x.s?y if x > y then s!x.d1!s else
+                s!y.d1!s, quit: 0}
     | d1!server.client < max.client!-4.client!2.client?x
      .printInteger!x.client > quit
   )
@@ -1485,30 +1478,30 @@ func signal(qsem *QSem) {
 %     \end{dnumberedcodebox}
 %     %\end{noindent}
 		% 		}
-		% \item \nul{linear syntax with unrestricted type:}
-		% \vspace{-0.25cm}
-		%
-		% \adjustbox{scale=0.5}{
-		% 	% \begin{noindent}
-		%   \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
-		%     (nu x1 x2)( // x1 = mu a.un ?bool.a = *un?bool
-		%       lin x1(y) | x2<true> | x2<true>
-		%     )
-		%   \end{dnumberedcodebox}
-		%   %\end{noindent}
-		% }
-		% \item \nul{linear syntax with linear / unrestricted type:}
-		% \vspace{-0.25cm}
-		%
-		% \adjustbox{scale=0.5}{
-		% 	% \begin{noindent}
-		%   \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
-		%     (nu x1 x2)( // x1 = lin ?bool or x1 = un ?bool
-		%       lin x1(y) | x2<true>
-		%     )
-		%   \end{dnumberedcodebox}
-		%   %\end{noindent}
-		% }
+		\item \nul{shared channel with unrestricted type:}
+		\vspace{-0.25cm}
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+		    (nu x1 x2)( // x1 = mu a.un ?bool.a = *un?bool
+		      lin x1(y) | x2<true> | x2<true>
+		    )
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+		}
+		\item \nul{linear channel with linear / unrestricted type:}
+		\vspace{-0.25cm}
+
+		\adjustbox{scale=0.5}{
+			% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+		    (nu x1 x2)( // x1 = lin ?bool or x1 = un ?bool
+		      lin x1(y) | x2<true>
+		    )
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+		}
 	\end{betterlist}
 \end{minipage}
 \end{document}

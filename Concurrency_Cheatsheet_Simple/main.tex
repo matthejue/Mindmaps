@@ -1251,7 +1251,7 @@ func signal(qsem *QSem) {
 		\begin{betterlist}
 			\item u, v ::= a, b, c, \ldots (names € N) | x, y, z, \ldots (variables)
 			\item pi ::= u<v> (send list of names v along channel u) | u(y) (receive list of names y along channel u) | tau (unobservable action)
-			\item P ::= Sum\textsubscript{i€I} p\textsubscript{i}.P\textsubscript{i} (summation over finite index set I) | P | Q (parallel composition) | (nu a) P (restriction (binds a name)) | !P (replication)
+			\item P ::= +\textsubscript{i€I} p\textsubscript{i}.P\textsubscript{i} (summation over finite index set I) | P | Q (parallel composition) | (nu a) P (restriction (binds a name)) | !P (replication)
 			\begin{betterlist}
 				% \item 0 stands for the empty sum (i.e., I = {}) pi.P abbreviates a singleton sum
 				% \item u(−) and (nu −) are \cul{binders}

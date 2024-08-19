@@ -441,7 +441,7 @@ func wait(qsem *QSem) {
       \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\Large}, box align=top]
       qsem.noBlockedSignals--
       unlock(qsem.m)
-      unlock(qsem.signalSignals)
+      lock(qsem.signalSignals)
     } else {
       qsem.curr--
       unlock(qsem.m)
@@ -449,7 +449,7 @@ func wait(qsem *QSem) {
   } else {
     qsem.noBlockedWaits++
     unlock(qsem.m)
-    lock(qsem.signalWaits)
+    unlock(qsem.signalWaits)
   }
 }
 // up
@@ -459,7 +459,7 @@ func signal(qsem *QSem) {
     if qsem.noBlockedWaits > 0 {
       qsem.noBlockedWaits--
       unlock(qsem.m)
-      unlock(qsem.signalWaits)
+      lock(qsem.signalWaits)
     } else {
       qsem.curr++
       unlock(qsem.m)
@@ -467,7 +467,7 @@ func signal(qsem *QSem) {
   } else {
     qsem.noBlockedSignals++
     unlock(qsem.m)
-    lock(qsem.signalSignals)
+    unlock(qsem.signalSignals)
   }
 }
       \end{dnumberedcodebox}
@@ -491,7 +491,7 @@ func signal(qsem *QSem) {
 			\item To be \nul{efficient}, in an implementation based on the lockset method each thread maintains a list of the most recent reads/writes and their locksets
 		\end{betterlist}
 	\end{betterlist}
-	\inlinebox{Lamport's \cul{happens-before (HB, incomplete and unsound) relation}}
+	\inlinebox{Lamport's happens-before (HB, incomplete and unsound) relation}
 	\begin{betterlist}
 		\item Let T be a trace. We define the HB relation < as the smallest strict partial order that satisfies the following conditions:
 		\begin{enumerate}
@@ -512,7 +512,7 @@ func signal(qsem *QSem) {
 \end{minipage}
 \begin{minipage}[t]{0.195\linewidth}
 	\raggedright
-	\inlinebox{Lamport's \cul{happens-before relation cont.}}
+	\inlinebox{Lamport's happens-before relation cont.}
 	\begin{betterlist}
 		% \item Instead of explicitly constructing a reordering, we calculate a happens before relation. It approximates the possible reorderings and thus can be computed efficiently but may lead to \nul{false positives} and \nul{false negatives}%, it approximates the possible reorderings. The HB relation can be computed efficiently but may lead to false positives and false negatives
 		% \item \cul{a partial order} on events to determine if one event happens before another event. If events are unordered, we assume that these events may happen concurrently (i.e., in any order). \nul{Ground truth:} the \cul{must happen before relation (mhb)}
@@ -609,7 +609,7 @@ func signal(qsem *QSem) {
                     then write-read race (W(x),e)
 
                     R(x) = {e} U (R(x) \ D(t))
-                    D(t) = D(t) cup { e }
+                    D(t) = D(t) U { e }
                   }
                   \end{dnumberedcodebox}
                 %\end{noindent}   }

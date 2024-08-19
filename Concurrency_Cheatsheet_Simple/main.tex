@@ -159,9 +159,9 @@
 	% \textcolor{gray}{Reordering the trace means that one simply permutes the elements}
 	\begin{enumerate}
 		\item The elements in the reordered trace must be part of the original trace
-		\begin{betterlist}
-			\item A valid reordering only needs to include a subset of the events of the original trace
-		\end{betterlist}
+		% \begin{betterlist}
+		% 	\item A valid reordering only needs to include a subset of the events of the original trace
+		% \end{betterlist}
 
 		\item \cul{Program order Condition}: Let P be some trace and P' be a permutation of P. P' preserves program order if, for each thread T, P arrowdown T = P' arrowdown T
 		\begin{betterlist}
@@ -172,6 +172,7 @@
 		\begin{betterlist}
 			\item If P\textsubscript{1} r(x) P\textsubscript{2} is a trace, then the \cul{last writer} of r(x) is some w(x) such that P\textsubscript{1} = P\textsubscript{1}' w(x) P\textsubscript{1}'' and P\textsubscript{1}'' does not contain another w(x)
 		\end{betterlist}
+		\item \cul{Fork-join condition:} \nul{Fork-1:} for each thread T != T1 (not the main thread), there exists at most one fork(T) in P, and there is no fork(T1) in P., \nul{Fork-2:} for each event e in thread T != T1, there exists fork(T) in thread T′ != T and fork(T) < Pe., \nul{Join:} for each join(T) in thread T' we have T != T' and, for each event e in T, e < Pjoin(T)
 	\end{enumerate}
 	\inlinebox{Lockset Method cont.}
 	\begin{betterlist}
@@ -213,7 +214,6 @@
 		\begin{betterlist}
 			\item if two locksets are disjoint: LS(c(x)\textsubscript{i}) n LS(c(x)\textsubscript{j}) = \{\} then the conflicting events c(x)\textsubscript{i} and c(x)\textsubscript{j} represent a data race
 		\end{betterlist}
-		\item \cul{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
 		% \item To be efficient, an implementation based on the lockset method only keeps track of the most recent locksets. That is, each thread maintains a list of the most recent reads/writes and their locksets
 		% \item \enquote{fork} information is not recorded in the trace. As one only compares locksets, one can encounter false positives
 		% \item Lock variable only included if the write is in that trace
@@ -341,6 +341,11 @@ func newQSem(q int) QSem {
                newMutex(), 0, 0}
   return qsem
 }
+// down
+func wait(qsem *QSem) {
+  lock(qsem.m)
+  if qsem.curr > 0 {
+    if qsem.noBlockedSignals > 0 {
     \end{dnumberedcodebox}
     %\end{noindent}
 			}
@@ -434,11 +439,6 @@ func newQSem(q int) QSem {
 			\adjustbox{scale=0.5}{
 				% \begin{noindent}
       \begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\Large}, box align=top]
-// down
-func wait(qsem *QSem) {
-  lock(qsem.m)
-  if qsem.curr > 0 {
-    if qsem.noBlockedSignals > 0 {
       qsem.noBlockedSignals--
       unlock(qsem.m)
       unlock(qsem.signalSignals)
@@ -477,24 +477,38 @@ func signal(qsem *QSem) {
 	\end{betterlist}
 	\inlinebox{Lockset Method cont.}
 	\begin{betterlist}
+		\item \cul{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
 		\item \cul{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness also applies)
 		\begin{betterlist}
-			\item There is a further reason for unsoundness because lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) we may run into a deadlock
+			\item There is a further reason for unsoundness because lockset enables reordering of critical sections%. By reordering critical sections (to exhibit the data race) we may run into a deadlock
+			\item fork information is not recorded
 		\end{betterlist}
 		\item \nul{comparison and combination with HB method:}
 		\begin{betterlist}
 			\item in practice, it appears that the lockset method gives rise to significantly \cul{more false positives} than the HB method
 			% \item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
 			\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \cul{not affected} if we \cul{reorder critical sections}
+      \item To be \nul{efficient}, in an implementation based on the lockset method each thread maintains a list of the most recent reads/writes and their locksets
 		\end{betterlist}
 	\end{betterlist}
 	\inlinebox{Lamport's \cul{happens-before (HB, incomplete and unsound) relation}}
 	\begin{betterlist}
-		\item any \nul{happens-before (partial) order} (HB relation) approximates the \nul{must happen before relation} (the possible reorderings)
-		\begin{betterlist}
-			\item \nul{if} the order is \nul{too large}, it orders events that may not be ordered by mhb: it misses data races and may yield false negatives. \nul{If} the order is \nul{too small}, it does not order events that may be ordered by mhb: it hallucinates data races and may thus yield false positives
-		\end{betterlist}
+		\item Let T be a trace. We define the HB relation < as the smallest strict partial order that satisfies the following conditions:
+		\begin{enumerate}
+			\item \cul{Program order:} If t\#e\textsubscript{i}, t\#f\textsubscript{i + n} € T for some n > 0, then t\#e\textsubscript{i} < t\#f\textsubscript{i + n}
+			\begin{betterlist}
+				\item states that events in the same thread are ordered according to their trace position
+				\item \cul{Trace and event notation}: We write t\#e\textsubscript{i} to denote event e at trace position i in thread t
+			\end{betterlist}
+		\end{enumerate}
 	\end{betterlist}
+
+	% \begin{betterlist}
+	% 	\item any \nul{happens-before (partial) order} (HB relation) approximates the \nul{must happen before relation} (the possible reorderings)
+	% 	\begin{betterlist}
+	% 		\item \nul{if} the order is \nul{too large}, it orders events that may not be ordered by mhb: it misses data races and may yield false negatives. \nul{If} the order is \nul{too small}, it does not order events that may be ordered by mhb: it hallucinates data races and may thus yield false positives
+	% 	\end{betterlist}
+	% \end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\linewidth}
 	\raggedright
@@ -505,31 +519,25 @@ func signal(qsem *QSem) {
 		% \item if two \nul{conflicting operations} are unordered under the happens-before relation, then we report that these operations are in a \nul{(data) race}
 		% \item \textcolor{gray}{One ignores the details of how to instrument programs to carry out tracing of events. In practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available}
 		% \item in practice, the entire trace does not need to be present as events can be processed \alert{online} in a stream-based fashion. A more detailed \alert{offline} analysis may get better results if the full trace is available
-		\item Let T be a trace. We define the HB relation < as the smallest strict partial order that satisfies the following conditions:
+		\item conditions cont.:
 		\begin{enumerate}
-			\item \cul{Program order:} If t\#e\textsubscript{i}, t\#f\textsubscript{i + n} € T for some n > 0, then t\#e\textsubscript{i} < t\#f\textsubscript{i + n}
-			\begin{betterlist}
-				\item states that events in the same thread are ordered according to their trace position
-				\item \cul{Trace and event notation}: We write t\#e\textsubscript{i} to denote event e at trace position i in thread t
-			\end{betterlist}
+			\setcounter{enumi}{1}
 			\item \cul{Critical section order:} If t\textsubscript{1}\#rel(x)\textsubscript{k}, t\textsubscript{2}\#acq(x)\textsubscript{k + n} € T with t\textsubscript{1} != t\textsubscript{2} and n > 0, then t\textsubscript{1}\#rel(x)\textsubscript{k} < t\textsubscript{2}\#acq(x)\textsubscript{k + n}
 			\begin{betterlist}
 				\item states that critical sections are ordered according to their trace position
 				\item for each acquire the matching release must be in the same thread. Hence, the critical section order only needs to consider a release and a subsequent acquire
 			\end{betterlist}
+			\item \nul{If fork(T) €  P}, then, for each e € P arrodown T, fork(T) < e. \nul{If join(T) €}  P, then, for each e €  P arrowdown T, e < join(T)
+			% Recall thread projection: P arrowdown T is the list of events in thread T contained in trace P. 
 		\end{enumerate}
 		\item \cul{Happens-before data race check:} If there are conflicting events e and f but neither e < f nor f < e , then (e, f) is a HB data race pair. The argument is that if neither e < f nor f < e we are able to reorder the trace such that e and f appear right next to each other (in some reordered trace)
 		% \begin{betterlist}
 		% \item \nul{note}: if (e, f) is a HB data race pair then so is (f, e). In such a situation, we consider (e, f) and (f, e) as two distinct representative for the same data race. When reporting (and counting) HB data races we only consider a specific representative
 		% \end{betterlist}
-		\item \nul{False negatives and False positives:}
+		\item the HB method has \cul{false negatives} because the textual order between critical sections is preserved. That is, valid reorderings that swap critical sections are ignored
+		\item the first race reported by the HB method is an \enquote{actual} race. However, subsequent races may be \cul{false positives}
 		\begin{betterlist}
-			\item the HB method has \cul{false negatives} because the textual order between critical sections is preserved. That is, valid reorderings that swap critical sections are ignored
-			\item the first race reported by the HB method is an \enquote{actual} race. However, subsequent races may be \cul{false positives}
-			\begin{betterlist}
-				\item the HB relation does not take into account write-read dependencies and therefore HB data races may not correspond to actual data races
-				\item we say \enquote{may not} because based on the trace alone we cannot decide if the write-read dependency actually affects the control flow
-			\end{betterlist}
+			\item the HB relation does not take into account write-read dependencies and therefore HB data races may not correspond to actual data races, because based on the trace alone we cannot decide if the write-read dependency actually affects the control flow
 		\end{betterlist}
 	\end{betterlist}
 	% \item \cul{dynamic data race prediction}: we record the trace of a specific program run. Two conflicting events may not appear in the trace right next to each other. However, we may be able to predict that there is some trace reordering under which the two conflicting events appear right next to each other (in the reordered trace)
@@ -596,7 +604,8 @@ func signal(qsem *QSem) {
                     W(x) = e
                   }
                   e@read(t,x) {
-                    If W(x) exists and W(x) not in D(t)
+                    If W(x) exists and W(x) 
+                      not in D(t)
                     then write-read race (W(x),e)
 
                     R(x) = {e} U (R(x) \ D(t))
@@ -605,22 +614,23 @@ func signal(qsem *QSem) {
                   \end{dnumberedcodebox}
                 %\end{noindent}   }
 		}
+		% \item the size of D(t) may grow linearly in the size of the trace. To check for a race we check if some element is in D(t). If there are n events, set-based race prediction requires O(n\textsuperscript{2}) time
 	\end{betterlist}
+	\inlinebox{Vector Clocks cont}
+  \begin{betterlist}
+		\item Let e be an event in thread t and j its timestamp. Then, we can uniquely identify e via t and j. We write t\#j to represent event e. In the literature, t\#j is called an \cul{epoch}
+		\begin{betterlist}
+			% \item \cul{Timestamps:} Each thread maintains a timestamp%, We represent a timestamp as a natural number% One generallly uses the timestamp \enquote{before} processing the event, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is 1. 
+			\item for each thread only keep most recent \cul{timestamp}. E.g. in case of \{1\#\{1, 2\}\} we write \{1\#2\}
+		\end{betterlist}
+  \end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.19\linewidth}
 	\raggedright
 
-	\begin{betterlist}
-		\item the size of D(t) may grow linearly in the size of the trace. To check for a race we check if some element is in D(t). If there are n events, set-based race prediction requires O(n\textsuperscript{2}) time
-	\end{betterlist}
-	\inlinebox{Vector Clocks}
+	\inlinebox{Vector Clocks cont}
 	\begin{betterlist}
 		% \item \cul{Vector clocks}: A distributed timestamp, A representation for a happens-before relation
-		\item Let e be an event in thread t and j its timestamp. Then, we can uniquely identify e via t and j. We write t\#j to represent event e. In the literature, t\#j is called an \cul{epoch}
-		\begin{betterlist}
-			\item \cul{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number% One generallly uses the timestamp \enquote{before} processing the event, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is 1. 
-			\item for each thread only keep most recent timestamp. E.g. in case of \{1\#\{1, 2\}\} we write \{1\#2\}
-		\end{betterlist}
 		% \item \cul{set of epochs:} We group together epochs belonging to the same thread. For example, in case of \{1\#1, 1\#2\} we write \{1\#\{1, 2\}\}
 		\item a \cul{vector clock} encodes a set of most recent timestamps from n threads as a vector of length n. V ::= [i\textsubscript{1},\ldots ,i\textsubscript{n}] is vector clock with n time stamps. The entry i\textsubscript{t} is the timestamp for thread t. The above vector clock V stands for the set of timestamps V  \sim\sim  \{1\#i\textsubscript{1}, \ldots, n\#i\textsubscript{n}\} % We use the entry 0 to indicate missing information about a thread
 		\begin{betterlist}
@@ -688,7 +698,7 @@ func signal(qsem *QSem) {
                   If W(x) != 0
                   then let j#k = W(x)
                       if k > Th(t)(j)
-                      then write-write race detected
+                      then write-write race det.
                   W(x) = t#Th(t)(t)
                   inc(Th(t),t)
                 }
@@ -696,7 +706,7 @@ func signal(qsem *QSem) {
                   If W(x) != 0
                   then let j#k = W(x)
                       if k > Th(t)(j)
-                      then read-write race detected
+                      then read-write race det.
                   R(x) = sync(Th(t), R(x))
                 }
                 \end{dnumberedcodebox}
@@ -718,11 +728,61 @@ func signal(qsem *QSem) {
 
 		% \item This can be calculated based on lock sets. Check for cycles in the lock graph. If there is a \alert{cycle}, we report that there is a \alert{potential deadlock}
 		\item If the lock graph contains a cycle, then there is a potential deadlock
-		\item \nul{Precision:} False positive possible. All events take place in the same thread. Common guard lock z.
-		\begin{betterlist}
-			\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives
-		\end{betterlist}
+		\item \nul{Precision:} \cul{False positive} possible. All events take place in the same thread. Common guard lock z.
+		% \begin{betterlist}
+		% 	\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives
+		% \end{betterlist}
 	\end{betterlist}
+  \inlinebox{False positive (lock graph and lock dependency)}
+  \vspace{-0.25cm}
+
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+T1    T2
+acq(y)
+acq(x)
+rel(x)
+rel(y)
+acq(z)
+wr(a) 
+rel(z)
+       acq(z)
+       rd(a) 
+       rel(z)
+       acq(x)
+       acq(y)
+       rel(y)
+       rel(x)
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+	}
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+// Guard lock
+T1    T2
+acq(z)
+acq(y)
+acq(x)
+rel(x)
+rel(y)
+rel(z)
+       acq(z)
+       acq(x)
+       acq(y)
+       rel(y)
+       rel(x)
+       rel(z)
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+	}
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+	}
 	% \inlinebox{Dining Philosophers}
 	% \begin{betterlist}
 	% 	\item \nul{Solutions:}
@@ -1410,11 +1470,11 @@ func signal(qsem *QSem) {
 		  \end{dnumberedcodebox}
 		  %\end{noindent}
 		}
-% 				\item \nul{unrestricted server:}
-% 				\vspace{-0.25cm}
-%
-% 				\adjustbox{scale=0.5}{
-% 					% \begin{noindent}
+		% 				\item \nul{unrestricted server:}
+		% 				\vspace{-0.25cm}
+		%
+		% 				\adjustbox{scale=0.5}{
+		% 					% \begin{noindent}
 %     \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
 % (nu d1 d2)( // mu s.un !bool.s
 %   (nu client server)( // mu a.un+{max: un?(lin!integer.lin!integer.lin?integer.end).a}, 
@@ -1430,7 +1490,7 @@ func signal(qsem *QSem) {
 % )
 %     \end{dnumberedcodebox}
 %     %\end{noindent}
-% 				}
+		% 				}
 		% \adjustbox{scale=0.5}{
 		% 	% \begin{noindent}
 		%   \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
@@ -1503,5 +1563,68 @@ func signal(qsem *QSem) {
 		  %\end{noindent}
 		}
 	\end{betterlist}
+
+	\inlinebox{False postive (HP and lockset)}
+  \vspace{-0.25cm}
+
+	\adjustbox{scale=1}{
+		% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\scriptsize}, box align=top]
+T1   T2        LS      x = 3      
+w(x)             {}      acq(y)     
+acq(y)                    rel(y)     
+rel(y)                     go func() {
+        acq(y)              acq(y)   
+        w(x)     {y}        x = 4    
+        rel(y)               rel(y)   
+                         }()        
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+	}
+
+	\inlinebox{False negative (HP, lock graph and lock dependency)}
+  \vspace{-0.25cm}
+
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+var tmp int
+x := 1
+y := 1
+go func() { // T1
+  x = 2
+  y = 2 // WRITE
+}()
+if y == 2 { // T2
+  x = 3
+}
+// or
+tmp = y // READ
+x = 3
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+	}
+	\adjustbox{scale=0.48}{
+		% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+T1   T2      T3
+w(x)
+w(y)
+     r(y)
+     w(x)
+acq(x)
+// cross-thread critical section
+fork(T2) 
+         acq(y)
+         rel(y)
+join(T2)
+rel(x)
+                acq(y)
+                acq(x)
+                rel(x)
+                rel(y)
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+	}
 \end{minipage}
 \end{document}

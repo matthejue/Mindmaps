@@ -9,7 +9,7 @@
 
 \centering
 
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 	\inlinebox{Important Terms}
 	\begin{betterlist}
@@ -88,7 +88,7 @@
 	% 	\end{betterlist}
 	% \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 
 	\inlinebox{Mutex and Mutable Variable}
@@ -290,7 +290,7 @@
 	% 	\item lists in Go are \alert{heterogeneous}. That is, when one takes an element from the list, one needs to cast its type explicitly
 	% \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 
 	% \inlinebox{Examples for Deadlocks, Livelocks and Starvation via Traces}
@@ -480,7 +480,7 @@ func signal(qsem *QSem) {
 		\item \cul{complete}: Because any conflicting pair of events that represent a data race can be shown to be a lockset data race pair
 		\item \cul{unsound}: Like HB, the lockset method ignores write-read dependencies (therefore the HB unsoundness also applies)
 		\begin{betterlist}
-			\item There is a further reason for unsoundness because lockset enables reordering of critical sections%. By reordering critical sections (to exhibit the data race) we may run into a deadlock
+			\item lockset enables reordering of critical sections. By reordering critical sections (to exhibit the data race) may run into a deadlock
 			\item fork information is not recorded
 		\end{betterlist}
 		\item \nul{comparison and combination with HB method:}
@@ -488,7 +488,7 @@ func signal(qsem *QSem) {
 			\item in practice, it appears that the lockset method gives rise to significantly \cul{more false positives} than the HB method
 			% \item one can combine the HB and lockset method to achieve Efficient, Near Complete and Often Sound Hybrid Dynamic Data Race Prediction (extended version)
 			\item unlike Lamport’s happens-before that is sensitive to the order of critical sections, the computation of locksets is \cul{not affected} if we \cul{reorder critical sections}
-      \item To be \nul{efficient}, in an implementation based on the lockset method each thread maintains a list of the most recent reads/writes and their locksets
+			\item To be \nul{efficient}, in an implementation based on the lockset method each thread maintains a list of the most recent reads/writes and their locksets
 		\end{betterlist}
 	\end{betterlist}
 	\inlinebox{Lamport's \cul{happens-before (HB, incomplete and unsound) relation}}
@@ -510,7 +510,7 @@ func signal(qsem *QSem) {
 	% 	\end{betterlist}
 	% \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 	\inlinebox{Lamport's \cul{happens-before relation cont.}}
 	\begin{betterlist}
@@ -617,15 +617,15 @@ func signal(qsem *QSem) {
 		% \item the size of D(t) may grow linearly in the size of the trace. To check for a race we check if some element is in D(t). If there are n events, set-based race prediction requires O(n\textsuperscript{2}) time
 	\end{betterlist}
 	\inlinebox{Vector Clocks cont}
-  \begin{betterlist}
+	\begin{betterlist}
 		\item Let e be an event in thread t and j its timestamp. Then, we can uniquely identify e via t and j. We write t\#j to represent event e. In the literature, t\#j is called an \cul{epoch}
 		\begin{betterlist}
 			% \item \cul{Timestamps:} Each thread maintains a timestamp%, We represent a timestamp as a natural number% One generallly uses the timestamp \enquote{before} processing the event, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is 1. 
 			\item for each thread only keep most recent \cul{timestamp}. E.g. in case of \{1\#\{1, 2\}\} we write \{1\#2\}
 		\end{betterlist}
-  \end{betterlist}
+	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 
 	\inlinebox{Vector Clocks cont}
@@ -733,10 +733,11 @@ func signal(qsem *QSem) {
 		% 	\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives
 		% \end{betterlist}
 	\end{betterlist}
-  \inlinebox{False positive (lock dependency and lock graph)}
-  \vspace{-0.25cm}
+	\inlinebox{False positive lock dependency and lock graph}
+	\vspace{-0.25cm}
 
-	\adjustbox{scale=0.48}{
+  \begin{minipage}[t]{0.58\textwidth}
+	\adjustbox{scale=0.52}{
 		% \begin{noindent}
 		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
 T1    T2       // Same thread 
@@ -757,7 +758,9 @@ rel(z)           rel(y)
 		  \end{dnumberedcodebox}
 		  %\end{noindent}
 	}
-	\adjustbox{scale=0.48}{
+  \end{minipage}
+  \begin{minipage}[t]{0.38\textwidth}
+	\adjustbox{scale=0.56}{
 		% \begin{noindent}
 		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
 // Guard lock
@@ -777,6 +780,7 @@ rel(z)
 		  \end{dnumberedcodebox}
 		  %\end{noindent}
 	}
+  \end{minipage}
 	\adjustbox{scale=0.48}{
 		% \begin{noindent}
 		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\large}, box align=top]
@@ -804,7 +808,7 @@ rel(z)
 
 \newpage
 
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 	\inlinebox{Lock dependencies}
 	\begin{betterlist}
@@ -1101,7 +1105,7 @@ rel(z)
 	% 	}
 	% % \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 
 	\inlinebox{Promises}
@@ -1249,7 +1253,7 @@ rel(z)
 	}
 	% \end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 
 	\inlinebox{Linear Temporal Logic (LTL)}
@@ -1325,7 +1329,7 @@ rel(z)
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 
 	\inlinebox{Pi Calculus}
@@ -1444,7 +1448,7 @@ rel(z)
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-\begin{minipage}[t]{0.19\linewidth}
+\begin{minipage}[t]{0.195\linewidth}
 	\raggedright
 
 	\inlinebox{Session Types}
@@ -1550,23 +1554,24 @@ rel(z)
 		  \end{dnumberedcodebox}
 		  %\end{noindent}
 		}
-		\item \nul{linear channel with linear / unrestricted type:}
-		\vspace{-0.25cm}
-
-		\adjustbox{scale=0.5}{
-			% \begin{noindent}
-		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
-		    (nu x1 x2)( // x1 = lin ?bool or x1 = un ?bool
-		      lin x1(y) | x2<true>
-		    )
-		  \end{dnumberedcodebox}
-		  %\end{noindent}
-		}
+		% \item \nul{linear channel with linear / unrestricted type:}
+		% \vspace{-0.25cm}
+		%
+		% \adjustbox{scale=0.5}{
+		% 	% \begin{noindent}
+		%   \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
+		%     (nu x1 x2)( // x1 = lin ?bool or x1 = un ?bool
+		%       lin x1(y) | x2<true>
+		%     )
+		%   \end{dnumberedcodebox}
+		%   %\end{noindent}
+		% }
 	\end{betterlist}
 
-	\inlinebox{False postive (HP and lockset)}
-  \vspace{-0.25cm}
+	\inlinebox{False negative HP and False positive lockset}
+	\vspace{-0.25cm}
 
+	\begin{minipage}[t]{0.6\textwidth}
 	\adjustbox{scale=1}{
 		% \begin{noindent}
 		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\scriptsize}, box align=top]
@@ -1578,15 +1583,39 @@ rel(y)                     go func() {
         w(x)     {y}        x = 4    
         rel(y)               rel(y)   
                          }()        
+
+        acq(y)
+        w(x)
+w(x)
 		  \end{dnumberedcodebox}
 		  %\end{noindent}
 	}
+	\end{minipage}
+	\begin{minipage}[t]{0.3\textwidth}
+		\adjustbox{scale=1}{
+			% \begin{noindent}
+		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\scriptsize}, box align=top]
+acq(y1)
+acq(y2)
+rel(y2)
+w(x)
+rel(y1)
+        acq(y2)
+        acq(y1)
+        rel(y1)
+        w(x)
+        rel(y2)
+		  \end{dnumberedcodebox}
+		  %\end{noindent}
+		}
+	\end{minipage}
 
-	\inlinebox{False negative (HP, lock graph and lock dependency)}
-  \vspace{-0.25cm}
+	\inlinebox{False pos. HP, lockset and false neg. lock graph, lock dep.}
+	\vspace{-0.25cm}
 
-	\adjustbox{scale=0.48}{
-		% \begin{noindent}
+	\begin{minipage}[t]{0.3\textwidth}
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
 		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
 var tmp int
 x := 1
@@ -1603,28 +1632,38 @@ tmp = y // READ
 x = 3
 		  \end{dnumberedcodebox}
 		  %\end{noindent}
-	}
-	\adjustbox{scale=0.48}{
-		% \begin{noindent}
+		}
+	\end{minipage}
+	% // cross-thread critical section
+	% acq(x)
+	% fork(T2)
+	%                       acq(y)
+	%                       B-acq(y)
+	%           B-acq(x)
+	% B-join(T2)
+	\begin{minipage}[t]{0.5\textwidth}
+		\adjustbox{scale=0.48}{
+			% \begin{noindent}
 		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
-T1   T2      T3
+T1   T2
 w(x)
 w(y)
      r(y)
      w(x)
-acq(x)
 // cross-thread critical section
-fork(T2) 
-         acq(y)
-         rel(y)
-join(T2)
-rel(x)
-                acq(y)
-                acq(x)
-                rel(x)
-                rel(y)
+1  acq(x)
+2  fork(T2) 
+5           B-acq(y)
+6           rel(y)
+7  B-join(T2)
+8  rel(x)
+3                  acq(y)
+4                  B-acq(x)
+9                  rel(x)
+10                 rel(y)
 		  \end{dnumberedcodebox}
 		  %\end{noindent}
-	}
+		}
+	\end{minipage}
 \end{minipage}
 \end{document}

@@ -733,21 +733,21 @@ func signal(qsem *QSem) {
 		% 	\item Deadlock prediction based on lock graph for Go-style mutexes results in further false positives
 		% \end{betterlist}
 	\end{betterlist}
-  \inlinebox{False positive (lock graph and lock dependency)}
+  \inlinebox{False positive (lock dependency and lock graph)}
   \vspace{-0.25cm}
 
 	\adjustbox{scale=0.48}{
 		% \begin{noindent}
 		  \begin{dnumberedcodebox}[minted language=text, minted options={autogobble, fontsize=\Large}, box align=top]
-T1    T2
-acq(y)
-acq(x)
-rel(x)
-rel(y)
-acq(z)
-wr(a) 
-rel(z)
-       acq(z)
+T1    T2       // Same thread 
+acq(y)          acq(y)
+acq(x)          acq(x)
+rel(x)           rel(x)
+rel(y)           rel(y)
+acq(z)          acq(x)
+wr(a)           acq(y)
+rel(z)           rel(y)
+       acq(z)   rel(x)
        rd(a) 
        rel(z)
        acq(x)

@@ -1235,7 +1235,8 @@ rel(z)
           } else {}
           <-p.m
         }
-        func (p1 *Promise[T]) tryCompleteWith(
+        func (p1 *Promise[T]) 
+          tryCompleteWith(
          p2 *Promise[T]) {
           p2.onSuccess(func(v T) {
             p1.setSucc(v)

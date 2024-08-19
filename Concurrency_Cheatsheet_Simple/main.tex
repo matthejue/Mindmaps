@@ -173,7 +173,7 @@
 		\begin{betterlist}
 			\item If P\textsubscript{1} r(x) P\textsubscript{2} is a trace, then the \cul{last writer} of r(x) is some w(x) such that P\textsubscript{1} = P\textsubscript{1}' w(x) P\textsubscript{1}'' and P\textsubscript{1}'' does not contain another w(x)
 		\end{betterlist}
-		\item \cul{Fork-join condition:} \nul{Fork-1:} for each thread T != T1 (not the main thread), there exists at most one fork(T) in P, and there is no fork(T1) in P., \nul{Fork-2:} for each event e in thread T != T1, there exists fork(T) in thread T′ != T and fork(T) < Pe., \nul{Join:} for each join(T) in thread T' we have T != T' and, for each event e in T, e < Pjoin(T)
+		\item \cul{Fork-join condition:} \nul{Fork-1:} For each thread T != T1 (not the main thread), there exists at most one fork(T) in P, and there is no fork(T1) in P., \nul{Fork-2:} For each event e in thread T != T1, there exists fork(T) in thread T′ != T and fork(T) < Pe., \nul{Join:} For each join(T) in thread T' we have T != T' and, for each event e in T, e < Pjoin(T)
 	\end{enumerate}
 	\inlinebox{Lockset Method cont.}
 	\begin{betterlist}
@@ -528,7 +528,7 @@ func signal(qsem *QSem) {
 				\item states that critical sections are ordered according to their trace position
 				\item for each acquire the matching release must be in the same thread. Hence, the critical section order only needs to consider a release and a subsequent acquire
 			\end{betterlist}
-			\item \nul{If fork(T) €  P}, then, for each e € P arrodown T, fork(T) < e. \nul{If join(T) €}  P, then, for each e €  P arrowdown T, e < join(T)
+			\item \nul{If fork(T)} €  P, then, for each e € P arrodown T, fork(T) < e. \nul{If join(T)} €  P, then, for each e €  P arrowdown T, e < join(T)
 			% Recall thread projection: P arrowdown T is the list of events in thread T contained in trace P. 
 		\end{enumerate}
 		\item \cul{Happens-before data race check:} If there are conflicting events e and f but neither e < f nor f < e , then (e, f) is a HB data race pair. The argument is that if neither e < f nor f < e we are able to reorder the trace such that e and f appear right next to each other (in some reordered trace)

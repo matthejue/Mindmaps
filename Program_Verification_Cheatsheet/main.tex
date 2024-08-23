@@ -542,7 +542,7 @@
 	\end{betterlist}
 	\fbox{Predicate Abstraction}
 	\begin{betterlist}
-    \item Way to design custom domain
+		\item Way to design custom domain
 		\item Let $B$ a finite set of formulas over program variables. The \alert{predicate abstraction for $B$} is the abstract domain $(\mathbb{A}_B, \sqsubseteq, \gamma_B, \alpha_B)$ where
 		\begin{betterlist}
 			\item the abstract states are the subsets of $B$: $\mathbb{A}_B = 2^B$,
@@ -611,7 +611,7 @@
 		\end{betterlist}
 		\item Let $\pi = st_1\ldots st_n$ be an infeasible trace, with $SSA(\pi ) = \{ \psi_1,\ldots , \psi_n\}$ as on the previous slide. Let $X$ be an unsatisfiable core of $SSA(\pi )$, and let $\pi^\# = st^\#_1 \ldots st^\#_n$ such that $st^\#_i = st_i$ if $\psi_i \in X$, and $st^\#_i = abstract(st_i)$ otherwise. Then the trace $\pi^\#$ is infeasible
 	\end{betterlist}
-  \fbox{CEGAR}
+	\fbox{CEGAR}
 	\begin{betterlist}
 		\item Given an abstract reachability graph $(AC, T)$, we call a sequence of statements $st_1,\ldots , st_n$ an \alert{error trace in $(AC, T)$} if there exists a sequence of abstract configurations $(\ell_0, \{ \varphi_0\} ),\ldots , (\ell_n, \{ \varphi_n\})$ such that
 		\begin{betterlist}
@@ -622,11 +622,99 @@
 		\item Let $\pi$  be a trace. If $\varphi_0,\ldots , \varphi_n$ is an infeasibility proof for $\pi$  and $B \supseteq \{ \varphi_0,\ldots \varphi_n\}$  then $\pi$  is not an error trace in an abstract reachability graph that is precise for $B$. \script{487}{Proof}
 		\item \alert{Progress property:} In the CEGAR algorithm, if $\pi$ is the error trace that is analyzed in iteration $i$, then $\pi$ will not be an error trace of the abstract reachability graph in further iterations
 	\end{betterlist}
-  \fbox{Trace Abstraction}
-  \begin{betterlist}
-    \item TODO
-  \end{betterlist}
-  
+	\fbox{Trace Abstraction}
+	\begin{betterlist}
+		\item a \alert{nondeterministic finite automaton (NFA)} is a tuple $A = (Q, \sum , \Delta , Q_{init}, F)$ consisting of a finite set of states $Q$, a finite alphabet $\sum$, a transition relation $\Delta \subseteq Q × \sum  × Q$, a set of initial states $Q_{init} \subseteq Q$, and a set of accepting states $F \subseteq Q$.
+		\begin{betterlist}
+			\item a \alert{run} for a word $w = a_1\ldots a_n \in \sum^{*}$ in an NFA $\mathcal{A}$ is a sequence of states $q_0q_1\ldots q_n$ such that $q_0 \in Q_{init}$ and $(q_{i−1}, a_{i}, q_{i}) \in \Delta$ for all $i \in \{1,\ldots , n\}$. The run is \alert{accepting} if it ends in an accepting state $q_n \in F$
+			\item a word $w \in \sum ^*$ is \alert{accepted} by $\mathcal{A}$ if there exists an accepting run for $w$ in $\mathcal{A}$. We write $\mathcal{L}(A)$ to denote the \alert{language of $\mathcal{A}$}, i.e., the set of all accepted words
+		\end{betterlist}
+		\item Program Automaton $\mathcal{A}_P$: Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. The \alert{program automaton} for $P$ is the NFA $AP = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta $for some locations $\ell, \ell'$
+		\begin{betterlist}
+			\item $P$ satisfies all assert statements iff every word in $L(AP)$ is infeasible
+		\end{betterlist}
+		\item A \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\}  stmt \{\beta(q′)\}$ is valid
+		\item Given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
+		\begin{betterlist}
+			\item every initial state is labeled with true and
+			\item every accepting state is labeled with false
+		\end{betterlist}
+		then every accepted trace of $\mathcal{A}$ is infeasible
+		\item we call an automaton $A = (Q, \sum , \Delta , Q_{init}, F)$ a \alert{Floyd-Hoare automaton} if there exists a Floyd-Hoare annotation $\beta  : Q \rightarrow Fm(V)$ such that
+		\begin{betterlist}
+			\item $\beta(q) = true$ for all $q \in Q_{init}$ and
+			\item $\beta(q) = false$ for all $q \in F$
+		\end{betterlist}
+		\item \underline{Lemma:} Every trace that is accepted by a Floyd-Hoare automaton is infeasible
+		\item If there are Floyd-Hoare automata $A_{1},\ldots , A_{n}$ such that the inclusion $L(AP) \subseteq L(A_{1}) \cup . . . \cup L(A_{n})$ holds then the program $P$ is safe
+	\end{betterlist}
+	\fbox{Constraint-based Invariant Synthesis}
+	\begin{betterlist}
+		\item Given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
+		\begin{betterlist}
+			\item every initial state is labeled with true and
+			\item every accepting state (i.e., error location) is labeled with false
+		\end{betterlist}
+		then $P$ is safe
+		\begin{betterlist}
+			\item there exist formulas $\varphi_{\ell_1},\ldots , \varphi_{\ell_n}$ such that
+			\begin{betterlist}
+				\item $\varphi_{\ell_{init}}$ is true
+				\item for each $(\ell , st, \ell ' ) \in \Delta$ : $sp(\{ \varphi_{\ell} \} , st) \subseteq \{ \varphi_{\ell'}\}$
+				\item for each $\ell \in Loc_{err} : \varphi_{\ell}$ is false
+			\end{betterlist}
+			\item there exist sets of states $S_{\ell_1},\ldots , S_{\ell_n}$ such that
+			\begin{betterlist}
+				\item $S_{\ell_{init}}$ is $S_{V,\mu}$
+				\item for each $(\ell, st, \ell') \in \Delta$ : for all $s, s' \in S_{V,µ}$ : $s \in S_{\ell}$ and $(s, s') \in [[st]]$ implies $s' \in S_{\ell'}$
+				\item for each $\ell \in Loc_{err}$ : $S_{\ell}$ is $\emptyset$
+			\end{betterlist}
+			\item there exist $a\ell 1,\ldots , a\ell n, b\ell 1,\ldots , b\ell n$ such that
+			\begin{betterlist}
+				\item $\forall x. a_{\ell_{init}} \cdot  x + b_{\ell_{init}} \geq 0 \leftrightarrow true$
+				\item for each $(\ell, st, \ell') \in \Delta$ : $\forall x, x' . a_{\ell} \cdot  x + b_{\ell} \geq 0 \land \tau_{st}(x, x') \rightarrow a_{\ell'} \cdot x' + b_{\ell'} \geq 0$
+				\item for each $\ell \in Loc_{err} : \forall x. a_{\ell} \cdot  x + b_{\ell} \geq 0 \leftrightarrow false$
+			\end{betterlist}
+		\end{betterlist}
+		\item \alert{Transition Formula:}  We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$
+		\item Lemma Farkas: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$
+	\end{betterlist}
+	\fbox{Termination Analysis}
+	\begin{betterlist}
+		\item We call an infinite sequence of program configurations $(\ell_0, s_0), (\ell_1, s_1)\ldots$ an \alert{infinite execution} of $P$ if there exists an infinite sequence of statements $st_1, st_2,\ldots$ such that for each $i \in \mathbb{N}$:
+		\begin{betterlist}
+			\item $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and
+			\item $(s_i, s_{i+1}) \in [[st_{i+1}]]$
+		\end{betterlist}
+		\item We call $P$ \alert{terminating} if $P$ does not have an infinite execution that starts in an initial configuration
+		\item Let $X$ be a set. We call a binary relation $R \subseteq X × X$ \alert{well-founded} if there is no infinite sequence $x_1, x_2,\ldots$ such that $(x_i, x_{i+1}) \in R$ for all $i \in \mathbb{N}$
+		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W a$ \alert{ranking function}  for the loop if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ the relation $(f(s), f(s')) \in R$ holds
+		\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating
+		\item \alert{Loop Entry:} Given a while loop \verb|while(expr){ st }| and a control-flow graph $G = (Loc, \Delta , \ell_{init}, \ell_{ex})$ for this while loop, we call $\ell_{init}$ the \alert{entry location} of the while loop
+		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|  with entry location $\ell$. Let $\beta$ be a Floyd-Hoare annotation of $\mathcal{A}_P$. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W$ a \alert{ranking function} if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ with $s \in \{ \beta(\ell )\}$ the relation $(f(s), f(s')) \in R$ holds
+		\item Let $P$ be a program and $\beta$ be a Floyd-Hoare annotation for $P$. If every while loop of $P$ has a ranking function for $\beta$ then $P$ is terminating
+	\end{betterlist}
+	\fbox{Concurrent Programs}
+	\begin{betterlist}
+		\item a \alert{ concurrent Boostan program}  is a triple $(V , \mu , \mathcal{T})$ where
+		\begin{betterlist}
+			\item $V$ is a set of program variables,
+			\item $\mu$ is a map that assigns each variable a domain,
+			\item $\mathcal{T}$ is a finite set of threads, i.e., a set of derivation trees $T$ such that $(V , \mu , T)$ is a (sequential) Boostan program
+		\end{betterlist}
+		\item \alert{Concurrent Program CFG:} Let $P = (V , \mu , \mathcal{T} )$ be a concurrent program, with $\mathcal{T} = \{ T_1,\ldots, T_n\}$. Let $(Loc_i, \Delta_i, \ell_{init,i}, \ell_{ex,i})$ be a CFG for $(V, \mu , T_i)$ for $i = 1, \ldots, n$
+		Then $(Loc, \Delta, \ell_{init}, \ell_{ex})$ is a CFG for $P$, where
+		\begin{betterlist}
+			\item $Loc = Loc_1 \times \ldots \times Loc_n$,
+			\item $((\ell_1,\ldots , \ell_n), st, (\ell'_1,\ldots , \ell'_n)) \in \Delta$ iff $(\ell_i, st, \ell'_i) \in \Delta_i$ for some $i$, and $\ell_j = \ell'_j$ for all $j \ne i$,
+			\item $\ell_{init} = (\ell_{init,1},\ldots , \ell_{init,n})$,
+			\item and $\ell_{ex} = (\ell_{ex,1},\ldots , \ell_{ex,n})$
+		\end{betterlist}
+    \item \alert{Commutativity:} We say that two statements $st1$, $st2$ \alert{commute} if $[[st_1 st_2]] = [[st_2 st_1]]$ holds
+    \item \alert{Equivalence:} We say that two traces $\pi_1, \pi_2$ are \alert{equivalent}, denoted $\pi_1 \sim \pi_2$, if $\pi_2$ can be derived from $\pi_1$ by (repeatedly) swapping adjacent commuting statements
+    \item A \alert{reduction} of a program $P$ is an automaton $\mathcal{A}_R$ such that $\mathcal{L}(\mathcal{A}_R) \subseteq \mathcal{L}(\mathcal{A}_P)$, and for every trace $\pi_1 \in \mathcal{L}(\mathcal{A}_P)$ there exists a trace $\pi_2 \in \mathcal{L}(\mathcal{A}_R)$ with $\pi_1 \sim \pi_2$
+    \item \alert{Soundness of Partial Order Reduction:} If $\mathcal{A}_R$ is a reduction of $P$, and every trace $\pi \in \mathcal{L}(\mathcal{A}_R)$ is correct, then $P$ is safe
+	\end{betterlist}
 \end{minipage}
 
 \newpage

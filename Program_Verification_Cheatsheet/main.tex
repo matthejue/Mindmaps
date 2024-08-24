@@ -168,10 +168,19 @@
 	\end{betterlist}
 	\fbox{(Boogie and) Boostan Semantics}
 	\begin{betterlist}
-		\item \script{159}{Boostan program}
+		\item A \script{159}{\alert{Boostan program}} is a triple $P = (V , \mu , T)$ where,
+		\begin{betterlist}
+			\item $V$ is a set of (program) variables,
+			\item $\mu$  is a map that assigns each variable in V either Z or \{ true, false\}
+			\item $T$ is a derivation tree for the start symbol SBoo in the Boostan grammar
+		\end{betterlist}
+		such that all variables that appear in T are in the set V, and the translation of each expression/type to an SMT term/sort is well-sorted wrt. the map µ
 		\item \script{161}{Problem with C Semantics (ff.)}
 		\item \script{167}{Relational semantics (f.)}
-		\item \script{169}{Program State}, \script{179}{Set of states} (\script{170}{Sets of Program States (first mentioned)})
+		\item Given a program $P = (V , \mu, \mathcal{T})$, a \script{169}{\alert{program state}} is a map that assigns each variable $v \in V$ a value of the variable’s domain. We use $S_{V, \mu}$ to denote the set of all program states
+		\begin{betterlist}
+			\item Given a program $P = (V, \mu, \mathcal{T})$ and a formula $\varphi$ whose free variables are a subset of $V$, then we will use $\{\varphi\}$ to denote the \script{179}{\alert{set of states}} that are a satisfying assignment for $\varphi$. $\{ \varphi \}  := \{ s \in S_{V ,\mu} \mid [[\varphi ]]_{M,s} = true\}$ (\script{170}{Sets of Program States (first mentioned)})
+		\end{betterlist}
 		\item \script{171}{Semantics of Expressions}
 		\begin{betterlist}
 			\item \underline{idea:} Assign each expression an SMT formula. Given an expression $expr$, we define the semantics of the expression, denoted $[[expr]]$ as the SMT formula that is denoted by the same string
@@ -253,6 +262,8 @@
 		\item \script{259}{Havoc Statement}
 		\item \script{267}{Assume Statement}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Hoare Proof System Extended}
 	\begin{betterlist}
 		\item \underline{Rules:}
@@ -268,8 +279,6 @@
 			\item \script{269}{Soundness of the Assume Axiom}
 		\end{betterlist}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Ultimate Referee}
 	\begin{betterlist}
 		\item \script{227}{Guide for Finding a Derivation in the Hoare Proof System}
@@ -278,7 +287,20 @@
 	\end{betterlist}
 	\fbox{Control-flow graphs}
 	\begin{betterlist}
-		\item \script{279}{Control-Flow Graph}, \script{279}{Control-Flow Graph for a Program}, \script{280}{Example}
+		\item A \script{279}{\alert{control-flow graph}} is a tuple $G = (Loc, \Delta , \ell init, \ell ex)$ where
+		\begin{betterlist}
+			\item $Loc$ is a finite set whose elements we call \alert{locations},
+			\item $\Delta$ is a ternary relation that consists of triples $(\ell , st, \ell ')$ where $\ell$ and $\ell'$  are locations, and $st$ is either
+			\begin{betterlist}
+				\item an assignment statement,
+				\item an array assignment statement,
+				\item a havoc statement, or
+				\item an assume statement.
+			\end{betterlist}
+			\item $\ell_{init}$ is a location that we call the \alert{initial location}
+			\item $\ell_{ex}$ is a location that we call the \alert{exit location}
+		\end{betterlist}
+    \item Given a program $P = (V , \mu , st)$ we say that a control-flow graph $G$ is a \script{279}{\alert{Control-Flow Graph for a Program}} $P$ if $G$ is a control-flow graph for st (which we define inductively on the next slides). \script{280}{Example}
 		\begin{betterlist}
 			\item \underline{useful for automated verification:} apply algorithms from graph theory / automata theory
 			\item captures only one aspect of a program, it defines the way in which the programmer arranged the statements in the code
@@ -286,9 +308,9 @@
 			\item \script{281}{Notational Conventions}
 			\item all control-flow graphs for a given statement are \alert{isomorphic} to each other
 		\end{betterlist}
-		\item \script{282}{Sequential Composition}, \script{283}{Example}
-		\item \script{284}{Conditional Statement}, \script{285}{Example}
-		\item \script{286}{While Statement}, \script{287}{Example}
+		\item \script{282}{Sequential Composition}, \script{283}{Illustration}
+		\item \script{284}{Conditional Statement}, \script{285}{Illustration}
+		\item \script{286}{While Statement}, \script{287}{Illustration}
 		\item we call a pair $(\ell, s)$ a \alert{program configuration} of $P$ if $\ell \in Loc$ is a location and $s$ is a state of $P$
 		\item we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}
 		\begin{betterlist}
@@ -629,12 +651,12 @@
 			\item a \alert{run} for a word $w = a_1\ldots a_n \in \sum^{*}$ in an NFA $\mathcal{A}$ is a sequence of states $q_0q_1\ldots q_n$ such that $q_0 \in Q_{init}$ and $(q_{i−1}, a_{i}, q_{i}) \in \Delta$ for all $i \in \{1,\ldots , n\}$. The run is \alert{accepting} if it ends in an accepting state $q_n \in F$
 			\item a word $w \in \sum ^*$ is \alert{accepted} by $\mathcal{A}$ if there exists an accepting run for $w$ in $\mathcal{A}$. We write $\mathcal{L}(A)$ to denote the \alert{language of $\mathcal{A}$}, i.e., the set of all accepted words
 		\end{betterlist}
-		\item Program Automaton $\mathcal{A}_P$: Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. The \alert{program automaton} for $P$ is the NFA $AP = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta $for some locations $\ell, \ell'$
+		\item Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. The \alert{program automaton} for $P$ is the NFA $\mathcal{A}_P = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta $for some locations $\ell, \ell'$
 		\begin{betterlist}
-			\item $P$ satisfies all assert statements iff every word in $L(AP)$ is infeasible
+			\item $P$ satisfies all assert statements iff every word in $\mathcal{L}(\mathcal{A}_P)$ is infeasible
 		\end{betterlist}
-		\item A \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\}  stmt \{\beta(q′)\}$ is valid
-		\item Given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
+		\item a \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\}  stmt \{\beta(q′)\}$ is valid
+		\item given an automaton $\mathcal\{ A\} $, if there is a Floyd-Hoare annotation such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
 			\item every accepting state is labeled with false
@@ -677,7 +699,7 @@
 			\end{betterlist}
 		\end{betterlist}
 		\item \alert{Transition Formula:}  We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$
-		\item Lemma Farkas: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$
+		\item \alert{Lemma Farkas:} If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$
 	\end{betterlist}
 	\fbox{Termination Analysis}
 	\begin{betterlist}
@@ -710,23 +732,24 @@
 			\item $\ell_{init} = (\ell_{init,1},\ldots , \ell_{init,n})$,
 			\item and $\ell_{ex} = (\ell_{ex,1},\ldots , \ell_{ex,n})$
 		\end{betterlist}
-    \item \alert{Commutativity:} We say that two statements $st1$, $st2$ \alert{commute} if $[[st_1 st_2]] = [[st_2 st_1]]$ holds
-    \item \alert{Equivalence:} We say that two traces $\pi_1, \pi_2$ are \alert{equivalent}, denoted $\pi_1 \sim \pi_2$, if $\pi_2$ can be derived from $\pi_1$ by (repeatedly) swapping adjacent commuting statements
-    \item A \alert{reduction} of a program $P$ is an automaton $\mathcal{A}_R$ such that $\mathcal{L}(\mathcal{A}_R) \subseteq \mathcal{L}(\mathcal{A}_P)$, and for every trace $\pi_1 \in \mathcal{L}(\mathcal{A}_P)$ there exists a trace $\pi_2 \in \mathcal{L}(\mathcal{A}_R)$ with $\pi_1 \sim \pi_2$
-    \item \alert{Soundness of Partial Order Reduction:} If $\mathcal{A}_R$ is a reduction of $P$, and every trace $\pi \in \mathcal{L}(\mathcal{A}_R)$ is correct, then $P$ is safe
+		\item \alert{Commutativity:} We say that two statements $st1$, $st2$ \alert{commute} if $[[st_1 st_2]] = [[st_2 st_1]]$ holds
+		\item \alert{Equivalence:} We say that two traces $\pi_1, \pi_2$ are \alert{equivalent}, denoted $\pi_1 \sim \pi_2$, if $\pi_2$ can be derived from $\pi_1$ by (repeatedly) swapping adjacent commuting statements
+		\item A \alert{reduction} of a program $P$ is an automaton $\mathcal{A}_R$ such that $\mathcal{L}(\mathcal{A}_R) \subseteq \mathcal{L}(\mathcal{A}_P)$, and for every trace $\pi_1 \in \mathcal{L}(\mathcal{A}_P)$ there exists a trace $\pi_2 \in \mathcal{L}(\mathcal{A}_R)$ with $\pi_1 \sim \pi_2$
+		\item \alert{Soundness of Partial Order Reduction:} If $\mathcal{A}_R$ is a reduction of $P$, and every trace $\pi \in \mathcal{L}(\mathcal{A}_R)$ is correct, then $P$ is safe
 	\end{betterlist}
 \end{minipage}
 
-\newpage
+% \newpage
+%
+% \begin{minipage}[t]{0.2\linewidth}
+% \end{minipage}
+% \begin{minipage}[t]{0.2\linewidth}
+% \end{minipage}
+% \begin{minipage}[t]{0.2\linewidth}
+% \end{minipage}
+% \begin{minipage}[t]{0.2\linewidth}
+% \end{minipage}
+% \begin{minipage}[t]{0.2\linewidth}
+% \end{minipage}
 
-\begin{minipage}[t]{0.2\linewidth}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-\end{minipage}
 \end{document}

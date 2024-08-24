@@ -287,7 +287,7 @@
 	\end{betterlist}
 	\fbox{Control-flow graphs}
 	\begin{betterlist}
-		\item A \script{279}{\alert{control-flow graph}} is a tuple $G = (Loc, \Delta , \ell init, \ell ex)$ where
+		\item A \script{279}{\alert{control-flow graph}} is a tuple $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ where
 		\begin{betterlist}
 			\item $Loc$ is a finite set whose elements we call \alert{locations},
 			\item $\Delta$ is a ternary relation that consists of triples $(\ell , st, \ell ')$ where $\ell$ and $\ell'$  are locations, and $st$ is either
@@ -312,7 +312,7 @@
 		\item \script{284}{Conditional Statement}, \script{285}{Illustration}
 		\item \script{286}{While Statement}, \script{287}{Illustration}
 		\item we call a pair $(\ell, s)$ a \alert{program configuration} of $P$ if $\ell \in Loc$ is a location and $s$ is a state of $P$
-		\item we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}
+		\item we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}
 		\begin{betterlist}
 			\item Executions do not have to start at the initial location and do not have to end at the exit location
 		\end{betterlist}
@@ -321,7 +321,7 @@
 			\item \alert{initial}, if $\ell= \ell_{init}$ and $s \in\{\varphi_{pre}\}$
 			\item an \alert{error configuration} if $\ell= \ell_{ex}$ and $s \not\in \{\varphi_{post}\}$
 		\end{betterlist}
-		\item \alert{Theorem PppSatAndExec:} The program $P = (V, \mu, st)$ satisfies the precondition-postcondition pair $(\varphi_{pre}, \varphi_{post})$ iff there exists no execution $(\ell_0, s_0), \ldots, (\ell_n, s_n)$ such that $(\ell_0, s0)$ is an initial configuration and $(\ell_n, sn)$ is an error configuration
+		\item \alert{Theorem PppSatAndExec:} The program $P = (V, \mu, st)$ satisfies the precondition-postcondition pair $(\varphi_{pre}, \varphi_{post})$ iff there exists no execution $(\ell_0, s_0), \ldots, (\ell_n, s_n)$ such that $(\ell_0, s_0)$ is an initial configuration and $(\ell_n, s_n)$ is an error configuration
 		\begin{betterlist}
 			\item so far we only had one way to formally show that $(\varphi_{pre}, \varphi_{post})$ is not satisfied: compute the binary relation over states for this program to check if every pair satisfies the precondition-postcondition pair. By Theorem PppSatAndExec we now have an alternative within our formal setting: we can give an execution
 			\item \script{296}{Example program that shows need for Theorem CorrectIffNoErrorReach}
@@ -651,12 +651,12 @@
 			\item a \alert{run} for a word $w = a_1\ldots a_n \in \sum^{*}$ in an NFA $\mathcal{A}$ is a sequence of states $q_0q_1\ldots q_n$ such that $q_0 \in Q_{init}$ and $(q_{i−1}, a_{i}, q_{i}) \in \Delta$ for all $i \in \{1,\ldots , n\}$. The run is \alert{accepting} if it ends in an accepting state $q_n \in F$
 			\item a word $w \in \sum ^*$ is \alert{accepted} by $\mathcal{A}$ if there exists an accepting run for $w$ in $\mathcal{A}$. We write $\mathcal{L}(A)$ to denote the \alert{language of $\mathcal{A}$}, i.e., the set of all accepted words
 		\end{betterlist}
-		\item Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. The \alert{program automaton} for $P$ is the NFA $\mathcal{A}_P = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta $for some locations $\ell, \ell'$
+		\item Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. The \alert{program automaton} for $P$ is the NFA $\mathcal{A}_P = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta$ for some locations $\ell, \ell'$
 		\begin{betterlist}
 			\item $P$ satisfies all assert statements iff every word in $\mathcal{L}(\mathcal{A}_P)$ is infeasible
 		\end{betterlist}
 		\item a \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\}  stmt \{\beta(q′)\}$ is valid
-		\item given an automaton $\mathcal\{ A\} $, if there is a Floyd-Hoare annotation such that
+		\item given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
 			\item every accepting state is labeled with false
@@ -691,7 +691,7 @@
 				\item for each $(\ell, st, \ell') \in \Delta$ : for all $s, s' \in S_{V,µ}$ : $s \in S_{\ell}$ and $(s, s') \in [[st]]$ implies $s' \in S_{\ell'}$
 				\item for each $\ell \in Loc_{err}$ : $S_{\ell}$ is $\emptyset$
 			\end{betterlist}
-			\item there exist $a\ell 1,\ldots , a\ell n, b\ell 1,\ldots , b\ell n$ such that
+			\item there exist $a_{\ell_1},\ldots, a_{\ell_n}, b_{\ell_1},\ldots, b_{\ell_n}$ such that
 			\begin{betterlist}
 				\item $\forall x. a_{\ell_{init}} \cdot  x + b_{\ell_{init}} \geq 0 \leftrightarrow true$
 				\item for each $(\ell, st, \ell') \in \Delta$ : $\forall x, x' . a_{\ell} \cdot  x + b_{\ell} \geq 0 \land \tau_{st}(x, x') \rightarrow a_{\ell'} \cdot x' + b_{\ell'} \geq 0$

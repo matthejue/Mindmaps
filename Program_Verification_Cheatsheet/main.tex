@@ -300,7 +300,7 @@
 			\item $\ell_{init}$ is a location that we call the \alert{initial location}
 			\item $\ell_{ex}$ is a location that we call the \alert{exit location}
 		\end{betterlist}
-    \item Given a program $P = (V , \mu , st)$ we say that a control-flow graph $G$ is a \script{279}{\alert{Control-Flow Graph for a Program}} $P$ if $G$ is a control-flow graph for st (which we define inductively on the next slides). \script{280}{Example}
+		\item Given a program $P = (V , \mu , st)$ we say that a control-flow graph $G$ is a \script{279}{\alert{Control-Flow Graph for a Program}} $P$ if $G$ is a control-flow graph for st (which we define inductively on the next slides). \script{280}{Example}
 		\begin{betterlist}
 			\item \underline{useful for automated verification:} apply algorithms from graph theory / automata theory
 			\item captures only one aspect of a program, it defines the way in which the programmer arranged the statements in the code
@@ -648,8 +648,12 @@
 	\begin{betterlist}
 		\item a \alert{nondeterministic finite automaton (NFA)} is a tuple $A = (Q, \sum , \Delta , Q_{init}, F)$ consisting of a finite set of states $Q$, a finite alphabet $\sum$, a transition relation $\Delta \subseteq Q × \sum  × Q$, a set of initial states $Q_{init} \subseteq Q$, and a set of accepting states $F \subseteq Q$.
 		\begin{betterlist}
-			\item a \alert{run} for a word $w = a_1\ldots a_n \in \sum^{*}$ in an NFA $\mathcal{A}$ is a sequence of states $q_0q_1\ldots q_n$ such that $q_0 \in Q_{init}$ and $(q_{i−1}, a_{i}, q_{i}) \in \Delta$ for all $i \in \{1,\ldots , n\}$. The run is \alert{accepting} if it ends in an accepting state $q_n \in F$
-			\item a word $w \in \sum ^*$ is \alert{accepted} by $\mathcal{A}$ if there exists an accepting run for $w$ in $\mathcal{A}$. We write $\mathcal{L}(A)$ to denote the \alert{language of $\mathcal{A}$}, i.e., the set of all accepted words
+			\item a \alert{run} for a word $w = a_1\ldots a_n \in \sum^{*}$ in an NFA $\mathcal{A}$ is a sequence of states $q_0q_1\ldots q_n$ such that $q_0 \in Q_{init}$ and $(q_{i−1}, a_{i}, q_{i}) \in \Delta$ for all $i \in \{1,\ldots , n\}$
+			\begin{betterlist}
+				\item the run is \alert{accepting} if it ends in an accepting state $q_n \in F$
+			\end{betterlist}
+			\item a word $w \in \sum ^*$ is \alert{accepted} by $\mathcal{A}$ if there exists an accepting run for $w$ in $\mathcal{A}$
+			\item we write $\mathcal{L}(A)$ to denote the \alert{language of $\mathcal{A}$}, i.e., the set of all accepted words
 		\end{betterlist}
 		\item Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. The \alert{program automaton} for $P$ is the NFA $\mathcal{A}_P = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta$ for some locations $\ell, \ell'$
 		\begin{betterlist}
@@ -668,16 +672,15 @@
 			\item $\beta(q) = false$ for all $q \in F$
 		\end{betterlist}
 		\item \underline{Lemma:} Every trace that is accepted by a Floyd-Hoare automaton is infeasible
-		\item If there are Floyd-Hoare automata $A_{1},\ldots , A_{n}$ such that the inclusion $L(AP) \subseteq L(A_{1}) \cup . . . \cup L(A_{n})$ holds then the program $P$ is safe
+		\item If there are Floyd-Hoare automata $\mathcal{A}_{1}, \ldots, \mathcal{A}_{n}$ such that the inclusion $L(\mathcal{A}_P) \subseteq L(\mathcal{A}_{1}) \cup . . . \cup L(\mathcal{A}_{n})$ holds then the program $P$ is safe
 	\end{betterlist}
 	\fbox{Constraint-based Invariant Synthesis}
 	\begin{betterlist}
 		\item Given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
-			\item every accepting state (i.e., error location) is labeled with false
+			\item every accepting state (i.e., error location) is labeled with false then $P$ is safe
 		\end{betterlist}
-		then $P$ is safe
 		\begin{betterlist}
 			\item there exist formulas $\varphi_{\ell_1},\ldots , \varphi_{\ell_n}$ such that
 			\begin{betterlist}
@@ -703,6 +706,7 @@
 	\end{betterlist}
 	\fbox{Termination Analysis}
 	\begin{betterlist}
+		\item \script{546}{Questions} and \script{547}{Answers}
 		\item We call an infinite sequence of program configurations $(\ell_0, s_0), (\ell_1, s_1)\ldots$ an \alert{infinite execution} of $P$ if there exists an infinite sequence of statements $st_1, st_2,\ldots$ such that for each $i \in \mathbb{N}$:
 		\begin{betterlist}
 			\item $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and
@@ -710,14 +714,38 @@
 		\end{betterlist}
 		\item We call $P$ \alert{terminating} if $P$ does not have an infinite execution that starts in an initial configuration
 		\item Let $X$ be a set. We call a binary relation $R \subseteq X × X$ \alert{well-founded} if there is no infinite sequence $x_1, x_2,\ldots$ such that $(x_i, x_{i+1}) \in R$ for all $i \in \mathbb{N}$
-		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W a$ \alert{ranking function}  for the loop if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ the relation $(f(s), f(s')) \in R$ holds
-		\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating
+		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W a$ \alert{ranking function}  for the loop if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ the relation $(f(s), f(s')) \in R$ holds. \script{551}{Example}. \script{550}{Informal definition and loop variant}
+		\begin{betterlist}
+			\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating. \script{553}{Proof}
+		\end{betterlist}
+		\item \script{554}{More questions}
+		\item do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >N y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}
+		\item \script{552}{Every loop that has a ranking function terminating}, \script{556}{Check if a function f is a ranking function}, \script{557}{4 assumptions, lexicographic ranking function}, \script{558}{Ranking function is only decreasing for reachable states}, in order to prove termination of the program above, we also have to take the reachable states into account
 		\item \alert{Loop Entry:} Given a while loop \verb|while(expr){ st }| and a control-flow graph $G = (Loc, \Delta , \ell_{init}, \ell_{ex})$ for this while loop, we call $\ell_{init}$ the \alert{entry location} of the while loop
 		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|  with entry location $\ell$. Let $\beta$ be a Floyd-Hoare annotation of $\mathcal{A}_P$. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W$ a \alert{ranking function} if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ with $s \in \{ \beta(\ell )\}$ the relation $(f(s), f(s')) \in R$ holds
-		\item Let $P$ be a program and $\beta$ be a Floyd-Hoare annotation for $P$. If every while loop of $P$ has a ranking function for $\beta$ then $P$ is terminating
+		\begin{betterlist}
+			\item Let $P$ be a program and $\beta$ be a Floyd-Hoare annotation for $P$. If every while loop of $P$ has a ranking function for $\beta$ then $P$ is terminating
+			\begin{betterlist}
+				\item Floyd-Hoare annotation denotes a superset of the reachable states at each location
+			\end{betterlist}
+		\end{betterlist}
+		\item \underline{Idea of the approach of the Terminator tool:} Iteratively collect ranking functions until termination of all loops is shown. \script{574}{Example}. \script{582}{Büchi Automizer}
+		\begin{enumerate}
+			\item Start with the empty set of ranking functions
+			\item Pick an ultimately periodic trace for which termination is not yet shown (if termination is not yet proven)
+			\item Compute a ranking function for this trace and add it to our collection (if the trace does not have in infinite execution)
+			\item Check if the collection of ranking functions is sufficient to prove termination and continue with the second step
+		\end{enumerate}
+		\item \script{583}{Prove nontermination}, \script{584}{Safety or termination more difficult}
 	\end{betterlist}
+\end{minipage}
+
+\newpage
+
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Concurrent Programs}
 	\begin{betterlist}
+    \item \script{587}{Concurrent Programs}, Number interleaving of 2 threads: $\dfrac{(m+n)!}{m!\cdot n!} $ (\script{588}{Illustration})
 		\item a \alert{ concurrent Boostan program}  is a triple $(V , \mu , \mathcal{T})$ where
 		\begin{betterlist}
 			\item $V$ is a set of program variables,
@@ -732,24 +760,26 @@
 			\item $\ell_{init} = (\ell_{init,1},\ldots , \ell_{init,n})$,
 			\item and $\ell_{ex} = (\ell_{ex,1},\ldots , \ell_{ex,n})$
 		\end{betterlist}
-		\item \alert{Commutativity:} We say that two statements $st1$, $st2$ \alert{commute} if $[[st_1 st_2]] = [[st_2 st_1]]$ holds
-		\item \alert{Equivalence:} We say that two traces $\pi_1, \pi_2$ are \alert{equivalent}, denoted $\pi_1 \sim \pi_2$, if $\pi_2$ can be derived from $\pi_1$ by (repeatedly) swapping adjacent commuting statements
-		\item A \alert{reduction} of a program $P$ is an automaton $\mathcal{A}_R$ such that $\mathcal{L}(\mathcal{A}_R) \subseteq \mathcal{L}(\mathcal{A}_P)$, and for every trace $\pi_1 \in \mathcal{L}(\mathcal{A}_P)$ there exists a trace $\pi_2 \in \mathcal{L}(\mathcal{A}_R)$ with $\pi_1 \sim \pi_2$
-		\item \alert{Soundness of Partial Order Reduction:} If $\mathcal{A}_R$ is a reduction of $P$, and every trace $\pi \in \mathcal{L}(\mathcal{A}_R)$ is correct, then $P$ is safe
+		\item \script{593}{Partial Order Reduction Illustration}
+		\begin{betterlist}
+			\item \alert{Commutativity:} We say that two statements $st1$, $st2$ \alert{commute} if $[[st_1 st_2]] = [[st_2 st_1]]$ holds
+			\item \alert{Equivalence:} We say that two traces $\pi_1, \pi_2$ are \alert{equivalent}, denoted $\pi_1 \sim \pi_2$, if $\pi_2$ can be derived from $\pi_1$ by (repeatedly) swapping adjacent commuting statements
+			\begin{betterlist}
+				\item $\sim$ is indeed reflexive (do not swap any statements), transitive (concatenate sequences of swaps) and symmetric (reverse swaps)
+			\end{betterlist}
+			\item A \alert{reduction} of a program $P$ is an automaton $\mathcal{A}_R$ such that $\mathcal{L}(\mathcal{A}_R) \subseteq \mathcal{L}(\mathcal{A}_P)$, and for every trace $\pi_1 \in \mathcal{L}(\mathcal{A}_P)$ there exists a trace $\pi_2 \in \mathcal{L}(\mathcal{A}_R)$ with $\pi_1 \sim \pi_2$
+			\item \alert{Soundness of Partial Order Reduction:} If $\mathcal{A}_R$ is a reduction of $P$, and every trace $\pi \in \mathcal{L}(\mathcal{A}_R)$ is correct, then $P$ is safe
+		\end{betterlist}
+		\item \script{595}{Example for Reduction of Program Automaton}
 	\end{betterlist}
 \end{minipage}
-
-% \newpage
-%
-% \begin{minipage}[t]{0.2\linewidth}
-% \end{minipage}
-% \begin{minipage}[t]{0.2\linewidth}
-% \end{minipage}
-% \begin{minipage}[t]{0.2\linewidth}
-% \end{minipage}
-% \begin{minipage}[t]{0.2\linewidth}
-% \end{minipage}
-% \begin{minipage}[t]{0.2\linewidth}
-% \end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+\end{minipage}
 
 \end{document}

@@ -74,7 +74,7 @@
 				\item $\mathcal{I}$ maps every $n$-ary function symbol to a function from $\mathcal{D}^n$ to $\mathcal{D}$
 				\item $\mathcal{I}$ maps every $n$-ary predicate symbol to an $n$-ary relation over $\mathcal{D}$, i.e., a subset of $\mathcal{D}^n$
 			\end{betterlist}
-			We call a function $\rho : V_{Var} \rightarrow \mathcal{D}$ that maps variable symbols to elements of the interpretation domain a \alert{variable assignment}
+			We call a function $\rho : \mathcal{V}_{Var} \rightarrow \mathcal{D}$ that maps variable symbols to elements of the interpretation domain a \alert{variable assignment}
     \item Let $f : X \rightarrow Y$ be a function whose domain is some set $X$ and whose range is some set $Y$. Let $\tilde x \in X$ and $\tilde y \in Y$, then we use $f \triangleleft \{\tilde x \rightarrow \tilde y\}$ to denote the function that maps all $x \in X\setminus \{\tilde x\}$  to $f (x)$ and that maps $\tilde x$ to $\tilde y$
 			\item \underline{evaluation:} \script{61}{of terms} and \script{62}{of formulas}
 		\end{betterlist}
@@ -193,9 +193,13 @@
 		\begin{betterlist}
 			\item \underline{idea:} Assign each expression an SMT formula. Given an expression $expr$, we define the semantics of the expression, denoted $[[expr]]$ as the SMT formula that is denoted by the same string
 			\item \script{171}{Exceptions}
-			\item \script{179}{Convention: Omit double brackets} (\script{171}{Convention $expr$ instead of $[[expr]]$} (first mentioned))
+      \item \script{179}{Meaning of $\{\varphi\}$ depending on context}, \script{179}{Convention: Omit double brackets} (\script{171}{Convention $expr$ instead of $[[expr]]$} (first mentioned))
 		\end{betterlist}
 		\item \script{172}{Semantics of the Assignment Statement (f.)}
+    \begin{betterlist}
+      \item \script{172}{prime} is the function that takes a state $s$ and returns a map where every variable $x$ in the domain of $s$ is replaced by $x'$. E.g., $prime(\{a \mapsto 23, b \mapsto 42\})$ is $\{a' \mapsto 23, b' \mapsto 42\}$
+    \end{betterlist}
+    
 		\item \script{178}{Semantics of the Concatenation of Statements}
 		\begin{betterlist}
 			\item \script{177}{Relational Composition}
@@ -320,7 +324,7 @@
 		\item \script{284}{Conditional Statement}, \script{285}{Illustration}
 		\item \script{286}{While Statement}, \script{287}{Illustration}
 		\item we call a pair $(\ell, s)$ a \alert{program configuration} of $P$ if $\ell \in Loc$ is a location and $s$ is a state of $P$
-		\item we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}
+		\item we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements (a trace) $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}
 		\begin{betterlist}
 			\item Executions do not have to start at the initial location and do not have to end at the exit location
 		\end{betterlist}
@@ -383,13 +387,13 @@
 			\begin{betterlist}
 				\item If \verb|st| is a while statement of the form \verb|while(expr){st}| then $sp(S, \verb|st|)$ is $\displaystyle \bigcup_{k\in \mathbb{N}} sp(sp^k(S, \verb|assume expr; st|), \verb|assume !expr;| )$
 				\begin{betterlist}
-					\item \uline{$k$-th iterative application application of the strongest post operator:}\\ $s p^k(S, s t)= \begin{cases}S & \text { if } k=0 \\ s p\left(s p^{k-1}(S, s t), s t\right) & \text { if } k>0\end{cases}$
+					\item \uline{$k$-th iterative application of the strongest post operator:}\\ $s p^k(S, s t)= \begin{cases}S & \text { if } k=0 \\ s p\left(s p^{k-1}(S, s t), s t\right) & \text { if } k>0\end{cases}$
 				\end{betterlist}
 				\item There are \script{340}{examples} in which the strongest post of a while statement can be expressed by a formula
 			\end{betterlist}
 			\item \script{318}{Example 1} and \script{338}{Example 2}
 		\end{betterlist}
-		\item \alert{Quantifier Elimination:} finding an equivalent quanfitier-free formula for a given formula
+		\item \alert{Quantifier Elimination:} Finding an equivalent quanfitier-free formula for a given formula
 		\begin{betterlist}
 			\item \alert{Destructive Equality Resolution 1:} If the variable $x$ does not occur in the term $t$ then the formula $\exists x:\varphi \land x = t$ and the formula $\varphi[x \mapsto t]$ are equivalent. \script{328}{Example and proof idea}
 			\item \alert{Destructive Equality Resolution 2:} If the variable $x$ does not occur in the term $t$ then the formula $\forall x:\varphi \lor x \ne t$ and the formula $\varphi[x\mapsto t]$ are equivalent. \script{329}{Proof idea}
@@ -606,7 +610,7 @@
 		\begin{betterlist}
 			\item We call a trace $\pi$ \alert{feasible} if there is some execution for $\pi$
 		\end{betterlist}
-		\item Given a trace $\pi = st_1, \ldots, st_n$, we call a sequence of formulas $\varphi_0, . . . , \varphi_n$ \alert{inductive for $\pi$} if $sp(\{\varphi_i\}, st_{i+1}) \subseteq \{\varphi_{i+1}\}$ for all $i \in \{0, \ldots, n−1\}$ %(Inductive sequence of formulas)
+		\item Given a trace $\pi = st_1, \ldots, st_n$, we call a \alert{sequence of formulas} $\varphi_0, . . . , \varphi_n$ \alert{inductive for $\pi$} if $sp(\{\varphi_i\}, st_{i+1}) \subseteq \{\varphi_{i+1}\}$ for all $i \in \{0, \ldots, n−1\}$ %(Inductive sequence of formulas)
 		\item If there exists a sequence of formulas $\varphi_0, \ldots , \varphi_n$ that is inductive for $\pi$ such that $\varphi_0$ is $true$ and $\varphi_n$ is $false$, then $\pi$ is infeasible
 		\item We call a sequence of formulas $\varphi_0, \ldots , \varphi_n$ a \alert{proof of infeasibility} if the sequence is inductive for $\pi$, $\varphi_0$ is $true$, and $\varphi_n$ is $false$
 		\item We define the \alert{abstraction of a statement} $abstract(st)$ as follows:

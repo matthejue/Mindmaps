@@ -75,7 +75,7 @@
 				\item $\mathcal{I}$ maps every $n$-ary predicate symbol to an $n$-ary relation over $\mathcal{D}$, i.e., a subset of $\mathcal{D}^n$
 			\end{betterlist}
 			We call a function $\rho : \mathcal{V}_{Var} \rightarrow \mathcal{D}$ that maps variable symbols to elements of the interpretation domain a \alert{variable assignment}
-    \item Let $f : X \rightarrow Y$ be a function whose domain is some set $X$ and whose range is some set $Y$. Let $\tilde x \in X$ and $\tilde y \in Y$, then we use $f \triangleleft \{\tilde x \rightarrow \tilde y\}$ to denote the function that maps all $x \in X\setminus \{\tilde x\}$  to $f (x)$ and that maps $\tilde x$ to $\tilde y$
+			\item Let $f : X \rightarrow Y$ be a function whose domain is some set $X$ and whose range is some set $Y$. Let $\tilde x \in X$ and $\tilde y \in Y$, then we use $f \triangleleft \{\tilde x \rightarrow \tilde y\}$ to denote the function that maps all $x \in X\setminus \{\tilde x\}$  to $f (x)$ and that maps $\tilde x$ to $\tilde y$
 			\item \underline{evaluation:} \script{61}{of terms} and \script{62}{of formulas}
 		\end{betterlist}
 		\item we call a formula $\varphi$ \alert{satisfiable} if there exists a model $M$ and a variable assignment $\rho$ such that $[[\varphi]]_{M,\rho} = true$. Otherwise, $\varphi$ is \alert{unsatisfiable}. We call a formula $\varphi$ \alert{valid} if $[[\varphi]]_{M,\rho} = true$ for all models $M$ and for all variable assignments $\rho$
@@ -193,13 +193,13 @@
 		\begin{betterlist}
 			\item \underline{idea:} Assign each expression an SMT formula. Given an expression $expr$, we define the semantics of the expression, denoted $[[expr]]$ as the SMT formula that is denoted by the same string
 			\item \script{171}{Exceptions}
-      \item \script{179}{Meaning of $\{\varphi\}$ depending on context}, \script{179}{Convention: Omit double brackets} (\script{171}{Convention $expr$ instead of $[[expr]]$} (first mentioned))
+			\item \script{179}{Meaning of $\{\varphi\}$ depending on context}, \script{179}{Convention: Omit double brackets} (\script{171}{Convention $expr$ instead of $[[expr]]$} (first mentioned))
 		\end{betterlist}
 		\item \script{172}{Semantics of the Assignment Statement (f.)}
-    \begin{betterlist}
-      \item \script{172}{prime} is the function that takes a state $s$ and returns a map where every variable $x$ in the domain of $s$ is replaced by $x'$. E.g., $prime(\{a \mapsto 23, b \mapsto 42\})$ is $\{a' \mapsto 23, b' \mapsto 42\}$
-    \end{betterlist}
-    
+		\begin{betterlist}
+			\item \script{172}{prime} is the function that takes a state $s$ and returns a map where every variable $x$ in the domain of $s$ is replaced by $x'$. E.g., $prime(\{a \mapsto 23, b \mapsto 42\})$ is $\{a' \mapsto 23, b' \mapsto 42\}$
+		\end{betterlist}
+
 		\item \script{178}{Semantics of the Concatenation of Statements}
 		\begin{betterlist}
 			\item \script{177}{Relational Composition}
@@ -691,8 +691,9 @@
 		\item Given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
-			\item every accepting state (i.e., error location) is labeled with false then $P$ is safe
+			\item every accepting state (i.e., error location) is labeled with false
 		\end{betterlist}
+		then $P$ is safe
 		\begin{betterlist}
 			\item there exist formulas $\varphi_{\ell_1},\ldots , \varphi_{\ell_n}$ such that
 			\begin{betterlist}
@@ -705,6 +706,12 @@
 				\item $S_{\ell_{init}}$ is $S_{V,\mu}$
 				\item for each $(\ell, st, \ell') \in \Delta$ : for all $s, s' \in S_{V,µ}$ : $s \in S_{\ell}$ and $(s, s') \in [[st]]$ implies $s' \in S_{\ell'}$
 				\item for each $\ell \in Loc_{err}$ : $S_{\ell}$ is $\emptyset$
+			\end{betterlist}
+			\item there exist $p{\ell_1},\ldots , p{\ell_n}$ such that
+			\begin{betterlist}
+				\item $\forall\vec{v}. p_{\ell_{init}}(\vec{v}) \Leftrightarrow true$
+				\item for each $(\ell, st, \ell') \in \Delta : \forall\vec{v}.\forall\vec{v'}.p_{\ell}(\vec{v}) \land \tau_{st}(\vec{v},\vec{v'}) \rightarrow p_{\ell'}(\vec{v}')$
+        \item for each $\ell \in Loc_{err} : \forall\vec{v}. p_{\ell}(\vec{v}) \Leftrightarrow false$
 			\end{betterlist}
 			\item there exist $a_{\ell_1},\ldots, a_{\ell_n}, b_{\ell_1},\ldots, b_{\ell_n}$ such that
 			\begin{betterlist}

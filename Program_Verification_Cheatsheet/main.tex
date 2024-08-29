@@ -688,7 +688,7 @@
 	\end{betterlist}
 	\fbox{Constraint-based Invariant Synthesis}
 	\begin{betterlist}
-		\item Given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
+		\item given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
 			\item every accepting state (i.e., error location) is labeled with false
@@ -709,25 +709,67 @@
 			\end{betterlist}
 			\item there exist $p{\ell_1},\ldots , p{\ell_n}$ such that
 			\begin{betterlist}
-				\item $\forall\vec{v}. p_{\ell_{init}}(\vec{v}) \Leftrightarrow true$
+				\item $\forall\vec{v}. p_{\ell_{init}}(\vec{v}) \leftrightarrow true$
 				\item for each $(\ell, st, \ell') \in \Delta : \forall\vec{v}.\forall\vec{v'}.p_{\ell}(\vec{v}) \land \tau_{st}(\vec{v},\vec{v'}) \rightarrow p_{\ell'}(\vec{v}')$
-        \item for each $\ell \in Loc_{err} : \forall\vec{v}. p_{\ell}(\vec{v}) \Leftrightarrow false$
+				\item for each $\ell \in Loc_{err} : \forall\vec{v}. p_{\ell}(\vec{v}) \leftrightarrow false$
 			\end{betterlist}
 			\item there exist $a_{\ell_1},\ldots, a_{\ell_n}, b_{\ell_1},\ldots, b_{\ell_n}$ such that
 			\begin{betterlist}
 				\item $\forall x. a_{\ell_{init}} \cdot  x + b_{\ell_{init}} \geq 0 \leftrightarrow true$
 				\item for each $(\ell, st, \ell') \in \Delta$ : $\forall x, x' . a_{\ell} \cdot  x + b_{\ell} \geq 0 \land \tau_{st}(x, x') \rightarrow a_{\ell'} \cdot x' + b_{\ell'} \geq 0$
 				\item for each $\ell \in Loc_{err} : \forall x. a_{\ell} \cdot  x + b_{\ell} \geq 0 \leftrightarrow false$
+				\item special case where the program has only one variable. The extension to multiple variables is straightforward
 			\end{betterlist}
 		\end{betterlist}
-		\item \alert{Transition Formula:}  We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$
-		\item \alert{Lemma Farkas:} If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$
+		\item \alert{Obstacle 1:} The relation $[[st]]$ that defines the meaning of a statement st is not given as a formula
+		\begin{betterlist}
+			\item define the transition formula which is a formula that denotes the relation $[[st]]$ for a given statement $st$. Such a formula does not always exist (difficult to prove) and is not unique. For every simple statement there exists a transition formula. Since a control-flow graph contains only simple statements we overcame Obstacle 1
+		\end{betterlist}
+		\item \alert{Obstacle 2:} The condition quantifies over states, sets of states and both sorts are related via the 'is element' relation. This is usually impossible in first-order logic and can only be done in second-order logic
+		\begin{betterlist}
+			\item Using the two obserservations below, we rephrase the set conditions from above as SMT formulas by the conditions below them. In order to improve legibility we use $\vec{v}$ to denote the list of all program variables. We call these formulas constraints
+			\begin{enumerate}
+				\item The quantification of set variables is existential and the outermost quantification in the orange box. We can always drop the outermost existential quantification (we introduce a Skolem constant) by replacing the quantified variables by other symbols and obtain an equisatisfiable formula
+				\item If quantification is not required, we can use a predicate symbol to represent a set. E.g., over the integers, the set of even numbers is a (resp. the only) satisfying assignment for the predicate symbol $p$ in the following formula. $\forall x.p(x) \leftrightarrow \exists y.x = 2 \cdot y$
+			\end{enumerate}
+			\item We note that the constraints do not encode the existence of a Floyd-Hoare annotation but something weaker: for a Floyd-Hoare annotation we require additionally that the solutions for sets of states can be represented as a FOL formula
+		\end{betterlist}
+		\item \alert{Transition Formula:}  We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$. \script{524}{Transition formulas for statements from lecture}
 	\end{betterlist}
 \end{minipage}
 
 \newpage
 
 \begin{minipage}[t]{0.2\linewidth}
+	\begin{betterlist}
+		\item \underline{Problem:} No SMT-sovler is able to provide a response for the check-sat command. The constraints are already too complicated for small and simple control flow graphs. Thus have to find a simpler problem for which our approach works
+		\begin{betterlist}
+			\item Do not check if some Floyd-Hoare annotation exists, check only if some Floyd-Hoare annotation of a specific form exists
+			\item Replace each $p\ell(\vec{v})$ by a linear inequality whose variables are the variables of the program and whose coefficients are the unknowns for which we want to find a solution. E.g. replace the predicate symbol $p_{\ell}(x, y)$ by $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$
+			\item $\oplus$ The SMT solver does not have to find a solution for predicate symbols but only for first-order variables $a_{\ell}$, $b_{\ell}$, $c_{\ell}$
+			\item $\ominus$ We can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta (\ell)$ is a linear inequality
+		\end{betterlist}
+		\item \underline{Problem:} No SMT-solver is able to provide a response for the check-sat command. The constraints are already too complicated for small and simple control flow graphs
+		\begin{betterlist}
+			\item \underline{constraints that are difficult to solve:}
+			\begin{enumerate}
+				\item Quantifier alternation. Since we are searching for a satisfying assignment of a non-closed formula, the formula is implicitly existentially quantified and we have to solve a problem that involves quantifier alternation.
+				\item Nonlinear arithmetic (i.e., multiplication of variables)
+			\end{enumerate}
+			\item \underline{can use a brilliant idea:}
+			\begin{betterlist}
+				\item can write (many) transition formulas as conjunction of linear inequalities, and abbreviate. \script{533}{Example}
+				such conjunctions using matrix notation
+				\item \script{534}{\alert{Lemma Farkas}}: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$
+				\begin{betterlist}
+					\item use this lemma to transform formulas into equivalent formulas that are simpler for SMT solvers as they do not have quantifier alternation: $\exists\vec{\lambda}.(\vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot  A =\vec{c}^⊺\land\vec{\lambda}^T\cdot \vec{b} \leq \delta )$ is satisfiable iff $(\vec{\lambda}  \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$ is satisfiable
+					\item \script{535}{Steps}
+					% \item extension to use a boolean combination of linear inequalities. For Farkas’ Lemma we need a form that is very similar to a conjunctive normal form and that hence the size of the final formula grows exponentially in the size of this Boolean combination of linear inequalities
+				\end{betterlist}
+			\end{betterlist}
+			\item \script{537}{Example}. We use $\vec{\lambda}=\left[\begin{array}{c}L_{41}\\\ldots\\L_{45}\end{array}\right]$, where the first index (4) indicates from which constraint the constant stems, and the second index indicates the position in the vector
+		\end{betterlist}
+	\end{betterlist}
 	\fbox{Termination Analysis}
 	\begin{betterlist}
 		\item \script{546}{Questions} and \script{547}{Answers}

@@ -545,7 +545,7 @@
 		\begin{betterlist}
 			\item \script{402}{Abstract Evaluation}
 			\item interval abstraction does not satisfy ACC
-			\item \alert{Widening Operator:} A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that
+      \item \color{orange}\alert{Widening Operator:} A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that\color{black}
 			\begin{betterlist}
 				\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
 				\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$
@@ -555,7 +555,7 @@
 				\item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F\triangledown(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$
 			\end{betterlist}
 		\end{betterlist}
-		\item \alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
+  \item \color{orange}\alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
 		\begin{betterlist}
 			\item $\mathbb{A} = V \rightarrow A_{\mathbb{Z}}$
 			\item $s^\#_1 \sqsubseteq s^\#_2$ iff for all $x \in V$ it holds that $s^\#_1(x) \sqsubseteq_{\mathbb{Z}} s^\#_2(x)$
@@ -569,11 +569,11 @@
 				\item $post^\#(s^\#, \verb|assume expr|) := \alpha(\gamma(s^\#) \cap \{expr\}) = \alpha(sp(\gamma(s^\#), \verb|assume expr|))$
 			\end{betterlist}
 			where $\top= \bigsqcup_{\sqsubseteq_{\mathbb{Z}}} A_{\mathbb{Z}}$ is the greatest element of $A_{\mathbb{Z}}$. \script{405}{Proof}
-		\end{betterlist}
-		\item an \alert{abstract evaluation function} for a value abstraction $(A_{\mathbb{Z}}, \sqsubset_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ is a monotone function $eval^\#$ that takes an (integer) expression $expr$ and an abstract state $s^\#: V \rightarrow A_{\mathbb{Z}}$ and returns an element of $A_{\mathbb{Z}}$ such that
+    \end{betterlist}\color{black}
+  \item \color{orange}an \alert{abstract evaluation function} for a value abstraction $(A_{\mathbb{Z}}, \sqsubset_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ is a monotone function $eval^\#$ that takes an (integer) expression $expr$ and an abstract state $s^\#: V \rightarrow A_{\mathbb{Z}}$ and returns an element of $A_{\mathbb{Z}}$ such that
 		\begin{betterlist}
 			\item if $s \in \gamma(s^\#)$ and $[[expr]]_{M,\rho} = v$ for $\rho = s$ then $v \in \gamma_{\mathbb{Z}}(eval^\#(expr, s^\#))$
-		\end{betterlist}
+		\end{betterlist}\color{black}
   \item \color{orange}\alert{Abstract Annotation}: For a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an \alert{abstract annotation} is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$\color{black}
 		\begin{betterlist}
     \item \color{orange}Let $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ be a control-flow graph, and let $f$ be an abstract annotation for $G$. Assume that for every $\ell\in Loc$ there exists a formula $\varphi_{\ell}$ such that $\gamma(f(\ell)) = \{\varphi_{\ell}\}$. Then the graph $(AC, T)$ with $AC = \{(\ell, \{\varphi_{\ell}\}) \mid \ell \in Loc\}$ and $T = \{((\ell, \{\varphi_{\ell}\}), st, (\ell', \{\varphi_{\ell'}\})) \mid (\ell, st, \ell') \in \Delta\}$ is an \alert{abstract reachability graph}. \script{411}{Proof (f.)}\color{black}
@@ -598,15 +598,15 @@
 	\fbox{Predicate Abstraction}
 	\begin{betterlist}
 		\item Way to design custom domain
-		\item Let $B$ a finite set of formulas over program variables. The \alert{predicate abstraction for $B$} is the abstract domain $(\mathbb{A}_B, \sqsubseteq, \gamma_B, \alpha_B)$ where
+    \item \color{orange}Let $B$ a finite set of formulas over program variables. The \alert{predicate abstraction for $B$} is the abstract domain $(\mathbb{A}_B, \sqsubseteq, \gamma_B, \alpha_B)$ where
 		\begin{betterlist}
 			\item the abstract states are the subsets of $B$: $\mathbb{A}_B = 2^B$,
 			\item the order $\sqsubseteq$ is subset inclusion $\subseteq$,
 			\item the concretization is $\gamma_B(X) = \{\bigwedge X\}$,
 			\item and the abstraction is $\alpha_B(S) = \{\varphi \in B \mid S \subseteq \{\varphi\}\}$
-		\end{betterlist}
-  \item \color{violet}The following defines an \alert{abstract post operator} for predicate abstraction for $B$: $post^\#_B(X, st) = \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\}$\color{black}
-  \item \color{orange}Given a finite set of formulas $B$ we define the \script{452}{\alert{abstract strongest post}} operator as follows: $sp^\#_B(S, st) = \{\bigwedge \{\varphi \in B \mid sp(S, st) \subseteq \{\varphi\}\}\}$\color{black}
+      \end{betterlist}\color{black}
+    \item \color{violet}The following defines an \alert{abstract post operator} for predicate abstraction for $B$: $post^\#_B(X, st) = \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\} = \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}$\color{black}
+    \item \color{orange}Given a finite set of formulas $B$ we define the \script{452}{\alert{abstract strongest post}} operator as follows: $sp^\#_B(S, st) = \{\bigwedge \{\varphi \in B \mid sp(S, st) \subseteq \{\varphi\}\}\}$ or $sp^\#_B(\{\bigwedge X\}, st) = \{\bigwedge \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\}\} = \{\bigwedge \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}\}$\color{black}
 		\begin{betterlist}
 			\item $sp^\#_B(\{ \psi \} , st) = \{\bigwedge \{\varphi \in B \mid sp(\{ \psi \}, st) \subseteq \{ \varphi \}\}\}$
 		\end{betterlist}

@@ -69,14 +69,14 @@
 			\item \alert{precedence} of quantifiers is lower than the precedence of logical connectives
 			\item A \script{60}{model} $M = (\mathcal{D}, \mathcal{I})$ is a pair where $\mathcal{D}$ is a nonempty set that we call \alert{interpretation domain} and $\mathcal{I}$ is a function that we call \alert{interpretation function} and that has the following properties:
 			\begin{betterlist}
-				\item The domain of $\mathcal{I}$ is $\mathcal{V}_{Const} \cup \mathcal{V}_{Fun} \cup \mathcal{V}_{Pred}$
+				\item The domain of $\mathcal{I}$ is $\mathcal{V}_{Const} \cup \mathcal{V}_{Fun} \cup \mathcal{V}_{Pred}$ (all \alert{except for $\mathcal{V}_{Var}$})
 				\item $\mathcal{I}$ maps every constant symbol to an element of $\mathcal{D}$
 				\item $\mathcal{I}$ maps every $n$-ary function symbol to a function from $\mathcal{D}^n$ to $\mathcal{D}$
 				\item $\mathcal{I}$ maps every $n$-ary predicate symbol to an $n$-ary relation over $\mathcal{D}$, i.e., a subset of $\mathcal{D}^n$
 			\end{betterlist}
 			We call a function $\rho : \mathcal{V}_{Var} \rightarrow \mathcal{D}$ that maps variable symbols to elements of the interpretation domain a \alert{variable assignment}
 			\item Let $f : X \rightarrow Y$ be a function whose domain is some set $X$ and whose range is some set $Y$. Let $\tilde x \in X$ and $\tilde y \in Y$, then we use $f \triangleleft \{\tilde x \rightarrow \tilde y\}$ to denote the function that maps all $x \in X\setminus \{\tilde x\}$  to $f (x)$ and that maps $\tilde x$ to $\tilde y$
-			\item \underline{evaluation:} \script{61}{of terms} and \script{62}{of formulas}
+			\item \underline{evaluation:} \script{61}{of terms} (returns \alert{element of domain}) and \script{62}{of formulas} (returns \alert{truth value})
 		\end{betterlist}
 		\item we call a formula $\varphi$ \alert{satisfiable} if there exists a model $M$ and a variable assignment $\rho$ such that $[[\varphi]]_{M,\rho} = true$. Otherwise, $\varphi$ is \alert{unsatisfiable}. We call a formula $\varphi$ \alert{valid} if $[[\varphi]]_{M,\rho} = true$ for all models $M$ and for all variable assignments $\rho$
 		\begin{betterlist}
@@ -100,7 +100,7 @@
 	\fbox{FOL Proof system ($N_{FOL}$)}
 	\begin{betterlist}
 		\item proof system for deriving valid FOL entailments $\Gamma \models \varphi$
-		\item $N_{FOL}$ (natural deduction for first order logic):
+		\item \script{70}{$N_{FOL}$} (natural deduction for first order logic):
 
 		\includegraphics[width=0.7\linewidth]{./figures/nfol.png}
 		\begin{betterlist}
@@ -176,18 +176,18 @@
 	\end{betterlist}
 	\fbox{(Boogie and) Boostan Semantics}
 	\begin{betterlist}
-  \item \color{orange}A \script{159}{\alert{Boostan program}} is a triple $P = (V , \mu , T)$ where,
+		\item \color{orange}A \script{159}{\alert{Boostan program}} is a triple $P = (V , \mu , T)$ where,
 		\begin{betterlist}
 			\item $V$ is a set of (program) variables,
 			\item $\mu$  is a map that assigns each variable in V either Z or \{ true, false\}
 			\item $T$ is a derivation tree for the start symbol SBoo in the Boostan grammar
 		\end{betterlist}
-    such that all variables that appear in T are in the set V, and the translation of each expression/type to an SMT term/sort is well-sorted wrt. the map $\mu$\color{black}
+		such that all variables that appear in T are in the set V, and the translation of each expression/type to an SMT term/sort is well-sorted wrt. the map $\mu$\color{black}
 		\item \script{161}{Problem with C Semantics (ff.)}
 		\item \script{167}{Relational semantics (f.)}
-    \item \color{orange}Given a program $P = (V , \mu, \mathcal{T})$, a \script{169}{\alert{program state}} is a map that assigns each variable $v \in V$ a value of the variable’s domain. We use $S_{V, \mu}$ to denote the set of all program states\color{black}
+		\item \color{orange}Given a program $P = (V , \mu, \mathcal{T})$, a \script{169}{\alert{program state}} is a map that assigns each variable $v \in V$ a value of the variable’s domain. We use $S_{V, \mu}$ to denote the set of all program states\color{black}
 		\begin{betterlist}
-    \item \color{orange}Given a program $P = (V, \mu, \mathcal{T})$ and a formula $\varphi$ whose free variables are a subset of $V$, then we will use $\{\varphi\}$ to denote the \script{179}{\alert{set of states}} that are a satisfying assignment for $\varphi$. $\{ \varphi \}  := \{ s \in S_{V ,\mu} \mid [[\varphi ]]_{M,s} = true\}$ (\script{170}{Sets of Program States (first mentioned)})\color{black}
+			\item \color{orange}Given a program $P = (V, \mu, \mathcal{T})$ and a formula $\varphi$ whose free variables are a subset of $V$, then we will use $\{\varphi\}$ to denote the \script{179}{\alert{set of states}} that are a satisfying assignment for $\varphi$. $\{ \varphi \}  := \{ s \in S_{V ,\mu} \mid [[\varphi ]]_{M,s} = true\}$ (\script{170}{Sets of Program States (first mentioned)})\color{black}
 		\end{betterlist}
 		\item \script{171}{Semantics of Expressions}
 		\begin{betterlist}
@@ -197,7 +197,7 @@
 		\end{betterlist}
 		\item \script{172}{Semantics of the Assignment Statement (f.)}
 		\begin{betterlist}
-    \item \color{orange}\script{172}{prime} is the function that takes a state $s$ and returns a map where every variable $x$ in the domain of $s$ is replaced by $x'$. E.g., $prime(\{a \mapsto 23, b \mapsto 42\})$ is $\{a' \mapsto 23, b' \mapsto 42\}$\color{black}
+			\item \color{orange}\script{172}{prime} is the function that takes a state $s$ and returns a map where every variable $x$ in the domain of $s$ is replaced by $x'$. E.g., $prime(\{a \mapsto 23, b \mapsto 42\})$ is $\{a' \mapsto 23, b' \mapsto 42\}$\color{black}
 		\end{betterlist}
 
 		\item \script{178}{Semantics of the Concatenation of Statements}
@@ -214,15 +214,15 @@
 	\fbox{Hoare Proof System}
 	\begin{betterlist}
 		\item proof system for deriving valid Hoare triples $\{\varphi\} st \{\psi\}$
-    \item \color{orange}a program $P$ \alert{satisfies the precondition-postcondition pair} $(\{\varphi_{pre}\}, \{\varphi_{post}\})$ if the inclusion $post(\{\varphi_{pre}\}, [[st]]) \subseteq \{\varphi_{post}\}$ holds (\script{189}{Precondition-Postcondition Pairs})\color{black}
+		\item \color{orange}a program $P$ \alert{satisfies the precondition-postcondition pair} $(\{\varphi_{pre}\}, \{\varphi_{post}\})$ if the inclusion $post(\{\varphi_{pre}\}, [[st]]) \subseteq \{\varphi_{post}\}$ holds (\script{189}{Precondition-Postcondition Pairs})\color{black}
 		\begin{betterlist}
 			\item given a binary relation $R$ over the set $X$ and a subset of $Y \subseteq X$, the \alert{postimage of $Y$ under $R$},
 			denoted $post(Y , R)$, is the set $\{x \in X \mid \text{ exists } y \in Y \text{ such that } (y, x) \in R\}$. \script{190}{Example}
 			\item \script{191}{Full Example}
 		\end{betterlist}
 		\item given a set of states $\{\varphi\}$, a program statement $st$ and a set of states $\{\psi\}$, we call the triple $\{\varphi\} st \{\psi\}$ a \alert{Hoare triple}
-    \item \color{orange}we call a Hoare triple $\{\varphi\} st \{\psi\}$ \alert{valid} if $st$ satisfies the precondition-postcondition pair $(\{\varphi\}, \{\psi\})$. \script{197}{Example}\color{black}
-    \item \underline{\script{200}{Rules}:}
+		\item \color{orange}we call a Hoare triple $\{\varphi\} st \{\psi\}$ \alert{valid} if $st$ satisfies the precondition-postcondition pair $(\{\varphi\}, \{\psi\})$. \script{197}{Example}\color{black}
+		\item \underline{\script{200}{Rules}:}
 
 		\includegraphics[width=0.7\linewidth]{./figures/hoare_rules.png}
 		\begin{betterlist}
@@ -278,7 +278,7 @@
 	\end{betterlist}
 	\fbox{Hoare Proof System Extended}
 	\begin{betterlist}
-  \item \underline{Rules:}
+		\item \underline{Rules:}
 
 		\includegraphics[width=0.5\linewidth]{./figures/arrassig.png}
 
@@ -373,7 +373,7 @@
 			\item each initial configuration is an element of RC
 			\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$ then $(\ell', s') \in RC$
 		\end{betterlist}
-  \item \color{orange}the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell', s')) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$\color{black}
+		\item \color{orange}the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell', s')) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$\color{black}
 		\begin{betterlist}
 			\item \script{362}{Algorithm}
 		\end{betterlist}
@@ -388,7 +388,7 @@
 	\begin{betterlist}
 		\item main means for analyzing the effect of statements in the control-flow graph-based view on programs
 		\item programs with more than one initial state, execute a loop-free program symbolically (i.e., on all inputs in parallel). Set of all states that are reachable after each of the statements. User formulas whose satisfying variable assignments are exactly the reachable sets of states. Define the \alert{strongest post predicate transfomer} which allows to compute these formulas
-    \item \color{orange}\alert{Strongest Postcondition:} Given a set of states $S$ and a statement $st$ the strongest postcondition is the post image of $S$ under the relation $[[st]]$, i.e. $sp(S, st) = post(S, [[st]])$
+		\item \color{orange}\alert{Strongest Postcondition:} Given a set of states $S$ and a statement $st$ the strongest postcondition is the post image of $S$ under the relation $[[st]]$, i.e. $sp(S, st) = post(S, [[st]])$
 		\begin{betterlist}
 			\item \underline{Idea:} Given a set of states $S$ and a statement \verb|st|, the strongest postcondition $sp(S, \verb|st|)$ is the set of states for which the following holds. If there is a state $s \in S$
 			\begin{betterlist}
@@ -396,8 +396,8 @@
 				\item in which \verb|st| terminates, and
 				\item $s'$ is a successor after executing \verb|st|
 			\end{betterlist}
-      then $s' \in sp(S, \verb|st|)$\color{black}
-    \item \color{orange}\alert{Assignment Statement:} $sp(\{\varphi\}, \verb|x := expr;| )$ is $\{\exists \hat x:\varphi[x \mapsto \hat x] \land x = expr[x \mapsto \hat x]\}$. \script{332}{Proof} and \script{333}{Example}
+			then $s' \in sp(S, \verb|st|)$\color{black}
+			\item \color{orange}\alert{Assignment Statement:} $sp(\{\varphi\}, \verb|x := expr;| )$ is $\{\exists \hat x:\varphi[x \mapsto \hat x] \land x = expr[x \mapsto \hat x]\}$. \script{332}{Proof} and \script{333}{Example}
 			\item \alert{Havoc Statement:} $sp(\{\varphi\}, \verb|havoc x;| )$ is $\{\exists x:\varphi\}$. \script{334}{Proof idea}
 			\item \alert{Assume Statement:} $sp(\{\varphi\}, \verb|assume expr;| )$ is $\{\varphi \land expr\}$. \script{335}{Proof}
 			\item \alert{Sequential Composition:} If $st$ is an sequential composition of the form $st_1st_2$, then $sp(S, st)$ is $sp(sp(S, st_1), st_2)$. \script{336}{Proof}
@@ -407,7 +407,7 @@
 				\item If \verb|st| is a while statement of the form \verb|while(expr){st}| then $sp(S, \verb|st|)$ is $\displaystyle \bigcup_{k\in \mathbb{N}} sp(sp^k(S, \verb|assume expr; st|), \verb|assume !expr;| )$
 				\begin{betterlist}
 					\item \uline{$k$-th iterative application of the strongest post operator:}\\ $s p^k(S, s t)= \begin{cases}S & \text { if } k=0 \\ s p\left(s p^{k-1}(S, s t), s t\right) & \text { if } k>0\end{cases}$
-          \end{betterlist}\color{black}
+				\end{betterlist}\color{black}
 				\item There are \script{340}{examples} in which the strongest post of a while statement can be expressed by a formula
 			\end{betterlist}
 			\item \script{318}{Example 1} and \script{338}{Example 2}
@@ -426,21 +426,21 @@
 	\end{betterlist}
 	\fbox{Bounded Model Checking}
 	\begin{betterlist}
-  \item \color{orange}an \alert{abstract (program) configuration} is a pair $(\ell, \{\varphi\})$ where $\ell$ is a location and $\varphi$ is a formula over the program’s variables\color{black}
-  \item \color{orange}an \alert{abstract reachability graph} is a graph $(AC, T)$ where AC is a set of abstract configurations and $T ⊆AC × Stmt × AC$, such that
+		\item \color{orange}an \alert{abstract (program) configuration} is a pair $(\ell, \{\varphi\})$ where $\ell$ is a location and $\varphi$ is a formula over the program’s variables\color{black}
+		\item \color{orange}an \alert{abstract reachability graph} is a graph $(AC, T)$ where AC is a set of abstract configurations and $T ⊆AC × Stmt × AC$, such that
 		\begin{enumerate}
 			\item for each edge $((\ell, {\varphi}), st, (\ell', \{\varphi'\})) \in T$, we have $(\ell, st, \ell') \in \Delta$ and $sp(\{\varphi\}, st) \subseteq \{\varphi'\}$,
 			\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ with $\varphi\not\equiv false$ and $(\ell, st, \ell') \in ∆$, there exists an abstract configuration $(\ell', \{\varphi'\}) \in AC$ such that $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$,
 			\item there exists $(\ell_{init}, \{\varphi_{init}\}) \in AC$ with $\{\varphi_{pre}\} \subseteq \{\varphi_{init}\}$, and
 			\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ there is a path from $(\ell_{init}, \{\varphi_{init}\})$ to $(\ell, \{\varphi\})$, using edges in $T$
-    \end{enumerate}\color{black}
+		\end{enumerate}\color{black}
 		\begin{betterlist}
-    \item \color{orange}we call an abstract reachability graph for G a \alert{safety proof} if is does not contain an abstract error configuration\color{black}
+			\item \color{orange}we call an abstract reachability graph for G a \alert{safety proof} if is does not contain an abstract error configuration\color{black}
 			\begin{betterlist}
 				\item \script{372}{Example}
 			\end{betterlist}
 		\end{betterlist}
-  \item \color{orange}a \alert{precise abstract reachability graph} is an abstract reachability graph $(AC, T)$ such that for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\}))$ the equality $sp(\{\varphi\}, st) = \{\varphi'\}$ holds, and $\{\varphi_{init}\} = \{\varphi_{pre}\}$\color{black}
+		\item \color{orange}a \alert{precise abstract reachability graph} is an abstract reachability graph $(AC, T)$ such that for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\}))$ the equality $sp(\{\varphi\}, st) = \{\varphi'\}$ holds, and $\{\varphi_{init}\} = \{\varphi_{pre}\}$\color{black}
 		\begin{betterlist}
 			\item a precise abstract reachability graph for a given control-flow graph is unique up to the formulas that represent the set of states at each location
 			\item \script{354}{Example: Implementation of the GCD (pr.)}. None of the three tests shows a violation of the postcondition. If one starts to build the precise abstract reachability graph, one sees after a few iterations that there is an abstract program configuration whose set of states is not a subset of the postcondition
@@ -449,7 +449,7 @@
 				\item \script{364}{Modifications}
 			\end{betterlist}
 		\end{betterlist}
-  \item \color{orange}Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an \alert{abstract error configuration} if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}\color{black}
+		\item \color{orange}Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an \alert{abstract error configuration} if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}\color{black}
 		\item \underline{Lemma:} The set of reachable configurations contains an error configuration \alert{iff} the precise abstract reachability graph for $G$ contains an abstract error configuration
 		\begin{betterlist}
 			\item $G$ is a control-flow graph for $P$
@@ -490,15 +490,15 @@
 		\begin{betterlist}
 			\item \script{385}{Examples}
 		\end{betterlist}
-  \item \color{orange}\alert{Galois connection:} Let $(A, \sqsubseteq_A)$ and $(B, \sqsubseteq_B)$ be partially ordered sets, and let $F : A \rightarrow B$ and $G : B \rightarrow A$ be functions. The pair $(F, G)$ is a Galois connection for $(A, \sqsubseteq_A)$ and $(B, \sqsubseteq_B)$ if for all $a \in A$ and $b \in B$ it holds that $F(a) \sqsubseteq_B b$ iff $a \sqsubseteq_A G(b)$\color{black}
-  \item \color{orange}\alert{GaloisProp:} If $(F, G)$ is a \alert{Galois connection} for $(A, \sqsubseteq A)$ and $(B, \sqsubseteq B)$, then:
+		\item \color{orange}\alert{Galois connection:} Let $(A, \sqsubseteq_A)$ and $(B, \sqsubseteq_B)$ be partially ordered sets, and let $F : A \rightarrow B$ and $G : B \rightarrow A$ be functions. The pair $(F, G)$ is a Galois connection for $(A, \sqsubseteq_A)$ and $(B, \sqsubseteq_B)$ if for all $a \in A$ and $b \in B$ it holds that $F(a) \sqsubseteq_B b$ iff $a \sqsubseteq_A G(b)$\color{black}
+		\item \color{orange}\alert{GaloisProp:} If $(F, G)$ is a \alert{Galois connection} for $(A, \sqsubseteq A)$ and $(B, \sqsubseteq B)$, then:
 		\begin{betterlist}
 			\item $F$ and $G$ are \alert{monotone},
 			\item $a \sqsubseteq_A G(F(a))$ holds for all $a \in A$, and
 			\item $F(G(b)) \sqsubseteq_B b$ holds for all $b \in B$
 			\item \script{394}{Proof}
-      \end{betterlist}\color{black}
-    \item \color{orange}an \alert{abstract domain} is a tuple $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$, such that
+		\end{betterlist}\color{black}
+		\item \color{orange}an \alert{abstract domain} is a tuple $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$, such that
 		\begin{betterlist}
 			\item $(\mathbb{A}, \sqsubseteq)$ is a complete lattice
 			\item $(\alpha, \gamma)$ is a Galois connection for $(\mathbb{A}, \sqsubseteq)$ and $(2^{S_{V ,\mu}}, \subseteq)$
@@ -515,15 +515,15 @@
 					\item by condition $2$ of Lemma GaloisProp, we have $S \subseteq \gamma(\alpha(S))$
 					\item by condition $3$ of Lemma GaloisProp, we have $\alpha(\gamma(s^\#)) \sqsubseteq s^\#$
 				\end{betterlist}
-      \end{betterlist}
+			\end{betterlist}
 			\item \script{389}{Examples (ff.)}
-		\end{betterlist}\color{black} 
-  \item \color{violet}An \alert{abstract post operator} $post^\#$ for an abstract domain $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ is a monotone function that takes an abstract state $s^\# \in \mathbb{A}$ and a simple statement $st$ and returns a new abstract state, such that the following holds: $sp(\gamma(s^\#), st) = post(\gamma(s^\#), [[st]]) \subseteq \gamma(post^\#(s^\#, st))$\color{black}
+		\end{betterlist}\color{black}
+		\item \color{violet}An \alert{abstract post operator} $post^\#$ for an abstract domain $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ is a monotone function that takes an abstract state $s^\# \in \mathbb{A}$ and a simple statement $st$ and returns a new abstract state, such that the following holds: $sp(\gamma(s^\#), st) = post(\gamma(s^\#), [[st]]) \subseteq \gamma(post^\#(s^\#, st))$\color{black}
 		\begin{betterlist}
 			\item \script{392}{Illustration}
 			\item \script{393}{Example}
 		\end{betterlist}
-  \item \color{orange}\alert{Value abstraction (Towards Non-relational Domains):} A value abstraction for a set of values $\mathbb{V}$ is a tuple $(A_{\mathbb{V}}, \sqsubset_{\mathbb{V}}, \gamma_{\mathbb{V}}, \alpha_{\mathbb{V}})$ such that:
+		\item \color{orange}\alert{Value abstraction (Towards Non-relational Domains):} A value abstraction for a set of values $\mathbb{V}$ is a tuple $(A_{\mathbb{V}}, \sqsubset_{\mathbb{V}}, \gamma_{\mathbb{V}}, \alpha_{\mathbb{V}})$ such that:
 		\begin{betterlist}
 			\item $(A_{\mathbb{V}}, \sqsubseteq_{\mathbb{V}})$ is a complete lattice
 			\item $(\alpha_{\mathbb{V}}, \gamma_{\mathbb{V}})$ is a Galois connection for $(A_{\mathbb{V}}, \sqsubseteq_{\mathbb{V}})$ and $(2^{\mathbb{V}}, \subseteq)$
@@ -537,15 +537,15 @@
 		\begin{betterlist}
 			\item explicit-value abstraction satisfies ACC
 		\end{betterlist}
-  \end{betterlist}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
-  \begin{betterlist}
+	\begin{betterlist}
 		\item \script{399}{Interval Domain}
 		\begin{betterlist}
 			\item \script{402}{Abstract Evaluation}
 			\item interval abstraction does not satisfy ACC
-      \item \color{orange}\alert{Widening Operator:} A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that\color{black}
+			\item \color{orange}\alert{Widening Operator:} A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that\color{black}
 			\begin{betterlist}
 				\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
 				\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$
@@ -555,7 +555,7 @@
 				\item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F\triangledown(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$
 			\end{betterlist}
 		\end{betterlist}
-  \item \color{orange}\alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
+		\item \color{orange}\alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
 		\begin{betterlist}
 			\item $\mathbb{A} = V \rightarrow A_{\mathbb{Z}}$
 			\item $s^\#_1 \sqsubseteq s^\#_2$ iff for all $x \in V$ it holds that $s^\#_1(x) \sqsubseteq_{\mathbb{Z}} s^\#_2(x)$
@@ -569,27 +569,27 @@
 				\item $post^\#(s^\#, \verb|assume expr|) := \alpha(\gamma(s^\#) \cap \{expr\}) = \alpha(sp(\gamma(s^\#), \verb|assume expr|))$
 			\end{betterlist}
 			where $\top= \bigsqcup_{\sqsubseteq_{\mathbb{Z}}} A_{\mathbb{Z}}$ is the greatest element of $A_{\mathbb{Z}}$. \script{405}{Proof}
-    \end{betterlist}\color{black}
-  \item \color{orange}an \alert{abstract evaluation function} for a value abstraction $(A_{\mathbb{Z}}, \sqsubset_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ is a monotone function $eval^\#$ that takes an (integer) expression $expr$ and an abstract state $s^\#: V \rightarrow A_{\mathbb{Z}}$ and returns an element of $A_{\mathbb{Z}}$ such that
+		\end{betterlist}\color{black}
+		\item \color{orange}an \alert{abstract evaluation function} for a value abstraction $(A_{\mathbb{Z}}, \sqsubset_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ is a monotone function $eval^\#$ that takes an (integer) expression $expr$ and an abstract state $s^\#: V \rightarrow A_{\mathbb{Z}}$ and returns an element of $A_{\mathbb{Z}}$ such that
 		\begin{betterlist}
 			\item if $s \in \gamma(s^\#)$ and $[[expr]]_{M,\rho} = v$ for $\rho = s$ then $v \in \gamma_{\mathbb{Z}}(eval^\#(expr, s^\#))$
 		\end{betterlist}\color{black}
-  \item \color{orange}\alert{Abstract Annotation}: For a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an \alert{abstract annotation} is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$\color{black}
+		\item \color{orange}\alert{Abstract Annotation}: For a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an \alert{abstract annotation} is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$\color{black}
 		\begin{betterlist}
-    \item \color{orange}Let $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ be a control-flow graph, and let $f$ be an abstract annotation for $G$. Assume that for every $\ell\in Loc$ there exists a formula $\varphi_{\ell}$ such that $\gamma(f(\ell)) = \{\varphi_{\ell}\}$. Then the graph $(AC, T)$ with $AC = \{(\ell, \{\varphi_{\ell}\}) \mid \ell \in Loc\}$ and $T = \{((\ell, \{\varphi_{\ell}\}), st, (\ell', \{\varphi_{\ell'}\})) \mid (\ell, st, \ell') \in \Delta\}$ is an \alert{abstract reachability graph}. \script{411}{Proof (f.)}\color{black}
+			\item \color{orange}Let $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ be a control-flow graph, and let $f$ be an abstract annotation for $G$. Assume that for every $\ell\in Loc$ there exists a formula $\varphi_{\ell}$ such that $\gamma(f(\ell)) = \{\varphi_{\ell}\}$. Then the graph $(AC, T)$ with $AC = \{(\ell, \{\varphi_{\ell}\}) \mid \ell \in Loc\}$ and $T = \{((\ell, \{\varphi_{\ell}\}), st, (\ell', \{\varphi_{\ell'}\})) \mid (\ell, st, \ell') \in \Delta\}$ is an \alert{abstract reachability graph}. \script{411}{Proof (f.)}\color{black}
 		\end{betterlist}
 		\item given a set $X$ and a function $f:X \rightarrow X$ we call an element $x \in X$ a \alert{fixpoint} of $f$ if $f(x) = x$. \script{418}{Examples}
 		\item given a set $X$ and a partial order $\sqsubseteq$ and a function $f:X \rightarrow X$, we call an element $x$ the \alert{least fixpoint} of $f$ if $x$ is a fixpoint of $f$ and for all fixpoints $y$ of $f$ the inclusion $x \sqsubseteq y$ holds. \script{419}{Examples}
 		\begin{betterlist}
-    \item \color{orange}\alert{Knaster-Tarski Fixpoint Theorem}: Let $(X, \sqsubseteq)$ be a complete lattice. If $f:X \rightarrow X$ is monotone then $f$ has a least fixpoint and this fixpoint is $\bigsqcap \{x \mid f(x) \sqsubseteq x\}$. \script{420}{Proof}\color{black}
+			\item \color{orange}\alert{Knaster-Tarski Fixpoint Theorem}: Let $(X, \sqsubseteq)$ be a complete lattice. If $f:X \rightarrow X$ is monotone then $f$ has a least fixpoint and this fixpoint is $\bigsqcap \{x \mid f(x) \sqsubseteq x\}$. \script{420}{Proof}\color{black}
 			\item \script{421}{Abstract Annotations as (Least) Fixpoints}
 		\end{betterlist}
 		\item Kleene Chains
 		\begin{betterlist}
 			\item it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$
-      \item \color{orange}\alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$\color{black}
-      \item \color{orange}\alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time. \script{424}{Proof}\color{black}
-      \item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}
+			\item \color{orange}\alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$\color{black}
+			\item \color{orange}\alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time. \script{424}{Proof}\color{black}
+			\item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}
 			\item \script{426}{Example (f.)}
 		\end{betterlist}
 		\item If $(Y, \sqsubseteq_Y)$ is a complete lattice, and $X$ is any set, then $(X\rightarrow Y, \sqsubseteq)$ is also a complete lattice, where $X \rightarrow Y$ is the set of all functions from $X \rightarrow Y$, and $f \sqsubseteq g$ iff for all $x \in X$, we have $f(x) \sqsubseteq_Y g(x)$. \script{429}{Proof}
@@ -598,15 +598,15 @@
 	\fbox{Predicate Abstraction}
 	\begin{betterlist}
 		\item Way to design custom domain
-    \item \color{orange}Let $B$ a finite set of formulas over program variables. The \alert{predicate abstraction for $B$} is the abstract domain $(\mathbb{A}_B, \sqsubseteq, \gamma_B, \alpha_B)$ where
+		\item \color{orange}Let $B$ a finite set of formulas over program variables. The \alert{predicate abstraction for $B$} is the abstract domain $(\mathbb{A}_B, \sqsubseteq, \gamma_B, \alpha_B)$ where
 		\begin{betterlist}
 			\item the abstract states are the subsets of $B$: $\mathbb{A}_B = 2^B$,
 			\item the order $\sqsubseteq$ is subset inclusion $\subseteq$,
 			\item the concretization is $\gamma_B(X) = \{\bigwedge X\}$,
 			\item and the abstraction is $\alpha_B(S) = \{\varphi \in B \mid S \subseteq \{\varphi\}\}$
-      \end{betterlist}\color{black}
-    \item \color{violet}The following defines an \alert{abstract post operator} for predicate abstraction for $B$: $post^\#_B(X, st) = \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\} = \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}$\color{black}
-    \item \color{orange}Given a finite set of formulas $B$ we define the \script{452}{\alert{abstract strongest post}} operator as follows: $sp^\#_B(S, st) = \{\bigwedge \{\varphi \in B \mid sp(S, st) \subseteq \{\varphi\}\}\}$ or $sp^\#_B(\{\bigwedge X\}, st) = \{\bigwedge \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\}\} = \{\bigwedge \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}\}$\color{black}
+		\end{betterlist}\color{black}
+		\item \color{violet}The following defines an \alert{abstract post operator} for predicate abstraction for $B$: $post^\#_B(X, st) = \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\} = \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}$\color{black}
+		\item \color{orange}Given a finite set of formulas $B$ we define the \script{452}{\alert{abstract strongest post}} operator as follows: $sp^\#_B(S, st) = \{\bigwedge \{\varphi \in B \mid sp(S, st) \subseteq \{\varphi\}\}\}$ or $sp^\#_B(\{\bigwedge X\}, st) = \{\bigwedge \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\}\} = \{\bigwedge \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}\}$\color{black}
 		\begin{betterlist}
 			\item $sp^\#_B(\{ \psi \} , st) = \{\bigwedge \{\varphi \in B \mid sp(\{ \psi \}, st) \subseteq \{ \varphi \}\}\}$
 		\end{betterlist}
@@ -646,7 +646,7 @@
 		\end{betterlist}
 		\item For $i = 0, \ldots, n$, let $\sigma_i$ be the substitution such that for any $x \in V$, we have $\sigma_i(x) = x_k$ iff there are exactly $k$ statements of the form \verb|x:=expr|, \verb|x[k]:=v| or \verb|havoc x| in the prefix trace $st_1 \ldots st_i$.
 
-      \color{orange}We define the \alert{static single-assignment form (SSA)} as the set of formulas $SSA(\pi) := \{\psi_1, \ldots, \psi_n\}$, where
+		\color{orange}We define the \alert{static single-assignment form (SSA)} as the set of formulas $SSA(\pi) := \{\psi_1, \ldots, \psi_n\}$, where
 
 		$\psi_i =
 			\begin{cases}
@@ -657,8 +657,8 @@
 			\end{cases}$
 		\begin{betterlist}
 			\item $\bigwedge SSA(\pi )$ is unsatisfiable iff $\pi$ is infeasible
-      \end{betterlist}\color{black}
-    \item \color{orange}Given a finite set of formulas $\mathbb{F}$ where $\bigwedge \mathbb{F}$ is unsatisfiable, we call a subset $X \subseteq \mathbb{F}$ an \alert{unsatisfiable core} if $\bigwedge X$ is also unsatisfiable\color{black}
+		\end{betterlist}\color{black}
+		\item \color{orange}Given a finite set of formulas $\mathbb{F}$ where $\bigwedge \mathbb{F}$ is unsatisfiable, we call a subset $X \subseteq \mathbb{F}$ an \alert{unsatisfiable core} if $\bigwedge X$ is also unsatisfiable\color{black}
 		\begin{betterlist}
 			\item An unsatisfiable core $X$ is \alert{minimal} if no strict subset of $X$ is an unsatisfiable core
 		\end{betterlist}
@@ -666,12 +666,12 @@
 	\end{betterlist}
 	\fbox{CEGAR}
 	\begin{betterlist}
-  \item \color{orange}Given an abstract reachability graph $(AC, T)$, we call a sequence of statements $st_1,\ldots , st_n$ an \alert{error trace in $(AC, T)$} if there exists a sequence of abstract configurations $(\ell_0, \{ \varphi_0\} ),\ldots , (\ell_n, \{ \varphi_n\})$ such that
+		\item \color{orange}Given an abstract reachability graph $(AC, T)$, we call a sequence of statements $st_1,\ldots , st_n$ an \alert{error trace in $(AC, T)$} if there exists a sequence of abstract configurations $(\ell_0, \{ \varphi_0\} ),\ldots , (\ell_n, \{ \varphi_n\})$ such that
 		\begin{betterlist}
 			\item $(\ell_0, \{ \varphi_0\} )$ is the initial abstract configuration $(\ell_{init}, \{ true\} )$,
 			\item $( (\ell_i, \{ \varphi_i\} ), st_{i+1}, (\ell_{i+1}, \{ \varphi_{i+1}\} ) ) \in T$ for $i \in \{ 0,\ldots , n −1\}$, and
 			\item $(\ell_n, \{ \varphi_n\} )$ is an abstract error configuration
-      \end{betterlist}\color{black}
+		\end{betterlist}\color{black}
 		\item Let $\pi$  be a trace. If $\varphi_0,\ldots , \varphi_n$ is an infeasibility proof for $\pi$  and $B \supseteq \{ \varphi_0,\ldots \varphi_n\}$  then $\pi$  is not an error trace in an abstract reachability graph that is precise for $B$. \script{487}{Proof}
 		\item \alert{Progress property:} In the CEGAR algorithm, if $\pi$ is the error trace that is analyzed in iteration $i$, then $\pi$ will not be an error trace of the abstract reachability graph in further iterations
 	\end{betterlist}
@@ -691,17 +691,17 @@
 			\item a word $w \in \sum ^*$ is \alert{accepted} by $\mathcal{A}$ if there exists an accepting run for $w$ in $\mathcal{A}$
 			\item we write $\mathcal{L}(A)$ to denote the \alert{language of $\mathcal{A}$}, i.e., the set of all accepted words
 		\end{betterlist}
-  \item Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. \color{orange}The \alert{program automaton} for $P$ is the NFA $\mathcal{A}_P = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta$ for some locations $\ell, \ell'$\color{black}
+		\item Let P be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. \color{orange}The \alert{program automaton} for $P$ is the NFA $\mathcal{A}_P = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta$ for some locations $\ell, \ell'$\color{black}
 		\begin{betterlist}
 			\item $P$ satisfies all assert statements iff every word in $\mathcal{L}(\mathcal{A}_P)$ is infeasible
 		\end{betterlist}
 		\item \color{orange}a \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\} stmt \{\beta(q′)\}$ is valid\color{black}
-    \item \color{violet}given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
+		\item \color{violet}given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
 			\item every accepting state is labeled with false
 		\end{betterlist}
-    then every accepted trace of $\mathcal{A}$ is infeasible\color{black}
+		then every accepted trace of $\mathcal{A}$ is infeasible\color{black}
 		\item \color{orange}we call an automaton $A = (Q, \sum , \Delta , Q_{init}, F)$ a \alert{Floyd-Hoare automaton} if there exists a Floyd-Hoare annotation $\beta  : Q \rightarrow Fm(V)$ such that
 		\begin{betterlist}
 			\item $\beta(q) = true$ for all $q \in Q_{init}$ and
@@ -712,12 +712,12 @@
 	\end{betterlist}
 	\fbox{Constraint-based Invariant Synthesis}
 	\begin{betterlist}
-  \item \color{violet}given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
+		\item \color{violet}given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
 			\item every accepting state (i.e., error location) is labeled with false
 		\end{betterlist}
-    then $P$ is safe\color{black}
+		then $P$ is safe\color{black}
 		\begin{betterlist}
 			\item there exist formulas $\varphi_{\ell_1},\ldots , \varphi_{\ell_n}$ such that
 			\begin{betterlist}
@@ -777,7 +777,7 @@
 			\begin{betterlist}
 				\item can write (many) transition formulas as conjunction of linear inequalities, and abbreviate. \script{533}{Example}
 				such conjunctions using matrix notation
-      \item \color{orange}\script{534}{\alert{Lemma Farkas}}: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$\color{black}
+				\item \color{orange}\script{534}{\alert{Lemma Farkas}}: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$\color{black}
 				\begin{betterlist}
 					\item use this lemma to transform formulas into equivalent formulas that are simpler for SMT solvers as they do not have quantifier alternation: $\exists\vec{\lambda}.(\vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot  A =\vec{c}^⊺\land\vec{\lambda}^T\cdot \vec{b} \leq \delta )$ is satisfiable iff $(\vec{\lambda}  \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$ is satisfiable
 					\item \script{535}{Steps}
@@ -826,13 +826,13 @@
 	\fbox{Concurrent Programs}
 	\begin{betterlist}
 		\item \script{587}{Concurrent Programs}, Number interleaving of 2 threads: $\dfrac{(m+n)!}{m!\cdot n!} $ (\script{588}{Illustration})
-    \item \color{orange}a \alert{ concurrent Boostan program}  is a triple $(V , \mu , \mathcal{T})$ where
+		\item \color{orange}a \alert{ concurrent Boostan program}  is a triple $(V , \mu , \mathcal{T})$ where
 		\begin{betterlist}
 			\item $V$ is a set of program variables,
 			\item $\mu$ is a map that assigns each variable a domain,
 			\item $\mathcal{T}$ is a finite set of threads, i.e., a set of derivation trees $T$ such that $(V , \mu , T)$ is a (sequential) Boostan program
-      \end{betterlist}\color{black}
-    \item \color{orange}\alert{Concurrent Program CFG:} Let $P = (V , \mu , \mathcal{T} )$ be a concurrent program, with $\mathcal{T} = \{ T_1,\ldots, T_n\}$. Let $(Loc_i, \Delta_i, \ell_{init,i}, \ell_{ex,i})$ be a CFG for $(V, \mu , T_i)$ for $i = 1, \ldots, n$
+		\end{betterlist}\color{black}
+		\item \color{orange}\alert{Concurrent Program CFG:} Let $P = (V , \mu , \mathcal{T} )$ be a concurrent program, with $\mathcal{T} = \{ T_1,\ldots, T_n\}$. Let $(Loc_i, \Delta_i, \ell_{init,i}, \ell_{ex,i})$ be a CFG for $(V, \mu , T_i)$ for $i = 1, \ldots, n$
 
 		Then $(Loc, \Delta, \ell_{init}, \ell_{ex})$ is a CFG for $P$, where
 		\begin{betterlist}
@@ -853,10 +853,51 @@
 		\end{betterlist}
 		\item \script{595}{Example for Reduction of Program Automaton}
 	\end{betterlist}
-  \fbox{Neat little details}
-  \begin{betterlist}
-    \item Although \alert{predicate transformers} technically manipulate sets of states, they do so through the medium of predicates (logical formulas). The term \enquote{predicate transformer} reflects the fact that these functions take predicates as input and produce new predicates as output
-  \end{betterlist}
+	\fbox{Neat little details}
+	\begin{betterlist}
+		\item Although \alert{predicate transformers} technically manipulate sets of states, they do so through the medium of predicates (logical formulas). The term \enquote{predicate transformer} reflects the fact that these functions take predicates as input and produce new predicates as output
+		\item $M \models \{\text{theory formulas}\}$
+		\item bei $M = (D,\{p \mapsto \overset{.}{=}\})$, $\overset{.}{=} {=} \{(x, y)\in \mathbb{N} \mid x = y\}$, $[[\forall x: p(x, x)]]_{M, \rho}$, $[[p(x, x)]]_{M, \rho} = [[x]]_{M, \rho} \overset{.}{=} [[x]]_{M, \rho}$, forall $v\in D$ it's the case that $[[x]]_{M, \rho\triangleleft\{x \mapsto v\}} \overset{.}{=} [[x]]_{M, \rho\triangleleft\{x \mapsto v\}} = v \overset{.}{=} v = true$
+		\item basis on propositional and first order logic
+		\begin{betterlist}
+			\item Valid $\rightarrow$ Satisfiable (but not vice versa)
+			\item Unsatisfiable $\rightarrow$ Falsifiable (but not vice versa)
+			\item Valid $\leftrightarrow$ Not Falsifiable
+			\item Satisfiable $\leftrightarrow$ Not Unsatisfiable
+		\end{betterlist}
+		\item \underline{Good loop invariant:}
+		\begin{enumerate}
+			\item Identify the goal: What is the loop trying to achieve? The loop invariant should help you prove that the loop is working towards this goal.
+			Break down the problem: Understand the preconditions (what’s true before the loop starts) and the postconditions (what needs to be true after the loop ends)
+			\item A good loop invariant often represents partial progress toward the final solution. It should capture the idea that each iteration of the loop brings you closer to solving the problem. Example: If the goal is to sort an array, a possible invariant might be that the first k elements are already sorted
+			\item Consider what should be true at the very start of the loop (when no iterations have occurred). This is often a simpler version of the invariant
+			\item Look at the loop's control variables and how they change with each iteration. The loop invariant often involves these variables
+			\item The loop invariant should be strong enough that, when the loop terminates, it implies the postcondition (the desired outcome of the loop). Example: If you want to find the maximum in an array, a good invariant might be that the variable max holds the maximum of all elements processed so far
+			\item Test the loop with small examples and see what properties remain true after each iteration. This can help you discover the invariant.
+			\item Ensure that the invariant is preserved by the loop body. This means that if the invariant holds before an iteration, it should still hold after the iteration. Example: For a loop that reverses an array, an invariant could be that all elements swapped so far are in their correct reversed positions.
+			\item Often, a loop invariant expresses a relationship between variables, like array indices or counters. Consider how variables relate to each other as the loop progresses Example: In an algorithm to find the GCD using the Euclidean method, a possible invariant is that gcd(a, b) = gcd(a, b \% a).
+			\item Ensure that the invariant holds for edge cases, like when the loop starts with empty inputs or when the loop runs zero times. A strong invariant should still hold in these cases.
+			\item Finding a good loop invariant is often an iterative process. You may need to refine your invariant as you analyze the loop more deeply or as you encounter edge cases
+		\end{enumerate}
+		\item \underline{Two heuristics that work quite well:}
+		\begin{betterlist}
+			\item start with what you have (pre-conditions), and weaken until you have an inductive invariant. In order to get an intuition how to weaken, apply one or several forward loop iterations and see what ceases to be true in the formula you have.
+			\item start with what you want (post-conditions) and strengthen until you have an inductive invariant. To get the intuition how to strengthen, apply one or several loop iterations backwards and see what needs to be added so that the post-condition can be deduced
+		\end{betterlist}
+		\item \underline{Where to Find the Loop Invariant in CFG:}
+		\begin{betterlist}
+			\item At the Entry Node (Loop Condition Check):
+			\begin{betterlist}
+				\item The loop invariant is asserted at the entry node, where the loop condition is evaluated
+				\item This is because the loop invariant should hold before the first iteration of the loop (initialization phase) and also before each subsequent iteration of the loop
+			\end{betterlist}
+			\item Before Each Iteration:
+			\begin{betterlist}
+				\item After every iteration of the loop body, control flows back to the entry node (condition check). At this point, the loop invariant should be checked (implicitly or explicitly) to ensure it still holds
+			\end{betterlist}
+		\end{betterlist}
+		\item \underline{Why loop invariant:} Loops can introduce a lot of complexity into a program because they execute a block of code multiple times. The state of the program changes with each iteration, making it difficult to reason about the final outcome. Why Invariants Help: A loop invariant provides a property that remains true before and after each iteration. This consistent truth simplifies reasoning about the loop's behavior, allowing you to break down the verification process into manageable steps
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

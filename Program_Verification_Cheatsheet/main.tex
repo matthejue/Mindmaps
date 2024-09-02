@@ -468,12 +468,12 @@
 		\item Let $X$ be a set, $\sqsubseteq$ some partial order over $X$ and $M \subseteq X$ be a subset
 		\begin{betterlist}
 			\item we call $x \in X$ a \alert{lower bound} for $M$ if $x \sqsubseteq m$ for all $m \in M$
-			\item we call a lower bound $y$ the \alert{greatest lower bound} for $M$ if for each lower bound $x$ of $M$ the inequality $x \sqsubseteq y$ holds
+			\item we call a lower bound $y$ the \alert{greatest lower bound} for $M$ if for each lower bound $x$ of / for? $M$ the inequality $x \sqsubseteq y$ holds
 			\begin{betterlist}
 				\item we use $\sqcap M$ to denote the \alert{greatest lower bound}. If $M = \{x, y\}$ we may also write $x \sqcap y$
 			\end{betterlist}
 			\item we call $x \in X$ an \alert{upper bound} for $M$ if $m \sqsubseteq x$ for all $m \in M$
-			\item we call an upper bound $y$ the \alert{least upper bound} for $M$ if for each upper bound $x$ of $M$ the inequality $y \sqsubseteq x$ holds
+			\item we call an upper bound $y$ the \alert{least upper bound} for $M$ if for each upper bound $x$ of / for? $M$ the inequality $y \sqsubseteq x$ holds
 			\begin{betterlist}
 				\item we use $\sqcup M$ to denote the \alert{least upper bound}. If $M = \{x, y\}$ we may also write $x \sqcup y$
 			\end{betterlist}
@@ -859,6 +859,7 @@
 		\item $M \models \{\text{theory formulas}\}$
 		\item bei $M = (D,\{p \mapsto \overset{.}{=}\})$, $\overset{.}{=} {=} \{(x, y)\in \mathbb{N} \mid x = y\}$, $[[\forall x: p(x, x)]]_{M, \rho}$, $[[p(x, x)]]_{M, \rho} = [[x]]_{M, \rho} \overset{.}{=} [[x]]_{M, \rho}$, forall $v\in D$ it's the case that $[[x]]_{M, \rho\triangleleft\{x \mapsto v\}} \overset{.}{=} [[x]]_{M, \rho\triangleleft\{x \mapsto v\}} = v \overset{.}{=} v = true$
 		\item basis on propositional and first order logic
+    \item Terminator unpassend
 		\begin{betterlist}
 			\item Valid $\rightarrow$ Satisfiable (but not vice versa)
 			\item Unsatisfiable $\rightarrow$ Falsifiable (but not vice versa)

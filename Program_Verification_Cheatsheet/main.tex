@@ -545,14 +545,14 @@
 		\begin{betterlist}
 			\item \script{402}{Abstract Evaluation}
 			\item interval abstraction does not satisfy ACC
-			\item \color{orange}A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that\color{black}
+			\item \color{orange}A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that
 			\begin{betterlist}
 				\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
-				\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$
+				\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$\color{black}
 			\end{betterlist}
-			\item Kleene iteration with $F_{\triangledown}$ always terminates. The result is an abstract annotation
+    \item \color{orange}Kleene iteration with $F_{\triangledown}$ always terminates. The result is an abstract annotation:
 			\begin{betterlist}
-				\item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F\triangledown(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$
+      \item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F_{\triangledown}(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$\color{black}
 			\end{betterlist}
 		\end{betterlist}
 		\item \color{orange}\alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
@@ -585,9 +585,9 @@
 			\item \color{orange}\alert{Knaster-Tarski Fixpoint Theorem}: Let $(X, \sqsubseteq)$ be a complete lattice. If $f:X \rightarrow X$ is monotone then $f$ has a least fixpoint and this fixpoint is $\bigsqcap \{x \mid f(x) \sqsubseteq x\}$. \script{420}{Proof}\color{black}
 			\item \script{421}{Abstract Annotations as (Least) Fixpoints}
 		\end{betterlist}
-		\item Kleene Chains
+  \item \color{orange}\underline{Kleene Chains:} Let $F : X \rightarrow X$ be a monotone function in a complete lattice $(X, \sqsubseteq)$, and let $\bot = \bigsqcap X$ be the least element of $X$\color{black}
 		\begin{betterlist}
-			\item it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$
+    \item \color{orange}it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$\color{black}
 			\item \color{orange}\alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$\color{black}
 			\item \color{orange}\alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time. \script{424}{Proof}\color{black}
 			\item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}
@@ -899,7 +899,16 @@
 			\end{betterlist}
 		\end{betterlist}
 		\item \underline{Why loop invariant:} Loops can introduce a lot of complexity into a program because they execute a block of code multiple times. The state of the program changes with each iteration, making it difficult to reason about the final outcome. Why Invariants Help: A loop invariant provides a property that remains true before and after each iteration. This consistent truth simplifies reasoning about the loop's behavior, allowing you to break down the verification process into manageable steps
-    \item wie in der Übungsaufgaben, Erfahrungen... lange gedacht, dass...
+    \item wie in der Übungsaufgaben, Erfahrungen... lange gedacht, dass... lange gebraucht, anstrengende Aufgabe
+    \item Fragen zurück stellen, wollen auch wisssen warum non-relational z.B.
+    \item sagen stopen sobald zu ausführlich
+    \item the Hoare proof system allows us to give a correctness proof if we guess “good” loop invariants. ARGs allow us to give a correctness proof if we guess “good” abstract configurations
+    \item unlike the non-relational abstract domains discussed in the last section, it can express relations between different variables. For example, $B$ may contain the formula $x \le y$, for two integer variables $x, y$
+    \item it is easy to see that, since B is finite, the predicate abstraction for B satisfies the ACC.
+    \item ARG from the predicate abstraction which, unlike the ARG defined by abstract interpretation, does not necessarily have the same structure as the CFG
+    \item the benefit of this ARG is that we are not restricted to a single abstract configuration per location: Different executions that reach the same location may reach different abstract configurations. Intuitively, this allows us to associate a location with a \enquote{disjunction} of abstract states: When an execution reaches the location, the program state must match one of the abstract states in abstract configurations with this location
+    \item using the given algorithm, we can algorithmically construct the abstract reachability graph that is precise for a given set of formulas B. As there are only finitely many possible conjunctions of formulas in B, the algorithm will always terminate
+    \item however, as we have seen on the example, it is still important that we choose a suitable set of formulas B in order to get a safety proof. The next two sections present a method for choosing B that has turned out to be quite successful in practice
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}

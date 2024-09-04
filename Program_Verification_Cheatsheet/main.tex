@@ -606,12 +606,12 @@
 			\item the concretization is $\gamma_B(X) = \{\bigwedge X\}$,
 			\item and the abstraction is $\alpha_B(S) = \{\varphi \in B \mid S \subseteq \{\varphi\}\}$
 		\end{betterlist}\color{black}
-		\item \color{violet}The following defines an \alert{abstract post operator} for predicate abstraction for $B$: $post^\#_B(X, st) = \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\} = \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}$\color{black}
+		\item \color{violet}The following defines an \alert{abstract post operator} for predicate abstraction for $B$: $post^\#_B(X, st) = \left\{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\right\} = \left\{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\right\}$\color{black}
 		\item \color{orange}Given a finite set of formulas $B$ we define the \script{452}{\alert{abstract strongest post}} operator as follows: $sp^\#_B(S, st) = \{\bigwedge \{\varphi \in B \mid sp(S, st) \subseteq \{\varphi\}\}\}$ or $sp^\#_B(\{\bigwedge X\}, st) = \{\bigwedge \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\}\} = \{\bigwedge \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}\}$\color{black}
 		\begin{betterlist}
 			\item $sp^\#_B(\{ \psi \} , st) = \{\bigwedge \{\varphi \in B \mid sp(\{ \psi \}, st) \subseteq \{ \varphi \}\}\}$
 		\end{betterlist}
-		\item We call an abstract reachability graph $(AC, T)$ \alert{precise for $B$} if for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$ the equality $sp^\#_B(\{\varphi\}, st) = \{\varphi'\}$ holds
+  \item \color{orange}We call an abstract reachability graph $(AC, T)$ \alert{precise for $B$} if for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$ the equality $sp^\#_B(\{\varphi\}, st) = \{\varphi'\}$ holds\color{black}
 	\end{betterlist}
 	\fbox{Infeasability Proofs}
 	\begin{betterlist}
@@ -625,7 +625,7 @@
 			\item \script{438}{Example}
 		\end{betterlist}
 		\item \color{orange}We call a program configuration $(\ell, s)$ an \alert{error configuration} if $\ell \in Loc_{err}$\color{black}
-		\item \color{orange}An abstract configuration $(\ell, \{\varphi\})$ is an \alert{abstract error configuration} if $\ell \in Loc_{err}$ and $\{\varphi\}\ne \emptyset$\color{black}
+    \item \color{orange}An abstract configuration $(\ell, \{\varphi\})$ is an \alert{abstract error configuration} if $\ell \in Loc_{err}$ and $\{\varphi\}\ne \emptyset = \{false\}$\color{black}
 		\item \color{orange}We call a sequence of statements a \alert{trace}\color{black}
 		\begin{betterlist}
 			\item We call a trace $\pi$ \alert{feasible} if there is some execution for $\pi$
@@ -803,7 +803,7 @@
 			\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating. \script{553}{Proof}
 		\end{betterlist}
 		\item \script{554}{More questions}
-		\item do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >N y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}
+    \item \color{orange}do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >_{\mathbb{N}} y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}\color{black}
 		\item \script{552}{Every loop that has a ranking function terminating}, \script{556}{Check if a function f is a ranking function}, \script{557}{4 assumptions, lexicographic ranking function}, \script{558}{Ranking function is only decreasing for reachable states}, in order to prove termination of the program above, we also have to take the reachable states into account
 		\item \alert{Loop Entry:} Given a while loop \verb|while(expr){ st }| and a control-flow graph $G = (Loc, \Delta , \ell_{init}, \ell_{ex})$ for this while loop, we call $\ell_{init}$ the \alert{entry location} of the while loop
 		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|  with entry location $\ell$. Let $\beta$ be a Floyd-Hoare annotation of $\mathcal{A}_P$. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W$ a \alert{ranking function} if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ with $s \in \{ \beta(\ell )\}$ the relation $(f(s), f(s')) \in R$ holds
@@ -909,6 +909,10 @@
     \item the benefit of this ARG is that we are not restricted to a single abstract configuration per location: Different executions that reach the same location may reach different abstract configurations. Intuitively, this allows us to associate a location with a \enquote{disjunction} of abstract states: When an execution reaches the location, the program state must match one of the abstract states in abstract configurations with this location
     \item using the given algorithm, we can algorithmically construct the abstract reachability graph that is precise for a given set of formulas B. As there are only finitely many possible conjunctions of formulas in B, the algorithm will always terminate
     \item however, as we have seen on the example, it is still important that we choose a suitable set of formulas B in order to get a safety proof. The next two sections present a method for choosing B that has turned out to be quite successful in practice
+    \item CEGAR:
+    \begin{betterlist}
+      \item stands for CounterExample-Guided Abstraction Refinement
+    \end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}

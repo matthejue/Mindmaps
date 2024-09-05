@@ -61,7 +61,7 @@
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          As always, we have to assume that our definition of the semantics actually captures what happens at runtime -- they might differ to compiler bugs, or bugs in the OS or CPU where the program is executed.
+					As always, we have to assume that our definition of the semantics actually captures what happens at runtime -- they might differ to compiler bugs, or bugs in the OS or CPU where the program is executed.
 				}}
 		\end{betterlist}
 		\item \alert{Completeness}
@@ -71,12 +71,12 @@
 				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-            Yes, the human can fail to find a proof and eventually give up.
+						Yes, the human can fail to find a proof and eventually give up.
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-            Same answer as above.
+						Same answer as above.
 					}}
 			\end{betterlist}
 			\item \underline{Termination}
@@ -84,20 +84,20 @@
 				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-            No, the human may fail to find a proof but keep trying (and even after the human's eventual death, others may keep trying to prove the correctness).
+						No, the human may fail to find a proof but keep trying (and even after the human's eventual death, others may keep trying to prove the correctness).
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-            Same answer as above.
+						Same answer as above.
 					}}
 			\end{betterlist}
 			\item Are there any programs which the technique does not support at all?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          Not that I could see (with the exception of programs with assert statements, already mentioned for specifications above). Generally, if we want to add more programming constructs (concurrency, recursion, ...) we need to extend the semantics.
+					Not that I could see (with the exception of programs with assert statements, already mentioned for specifications above). Generally, if we want to add more programming constructs (concurrency, recursion, ...) we need to extend the semantics.
 
-          Plus, there is a scalability issue for very large programs.
+					Plus, there is a scalability issue for very large programs.
 				}}
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
@@ -106,24 +106,24 @@
 			\item \checkboxChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          It can be very detailed and complex, as we specify it in terms of the semantic relation -- any mathematical statement about this relation is a possible specification.
+					It can be very detailed and complex, as we specify it in terms of the semantic relation -- any mathematical statement about this relation is a possible specification.
 				}}
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          -
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          -
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          -
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          -
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -131,22 +131,22 @@
 			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          We would then have produced a full proof of incorrectness. This can take many forms, but e.g. a failing execution would be the best output.
+					We would then have produced a full proof of incorrectness. This can take many forms, but e.g. a failing execution would be the best output.
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          We have a human-readable (hopefully) proof. It is not directly usable by machines.
+					We have a human-readable (hopefully) proof. It is not directly usable by machines.
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          One can examine failed / stalled proof attempts. It is unclear whether they will be helpful.
+					One can examine failed / stalled proof attempts. It is unclear whether they will be helpful.
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          Same answer as for UNKNOWN.
+					Same answer as for UNKNOWN.
 				}}
 		\end{betterlist}
 		\item \alert{Efficiency}
@@ -154,12 +154,12 @@
 			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          ...
+					...
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          If the proof is complex, one should try to formulate and prove helpful lemmas first instead of directly going for the full proof.
+					If the proof is complex, one should try to formulate and prove helpful lemmas first instead of directly going for the full proof.
 				}}
 		\end{betterlist}
 		\item \alert{Further Aspects}
@@ -167,52 +167,72 @@
 			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          See previous comment: One can break down the proof into smaller lemmas. The lemmas may talk about parts of the program, parts of the specification, or both. If we have multiple humans, we can then parallelize the proofs of these lemmas.
+					See previous comment: One can break down the proof into smaller lemmas. The lemmas may talk about parts of the program, parts of the specification, or both. If we have multiple humans, we can then parallelize the proofs of these lemmas.
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          Yes, a successful proof can in many cases be modified, if the modifications to the program are small and preserve correctness.
+					Yes, a successful proof can in many cases be modified, if the modifications to the program are small and preserve correctness.
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          human mind, pen, paper
+					human mind, pen, paper
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-          The material costs (pen, paper) are low. But we need one or more very skilled humans to perform the mathematical reasoning about the program; and for complex programs, it may take a long time. So the overall cost is high -- we need to automate and simplify parts of this process.
+					The material costs (pen, paper) are low. But we need one or more very skilled humans to perform the mathematical reasoning about the program; and for complex programs, it may take a long time. So the overall cost is high -- we need to automate and simplify parts of this process.
 				}}
 		\end{betterlist}
-\item see page \pageref{pdf:relational_semantics}
+		\item see page \pageref{pdf:relational_semantics}
 	\end{betterlist}
 
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{Hoare proof system}
- \begin{betterlist}
-     \item see page \pageref{pdf:hoare_proof_system}
- \end{betterlist}
+	\begin{betterlist}
+		\item see page \pageref{pdf:hoare_proof_system}
+	\end{betterlist}
+	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+			\begin{betterlist}
+				\item asdf
+			\end{betterlist}
+		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{Deductive Verification}
+	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+			\begin{betterlist}
+				\item asdf
+			\end{betterlist}
+		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{building the reachability graph (Explicit-State Model Checking)}
- \begin{betterlist}
-     \item see page \pageref{pdf:explicit_state_model_checking}
- \end{betterlist}
+	\begin{betterlist}
+		\item see page \pageref{pdf:explicit_state_model_checking}
+	\end{betterlist}
+	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+			\begin{betterlist}
+				\item asdf
+			\end{betterlist}
+		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{building the precise ARG / Bounded Model Checking}
- \begin{betterlist}
-     \item see page \pageref{pdf:bounded_mode_checking}
- \end{betterlist}
+	\begin{betterlist}
+		\item see page \pageref{pdf:bounded_mode_checking}
+	\end{betterlist}
+	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+			\begin{betterlist}
+				\item asdf
+			\end{betterlist}
+		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
@@ -220,24 +240,24 @@
 	\begin{betterlist}
 		\item Give a short description of the technique
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-  \begin{betterlist}
-      \item one abstractly interprets programs using an abstract domain and an abstract post operator 
-      \item one defines abstract annotations using an equation system and if one has an equation system one can build an abstract reability graph and one can find a solution to this equation system using for instance kleene iteration using one of these two functions $F_\#$ (monotone function over locations mapped to abstract states with least upper bound) or $F_{\triangledown}$ (monotone function over locations mapped to abstract states with widening operator $\triangledown$)
-      \begin{betterlist}
-          \item the widening operator $\triangledown$ is an over approximation of the union and of the upper bound so one gets something bigger possibly and one is guaranteed by the second condition that one cannot infinitely often get something bigger at some point it will stay the same and using that one can then show that the kleene iteration with this function always terminates just relatively straightforward from the second condition of the widening operator and the result that one computes is still this kind of abstract annotation that one needed to build an abstract reachability graph and to show that it's still an abstract annotation one use the first condition of the winding operator because one overapproximates the least upper bound it's still fine
-      \end{betterlist}
-  \end{betterlist}
+				\begin{betterlist}
+					\item one abstractly interprets programs using an abstract domain and an abstract post operator
+					\item one defines abstract annotations using an equation system and if one has an equation system one can build an abstract reability graph and one can find a solution to this equation system using for instance kleene iteration using one of these two functions $F_\#$ (monotone function over locations mapped to abstract states with least upper bound) or $F_{\triangledown}$ (monotone function over locations mapped to abstract states with widening operator $\triangledown$)
+					\begin{betterlist}
+						\item the widening operator $\triangledown$ is an over approximation of the union and of the upper bound so one gets something bigger possibly and one is guaranteed by the second condition that one cannot infinitely often get something bigger at some point it will stay the same and using that one can then show that the kleene iteration with this function always terminates just relatively straightforward from the second condition of the widening operator and the result that one computes is still this kind of abstract annotation that one needed to build an abstract reachability graph and to show that it's still an abstract annotation one use the first condition of the winding operator because one overapproximates the least upper bound it's still fine
+					\end{betterlist}
+				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-  \begin{betterlist}
-    \item Precondition-postcondition pairs
-    \item Assert statements 
-    \begin{betterlist}
-        \item No division by zero.
-    \end{betterlist}
-  \end{betterlist}
+				\begin{betterlist}
+					\item Precondition-postcondition pairs
+					\item Assert statements
+					\begin{betterlist}
+						\item No division by zero.
+					\end{betterlist}
+				\end{betterlist}
 			}}
 		\item \alert{Soundness}
 		\begin{betterlist}
@@ -246,16 +266,16 @@
 				\item In which circumstances does the technique claim that a program is correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-        \item if there's no error trace, there's no way to reach an abstract error configuration in the ARG, if the ARG is a safety proof, then one has proven the program correct
-  \end{betterlist}
+						\begin{betterlist}
+							\item if there's no error trace, there's no way to reach an abstract error configuration in the ARG, if the ARG is a safety proof, then one has proven the program correct
+						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item yes, then it is correct
-  \end{betterlist}
+						\begin{betterlist}
+							\item yes, then it is correct
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{For incorrect programs}
@@ -263,35 +283,35 @@
 				\item In which circumstances does the technique claim that a program is incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item cannot use it to find errors, so if the program is incorrect one will always end up with some abstract reachability graph that's not a safety proof but one is never sure that something is really an error
-  \end{betterlist}
+						\begin{betterlist}
+							\item cannot use it to find errors, so if the program is incorrect one will always end up with some abstract reachability graph that's not a safety proof but one is never sure that something is really an error
+						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item it never claims that, there are not true positives, thus there are also no false positives
-  \end{betterlist}
+						\begin{betterlist}
+							\item it never claims that, there are not true positives, thus there are also no false positives
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
-				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item depends on whether the domain is really suitable for the program and the property one is trying to prove and if it's not then there are limited number of interesting things that one can probably show with the sign domain or the intervals but for other things one needs more expressive domains
-      \item non-relational domain has to satisfy Ascending Chain Condition (ACC)
-      \begin{betterlist}
-          \item sign abstraction satisfies ACC
-          \item explicit-value abstraction satisfies ACC
-          \item but interval abstraction does not satisfy ACC
-          \begin{betterlist}
-              \item  if two bounds are not equal one is extreme and says plus infinity to minus infinity after that one can definitely not get bigger anymore, that's one thing one can. Maybe one doesn't want to do this directly one can have some conditions so maybe only if the bounds are greater than 100 or less than minus 100 for this lower bound then one does this extreme widening 
-              \item or sometimes one has an abstract domain that in addition to the interval it counts how often the interval has gotten bigger and only after it has gotten bigger 10 times then one goes to the extreme plus minus infinity so one wants to limit this somehow, not always be so extreme but in in principle this is how one can do widening for intervals
-          \end{betterlist}
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					\begin{betterlist}
+						\item depends on whether the domain is really suitable for the program and the property one is trying to prove and if it's not then there are limited number of interesting things that one can probably show with the sign domain or the intervals but for other things one needs more expressive domains
+						\item non-relational domain has to satisfy Ascending Chain Condition (ACC)
+						\begin{betterlist}
+							\item sign abstraction satisfies ACC
+							\item explicit-value abstraction satisfies ACC
+							\item but interval abstraction does not satisfy ACC
+							\begin{betterlist}
+								\item  if two bounds are not equal one is extreme and says plus infinity to minus infinity after that one can definitely not get bigger anymore, that's one thing one can. Maybe one doesn't want to do this directly one can have some conditions so maybe only if the bounds are greater than 100 or less than minus 100 for this lower bound then one does this extreme widening
+								\item or sometimes one has an abstract domain that in addition to the interval it counts how often the interval has gotten bigger and only after it has gotten bigger 10 times then one goes to the extreme plus minus infinity so one wants to limit this somehow, not always be so extreme but in in principle this is how one can do widening for intervals
+							\end{betterlist}
 
-      \end{betterlist}
-  \end{betterlist}
-					}}
+						\end{betterlist}
+					\end{betterlist}
+				}}
 		\end{betterlist}
 		\item \alert{Completeness}
 		\begin{betterlist}
@@ -300,16 +320,16 @@
 				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-    \item yes, sometimes if one wants to proof correctness one does not get an ARG that is a safety proof
-  \end{betterlist}
+						\begin{betterlist}
+							\item yes, sometimes if one wants to proof correctness one does not get an ARG that is a safety proof
+						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item for incorrect programs it always terminates with UNKNOWN, one gets an ARG that's not a safety proof but one s never sure that something is really an error
-  \end{betterlist}
+						\begin{betterlist}
+							\item for incorrect programs it always terminates with UNKNOWN, one gets an ARG that's not a safety proof but one s never sure that something is really an error
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{Termination}
@@ -317,25 +337,25 @@
 				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item it always terminates or usually one instantiated it such that it terminates possibly with widening
-  \end{betterlist}
+						\begin{betterlist}
+							\item it always terminates or usually one instantiated it such that it terminates possibly with widening
+						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item yes, but it will never say that it's an incorrect program
-  \end{betterlist}
+						\begin{betterlist}
+							\item yes, but it will never say that it's an incorrect program
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Are there any programs which the technique does not support at all?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item it always terminates, but it may or not be may not be a safety proof as the choice of the abstract domain really matters a lot
-      \item see CEGAR and Trace Abstraction Refinement
-  \end{betterlist}
+					\begin{betterlist}
+						\item it always terminates, but it may or not be may not be a safety proof as the choice of the abstract domain really matters a lot
+						\item see CEGAR and Trace Abstraction Refinement
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
@@ -344,28 +364,28 @@
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-       \item assert statements or prec-post-condition pair is correct, one has to think what is actually the specification that the program should satisfy, formalsing requirements can be a difficult task
-  \end{betterlist}
+					\begin{betterlist}
+						\item assert statements or prec-post-condition pair is correct, one has to think what is actually the specification that the program should satisfy, formalsing requirements can be a difficult task
+					\end{betterlist}
 				}}
 			\item \checkboxChecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item the choice of the abstract domain really matters a lot
-  \end{betterlist}
+					\begin{betterlist}
+						\item the choice of the abstract domain really matters a lot
+					\end{betterlist}
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-      -
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-      -
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-      -
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -373,30 +393,30 @@
 			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item does never determine that Program is incorrect, but one gets a ARG that is not a safety proof
-  \end{betterlist}
+					\begin{betterlist}
+						\item does never determine that Program is incorrect, but one gets a ARG that is not a safety proof
+					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item always get an abstract reachability graph without error configurations and thus error traces and thus one gets a safety proof
-  \end{betterlist}
+					\begin{betterlist}
+						\item always get an abstract reachability graph without error configurations and thus error traces and thus one gets a safety proof
+					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item one gets a reachability graph that is no safety proof, one can try to find a better abstract domain
-  \end{betterlist}
+					\begin{betterlist}
+						\item one gets a reachability graph that is no safety proof, one can try to find a better abstract domain
+					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item always terminates, see section about termination of correct programs
-  \end{betterlist}
+					\begin{betterlist}
+						\item always terminates, see section about termination of correct programs
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Efficiency}
@@ -404,20 +424,20 @@
 			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item predicate abstraction is a way to design custom domain, one just picks a set of predicates, a set of formulas and those are the abstract states that one uses, one gets this suitable formulas with the help of infeasability proofs
-      \begin{betterlist}
-          \item  instead of figuring out this complicated problem of which formulas does one need to prove that the entire program is correct one first figures out a much simpler problem which formulas one needs to prove that one particular sequence of statements, so one particular trace is correct 
-          \item since one is looking at traces that lead to error locations, correctness really means that they're invasible, they cannot be executed. One can compute invisibility proofs with the weakest precondition or the strongest post condition and one can just do that directly or one could abstract some of the statements to get simpler proofs in the hope that this would be somewhat nicer for the purpose
-          \item one has to figure out which of the statements one can abstract and still get an infeasible trace, if one abstracts too much everything becomes feasiable, to check feasability one uses SSA of a trace (one encodes a sequence of statements as a set of formulas), there's a bit of non-determinism in here, it depends on which unsatisfiable core the smt solver is going to give one, deciding which of these proofs one will get
-          \item see CEGAR
-      \end{betterlist}
-  \end{betterlist}
+					\begin{betterlist}
+						\item predicate abstraction is a way to design custom domain, one just picks a set of predicates, a set of formulas and those are the abstract states that one uses, one gets this suitable formulas with the help of infeasability proofs
+						\begin{betterlist}
+							\item  instead of figuring out this complicated problem of which formulas does one need to prove that the entire program is correct one first figures out a much simpler problem which formulas one needs to prove that one particular sequence of statements, so one particular trace is correct
+							\item since one is looking at traces that lead to error locations, correctness really means that they're invasible, they cannot be executed. One can compute invisibility proofs with the weakest precondition or the strongest post condition and one can just do that directly or one could abstract some of the statements to get simpler proofs in the hope that this would be somewhat nicer for the purpose
+							\item one has to figure out which of the statements one can abstract and still get an infeasible trace, if one abstracts too much everything becomes feasiable, to check feasability one uses SSA of a trace (one encodes a sequence of statements as a set of formulas), there's a bit of non-determinism in here, it depends on which unsatisfiable core the smt solver is going to give one, deciding which of these proofs one will get
+							\item see CEGAR
+						\end{betterlist}
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Further Aspects}
@@ -425,30 +445,30 @@
 			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item yes, if one variable doesn't get influcended by other part of program and wouldn't have to be updated
-  \end{betterlist}
+					\begin{betterlist}
+						\item yes, if one variable doesn't get influcended by other part of program and wouldn't have to be updated
+					\end{betterlist}
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item yes, if one variable doesn't get influcended by changes to program and wouldn't have to be updated
-  \end{betterlist}
+					\begin{betterlist}
+						\item yes, if one variable doesn't get influcended by changes to program and wouldn't have to be updated
+					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item basically just application of abstract strongest post
-  \end{betterlist}
+					\begin{betterlist}
+						\item basically just application of abstract strongest post
+					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item can be made quite efficient
-  \end{betterlist}
+					\begin{betterlist}
+						\item can be made quite efficient
+					\end{betterlist}
 				}}
 		\end{betterlist}
 	\end{betterlist}
@@ -463,19 +483,19 @@
 		\item Give a short description of the technique.
 
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-  \begin{betterlist}
-      \item best explained over it's acronym: counterexample guided abstraction refinement
-      \item built an abstraction of the program, an abstract reability graph but one donesn't just build one, we refine it, ons starts with a very abstract reability graph where one just says everywhere all states are possible and then one found some new formulas that allow to rule out some states and one built a more refined and more precise abstract reachability graph and one does this in every iteration, so this is why it's an abstraction refinement 
-      \item and it's counter example guided because these error traces are counter examples in the sense that they show why the current abstract reability graph is not a safety proof and one use them to guide ones refinement because one basically does the refinement by constructing these infeasability proofs for counter examples
-      \item on the Fly designs its own abstract domain
-  \end{betterlist}
+				\begin{betterlist}
+					\item best explained over it's acronym: counterexample guided abstraction refinement
+					\item built an abstraction of the program, an abstract reability graph but one donesn't just build one, we refine it, ons starts with a very abstract reability graph where one just says everywhere all states are possible and then one found some new formulas that allow to rule out some states and one built a more refined and more precise abstract reachability graph and one does this in every iteration, so this is why it's an abstraction refinement
+					\item and it's counter example guided because these error traces are counter examples in the sense that they show why the current abstract reability graph is not a safety proof and one use them to guide ones refinement because one basically does the refinement by constructing these infeasability proofs for counter examples
+					\item on the Fly designs its own abstract domain
+					\item Predicate Abstraction: the Hoare proof system allows us to give a correctness proof if we guess \enquote{good} loop invariants. ARGs allow us to give a correctness proof if we guess “good” abstract configurations
+				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
-
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-                    \begin{betterlist}
-                        \item same as Abstract Interpretation
-                    \end{betterlist}
+				\begin{betterlist}
+					\item same as Abstract Interpretation
+				\end{betterlist}
 			}}
 		\item \alert{Soundness}
 		\begin{betterlist}
@@ -484,16 +504,16 @@
 				\item In which circumstances does the technique claim that a program is correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item same as for Abstract Interpretation
-    \end{betterlist}
+						\begin{betterlist}
+							\item same as for Abstract Interpretation
+						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item yes, then it is correct
-    \end{betterlist}
+						\begin{betterlist}
+							\item yes, then it is correct
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{For incorrect programs}
@@ -501,25 +521,25 @@
 				\item In which circumstances does the technique claim that a program is incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item if a feasible trace is found
-    \end{betterlist}
+						\begin{betterlist}
+							\item if a feasible trace is found
+						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item yes, then it is incorrect
-    \end{betterlist}
+						\begin{betterlist}
+							\item yes, then it is incorrect
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
-				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item no special requirements
-        \item (correctly specified requirements via assert statements or pre-post-condition pairs)
-    \end{betterlist}
-					}}
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					\begin{betterlist}
+						\item no special requirements
+						\item (correctly specified requirements via assert statements or pre-post-condition pairs)
+					\end{betterlist}
+				}}
 		\end{betterlist}
 		\item \alert{Completeness}
 		\begin{betterlist}
@@ -528,21 +548,21 @@
 				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item yes, if feasibility check returns unknown, whole algorithm returns unknown
-        \item if asking whether a given trace $\pi$ is feasible, do a SSA encoding and ask an smt whether this is satisfiable and the smt solver might return unknown 
-        \begin{betterlist}
-            \item depending on what logic one needs to encode the trace if the program uses multiplication and one needs to use a nonlinear arithmetic then this is an undecidable logic, the smt solver will in some cases say that it can't tell whether this trace is feasible or not. If it this says unknown then the entire verification should also say unknown because one can at least not rule out at this error trace
-            \item one could also think about some alternatives, so maybe one can put this trace aside and look for some other error traces and see if one can show for one of them that they are feasible, then one can definitely say incorrect but in practice one thing that one usually does in verification tools is then just say immediately unknown one doesn't know if this is correct or not
-        \end{betterlist}
-    \end{betterlist}
+						\begin{betterlist}
+							\item yes, if feasibility check returns unknown, whole algorithm returns unknown
+							\item if asking whether a given trace $\pi$ is feasible, do a SSA encoding and ask an smt whether this is satisfiable and the smt solver might return unknown
+							\begin{betterlist}
+								\item depending on what logic one needs to encode the trace if the program uses multiplication and one needs to use a nonlinear arithmetic then this is an undecidable logic, the smt solver will in some cases say that it can't tell whether this trace is feasible or not. If it this says unknown then the entire verification should also say unknown because one can at least not rule out at this error trace
+								\item one could also think about some alternatives, so maybe one can put this trace aside and look for some other error traces and see if one can show for one of them that they are feasible, then one can definitely say incorrect but in practice one thing that one usually does in verification tools is then just say immediately unknown one doesn't know if this is correct or not
+							\end{betterlist}
+						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item same as above, feasability check made for correct and incorrect programs
-    \end{betterlist}
+						\begin{betterlist}
+							\item same as above, feasability check made for correct and incorrect programs
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{Termination}
@@ -550,44 +570,44 @@
 				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item no
-        \item one does not know if it will terminate, there's the possibilit to go through the loop infinitely many times
-        \item do have infinite abstract reachability graphs?
-        \begin{betterlist}
-            \item is definitely going to be infinite, because P is finite and the set B is finite
-        \end{betterlist}
-        \item if precise reachability graph is inifnite, does this mean one is not going to terminate?
-        \begin{betterlist}
-            \item example graph from lecture could be verified in just two iterations, even tough the precice reachability graph is infinite as p could be any integer (inifnitely many initial configurations) and one doesn't know how large n is (can go through the loop any arbitrary number of times)
-        \end{betterlist}
-    \end{betterlist}
+						\begin{betterlist}
+							\item no
+							\item one does not know if it will terminate, there's the possibilit to go through the loop infinitely many times
+							\item do have infinite abstract reachability graphs?
+							\begin{betterlist}
+								\item is definitely going to be infinite, because P is finite and the set B is finite
+							\end{betterlist}
+							\item if precise reachability graph is inifnite, does this mean one is not going to terminate?
+							\begin{betterlist}
+								\item example graph from lecture could be verified in just two iterations, even tough the precice reachability graph is infinite as p could be any integer (inifnitely many initial configurations) and one doesn't know how large n is (can go through the loop any arbitrary number of times)
+							\end{betterlist}
+						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item yes
-        \item like for bounded model checking (precise abstract reachability graph) if one searches through the precise abstract reachability graph using BFS to find error trace, then if there's a feasible trace one will find it eventually (if it has length k, at some point one will have looked at all traces of lenght k, then one will have found it or there's none)
-        \begin{betterlist}
-            \item using DFS there one might be running throgh some loop forever and not find an error somewhere else that's really easy to reach
-        \end{betterlist}
-    \end{betterlist}
+						\begin{betterlist}
+							\item yes
+							\item like for bounded model checking (precise abstract reachability graph) if one searches through the precise abstract reachability graph using BFS to find error trace, then if there's a feasible trace one will find it eventually (if it has length k, at some point one will have looked at all traces of lenght k, then one will have found it or there's none)
+							\begin{betterlist}
+								\item using DFS there one might be running throgh some loop forever and not find an error somewhere else that's really easy to reach
+							\end{betterlist}
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Are there any programs which the technique does not support at all?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item it turns out we can also sometimes verify things that bounded model checking for instance where the the precise reachability graph that's constructed by bounded model checking would be infinite but we are here constructing a finite safety proof
-       \item infinitely many programs where it won't work, the whole thing is undecidable
-       \item there are yeah infinitely many programs where it works
-       \item the question about how often is will it work on practical programs that people actually write also can't be answerd, but it's among the techniques that are out there it's one of the more successful ones
-       \begin{betterlist}
-            \item it's not like every program that's ever been written has run through a predicate abstraction so one can't know how many of those it will actually be able to prove
-       \end{betterlist}
+					\begin{betterlist}
+						\item it turns out we can also sometimes verify things that bounded model checking for instance where the the precise reachability graph that's constructed by bounded model checking would be infinite but we are here constructing a finite safety proof
+						\item infinitely many programs where it won't work, the whole thing is undecidable
+						\item there are yeah infinitely many programs where it works
+						\item the question about how often is will it work on practical programs that people actually write also can't be answerd, but it's among the techniques that are out there it's one of the more successful ones
+						\begin{betterlist}
+							\item it's not like every program that's ever been written has run through a predicate abstraction so one can't know how many of those it will actually be able to prove
+						\end{betterlist}
 
-   \end{betterlist}
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
@@ -596,26 +616,26 @@
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item same as for Abstract Interpretation
-   \end{betterlist}
+					\begin{betterlist}
+						\item same as for Abstract Interpretation
+					\end{betterlist}
 				}}
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -623,30 +643,30 @@
 			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-     \item an feasible trace, one can encode a trace into single static assignment form (into one smt formula) and if that is satisfiable, the trace is feasible, the satisfying models tells the values of the variables at every position and from that one can construct an execution (one has e.g. initial value of $x$, after first assignment$x'$, after 2nd assignment $x''$... and if satisfying model tells values for $x$, $x'$ and $x''$, then value of $x$ kept until it is assigned etc.)
-   \end{betterlist}
+					\begin{betterlist}
+						\item an feasible trace, one can encode a trace into single static assignment form (into one smt formula) and if that is satisfiable, the trace is feasible, the satisfying models tells the values of the variables at every position and from that one can construct an execution (one has e.g. initial value of $x$, after first assignment$x'$, after 2nd assignment $x''$... and if satisfying model tells values for $x$, $x'$ and $x''$, then value of $x$ kept until it is assigned etc.)
+					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-     \item one has an ARG and thus a safety proof
-   \end{betterlist}
+					\begin{betterlist}
+						\item one has an ARG and thus a safety proof
+					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item one has a trace for which the smt solver returns unknown and can try to proof oneself that it's feasible or unfeasible
-   \end{betterlist}
+					\begin{betterlist}
+						\item one has a trace for which the smt solver returns unknown and can try to proof oneself that it's feasible or unfeasible
+					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item one has an ARG with abstract error configurations, one can manually look for infeasible traces that lead to faster progress
-   \end{betterlist}
+					\begin{betterlist}
+						\item one has an ARG with abstract error configurations, one can manually look for infeasible traces that lead to faster progress
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Efficiency}
@@ -654,36 +674,36 @@
 			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item it's good that abstract usability graph is finite, but it can be in practice a bit of a problem that it's really larg. It's in general exponential in the size of ones set of formulas B because the abstract states are subsets of B they're exponentially many of them and also the set B grows in every iteration, In every iteration one adds at least one more formula to the set, so over the time it can be a really large set and the graph can be really large. So this can be something where one just runs out of memory trying to build this graph for instance
-       \item then on top of that one needs to compute the abstract strong post operator and this can be also very expensive. One needs to do this in every iteration for every abstract configuration and one just said there are many abstract configurations and one needs to compute this strongest post for every F in B. One needs to call an smt server to check whether a condition here on is a strongest post condition and smt server calls are one of the things that are most expensive in terms of time, especially if we have done theories that are difficult also for smt solvers like arrays or bit vectors or floats 
-   \end{betterlist}
+					\begin{betterlist}
+						\item it's good that abstract usability graph is finite, but it can be in practice a bit of a problem that it's really larg. It's in general exponential in the size of ones set of formulas B because the abstract states are subsets of B they're exponentially many of them and also the set B grows in every iteration, In every iteration one adds at least one more formula to the set, so over the time it can be a really large set and the graph can be really large. So this can be something where one just runs out of memory trying to build this graph for instance
+						\item then on top of that one needs to compute the abstract strong post operator and this can be also very expensive. One needs to do this in every iteration for every abstract configuration and one just said there are many abstract configurations and one needs to compute this strongest post for every F in B. One needs to call an smt server to check whether a condition here on is a strongest post condition and smt server calls are one of the things that are most expensive in terms of time, especially if we have done theories that are difficult also for smt solvers like arrays or bit vectors or floats
+					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item want to have some idea that the algorithm is still doing something meaningful. It shouldn't do the same things over and over again when possibly running in loop forever. Don't want to look at same error trace and check if it's infeasible again:
-       \begin{betterlist}
-           \item for this reason there's the progress property which means means if one looks at an error choice in one iteration one is not going to look at the same error Choice again in any future iteration
-       \end{betterlist}
-       \item one does what described in the section above in every iteration, it's costly at least with the unoptimized algorithm, one is not going to reuse any information from previous iterations one computes a new abstract reability graph in every iteration and it's not immediately clear at least how one can reuse the results of smt solver calls from previous iterations so there's a lot of work that goes into every iteration and that can be a real problem
-       \begin{betterlist}
-            \item Use different sets $B$ for different locations
-            \begin{betterlist}
-                \item maybe then each set is not as big as if one throws them all in one set and one thinks about which formulas are useful for which locations
-            \end{betterlist}
-            \item Do not construct the ARG eagerly. Construct a tree that represents the breadth-first search for new counterexamples. Reuse the tree in the next iteration. 
-            \begin{betterlist}
-                \item similar to what one does for bounded model checking one also doesn't build a precise abstract reability graph completely one builds it as far as needed for the BFS and if one finds a counter example one stops and then one can also try and reuse this tree in the next iteration. This might get a bit complicated but maybe some parts of it can be reused 
-            \end{betterlist}
-            \item Use the partial order on abstract configurations induced by entailment. If there are two nodes $(\ell , \{ \varphi 1\} )$ and $(\ell , \{ \varphi 2\} )$ such that $\varphi 2 \models \varphi 1$, one can ignore $(\ell , \{ \varphi 2\} )$. One says that $(\ell , \{ \varphi 2\} )$ is already \enquote{covered} by $(\ell , \{ \varphi 1\} )$.
-            \begin{betterlist}
-                \item because the idea is that anything that's feasible from this smaller set of States $\phi_2$ is also feasible from the largest set of States given by $\phi_1$ and so one says that one configuration covers the other and therefore the covered one does not have to be explored
-            \end{betterlist}
-       \end{betterlist}
-       \item Trace Abstraction Refinement is in part motivated by these optimizations but the idea is that one does it in a more elegant way than adding bits and pieces to the existing algorithm
-   \end{betterlist}
+					\begin{betterlist}
+						\item want to have some idea that the algorithm is still doing something meaningful. It shouldn't do the same things over and over again when possibly running in loop forever. Don't want to look at same error trace and check if it's infeasible again:
+						\begin{betterlist}
+							\item for this reason there's the progress property which means means if one looks at an error choice in one iteration one is not going to look at the same error Choice again in any future iteration
+						\end{betterlist}
+						\item one does what described in the section above in every iteration, it's costly at least with the unoptimized algorithm, one is not going to reuse any information from previous iterations one computes a new abstract reability graph in every iteration and it's not immediately clear at least how one can reuse the results of smt solver calls from previous iterations so there's a lot of work that goes into every iteration and that can be a real problem
+						\begin{betterlist}
+							\item Use different sets $B$ for different locations
+							\begin{betterlist}
+								\item maybe then each set is not as big as if one throws them all in one set and one thinks about which formulas are useful for which locations
+							\end{betterlist}
+							\item Do not construct the ARG eagerly. Construct a tree that represents the breadth-first search for new counterexamples. Reuse the tree in the next iteration.
+							\begin{betterlist}
+								\item similar to what one does for bounded model checking one also doesn't build a precise abstract reability graph completely one builds it as far as needed for the BFS and if one finds a counter example one stops and then one can also try and reuse this tree in the next iteration. This might get a bit complicated but maybe some parts of it can be reused
+							\end{betterlist}
+							\item Use the partial order on abstract configurations induced by entailment. If there are two nodes $(\ell , \{ \varphi 1\} )$ and $(\ell , \{ \varphi 2\} )$ such that $\varphi 2 \models \varphi 1$, one can ignore $(\ell , \{ \varphi 2\} )$. One says that $(\ell , \{ \varphi 2\} )$ is already \enquote{covered} by $(\ell , \{ \varphi 1\} )$.
+							\begin{betterlist}
+								\item because the idea is that anything that's feasible from this smaller set of States $\phi_2$ is also feasible from the largest set of States given by $\phi_1$ and so one says that one configuration covers the other and therefore the covered one does not have to be explored
+							\end{betterlist}
+						\end{betterlist}
+						\item Trace Abstraction Refinement is in part motivated by these optimizations but the idea is that one does it in a more elegant way than adding bits and pieces to the existing algorithm
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Further Aspects}
@@ -691,31 +711,31 @@
 			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-     \item yes, can have different set of formulas $B$ for different locations. See section above for more information
-   \end{betterlist}
+					\begin{betterlist}
+						\item yes, can have different set of formulas $B$ for different locations. See section above for more information
+					\end{betterlist}
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-     \item yes, can have different set of formulas $B$ for different locations if this locations are not in part of program that changes, then can reuse them, because of the lemma used for the progress property, because for all the traces for unchanged parts of program for which a infeasability proof existed, the infeasability proof still applies
-   \end{betterlist}
+					\begin{betterlist}
+						\item yes, can have different set of formulas $B$ for different locations if this locations are not in part of program that changes, then can reuse them, because of the lemma used for the progress property, because for all the traces for unchanged parts of program for which a infeasability proof existed, the infeasability proof still applies
+					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item smt-solver for feasability check
-       \item compute abstract strongest post in every iteration, for every abstract configuration and need to compute strongest post for every $F$ in $B$
-   \end{betterlist}
+					\begin{betterlist}
+						\item smt-solver for feasability check
+						\item compute abstract strongest post in every iteration, for every abstract configuration and need to compute strongest post for every $F$ in $B$
+					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item see bullet points in bottleneck section above
-   \end{betterlist}
+					\begin{betterlist}
+						\item see bullet points in bottleneck section above
+					\end{betterlist}
 				}}
 		\end{betterlist}
 	\end{betterlist}
@@ -727,20 +747,22 @@
 		\item Give a short description of the technique.
 
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-  \begin{betterlist}
-    \item on high level the idea ia a divide and conquer approach, instead proving that entire complex program is correct, one is going to decompose the program into some simpler programs that are in some sense obviously correct. This is achievied by automata (NFAs) A1 to An where the language of the program automaton is included in the union of these languages of A1 to An.
-    \item A1 to An are these simpler programs, they are correct in sense that every accepted trace is infeasible, they only accept infeasible traces. Thus one don't have to do any checking, the Floyd hoare automaton is "obviously correct", because for every accepted trace the automaton gives one via the annotation a proof of infeasibility.
-    \item one uses use the idea from cegar to look at CEs, one looks at proofs of infeasibility derived from the program automaton and use that as basis to construct automata A1 to An.
-    \item one \enquote{abstracts} the error \enquote{traces} by using Abstraction of statements and adding self loops that allow all statements besides the ones that modify important variables that would make the trace feasible. One only added transitions were the hoare triples are valid, thus it is still a floyd hoare automaton. Later doen't care what annotation was, the only thing one has to remember is that there exist some, but one is not going to use it again, so one can forget about it.
-    \item one adds more and more automatons to the union and thus "refines" the union over the iterations to come closer and closer to cover all traces of the program automaton.
-  \end{betterlist}
+				\begin{betterlist}
+					\item on high level the idea ia a divide and conquer approach, instead proving that entire complex program is correct, one is going to decompose the program into some simpler programs
+					\item this is achievied by automata (NFAs) A1 to An where the language of the program automaton is included in the union of these languages of A1 to An
+					% \item A1 to An are these simpler programs, they are correct in sense that every accepted trace is infeasible, they only accept infeasible traces. Thus one don't have to do any checking, the Floyd hoare automaton is "obviously correct", because for every accepted trace the automaton gives one via the annotation a proof of infeasibility
+					\item one uses use the idea from cegar to look at CEs, one looks at proofs of infeasibility derived from the program automaton and use that as basis to construct automata A1 to An, they only accept infeasible traces
+					\item these are "obviously correct" Floyd hoare automatons, because for every accepted trace the automaton gives one via the annotation a proof of infeasibility
+					\item one \enquote{abstracts} the error \enquote{traces} by using abstraction of statements and adding self loops that allow all statements besides the ones that modify important variables that would make the trace feasible. One only added transitions were the hoare triples are valid, thus it is still a floyd hoare automaton
+					\item one adds more and more automatons to the union and thus "refines" the union over the iterations to come closer and closer to cover all traces of the program automaton
+				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-  \begin{betterlist}
-    \item same as Abstract Interpretation
-  \end{betterlist}
+				\begin{betterlist}
+					\item same as Abstract Interpretation
+				\end{betterlist}
 			}}
 		\item \alert{Soundness}
 		\begin{betterlist}
@@ -749,16 +771,16 @@
 				\item In which circumstances does the technique claim that a program is correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-      \item If it found good infeasability proofs such that the union automaton is superset of the program automaton.
-    \end{betterlist}
+						\begin{betterlist}
+							\item If it found good infeasability proofs such that the union automaton is superset of the program automaton.
+						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item yes, because all traces of the program automaton are also in the union automaton. And the union automaton only contains infeasible traces, thus the traces in the program automaton are also infeasible. Thus no error configuration can be reached.
-    \end{betterlist}
+						\begin{betterlist}
+							\item yes, because all traces of the program automaton are also in the union automaton. And the union automaton only contains infeasible traces, thus the traces in the program automaton are also infeasible. Thus no error configuration can be reached.
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{For incorrect programs}
@@ -766,25 +788,25 @@
 				\item In which circumstances does the technique claim that a program is correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-      \item If an infeasability proof is not possible for a trace in the program automaton.
-    \end{betterlist}
+						\begin{betterlist}
+							\item If an infeasability proof is not possible for a trace in the program automaton.
+						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item yes, because then the trace is feasible, meaning there's a execution that leads to the error location.
-        \item but one doesn't directly have a proof.
-    \end{betterlist}
+						\begin{betterlist}
+							\item yes, because then the trace is feasible, meaning there's a execution that leads to the error location.
+							\item but one doesn't directly have a proof.
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
-				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item same as CEGAR
-    \end{betterlist}
-					}}
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					\begin{betterlist}
+						\item same as CEGAR
+					\end{betterlist}
+				}}
 		\end{betterlist}
 		\item \alert{Completeness}
 		\begin{betterlist}
@@ -793,16 +815,16 @@
 				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item same as for CEGAR
-    \end{betterlist}
+						\begin{betterlist}
+							\item same as for CEGAR
+						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item same as for CEGAR
-    \end{betterlist}
+						\begin{betterlist}
+							\item same as for CEGAR
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{Termination}
@@ -810,27 +832,27 @@
 				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item no, it can be never terminate and run in the main loop forever, depending on whether one gets good proofs of infeasibility or not so good ones
-    \end{betterlist}
+						\begin{betterlist}
+							\item no, it can be never terminate and run in the main loop forever, depending on whether one gets good proofs of infeasibility or not so good ones
+						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-    \begin{betterlist}
-        \item yes, if there is an error trace that's feasible one will eventually find it, assuming for inclusion check BFS is used
-    \end{betterlist}
+						\begin{betterlist}
+							\item yes, if there is an error trace that's feasible one will eventually find it, assuming for inclusion check BFS is used
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Are there any programs which the technique does not support at all?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-        \item no group that one can be explicitly defined and restricted
-        \item can not prove that everything that succeeds with trace abstraction also succeeds with predicate abstraction or vice versa, have to be a bit more careful with this statement
-        \item everything, that can be proven with trace abstraction can also be proven with predicate abstraction if just throw all formulas together, but one is going to need a lot more time, time in memory, the graphs are bigger
-        \item everything that can prove with predicate abstraction, can also prove with trace abstraction if one gets the right proofs of infeasibility
-   \end{betterlist}
+					\begin{betterlist}
+						\item no group that one can be explicitly defined and restricted
+						\item can not prove that everything that succeeds with trace abstraction also succeeds with predicate abstraction or vice versa, have to be a bit more careful with this statement
+						\item everything, that can be proven with trace abstraction can also be proven with predicate abstraction if just throw all formulas together, but one is going to need a lot more time, time in memory, the graphs are bigger
+						\item everything that can prove with predicate abstraction, can also prove with trace abstraction if one gets the right proofs of infeasibility
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
@@ -839,26 +861,26 @@
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item same as for Abstract Interpretation
-   \end{betterlist}
+					\begin{betterlist}
+						\item same as for Abstract Interpretation
+					\end{betterlist}
 				}}
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   -
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -866,30 +888,30 @@
 			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item same as for CEGAR
-   \end{betterlist}
+					\begin{betterlist}
+						\item same as for CEGAR
+					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item mostly that it's correct, the NFA's are not of much use, some of them could maybe be reused if only small changes are applied to the program
-   \end{betterlist}
+					\begin{betterlist}
+						\item mostly that it's correct, the NFA's are not of much use, some of them could maybe be reused if only small changes are applied to the program
+					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item same as for CEGAR
-   \end{betterlist}
+					\begin{betterlist}
+						\item same as for CEGAR
+					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item the minimized program graph, one can search manually in it for infeasible traces that lead to faster progress
-   \end{betterlist}
+					\begin{betterlist}
+						\item the minimized program graph, one can search manually in it for infeasible traces that lead to faster progress
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Efficiency}
@@ -897,17 +919,17 @@
 			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item in some examples predicate abstraction succeeds faster, because it combines formulas from different iterations, just by sheer luck, if take the conjunction of them, one is able to prove more things. In trace abstraction would not combine them, would have to do a couple more iterations, until hopefully one gets eventually a proof of infeasibility that contains both formulas at the same time and then maybe one can prove that the program is correct
-   \end{betterlist}
+					\begin{betterlist}
+						\item in some examples predicate abstraction succeeds faster, because it combines formulas from different iterations, just by sheer luck, if take the conjunction of them, one is able to prove more things. In trace abstraction would not combine them, would have to do a couple more iterations, until hopefully one gets eventually a proof of infeasibility that contains both formulas at the same time and then maybe one can prove that the program is correct
+					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item one can minimize the automaton Ai used in the inclusion, Ai is initialy Ap, and one checks whether the language of Ai is the empty set, whenever one constructs a new Ai, one computes Ai one had previously minus the new Ai where one uses some construction for the difference of automata. Basically one always substracts the automaton one has proven correct. Then one only has to check if the remaining Ai is empty, and this automaton Ai is the one that one can minimize after every difference operation, so it keeps getting smaller
-       \item one puts work in one iteration that will be helpful to make future iterations more efficient.
-   \end{betterlist}
+					\begin{betterlist}
+						\item one can minimize the automaton Ai used in the inclusion, Ai is initialy Ap, and one checks whether the language of Ai is the empty set, whenever one constructs a new Ai, one computes Ai one had previously minus the new Ai where one uses some construction for the difference of automata. Basically one always substracts the automaton one has proven correct. Then one only has to check if the remaining Ai is empty, and this automaton Ai is the one that one can minimize after every difference operation, so it keeps getting smaller
+						\item one puts work in one iteration that will be helpful to make future iterations more efficient.
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Further Aspects}
@@ -915,36 +937,36 @@
 			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item yes, thats how the algorithm explained at the beginning works, automatons of simple programs, can seperate into distinct infeasability traces
-   \end{betterlist}
+					\begin{betterlist}
+						\item yes, thats how the algorithm explained at the beginning works, automatons of simple programs, can seperate into distinct infeasability traces
+					\end{betterlist}
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item yes, automatons can be reused if the infeasible trace from which they derive are only in unchanged part of the program automaton
-   \end{betterlist}
+					\begin{betterlist}
+						\item yes, automatons can be reused if the infeasible trace from which they derive are only in unchanged part of the program automaton
+					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item smt-solver for feasability check
-       \item no smt checks for automata inclusion, use formulas to construct automaton a1, once constructed it, can forget about these formulas, in particular we never have some set B that contains the formulas from the first iteration the formulas from the second iteration and the formulas from the third iteration and so on
-       \item so growing set of formulas that had in predicate abstraction doesn't appear here, every formula is only relevant in the one iteration where it's found, can help with performance obstacles that saw with predicate abstraction (also fits into bottleneck, cost discussion)
-       \item It uses almost only pure automata algorithms, pure automata algorithms can decide when to stop, one cunstructs automaton for union of automata, one can check inclusion between the automata by complementing union automaton and doing intersection with program automaton and then check  for emptiness.
-   \end{betterlist}
+					\begin{betterlist}
+						\item smt-solver for feasability check
+						\item no smt checks for automata inclusion, use formulas to construct automaton a1, once constructed it, can forget about these formulas, in particular we never have some set B that contains the formulas from the first iteration the formulas from the second iteration and the formulas from the third iteration and so on
+						\item so growing set of formulas that had in predicate abstraction doesn't appear here, every formula is only relevant in the one iteration where it's found, can help with performance obstacles that saw with predicate abstraction (also fits into bottleneck, cost discussion)
+						\item It uses almost only pure automata algorithms, pure automata algorithms can decide when to stop, one cunstructs automaton for union of automata, one can check inclusion between the automata by complementing union automaton and doing intersection with program automaton and then check  for emptiness.
+					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-   \begin{betterlist}
-       \item see bullet points in bottleneck section above
-       \item in practise difficult to predict
-       \item dependant on smt solver and program input
-        % \item (potentialy exponential in the worst case)
-   \end{betterlist}
+					\begin{betterlist}
+						\item see bullet points in bottleneck section above
+						\item in practise difficult to predict
+						\item dependant on smt solver and program input
+						% \item (potentialy exponential in the worst case)
+					\end{betterlist}
 				}}
 		\end{betterlist}
 	\end{betterlist}
@@ -952,23 +974,38 @@
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{Invariant Synthesis}
- \begin{betterlist}
-     \item see page \pageref{pdf:invariant_synthesis}
- \end{betterlist}
+	\begin{betterlist}
+		\item see page \pageref{pdf:invariant_synthesis}
+		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+				\begin{betterlist}
+					\item asdf
+				\end{betterlist}
+			}}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{Ranking Function Synthesis}
- \begin{betterlist}
-     \item see page \pageref{pdf:ranking_function_synthesis}
- \end{betterlist}
+	\begin{betterlist}
+		\item see page \pageref{pdf:ranking_function_synthesis}
+	\end{betterlist}
+	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+			\begin{betterlist}
+				\item asdf
+			\end{betterlist}
+		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{Terminator}
- \begin{betterlist}
-     \item see page \pageref{pdf:terminator}
- \end{betterlist}
+	\begin{betterlist}
+		\item see page \pageref{pdf:terminator}
+	\end{betterlist}
+	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+			\begin{betterlist}
+				\item asdf
+			\end{betterlist}
+		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
@@ -976,16 +1013,16 @@
 	\begin{betterlist}
 		\item Give a short description of the technique
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+				\begin{betterlist}
+					\item TODO
+				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+				\begin{betterlist}
+					\item TODO
+				\end{betterlist}
 			}}
 		\item \alert{Soundness}
 		\begin{betterlist}
@@ -994,16 +1031,16 @@
 				\item In which circumstances does the technique claim that a program is correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{For incorrect programs}
@@ -1011,24 +1048,24 @@
 				\item In which circumstances does the technique claim that a program is correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
-				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
-					}}
+			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
 		\end{betterlist}
 		\item \alert{Completeness}
 		\begin{betterlist}
@@ -1037,16 +1074,16 @@
 				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item \underline{Termination}
@@ -1054,24 +1091,24 @@
 				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+						\begin{betterlist}
+							\item TODO
+						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Are there any programs which the technique does not support at all?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
@@ -1080,34 +1117,34 @@
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -1115,30 +1152,30 @@
 			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Efficiency}
@@ -1146,16 +1183,16 @@
 			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 		\end{betterlist}
 		\item \alert{Further Aspects}
@@ -1163,29 +1200,29 @@
 			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
 			\framebox[0.95\textwidth][l]{\parbox{0.91\textwidth}{
-  \begin{betterlist}
-      \item TODO
-  \end{betterlist}
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
 				}}
 		\end{betterlist}
 	\end{betterlist}
@@ -1239,8 +1276,8 @@
 \addcontentsline{toc}{section}{Credits}
 \fbox{Credits}
 \begin{betterlist}
-    \item \alert{Theo:} Hoare Proof System, Explicit-State Model Checking, Bounded Model Checking, Invariant Synthesis, Ranking Function Synthesis
-    \item \alert{Jürgen:} Abstract Interpretion, CEGAR, Trace Abstraction
-    \item \alert{Aisan:} Terminator
+	\item \alert{Theo:} Hoare Proof System, Explicit-State Model Checking, Bounded Model Checking, Invariant Synthesis, Ranking Function Synthesis
+	\item \alert{Jürgen:} Abstract Interpretion, CEGAR, Trace Abstraction
+	\item \alert{Aisan:} Terminator
 \end{betterlist}
 \end{document}

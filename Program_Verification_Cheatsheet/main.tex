@@ -550,9 +550,9 @@
 				\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
 				\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$\color{black}
 			\end{betterlist}
-    \item \color{orange}Kleene iteration with $F_{\triangledown}$ always terminates. The result is an abstract annotation:
+			\item \color{orange}Kleene iteration with $F_{\triangledown}$ always terminates. The result is an abstract annotation:
 			\begin{betterlist}
-      \item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F_{\triangledown}(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$\color{black}
+				\item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F_{\triangledown}(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$\color{black}
 			\end{betterlist}
 		\end{betterlist}
 		\item \color{orange}\alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
@@ -577,7 +577,7 @@
 		\item \color{orange}For a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an \alert{abstract annotation} is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$\color{black}
 		\begin{betterlist}
 			\item Let $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ be a control-flow graph, and let $f$ be an abstract annotation for $G$. Assume that for every $\ell\in Loc$ there exists a formula $\varphi_{\ell}$ such that $\gamma(f(\ell)) = \{\varphi_{\ell}\}$. Then the graph $(AC, T)$ with $AC = \{(\ell, \{\varphi_{\ell}\}) \mid \ell \in Loc\}$ and $T = \{((\ell, \{\varphi_{\ell}\}), st, (\ell', \{\varphi_{\ell'}\})) \mid (\ell, st, \ell') \in \Delta\}$ is an \alert{abstract reachability graph}. \script{411}{Proof (f.)}
-      \item \color{orange}An abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$\color{black}
+			\item \color{orange}An abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$\color{black}
 		\end{betterlist}
 		\item given a set $X$ and a function $f:X \rightarrow X$ we call an element $x \in X$ a \alert{fixpoint} of $f$ if $f(x) = x$. \script{418}{Examples}
 		\item given a set $X$ and a partial order $\sqsubseteq$ and a function $f:X \rightarrow X$, we call an element $x$ the \alert{least fixpoint} of $f$ if $x$ is a fixpoint of $f$ and for all fixpoints $y$ of $f$ the inclusion $x \sqsubseteq y$ holds. \script{419}{Examples}
@@ -585,9 +585,9 @@
 			\item \color{orange}\alert{Knaster-Tarski Fixpoint Theorem}: Let $(X, \sqsubseteq)$ be a complete lattice. If $f:X \rightarrow X$ is monotone then $f$ has a least fixpoint and this fixpoint is $\bigsqcap \{x \mid f(x) \sqsubseteq x\}$. \script{420}{Proof}\color{black}
 			\item \script{421}{Abstract Annotations as (Least) Fixpoints}
 		\end{betterlist}
-  \item \color{orange}\underline{Kleene Chains:} Let $F : X \rightarrow X$ be a monotone function in a complete lattice $(X, \sqsubseteq)$, and let $\bot = \bigsqcap X$ be the least element of $X$\color{black}
+		\item \color{orange}\underline{Kleene Chains:} Let $F : X \rightarrow X$ be a monotone function in a complete lattice $(X, \sqsubseteq)$, and let $\bot = \bigsqcap X$ be the least element of $X$\color{black}
 		\begin{betterlist}
-    \item \color{orange}it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$\color{black}
+			\item \color{orange}it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$\color{black}
 			\item \color{orange}\alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$\color{black}
 			\item \color{orange}\alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time. \script{424}{Proof}\color{black}
 			\item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}
@@ -598,7 +598,8 @@
 	\end{betterlist}
 	\fbox{Predicate Abstraction}
 	\begin{betterlist}
-		\item Way to design custom domain
+		\item the Hoare proof system allows us to give a correctness proof if we guess \enquote{good} loop invariants. ARGs allow us to give a correctness proof if we guess \enquote{good} abstract configurations. If some set of formulas $B$ was \enquote{good}, the abstract reachability graph will be a safety proof
+		\item approach to design a customized abstract domain. The abstract domain will be based on a set of formulas $B$. If the set of formulas B was \enquote{good}, the abstract reachability graph will be a safety proof
 		\item \color{orange}Let $B$ a finite set of formulas over program variables. The \alert{predicate abstraction for $B$} is the abstract domain $(\mathbb{A}_B, \sqsubseteq, \gamma_B, \alpha_B)$ where
 		\begin{betterlist}
 			\item the abstract states are the subsets of $B$: $\mathbb{A}_B = 2^B$,
@@ -606,12 +607,20 @@
 			\item the concretization is $\gamma_B(X) = \{\bigwedge X\}$,
 			\item and the abstraction is $\alpha_B(S) = \{\varphi \in B \mid S \subseteq \{\varphi\}\}$
 		\end{betterlist}\color{black}
+		\item unlike the non-relational abstract domains, it can express relations between different variables. For example, $B$ may contain the formula $x \le y$, for two integer variables $x, y$
+		\item it is easy to see that, since $B$ is finite, the predicate abstraction for $B$ satisfies the ACC
+		\item ARG from the predicate abstraction unlike the ARG defined by abstract interpretation, does not necessarily have the same structure as the CFG. Instead, the definition is inspired by the precise ARG
+		\item the benefit of this ARG is that we are not restricted to a single abstract configuration per location: Different executions that reach the same location may reach different abstract configurations. Intuitively, this allows us to associate a location with a \enquote{disjunction} of abstract states: When an execution reaches the location, the program state must match one of the abstract states in abstract configurations with this location
 		\item \color{violet}The following defines an \alert{abstract post operator} for predicate abstraction for $B$: $post^\#_B(X, st) = \left\{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\right\} = \left\{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\right\}$\color{black}
 		\item \color{orange}Given a finite set of formulas $B$ we define the \script{452}{\alert{abstract strongest post}} operator as follows: $sp^\#_B(S, st) = \{\bigwedge \{\varphi \in B \mid sp(S, st) \subseteq \{\varphi\}\}\}$ or $sp^\#_B(\{\bigwedge X\}, st) = \{\bigwedge \{\varphi \in B \mid sp(\{\bigwedge X\}, st) \subseteq \{\varphi\}\}\} = \{\bigwedge \{\varphi \in B \mid post(\{\bigwedge X\}, [[st]]) \subseteq \{\varphi\}\}\}$\color{black}
 		\begin{betterlist}
+			\item the abstract strongest post for $B$ is similar to an abstract post operator for the predicate abstraction domain. However, it returns a set of states, not an abstract state
+			\item If the set $B$ is empty, the abstract strongest post operator is always $\bigwedge\{\}$. This formula is called the \enquote{empty conjunction} and one usually uses the convention that the empty conjunction is true. We follow this convention
 			\item $sp^\#_B(\{ \psi \} , st) = \{\bigwedge \{\varphi \in B \mid sp(\{ \psi \}, st) \subseteq \{ \varphi \}\}\}$
 		\end{betterlist}
-  \item \color{orange}We call an abstract reachability graph $(AC, T)$ \alert{precise for $B$} if for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$ the equality $sp^\#_B(\{\varphi\}, st) = \{\varphi'\}$ holds\color{black}
+		\item \color{orange}We call an abstract reachability graph $(AC, T)$ \alert{precise for $B$} if for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$ the equality $sp^\#_B(\{\varphi\}, st) = \{\varphi'\}$ holds\color{black}
+		\item as there are only finitely many possible conjunctions of formulas in B, a algorithm constructing the abstract reachability graph that is precise for a given set of formulas B will always terminate
+		\item however, as we have seen on the example, it is still important that we choose a suitable set of formulas B in order to get a safety proof. Infeasability proofs present a method for choosing B that has turned out to be quite successful in practice
 	\end{betterlist}
 	\fbox{Infeasability Proofs}
 	\begin{betterlist}
@@ -625,7 +634,7 @@
 			\item \script{438}{Example}
 		\end{betterlist}
 		\item \color{orange}We call a program configuration $(\ell, s)$ an \alert{error configuration} if $\ell \in Loc_{err}$\color{black}
-    \item \color{orange}An abstract configuration $(\ell, \{\varphi\})$ is an \alert{abstract error configuration} if $\ell \in Loc_{err}$ and $\{\varphi\}\ne \emptyset = \{false\}$\color{black}
+		\item \color{orange}An abstract configuration $(\ell, \{\varphi\})$ is an \alert{abstract error configuration} if $\ell \in Loc_{err}$ and $\{\varphi\}\ne \emptyset = \{false\}$\color{black}
 		\item \color{orange}We call a sequence of statements a \alert{trace}\color{black}
 		\begin{betterlist}
 			\item We call a trace $\pi$ \alert{feasible} if there is some execution for $\pi$
@@ -665,6 +674,11 @@
 		\end{betterlist}
 		\item Let $\pi = st_1\ldots st_n$ be an infeasible trace, with $SSA(\pi ) = \{ \psi_1,\ldots , \psi_n\}$ as on the previous slide. Let $X$ be an unsatisfiable core of $SSA(\pi )$, and let $\pi^\# = st^\#_1 \ldots st^\#_n$ such that $st^\#_i = st_i$ if $\psi_i \in X$, and $st^\#_i = abstract(st_i)$ otherwise. Then the trace $\pi^\#$ is infeasible
 	\end{betterlist}
+\end{minipage}
+
+\newpage
+
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{CEGAR}
 	\begin{betterlist}
 		\item \color{orange}Given an abstract reachability graph $(AC, T)$, we call a sequence of statements $st_1,\ldots , st_n$ an \alert{error trace in $(AC, T)$} if there exists a sequence of abstract configurations $(\ell_0, \{ \varphi_0\} ),\ldots , (\ell_n, \{ \varphi_n\})$ such that
@@ -676,11 +690,6 @@
 		\item Let $\pi$  be a trace. If $\varphi_0,\ldots , \varphi_n$ is an infeasibility proof for $\pi$  and $B \supseteq \{ \varphi_0,\ldots \varphi_n\}$  then $\pi$  is not an error trace in an abstract reachability graph that is precise for $B$. \script{487}{Proof}
 		\item \alert{Progress property:} In the CEGAR algorithm, if $\pi$ is the error trace that is analyzed in iteration $i$, then $\pi$ will not be an error trace of the abstract reachability graph in further iterations
 	\end{betterlist}
-\end{minipage}
-
-\newpage
-
-\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Trace Abstraction}
 	\begin{betterlist}
 		\item a \alert{nondeterministic finite automaton (NFA)} is a tuple $A = (Q, \sum , \Delta , Q_{init}, F)$ consisting of a finite set of states $Q$, a finite alphabet $\sum$, a transition relation $\Delta \subseteq Q × \sum  × Q$, a set of initial states $Q_{init} \subseteq Q$, and a set of accepting states $F \subseteq Q$.
@@ -697,6 +706,10 @@
 			\item $P$ satisfies all assert statements iff every word in $\mathcal{L}(\mathcal{A}_P)$ is infeasible
 		\end{betterlist}
 		\item \color{orange}a \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\} stmt \{\beta(q′)\}$ is valid\color{black}
+		\begin{betterlist}
+			\item Later doesn't care what annotation was, the only thing one has to remember is that there exist some, but one is not going to use it again, so one can forget about it
+		\end{betterlist}
+
 		\item \color{violet}given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
@@ -713,6 +726,17 @@
 	\end{betterlist}
 	\fbox{Constraint-based Invariant Synthesis}
 	\begin{betterlist}
+		\item an \alert{invariant} is a condition or property that remains true throughout the execution of a program, particularly during specific parts of the program such as loops, functions, or procedures. Invariants are crucial for proving the correctness of programs, as they help ensure that the program behaves as expected under all possible conditions
+    \item A \alert{condition} is a requirement, situation, or state that must be met or be true for something else to occur. Conditions often set the stage for actions or decisions, and they can be thought of as the "if" in an "if-then" statement
+    \begin{betterlist}
+      \item Conditions act as criteria or triggers that dictate whether or not something can happen. They describe the circumstances under which a process is valid or an action can proceed
+    \end{betterlist}
+    \item A \alert{constraint} is a limitation, restriction, or boundary that defines the scope or limits of a system or process. Constraints impose rules on how a task or activity can be performed and limit the range of possible solutions or actions
+    \begin{betterlist}
+      \item Constraints limit the ways in which a solution can be developed or a process can operate. They reduce the available options by enforcing restrictions on the parameters within which you must work
+    \end{betterlist}
+    
+		\item \underline{Question:} can we formalize the second constraints or the third constraints as a formula in some logic and obtain a Floyd-Hoare annotation as a satisfying assignment of this formula?
 		\item \color{violet}given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
@@ -732,7 +756,7 @@
 				\item for each $(\ell, st, \ell') \in \Delta$ : for all $s, s' \in S_{V,µ}$ : $s \in S_{\ell}$ and $(s, s') \in [[st]]$ implies $s' \in S_{\ell'}$
 				\item for each $\ell \in Loc_{err}$ : $S_{\ell}$ is $\emptyset$
 			\end{betterlist}
-			\item there exist $p{\ell_1},\ldots , p{\ell_n}$ such that
+			\item there exist $p_{\ell_1},\ldots , p_{\ell_n}$ such that
 			\begin{betterlist}
 				\item $\forall\vec{v}. p_{\ell_{init}}(\vec{v}) \leftrightarrow true$
 				\item for each $(\ell, st, \ell') \in \Delta : \forall\vec{v}.\forall\vec{v'}.p_{\ell}(\vec{v}) \land \tau_{st}(\vec{v},\vec{v'}) \rightarrow p_{\ell'}(\vec{v}')$
@@ -748,24 +772,28 @@
 		\end{betterlist}
 		\item \alert{Obstacle 1:} The relation $[[st]]$ that defines the meaning of a statement st is not given as a formula
 		\begin{betterlist}
-			\item define the transition formula which is a formula that denotes the relation $[[st]]$ for a given statement $st$. Such a formula does not always exist (difficult to prove) and is not unique. For every simple statement there exists a transition formula. Since a control-flow graph contains only simple statements we overcame Obstacle 1
+			\item define the \textit{transition formula} which is a formula that denotes the relation $[[st]]$ for a given statement $st$. Such a formula does not always exist (difficult to prove) and is not unique. For every simple statement there exists a transition formula. Since a control-flow graph contains only simple statements we overcame Obstacle 1
 		\end{betterlist}
 		\item \alert{Obstacle 2:} The condition quantifies over states, sets of states and both sorts are related via the 'is element' relation. This is usually impossible in first-order logic and can only be done in second-order logic
 		\begin{betterlist}
-			\item Using the two obserservations below, we rephrase the set conditions from above as SMT formulas by the conditions below them. In order to improve legibility we use $\vec{v}$ to denote the list of all program variables. We call these formulas constraints
+			\item using the two obserservations below, we rephrase the third set constaints from above as SMT formulas by the fourth constaints below them. In order to improve legibility we use $\vec{v}$ to denote the list of all program variables. We call these formulas \textit{constraints}
 			\begin{enumerate}
-				\item The quantification of set variables is existential and the outermost quantification in the orange box. We can always drop the outermost existential quantification (we introduce a Skolem constant) by replacing the quantified variables by other symbols and obtain an equisatisfiable formula
+				\item The quantification of set variables is existential and the outermost quantification in the third constraints. We can always drop the outermost existential quantification (we introduce a Skolem constant) by replacing the quantified variables by other symbols and obtain an equisatisfiable formula
 				\item If quantification is not required, we can use a predicate symbol to represent a set. E.g., over the integers, the set of even numbers is a (resp. the only) satisfying assignment for the predicate symbol $p$ in the following formula. $\forall x.p(x) \leftrightarrow \exists y.x = 2 \cdot y$
 			\end{enumerate}
-			\item We note that the constraints do not encode the existence of a Floyd-Hoare annotation but something weaker: for a Floyd-Hoare annotation we require additionally that the solutions for sets of states can be represented as a FOL formula
+			\item The constraints do not encode the existence of a Floyd-Hoare annotation but something weaker: for a Floyd-Hoare annotation we require additionally that the solutions for sets of states can be represented as a FOL formula
 		\end{betterlist}
-		\item \color{orange}\alert{Transition Formula:}  We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$. \script{524}{Transition formulas for statements from lecture}\color{black}
+		\item \color{orange}We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$\color{black}
+      \begin{betterlist}
+        \item \script{524}{Canonical Transition formulas for statements from lecture}
+      \end{betterlist}
 		\item \underline{Problem:} No SMT-sovler is able to provide a response for the check-sat command. The constraints are already too complicated for small and simple control flow graphs. Thus have to find a simpler problem for which our approach works
 		\begin{betterlist}
 			\item Do not check if some Floyd-Hoare annotation exists, check only if some Floyd-Hoare annotation of a specific form exists
-			\item Replace each $p\ell(\vec{v})$ by a linear inequality whose variables are the variables of the program and whose coefficients are the unknowns for which we want to find a solution. E.g. replace the predicate symbol $p_{\ell}(x, y)$ by $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$
+			\item Replace each $p\ell(\vec{v})$ by a linear inequality whose variables are the variables of the program and whose coefficients are the unknowns for which we want to find a solution. E.g. if program has two integer variables $x$ and $y$, then replace the predicate symbol $p_{\ell}(x, y)$ by $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$
 			\item $\oplus$ The SMT solver does not have to find a solution for predicate symbols but only for first-order variables $a_{\ell}$, $b_{\ell}$, $c_{\ell}$
 			\item $\ominus$ We can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta (\ell)$ is a linear inequality
+      \item carry out this idea in the fifth constraint. \script{530}{Example}
 		\end{betterlist}
 		\item \underline{Problem:} No SMT-solver is able to provide a response for the check-sat command. The constraints are already too complicated for small and simple control flow graphs
 		\begin{betterlist}
@@ -776,18 +804,26 @@
 			\end{enumerate}
 			\item \underline{can use a brilliant idea:}
 			\begin{betterlist}
-				\item can write (many) transition formulas as conjunction of linear inequalities, and abbreviate. \script{533}{Example}
-				such conjunctions using matrix notation
+				\item can write (many) transition formulas as conjunction of linear inequalities, and abbreviate such conjunctions using matrix notation. \script{533}{Example}
 				\item \color{orange}\script{534}{\alert{Lemma Farkas}}: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$\color{black}
 				\begin{betterlist}
-					\item use this lemma to transform formulas into equivalent formulas that are simpler for SMT solvers as they do not have quantifier alternation: $\exists\vec{\lambda}.(\vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot  A =\vec{c}^⊺\land\vec{\lambda}^T\cdot \vec{b} \leq \delta )$ is satisfiable iff $(\vec{\lambda}  \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$ is satisfiable
+					\item use this lemma to transform formulas into equivalent formulas that are simpler for SMT solvers as they do not have quantifier alternation
+          \item $\exists\vec{\lambda}.(\vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot  A =\vec{c}^⊺\land\vec{\lambda}^T\cdot \vec{b} \leq \delta )$ is satisfiable iff $(\vec{\lambda}  \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$ is satisfiable
 					\item \script{535}{Steps}
+          \item (this transformation is implemented in Ultimate and helped to find invariants for many examples)
 					% \item extension to use a boolean combination of linear inequalities. For Farkas’ Lemma we need a form that is very similar to a conjunctive normal form and that hence the size of the final formula grows exponentially in the size of this Boolean combination of linear inequalities
 				\end{betterlist}
 			\end{betterlist}
-			\item \script{537}{Example}. We use $\vec{\lambda}=\left[\begin{array}{c}L_{41}\\\ldots\\L_{45}\end{array}\right]$, where the first index (4) indicates from which constraint the constant stems, and the second index indicates the position in the vector
+      \item \script{536}{Extensions}: 
+        The limitation to annotations of the form $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$ is very restrictive. Using a single inequality we are not even able to state an equality like, e.g., $x = 0$. A straightforward extension is to use a boolean combination of linear inequalities. We note however that for Farkas’ Lemma we need a form that is very similar to a conjunctive normal form and that hence the size of the final formula grows exponentially in the size of this Boolean combination of linear inequalities
+			\item \script{537}{Example}
+        \begin{betterlist}
+          \item we use $\vec{\lambda}=\left[\begin{array}{c}L_{41}\\\ldots\\L_{45}\end{array}\right]$, where the first index (4) indicates from which constraint the constant stems, and the second index indicates the position in the vector
+        \end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Termination Analysis}
 	\begin{betterlist}
 		\item \script{546}{Questions} and \script{547}{Answers}
@@ -803,7 +839,7 @@
 			\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating. \script{553}{Proof}
 		\end{betterlist}
 		\item \script{554}{More questions}
-    \item \color{orange}do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >_{\mathbb{N}} y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}\color{black}
+		\item \color{orange}do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >_{\mathbb{N}} y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}\color{black}
 		\item \script{552}{Every loop that has a ranking function terminating}, \script{556}{Check if a function f is a ranking function}, \script{557}{4 assumptions, lexicographic ranking function}, \script{558}{Ranking function is only decreasing for reachable states}, in order to prove termination of the program above, we also have to take the reachable states into account
 		\item \alert{Loop Entry:} Given a while loop \verb|while(expr){ st }| and a control-flow graph $G = (Loc, \Delta , \ell_{init}, \ell_{ex})$ for this while loop, we call $\ell_{init}$ the \alert{entry location} of the while loop
 		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|  with entry location $\ell$. Let $\beta$ be a Floyd-Hoare annotation of $\mathcal{A}_P$. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W$ a \alert{ranking function} if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ with $s \in \{ \beta(\ell )\}$ the relation $(f(s), f(s')) \in R$ holds
@@ -813,17 +849,69 @@
 				\item Floyd-Hoare annotation denotes a superset of the reachable states at each location
 			\end{betterlist}
 		\end{betterlist}
-		\item \underline{Idea of the approach of the Terminator tool:} Iteratively collect ranking functions until termination of all loops is shown. \script{574}{Example}. \script{582}{Büchi Automizer}
+	\end{betterlist}
+	\fbox{Ranking Function Synthesis}
+	\begin{betterlist}
+		\item compute ranking functions for general programs is very difficult
+		\item for infinite traces it is sometimes doable. For several termination analyses it is sufficient to compute ranking functions for ultimately periodic traces. An ultimately periodic trace is an infinite trace in which some (finite) sequence of statements is repeated infinitely often
+		\item \enquote{Synthesize} ranking functions analogously to the synthesis of invariants
+		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation
+		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation. For these programs we synthesize a ranking function together with a loop invariant. \script{571}{Constraints for ranking function and invariant}
+		\item \underline{Algorithm for checking termination. Idea of the approach of the Terminator tool:} Iteratively collect ranking functions until termination of all loops is shown
 		\begin{enumerate}
 			\item Start with the empty set of ranking functions
 			\item Pick an ultimately periodic trace for which termination is not yet shown (if termination is not yet proven)
 			\item Compute a ranking function for this trace and add it to our collection (if the trace does not have in infinite execution)
 			\item Check if the collection of ranking functions is sufficient to prove termination and continue with the second step
 		\end{enumerate}
+		\item a strength of Terminator’s approach is that it does not need one (possibly complicated) ranking function for each loop but that it can use a combination of several ranking functions to prove termination of a single loop. The theoretical basis for this are disjunctively well-founded transition invariants
+		\item \script{574}{Example}
+
+		\adjustbox{scale=0.5}{
+				% \begin{noindent}
+			\begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+while (x>0 && y>0) {
+  if (*) {
+    x := x-1;
+    havoc y;
+  } else {
+    y := y-1;
+  }
+  assert false;
+}
+			\end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\adjustbox{scale=0.5}{
+				% \begin{noindent}
+			\begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
+oldf1 := f1(x,y);
+oldf2 := f2(x,y);
+while (x>0 && y>0) {
+  if (*) {
+    x := x-1;
+    havoc y;
+  } else {
+    y := y-1;
+  }
+  assert (oldf1 > f1(x,y) && oldf1 >= 0)
+      || (oldf2 > f2(x,y) && oldf2 >= 0);
+  if (*) {
+    oldf1 := f1(x,y);
+    oldf2 := f2(x,y);
+  }
+}
+			\end{dnumberedcodebox}
+    %\end{noindent}
+		}
+		\begin{betterlist}
+			\item the expression of the assert statement is a disjunction; we do not require that both ranking functions are decreasing, we only require that at least one of ranking function is decreasing
+			\item For concluding termination the nondeterministic assignments to \verb|oldf1| and \verb|oldf1| are vital. The safety proof does not only show that in each iteration the function \verb|f1| or the function \verb|f2| is decreasing, the safety proof shows that between every two (not necessarily consecutive) visits of the loop head the function \verb|f1| or the function \verb|f2| is decreasing
+			\item In an infinite execution, we would observe that infinitely often \verb|f1| decreases or \verb|f2| decreases. As there are only finitely many (exactly two) options, one of the functions must decrease infinitely often. This contradicts well-foundedness. The proof uses a combinatorial result called Ramsey’s theorem to show that in every infinite execution, at least one of the two ranking functions would have to decrease infinitely often
+			\item Termination analysis available in Ultimate: Büchi Automizer
+		\end{betterlist}
 		\item \script{583}{Prove nontermination}, \script{584}{Safety or termination more difficult}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Concurrent Programs}
 	\begin{betterlist}
 		\item \script{587}{Concurrent Programs}, Number interleaving of 2 threads: $\dfrac{(m+n)!}{m!\cdot n!} $ (\script{588}{Illustration})
@@ -854,13 +942,15 @@
 		\end{betterlist}
 		\item \script{595}{Example for Reduction of Program Automaton}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Neat little details}
 	\begin{betterlist}
 		\item Although \alert{predicate transformers} technically manipulate sets of states, they do so through the medium of predicates (logical formulas). The term \enquote{predicate transformer} reflects the fact that these functions take predicates as input and produce new predicates as output
 		\item $M \models \{\text{theory formulas}\}$
 		\item bei $M = (D,\{p \mapsto \overset{.}{=}\})$, $\overset{.}{=} {=} \{(x, y)\in \mathbb{N} \mid x = y\}$, $[[\forall x: p(x, x)]]_{M, \rho}$, $[[p(x, x)]]_{M, \rho} = [[x]]_{M, \rho} \overset{.}{=} [[x]]_{M, \rho}$, forall $v\in D$ it's the case that $[[x]]_{M, \rho\triangleleft\{x \mapsto v\}} \overset{.}{=} [[x]]_{M, \rho\triangleleft\{x \mapsto v\}} = v \overset{.}{=} v = true$
 		\item basis on propositional and first order logic
-    \item Terminator unpassend
+		\item Terminator unpassend
 		\begin{betterlist}
 			\item Valid $\rightarrow$ Satisfiable (but not vice versa)
 			\item Unsatisfiable $\rightarrow$ Falsifiable (but not vice versa)
@@ -899,23 +989,10 @@
 			\end{betterlist}
 		\end{betterlist}
 		\item \underline{Why loop invariant:} Loops can introduce a lot of complexity into a program because they execute a block of code multiple times. The state of the program changes with each iteration, making it difficult to reason about the final outcome. Why Invariants Help: A loop invariant provides a property that remains true before and after each iteration. This consistent truth simplifies reasoning about the loop's behavior, allowing you to break down the verification process into manageable steps
-    \item wie in der Übungsaufgaben, Erfahrungen... lange gedacht, dass... lange gebraucht, anstrengende Aufgabe
-    \item Fragen zurück stellen, wollen auch wisssen warum non-relational z.B.
-    \item sagen stopen sobald zu ausführlich
-    \item the Hoare proof system allows us to give a correctness proof if we guess “good” loop invariants. ARGs allow us to give a correctness proof if we guess “good” abstract configurations
-    \item unlike the non-relational abstract domains discussed in the last section, it can express relations between different variables. For example, $B$ may contain the formula $x \le y$, for two integer variables $x, y$
-    \item it is easy to see that, since B is finite, the predicate abstraction for B satisfies the ACC.
-    \item ARG from the predicate abstraction which, unlike the ARG defined by abstract interpretation, does not necessarily have the same structure as the CFG
-    \item the benefit of this ARG is that we are not restricted to a single abstract configuration per location: Different executions that reach the same location may reach different abstract configurations. Intuitively, this allows us to associate a location with a \enquote{disjunction} of abstract states: When an execution reaches the location, the program state must match one of the abstract states in abstract configurations with this location
-    \item using the given algorithm, we can algorithmically construct the abstract reachability graph that is precise for a given set of formulas B. As there are only finitely many possible conjunctions of formulas in B, the algorithm will always terminate
-    \item however, as we have seen on the example, it is still important that we choose a suitable set of formulas B in order to get a safety proof. The next two sections present a method for choosing B that has turned out to be quite successful in practice
-    \item CEGAR:
-    \begin{betterlist}
-      \item stands for CounterExample-Guided Abstraction Refinement
-    \end{betterlist}
+		\item wie in der Übungsaufgaben, Erfahrungen... lange gedacht, dass... lange gebraucht, anstrengende Aufgabe, lange den Fehler gemacht, dass
+		\item Fragen zurück stellen, wollen auch wisssen warum non-relational z.B.
+		\item sagen stoppen sobald zu ausführlich
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}
 \end{minipage}

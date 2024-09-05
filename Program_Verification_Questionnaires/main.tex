@@ -487,6 +487,8 @@
 					\item best explained over it's acronym: counterexample guided abstraction refinement
 					\item built an abstraction of the program, an abstract reability graph but one donesn't just build one, we refine it, ons starts with a very abstract reability graph where one just says everywhere all states are possible and then one found some new formulas that allow to rule out some states and one built a more refined and more precise abstract reachability graph and one does this in every iteration, so this is why it's an abstraction refinement
 					\item and it's counter example guided because these error traces are counter examples in the sense that they show why the current abstract reability graph is not a safety proof and one use them to guide ones refinement because one basically does the refinement by constructing these infeasability proofs for counter examples
+          \item TODO: algorithm steps
+          \item TODO: loop
 					\item on the Fly designs its own abstract domain
 					\item Predicate Abstraction: the Hoare proof system allows us to give a correctness proof if we guess \enquote{good} loop invariants. ARGs allow us to give a correctness proof if we guess “good” abstract configurations
 				\end{betterlist}
@@ -755,6 +757,7 @@
 					\item these are "obviously correct" Floyd hoare automatons, because for every accepted trace the automaton gives one via the annotation a proof of infeasibility
 					\item one \enquote{abstracts} the error \enquote{traces} by using abstraction of statements and adding self loops that allow all statements besides the ones that modify important variables that would make the trace feasible. One only added transitions were the hoare triples are valid, thus it is still a floyd hoare automaton
 					\item one adds more and more automatons to the union and thus "refines" the union over the iterations to come closer and closer to cover all traces of the program automaton
+          \item TOOD: Loop
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -978,7 +981,37 @@
 		\item see page \pageref{pdf:invariant_synthesis}
 		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
 				\begin{betterlist}
-					\item asdf
+					\item a formula that is always true at a certain location in a control flow graph (CFG) is an \alert{invariant}. In formal verification, an invariant is a property or condition that remains true at a particular point (or location) in a program, regardless of how the program execution reaches that point
+					\item find invariants (annotations of locations in the program automaton) that satisfy the constraints of a floyd hoare annotation by writing constraints into a smt-script and checking it with a smt-solver. And because smt-solvers are not as powerfull (no element of because is not FOL, not deal with predicates of FOL that are nonlinear, quantifiers) as we wish, we have to restrict ourselves and use some tricks, inter alias Farkas' Lemma (remove quantors, exists does not cause a problem), which also restricts the kinds of invariants to only linear inequalities
+					\begin{betterlist}
+						\item the constraints do not encode the existence of a Floyd-Hoare annotation but something weaker: for a Floyd-Hoare annotation we require additionally that the solutions for sets of states can be represented as a FOL formula
+            \item do not check if some Floyd-Hoare annotation exists, check only if some Floyd-Hoare annotation of a specific form exists
+					\end{betterlist}
+
+					% \item the method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
+					% \begin{betterlist}
+					% 	\item one of the key challenges is how to handle the constraints effectively
+					% 	\begin{betterlist}
+					% 		\item can't handle elements
+					% 		\item because smt solvers nowadays can't handle formulas with quantors, especially when dealing with nonlinear or complex conditions. This is where Farkas' Lemma comes into play, often used as a "trick" to simplify the process
+					% 	\end{betterlist}
+					% \end{betterlist}
+					\item assumes asserts but for preconditions and postconditions program can easily be converted to have assume for preconditions and assert for postconditions
+					\item \alert{Soundness:} If smt-solver is able to satisfy constraints, then it's a correct floyd hoare automaton (if floyd annotation the case then it's safe)
+					\begin{betterlist}
+						\item \alert{Extract information:} can get parameters through satisfying model for linear constraints in floyd hoare annotation
+					\end{betterlist}
+					\item \alert{Completeness:} unsatisfiable only means no linear inequalities exist for annotations of automaton, can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta(\ell)$ is a linear inequality . \alert{Without extension} very restrictive limitation to annotations of CFG of the form $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$
+					\begin{betterlist}
+						\item \alert{Extract information:} only searches for proof of floyd hoare automaton, searches for first state true and exit state false, would be CE if exit state something different than false
+					\end{betterlist}
+					\item \alert{Restriction:} not all statements work, some statments don't have transition formula (for method with Farka's lemma without extensions form that is very similar to a conjunctive normal form is needed) and even for statements with transition formula e.g. assignment with multiplication $x = x\cdot y$ can't be represented with linear inequalities in this matrix
+            \begin{betterlist}
+              \item only FOL, no \enquote{element of}
+              \item we can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta (\ell )$ is a linear inequality
+            \end{betterlist}
+					\item \alert{Termination}: Dependend Smt-solver, how long smt script with contraints needs to run through
+					\item \alert{Bottleneck:} The method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
 				\end{betterlist}
 			}}
 	\end{betterlist}
@@ -988,24 +1021,38 @@
 	\fbox{Ranking Function Synthesis}
 	\begin{betterlist}
 		\item see page \pageref{pdf:ranking_function_synthesis}
+		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+				\begin{betterlist}
+          \item definition of ranking function
+					\item find a ranking function by writing the constraints of a ranking function:
+
+            into a smt-script and checking it with a smt-solver
+            \begin{betterlist}
+              \item and because smt-solvers are not as powerful as we wish, we have to restrict ourselves and use some tricks, inter alia Farka's Lemma 
+              \item constraints have to restricted in a way such that Farka's Lemma can be applied, which restricts the ranking functions to only linear inequalities (restricts constraints to only have linear inequalities in order for Farka's lemma to be applicable)
+            \end{betterlist}
+            
+          \item \alert{Soundness}, \alert{Completenss}, \alert{Termination} and same as for invariant synthesis
+          \item \alert{Restriction:} Only works for ultimately periodic traces, everyting else same as for invariant synthesis
+				\end{betterlist}
+			}}
 	\end{betterlist}
-	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-			\begin{betterlist}
-				\item asdf
-			\end{betterlist}
-		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{Terminator}
 	\begin{betterlist}
 		\item see page \pageref{pdf:terminator}
+		\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
+				\begin{betterlist}
+          \item TODO: algorithm steps
+          \item because ranking function synthesis used for getting ranking functions, these ranking functions are linear
+          \item Soundness:
+          \item Completeness:
+          \item Terminierung:
+				\end{betterlist}
+			}}
 	\end{betterlist}
-	\framebox[0.99\textwidth][l]{\parbox{0.95\textwidth}{
-			\begin{betterlist}
-				\item asdf
-			\end{betterlist}
-		}}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright

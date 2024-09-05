@@ -727,15 +727,19 @@
 	\fbox{Constraint-based Invariant Synthesis}
 	\begin{betterlist}
 		\item an \alert{invariant} is a condition or property that remains true throughout the execution of a program, particularly during specific parts of the program such as loops, functions, or procedures. Invariants are crucial for proving the correctness of programs, as they help ensure that the program behaves as expected under all possible conditions
-    \item A \alert{condition} is a requirement, situation, or state that must be met or be true for something else to occur. Conditions often set the stage for actions or decisions, and they can be thought of as the "if" in an "if-then" statement
-    \begin{betterlist}
-      \item Conditions act as criteria or triggers that dictate whether or not something can happen. They describe the circumstances under which a process is valid or an action can proceed
-    \end{betterlist}
-    \item A \alert{constraint} is a limitation, restriction, or boundary that defines the scope or limits of a system or process. Constraints impose rules on how a task or activity can be performed and limit the range of possible solutions or actions
-    \begin{betterlist}
-      \item Constraints limit the ways in which a solution can be developed or a process can operate. They reduce the available options by enforcing restrictions on the parameters within which you must work
-    \end{betterlist}
-    
+		\begin{betterlist}
+			\item a formula that is always true at a certain location in a control flow graph (CFG) is considered an invariant. In formal verification, an invariant is a property or condition that remains true at a particular point (or location) in a program, regardless of how the program execution reaches that point
+		\end{betterlist}
+
+		\item A \alert{condition} is a requirement, situation, or state that must be met or be true for something else to occur. Conditions often set the stage for actions or decisions, and they can be thought of as the "if" in an "if-then" statement
+		\begin{betterlist}
+			\item Conditions act as criteria or triggers that dictate whether or not something can happen. They describe the circumstances under which a process is valid or an action can proceed
+		\end{betterlist}
+		\item A \alert{constraint} is a limitation, restriction, or boundary that defines the scope or limits of a system or process. Constraints impose rules on how a task or activity can be performed and limit the range of possible solutions or actions
+		\begin{betterlist}
+			\item Constraints limit the ways in which a solution can be developed or a process can operate. They reduce the available options by enforcing restrictions on the parameters within which you must work
+		\end{betterlist}
+
 		\item \underline{Question:} can we formalize the second constraints or the third constraints as a formula in some logic and obtain a Floyd-Hoare annotation as a satisfying assignment of this formula?
 		\item \color{violet}given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
 		\begin{betterlist}
@@ -784,16 +788,16 @@
 			\item The constraints do not encode the existence of a Floyd-Hoare annotation but something weaker: for a Floyd-Hoare annotation we require additionally that the solutions for sets of states can be represented as a FOL formula
 		\end{betterlist}
 		\item \color{orange}We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$\color{black}
-      \begin{betterlist}
-        \item \script{524}{Canonical Transition formulas for statements from lecture}
-      \end{betterlist}
+		\begin{betterlist}
+			\item \script{524}{Canonical Transition formulas for statements from lecture}
+		\end{betterlist}
 		\item \underline{Problem:} No SMT-sovler is able to provide a response for the check-sat command. The constraints are already too complicated for small and simple control flow graphs. Thus have to find a simpler problem for which our approach works
 		\begin{betterlist}
 			\item Do not check if some Floyd-Hoare annotation exists, check only if some Floyd-Hoare annotation of a specific form exists
 			\item Replace each $p\ell(\vec{v})$ by a linear inequality whose variables are the variables of the program and whose coefficients are the unknowns for which we want to find a solution. E.g. if program has two integer variables $x$ and $y$, then replace the predicate symbol $p_{\ell}(x, y)$ by $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$
 			\item $\oplus$ The SMT solver does not have to find a solution for predicate symbols but only for first-order variables $a_{\ell}$, $b_{\ell}$, $c_{\ell}$
 			\item $\ominus$ We can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta (\ell)$ is a linear inequality
-      \item carry out this idea in the fifth constraint. \script{530}{Example}
+			\item carry out this idea in the fifth constraint. \script{530}{Example}
 		\end{betterlist}
 		\item \underline{Problem:} No SMT-solver is able to provide a response for the check-sat command. The constraints are already too complicated for small and simple control flow graphs
 		\begin{betterlist}
@@ -808,18 +812,18 @@
 				\item \color{orange}\script{534}{\alert{Lemma Farkas}}: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$\color{black}
 				\begin{betterlist}
 					\item use this lemma to transform formulas into equivalent formulas that are simpler for SMT solvers as they do not have quantifier alternation
-          \item $\exists\vec{\lambda}.(\vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot  A =\vec{c}^⊺\land\vec{\lambda}^T\cdot \vec{b} \leq \delta )$ is satisfiable iff $(\vec{\lambda}  \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$ is satisfiable
+					\item $\exists\vec{\lambda}.(\vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot  A =\vec{c}^⊺\land\vec{\lambda}^T\cdot \vec{b} \leq \delta )$ is satisfiable iff $(\vec{\lambda}  \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$ is satisfiable
 					\item \script{535}{Steps}
-          \item (this transformation is implemented in Ultimate and helped to find invariants for many examples)
+					\item (this transformation is implemented in Ultimate and helped to find invariants for many examples)
 					% \item extension to use a boolean combination of linear inequalities. For Farkas’ Lemma we need a form that is very similar to a conjunctive normal form and that hence the size of the final formula grows exponentially in the size of this Boolean combination of linear inequalities
 				\end{betterlist}
 			\end{betterlist}
-      \item \script{536}{Extensions}: 
-        The limitation to annotations of the form $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$ is very restrictive. Using a single inequality we are not even able to state an equality like, e.g., $x = 0$. A straightforward extension is to use a boolean combination of linear inequalities. We note however that for Farkas’ Lemma we need a form that is very similar to a conjunctive normal form and that hence the size of the final formula grows exponentially in the size of this Boolean combination of linear inequalities
-			\item \script{537}{Example}
-        \begin{betterlist}
-          \item we use $\vec{\lambda}=\left[\begin{array}{c}L_{41}\\\ldots\\L_{45}\end{array}\right]$, where the first index (4) indicates from which constraint the constant stems, and the second index indicates the position in the vector
-        \end{betterlist}
+			\item \script{536}{Extensions}: The limitation to annotations of the form $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$ is very restrictive. Using a single inequality we are not even able to state an equality like, e.g., $x = 0$. A straightforward extension is to use a boolean combination of linear inequalities
+			\item for Farkas’ Lemma we need a form that is very similar to a conjunctive normal form and that hence the size of the final formula grows \alert{exponentially} in the size of this Boolean combination of linear inequalities
+			\item \script{537}{Example}. \script{541}{End result}
+			\begin{betterlist}
+				\item we use $\vec{\lambda}=\left[\begin{array}{c}L_{41}\\\ldots\\L_{45}\end{array}\right]$, where the first index (4) indicates from which constraint the constant stems, and the second index indicates the position in the vector
+			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
@@ -836,7 +840,7 @@
 		\item Let $X$ be a set. We call a binary relation $R \subseteq X × X$ \alert{well-founded} if there is no infinite sequence $x_1, x_2,\ldots$ such that $(x_i, x_{i+1}) \in R$ for all $i \in \mathbb{N}$
 		\item \color{orange}Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W a$ \alert{ranking function}  for the loop if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ the relation $(f(s), f(s')) \in R$ holds. \script{551}{Example}. \script{550}{Informal definition and loop variant}\color{black}
 		\begin{betterlist}
-			\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating. \script{553}{Proof}
+    \item \color{orange}\alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating. \script{553}{Proof}\color{black}
 		\end{betterlist}
 		\item \script{554}{More questions}
 		\item \color{orange}do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >_{\mathbb{N}} y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}\color{black}
@@ -855,8 +859,17 @@
 		\item compute ranking functions for general programs is very difficult
 		\item for infinite traces it is sometimes doable. For several termination analyses it is sufficient to compute ranking functions for ultimately periodic traces. An ultimately periodic trace is an infinite trace in which some (finite) sequence of statements is repeated infinitely often
 		\item \enquote{Synthesize} ranking functions analogously to the synthesis of invariants
+		\item \script{563}{Example for just ranking function (ff.)}
 		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation
-		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation. For these programs we synthesize a ranking function together with a loop invariant. \script{571}{Constraints for ranking function and invariant}
+		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation. For these programs we synthesize a ranking function together with a loop invariant
+		\item \script{571}{Constraints for ranking function and invariant}
+		\begin{betterlist}
+			\item The constraints for the special case where we are searching for a ranking function of the form $f(\vec{v}) =\vec{r}^T\cdot \vec{v} + r_0$ and an invariant of the form $\vec{s}^T\cdot \vec{v} + s_0 \geq 0$
+		\end{betterlist}
+		\item Synthesis of ranking functions available in Ultimate: LassoRanker
+	\end{betterlist}
+	\fbox{Terminator}
+	\begin{betterlist}
 		\item \underline{Algorithm for checking termination. Idea of the approach of the Terminator tool:} Iteratively collect ranking functions until termination of all loops is shown
 		\begin{enumerate}
 			\item Start with the empty set of ranking functions
@@ -868,7 +881,7 @@
 		\item \script{574}{Example}
 
 		\adjustbox{scale=0.5}{
-				% \begin{noindent}
+			% \begin{noindent}
 			\begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
 while (x>0 && y>0) {
   if (*) {
@@ -883,7 +896,7 @@ while (x>0 && y>0) {
     %\end{noindent}
 		}
 		\adjustbox{scale=0.5}{
-				% \begin{noindent}
+			% \begin{noindent}
 			\begin{dnumberedcodebox}[minted language=go,minted options={autogobble, fontsize=\tiny,numbersep=0.3cm,linenos}, box align=top]
 oldf1 := f1(x,y);
 oldf2 := f2(x,y);

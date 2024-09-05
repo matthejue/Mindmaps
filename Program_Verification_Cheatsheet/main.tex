@@ -687,6 +687,23 @@
 			\item $( (\ell_i, \{ \varphi_i\} ), st_{i+1}, (\ell_{i+1}, \{ \varphi_{i+1}\} ) ) \in T$ for $i \in \{ 0,\ldots , n −1\}$, and
 			\item $(\ell_n, \{ \varphi_n\} )$ is an abstract error configuration
 		\end{betterlist}\color{black}
+		\item \underline{Steps:}
+		\begin{enumerate}
+			\item Set $B$ to the empty set
+			\item Construct an abstract reachability graph ARG that is precise for $B$
+			\item Check if ARG is a safety proof
+			\begin{betterlist}
+				\item If yes, report that P satisfies its specification and return
+				\item If no, construct an error trace $\pi$ of ARG
+			\end{betterlist}
+			\item Check if $\pi$ is feasible
+			\begin{betterlist}
+				\item If yes, report that $P$ does not satisfy its specification, construct an execution for $\pi$, and return
+				\item If no, construct a proof of infeasibility $\varphi_0,\ldots, \varphi_n$ for $\pi$, add the set of formulas $\{\varphi_0,\ldots, \varphi_n\}$ to $B$, and continue with Step 2
+			\end{betterlist}
+		\end{enumerate}
+
+		\includegraphics[width=\linewidth]{./figures/cegar_approach.png}
 		\item Let $\pi$  be a trace. If $\varphi_0,\ldots , \varphi_n$ is an infeasibility proof for $\pi$  and $B \supseteq \{ \varphi_0,\ldots \varphi_n\}$  then $\pi$  is not an error trace in an abstract reachability graph that is precise for $B$. \script{487}{Proof}
 		\item \alert{Progress property:} In the CEGAR algorithm, if $\pi$ is the error trace that is analyzed in iteration $i$, then $\pi$ will not be an error trace of the abstract reachability graph in further iterations
 	\end{betterlist}
@@ -724,6 +741,8 @@
 		\item \underline{Lemma:} Every trace that is accepted by a Floyd-Hoare automaton is infeasible
 		\item If there are Floyd-Hoare automata $\mathcal{A}_{1}, \ldots, \mathcal{A}_{n}$ such that the inclusion $L(\mathcal{A}_P) \subseteq L(\mathcal{A}_{1}) \cup . . . \cup L(\mathcal{A}_{n})$ holds then the program $P$ is safe
 	\end{betterlist}
+
+	\includegraphics[width=\linewidth]{./figures/trace_abstraction_refinement.png}
 	\fbox{Constraint-based Invariant Synthesis}
 	\begin{betterlist}
 		\item an \alert{invariant} is a condition or property that remains true throughout the execution of a program, particularly during specific parts of the program such as loops, functions, or procedures. Invariants are crucial for proving the correctness of programs, as they help ensure that the program behaves as expected under all possible conditions
@@ -778,6 +797,10 @@
 		\begin{betterlist}
 			\item define the \textit{transition formula} which is a formula that denotes the relation $[[st]]$ for a given statement $st$. Such a formula does not always exist (difficult to prove) and is not unique. For every simple statement there exists a transition formula. Since a control-flow graph contains only simple statements we overcame Obstacle 1
 		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\begin{betterlist}
 		\item \alert{Obstacle 2:} The condition quantifies over states, sets of states and both sorts are related via the 'is element' relation. This is usually impossible in first-order logic and can only be done in second-order logic
 		\begin{betterlist}
 			\item using the two obserservations below, we rephrase the third set constaints from above as SMT formulas by the fourth constaints below them. In order to improve legibility we use $\vec{v}$ to denote the list of all program variables. We call these formulas \textit{constraints}
@@ -826,8 +849,6 @@
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Termination Analysis}
 	\begin{betterlist}
 		\item \script{546}{Questions} and \script{547}{Answers}
@@ -840,7 +861,7 @@
 		\item Let $X$ be a set. We call a binary relation $R \subseteq X × X$ \alert{well-founded} if there is no infinite sequence $x_1, x_2,\ldots$ such that $(x_i, x_{i+1}) \in R$ for all $i \in \mathbb{N}$
 		\item \color{orange}Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W a$ \alert{ranking function}  for the loop if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ the relation $(f(s), f(s')) \in R$ holds. \script{551}{Example}. \script{550}{Informal definition and loop variant}\color{black}
 		\begin{betterlist}
-    \item \color{orange}\alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating. \script{553}{Proof}\color{black}
+			\item \color{orange}\alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating. \script{553}{Proof}\color{black}
 		\end{betterlist}
 		\item \script{554}{More questions}
 		\item \color{orange}do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >_{\mathbb{N}} y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}\color{black}
@@ -925,6 +946,8 @@ while (x>0 && y>0) {
 		\end{betterlist}
 		\item \script{583}{Prove nontermination}, \script{584}{Safety or termination more difficult}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Concurrent Programs}
 	\begin{betterlist}
 		\item \script{587}{Concurrent Programs}, Number interleaving of 2 threads: $\dfrac{(m+n)!}{m!\cdot n!} $ (\script{588}{Illustration})
@@ -955,8 +978,6 @@ while (x>0 && y>0) {
 		\end{betterlist}
 		\item \script{595}{Example for Reduction of Program Automaton}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Neat little details}
 	\begin{betterlist}
 		\item Although \alert{predicate transformers} technically manipulate sets of states, they do so through the medium of predicates (logical formulas). The term \enquote{predicate transformer} reflects the fact that these functions take predicates as input and produce new predicates as output

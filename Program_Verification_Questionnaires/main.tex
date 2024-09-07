@@ -321,24 +321,469 @@
 	\fbox{building the reachability graph (Explicit-State Model Checking)}
 	\begin{betterlist}
 		\item see page \pageref{pdf:explicit_state_model_checking}
-	\end{betterlist}
-	\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+		\item Give a short description of the technique
+		\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+				\begin{betterlist}
+					\item the \alert{set of reachable configurations $RC$} is the smallest set such that|
+					\begin{betterlist}
+						\item each initial configuration is an element of RC
+						\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$ then $(\ell', s') \in RC$
+					\end{betterlist}
+					\item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell', s')) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$
+					\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
+					\item performs a standard breadth-first traversal of the graph while constructing the graph on the fly
+				\end{betterlist}
+			}}
+		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
+
+		\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+				\begin{betterlist}
+					\allpre
+				\end{betterlist}
+			}}
+		\item \alert{Soundness}
+		\begin{betterlist}
+			\item \underline{For correct programs}
 			\begin{betterlist}
-				\item asdf
+				\item In which circumstances does the technique claim that a program is correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item once it terminates and didn't find an error configuration
+						\end{betterlist}
+					}}
+				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+              \item tried out all possibilities, proof by case distinction over all reachable configurations
+							% \item yes, if the ARG has no error configurations, then it is a safety proof
+							% \item we call an abstract reachability graph for G a \alert{safety proof} if is does not contain an abstract error configuration
+						\end{betterlist}
+					}}
 			\end{betterlist}
-		}}
+			\item \underline{For incorrect programs}
+			\begin{betterlist}
+				\item In which circumstances does the technique claim that a program is incorrect?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item if the algorithm finds an abstract error configuration
+						\end{betterlist}
+					}}
+				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item no, because $sp(\{\varphi\}, st) \subseteq \{\varphi'\}$ might overapproximate
+						\end{betterlist}
+					}}
+			\end{betterlist}
+			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item no loops
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Completeness}
+		\begin{betterlist}
+			\item \underline{UNKNOWN verdicts} (failing to either establish correctness of incorrectness)
+			\begin{betterlist}
+				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item no
+						\end{betterlist}
+					}}
+				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item no
+						\end{betterlist}
+					}}
+			\end{betterlist}
+			\item \underline{Termination}
+			\begin{betterlist}
+				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item no, may not terminate, may iterate over infinitely many initial configurations and may add infinitely many configurations while processing the worklist
+						\end{betterlist}
+					}}
+				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item yes, is always terminating if using breath-first search
+						\end{betterlist}
+					}}
+			\end{betterlist}
+			\item Are there any programs which the technique does not support at all?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item domains of the variables finite
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{User Input:} How much / which user input is needed for the technique?
+		\begin{betterlist}
+			\item \checkboxChecked the program
+			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\specpre
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked the proof is completely manual
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Provided Output}
+		\begin{betterlist}
+			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Efficiency}
+		\begin{betterlist}
+			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item Are there particularly important optimizations?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Further Aspects}
+		\begin{betterlist}
+			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item Which techniques are used? E.g. SMT solving, automata, ...
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item Reachability Graph
+						\item relational semantics (via relations for different statements $[[st]]$)
+					\end{betterlist}
+				}}
+			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
 	\fbox{building the precise ARG / Bounded Model Checking}
 	\begin{betterlist}
 		\item see page \pageref{pdf:bounded_mode_checking}
-	\end{betterlist}
-	\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+		\item Give a short description of the technique
+		\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+				\begin{betterlist}
+					\item an \alert{abstract (program) configuration} is a pair $(\ell, \{\varphi\})$ where $\ell$ is a location and $\varphi$ is a formula over the program’s variables
+					\item an \alert{abstract reachability graph} is a graph $(AC, T)$ where AC is a set of abstract configurations and $T \subseteq AC \times Stmt \times AC$, such that
+					\begin{enumerate}
+						\item for each edge $((\ell, {\varphi}), st, (\ell', \{\varphi'\})) \in T$, we have $(\ell, st, \ell') \in \Delta$ and $sp(\{\varphi\}, st) \subseteq \{\varphi'\}$,
+						\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ with $\varphi\not\equiv false$ and $(\ell, st, \ell') \in ∆$, there exists an abstract configuration $(\ell', \{\varphi'\}) \in AC$ such that $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$,
+						\item there exists $(\ell_{init}, \{\varphi_{init}\}) \in AC$ with $\{\varphi_{pre}\} \subseteq \{\varphi_{init}\}$, and
+						\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ there is a path from $(\ell_{init}, \{\varphi_{init}\})$ to $(\ell, \{\varphi\})$, using edges in $T$
+					\end{enumerate}
+					\item a \alert{precise abstract reachability graph} is an abstract reachability graph $(AC, T)$ such that for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\}))$ the equality $sp(\{\varphi\}, st) = \{\varphi'\}$ holds, and $\{\varphi_{init}\} = \{\varphi_{pre}\}$
+					\item performs a standard breadth-first traversal of the graph while constructing the graph on the fly
+				\end{betterlist}
+			}}
+		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
+
+		\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+				\begin{betterlist}
+					\allpre
+				\end{betterlist}
+			}}
+		\item \alert{Soundness}
+		\begin{betterlist}
+			\item \underline{For correct programs}
 			\begin{betterlist}
-				\item asdf
+				\item In which circumstances does the technique claim that a program is correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item In the case that the algorithm terminates without finding an abstract error configuration, the program is correct
+							\item \underline{Guarantees correctness up to a bound:}
+							\begin{betterlist}
+								\item After we explored all nodes whose distance to the initial node is smaller than $k$, we can guarantee the program cannot reach an error by executing less than $k$ statements
+							\end{betterlist}
+						\end{betterlist}
+					}}
+				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item yes, if algorithm terminates and no error location has been found, then none is reachable
+						\end{betterlist}
+					}}
 			\end{betterlist}
-		}}
+			\item \underline{For incorrect programs}
+			\begin{betterlist}
+				\item In which circumstances does the technique claim that a program is incorrect?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item if the algorithm finds an abstract error configuration
+						\end{betterlist}
+					}}
+				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item yes, because $sp(\{\varphi\}, st) = \{\varphi'\}$
+						\end{betterlist}
+					}}
+			\end{betterlist}
+			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Completeness}
+		\begin{betterlist}
+			\item \underline{UNKNOWN verdicts} (failing to either establish correctness of incorrectness)
+			\begin{betterlist}
+				\item Given a correct program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item no, only if there's a timeout in case that it's going to run infintely or just a too long running example
+						\end{betterlist}
+					}}
+				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item no
+						\end{betterlist}
+					}}
+			\end{betterlist}
+			\item \underline{Termination}
+			\begin{betterlist}
+				\item Does the technique always terminate for correct programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item no, may not terminate, may add infinitely many abstract configurations while processing the worklist
+						\end{betterlist}
+					}}
+				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
+
+				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+						\begin{betterlist}
+							\item yes, is always terminating if using breath-first search
+						\end{betterlist}
+					}}
+			\end{betterlist}
+			\item Are there any programs which the technique does not support at all?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item For most programs with loops, the algorithm does not terminate
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{User Input:} How much / which user input is needed for the technique?
+		\begin{betterlist}
+			\item \checkboxChecked the program
+			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\specpre
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \checkboxUnchecked the proof is completely manual
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Provided Output}
+		\begin{betterlist}
+			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Efficiency}
+		\begin{betterlist}
+			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item Are there particularly important optimizations?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item Check if $(\ell ' , S)$ is an abstract error configuration while adding it to the graph
+						\item If $(\ell ' , S)$ is an abstract error configuration, then discontinue to build the graph and tell the user that the program is not safe
+						\item Construct a path $(\ell_0, S_0),\ldots , (\ell_0, S_0)$ such that $(\ell_0, S_0)$ is $(\ell_{init}, \{ \varphi_{pre}\} )$ and $(\ell_n, S_n)$ is the abstract error configuration $(\ell' , S)$
+						\item Let $st_1,\ldots s_n$ be a sequence of statements such that $(\ell_{i−1}, st_i, \ell_i) \in \Delta$ and $S_i = sp(S_{i−1}, st_i)$ for each $i \in \{1,\ldots, n\}$. Return $st_1,\ldots s_n$ to the user as a counterexample to safety of the program
+					\end{betterlist}
+				}}
+		\end{betterlist}
+		\item \alert{Further Aspects}
+		\begin{betterlist}
+			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+			\item Which techniques are used? E.g. SMT solving, automata, ...
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item precise Abstract Reachability Graph (precise ARG)
+						\item strongest post operator for different statements
+					\end{betterlist}
+				}}
+			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item TODO
+					\end{betterlist}
+				}}
+		\end{betterlist}
+	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
@@ -367,6 +812,14 @@
 						\item in order to guarantee termination in all cases, we require that the lattice satisfies the ACC
 					\end{betterlist}
 					\item to ensure termination in abstract domains that do not satisfy the ACC, we introduce widening
+					\begin{betterlist}
+						\item A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that
+						\begin{betterlist}
+							\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
+							\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$
+						\end{betterlist}
+						\item Kleene iteration with $F_{\triangledown}$ always terminates. The result is an abstract annotation: $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F_{\triangledown}(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$
+					\end{betterlist}
 					% \item one abstractly interprets programs using an abstract domain and an abstract post operator
 					% \item one defines abstract annotations using an equation system and if one has an equation system one can build an abstract reability graph and one can find a solution to this equation system using for instance kleene iteration using one of these two functions $F_\#$ (monotone function over locations mapped to abstract states with least upper bound) or $F_{\triangledown}$ (monotone function over locations mapped to abstract states with widening operator $\triangledown$)
 					% \begin{betterlist}
@@ -413,9 +866,13 @@
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item cannot use it to find errors, so if the program is incorrect one will always end up with some abstract reachability graph that's not a safety proof but one is never sure that something is really an error
+							\item never, cannot use it to find errors, so if the program is incorrect one will always end up with some abstract reachability graph that's not a safety proof but one is never sure that something is really an error
 							\begin{betterlist}
 								\item true positive only in case $\phi_{exit} \cap \phi_{post} = \emptyset$, but mostly it is $\phi_{exit} \cap \phi_{post} = \phi_{exit \cap post}$, thus if there is a path from an initial equivalence class to an error equivalence class, the program might be incorrect but it might also be the case the we have chosen a partition that is not helpful, thus in general one says there are no true positives or false positives
+							\end{betterlist}
+							\item this can happen, because the abstract post operator overapproximates and one doesn't know if the nonempty difference from $\phi_{post}$ is a result of this overapproximation
+							\begin{betterlist}
+								\item An \alert{abstract post operator} $post^\#$ for an abstract domain $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ is a monotone function that takes an abstract state $s^\# \in \mathbb{A}$ and a simple statement $st$ and returns a new abstract state, such that the following holds: $sp(\gamma(s^\#), st) = post(\gamma(s^\#), [[st]]) \subseteq \gamma(post^\#(s^\#, st))$
 							\end{betterlist}
 						\end{betterlist}
 					}}
@@ -498,7 +955,7 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-            \specpre
+						\specpre
 						% \item assert statements or prec-post-condition pair is correct, one has to think what is actually the specification that the program should satisfy, formalsing requirements can be a difficult task
 					\end{betterlist}
 				}}
@@ -558,9 +1015,9 @@
 			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-            -
+					-
 					% \begin{betterlist}
-						% \item the computation of $post^\#$ might be costly like in CEGAR
+					% \item the computation of $post^\#$ might be costly like in CEGAR
 					% \end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
@@ -598,7 +1055,7 @@
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
 						\item basically just application of abstract strongest post
-            \item Abstract Reachability Graph (ARG)
+						\item Abstract Reachability Graph (ARG)
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
@@ -1148,10 +1605,27 @@
 					\item a formula that is always true at a certain location in a control flow graph (CFG) is an \alert{invariant}. In formal verification, an invariant is a property or condition that remains true at a particular point (or location) in a program, regardless of how the program execution reaches that point
 					\item find invariants (annotations of locations in the program automaton) that satisfy the constraints of a floyd hoare annotation by writing constraints into a smt-script and checking it with a smt-solver. And because smt-solvers are not as powerfull (\enquote{no element} of because is not FOL, not deal with predicates of FOL that are nonlinear, quantifiers) as we wish, we have to restrict ourselves and use some tricks, inter alias Farkas' Lemma (remove quantors, exists does not cause a problem), which also restricts the kinds of invariants to only linear inequalities and also constraints need to have a certain form (and thus also statements in program, representable in matrix notation of Farka's lemma)
 					\begin{betterlist}
-						\item the constraints do not encode the existence of a Floyd-Hoare annotation but something weaker: for a Floyd-Hoare annotation we require additionally that the solutions for sets of states can be represented as a FOL formula
+						\item the constraints do not encode the existence of a Floyd-Hoare annotation but something weaker: for a Floyd-Hoare annotation we require additionally that the solutions for sets of states can be represented as a FOL formula and later as linear inequalities
 						\item do not check if some Floyd-Hoare annotation exists, check only if some Floyd-Hoare annotation of a specific form exists
+						\item given a program $P$, if there is a Floyd-Hoare annotation of the program automaton $\mathcal{A}_P$ such that
+						\begin{betterlist}
+							\item every initial state is labeled with true and
+							\item every accepting state (i.e., error location) is labeled with false
+						\end{betterlist}
+						\item there exist formulas $\varphi_{\ell_1},\ldots , \varphi_{\ell_n}$ such that
+						\begin{betterlist}
+							\item $\varphi_{\ell_{init}}$ is true
+							\item for each $(\ell , st, \ell ' ) \in \Delta$ : $sp(\{ \varphi_{\ell} \} , st) \subseteq \{ \varphi_{\ell'}\}$
+							\item for each $\ell \in Loc_{err} : \varphi_{\ell}$ is false
+						\end{betterlist}
+						\item there exist $a_{\ell_1},\ldots, a_{\ell_n}, b_{\ell_1},\ldots, b_{\ell_n}$ such that
+						\begin{betterlist}
+							\item $\forall x. a_{\ell_{init}} \cdot  x + b_{\ell_{init}} \geq 0 \leftrightarrow true$
+							\item for each $(\ell, st, \ell') \in \Delta$ : $\forall x, x' . a_{\ell} \cdot  x + b_{\ell} \geq 0 \land \tau_{st}(x, x') \rightarrow a_{\ell'} \cdot x' + b_{\ell'} \geq 0$
+							\item for each $\ell \in Loc_{err} : \forall x. a_{\ell} \cdot  x + b_{\ell} \geq 0 \leftrightarrow false$
+							\item special case where the program has only one variable. The extension to multiple variables is straightforward
+						\end{betterlist}
 					\end{betterlist}
-
 					% \item the method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
 					% \begin{betterlist}
 					%   \item one of the key challenges is how to handle the constraints effectively
@@ -1360,7 +1834,7 @@
 			\end{betterlist}
 			\item \underline{For incorrect programs}
 			\begin{betterlist}
-				\item In which circumstances does the technique claim that a program is correct?
+				\item In which circumstances does the technique claim that a program is incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}

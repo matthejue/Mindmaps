@@ -292,7 +292,7 @@
 			\item \script{269}{Soundness of the Assume Axiom}
 		\end{betterlist}
 	\end{betterlist}
-	\fbox{Ultimate Referee}
+	\fbox{Deductive verification}
 	\begin{betterlist}
 		\item \script{227}{Guide for Finding a Derivation in the Hoare Proof System}
 		\item \script{230}{What it is and example (ff.)}
@@ -341,7 +341,7 @@
 		\item \script{282}{Sequential Composition}, \script{283}{Illustration}
 		\item \script{284}{Conditional Statement}, \script{285}{Illustration}
 		\item \script{286}{While Statement}, \script{287}{Illustration}
-    \item \script{438}{Assert Statement with Illustration}
+		\item \script{438}{Assert Statement with Illustration}
 		\item \color{orange}we call a pair $(\ell, s)$ a \alert{program configuration} of $P$ if $\ell \in Loc$ is a location and $s$ is a state of $P$\color{black}
 		\item \color{orange}we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements (a trace) $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}\color{black}
 		\begin{betterlist}
@@ -370,18 +370,19 @@
 		\end{betterlist}
 		\item \alert{Reachable Program Configuration:} We call a configuration $(\ell, s)$ \alert{reachable} if there exists a program execution $(\ell_0, s_0), . . . , (\ell_n, s_n)$ such that $(\ell_0, s_0)$ is an initial configuration and $(\ell_n, s_n) = (\ell, s)$
 		\item \alert{Theorem CorrectIffNoErrorReach:} A program satisfies a given precondition-postcondition pair iff the set of reachable configurations does not contain an error configuration
+	\end{betterlist}
+	\fbox{Building the reachability graph (Explicit-State Model Checking)}
+	\begin{betterlist}
 		\item the \alert{set of reachable configurations $RC$} is the smallest set such that
 		\begin{betterlist}
 			\item each initial configuration is an element of RC
 			\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$ then $(\ell', s') \in RC$
 		\end{betterlist}
 		\item \color{orange}the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell', s')) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$\color{black}
-		\begin{betterlist}
-			\item \script{362}{Algorithm}
-		\end{betterlist}
 		\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
 		\begin{betterlist}
 			\item \script{111}{Example}
+			\item \script{362}{Algorithm}
 		\end{betterlist}
 	\end{betterlist}
 	\fbox{Predicate Transformers}
@@ -428,10 +429,10 @@
 			\item $\{\varphi\} \subseteq wp(\{\psi\}, st)$
 		\end{betterlist}
 	\end{betterlist}
-	\fbox{Bounded Model Checking}
+	\fbox{Building the precise ARG / Bounded Model Checking}
 	\begin{betterlist}
 		\item \color{orange}an \alert{abstract (program) configuration} is a pair $(\ell, \{\varphi\})$ where $\ell$ is a location and $\varphi$ is a formula over the program’s variables\color{black}
-		\item \color{orange}an \alert{abstract reachability graph} is a graph $(AC, T)$ where AC is a set of abstract configurations and $T ⊆AC × Stmt × AC$, such that
+		\item \color{orange}an \alert{abstract reachability graph} is a graph $(AC, T)$ where AC is a set of abstract configurations and $T \subseteq AC \times Stmt \times AC$, such that
 		\begin{enumerate}
 			\item for each edge $((\ell, {\varphi}), st, (\ell', \{\varphi'\})) \in T$, we have $(\ell, st, \ell') \in \Delta$ and $sp(\{\varphi\}, st) \subseteq \{\varphi'\}$,
 			\item for each abstract configuration $(\ell, \{\varphi\}) \in AC$ with $\varphi\not\equiv false$ and $(\ell, st, \ell') \in ∆$, there exists an abstract configuration $(\ell', \{\varphi'\}) \in AC$ such that $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$,
@@ -449,8 +450,13 @@
 			\item a precise abstract reachability graph for a given control-flow graph is unique up to the formulas that represent the set of states at each location
 			\item \script{354}{Example: Implementation of the GCD (pr.)}. None of the three tests shows a violation of the postcondition. If one starts to build the precise abstract reachability graph, one sees after a few iterations that there is an abstract program configuration whose set of states is not a subset of the postcondition
 			\item \script{363}{Algorithm}
+			\item The algorithms perform a standard breadth-first traversal of the graph while constructing the graph on the fly
+			\item These algorithms may not terminate. The first algorithm may iterate over infinitely many initial configurations in line 3. Both algorithms may add infinitely many (abstract) configurations while processing the worklist
+			\item \script{364}{Modifications}
+			\item \underline{Guarantees correctness up to a bound:}
 			\begin{betterlist}
-				\item \script{364}{Modifications}
+				\item After we explored all nodes whose distance to the initial node is smaller than $k$, we can guarantee the program cannot reach an error by executing less than $k$ statements
+				\item In the case that the algorithm terminates without finding an abstract error configuration, the program is correct. But for most programs with loops, the algorithm does not terminate
 			\end{betterlist}
 		\end{betterlist}
 		\item \color{orange}Let $(\varphi_{pre}, \varphi_{post})$ be a precondition-postcondition pair. We call an abstract configuration $(\ell, \{\varphi\})$ an \alert{abstract error configuration} if $\ell$ is the exit location and the inclusion $\{\varphi\} \subseteq \{\varphi_{post}\}$ does not hold. \script{355}{Example}\color{black}
@@ -558,7 +564,7 @@
 		\begin{betterlist}
 			\item \script{402}{Abstract Evaluation}
 			\item interval abstraction does not satisfy ACC
-      \item To ensure termination in abstract domains that do not satisfy the ACC, we introduce widening. If the abstract domain satisfies the ACC, widening can also help to terminate in fewer iterations
+			\item To ensure termination in abstract domains that do not satisfy the ACC, we introduce widening. If the abstract domain satisfies the ACC, widening can also help to terminate in fewer iterations
 			\item \color{orange}A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that
 			\begin{betterlist}
 				\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
@@ -1016,12 +1022,17 @@ while (x>0 && y>0) {
 		\item $M \models \{\text{theory formulas}\}$
 		\item bei $M = (D,\{p \mapsto \overset{.}{=}\})$, $\overset{.}{=} {=} \{(x, y)\in \mathbb{N} \mid x = y\}$, $[[\forall x: p(x, x)]]_{M, \rho}$, $[[p(x, x)]]_{M, \rho} = [[x]]_{M, \rho} \overset{.}{=} [[x]]_{M, \rho}$, forall $v\in D$ it's the case that $[[x]]_{M, \rho\triangleleft\{x \mapsto v\}} \overset{.}{=} [[x]]_{M, \rho\triangleleft\{x \mapsto v\}} = v \overset{.}{=} v = true$
 		\item basis on propositional and first order logic
-		\item Terminator unpassend
 		\begin{betterlist}
 			\item Valid $\rightarrow$ Satisfiable (but not vice versa)
 			\item Unsatisfiable $\rightarrow$ Falsifiable (but not vice versa)
 			\item Valid $\leftrightarrow$ Not Falsifiable
 			\item Satisfiable $\leftrightarrow$ Not Unsatisfiable
+		\end{betterlist}
+		\item Terminator unpassend
+		\item \alert{Hypothesis:} program incorrect
+		\begin{betterlist}
+			\item \alert{False positive:} says it is incorrect, but it's not incorrect
+			\item \alert{False negative:} says it is correct, but it's not correct
 		\end{betterlist}
 		\item \underline{Good loop invariant:}
 		\begin{enumerate}

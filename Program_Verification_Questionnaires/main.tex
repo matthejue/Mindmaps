@@ -64,6 +64,20 @@
 	\item specification, assert statements correctly chosen
 }
 
+
+\newcommand{\prepostreuse}{
+\item Proof can be ruesed for stronger postconditions and weaker postconditions (for implication one can do: \texttt{A -> B |= A\raisebox{-0.1mm}{\^{}}C -> B} and \texttt{A -> B |= A -> BvC})
+}
+
+\newcommand{\ssatoexecution}{
+	\item one can encode a trace into single static assignment form (into one smt formula) and if that is satisfiable, the trace is feasible, the satisfying models tells the values of the variables at every position and from that one can construct an execution (one has e.g. initial value of $x$, after first assignment$x'$, after 2nd assignment $x''$... and if satisfying model tells values for $x$, $x'$ and $x''$, then value of $x$ kept until it is assigned etc.)
+}
+
+\newcommand{\prepostreusetwo}{
+	\item if postcondition of first part equals precondition of second part
+}
+
+
 % \begin{landscape}
 \begin{minipage}[t]{0.16\linewidth}
 	\raggedright
@@ -282,7 +296,7 @@
 					\item \alert{Extensions:} Could use invariant synthesis to find loop invariant
 					\item \alert{Mudarity and Incrementality:} For compo rool one can reuse first statement if one changed second statement
 					\begin{betterlist}
-						\item Proof can be ruesed for stronger postconditions and weaker postconditions (for implication one can do: \texttt{A -> B |= A\raisebox{-0.1mm}{\^{}}C -> B} and \texttt{A -> B |= A -> BvC})
+						\prepostreuse
 					\end{betterlist}
 					\item \alert{Techniques:} Inference rules of hoare proof system (and invariant synthesis for loop invariant)
 					\item \alert{Restriction:} have not assert inference rule, only programs for which statements one has proven soundness, human has to find right loop invariant
@@ -311,6 +325,7 @@
 				\item \alert{Completeness:} yes, but depends on internal implementation
 				\item \alert{Termination:} yes
 				\item \alert{Specification:} Program with assert, assume and invariants (invariant find by human, if invariant synthesis not strong enough)
+				\item \alert{Manual Steps:} Human needs to find the right loop invariant, e.g. with help of Ultimate Refereee, if invariant synthesis doessn't find one
 				\item \alert{Techniques:} ULTIMATE Referee utilizes automata theory to represent and analyze the behavior of programs. The program is converted into an abstract model (e.g., a transition system) which can be verified against a specification expressed as an automaton. The tool checks whether all possible executions of the program satisfy the given specification
 				\item \alert{Bottleneck:} not in the lecture
 			\end{betterlist}
@@ -332,7 +347,7 @@
 					\item the \alert{reachability graph} is a pair $(RC, T)$ such that $((\ell, s), st, (\ell', s')) \in T$ iff $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$
 					\item \alert{Timestamps:} Each thread maintains a timestamp, We represent a timestamp as a natural number, Each time we process an event we increase the thread’s timestamp, Initially, the timestamp for each thread is $1$
 					\item performs a standard breadth-first traversal of the graph while constructing the graph on the fly
-          \item get next state for configuration by executing statement (like taking from relational semantics)
+					\item get next state for configuration by executing statement (like taking from relational semantics)
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -357,9 +372,7 @@
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-              \item tried out all possibilities, proof by case distinction over all reachable configurations
-							% \item yes, if the ARG has no error configurations, then it is a safety proof
-							% \item we call an abstract reachability graph for G a \alert{safety proof} if is does not contain an abstract error configuration
+							\item tried out all possibilities, proof by case distinction over all reachable configurations
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -369,22 +382,20 @@
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item if the algorithm finds an abstract error configuration
+							\item if the algorithm finds an error configuration
 						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item no, because $sp(\{\varphi\}, st) \subseteq \{\varphi'\}$ might overapproximate
+							\item no, then one has an execution to a reachable error configuration, in the end a configuration with a state is reachable that shouldn't be reachable
 						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item no loops
-					\end{betterlist}
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Completeness}
@@ -395,14 +406,14 @@
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item no
+							\item no, is (sound and) complete for finite variable domains
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item no
+							\item no, is (sound and) complete for finite variable domains
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -412,14 +423,17 @@
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item no, may not terminate, may iterate over infinitely many initial configurations and may add infinitely many configurations while processing the worklist
+							\item yes, terminates if domain of variables is finite
+							\begin{betterlist}
+								\item for infinite domains of variables may not terminate, may iterate over infinitely many initial configurations and may add infinitely many configurations while processing the worklist
+							\end{betterlist}
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item yes, is always terminating if using breath-first search
+							\item yes and without extension needs same time as for correct program, because algorithm after finding an error configuration continues and only checks later
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -433,7 +447,13 @@
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
 		\begin{betterlist}
-			\item \checkboxChecked the program
+			\item \checkboxChecked the program, converted to
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item CFG
+					\end{betterlist}
+				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
@@ -444,27 +464,19 @@
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -473,28 +485,28 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item directly get execution as CE
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item one kind of has a proof, because the reachability graph has no error configurations and the reachability graph includes all possible reachable configurations
 					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item not possible
 					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item not possible
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -504,14 +516,14 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item if domains of variables large, then needs a lot of memory and time to compute the reachability graph
 					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item like for Bounded Model Checking terminate once finding an error configuration
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -521,14 +533,15 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item as long as parts don't influence each other
+						\prepostreusetwo
 					\end{betterlist}
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\prepostreuse
 					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
@@ -542,7 +555,7 @@
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item num locations + product of all variable domains in the worst case, but usually lower dependending on precondition and program structure
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -584,17 +597,13 @@
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
 							\item In the case that the algorithm terminates without finding an abstract error configuration, the program is correct
-							\item \underline{Guarantees correctness up to a bound:}
-							\begin{betterlist}
-								\item After we explored all nodes whose distance to the initial node is smaller than $k$, we can guarantee the program cannot reach an error by executing less than $k$ statements
-							\end{betterlist}
 						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item yes, if algorithm terminates and no error location has been found, then none is reachable
+							\item yes, if algorithm terminates and no abstract error location has been found, then none is reachable
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -611,14 +620,14 @@
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item yes, because $sp(\{\varphi\}, st) = \{\varphi'\}$
+							\item yes, because $sp(\{\varphi\}, st) = \{\varphi'\}$ and not $\{\varphi_{pre}\} \subseteq \{\varphi_{init}\}$, thus all states reachable over $\{\varphi'\}$ are really reachable and are not just an overapproximation
 						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item strongest post correctly defined
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -630,14 +639,17 @@
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item no, only if there's a timeout in case that it's going to run infintely or just a too long running example
+							\item yes, smt-sovler check for checking subset of postcondition in exit location, can return unknown
+							\begin{betterlist}
+								\item and if there's a timeout in case that it's going to run infintely or just a too long running example
+							\end{betterlist}
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 						\begin{betterlist}
-							\item no
+							\item yes, if one uses breadth-first search, it will terminate for an incorrect program (that is able to terminate)
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -668,7 +680,13 @@
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
 		\begin{betterlist}
-			\item \checkboxChecked the program
+			\item \checkboxChecked the program, converted to
+
+			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
+					\begin{betterlist}
+						\item CFG
+					\end{betterlist}
+				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
@@ -679,27 +697,19 @@
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -708,28 +718,35 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item with the help of the CFG can determinte a trace to the error configuration (error trace)
+						\begin{betterlist}
+							\ssatoexecution
+						\end{betterlist}
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item contains no error configuration, could call a safety proof, because it's also an abstract reachablity graph
 					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item precise abstract reachability graph up until this point
+						\item \underline{Guarantees correctness up to a bound:}
+						\begin{betterlist}
+							\item After we explored all nodes whose distance to the initial node is smaller than $k$, we can guarantee the program cannot reach an error by executing less than $k$ statements
+						\end{betterlist}
 					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item same as above
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -739,7 +756,8 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item smt-solver check for every exit location that is added is not so relevant
+						\item doesn't work for many while loops, doesn't know if it terminates
 					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
@@ -759,14 +777,14 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\prepostreusetwo
 					\end{betterlist}
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item yes, can reuse precise abstract reachability graph it if one already executed it up until step $k$ and later parts weren't visited
 					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
@@ -780,7 +798,7 @@
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item for programs that have variables with infinite domains and loops it's unpredictable
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -1260,7 +1278,10 @@
 
 			\framebox[0.95\textwidth][l]{\parbox{0.90\textwidth}{
 					\begin{betterlist}
-						\item an feasible trace, one can encode a trace into single static assignment form (into one smt formula) and if that is satisfiable, the trace is feasible, the satisfying models tells the values of the variables at every position and from that one can construct an execution (one has e.g. initial value of $x$, after first assignment$x'$, after 2nd assignment $x''$... and if satisfying model tells values for $x$, $x'$ and $x''$, then value of $x$ kept until it is assigned etc.)
+						\item an feasible trace
+						\begin{betterlist}
+							\ssatoexecution
+						\end{betterlist}
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?

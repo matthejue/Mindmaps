@@ -66,3 +66,13 @@
     \draw[SecondaryColor, line width=0.15mm] (0.025,0.075) -- (0.125,0.075);
   \end{tikzpicture}
 }
+
+% ┌───────┐
+% │ Boxes │
+% └───────┘
+\newtcblisting{dnumberedcodebox}[1][]{
+	enhanced, colframe=PrimaryColor,colback=BoxColor,fonttitle=\bfseries\tiny,#1,listing only,halign title=center,sharp corners,boxrule=0.05cm,bottom=0.1cm,top=0.1cm,left=0.5cm,right=0.1cm,listing engine=minted,overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=0.5cm]frame.north west);\end{tcbclipinterior}}% arc=0.2cm
+}
+\renewcommand{\theFancyVerbLine}{\sffamily
+	\textcolor{white}{\tiny
+		\oldstylenums{\arabic{FancyVerbLine}}}}

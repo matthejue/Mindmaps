@@ -18,6 +18,7 @@
 			\item \alert{Ambiguities:} Different programming languages disagree what should happen for a piece of code. \underline{Solution:} Use mathematical logic to give programming languages a precise semantics
 			\item \alert{Correctness Proofs are Hard to Find:} We cannot track all executions.
 		\end{enumerate}
+		\item verification problem is undecidable
 	\end{betterlist}
 	\fbox{Propositional Logic (PL)} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/2._Propositional_Logic.md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/2._Propositional_Logic.pdf}
 	\begin{betterlist}
@@ -340,6 +341,7 @@
 		\item \script{282}{Sequential Composition}, \script{283}{Illustration}
 		\item \script{284}{Conditional Statement}, \script{285}{Illustration}
 		\item \script{286}{While Statement}, \script{287}{Illustration}
+    \item \script{438}{Assert Statement with Illustration}
 		\item \color{orange}we call a pair $(\ell, s)$ a \alert{program configuration} of $P$ if $\ell \in Loc$ is a location and $s$ is a state of $P$\color{black}
 		\item \color{orange}we call a sequence of program configurations $(\ell_0, s_0), . . . , (\ell_n, s_n)$ an \alert{execution} of $P$ if there exists a sequence of statements (a trace) $st_1 \ldots st_n$ such that for each $i \in \{0, \ldots, n−1\}:$ $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and $(s_i, s_{i+1}) \in [[st_{i+1}]]$. \script{292}{Example}\color{black}
 		\begin{betterlist}
@@ -382,8 +384,6 @@
 			\item \script{111}{Example}
 		\end{betterlist}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Predicate Transformers}
 	\begin{betterlist}
 		\item main means for analyzing the effect of statements in the control-flow graph-based view on programs
@@ -412,6 +412,10 @@
 			\end{betterlist}
 			\item \script{318}{Example 1} and \script{338}{Example 2}
 		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\begin{betterlist}
 		\item \alert{Quantifier Elimination:} Finding an equivalent quanfitier-free formula for a given formula
 		\begin{betterlist}
 			\item \alert{Destructive Equality Resolution 1:} If the variable $x$ does not occur in the term $t$ then the formula $\exists x:\varphi \land x = t$ and the formula $\varphi[x \mapsto t]$ are equivalent. \script{328}{Example and proof idea}
@@ -458,6 +462,19 @@
 	\end{betterlist}
 	\fbox{Abstract Interpretation}
 	\begin{betterlist}
+		\item \underline{Idea of our \alert{abstraction}:}
+		\begin{betterlist}
+			\item Partition configurations into finitely many equivalence classes (\script{369}{Visualisation}). Build a graph whose nodes are the equivalence classes
+			\item Connect two equivalence classes $C_1$, $C_2$ by an edge if there are configurations $c_1 \in C_1$ and $c_2 \in C_2$ that are connected by an edge
+			\item Call an equivalence class initial if it contains an initial configuration. Call an equivalence class error if it contains an error configuration
+			\item If there is no path from an initial equivalence class to an error equivalence class, there is also no path from an initial configuration to an error configuration and the analyzed program is correct
+			\item Unfortunately, the contrary direction does not hold. If there is a path from an initial equivalence class to an error equivalence class, the program might be incorrect but it might also be the case the we have chosen a partition that is not helpful
+		\end{betterlist}
+		\item \script{371}{Obvious theorems and lemmas}
+		\item class of algorithms that can be used to compute abstract reachability graphs (ARG). The ARGs will have the same structure as the underlying CFG, and we will compute for each location a formula $\varphi$ such that $\{ \varphi \}$  is overapproximation of the set of possible states at the location
+		\begin{betterlist}
+			\item algorithms may terminate with an \enquote{unknown} verdict, failing to either establish correctness of incorrectness
+		\end{betterlist}
 		\item given a set $X$, a partial order is a binary relation $\sqsubseteq$ that is
 		\begin{betterlist}
 			\item reflexive (for any $x \in X$, $x \sqsubseteq x$ holds),
@@ -537,14 +554,11 @@
 		\begin{betterlist}
 			\item explicit-value abstraction satisfies ACC
 		\end{betterlist}
-	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
-	\begin{betterlist}
 		\item \script{399}{Interval Domain}
 		\begin{betterlist}
 			\item \script{402}{Abstract Evaluation}
 			\item interval abstraction does not satisfy ACC
+      \item To ensure termination in abstract domains that do not satisfy the ACC, we introduce widening. If the abstract domain satisfies the ACC, widening can also help to terminate in fewer iterations
 			\item \color{orange}A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that
 			\begin{betterlist}
 				\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
@@ -555,6 +569,10 @@
 				\item $F_{\triangledown}: (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with $F_{\triangledown}(g) = \{\ell_{init} \mapsto g(\ell_{init}) \triangledown(\alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta\})\}\cup \{\ell\mapsto g(\ell) \triangledown \bigsqcup\{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta\} \mid \ell \in Loc \setminus \{\ell_{init}\}\}$\color{black}
 			\end{betterlist}
 		\end{betterlist}
+	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
+	\begin{betterlist}
 		\item \color{orange}\alert{Non-relational Domain:} A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
 		\begin{betterlist}
 			\item $\mathbb{A} = V \rightarrow A_{\mathbb{Z}}$
@@ -562,7 +580,7 @@
 			\item $\gamma(s^\#) = \{s \in S_{V ,\mu} | \text{ for all } x \in V, s(x) \in \gamma_{\mathbb{Z}}(s^\#(x))\}$
 			\item $\alpha(S) = \{x \mapsto \alpha_{\mathbb{Z}}(\{s(x) | s \in S\}) \mid x \in V\}$
 			\item \script{397}{Example}
-			\item the following rules define an abstract post operator for the non-relational domain induced by a value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$:
+			\item the following \script{404}{rules} define an abstract post operator for the non-relational domain induced by a value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$:
 			\begin{betterlist}
 				\item $post^\#(s^\#, \verb|x:=expr|) := s^\#\{x \mapsto eval^\#(expr, s^\#)\} \sqsupseteq \alpha(sp(\gamma(s^\#), \verb|x:=expr|))$
 				\item $post^\#(s^\#, \verb|havoc x|) := s^\#\{x \mapsto \top\} = \alpha(sp(\gamma(s^\#), \verb|havoc x|))$
@@ -574,10 +592,14 @@
 		\begin{betterlist}
 			\item if $s \in \gamma(s^\#)$ and $[[expr]]_{M,\rho} = v$ for $\rho = s$ then $v \in \gamma_{\mathbb{Z}}(eval^\#(expr, s^\#))$
 		\end{betterlist}\color{black}
+		\item an abstract annotation intuitively gives us the set of states we should add to each location of the control flow graph in order to get an ARG. The set of program states is represented as an abstract state
 		\item \color{orange}For a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an \alert{abstract annotation} is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$\color{black}
 		\begin{betterlist}
 			\item Let $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ be a control-flow graph, and let $f$ be an abstract annotation for $G$. Assume that for every $\ell\in Loc$ there exists a formula $\varphi_{\ell}$ such that $\gamma(f(\ell)) = \{\varphi_{\ell}\}$. Then the graph $(AC, T)$ with $AC = \{(\ell, \{\varphi_{\ell}\}) \mid \ell \in Loc\}$ and $T = \{((\ell, \{\varphi_{\ell}\}), st, (\ell', \{\varphi_{\ell'}\})) \mid (\ell, st, \ell') \in \Delta\}$ is an \alert{abstract reachability graph}. \script{411}{Proof (f.)}
 			\item \color{orange}An abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$\color{black}
+			\item any abstract annotation defines an abstract reachability graph. Abstract annotations were defined via a recursive equation system
+			\item by using theory of fixpoints can guarantee there always exist a solution to such an equation system that can be computed
+			\item function is monotone and the definition of the function is closely related to the theorem about the set of reachable configurations RC: \script{415}{Relationship to set of reachable configurations RC (f.)}
 		\end{betterlist}
 		\item given a set $X$ and a function $f:X \rightarrow X$ we call an element $x \in X$ a \alert{fixpoint} of $f$ if $f(x) = x$. \script{418}{Examples}
 		\item given a set $X$ and a partial order $\sqsubseteq$ and a function $f:X \rightarrow X$, we call an element $x$ the \alert{least fixpoint} of $f$ if $x$ is a fixpoint of $f$ and for all fixpoints $y$ of $f$ the inclusion $x \sqsubseteq y$ holds. \script{419}{Examples}
@@ -590,8 +612,10 @@
 			\item \color{orange}it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$\color{black}
 			\item \color{orange}\alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$\color{black}
 			\item \color{orange}\alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time. \script{424}{Proof}\color{black}
-			\item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}
-			\item \script{426}{Example (f.)}
+			\item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}		\end{betterlist}
+		\item Using Theorem ACC-FP, and the characterization of abstract annotations as fixpoints of the monotone function $F^\#$, we can now compute abstract annotations by repeated application of $F^\#$
+		\begin{betterlist}
+			\item In order to guarantee termination in all cases, we require that the lattice satisfies the ACC. However, \script{426}{Example (f.)} shows, the algorithm may also terminate in some cases if the lattice does not satisfy the ACC
 		\end{betterlist}
 		\item If $(Y, \sqsubseteq_Y)$ is a complete lattice, and $X$ is any set, then $(X\rightarrow Y, \sqsubseteq)$ is also a complete lattice, where $X \rightarrow Y$ is the set of all functions from $X \rightarrow Y$, and $f \sqsubseteq g$ iff for all $x \in X$, we have $f(x) \sqsubseteq_Y g(x)$. \script{429}{Proof}
 		\item If a complete lattice $(Y , \sqsubseteq_Y)$ satisfies the ACC, then for any finite set $X$, the complete lattice $(X \rightarrow Y , \sqsubseteq)$ also satisfies the ACC
@@ -879,15 +903,23 @@
 	\begin{betterlist}
 		\item compute ranking functions for general programs is very difficult
 		\item for infinite traces it is sometimes doable. For several termination analyses it is sufficient to compute ranking functions for ultimately periodic traces. An ultimately periodic trace is an infinite trace in which some (finite) sequence of statements is repeated infinitely often
-		\item \enquote{Synthesize} ranking functions analogously to the synthesis of invariants
-		\item \script{563}{Example for just ranking function (ff.)}
-		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation
-		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation. For these programs we synthesize a ranking function together with a loop invariant
-		\item \script{571}{Constraints for ranking function and invariant}
+		\item \enquote{Synthesize} ranking functions analogously to the synthesis of invariants: There exist $r_x$, $r_y$, $r_0$ such that:
 		\begin{betterlist}
-			\item The constraints for the special case where we are searching for a ranking function of the form $f(\vec{v}) =\vec{r}^T\cdot \vec{v} + r_0$ and an invariant of the form $\vec{s}^T\cdot \vec{v} + s_0 \geq 0$
+			\item $\forall x, y, x', y' . \tau_{loop}(x, y, x', y') \rightarrow (r_x\cdot x+r_y \cdot y+r_0)−(r_x\cdot x' +r_y \cdot y ' +r_0) \geq 1$
+			\item $\forall x, y, x', y' . \tau_{loop}(x, y, x', y') \rightarrow r_x \cdot  x + r_y \cdot y + r_0 \geq 0$
 		\end{betterlist}
-		\item Synthesis of ranking functions available in Ultimate: LassoRanker
+		\item \script{563}{Example for just ranking function (ff.)}
+		\item in lasso programs the loop sometimes does not have a ranking function but there is a ranking function for the combination of the loop and a given Floyd-Hoare annotation. For these programs we synthesize a ranking function together with a loop invariant. \script{571}{Constraints for ranking function and invariant}: There exist $\vec{r}, r_0, \vec{s}, s_0$ such that:
+		\begin{betterlist}
+			\item $\forall\vec{v}\vec{v}'.\tau_{stem}(\vec{v},\vec{v}') \rightarrow\vec{s}^T\cdot \vec{v}' + s_0 \geq 0$
+			\item $\forall\vec{v}\vec{v}'.\vec{s}^⊺\cdot \vec{v} + s_0 \geq 0 \land \tau_{loop}(\vec{v},\vec{v}') \rightarrow\vec{s}^T\cdot \vec{v}' + s_0 \geq 0$
+			\item $\forall\vec{v}\vec{v}'.\vec{s}^⊺\cdot \vec{v} + s_0 \geq 0 \land \tau_{loop}(\vec{v},\vec{v}') \rightarrow (\vec{r}^T\cdot \vec{v} + r_0) −(\vec{r}^T\cdot \vec{v}'  + r_0) \geq 1$
+			\item $\forall\vec{v}\vec{v}'.\vec{s}^⊺\cdot \vec{v} + s_0 \geq 0 \land \tau_{loop}(\vec{v},\vec{v}') \rightarrow\vec{r}^T\cdot \vec{v} + r_0 \geq 0$
+		\end{betterlist}
+		\begin{betterlist}
+			\item The constraints for the special case where we are searching for a ranking function of the form $f(\vec{v}) =\vec{r}^T\cdot \vec{v} + r_0$ and an invariant of the form $\vec{s}^T\cdot \vec{v} + s_0 \geq 0$. Using $\tau_{stem}$ to denote a transition formula of the sequential composition of all statements before the loop
+		\end{betterlist}
+		\item Synthesis of ranking functions available in Ultimate: \alert{LassoRanker}
 	\end{betterlist}
 	\fbox{Terminator}
 	\begin{betterlist}
@@ -942,7 +974,7 @@ while (x>0 && y>0) {
 			\item the expression of the assert statement is a disjunction; we do not require that both ranking functions are decreasing, we only require that at least one of ranking function is decreasing
 			\item For concluding termination the nondeterministic assignments to \verb|oldf1| and \verb|oldf1| are vital. The safety proof does not only show that in each iteration the function \verb|f1| or the function \verb|f2| is decreasing, the safety proof shows that between every two (not necessarily consecutive) visits of the loop head the function \verb|f1| or the function \verb|f2| is decreasing
 			\item In an infinite execution, we would observe that infinitely often \verb|f1| decreases or \verb|f2| decreases. As there are only finitely many (exactly two) options, one of the functions must decrease infinitely often. This contradicts well-foundedness. The proof uses a combinatorial result called Ramsey’s theorem to show that in every infinite execution, at least one of the two ranking functions would have to decrease infinitely often
-			\item Termination analysis available in Ultimate: Büchi Automizer
+			\item Termination analysis available in Ultimate: \alert{Büchi Automizer}
 		\end{betterlist}
 		\item \script{583}{Prove nontermination}, \script{584}{Safety or termination more difficult}
 	\end{betterlist}

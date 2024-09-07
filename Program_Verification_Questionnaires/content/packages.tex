@@ -75,13 +75,19 @@
 \usepackage{xparse}
 % https://tex.stackexchange.com/questions/358292/creating-a-subcounter-to-a-counter-i-created
 \usepackage{chngcntr}
+% \usepackage{cprotectinside}
+% \usepackage{fancyvrb}
+\usepackage{verbatimbox}
 
 % ┌───────────────┐
 % │ Pretty Boxes  │
 % └───────────────┘
 \usepackage{xcolor}
 \usepackage{tcolorbox}
-\tcbuselibrary{skins,theorems}
+\tcbuselibrary{skins}
+\tcbuselibrary{theorems}
+\usepackage[bold=1]{xfakebold}
+\tcbuselibrary{minted}
 
 % ┌──────────────┐
 % │ Pseudo Code  │

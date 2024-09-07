@@ -832,7 +832,7 @@
 					\end{betterlist}
 					\item to ensure termination in abstract domains that do not satisfy the ACC, we introduce widening
 					\begin{betterlist}
-						\item a \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that:
+						\item A \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that:
 						\begin{betterlist}
 							\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
 							\item for any sequence $(s^\#_i)_{i\in \mathbb{N}}$ of abstract states, the sequence $(\tilde s^\#_i)_{i\in \mathbb{N}}$ with $\tilde s^\#_0 = s^\#_0$ and $\tilde s^\#_{i+1} = \tilde s^\#_i \triangledown s^\#_i$ stabilizes; i.e., there exists $n$ such that $\tilde s^\#_m = \tilde s^\#_n$ for all $m \ge n$

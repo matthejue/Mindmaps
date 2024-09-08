@@ -1,0 +1,1379 @@
+00:00:00 e
+00:00:49 okay so then welcome everyone to the
+00:00:52 lecture part for
+00:00:55 today uh today we're going to be talking
+00:00:58 a bit about a tool called ultimate
+00:01:00 referee and some related tools so this
+00:01:03 is about how this may be sometimes
+00:01:06 tedious work of writing down a
+00:01:08 derivation tree in the H proof system
+00:01:10 can be made in a more automated way and
+00:01:14 then the second part of the lecture
+00:01:16 we'll talk about some extensions of
+00:01:19 Boogie and buan our languages that we're
+00:01:22 looking at that allow us on one hand to
+00:01:24 model more features of real programming
+00:01:27 languages and they will also be
+00:01:30 quite helpful for the next part of the
+00:01:32 lecture
+00:01:33 then okay so we start with the first
+00:01:36 part um this ultimate referee and the
+00:01:39 idea is to sort of start first by
+00:01:41 thinking about what would be sort of a
+00:01:44 structured way to find the derivation in
+00:01:45 a h proof system right what are some
+00:01:48 guidelines I don't know maybe when
+00:01:50 you've done the exercises you've already
+00:01:52 found some ideas like what are things
+00:01:55 that are usually quite
+00:01:58 helpful I don't know
+00:02:01 um so maybe I'll just quickly give some
+00:02:05 guidelines that we have here so here are
+00:02:08 the rules first and the way I would
+00:02:11 typically approach this is first of
+00:02:13 course you need to come up with the loop
+00:02:14 invariance right that is the difficult
+00:02:16 part and for that part I cannot really
+00:02:19 give you an algorithm because yeah this
+00:02:22 is an undecidable problem but imagine
+00:02:25 you have looked at the program long
+00:02:28 enough and you've come up with good Loop
+00:02:30 variants that are going to be useful for
+00:02:32 your proof then uh the way that you can
+00:02:37 get to the the full proof tree is
+00:02:41 usually you have some sequential
+00:02:44 compositions always start from the right
+00:02:46 and go to the left right so that means
+00:02:50 uh if you look at the compo rule here
+00:02:53 first uh prove this whole triple and
+00:02:57 while you're doing that maybe leave this
+00:02:59 F2 open right because this is sort of a
+00:03:02 challenge for this rule right what is
+00:03:04 the F2 to right in the middle leave it
+00:03:06 open until you
+00:03:08 shown uh yeah until you've basically
+00:03:11 almost finished the right proof tree and
+00:03:12 then you know what you going to need
+00:03:14 there right if you apply that
+00:03:16 recursively you usually can derive defi
+00:03:19 2 pretty automatically and then once you
+00:03:21 know it you can write it here and you
+00:03:23 can write it here and then to the left
+00:03:26 side okay um the we
+00:03:30 postcondition and strengthen
+00:03:31 precondition rules should be usually
+00:03:34 applied very sparingly because if you
+00:03:36 know if you strengthen your
+00:03:37 preconditions too much you're not going
+00:03:39 to be able to show that they hold if you
+00:03:41 weaken your post conditions too much
+00:03:43 then they may be not be sufficient so
+00:03:45 typically I would say you should only
+00:03:47 weaken the pre uh the post condition um
+00:03:50 when you're next going to apply the V
+00:03:53 rule just because yeah maybe you need to
+00:03:56 bring it into this form F and not
+00:03:58 expression
+00:04:01 and for that it's sometimes necessary to
+00:04:03 to weaken the post condition but
+00:04:05 otherwise I would try to avoid
+00:04:07 this and
+00:04:09 similarly strengthen the pro post uh the
+00:04:13 precondition is often useful when you
+00:04:15 want to apply the assign rule right you
+00:04:17 either strengthen it or maybe it's an
+00:04:19 equivalent formula but you need to
+00:04:20 rewrite it such that uh what is here on
+00:04:23 the left side is exactly the right side
+00:04:26 where X has been replaced by some
+00:04:28 expression
+00:04:31 and yeah apart from that really used
+00:04:34 them sparingly and and only maybe for
+00:04:36 some equivalence Transformations right
+00:04:38 maybe sometimes here it's not so clear
+00:04:41 or it's not uh if you prove P from
+00:04:45 statement two you don't get exactly this
+00:04:46 form F and not expression but you get
+00:04:48 something equivalent and then you use
+00:04:51 the um strengthen precondition to
+00:04:53 transform it into this
+00:04:54 form if you follow that then you s doing
+00:04:57 a backward reasoning pass for the
+00:04:59 program right because you always start
+00:05:01 in the sequential composition on the
+00:05:03 right and whenever you have a leaf of
+00:05:06 the proof tree you know the post
+00:05:09 condition and then yeah usually um the
+00:05:13 assignment rule tells you what the
+00:05:14 precondition should be so that you can
+00:05:16 fill it in for um yeah the F2 in the
+00:05:21 sequential composition that is around
+00:05:23 the
+00:05:25 assignment right so in this sense you're
+00:05:27 reasoning backwards from the program and
+00:05:29 our H calculus is kind of more suited to
+00:05:32 reasoning backwards because exactly this
+00:05:35 assignment rule looks like this right it
+00:05:36 looks when you have the post Condition
+00:05:39 it's clear what the precondition should
+00:05:40 be but in the other direction it's not
+00:05:42 so
+00:05:42 clear um you can also give slightly
+00:05:45 different uh Hall proof rules that allow
+00:05:48 more forward reasoning where if you have
+00:05:50 the precondition you can easily derive
+00:05:51 the post condition but with these rules
+00:05:54 backwards is usually easier
+00:05:59 okay so if you do that it is almost an
+00:06:03 automatic process and in fact the idea
+00:06:06 is instead of doing a lot of trying and
+00:06:09 doing this manually why couldn't we just
+00:06:11 automate this part and it turns out that
+00:06:13 you can actually do this and one tool
+00:06:16 that is able to do this is called a tool
+00:06:19 called ultimate referee so um it's a
+00:06:22 tool for checking Loop en variance so
+00:06:25 you give it as input the program that
+00:06:26 you want to prove and the correctness
+00:06:28 specification as a precondition
+00:06:30 postcondition pair but the key is that
+00:06:33 here each Loop is annotated by a formula
+00:06:37 that you claim is a good invariant for
+00:06:39 this program right and then referee will
+00:06:42 check if there is some derivation in the
+00:06:43 whole proof system where the formulas
+00:06:46 that you have given are used as Loop
+00:06:48 invariance for the respective V rules
+00:06:50 and you can actually prove the prec
+00:06:52 condition post condition with these
+00:06:55 invariance uh on the technical level how
+00:06:58 referee is implemented it not actually
+00:07:00 literally construct the proof tree but
+00:07:02 it will do some equivalent checks that
+00:07:04 boil down to finding out whether such a
+00:07:06 derivation
+00:07:08 exists um yeah in the case of referee
+00:07:11 this is ult implemented in this ultimate
+00:07:13 program analysis framework that we
+00:07:16 develop at our chair so you'll see it a
+00:07:18 little bit throughout the lecture we
+00:07:19 already saw ultimate automizer in the
+00:07:21 beginning and it's also available on the
+00:07:24 web so let's try this out um I'm just
+00:07:28 going to switch over to the browser so
+00:07:32 we have here this program which uh yeah
+00:07:35 we did a whole proof of this last on
+00:07:37 Monday in the exercises right so we have
+00:07:40 a precondition which was
+00:07:43 true and here in Boogie uh you can
+00:07:46 annotate this precondition for on a
+00:07:49 procedure with this keyboard
+00:07:51 requires and we have a post condition
+00:07:54 which was this implication if I is equal
+00:07:57 to J then y in the end is equal to zero
+00:08:00 and in Boogie you annotate this with the
+00:08:02 keyword
+00:08:03 [Music]
+00:08:04 ures right and uh now you have here the
+00:08:07 program and I've already written some
+00:08:10 possible invariant here so now I can try
+00:08:14 and execute this and refere will check
+00:08:16 if this invariant is good enough and it
+00:08:18 turns out no there's a lot of text here
+00:08:20 and uh but the headline says The
+00:08:23 annotation is not a valid
+00:08:25 proof well maybe that's not surprising
+00:08:27 because you already looked at this and
+00:08:29 so y equals z that's a weird that's not
+00:08:32 a good invariant for
+00:08:33 this um so can someone recall for us
+00:08:39 what are the conditions we need for an
+00:08:41 invariant to work so to be able to prove
+00:08:44 the program there should be three
+00:08:47 conditions that we we have to satisfy
+00:09:01 so typically when we want a loop
+00:09:02 invariant we want that first from the
+00:09:05 beginning of from the precondition when
+00:09:08 we execute the beginning of the program
+00:09:09 up to the loop this implies that after
+00:09:12 this initialization phase the loop
+00:09:14 invariant holds right so um we can also
+00:09:18 write this as a whole triple with the
+00:09:19 precondition true the statement X is
+00:09:22 assigned to I and Y is assigned to J and
+00:09:24 then from that it should follow that Y
+00:09:26 is equal to zero but that is a of course
+00:09:29 not the case here right so in this sense
+00:09:32 this is already one problem of this
+00:09:35 invariant then the second part is if the
+00:09:39 invariant holds and the loop condition
+00:09:41 also holds we execute the body of the
+00:09:44 loop once so we decrement both X and Y
+00:09:47 then we should be able to show that
+00:09:49 afterwards the post condition holds
+00:09:50 again and also this one also doesn't
+00:09:53 work right y0 X is not equals to Z I
+00:09:56 decrement both then Y is no longer zero
+00:10:00 and the last condition would be that if
+00:10:01 the invariant holds and the loop
+00:10:03 condition does no longer hold then we
+00:10:04 can conclude the post condition this one
+00:10:08 works here right if Y is equal to zero
+00:10:10 then the implication is true and what
+00:10:13 referee checks are exactly these three
+00:10:15 conditions it just yeah States this
+00:10:17 maybe in a bit of unintuitive way
+00:10:19 because we haven't seen the the basics
+00:10:22 that it works on yet this will be uh the
+00:10:24 topic of next week but it says so it's
+00:10:27 not a valid proof of correctness
+00:10:29 and it says it's not valid for all Loop
+00:10:31 free paths from entry of procedure to
+00:10:34 Loop head at line seven right so this
+00:10:36 first condition from the entry so of the
+00:10:39 procedure so from the precondition up to
+00:10:42 the loop for this um this condition is
+00:10:45 not satisfied and it also gives us a
+00:10:48 possible counter example it says yeah if
+00:10:49 you start with ials 2 and J equals 3 and
+00:10:53 you execute this then you end in a state
+00:10:55 where I is 2 Jal three x is 2 and Y is
+00:11:02 zero which is a bit
+00:11:04 strange because that should be okay I
+00:11:07 don't know what uh there seems to be
+00:11:09 something broken in referee here because
+00:11:11 this doesn't look like a Contex
+00:11:14 sample I will have to debug what's
+00:11:17 happening
+00:11:18 there
+00:11:20 okay but it should give us this okay uh
+00:11:25 another condition is right the the one
+00:11:27 from the beginning of the loop to the
+00:11:29 loop again and this is what it says here
+00:11:31 it's also not valid from the loop head
+00:11:34 to the loop head again and in this case
+00:11:36 it says yeah if you start with X is
+00:11:39 equal to minus one yes then you enter
+00:11:42 the loop and Y was initially zero then
+00:11:44 you end in xals to minus 2 and it
+00:11:47 doesn't give us the value of y but y
+00:11:49 will be then minus one so it will not
+00:11:52 satisfy the loop condition uh the
+00:11:54 invariant that we
+00:11:55 proposed uh but yeah okay it says the
+00:11:59 thir condition is fine right The
+00:12:00 annotation is valid from for the path
+00:12:02 from the end of the loop or from the
+00:12:04 loop head to the exit of the procedure
+00:12:06 so if you're on the loop head and the
+00:12:07 condition does not hold and we go to the
+00:12:09 end of the procedure then the post
+00:12:11 condition is
+00:12:13 satisfied okay so let's see we can fix
+00:12:15 this right does anyone remember what was
+00:12:17 in inv variant from the exercise on
+00:12:27 Monday yes
+00:12:42 okay let's see if this is right we run
+00:12:45 it again it checks oh yeah and it says
+00:12:48 indeed this is a valid proof of
+00:12:50 correctness right in this case it claims
+00:12:52 yeah all three conditions from entry to
+00:12:55 the loop from the loop to the loop again
+00:12:57 and from the loop to the end of the
+00:12:58 procedure there satisfied so this is a
+00:13:00 valid Loop
+00:13:01 invariant um there are of course other
+00:13:03 loop invariants right so you could for
+00:13:05 instance
+00:13:06 also uh use the one that
+00:13:09 says if I is equal to J then Y is equal
+00:13:12 to
+00:13:14 X let's see if this one
+00:13:17 works yes this one also works
+00:13:20 wonderful
+00:13:22 uh whereas if I just find
+00:13:25 true it will satisfy well it will be be
+00:13:29 satisfied after
+00:13:31 initialization um and it will be
+00:13:33 satisfied once we go through the loop
+00:13:35 again but it is not sufficient to prove
+00:13:37 our post
+00:13:38 condition
+00:13:40 okay so much for the demo
+00:13:44 um so you can use this to just know if
+00:13:48 the program is correct you only have to
+00:13:50 do the difficult part of coming up with
+00:13:51 the loin variance but the more tedious
+00:13:53 automatable parts of writing the whole
+00:13:56 proof tree are done by the tool
+00:14:00 and uh this is not only Built for us
+00:14:01 here in this lecture right although that
+00:14:03 was one motivation for this tool it can
+00:14:06 also be used in other settings so for
+00:14:08 instance if you have some very smart
+00:14:10 verification tool that can actually come
+00:14:12 up with the invariance for you uh you
+00:14:14 might still want to check whether it's
+00:14:17 actually correct right we had this at
+00:14:18 the beginning of the lecture if the
+00:14:20 verifier claims the program is incorrect
+00:14:22 we want some information of where is the
+00:14:24 bug so we can fix it if the program is
+00:14:26 correct we maybe still want some
+00:14:28 additional information so that we can
+00:14:30 check if there's not a bug in the
+00:14:31 software verification tool that we
+00:14:34 used um right so if you verify your code
+00:14:37 with some verification tool XY Z and it
+00:14:39 says your code is correct if you don't
+00:14:41 trust it then you can ask it to give the
+00:14:44 invariance that it found and then you uh
+00:14:46 can ask ultimate referee to double check
+00:14:49 whether these are actually good and
+00:14:50 sufficient
+00:14:53 invariants um there's another mechanism
+00:14:56 that's also used in some program
+00:14:58 verification tool tools um including
+00:15:00 Ultimate this is called witness
+00:15:02 validation which is a bit more lenient
+00:15:04 so it you can also give it some hints
+00:15:07 some invariance but they don't need to
+00:15:09 be sufficient to prove it in in the
+00:15:12 witness validation case ultimate would
+00:15:13 try to complete the missing parts if
+00:15:16 your invariant is correct but not
+00:15:18 exactly sufficient it will try to find
+00:15:20 the missing parts whereas referee just
+00:15:22 checks if this is the invariant that you
+00:15:24 need and if not then it will say this is
+00:15:27 not a good invariant
+00:15:30 okay and this is actually not the only
+00:15:32 such verification tool right so ultimate
+00:15:35 referee is what we call a deductive
+00:15:36 verification tool and you can see it
+00:15:39 sort of on a scale of how automated it
+00:15:41 is right in a sense in the selector we
+00:15:44 started here on the left we did some
+00:15:47 proofs about the semantics of programs
+00:15:50 manually on with pen and paper right in
+00:15:53 some of the exercises we calculated the
+00:15:55 semantics of some program for instance
+00:15:58 and for this yeah you basically the
+00:16:00 human has to give every single proof
+00:16:02 step and we do this on with pen and
+00:16:05 paper or maybe in a with latch on the
+00:16:08 PDF but you can also do that with
+00:16:11 program certain kinds of program
+00:16:12 verification tools that will then check
+00:16:15 whether you made any mistake in your
+00:16:17 proof right so if the program
+00:16:19 verification tool doesn't find any issue
+00:16:21 with any single small proof step that
+00:16:23 you made then you can be a bit more
+00:16:25 confident that the program is actually
+00:16:27 correct um and this is what we would
+00:16:29 call Interactive verification because
+00:16:31 it's yeah mostly given by the user step
+00:16:33 by step and the tool maybe tells you
+00:16:36 what is left to proof but you have to
+00:16:38 figure out how to do
+00:16:39 it and deductive verification is sort of
+00:16:42 in the middle here right because here we
+00:16:45 only have to input the
+00:16:47 invariance and uh if we have some more
+00:16:49 expressive programming language with
+00:16:51 procedures we maybe also give some
+00:16:53 similar things that are called contracts
+00:16:55 those are these things these requires
+00:16:57 insur PS that we saw also in in the
+00:17:01 example for
+00:17:02 referee and uh if you just input this
+00:17:05 this information then the tool can check
+00:17:07 whether it can yeah whether there is a
+00:17:10 hob derivation with these invariance and
+00:17:13 these contracts to show that the entire
+00:17:15 program is correct so it's a bit more
+00:17:18 automated and as we go forward we will
+00:17:21 move more to the right right uh in the
+00:17:24 rest of the lecture we will look for
+00:17:26 algorithms that try and find in and
+00:17:29 contracts automatically so the idea is
+00:17:32 ideally you should only input the
+00:17:33 program and the property you want that
+00:17:35 you want to prove and the tool should
+00:17:38 figure out all the
+00:17:39 rest but this is of course much more
+00:17:43 difficult um besides referee there also
+00:17:46 a couple of other deductive vars I've
+00:17:48 just picked three random ones um so from
+00:17:52 C is a quite yeah famous one uh for C
+00:17:57 programs as the name suggests
+00:18:00 vour is the one that's you developed at
+00:18:02 University of Trenta in the Netherlands
+00:18:04 and it can do Java and a couple of
+00:18:07 different languages I think also some
+00:18:09 support for C but it's still in the
+00:18:11 works um VCC was developed by Microsoft
+00:18:16 uh and I think at least Vost and VCC
+00:18:20 actually also can do concurrent programs
+00:18:22 so VCC is a verifier for concurrent C
+00:18:27 programs um and all of these are based
+00:18:29 on the idea that you just annotate the
+00:18:31 program with the invariance contracts
+00:18:33 maybe a little bit of extra information
+00:18:34 and then it will check whether this is
+00:18:36 sufficient to prove the
+00:18:38 program so for instance if I switch here
+00:18:42 V to Vos this also has an online
+00:18:45 interface and here I've Rewritten our
+00:18:48 program in Java so I have a small main
+00:18:51 class with X and Y and I have this
+00:18:54 method which takes I andj and yeah
+00:18:57 performs the
+00:18:59 the code that we just seen in
+00:19:01 Boogie and I had to annotate this as
+00:19:04 well right so here I have the loop
+00:19:07 invariant yet another slightly different
+00:19:09 one x - Y is equal to IUS
+00:19:12 J and here are the requires an
+00:19:16 urce because of the way that Workhorse
+00:19:18 works I need to give a little bit of
+00:19:21 extra information that uh yeah we will
+00:19:24 not talk about much in this uh lecture
+00:19:28 these are called permissions so
+00:19:29 basically I'm telling where course that
+00:19:31 this procedure is going to modify X and
+00:19:34 Y or it has permission to modify X and
+00:19:36 Y and now I can try and run
+00:19:40 this and okay it also takes a couple of
+00:19:43 [Music]
+00:19:47 seconds see if it actually accepts my
+00:19:52 invariant or whether it will time out ah
+00:19:54 yeah okay it a success def find the
+00:19:56 verdict is pass no additional
+00:19:59 information needed my invariant was good
+00:20:02 whereas if I were to break it it should
+00:20:05 probably give us some kind of
+00:20:17 [Music]
+00:20:19 error oh yeah okay there was an error
+00:20:24 and the invariant was not
+00:20:27 established but it's not entirely clear
+00:20:30 to me what I am supposed to read from
+00:20:32 this information so maybe if you're an
+00:20:34 vareuse expert you can get uh why this
+00:20:38 invariant is
+00:20:40 broken okay
+00:20:44 so this uh was the first part of the
+00:20:47 lecture deductive
+00:20:49 verification and uh yeah I guess
+00:20:53 about next week or the week after we're
+00:20:55 going to start with the automated
+00:20:57 verification part
+00:20:59 we need still a couple of steps to
+00:21:01 prepare for that and the first one that
+00:21:03 we're going to start today is to extend
+00:21:05 our languages a little bit with some
+00:21:07 extra
+00:21:08 features um yeah as I said before both
+00:21:11 to model some more features that are
+00:21:13 found in real programming languages but
+00:21:15 also as a preparation for the automated
+00:21:18 analysis are there any questions about
+00:21:21 the deductive verification aspect
+00:21:24 or anything so there it's a whole
+00:21:28 gigantic research area deductive
+00:21:30 verification people work a lot on it and
+00:21:33 in particular if you look at you this
+00:21:35 permission business so a lot of work
+00:21:37 there goes into how yeah what logic you
+00:21:40 should use for your invariant and
+00:21:42 contracts so they don't just use first
+00:21:44 autologic as we have done they extend it
+00:21:47 with a lot of extra features that are
+00:21:49 meant to make it easier to verify
+00:21:52 programs compositionally right so that
+00:21:54 you can give the contract for a small
+00:21:56 procedure and verify that this is
+00:21:58 correct and you can reuse that proof in
+00:22:01 a large program where this procedure is
+00:22:03 is just a small part and you don't have
+00:22:05 to care about whether there are other
+00:22:07 threets running in parallel or what
+00:22:08 other procedures are going to be called
+00:22:11 or what data structures exist in memory
+00:22:14 um and there's a lot of work that um is
+00:22:17 meant to make that easier but I yeah we
+00:22:20 will not go into this into in much
+00:22:22 detail in this
+00:22:24 lecture so instead some extensions for
+00:22:29 Boogie and bushan and particular arrays
+00:22:31 nondeterminism and
+00:22:34 assumptions and why do we want these
+00:22:36 extra features well um one part is that
+00:22:39 verification tools like ultimate
+00:22:41 automizer which we develop here but also
+00:22:43 V course often take very complex input
+00:22:47 languages like C or Java and then they
+00:22:50 translate the programs into a simpler
+00:22:53 language like Boogie or varos has its
+00:22:55 own
+00:22:57 pvl I don't what the piece stands for
+00:22:59 but verification language I assume is
+00:23:01 the
+00:23:02 rest and yeah in order to model these
+00:23:05 complex languages we need some features
+00:23:06 in these uh simple languages so we start
+00:23:10 with arrays and uh we've already seen
+00:23:12 the theory of arrays so there will be a
+00:23:14 small recap of that and then we see how
+00:23:17 this works in in Boogie and buan um yeah
+00:23:20 this is exactly this translation that I
+00:23:21 did uh that I just explained and if we
+00:23:24 want to use asmt to actually verify
+00:23:27 programs then of course we need arrays
+00:23:30 in smt as well and they should somehow
+00:23:32 match the arrays that we have in
+00:23:34 Boogie and in our lecture yeah we Define
+00:23:37 the semantics of boostan via smt so it's
+00:23:40 also quite useful if the arrays in
+00:23:43 boostan and smt or somewhat
+00:23:47 similar um so how was this done again
+00:23:52 this is just a recap so we had arrays as
+00:23:55 mathematical objects but in a
+00:23:57 programming language you can modify
+00:23:59 arrays right you can write at some index
+00:24:01 an array and then it changes how do we
+00:24:03 model this ma mathematically well we
+00:24:06 have an array as a map and array update
+00:24:09 is an operation that takes a map and
+00:24:11 Returns the modified
+00:24:13 map um so for instance if you have a map
+00:24:17 that is zero at every position then this
+00:24:21 represents sort of an array that's
+00:24:23 initialized with
+00:24:24 zero and if you write then the number 23
+00:24:27 at index 5 if you get a new array that
+00:24:30 uh yeah at number five it has the value
+00:24:32 23 and out of everywhere else it has
+00:24:35 zero and to model that we had two
+00:24:37 functions the first one is the one we
+00:24:40 write with this uh angle or square
+00:24:43 brackets we also call it select
+00:24:46 sometimes uh this is a binary function
+00:24:48 symbol it takes an array or a map and an
+00:24:51 element of the domain so an index and it
+00:24:56 Returns the value of the map at that
+00:24:57 position right so for instance if we use
+00:25:00 this F from the example and select the
+00:25:03 index 5 we get zero if we take the F
+00:25:06 power and select index 5 we get
+00:25:10 23 and for the updates we had the store
+00:25:13 with these angle brackets in the small
+00:25:15 triangle it takes three arguments a map
+00:25:18 an index and a new value and it returns
+00:25:20 an updated map so for instance if we
+00:25:24 take a f and update it at position 5
+00:25:26 with 23 then we get exactly this map F
+00:25:31 Bar okay the aums of the theor we've
+00:25:34 seen on previous slides so I'm not going
+00:25:36 to repeat those um if we do this in smt
+00:25:39 lip it's basically very similar except
+00:25:42 yeah we write the word store and select
+00:25:45 rather than uh using funky
+00:25:49 brackets um so here's a small example
+00:25:52 that I've also prepared a bit in in smt
+00:25:55 interpool so what we have here
+00:25:59 weet the logic so this is the quantifier
+00:26:02 free logic of
+00:26:04 arrays so the the first a is arrays and
+00:26:08 a linear integer arithmetic so we will
+00:26:10 have arrays of integers in here then we
+00:26:14 declare our our constant symbols so I J
+00:26:18 K V A and B and then we can for instance
+00:26:21 Asser that b is the array B is exactly
+00:26:25 the array a where I have stored value V
+00:26:27 at position
+00:26:29 okay and I can say that uh select AI is
+00:26:34 not equal to select bi and select AJ is
+00:26:38 not equal to select
+00:26:40 BJ so let's see if I run this is this
+00:26:45 satisfiable yes uhhuh okay if it's
+00:26:50 [Music]
+00:26:51 satisfiable I should be able to get a
+00:26:55 model and it tells me yeah you can use I
+00:26:58 as free and J also as free and K also as
+00:27:02 free and uh then it tells me also some
+00:27:05 values for the arrays they look a bit
+00:27:07 more complicated but basically they
+00:27:10 start from an array a constant array
+00:27:13 that's zero at every position and then
+00:27:16 you overwrite some indices so here you
+00:27:19 write five at index five you write one
+00:27:21 and at index three you write two and if
+00:27:24 you take the the erase that result from
+00:27:26 this and these other values for the
+00:27:29 variables just satisfies the
+00:27:33 formula
+00:27:35 okay
+00:27:38 but in the example we also had that I is
+00:27:43 different from J right so here we saw I
+00:27:46 J and K are all equal if I say they are
+00:27:48 different will they still be satisfied
+00:27:50 though
+00:28:05 let's find
+00:28:06 out so uh and no very quickly it says
+00:28:11 unet why is this well if B and a they're
+00:28:15 actually equal except at position K
+00:28:17 right there's only one position where
+00:28:19 they're different because I know that b
+00:28:21 is equal to a if I modify just one
+00:28:24 position so it's not possible that they
+00:28:26 are that there are two different
+00:28:27 position positions I and J where A and B
+00:28:30 are
+00:28:32 different
+00:28:34 okay so this all works intb as well now
+00:28:38 why do we actually want this in Boogie
+00:28:40 well one really big important feature
+00:28:43 that we wanted to use it for is for
+00:28:45 pointers or references so even if we
+00:28:48 have programs in I don't know Java or C
+00:28:51 programs that don't actually use an
+00:28:53 array of Java or or C uh we very often
+00:28:58 work with references to some object in
+00:29:01 memory right and for that arrays are
+00:29:04 really useful to model them because we
+00:29:05 don't have this in
+00:29:07 Boogie and U so the simplest way that
+00:29:10 you can think of modeling this is to
+00:29:12 take just the entire memory as one
+00:29:14 gigantic array where the in indices are
+00:29:18 integers these are Pointers so your your
+00:29:21 pointers are integers and you the values
+00:29:24 that are stored in the array are also
+00:29:26 integers you can make this more complex
+00:29:28 at if you have different data types and
+00:29:30 and objects and so on but this is the
+00:29:33 simplest way you can imagine it and then
+00:29:36 you can start thinking about so for
+00:29:38 instance if in C I have a poter the
+00:29:40 reference I read the value that's stored
+00:29:42 at a certain location in memory in
+00:29:44 Boogie I could then model this as yeah
+00:29:47 reading the array M at pos position
+00:29:51 pointer in the array Theory it looks
+00:29:53 exactly the same and yeah in SM lip
+00:29:57 select M
+00:30:01 pointer if I want to assign a pointer so
+00:30:04 I want to store something in the
+00:30:06 location that's pointed to by the
+00:30:07 pointer right I write this like this in
+00:30:10 C um in Boogie I would then update the
+00:30:14 array M at position pointer with the new
+00:30:18 expression and uh in the array Theory
+00:30:21 because we can't actually modify arrays
+00:30:24 right we have these primed variables as
+00:30:26 we had for the assignment statement
+00:30:27 before say me Prime is equal to me where
+00:30:31 you replace the value at pointer with
+00:30:33 the value of
+00:30:36 expression um and similarly in smt lip
+00:30:40 and if you want to copy a reference
+00:30:42 right you have two pointers pointing to
+00:30:44 the same thing now well yeah you can
+00:30:47 just use the normal assignment there's
+00:30:48 nothing special needed here pointer two
+00:30:50 is assigned to pointer or in the array
+00:30:53 Theory pointer 2 Prime is equal to
+00:30:55 pointer and so on
+00:31:00 okay so with that we can model this
+00:31:02 typical Random Access Memory that you
+00:31:04 have in
+00:31:08 programs okay um and yeah we've already
+00:31:12 seen it in in some examples before so
+00:31:14 this is all possible in Boogie we
+00:31:17 specify the types in this fashion where
+00:31:19 we first write what's the indices in
+00:31:21 square brackets and then the values that
+00:31:24 can be
+00:31:25 [Music]
+00:31:26 written uh um and you have to usual
+00:31:30 Syntax for reading from arrays and for
+00:31:34 assigning something to a position in an
+00:31:39 array uh so in this case it's a bit of
+00:31:42 more complicated procedure that sorts an
+00:31:45 array so an insertion sort algorithm you
+00:31:49 given an array and a lower and higher
+00:31:51 bound and you sort the elements within
+00:31:53 that array the lower and higher bound
+00:31:55 are important because these are Mt
+00:31:58 arrays or Boogie arrays so they are
+00:32:00 infinite always right every
+00:32:03 integer from minus infinity to plus
+00:32:06 infinity is a possible index so we
+00:32:08 cannot sort the entire thing because
+00:32:10 it's infinite but we can sort it between
+00:32:11 certain
+00:32:15 boundaries
+00:32:18 okay good then now we will do the same
+00:32:22 in boost
+00:32:23 down uh what do we need to
+00:32:26 do well we need to extend a syntax we
+00:32:29 need some Expressions to read from
+00:32:30 arrays we need some statements to assign
+00:32:33 values in an array then we will have to
+00:32:36 give semantics for
+00:32:39 this and uh we will also update our H
+00:32:42 proof system so we can prove things
+00:32:44 about these extended boost down programs
+00:32:47 and of course the new rules for the h
+00:32:49 proof
+00:32:50 system should still be
+00:32:52 sound so let's see how does the syntax
+00:32:56 look so this was the grammar before and
+00:33:00 you remember from the assignment
+00:33:02 statement we had here this non-terminal
+00:33:04 LHS left hand side which at the moment
+00:33:08 can only be a
+00:33:09 variable we can just change that to say
+00:33:11 oh it can be a variable or it can be a
+00:33:14 variable followed by an expression in
+00:33:17 square brackets right so the variable is
+00:33:19 an array and the expression is the index
+00:33:23 so then we can write things like a of I
+00:33:28 is assigned to I don't know to for
+00:33:34 instance
+00:33:36 okay um so now we can update arrays we
+00:33:40 would also like to read from them so
+00:33:42 I've also added some rules here for the
+00:33:45 expression non- terminals so an integer
+00:33:48 expression can be a variable
+00:33:51 representing an array where I read from
+00:33:54 the index given by this
+00:33:56 expression but yeah an array might also
+00:33:59 return a Boolean so a Boolean expression
+00:34:00 can also be the same
+00:34:05 thing okay and uh then we need to give
+00:34:08 the semantics so first what's the domain
+00:34:11 of variables before it was only oh
+00:34:13 actually this should be the
+00:34:16 integers or booleans now it can also be
+00:34:19 functions from one of these to the
+00:34:22 other and we need to give a semantics of
+00:34:24 the assignment
+00:34:25 statement so this was the semantics of
+00:34:28 the original assignment statement and
+00:34:30 now if I want to give uh a semantics for
+00:34:34 an assignment array assignment statement
+00:34:36 a ofi is assigned to expression does
+00:34:39 anyone have an idea how I could do this
+00:35:12 it's probably going to be some set of
+00:35:16 pairs of states
+00:35:25 right but what comes
+00:35:29 afterwards what does what has to hold
+00:35:32 for these two
+00:35:43 states maybe if the assignment statement
+00:35:45 is given as a tip I can write this again
+00:35:48 as some formula is going to be satisfy
+00:35:51 or it's going to evaluate to true
+00:35:59 and yeah
+00:36:07 is but what's the formula that needs to
+00:36:09 go in here
+00:36:55 yeah he of
+00:36:57 I prime
+00:37:01 [Music]
+00:37:08 or okay
+00:37:34 mhm anything
+00:37:39 else okay so this part also
+00:37:44 here v such that V is not X we should
+00:37:49 have V equals V
+00:37:52 Prime okay yeah this is one possible
+00:37:55 semantics we GI uh the new value of a
+00:38:00 prime of I yeah and everything else is
+00:38:03 unchanged uh including all other
+00:38:07 variables this is yeah I would say this
+00:38:09 is the semantics we've just written it
+00:38:11 down slightly differently right we can
+00:38:13 also say a prime is a where I have
+00:38:16 modified I or yeah replaced the value at
+00:38:20 position I with
+00:38:22 expression but it's equivalent to what
+00:38:26 was yeah just
+00:38:30 now
+00:38:32 okay right so here in Boogie or bushan
+00:38:35 we can modify arrays and yeah this works
+00:38:38 simply by
+00:38:40 replacing uh right setting that a prime
+00:38:43 is this new array that's returned by the
+00:38:45 store
+00:38:49 function okay so we have a syntax we
+00:38:54 have a semantics now we need a rule for
+00:38:57 the the hall proof system and it will be
+00:38:59 an Exum just like the normal assignment
+00:39:00 Exum so this was the the normal one now
+00:39:04 what do I need to write for the array
+00:39:06 assignment so again I
+00:39:08 have some
+00:39:11 precondition some post condition
+00:39:17 and I'm going to have an array
+00:39:19 assignment and this is an
+00:39:21 xum any
+00:39:26 suggestions for
+00:40:21 no yes
+00:40:39 so
+00:40:42 uhuh and then the post condition is just
+00:40:44 fire I assume so this would be yeah very
+00:40:49 analogous it doesn't quite work right so
+00:40:53 there's a technical problem and there's
+00:40:55 a more fun problem so the technical
+00:40:58 problem is okay we haven't yet defined
+00:41:00 what it means to replace some expression
+00:41:03 by another expression right we've only
+00:41:04 defined substitution of
+00:41:07 variables and the reason why this turns
+00:41:09 out to be a bit difficult is if you
+00:41:11 imagine you have five is something like
+00:41:16 uh a of J is equal to
+00:41:20 7 and I is equal to
+00:41:24 J right if you're now trying to place a
+00:41:26 of I here there is no occurrence of a of
+00:41:29 I you're not going to replace
+00:41:31 anything but because I and J are
+00:41:33 actually equal this a of J in a sense is
+00:41:37 an occurrence of a ofi so this makes it
+00:41:40 really difficult to Define this by
+00:41:42 replacing an expression but it's a very
+00:41:44 natural idea right um the trick that we
+00:41:48 do is yeah similar to the trick we did
+00:41:50 for the semantics we just replace the
+00:41:52 entire
+00:41:53 array right the entire array a is
+00:41:56 replaced by
+00:41:57 this uh this term here the store term a
+00:42:01 where I store at position I the value of
+00:42:09 expression
+00:42:11 okay and uh yeah indeed it turns out
+00:42:15 this is
+00:42:16 sound um if you look at the semantics
+00:42:19 again the array assignment is in a sense
+00:42:23 like I can sort of view it as
+00:42:29 a normal
+00:42:31 assignment if I had store expressions in
+00:42:33 my language right this is basically the
+00:42:36 same thing and then the the normal
+00:42:38 assignment rule would be exactly this
+00:42:40 here so we don't have this in our
+00:42:42 language but because this is very
+00:42:44 analogous the proof of the soundness is
+00:42:46 exactly like the proof of the uh
+00:42:48 soundness for the assignment
+00:42:54 AUM okay uh hope you believe this if you
+00:42:58 have questions or
+00:43:01 doubts you can raise them
+00:43:08 now if
+00:43:10 not then this would be the first
+00:43:14 extension we have arrays in our language
+00:43:16 now and then the next part would be
+00:43:20 nondeterminism uh and through the
+00:43:23 nondeterminism in bugi or buan is uh
+00:43:26 expressed through a statement that we
+00:43:28 call
+00:43:30 Havoc so um maybe as a start can someone
+00:43:34 tell me what nondeterminism
+00:43:44 is what does it mean that let's say here
+00:43:47 a program is non deterministic
+00:44:02 yes for the same input the program will
+00:44:05 arrive at different outputs or maybe
+00:44:07 behave differently in
+00:44:09 general um is this something that you
+00:44:12 find in real languages programming
+00:44:14 languages are they deterministic or are
+00:44:16 they
+00:44:20 non-deterministic and if there's n
+00:44:22 determinism why what is it good for
+00:44:37 I mean is this a feature or a bug let's
+00:44:39 say of the language
+00:44:41 yeah Randomness is yeah if you really
+00:44:45 have romness that's a a kind of
+00:44:47 nondeterminism uh we have to be a bit
+00:44:49 careful because when we talk about
+00:44:51 random programs people often care about
+00:44:53 what are the probability distributions
+00:44:56 whereas with n determinism there's no
+00:44:58 probability distribution we just talk
+00:45:00 about what are the possible outcomes but
+00:45:02 if there is Randomness then there is
+00:45:03 also nondeterminism I would say yeah
+00:45:07 mhm
+00:45:11 yeah yes if you have undefined Behavior
+00:45:14 then in a sense your program is very
+00:45:16 non-deterministic anything can happen
+00:45:18 that's another example and even in
+00:45:20 languages that don't treat this as
+00:45:22 Extreme as C that really anything can
+00:45:24 happen it can be quite useful if you
+00:45:26 don't want to fully specify what happens
+00:45:28 in certain cases right so maybe how the
+00:45:32 program behaves depends on the platform
+00:45:34 where you executing it on the operating
+00:45:36 system on the hardware but when you
+00:45:38 specify the behavior of the semantics of
+00:45:41 a programming language you say oh this
+00:45:43 non deterministic maybe within a certain
+00:45:45 range rather than everything can happen
+00:45:47 um and then you leave it up to you know
+00:45:51 for example the Implement of a compiler
+00:45:53 to determine what exactly
+00:45:55 happens um whereas for us on the
+00:45:58 verification side we just treat this as
+00:45:59 non determinism because we want to prove
+00:46:01 that the program is correct no matter
+00:46:03 which compiler compiles it if it's a
+00:46:05 correct
+00:46:07 compiler yeah so uh we had undefined
+00:46:10 Behavior we had uh I'm blanking uh what
+00:46:15 was the other
+00:46:18 example that was the definition yes
+00:46:20 didn't we
+00:46:23 have uh Randomness yes thank you
+00:46:26 Randomness uh undefined or
+00:46:28 underspecified
+00:46:30 behavior one part where n termism is
+00:46:34 really useful for modeling is when we
+00:46:36 have input when we have some environment
+00:46:39 that the program is interacting with so
+00:46:40 either a user clicking buttons writing
+00:46:43 text or the environment could also be a
+00:46:46 network we're sending requests getting
+00:46:48 some info back but we we have no idea
+00:46:50 what that info will be and we often want
+00:46:52 to prove that no matter which which data
+00:46:55 we get back the program behaves
+00:46:57 correctly um or it could be some other
+00:46:59 Hardware right it could be a sensor in
+00:47:02 in some cyber physical system we don't
+00:47:05 know what the environment is what the
+00:47:07 sensor will give us so we model this as
+00:47:08 a
+00:47:09 nondeterministic
+00:47:14 information
+00:47:15 okay and uh in a sense we already have
+00:47:18 some nondeterminism or some kind of
+00:47:20 input in our programming language in
+00:47:23 buan or
+00:47:24 bugie and that senses yeah the values
+00:47:28 the variables are not initialized right
+00:47:30 some languages like C would tell you
+00:47:32 that Global VAR variables are always
+00:47:35 initialized to zero in boostan or Boogie
+00:47:38 this is not the case so we get some kind
+00:47:40 of input through the initial values of
+00:47:42 our
+00:47:43 variables and one might think that this
+00:47:45 is enough right we can just use one
+00:47:47 auxiliary variable for each input but
+00:47:49 this is sometimes difficult to model
+00:47:52 really input in this way because if we
+00:47:54 have for instance input inside a loop we
+00:47:56 need unboundedly many
+00:47:58 variables maybe we can trick uh can do
+00:48:02 some tricks with arrays but it gets very
+00:48:04 inconvenient so instead we're going to
+00:48:07 explicitly add nondeterminism through a
+00:48:09 new statement to our
+00:48:11 language uh here's an example so here's
+00:48:14 a small C program which has some uh
+00:48:17 character variable X and while X is yeah
+00:48:22 X should be a number between one and N
+00:48:24 that's given by the user so while X is
+00:48:26 not in the right range we output to the
+00:48:29 user please input a number from 1 to
+00:48:32 9 UM and then we use this rear function
+00:48:35 which reads one character from the
+00:48:37 terminal that the user can type
+00:48:40 in and if now X is in our accepted range
+00:48:44 we can continue and work with it if not
+00:48:46 then we're going to ask again right and
+00:48:48 because the user might very often tip AB
+00:48:51 B CDE e FG um it might take a long time
+00:48:55 until uh we actually
+00:48:57 get the right input so we might need any
+00:48:59 many
+00:48:59 inputs so how do we model this now in
+00:49:02 Boogie uh so we have a variable x uh
+00:49:07 slightly confusingly this character
+00:49:10 literal one here represents the asky
+00:49:12 character one which is 49 as a number so
+00:49:15 it's a bit different but yeah uh
+00:49:18 basically we have the same check uh
+00:49:20 range
+00:49:21 check the print Ln we don't model
+00:49:23 because yeah it doesn't really affect
+00:49:27 the behavior of the program and then for
+00:49:30 this reading of input we have a
+00:49:32 statement called Havoc X right so this
+00:49:35 means assign a nondeterministically
+00:49:37 chosen value to the variable X any
+00:49:40 integer can be stored in X
+00:49:45 now and yeah so this
+00:49:48 is how we model input and we're going to
+00:49:52 extend our boost and language with the
+00:49:54 same Havoc statement so that we can also
+00:49:56 have in put in
+00:49:59 Gan uh yeah but first here is an example
+00:50:02 right so another example we have while X
+00:50:07 is exactly equal to 3 *
+00:50:09 y we assign y to X and then we have X
+00:50:13 again so we get a completely nistic
+00:50:16 chosen new value for x and then we check
+00:50:19 the loop again right is X now exactly
+00:50:21 equal to 3 * y if so then continue if
+00:50:23 not exit the loop and the question here
+00:50:27 is does this program satisfy the
+00:50:28 precondition postcondition pair that if
+00:50:31 we start with yals 1 then uh it will
+00:50:36 when the program terminates it will
+00:50:38 always be the case that Y is equal less
+00:50:40 or equal
+00:50:41 at1 now is this correct does the program
+00:50:45 satisfy this specification
+00:51:11 seems like a difficult question if we
+00:51:14 have difficult questions we should ask
+00:51:16 tools to answer them for
+00:51:18 us because at least this is a question
+00:51:20 that the tool may be able to answer so
+00:51:22 I've prepared this here in the web
+00:51:25 interface of ultimate autom
+00:51:27 which you already saw in the first
+00:51:29 lecture so what do we have our variables
+00:51:32 X and Y and I've written a small main
+00:51:34 procedure again the precondition is
+00:51:37 given with this requires keyword and the
+00:51:39 post condition with
+00:51:40 ensures and the statement here is not
+00:51:44 necessary so now I'm going to ask
+00:51:48 ultimate automizer if this is correct
+00:51:51 and it runs for a while and then it
+00:51:52 tells me know this can be
+00:51:55 violated uh and the path here to a
+00:51:58 violation is a bit long so what does it
+00:52:01 say well we start with y equals to
+00:52:04 one uh apparently the condition is true
+00:52:08 that X is equal to 3 * y so the initial
+00:52:11 value although unfortunately the
+00:52:12 ultimate doesn't tell us the value of x
+00:52:14 it must be
+00:52:16 free uh then we set y to X and now we
+00:52:19 nistic choose a new value for x and the
+00:52:22 case and unfortunately again this is a
+00:52:25 bit of a technical limitation at the
+00:52:27 moment that it doesn't tell you the
+00:52:28 value of x but we know here that in Next
+00:52:31 Step the condition that X is equal to 3
+00:52:34 * Y is true again so it must have
+00:52:36 guessed 3 * three so
+00:52:39 9 and we repeat this again and now Y is
+00:52:43 9 and apparently the condition is true
+00:52:45 again so we must have guessed 3 * 9 so
+00:52:48 27 and this happens again and again and
+00:52:52 again and then in I don't know after
+00:52:54 five iterations or so we have a value
+00:52:57 that's in y That's greater than at1 and
+00:53:01 apparently this time the condition is
+00:53:03 false so the nistic guess for X chose
+00:53:06 something different from 200 or 3 *
+00:53:10 243 and we exit the
+00:53:12 loop right so this is maybe if you think
+00:53:15 of probability distributions this would
+00:53:17 be very improbable that you guess
+00:53:19 exactly this right you guess right four
+00:53:22 times and then you guess wrong the fifth
+00:53:23 time and out of all Poss integers you
+00:53:27 always choose three times y so maybe
+00:53:29 this is very imposs very improbable but
+00:53:31 it's possible right and for
+00:53:33 nondeterminism we only care about
+00:53:34 whether it's possible or not and uh yeah
+00:53:37 a program verification tool like
+00:53:39 ultimate automizer can find this whereas
+00:53:41 with testing maybe we would have to run
+00:53:43 the tests a lot of times before we
+00:53:45 actually find this
+00:53:49 bug
+00:53:51 okay so so much about Boogie now we
+00:53:56 extend boan and uh yeah we've seen this
+00:53:59 before what do we have to do we extend
+00:54:01 the syntax the semantics and the H proof
+00:54:04 system in such a way that it still
+00:54:07 sound what's the syntax uh it's very
+00:54:10 simple we just add this new statement
+00:54:12 havoc and then some
+00:54:16 variable uh what's the semantics so here
+00:54:19 again is the semantics of the assignment
+00:54:21 statement does anyone have an idea what
+00:54:24 the semantics of
+00:54:26 statement
+00:54:29 like Havoc X would be
+00:55:20 yes
+00:55:27 exactly we take the semantics of the
+00:55:30 assignment statement but we just don't
+00:55:32 specify anything about X
+00:55:34 Prime and uh yeah then we get this
+00:55:38 here we just say all other variables
+00:55:40 stay the same and we have no idea what
+00:55:43 happens to
+00:55:47 X okay that was the semantics now we
+00:55:51 need a rule for the proof system and
+00:55:52 again it's going to be an
+00:55:54 AUM so uh
+00:55:56 I have a
+00:55:59 precondition I have
+00:56:01 Havoc
+00:56:02 X and I need a post
+00:56:09 condition any
+00:56:11 ideas this is going to be an XM
+00:56:37 [Music]
+00:56:50 so maybe we'll try it also analogous to
+00:56:52 the assignment exam since it's given
+00:56:54 here so we put some f here
+00:56:56 here and then what do we put in the
+00:56:59 precondition right in the assignment
+00:57:01 exam we said oi has to hold but for the
+00:57:04 the value that X will have after the
+00:57:07 assignment right just
+00:57:09 substitution so we would also like to
+00:57:11 say here that five holds for this value
+00:57:13 that X will have after the Havoc but we
+00:57:16 don't know the value that it will have
+00:57:18 so what can we do
+00:57:32 I can hear the Crickets from
+00:57:36 outside
+00:57:43 yes introduce some other variable okay
+00:57:47 and
+00:57:53 then yeah but I mean
+00:57:57 what do we do with this new
+00:58:05 variable yeah but I mean okay let's say
+00:58:07 I introduced the variable y I don't just
+00:58:10 write y here so what do I do
+00:58:16 with okay so I could
+00:58:22 WR
+00:58:24 um yeah maybe not far off because right
+00:58:28 if this Y is really a fresh variable
+00:58:30 what does this say I mean this looks
+00:58:32 very similar to some rules we had in
+00:58:33 natural deduction actually use a fresh
+00:58:36 variable and replace x with
+00:58:43 this I mean this is really just another
+00:58:46 way of saying that five
+00:58:48 holds uh for all
+00:58:54 X right if we don't know anything about
+00:58:57 this fresh variable then uh we can only
+00:59:00 show that this holds for all uh yeah we
+00:59:03 have to show that it holds for all
+00:59:04 possible
+00:59:08 values right so F holds for all possible
+00:59:10 values and then we assign X to one of
+00:59:12 these possible values then we know that
+00:59:14 five
+00:59:17 holds
+00:59:19 okay so that is the assignment AUM
+00:59:23 and yeah here for XF uh the hoc
+00:59:30 XM and this is also sound so you have
+00:59:34 some routine now improving the soundness
+00:59:37 of these rules right so we take the
+00:59:39 semantics we take some arbitrary set in
+00:59:41 the postate uh state in the post set um
+00:59:45 of all XF and the semantics of Havoc
+00:59:47 then there must be an s that satisfies
+00:59:49 for all XF and the two are in the
+00:59:54 semantics now okay we can take the
+00:59:57 semantics of havoc and we also take the
+00:59:59 for all XF in here and say yeah for this
+01:00:02 assignment RW s Union Prime S Prime this
+01:00:07 formula values to
+01:00:09 true and uh then we can split this we
+01:00:11 can say okay this formula for all XF
+01:00:14 values to true and for all other
+01:00:16 variables S and S Prime are exactly the
+01:00:18 same S Prime of v and is s of
+01:00:22 v and uh this if you look at this
+01:00:26 semantics of the for all
+01:00:28 quantifier this really just means or
+01:00:31 this implies that if I take this
+01:00:34 slightly different EV variation as Prime
+01:00:37 rather than this because it's the same
+01:00:40 on all variables that appear in F except
+01:00:43 on the Quantified one then this must
+01:00:45 evaluate to
+01:00:50 True
+01:00:52 okay and uh yeah therefore we have shown
+01:00:57 that S Prime is yeah it
+01:01:00 satisfies F and therefore the whole
+01:01:02 triple is
+01:01:05 valid
+01:01:07 okay so and uh finally we will talk
+01:01:12 about
+01:01:13 assumptions so what are assumptions uh
+01:01:15 the idea is that we sometimes want to
+01:01:17 restrict input to a subset of possible
+01:01:21 values this is not something you will
+01:01:24 find in normal programming languages
+01:01:26 in particular because it's not clear how
+01:01:28 you would actually implement this in a
+01:01:30 computer so this is really a feature
+01:01:32 that Boogie and boan have because
+01:01:34 they're verification languages and these
+01:01:37 assumptions can be extremely powerful
+01:01:40 when we want to do when we want to model
+01:01:42 more complicated features of other
+01:01:44 languages and when when we want to
+01:01:45 verify programs so in particular these
+01:01:48 will play a big role next week uh in the
+01:01:51 next topic of the lecture uh let's see
+01:01:53 how they work so we have again program
+01:01:56 from
+01:01:57 before and we just modeled the rear with
+01:02:00 Havoc X right but X is an integer
+01:02:04 whereas here our X was a character
+01:02:07 variable so it can only go from zero to
+01:02:10 255 one by so this is actually a bit
+01:02:14 imprecise our modeling here because
+01:02:15 suddenly X can take negative values or
+01:02:18 right because or it can take values like
+01:02:23 25,000 so we don't actually want X to
+01:02:26 take any possible value we only want
+01:02:28 values in the range from Z to to
+01:02:33 255 and the way that we do this is we
+01:02:37 put here a so-called assume statement so
+01:02:40 it says we assume and then we put a
+01:02:42 Boolean condition here namely that 0 is
+01:02:44 less or equal x and x is less or equal
+01:02:49 255 okay so what does this mean when we
+01:02:53 execute this program we will first ass
+01:02:55 assign any possible integer to X in the
+01:02:58 Havoc
+01:02:59 statement and then afterwards we will
+01:03:02 check whether this x is between 0 and
+01:03:05 255 if yes nothing happens and the
+01:03:08 execution just goes on right the assume
+01:03:10 statement doesn't actually change any
+01:03:12 variables or
+01:03:13 anything but if X is not in this
+01:03:17 range then we will get stuck here we
+01:03:20 cannot actually execute this umid block
+01:03:23 and this is the part that's unclear what
+01:03:25 that means when you want to implement
+01:03:26 this in a computer what does it mean to
+01:03:28 block right in a sense you you say any
+01:03:31 execution where X is not in this range
+01:03:33 is not actually an admissible execution
+01:03:35 I they don't
+01:03:37 count and yeah again how would you
+01:03:40 implement this but for program analysis
+01:03:44 tools this is actually um doable and
+01:03:47 quite nice to
+01:03:49 have so um this is also explained in the
+01:03:52 Boogie specification we extend pushan so
+01:03:55 sytax semantics H proof system soundness
+01:03:58 proof as
+01:04:00 before um so what's the grammar this is
+01:04:04 what we had before we now have a new
+01:04:05 statement assume with somean
+01:04:10 expression and uh we give the semantics
+01:04:13 what does the semantics say we have
+01:04:15 pairs of States S1 and S2 but actually
+01:04:18 S1 and S2 must be exactly the same state
+01:04:20 right so the assume statement never
+01:04:22 changes the value of some
+01:04:24 variables but the condition here is that
+01:04:28 s one or S two I mean they're the same
+01:04:30 the state has to satisfy the
+01:04:34 expression if it doesn't satisfy the
+01:04:37 expression there is no possible
+01:04:38 successor State you cannot execute the
+01:04:46 statement okay so this is a bit an of an
+01:04:49 unintuitive statement that you have to
+01:04:52 get used to and it
+01:04:53 gets yeah it would get even if we looked
+01:04:56 at concurrent programs which you're not
+01:04:57 going to do for now um but yeah you can
+01:05:02 alternatively write this like this if
+01:05:05 you want to define the semantics with an
+01:05:07 smt formula again so you take the
+01:05:09 expression and you say all variables are
+01:05:15 unchanged now we're going to need an AUM
+01:05:18 for this and here's already a blueprint
+01:05:21 so we
+01:05:22 assume uh we have a precondition f we
+01:05:25 assume
+01:05:26 an expression what would be the post
+01:05:28 condition so that means if we start in a
+01:05:32 state that satisfies F and we are able
+01:05:35 to execute the statement and we reach
+01:05:37 the state S Prime what do we know about
+01:05:39 the state S
+01:05:41 Prime
+01:05:44 yeah exactly so it's the same state as
+01:05:47 before so it still satisfies
+01:05:50 five and
+01:05:52 uh because we were able to execute the
+01:05:54 statement it must also satisfy the
+01:05:57 expression and this is indeed the
+01:06:00 AUM and one more time yes this is a
+01:06:03 sound Exum the H Triple is
+01:06:06 valid uh we take any state in the post
+01:06:10 set then there must be a state s that
+01:06:12 satisfies F and the pair is in the
+01:06:16 semantics now we can insert the
+01:06:19 definition of the semantics so we know
+01:06:21 actually s is equal to S Prime and
+01:06:24 satisfies the expression
+01:06:27 and
+01:06:29 then yeah so actually S Prime is
+01:06:32 satisfies Fe because it's equal to S
+01:06:35 which satisfies F and S Prime satisfies
+01:06:39 the
+01:06:40 expression so yeah we have shown that
+01:06:43 anything in the post set is in this set
+01:06:46 and therefore the whole triple is
+01:06:49 valid okay and uh this is what we were
+01:06:55 going to do for today I don't know do
+01:06:56 you have any
+01:06:58 questions about these
+01:07:06 statements none that I see right now so
+01:07:08 we will have um a couple of exercises on
+01:07:11 assume statements and also the other
+01:07:13 statements that we introduced on the
+01:07:15 exercise sheet today so there you can
+01:07:18 get to know them a bit better uh if they
+01:07:21 have any questions of course you can
+01:07:22 always ask in the Forum or in the next
+01:07:25 lecture
+01:07:26 and then on Monday we are going to
+01:07:29 Define control flow graphs maybe you
+01:07:32 have an idea of already what a control
+01:07:34 flow graph is maybe you've seen one for
+01:07:36 from some other lecture so a graphical
+01:07:39 representation of
+01:07:41 programs right so far we had uh
+01:07:43 derivation trees or text now we're going
+01:07:45 to represent programs as
+01:07:47 graphs and um yeah that has two aspects
+01:07:51 so for one we will as part of that give
+01:07:54 a new semantics to programs in a sense
+01:07:58 which is quite useful because it can
+01:08:00 express some things that our current
+01:08:02 semantics cannot do um but in another
+01:08:05 sense it's equivalent to the semantic
+01:08:07 sphere so it depends always how closely
+01:08:09 you you look and control flow graphs
+01:08:11 will be then something that's really
+01:08:13 much more useful for our automated
+01:08:15 verification techniques right they
+01:08:17 usually don't work on deration trees or
+01:08:20 uh text they will work on control flow
+01:08:22 graphs so once we know what a control
+01:08:24 flow graph for Boost program looks like
+01:08:26 we can start analyzing them
+01:08:29 automatically okay then that's it for
+01:08:31 today and uh thank you

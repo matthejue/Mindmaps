@@ -66,7 +66,7 @@
 
 
 \newcommand{\prepostreuse}{
-\item Proof can be ruesed for stronger postconditions and weaker postconditions (for implication one can do: \texttt{A -> B |= A\raisebox{-0.1mm}{\^{}}C -> B} and \texttt{A -> B |= A -> BvC})
+\item proof can be ruesed for stronger postconditions and weaker postconditions (for implication one can do: \texttt{A -> B |= A\raisebox{-0.1mm}{\^{}}C -> B} and \texttt{A -> B |= A -> BvC})
 }
 
 \newcommand{\ssatoexecution}{
@@ -344,7 +344,7 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item unknown for correct problems, because if it says no, it could also be the case that human just didn't find the right loop invariant
+              \item no, if one assumes also loop invariant and program correct, because hoare proof system is complete which can be proven by structural induction over formulas and terms
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
@@ -352,6 +352,7 @@
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
 							\item unknown always for incorrect problems, because could just be that program correct but human just didn't right loop invariant
+							\item no, if loop invariant and program correct
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -386,7 +387,7 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item CFG
+						\item just string taken, removal of empty spaces
 					\end{betterlist}
 				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
@@ -405,7 +406,7 @@
 			\item \checkboxChecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item invariants either by human or by invariant synthesis (but only linear ones)
+						\item loop invariants either by human or by invariant synthesis (but only linear ones)
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
@@ -1256,7 +1257,7 @@
 							\item $\alpha(S) = \{x \mapsto \alpha_{\mathbb{Z}}(\{s(x) | s \in S\}) \mid x \in V\}$
 						\end{betterlist}
 					\end{betterlist}
-					\item have abstract annotation which intuitively gives us the abstract states we should add to each location of the control flow graph in order to get an ARG (and thus maybe a safety proof if no error configurations are reachable)%. The set of program states is represented as an abstract state
+					\item have abstract annotation which intuitively gives us the abstract states we should add to each location of the control flow graph in order to get an ARG (and thus maybe a safety proof if no error configurations are reachable, the ARGs will have the same structure as the underlying CFG)%. The set of program states is represented as an abstract state
 					\begin{betterlist}
 						\item for a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an abstract annotation is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$
 						\item an abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with:\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$
@@ -1407,7 +1408,13 @@
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
 		\begin{betterlist}
-			\item \checkboxChecked the program
+			\item \checkboxChecked the program, converted to
+
+			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+					\begin{betterlist}
+						\item CFG
+					\end{betterlist}
+				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
@@ -2062,15 +2069,7 @@
 		\item see page \pageref{pdf:invariant_synthesis}
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
-					\item \alert{Completeness:} unsatisfiable only means no linear inequalities exist for annotations of automaton, can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta(\ell)$ is a linear inequality . \alert{Without extension} very restrictive limitation to annotations of CFG of the form $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$
-					\begin{betterlist}
-						\item \alert{Extract information:} only searches for proof of floyd hoare automaton, searches for first state true and exit state false, would be CE if exit state something different than false
-					\end{betterlist}
-					\begin{betterlist}
-						\item only FOL, no \enquote{element of}
-						\item we can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta (\ell )$ is a linear inequality
-					\end{betterlist}
-					\item \alert{Termination}: Dependend Smt-solver, how long smt script with contraints needs to run through
+					\item d
 					% \item the method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
 					% \begin{betterlist}
 					%   \item one of the key challenges is how to handle the constraints effectively
@@ -2147,7 +2146,10 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item can only return unknown if not satisfiable
+							\begin{betterlist}
+								\item unsatisfiable only means no linear inequalities exist for annotations of automaton, can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta(\ell)$ is a linear inequality . \alert{Without extension} very restrictive limitation to annotations of CFG of the form $a_{\ell} \cdot  x + b_{\ell} \cdot  y + c_{\ell} \geq 0$
+							\end{betterlist}
 						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
@@ -2161,7 +2163,8 @@
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item only FOL, no \enquote{element of}
+						\item we can only find a Floyd-Hoare annotation $\beta$ if for each $\ell \in Loc$ the formula $\beta (\ell )$ is a linear inequality
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2190,14 +2193,14 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item dependant on smt-solver, if able to handle smt-script with constraints, but usually yes
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item dependant on smt-solver, if able to handle smt-script with constraints, but usually yes
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2215,40 +2218,32 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item CFG
+						\item Program automaton
 					\end{betterlist}
 				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\specassert
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -2257,28 +2252,32 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item d
+						\item only returns unknown, see below under unknown
 					\end{betterlist}
+
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item can get parameters through satisfying model for linear constraints in floyd hoare annotation
+						\item can get parameters through satisfying model for linear constraints in floyd hoare annotation and thus a floyd hoare annotation that proofs safety
 					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item only information that there's no floyd hoare annotation with only linear inequalities
+						\begin{betterlist}
+							\item only searches for proof of floyd hoare automaton, searches for first state true and exit state false, would be CE if exit state something different than false, can't extract execution from that
+						\end{betterlist}
 					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item program automaton, Smt-solver for checking smt-script with constraints
+						\item probably always terminates, see above under unknown what can be extracted
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2288,14 +2287,14 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item The method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
+						\item the method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
 					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item the limitation to annotations of the form $a_\ell \cdot  x + b_\ell \cdot  y + c_\ell \geq 0$ is very restrictive. Using a single inequality we are not even able to state an equality like, e.g., $x = 0.$ A straightforward extension is to use a boolean combination of linear inequalities
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2305,27 +2304,28 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\prepostreusetwo
 					\end{betterlist}
+
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\prepostreuse
 					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item program automaton, Smt-solver for checking smt-script with constraints
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item dependant on smt-solver
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2336,6 +2336,9 @@
 	\fbox{Ranking Function Synthesis}
 	\begin{betterlist}
 		\item see page \pageref{pdf:ranking_function_synthesis}
+	\end{betterlist}
+	\begin{betterlist}
+		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
 					\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \texttt{while(expr){ st }}. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W a$ \alert{ranking function} for the loop if for each pair of states $(s, s') \in [[\texttt{assume expr; st}]]$ the relation $(f(s), f(s')) \in R$ holds
@@ -2356,33 +2359,13 @@
 							\item $\forall\vec{v}\vec{v}'.\vec{s}^⊺\cdot \vec{v} + s_0 \geq 0 \land \tau_{loop}(\vec{v},\vec{v}') \rightarrow\vec{r}^T\cdot \vec{v} + r_0 \geq 0$
 						\end{betterlist}
 					\end{betterlist}
-					\item checking Termination
-					\item \alert{Soundness:} If smt-solver able to satisfy constraints for all loops that they have a ranking function then the program is terminating (RankTerminate)
-					\item \alert{Completenss:} Can only detect programs with linear ranking function (no lexicographic ranking function)
-					\begin{betterlist}
-						\item can't check non-termination
-					\end{betterlist}
-					\item \alert{Termination:} Dependend Smt-solver, how long smt script with contraints needs to run through
-					\item \alert{Restriction:} Only works for ultimately periodic traces, everyting else same as for invariant synthesis
-					\begin{betterlist}
-						\item only programs that have a statements that have a transition formula and can be brought in the right form for Farka's lemma (\texttt{while(x > 3)\{ x = x - 1\}})
-					\end{betterlist}
-					\item \alert{Techniques:} program automaton, Smt-solver for checking smt-script with constraints
-				\end{betterlist}
-			}}
-	\end{betterlist}
-	\begin{betterlist}
-		\item Give a short description of the technique
-		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-				\begin{betterlist}
-					\item TODO
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
-					\item TODO
+					\item checking Termination
 				\end{betterlist}
 			}}
 		\item \alert{Soundness}
@@ -2393,14 +2376,17 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item If smt-solver able to satisfy constraints for all loops that they have a ranking function then the program is terminating (RankTerminate)
+							\begin{betterlist}
+								\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating
+							\end{betterlist}
 						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item no, RankTerminate is an implication, conclusion is the case if premise satisfied
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2410,21 +2396,24 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item never, it always terminates with unknown for reason described below in the unknown section
 						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item there are not true positives, thus also no false positives
 						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item Only works for ultimately periodic traces, everyting else same as for invariant synthesis
+						\begin{betterlist}
+							\item only programs that have a statements that have a transition formula and can be brought in the right form for Farka's lemma (\texttt{while(x > 3)\{ x = x - 1\}})
+						\end{betterlist}
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2436,14 +2425,14 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, becauee ranking function synthesis only find linear ranking function and it could be that the termination of the program can only be proven with a non-linear ranking function
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, incorrect programs always terminate with unknown, because ranking function synthesis can only find linear ranking functions and the program could still be correct and just have a non-linear ranking function
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2453,14 +2442,14 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item dependend Smt-solver, how long smt script with contraints needs to run through, but probably yes
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item dependend Smt-solver, how long smt script with contraints needs to run through, but probably yes
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2468,8 +2457,9 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item same as under assumptions for soundness
 					\end{betterlist}
+
 				}}
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
@@ -2478,70 +2468,66 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item CFG
+						\item Program automaton
 					\end{betterlist}
 				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item precondition-postcondition pair correctly specified for 2nd constraints
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
 		\begin{betterlist}
 			\item If the technique determines that a program is incorrect, what additional information can be provided to the user? E.g. a failing execution (including variable values), a feasible error trace, any information about why the program is incorrect?
-
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item it never determines that, only unknown
+						\begin{betterlist}
+							\item can return loop / trace for which linear ranking function couldn't be found
+						\end{betterlist}
+
 					\end{betterlist}
+
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item can get parameters through satisfying model for linear constraints in floyd hoare annotation
 					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item can return loop / trace for which linear ranking function couldn't be found
 					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item dependant on smt-solver but most probably terminates, can return loop / trace for which linear ranking function couldn't be found
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2551,15 +2537,13 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item (smt-solver calls for ranking function synthesis)
 					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Further Aspects}
@@ -2567,28 +2551,24 @@
 			\item \underline{Modularity:} Can the verification for complex programs (or complex specifications) be broken down into verification tasks for smaller parts of the program / parts of the specification? If so, does this allow for efficiency benefits, e.g. parallelization of the sub-verification tasks? Can the modularity help as part of a software development process? E.g. by allowing to verify parts of the program, when other parts have not been written yet?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item program automaton, Smt-solver for checking smt-script with constraints for ranking function synthesis
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item dependant on smt-solver
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2650,6 +2630,9 @@
 	\fbox{Terminator}
 	\begin{betterlist}
 		\item see page \pageref{pdf:terminator}
+	\end{betterlist}
+	\begin{betterlist}
+		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
 					\item \underline{Algorithm for checking termination. Idea of the approach of the Terminator tool:} Iteratively collect ranking functions until termination of all loops is shown
@@ -2664,43 +2647,13 @@
 					\codeone
 					\codetwo
 					\item it does not need one (possibly complicated) ranking function for each loop but that it can use a combination of several ranking functions to prove termination of a single loop, because of the theoretical basis of disjunctively well-founded transition invariants
-					\item checking Termination (is undecidable)
-					\item \alert{Soundness:} If one is able to find a ranking function for every ultimately periodic trace, then the program is terminating, because of the theoretical basis of disjunctively well-founded transition invariants
-					\begin{betterlist}
-						\item \alert{Extract information:} Get ranking function for all whiles and thus proofs for termination (by RankTerminate)
-					\end{betterlist}
-					\item \alert{Completeness:} Can't detect every terminating program
-					\begin{betterlist}
-						\item can't check non-termination
-						\item if it doesn't find ranking function, unknown, becase one is only checking if there's linear ranking function, but there could be non-linear ranking function
-						\item \alert{Extract information:} Get ranking functions found so far and returns ultimately periodic trace for which it couldn't find linear ranking function, so user can try to find one manually
-					\end{betterlist}
-					\item \alert{Restriction:} only program whose statements can be brought in a form such that Farka's lemma can be applied (this matrix notation) and only programs for which there's a linear ranking function (because of ranking function synthesis using Farka's lemma)
-					\begin{betterlist}
-						\item can check while loops with if else
-					\end{betterlist}
-					\item \alert{Termination:} no, if there's no linear ranking function found by invaraible synthesis, then the program terminates, because it only works for linear ranking functions (as soon as \texttt{x := x * y} appears as statement, can't be brought in right form)
-					\item \alert{Techniques:} program automaton, Smt-solver for ranking function synthesis
-					\item \alert{Specification:} only program
-					\item \alert{Bottleneck:} (Smt-solver for ranking function synthesis)
-					\item \alert{Extensions:} (T2 tool)
-					\item \alert{Modularyity and Incrementality:} Reuse ranking functions already found if one used first constraints for ranking function synthesis (is going to work with every invariant), don't have to find one again, but if used seconds constraints one needs to have the same invariant to be the case before the while loop
-					\item \alert{Cost:} constructing program automatons, smt-solver calls
-				\end{betterlist}
-			}}
-	\end{betterlist}
-	\begin{betterlist}
-		\item Give a short description of the technique
-		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-				\begin{betterlist}
-					\item TODO
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
-					\item TODO
+					\item checking Termination (is undecidable)
 				\end{betterlist}
 			}}
 		\item \alert{Soundness}
@@ -2711,14 +2664,17 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item If one is able to find a ranking function for every ultimately periodic trace, then the program is terminating, because of the theoretical basis of disjunctively well-founded transition invariants
 						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, because RankTerminate is an implication
+							\begin{betterlist}
+								\item \alert{RankTerminate:} Let $P$ be a program. If every while loop of $P$ has a ranking function then $P$ is terminating
+							\end{betterlist}
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2728,21 +2684,27 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item never, if it doesn't find ranking function, unknown, becase one is only checking if there's linear ranking function, but there could be non-linear ranking function
+							% \item Can't detect every terminating program
+							% \begin{betterlist}
+							% \item can't check non-termination
+							% \end{betterlist}
 						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item there are not true positives, thus there are also no false positives
 						\end{betterlist}
 					}}
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item loops only contain ultimately periodic traces that can be descibed by linear ranking functions
+						\item every statement in the loops needs to have a transition formula and if the 2nd constraint for ranking functions is used, then also all statements before the loop (stam)
+						\item it has to be possible to write every statement in matrix notation needed for Farka's lemma (\texttt{x := x * y} can't be written as two inequalities of the form $r_x \cdot x + r_y\cdot y \le r_0$)
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2754,14 +2716,15 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, if a loops of a correct program can't be described by linear ranking functions, there could be a non-linear ranking function, so one can't say whether it's terminating or non-terminating
+							\item (also a bad smt-solver can return unknown)
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item for incorrect programs it always terminates with unknown for the same reason as above
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2771,14 +2734,14 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, there are ony finitely many loops with linear ranking function
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, if there's no linear ranking function found by invariant synthesis, smt-solver says unsatasfiable, no linear ranking function can be found, then the program terminates
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2786,7 +2749,10 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item Only program whose statements can be brought in a form such that Farka's lemma can be applied (this matrix notation) and only loops for which there are linear ranking functions describing their ultimately periodic traces (because of ranking function synthesis using Farka's lemma)
+						\begin{betterlist}
+							\item can check while loops with if else
+						\end{betterlist}
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2796,40 +2762,32 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item CFG
+						\item Program automaton
 					\end{betterlist}
 				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item precondition-postcondition pair correctly specified for 2nd constraints
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked suitable settings; e.g. choosing a mode or abstract domain for the given program and specification. Explain: What has to be chosen, and how easy is it to predict useful settings for a given program?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 			\item \checkboxUnchecked the proof is completely manual
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					\begin{betterlist}
-						\item TODO
-					\end{betterlist}
+					-
 				}}
 		\end{betterlist}
 		\item \alert{Provided Output}
@@ -2838,28 +2796,31 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item it never determines that, for incorrect non-terminating programs it always returns unknown
+						\begin{betterlist}
+							\item for unknown ranking functions found so far and trace for which it couldn't be found
+						\end{betterlist}
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item Get ranking function for all whiles and thus proofs for termination (by RankTerminate)
 					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item get ranking functions found so far and returns ultimately periodic trace for which it couldn't find linear ranking function, so user can try to find one manually
 					\end{betterlist}
 				}}
 			\item If the technique does not terminate or runs for a very long time, what information can be provided to help the user understand why?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item is always terminating, if it doesn't find a linear ranking function it stops
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2869,14 +2830,14 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item (Smt-solver for ranking function synthesis)
 					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item T2 tool
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -2886,27 +2847,28 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item yes, loop invariants of two different loops can be analysed in whatever order% if first constraints are enough, for 2nd constraints only if new loop invariant is a stronger of the 2nd loop invariant
+						\prepostreusetwo for 2nd constraint
 					\end{betterlist}
 				}}
 			\item \underline{Incrementality:} Can verification artefacts be reused for modified versions of the program? E.g. if the program is still under development.
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item reuse ranking functions already found if one used first constraints for ranking function synthesis (is going to work with every invariant), don't have to find one again, but if used seconds constraints one needs to have the same invariant to be the case before the while loop
 					\end{betterlist}
 				}}
 			\item Which techniques are used? E.g. SMT solving, automata, ...
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item constructing program automatons, smt-solver calls
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item TODO
+						\item dependant on smt-solver
 					\end{betterlist}
 				}}
 		\end{betterlist}

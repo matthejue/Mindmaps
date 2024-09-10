@@ -1280,7 +1280,7 @@
 						\item therefore we have the Theorem ACC-FP, it guarantess that we can reach a fixpiont of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ / we can compute a abstract annotation in finite time, by repeated application of $F^\#$, in case that the lattice (nonrelational abstract states $\mathbb{A}_S$) on which the function $F^\#$ operates satisfies the ACC
 						\begin{betterlist}
 							\item thus in order to guarantee termination in all cases (all possible starting points of the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation)), we require that the lattice satisfies the ACC
-							\item by the lemma below the abstract states of non-relational abstract domains $\mathbb{A}_S$ and thus also the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) satisfy the ACC, because explicit value domain (latest after 3 iterations) and sign domain (latest after 5 iterations) do
+							\item by the lemma below the abstract states of non-relational abstract domains $\mathbb{A}_S$ and thus also the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) satisfy the ACC, because explicit value domain (latest after 3 steps) and sign domain (latest after 5 steps) do
 						\end{betterlist}
 						\item in order to be sure to overapproximate as little as possible with our abstract annotation, as our function $F^\#$ is continous, we can use the Kleene Fixpoint Theorem, to guarantee that the fixpoint we reach is the least fixpoint of the function $F^\#$%, thus the fixpoint we reach is the most precise abstract annotation
 						\item an abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with:\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$
@@ -1416,7 +1416,7 @@
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
 							\item guaranteed to terminate after finitely many steps, usually one instantiated it such that it terminates, possibly with widening
-							\item may also terminate if abstract domain doesn't satisfy ACC
+							\item may also terminate if non-relational abstract domain doesn't satisfy ACC, if one is lucky and there's an upper bound like in this one example from the lecture
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?

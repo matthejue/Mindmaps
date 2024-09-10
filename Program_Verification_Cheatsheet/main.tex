@@ -10,6 +10,7 @@
 \begin{minipage}[t]{0.2\linewidth}
 	\fbox{General} \lecturenotes{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/1._Introduction.md} \additionalslides{/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/1._Introduction.pdf}
 	\begin{betterlist}
+		\item Program verification is the process of ensuring that a computer program behaves as expected and adheres to its specifications (precondition-postcondition pair, assert statements) or is able to terminate. Goal is to prove that the program produces the correct results for all expected possible executions. In this lecture we dealed with methods for Formal Verification: These methods use e.g. mathematical logic (Hoare Proof System), linear algebra (Invariant synthesis, Ranking function synthesis, Terminator), abstractions (Abstract Interpretation), nondeterministic finite automatons (Trace Abstraction Refinemint), Counter examples (CEGAR) to prove that a program's is correct (satisfies precondition-postcondition pair or will always terminate)
 		\item \alert{Program Verifier:} Takes program and specification and determines whether the program satisfies or if it violates the specification. Tells that in all executions of program specification holds. Also want indication of how specification is violated (i.e. counter example, e.g. inputs to violate assert statement) and also in case of yes want proof, because the program verifier itself could have a bug. \underline{Typical specifications:} No division by zero, Array only accessed within its bounds, Termination, Memory safety, No assert statement is violated
 		\item \href{https://ultimate-pa.org/?ui=tool&tool=automizer}{Ultimate Automizer}
 		\item \underline{Challenges:}
@@ -282,11 +283,11 @@
 	\begin{betterlist}
 		\item \underline{Rules:}
 
-		\includegraphics[width=0.5\linewidth]{./figures/arrassig.png}
+		\includegraphics[width=0.4\linewidth]{./figures/arrassig.png}
 
-		\includegraphics[width=0.325\linewidth]{./figures/havoc.png}
+		\includegraphics[width=0.225\linewidth]{./figures/havoc.png}
 
-		\includegraphics[width=0.4\linewidth]{./figures/assu.png}
+		\includegraphics[width=0.3\linewidth]{./figures/assu.png}
 		\begin{betterlist}
 			\item \script{252}{Soundness of the Array Assignment Axiom}
 			\item \script{261}{Soundness of the Havoc Axiom}
@@ -297,14 +298,15 @@
 	\begin{betterlist}
 		\item \script{230}{Ultimate Refereee with example (ff.)}
 		\item \script{233}{Interactive verification, Deductive verification, Automated verification}
-    \begin{betterlist}
-        \item \alert{interactive verification} (input: every proof step, check mistake in proof and tells what left to prove but have to figure out oneself)
-        \item \alert{deductive verification} (input: invariants, contracts: requires and ensures pairs)
-        \item \alert{automated verification} (input: program and property, find invariants and contracts automatically)
-    \end{betterlist}
+		\begin{betterlist}
+			\item \alert{interactive verification} (input: every proof step, check mistake in proof and tells what left to prove but have to figure out oneself)
+			\item \alert{deductive verification} (input: invariants, contracts: requires and ensures pairs)
+			\item \alert{automated verification} (input: program and property, find invariants and contracts automatically)
+		\end{betterlist}
 	\end{betterlist}
 	\fbox{Control-flow graphs}
 	\begin{betterlist}
+		\item \underline{short definition of CFG:} automaton over the alphabet of statements
 		\item \color{orange}A \script{279}{\alert{control-flow graph}} is a tuple $G = (Loc, \Delta, \ell_{init}, \ell_{ex})$ where
 		\begin{betterlist}
 			\item $Loc$ is a finite set whose elements we call \alert{locations},
@@ -501,7 +503,7 @@
 				\item we use $\sqcap M$ to denote the \alert{greatest lower bound}. If $M = \{x, y\}$ we may also write $x \sqcap y$
 			\end{betterlist}
 			\item we call $x \in X$ an \alert{upper bound} for $M$ if $m \sqsubseteq x$ for all $m \in M$
-			\item we call an upper bound $y$ the \alert{least upper bound} for $M$ if for each upper bound $x$ of / for? $M$ the inequality $y \sqsubseteq x$ holds
+			\item we call an upper bound $y$ the \alert{least upper bound} (suprema) for $M$ if for each upper bound $x$ of / for? $M$ the inequality $y \sqsubseteq x$ holds
 			\begin{betterlist}
 				\item we use $\sqcup M$ to denote the \alert{least upper bound}. If $M = \{x, y\}$ we may also write $x \sqcup y$
 			\end{betterlist}
@@ -510,7 +512,7 @@
 		\begin{betterlist}
 			\item $L$ is a set,
 			\item $\sqsubseteq $ is a \alert{partial order} over $L$,
-			\item every subset $M$ of $L$ has a \alert{greatest lower bound} $\sqcap M$ w.r.t. $\sqsubseteq$
+			\item every subset $M$ of $L$ has a \alert{greatest lower bound} (infima) $\sqcap M$ w.r.t. $\sqsubseteq$
 			\item every subset $M$ of $L$ has a \alert{least upper bound} $\sqcup M$ w.r.t. $\sqsubseteq$
 			\item \script{383}{Examples}
 		\end{betterlist}
@@ -623,13 +625,14 @@
 			\item \color{orange}it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$\color{black}
 			\item \color{orange}\alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$\color{black}
 			\item \color{orange}\alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time. \script{424}{Proof}\color{black}
-			\item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}		\end{betterlist}
+			\item \color{orange}\alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$\color{black}
+		\end{betterlist}
 		\item Using Theorem ACC-FP, and the characterization of abstract annotations as fixpoints of the monotone function $F^\#$, we can now compute abstract annotations by repeated application of $F^\#$
 		\begin{betterlist}
 			\item In order to guarantee termination in all cases, we require that the lattice satisfies the ACC. However, \script{426}{Example (f.)} shows, the algorithm may also terminate in some cases if the lattice does not satisfy the ACC
 		\end{betterlist}
-		\item If $(Y, \sqsubseteq_Y)$ is a complete lattice, and $X$ is any set, then $(X\rightarrow Y, \sqsubseteq)$ is also a complete lattice, where $X \rightarrow Y$ is the set of all functions from $X \rightarrow Y$, and $f \sqsubseteq g$ iff for all $x \in X$, we have $f(x) \sqsubseteq_Y g(x)$. \script{429}{Proof}
-		\item If a complete lattice $(Y , \sqsubseteq_Y)$ satisfies the ACC, then for any finite set $X$, the complete lattice $(X \rightarrow Y , \sqsubseteq)$ also satisfies the ACC
+		\item \color{orange}If $(Y, \sqsubseteq_Y)$ is a complete lattice, and $X$ is any set, then $(X\rightarrow Y, \sqsubseteq)$ is also a complete lattice, where $X \rightarrow Y$ is the set of all functions from $X \rightarrow Y$, and $f \sqsubseteq g$ iff for all $x \in X$, we have $f(x) \sqsubseteq_Y g(x)$. \script{429}{Proof}\color{black}
+		\item \color{orange}If a complete lattice $(Y , \sqsubseteq_Y)$ satisfies the ACC, then for any finite set $X$, the complete lattice $(X \rightarrow Y , \sqsubseteq)$ also satisfies the ACC\color{black}
 	\end{betterlist}
 	\fbox{Predicate Abstraction}
 	\begin{betterlist}
@@ -705,7 +708,7 @@
 		\end{betterlist}\color{black}
 		\item \color{orange}Given a finite set of formulas $\mathbb{F}$ where $\bigwedge \mathbb{F}$ is unsatisfiable, we call a subset $X \subseteq \mathbb{F}$ an \alert{unsatisfiable core} if $\bigwedge X$ is also unsatisfiable\color{black}
 		\begin{betterlist}
-			\item An unsatisfiable core $X$ is \alert{minimal} if no strict subset of $X$ is an unsatisfiable core
+			\item \color{orange}An unsatisfiable core $X$ is \alert{minimal} if no strict subset of $X$ is an unsatisfiable core\color{black}
 		\end{betterlist}
 		\item Let $\pi = st_1\ldots st_n$ be an infeasible trace, with $SSA(\pi ) = \{ \psi_1,\ldots , \psi_n\}$ as on the previous slide. Let $X$ be an unsatisfiable core of $SSA(\pi )$, and let $\pi^\# = st^\#_1 \ldots st^\#_n$ such that $st^\#_i = st_i$ if $\psi_i \in X$, and $st^\#_i = abstract(st_i)$ otherwise. Then the trace $\pi^\#$ is infeasible
 	\end{betterlist}
@@ -738,11 +741,11 @@
 			\end{betterlist}
 		\end{enumerate}
 
-		\includegraphics[width=\linewidth]{./figures/cegar_approach.png}
+		\includegraphics[width=0.8\linewidth]{./figures/cegar_approach.png}
 		\item Let $\pi$  be a trace. If $\varphi_0,\ldots , \varphi_n$ is an infeasibility proof for $\pi$  and $B \supseteq \{ \varphi_0,\ldots \varphi_n\}$  then $\pi$  is not an error trace in an abstract reachability graph that is precise for $B$. \script{487}{Proof}
 		\item \alert{Progress property:} In the CEGAR algorithm, if $\pi$ is the error trace that is analyzed in iteration $i$, then $\pi$ will not be an error trace of the abstract reachability graph in further iterations
 	\end{betterlist}
-	\fbox{Trace Abstraction}
+	\fbox{Trace Abstraction Refinement}
 	\begin{betterlist}
 		\item a \alert{nondeterministic finite automaton (NFA)} is a tuple $A = (Q, \sum , \Delta , Q_{init}, F)$ consisting of a finite set of states $Q$, a finite alphabet $\sum$, a transition relation $\Delta \subseteq Q × \sum  × Q$, a set of initial states $Q_{init} \subseteq Q$, and a set of accepting states $F \subseteq Q$.
 		\begin{betterlist}
@@ -757,11 +760,12 @@
 		\begin{betterlist}
 			\item $P$ satisfies all assert statements iff every word in $\mathcal{L}(\mathcal{A}_P)$ is infeasible
 		\end{betterlist}
+		\item in the formalism of the program automaton, infeasible traces (i.e., traces for which there exists no execution of the program P) may still be accepted by the automaton $\mathcal{A}_P$. The finite automaton cannot distinguish between feasible and infeasible traces. In fact, the verification task consists precisely of showing that all the traces accepted by $\mathcal{A}_P$ are infeasible
+		\item Show that program $P$ can be decomposed into simpler, \enquote{obviously} correct programs $L(\mathcal{A}_P) \subseteq L(\mathcal{A}_1) \cup \ldots \cup L(\mathcal{A}_n)$ where $\mathcal{A}_1, \ldots , \mathcal{A}_n$ are automata (over simple statements) such that every accepted trace is infeasible
 		\item \color{orange}a \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\} stmt \{\beta(q′)\}$ is valid\color{black}
 		\begin{betterlist}
 			\item Later doesn't care what annotation was, the only thing one has to remember is that there exist some, but one is not going to use it again, so one can forget about it
 		\end{betterlist}
-
 		\item \color{violet}given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
 		\begin{betterlist}
 			\item every initial state is labeled with true and
@@ -775,9 +779,23 @@
 		\end{betterlist}\color{black}
 		\item \underline{Lemma:} Every trace that is accepted by a Floyd-Hoare automaton is infeasible
 		\item If there are Floyd-Hoare automata $\mathcal{A}_{1}, \ldots, \mathcal{A}_{n}$ such that the inclusion $L(\mathcal{A}_P) \subseteq L(\mathcal{A}_{1}) \cup . . . \cup L(\mathcal{A}_{n})$ holds then the program $P$ is safe
+		\item \uline{generate automata $A_i$ such that they are guaranteed to be Floyd-Hoare automata by construction. We follow the idea of the CEGAR schema and start by proving infeasibility of error traces:}
+		\begin{enumerate}
+			\item take trace $\pi$
+			\item prove infeasibility of $\pi$
+			\item consider trace as automaton $A_1$,
+			\begin{betterlist}
+				\item proof of infeasibility as Floyd-Hoare annotation
+			\end{betterlist}
+			\item generalize automaton $A_1$
+			\begin{betterlist}
+				\item add transitions
+				\item merge states with same annotation
+			\end{betterlist}
+		\end{enumerate}
 	\end{betterlist}
 
-	\includegraphics[width=\linewidth]{./figures/trace_abstraction_refinement.png}
+	\includegraphics[width=0.8\linewidth]{./figures/trace_abstraction_refinement.png}
 	\fbox{Constraint-based Invariant Synthesis}
 	\begin{betterlist}
 		\item an \alert{invariant} is a condition or property that remains true throughout the execution of a program, particularly during specific parts of the program such as loops, functions, or procedures. Invariants are crucial for proving the correctness of programs, as they help ensure that the program behaves as expected under all possible conditions
@@ -886,7 +904,7 @@
 	\end{betterlist}
 	\fbox{Termination Analysis}
 	\begin{betterlist}
-		\item \script{546}{Questions} and \script{547}{Answers}
+		\item \script{546}{Questions} and \script{547}{Answers}, 1, 2 can is not enough, is like satisfaible and valid. 1, 3 is only exit locations. 2, 4 is error and exit locations
 		\item We call an infinite sequence of program configurations $(\ell_0, s_0), (\ell_1, s_1)\ldots$ an \alert{infinite execution} of $P$ if there exists an infinite sequence of statements $st_1, st_2,\ldots$ such that for each $i \in \mathbb{N}$:
 		\begin{betterlist}
 			\item $(\ell_i, st_{i+1}, \ell_{i+1}) \in \Delta$ and
@@ -901,6 +919,9 @@
 		\item \script{554}{More questions}
 		\item \color{orange}do not use $(\mathbb{N}, >)$ but $(\mathbb{Z}, >_{\mathbb{N}})$ where we define $>_{\mathbb{N}}$ as follows. $x >_{\mathbb{N}} y$ iff $x > y$ and $x \in \mathbb{N}$. \script{555}{Reason}\color{black}
 		\item \script{552}{Every loop that has a ranking function terminating}, \script{556}{Check if a function f is a ranking function}, \script{557}{4 assumptions, lexicographic ranking function}, \script{558}{Ranking function is only decreasing for reachable states}, in order to prove termination of the program above, we also have to take the reachable states into account
+		\begin{betterlist}
+			\item $R_{lex} = \{((x, y), (x', y')) \in (\mathbb{N}^2)^2 \mid x > x'  or (x = x'  and y > y' )\}$
+		\end{betterlist}
 		\item \alert{Loop Entry:} Given a while loop \verb|while(expr){ st }| and a control-flow graph $G = (Loc, \Delta , \ell_{init}, \ell_{ex})$ for this while loop, we call $\ell_{init}$ the \alert{entry location} of the while loop
 		\item Let $P = (V, \mu, st_P)$ be a program that contains a while loop \verb|while(expr){ st }|  with entry location $\ell$. Let $\beta$ be a Floyd-Hoare annotation of $\mathcal{A}_P$. Let $W$ be a set, and $R \subseteq W × W$ a well-founded relation. We call a function $f : S_{V,\mu} \rightarrow W$ a \alert{ranking function} if for each pair of states $(s, s') \in [[\verb|assume expr; st|]]$ with $s \in \{ \beta(\ell )\}$ the relation $(f(s), f(s')) \in R$ holds
 		\begin{betterlist}
@@ -1033,7 +1054,7 @@ while (x>0 && y>0) {
 			\item Valid $\leftrightarrow$ Not Falsifiable
 			\item Satisfiable $\leftrightarrow$ Not Unsatisfiable
 		\end{betterlist}
-		\item Terminator unpassend
+		% \item Terminator unpassend
 		\item \alert{Hypothesis:} program incorrect
 		\begin{betterlist}
 			\item \alert{False positive:} says it is incorrect, but it's not incorrect
@@ -1071,10 +1092,16 @@ while (x>0 && y>0) {
 			\end{betterlist}
 		\end{betterlist}
 		\item \underline{Why loop invariant:} Loops can introduce a lot of complexity into a program because they execute a block of code multiple times. The state of the program changes with each iteration, making it difficult to reason about the final outcome. Why Invariants Help: A loop invariant provides a property that remains true before and after each iteration. This consistent truth simplifies reasoning about the loop's behavior, allowing you to break down the verification process into manageable steps
-    \item A well-known example of a complete lattice with an infinite set is the power set of any infinite set $S$, denoted by $P(S)$. The power set $P(S)$ consists of all subsets
-		\item wie in der Übungsaufgaben, Erfahrungen... lange gedacht, dass... lange gebraucht, anstrengende Aufgabe, lange den Fehler gemacht, dass
-		\item Fragen zurück stellen, wollen auch wisssen warum non-relational z.B.
-		\item sagen stoppen sobald zu ausführlich
+		\item A well-known example of a complete lattice with an infinite set is the power set of any infinite set $S$, denoted by $P(S)$. The power set $P(S)$ consists of all subsets
+		\item \alert{correctness} refers to the program’s ability to behave as specified by a formal contract, often represented by preconditions, postconditions, and assertions. There are two types of correctness commonly considered:
+		\begin{betterlist}
+			\item \alert{Partial Correctness:} This means that if the program terminates, it satisfies the postconditions provided the preconditions hold. In other words, the program gives the correct output if it completes its execution, but it doesn't guarantee that the program will always terminate.
+			\item \alert{Total Correctness:} This includes both partial correctness and termination. A program is totally correct if:
+			\begin{betterlist}
+				\item It satisfies the preconditions and postconditions (partial correctness).
+				\item It terminates for all inputs that satisfy the preconditions.
+			\end{betterlist}
+		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}

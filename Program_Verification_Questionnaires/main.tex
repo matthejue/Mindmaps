@@ -8,7 +8,7 @@
 \begin{document}
 
 
-\fontsize{1.8pt}{1.8pt}\selectfont
+\fontsize{1.5pt}{1.5pt}\selectfont
 
 \addcontentsline{toc}{section}{Main Overview}
 
@@ -250,7 +250,7 @@
 					The material costs (pen, paper) are low. But we need one or more very skilled humans to perform the mathematical reasoning about the program; and for complex programs, it may take a long time. So the overall cost is high -- we need to automate and simplify parts of this process.
 				}}
 		\end{betterlist}
-		\item see page \pageref{pdf:relational_semantics}
+		% \item see page \pageref{pdf:relational_semantics}
 	\end{betterlist}
 
 \end{minipage}
@@ -258,10 +258,18 @@
 	\raggedright
 	\fbox{Hoare proof system}
 	\begin{betterlist}
-		\item see page \pageref{pdf:hoare_proof_system}
+		% \item see page \pageref{pdf:hoare_proof_system}
 		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
+					\item \alert{Proof System:}
+					\begin{betterlist}
+						\item template for giving a proof
+						\item reasoning according to a fixed number of rules
+						\item prove once that every rule is \enquote{correct}
+						\item check a proof $\rightarrow$ check if every step is an instance of a rule
+						\item find a proof $\rightarrow$ find a sequence of rules
+					\end{betterlist}
 					\item build derivation tree from full program to leaves by using inference rules of hoare proofe system, leaves are axiome (rules with empty top line)
 					\begin{betterlist}
 						\item we call a Hoare triple $\{\varphi\} st \{\psi\}$ \alert{valid} if $st$ satisfies the precondition-postcondition pair $(\{\varphi\}, \{\psi\})$
@@ -344,7 +352,7 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-              \item no, if one assumes also loop invariant and program correct, because hoare proof system is complete which can be proven by structural induction over formulas and terms
+							\item no, if one assumes also loop invariant and program correct, because hoare proof system is complete which can be proven by structural induction over formulas and terms
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
@@ -734,11 +742,11 @@
 	\raggedright
 	\fbox{building the reachability graph (Explicit-State Model Checking)}
 	\begin{betterlist}
-		\item see page \pageref{pdf:explicit_state_model_checking}
+		% \item see page \pageref{pdf:explicit_state_model_checking}
 		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
-					\item the \alert{set of reachable configurations $RC$} is the smallest set such that|
+					\item the \alert{set of reachable configurations $RC$} is the smallest set such that
 					\begin{betterlist}
 						\item each initial configuration is an element of RC
 						\item if $(\ell, s) \in RC$, $(\ell, st, \ell') \in \Delta$ and $(s, s') \in [[st]]$ then $(\ell', s') \in RC$
@@ -965,7 +973,7 @@
 	\raggedright
 	\fbox{building the precise ARG / Bounded Model Checking}
 	\begin{betterlist}
-		\item see page \pageref{pdf:bounded_mode_checking}
+		% \item see page \pageref{pdf:bounded_mode_checking}
 		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
@@ -1231,8 +1239,10 @@
 					\end{betterlist}
 					\item we have so called abstract domains, they define the structure and rules for grouping concrete program states into equivalence classes
 					\begin{betterlist}
-						\item abstract domain is typically structured as a lattice. The elements of this lattice represent the abstract states. The lattice structure is essential for ensuring that the abstract interpretation converges to a fixed point
+						\item abstract domain is structured as a complete lattice. The elements of this lattice represent the abstract states. The lattice structure will later be essential for ensuring that the abstract annotation converges to a fixpoint
 						\item Galios connection formalizes the relationship between the domain of abstract and concrete states, defining how each element of the concrete domain relates to an element in the abstract domain, it preserves the order relationships between concrete states and abstract states% Galois connections provides the theoretical foundation for the abstraction and concretization processes in abstract interpretation
+						\item we are more concrettely using nonrelational abstract domains that do not capture relationships between different program variables. Instead, they focus on analyzing each variable independently
+						\item the abstract states of non-relational abstract domains form a complete lattice as defined by the lemma below
 						\item an \alert{abstract domain} is a tuple $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$, such that
 						\begin{betterlist}
 							\item $(\mathbb{A}, \sqsubseteq)$ is a complete lattice
@@ -1243,12 +1253,10 @@
 									\item $\sqsubseteq $ is a \alert{partial order} over $L$,
 									\item every subset $M$ of $L$ has a \alert{greatest lower bound} $\sqcap M$ w.r.t. $\sqsubseteq$
 									\item every subset $M$ of $L$ has a \alert{least upper bound} $\sqcup M$ w.r.t. $\sqsubseteq$
-									\item \script{383}{Examples}
 								\end{betterlist}
 							\end{betterlist}
 							\item $(\alpha, \gamma)$ is a Galois connection for $(\mathbb{A}, \sqsubseteq)$ and $(2^{S_{V ,\mu}}, \subseteq)$
 						\end{betterlist}
-						\item nonrelational domains are abstract domains that do not capture relationships between different program variables. Instead, they focus on analyzing each variable independently
 						\item A value abstraction $(A_{\mathbb{Z}}, \sqsubseteq_{\mathbb{Z}}, \gamma_{\mathbb{Z}}, \alpha_{\mathbb{Z}})$ for $\mathbb{Z}$ induces the \alert{non-relational abstract domain} $(\mathbb{A}, \sqsubseteq, \gamma, \alpha)$ with
 						\begin{betterlist}
 							\item $\mathbb{A} = V \rightarrow A_{\mathbb{Z}}$
@@ -1256,21 +1264,41 @@
 							\item $\gamma(s^\#) = \{s \in S_{V ,\mu} | \text{ for all } x \in V, s(x) \in \gamma_{\mathbb{Z}}(s^\#(x))\}$
 							\item $\alpha(S) = \{x \mapsto \alpha_{\mathbb{Z}}(\{s(x) | s \in S\}) \mid x \in V\}$
 						\end{betterlist}
+						\item If $(Y, \sqsubseteq_Y)$ is a complete lattice, and $X$ is any set, then $(X\rightarrow Y, \sqsubseteq)$ is also a complete lattice, where $X \rightarrow Y$ is the set of all functions from $X \rightarrow Y$, and $f \sqsubseteq g$ iff for all $x \in X$, we have $f(x) \sqsubseteq_Y g(x)$
 					\end{betterlist}
 					\item have abstract annotation which intuitively gives us the abstract states we should add to each location of the control flow graph in order to get an ARG (and thus maybe a safety proof if no error configurations are reachable, the ARGs will have the same structure as the underlying CFG)%. The set of program states is represented as an abstract state
 					\begin{betterlist}
+						\item abstract annotations were defined via a recursive equation system (in an ARG every set of states has to be subset of the strongest post of the previous set of states, that is the equation system)
+						\item For every abstract domain, the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) forms a complete lattice by the lemma above
 						\item for a CFG $(Loc, \Delta, \ell_{init}, \ell_{ex})$, an abstract annotation is a function $f: Loc \rightarrow \mathbb{A}_S$ which satisfies $f(\ell_{init}) \sqsupseteq \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell′, st, \ell_{init}) \in \Delta\}$ and for all $\ell \in Loc \setminus \{\ell_{init}\}$, $f(\ell) \sqsupseteq \bigsqcup \{post^\#(f(\ell'), st) \mid (\ell', st, \ell) \in \Delta\}$
-						\item an abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with:\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$
 					\end{betterlist}
 					% \item any abstract annotation defines an abstract reachability graph. 
-					\item abstract annotations were defined via a recursive equation system
-					\item by using theory of fixpoints one can guarantee there always exist a solution to such an equation system that can be computed
-					\item using Theorem ACC-FP, and the characterization of abstract annotations as fixpoints of the monotone function $F^\#$, we can now compute abstract annotations by repeated application of $F^\#$
+					\item by using theory if fixpoints and lattices one can guarantee there always exist a solution to such an equation system that can be computed in finite time
 					\begin{betterlist}
-						\item in order to guarantee termination in all cases, we require that the lattice satisfies the ACC
+						\item every complete lattice and thus also the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) has a fixpoint as it is proven by the Knaster Tarksi fixpoint theorem, the complete lattice's structure allows us to construct the least fixed point by taking the least upper bound of elements that are "below" their image under the function (and similarly construct the greatest fixed point by taking the greatest lower bound of elements that are "above" their image), the greatst upper bound of these elements exists because a complete lattice has a least upper bound for every subset of it's domain
+						\item the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) represents the abstract states that a program can reach in it's execution, unfortunetely the Kanster Tarski fixpoint theorem does not guarantee that we can compute the fixpoint in finite time, in case of e.g. the interval domain it could be unreachable like $[-\infty, \infty]$
+						\item therefore we have the Theorem ACC-FP, it guarantess that we can reach a fixpiont of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ / we can compute a abstract annotation in finite time, by repeated application of $F^\#$, in case that the lattice (nonrelational abstract states $\mathbb{A}_S$) on which the function $F^\#$ operates satisfies the ACC
+						\begin{betterlist}
+							\item thus in order to guarantee termination in all cases (all possible starting points of the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation)), we require that the lattice satisfies the ACC
+							\item by the lemma below the abstract states of non-relational abstract domains $\mathbb{A}_S$ and thus also the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) satisfy the ACC, because explicit value domain (latest after 3 iterations) and sign domain (latest after 5 iterations) do
+						\end{betterlist}
+						\item in order to be sure to overapproximate as little as possible with our abstract annotation, as our function $F^\#$ is continous, we can use the Kleene Fixpoint Theorem, to guarantee that the fixpoint we reach is the least fixpoint of the function $F^\#$%, thus the fixpoint we reach is the most precise abstract annotation
+						\item an abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with:\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$
+							\item \alert{Knaster-Tarski Fixpoint Theorem}: Let $(X, \sqsubseteq)$ be a complete lattice. If $f:X \rightarrow X$ is monotone then $f$ has a least fixpoint and this fixpoint is $\bigsqcap \{x \mid f(x) \sqsubseteq x\}$
+							\item \underline{Kleene Chains:} Let $F : X \rightarrow X$ be a monotone function in a complete lattice $(X, \sqsubseteq)$, and let $\bot = \bigsqcap X$ be the least element of $X$
+						\begin{betterlist}
+							\item it holds that $\bot\sqsubseteq F(\bot) \sqsubseteq \ldots \sqsubseteq F^n(\bot) \sqsubseteq F^{n+1}(\bot) \sqsubseteq \ldots$
+							\item \alert{Ascending Chain Condition (ACC)}: $(X, \sqsubseteq)$ satisfies the \alert{ascending chain condition} if for every infinite ascending chain $x_1 \sqsubseteq x_2 \sqsubseteq \ldots$ there exists an $k \in \mathbb{N}$ such that $x_m = x_k$ for all $m \ge k$
+							\begin{betterlist}
+								\item If a complete lattice $(Y , \sqsubseteq_Y)$ satisfies the ACC, then for any finite set $X$, the complete lattice $(X \rightarrow Y , \sqsubseteq)$ also satisfies the ACC
+							\end{betterlist}
+							\item \alert{ACC-FP}: If $(X, \sqsubseteq)$ satisfies the ACC, then $\bigsqcup\{F^n(\bot) \mid n \in  \mathbb{N}\}$ is a fixpoint of $F$ and can be computed in finite time
+							\item \alert{Kleene Fixpoint Theorem}: If $F$ is continuous (i.e. $F(\bigsqcup M) = \bigsqcup \{F(m) \mid m \in M\}$ for every set $M$), then $\bigsqcup\{F^n(\bot) \mid n \in \mathbb{N}\}$ is the least fixpoint of $F$
+						\end{betterlist}
 					\end{betterlist}
-					\item to ensure termination in abstract domains that do not satisfy the ACC, we introduce widening
+					\item to ensure termination in abstract domains that do not satisfy the ACC, we introduce widening (interval domain does not satisfy ACC, because it has many infinite ascending chains that don't reach a repeating value: $[0, 1] \sqsubseteq [0, 2]\sqsubseteq [0, 3]\sqsubseteq [0, 4]\ldots$)
 					\begin{betterlist}
+					  \item the widening operator $\triangledown$ is an over approximation of the union and of the upper bound so one gets something bigger possibly and one is guaranteed by the second condition that one cannot infinitely often get something bigger at some point it will stay the same and using that one can then show that the kleene iteration with this function always terminates just relatively straightforward from the second condition of the widening operator and the result that one computes is still this kind of abstract annotation that one needed to build an abstract reachability graph and to show that it's still an abstract annotation one use the first condition of the winding operator because one overapproximates the least upper bound it's still fine
 						\item a \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that:
 						\begin{betterlist}
 							\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
@@ -1368,14 +1396,16 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item yes, sometimes if one wants to proof correctness one does not get an ARG that is a safety proof as explained above under incorrect programs
+							\item the inclusion check for postcondition could fail, smt-solver could return unknown
+							\item yes, sometimes if one wants to proof correctness one does not get an ARG that is a safety proof, because the non-relational abstract domain is too weak, as explained above under incorrect programs
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item for incorrect programs it always terminates with UNKNOWN, one gets an ARG that's not a safety proof but one s never sure that something is really an error, the concrete cases were explained above under incorrect programs
+							\item the inclusion check for postcondition could fail, smt-solver could return unknown
+							\item for incorrect programs it always terminates with UNKNOWN, one gets an ARG that's not a safety proof but one is never sure that something is really an error, the concrete cases were explained above under incorrect programs
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -1385,8 +1415,8 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item algorithms are typically guaranteed to terminate after finitely many steps
-							\item it always terminates or usually one instantiated it such that it terminates possibly with widening
+							\item guaranteed to terminate after finitely many steps, usually one instantiated it such that it terminates, possibly with widening
+							\item may also terminate if abstract domain doesn't satisfy ACC
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
@@ -1488,7 +1518,11 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item Predicate Abstraction (relational domains and not only non-relatonal) is a way to design custom domain, one just picks a set of predicates, a set of formulas and those are the abstract states that one uses, one gets this suitable formulas with the help of infeasability proofs
+						\item \alert{Widening:} start widening after a few iterations (problem of exercise) even if abstract domains satisfies ACC already
+						\begin{betterlist}
+							\item widening also allows faster termination but may also lead to less precision
+						\end{betterlist}
+						\item \alert{Predicate Abstraction} (relational domains and not only non-relatonal) is a way to design custom domain, one just picks a set of predicates, a set of formulas and those are the abstract states that one uses, one gets this suitable formulas with the help of infeasability proofs
 						\begin{betterlist}
 							\item  instead of figuring out this complicated problem of which formulas does one need to prove that the entire program is correct one first figures out a much simpler problem which formulas one needs to prove that one particular sequence of statements, so one particular trace is correct
 							\item since one is looking at traces that lead to error locations, correctness really means that they're invasible, they cannot be executed. One can compute invisibility proofs with the weakest precondition or the strongest post condition and one can just do that directly or one could abstract some of the statements to get simpler proofs in the hope that this would be somewhat nicer for the purpose
@@ -1566,8 +1600,30 @@
 					\item \underline{Predicate Abstraction:} Approach to design a customized abstract domain. The abstract domain will be based on a set of formulas $B$. If the set of formulas B was \enquote{good}, the abstract reachability graph will be a safety proof
 					\begin{betterlist}
 						\item the Hoare proof system allows us to give a correctness proof if we guess \enquote{good} loop invariants. ARGs allow us to give a correctness proof if we guess “good” abstract configurations
+						\item we call an abstract reachability graph $(AC, T)$ \alert{precise for $B$} if for each edge $((\ell, \{\varphi\}), st, (\ell', \{\varphi'\})) \in T$ the equality $sp^\#_B(\{\varphi\}, st) = \{\varphi'\}$ holds
 					\end{betterlist}
 
+					\includegraphics[width=0.7\linewidth]{./figures/ConstructACB.png}
+					% \item to find formulas that should be added to $B$, get formulas of the error trace in the ARG precise for $B$, these formulas correpsond to the SSA of the error trace and try to find minimal unsatisfiable core, add formulas of minimal unsatisfiable core to $B$
+					\item to find formulas that should be added to $B$, find an error trace in the ARG precise for $B$ and construct the SSA of these formulas (one can't take the formulas from the ARG precise for $B$, because these formulas don't include primes for the order in which statements are executed) and try to find minimal unsatisfiable core, abstract all formulas not in the minimal unsatisfiable core and create a proof of infeasability, add formulas from this proof of infeasability to $B$
+					\begin{betterlist}
+						\item We define the \alert{static single-assignment form (SSA)} as the set of formulas $SSA(\pi) := \{\psi_1, \ldots, \psi_n\}$, where
+
+						$\psi_i =
+							\begin{cases}
+								expr\;\sigma_i                                    & \text{if } st_i \text{ is  assume expr} \\
+								\sigma_i(x) = (expr\;\sigma_{i−1})                & \text{if } st_i \text{ is  x:=expr}     \\
+								\sigma_i(a) = (a⟨k \triangleleft v⟩) \sigma_{i−1} & \text{if } st_i \text{ is  a[k]:=v}     \\
+								true                                              & \text{if } st_i \text{ is  havoc x}
+							\end{cases}$
+						\begin{betterlist}
+							\item $\bigwedge SSA(\pi )$ is unsatisfiable iff $\pi$ is infeasible
+						\end{betterlist}
+						\item Given a finite set of formulas $\mathbb{F}$ where $\bigwedge \mathbb{F}$ is unsatisfiable, we call a subset $X \subseteq \mathbb{F}$ an \alert{unsatisfiable core} if $\bigwedge X$ is also unsatisfiable
+						\begin{betterlist}
+							\item An unsatisfiable core $X$ is \alert{minimal} if no strict subset of $X$ is an unsatisfiable core
+						\end{betterlist}
+					\end{betterlist}
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -1691,7 +1747,13 @@
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
 		\begin{betterlist}
-			\item \checkboxChecked the program
+			\item \checkboxChecked the program, converted to
+
+			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+					\begin{betterlist}
+						\item CFG
+					\end{betterlist}
+				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
@@ -1727,6 +1789,7 @@
 						\begin{betterlist}
 							\ssatoexecution
 						\end{betterlist}
+						\item set $B$
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?
@@ -1734,6 +1797,7 @@
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item one has an ARG and thus a safety proof
+						\item set $B$
 					\end{betterlist}
 				}}
 			\item If the technique returns UNKNOWN, what additional information can be provided to the user? Does the information help the user to understand why the result is UNKNOWN? Does it help the user to provide better input that avoids an UNKNOWN verdict?
@@ -1757,7 +1821,8 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item The size of the ARG can be exponential in $B$. Remember that abstract states are subsets of $B$. $B$ grows in every iteration as new formulas are added
+						\item smt solver calls most expensive
+						\item the size of the ARG can be exponential in $B$. Remember that abstract states are subsets of $B$. $B$ grows in every iteration as new formulas are added
 						\begin{betterlist}
 							\item it's good that abstract reachablity graph is finite, but it can be in practice a bit of a problem that it's really large. It's in general exponential in the size of ones set of formulas B because the abstract states are subsets of B they're exponentially many of them and also the set B grows in every iteration, In every iteration one adds at least one more formula to the set, so over the time it can be a really large set and the graph can be really large. So this can be something where one just runs out of memory trying to build this graph for instance
 						\end{betterlist}
@@ -1817,6 +1882,7 @@
 					\begin{betterlist}
 						\item smt-solver for feasability check and abstract strongest post for all of the ARG's precise for current set of formulas $B$
 						\item compute abstract strongest post in every iteration, for every abstract configuration and need to compute strongest post for every $F$ in $B$
+						\item ARG precise for B
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher.
@@ -1846,6 +1912,48 @@
 					\item one adds more and more automatons to the union and thus "refines" the union over the iterations to come closer and closer to cover all traces of the program automaton
 
 					\includegraphics[width=\linewidth]{./figures/trace_abstraction_refinement.png}
+
+					\item $L(A) \subseteq L(B)$ iff $L(A \cap \overline{B}) \ne \emptyset$
+					\item in the formalism of the program automaton, infeasible traces (i.e., traces for which there exists no execution of the program P) may still be accepted by the automaton $\mathcal{A}_P$. The finite automaton cannot distinguish between feasible and infeasible traces. In fact, the verification task consists precisely of showing that all the traces accepted by $\mathcal{A}_P$ are infeasible
+					\begin{betterlist}
+						\item Let $P$ be a program with assert statements, and let $G = (Loc, \Delta , \ell_{init}, \ell_{ex}, Loc_{err})$ be a CFG with error locations for $P$. The \alert{program automaton} for $P$ is the NFA $\mathcal{A}_P = (Loc, \sum , \Delta , \{ \ell_{init}\} , Loc_{err})$ where $\sum$ is the set of all statements $st$ such that $(\ell, st, \ell') \in \Delta$ for some locations $\ell, \ell'$
+						\begin{betterlist}
+							\item $P$ satisfies all assert statements iff every word in $\mathcal{L}(\mathcal{A}_P)$ is infeasible
+						\end{betterlist}
+					\end{betterlist}
+					\item Show that program $P$ can be decomposed into simpler, \enquote{obviously} correct programs $L(\mathcal{A}_P) \subseteq L(\mathcal{A}_1) \cup \ldots \cup L(\mathcal{A}_n)$ where $\mathcal{A}_1, \ldots , \mathcal{A}_n$ are automata (over simple statements) such that every accepted trace is infeasible
+					\item \uline{generate automata $A_i$ such that they are guaranteed to be Floyd-Hoare automata by construction. We follow the idea of the CEGAR schema and start by proving infeasibility of error traces:}
+					\begin{enumerate}
+						\item take trace $\pi$
+						\item prove infeasibility of $\pi$
+						\item consider trace as automaton $A_1$,
+						\begin{betterlist}
+							\item proof of infeasibility as Floyd-Hoare annotation
+						\end{betterlist}
+						\item generalize automaton $A_1$
+						\begin{betterlist}
+							\item add transitions
+							\item merge states with same annotation
+						\end{betterlist}
+					\end{enumerate}
+					\begin{betterlist}
+						\item a \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\} stmt \{\beta(q′)\}$ is valid
+						\begin{betterlist}
+							\item Later doesn't care what annotation was, the only thing one has to remember is that there exist some, but one is not going to use it again, so one can forget about it
+						\end{betterlist}
+						\item given an automaton $\mathcal{A}$, if there is a Floyd-Hoare annotation such that
+						\begin{betterlist}
+							\item every initial state is labeled with true and
+							\item every accepting state is labeled with false
+						\end{betterlist}
+						then every accepted trace of $\mathcal{A}$ is infeasible
+						\item we call an automaton $A = (Q, \sum , \Delta , Q_{init}, F)$ a \alert{Floyd-Hoare automaton} if there exists a Floyd-Hoare annotation $\beta  : Q \rightarrow Fm(V)$ such that
+						\begin{betterlist}
+							\item $\beta(q) = true$ for all $q \in Q_{init}$ and
+							\item $\beta(q) = false$ for all $q \in F$
+						\end{betterlist}
+						\item \underline{Lemma:} Every trace that is accepted by a Floyd-Hoare automaton is infeasible
+					\end{betterlist}
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -1948,7 +2056,13 @@
 		\end{betterlist}
 		\item \alert{User Input:} How much / which user input is needed for the technique?
 		\begin{betterlist}
-			\item \checkboxChecked the program
+			\item \checkboxChecked the program, converted to
+
+			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+					\begin{betterlist}
+						\item Program automaton
+					\end{betterlist}
+				}}
 			\item \checkboxHalfChecked the specification. Explain: Is the specification high-level or detailed, easy to specify or complex?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
@@ -2066,22 +2180,20 @@
 	\raggedright
 	\fbox{Invariant Synthesis}
 	\begin{betterlist}
-		\item see page \pageref{pdf:invariant_synthesis}
-		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-				\begin{betterlist}
-					\item d
-					% \item the method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
-					% \begin{betterlist}
-					%   \item one of the key challenges is how to handle the constraints effectively
-					%   \begin{betterlist}
-					%     \item can't handle elements
-					%     \item because smt solvers nowadays can't handle formulas with quantors, especially when dealing with nonlinear or complex conditions. This is where Farkas' Lemma comes into play, often used as a "trick" to simplify the process
-					%   \end{betterlist}
-					% \end{betterlist}
-				\end{betterlist}
-			}}
-	\end{betterlist}
-	\begin{betterlist}
+		% \item see page \pageref{pdf:invariant_synthesis}
+		% \framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+		% 		\begin{betterlist}
+		% 			\item d
+		% 			% \item the method works by expressing the invariant synthesis problem as a set of constraints. These constraints are derived from the program's structure (such as loops and conditions) and the desired correctness properties
+		% 			% \begin{betterlist}
+		% 			%   \item one of the key challenges is how to handle the constraints effectively
+		% 			%   \begin{betterlist}
+		% 			%     \item can't handle elements
+		% 			%     \item because smt solvers nowadays can't handle formulas with quantors, especially when dealing with nonlinear or complex conditions. This is where Farkas' Lemma comes into play, often used as a "trick" to simplify the process
+		% 			%   \end{betterlist}
+		% 			% \end{betterlist}
+		% 		\end{betterlist}
+		% 	}}
 		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
@@ -2109,6 +2221,11 @@
 							\item special case where the program has only one variable. The extension to multiple variables is straightforward
 						\end{betterlist}
 					\end{betterlist}
+					\item \alert{Lemma Farkas}: If $\exists\vec{x} . A \cdot \vec{x} \leq\vec{b}$ is satisfiable, then $\forall\vec{x} . (A \cdot \vec{x} \leq\vec{b} \rightarrow\vec{c}^T\cdot \vec{x} \leq \delta)$ is equivalent to $\exists\vec{\lambda} . ( \vec{\lambda} \geq 0 \land\vec{\lambda}^T\cdot A =\vec{c}^T\land\vec{\lambda}^T\cdot \vec{b} \leq \delta)$
+					\begin{betterlist}
+						\item $\vec{x} . A \cdot \vec{x} \leq\vec{b}$ false trivially satisfied, because $\vec{x} . A \cdot \vec{x} \leq\vec{b}$ appears in the premise and conclusion and in the implication in conclusion of conclusion appears in premise again
+					\end{betterlist}
+
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -2129,14 +2246,14 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item If smt-solver is able to satisfy constraints, then it's a correct floyd hoare automaton (if floyd annotation the case then it's safe)
+							\item If smt-solver is able to satisfy constraints
 						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, then it's a correct floyd hoare automaton (if floyd annotation the case then it's safe)
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2156,7 +2273,7 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item no false positives if true positives don't exist
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2176,14 +2293,14 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, because it only checks if floyd-hoare annotation with linear inequalities exists, but floyd hoare annotation could have non-linear inequalities etc.
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item TODO
+							\item yes, for incorrect programs it always terminates with unknown, because it can only say that no linear inequalities exist that describe floyd hoare annotation, there could be a floyd-hoare annotation with nonlinear inequalities
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -2335,9 +2452,7 @@
 	\raggedright
 	\fbox{Ranking Function Synthesis}
 	\begin{betterlist}
-		\item see page \pageref{pdf:ranking_function_synthesis}
-	\end{betterlist}
-	\begin{betterlist}
+		% \item see page \pageref{pdf:ranking_function_synthesis}
 		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
@@ -2359,13 +2474,16 @@
 							\item $\forall\vec{v}\vec{v}'.\vec{s}^⊺\cdot \vec{v} + s_0 \geq 0 \land \tau_{loop}(\vec{v},\vec{v}') \rightarrow\vec{r}^T\cdot \vec{v} + r_0 \geq 0$
 						\end{betterlist}
 					\end{betterlist}
+					\item We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$
+
+					\includegraphics[width=0.5\linewidth]{./figures/transition_formulas.png}
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
-					\item checking Termination
+					\item checking Termination (is undecidable)
 				\end{betterlist}
 			}}
 		\item \alert{Soundness}
@@ -2410,7 +2528,7 @@
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item Only works for ultimately periodic traces, everyting else same as for invariant synthesis
+						\item Only works for ultimately periodic traces (= lasso traces), everyting else same as for invariant synthesis
 						\begin{betterlist}
 							\item only programs that have a statements that have a transition formula and can be brought in the right form for Farka's lemma (\texttt{while(x > 3)\{ x = x - 1\}})
 						\end{betterlist}
@@ -2626,12 +2744,28 @@
 					}
 			}
 	\end{myverbbox}
+  \begin{myverbbox}{codefour}
+oldx := fx(x);
+oldy := fy(x);
+while(x > 10){
+  if(){
+    x := x - 1;
+    y := y + 2;
+  } else {
+    y := y - 1
+    x := x + 2;
+  }
+  assert((fx(x) > oldx && oldx >= 0) || (fy(y) > oldy && oldy >= 0))
+  if(*) {
+    oldx := fx(x);
+    oldy := fy(x);
+  }
+}
+  \end{myverbbox}
 	\raggedright
 	\fbox{Terminator}
 	\begin{betterlist}
-		\item see page \pageref{pdf:terminator}
-	\end{betterlist}
-	\begin{betterlist}
+		% \item see page \pageref{pdf:terminator}
 		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
@@ -2647,6 +2781,15 @@
 					\codeone
 					\codetwo
 					\item it does not need one (possibly complicated) ranking function for each loop but that it can use a combination of several ranking functions to prove termination of a single loop, because of the theoretical basis of disjunctively well-founded transition invariants
+          \begin{betterlist}
+            \item the proof uses a combinatorial result called Ramsey’s theorem to show that in every infinite execution, at least one of the two ranking functions would have to decrease infinitely often
+          \end{betterlist}
+          \item For concluding termination the nondeterministic assignments to \texttt{oldf1} and \texttt{oldf1} are vital. The safety proof does not only show that in each iteration the function \texttt{f1} or the function \texttt{f2} is decreasing, the safety proof shows that between every two (not necessarily consecutive) visits of the loop head the function \texttt{f1} or the function \texttt{f2} is decreasing
+          \begin{betterlist}
+            \item issue is that when a function does not decrease, it may increase by an arbitrary amount, force the function to decrease / increase in the oppositive direction for the other variable, while the function is still decreasing for one variable in every step
+          \end{betterlist}
+          
+            \codefour
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -2734,14 +2877,18 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item yes, there are ony finitely many loops with linear ranking function
+							% \item yes, there are ony finitely many loops with linear ranking function
+							\item no, it's possible that it's always able to find a linear ranking function, but it could find infintely many ultimately periodic traces / lassos and Terminator may never find a finite collection of linear ranking functions that are suitable to show termination for all lassos
+							\item but may use timeouts
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item yes, if there's no linear ranking function found by invariant synthesis, smt-solver says unsatasfiable, no linear ranking function can be found, then the program terminates
+							% \item yes, if there's no linear ranking function found by invariant synthesis, smt-solver says unsatasfiable, no linear ranking function can be found, then the program terminates
+							\item no, same as above
+							\item but may use timeouts
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -3101,56 +3248,56 @@
 	\end{betterlist}
 \end{minipage}
 
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Relational Semantics}
-\includepdf[pages=-]{./content/Theo_questionnaire-relational_semantics.pdf}
-\label{pdf:relational_semantics}
-
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Hoare Proof System}
-\includepdf[pages=-]{./content/Theo_questionnaire-hoare_proof_system.pdf}
-\label{pdf:hoare_proof_system}
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Explicit State Model Checking}
-\includepdf[pages=-]{./content/Theo_questionnaire-explicit_state_model_checking.pdf}
-\label{pdf:explicit_state_model_checking}
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Bounded Model Checking}
-\includepdf[pages=-]{./content/Theo_questionnaire-bounded_mode_checking.pdf}
-\label{pdf:bounded_mode_checking}
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Invariant Synthesis}
-\includepdf[pages=-]{./content/Theo_questionnaire-invariant_synthesis.pdf}
-\label{pdf:invariant_synthesis}
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Ranking Function Synthesis}
-\includepdf[pages=-]{./content/Theo_questionnaire-ranking_function_synthesis.pdf}
-\label{pdf:ranking_function_synthesis}
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Terminator}
-\includepdf[pages=-]{./content/Terminator.pdf}
-\label{pdf:terminator}
-
-\newpage
-\phantomsection
-\addcontentsline{toc}{section}{Credits}
-\fbox{Credits}
-\begin{betterlist}
-	\item \alert{Theo:} Hoare Proof System, Explicit-State Model Checking, Bounded Model Checking, Invariant Synthesis, Ranking Function Synthesis
-	\item \alert{Jürgen:} Abstract Interpretion, CEGAR, Trace Abstraction
-	\item \alert{Aisan:} Terminator
-\end{betterlist}
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Relational Semantics}
+% \includepdf[pages=-]{./content/Theo_questionnaire-relational_semantics.pdf}
+% \label{pdf:relational_semantics}
+%
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Hoare Proof System}
+% \includepdf[pages=-]{./content/Theo_questionnaire-hoare_proof_system.pdf}
+% \label{pdf:hoare_proof_system}
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Explicit State Model Checking}
+% \includepdf[pages=-]{./content/Theo_questionnaire-explicit_state_model_checking.pdf}
+% \label{pdf:explicit_state_model_checking}
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Bounded Model Checking}
+% \includepdf[pages=-]{./content/Theo_questionnaire-bounded_mode_checking.pdf}
+% \label{pdf:bounded_mode_checking}
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Invariant Synthesis}
+% \includepdf[pages=-]{./content/Theo_questionnaire-invariant_synthesis.pdf}
+% \label{pdf:invariant_synthesis}
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Ranking Function Synthesis}
+% \includepdf[pages=-]{./content/Theo_questionnaire-ranking_function_synthesis.pdf}
+% \label{pdf:ranking_function_synthesis}
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Terminator}
+% \includepdf[pages=-]{./content/Terminator.pdf}
+% \label{pdf:terminator}
+%
+% \newpage
+% \phantomsection
+% \addcontentsline{toc}{section}{Credits}
+% \fbox{Credits}
+% \begin{betterlist}
+% 	\item \alert{Theo:} Hoare Proof System, Explicit-State Model Checking, Bounded Model Checking, Invariant Synthesis, Ranking Function Synthesis
+% 	\item \alert{Jürgen:} Abstract Interpretion, CEGAR, Trace Abstraction
+% 	\item \alert{Aisan:} Terminator
+% \end{betterlist}
 \end{document}

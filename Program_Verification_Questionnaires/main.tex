@@ -8,7 +8,7 @@
 \begin{document}
 
 
-\fontsize{1.5pt}{1.5pt}\selectfont
+\fontsize{1.3pt}{1.3pt}\selectfont
 
 \addcontentsline{toc}{section}{Main Overview}
 
@@ -179,10 +179,12 @@
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -262,7 +264,7 @@
 		\item Give a short description of the technique
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
-					\item \alert{Proof System:}
+					\item \alert{Proof System (informal):}
 					\begin{betterlist}
 						\item template for giving a proof
 						\item reasoning according to a fixed number of rules
@@ -270,7 +272,8 @@
 						\item check a proof $\rightarrow$ check if every step is an instance of a rule
 						\item find a proof $\rightarrow$ find a sequence of rules
 					\end{betterlist}
-					\item build derivation tree from full program to leaves by using inference rules of hoare proofe system, leaves are axiome (rules with empty top line)
+					\item Hoare proof system proof system for deriving valid Hoare triples (not for valid entailments like natural deduction for PL / FOL)
+					\item build derivation tree from full program to leaves by using inference rules of hoare proofe system, leaves are axioms (rules with empty top line)
 					\begin{betterlist}
 						\item we call a Hoare triple $\{\varphi\} st \{\psi\}$ \alert{valid} if $st$ satisfies the precondition-postcondition pair $(\{\varphi\}, \{\psi\})$
 						\begin{betterlist}
@@ -298,7 +301,8 @@
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				\begin{betterlist}
-					\item only precondition-postcondition pair, because have no inference rule for assert, thus no division by zero
+					\allpre
+					\item have no inference rule for assert, but can replace by if as above
 				\end{betterlist}
 			}}
 		\item \alert{Soundness}
@@ -327,13 +331,14 @@
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
 							\item never, because it could also be the case that human just didn't find the right loop invariant
+							\item but it can proove that loop invariant or program is incorrect
 						\end{betterlist}
 					}}
 				\item Existence of false positives: If the technique claims a program is incorrect, is the program guaranteed to be incorrect?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item never claims incorrect
+							\item never claims incorrect, only claim either program or invariant incorrect, thus no false positives
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -341,6 +346,7 @@
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item human or invariant synthesis found loop invariant
+						\item soundness of all rules proven
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -352,7 +358,11 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item no, if one assumes also loop invariant and program correct, because hoare proof system is complete which can be proven by structural induction over formulas and terms
+							\item but can be unknown for program for which loop invariant guessed wrong
+							\begin{betterlist}
+								\item no, if one assumes loop invariant and program together checked for correctness, because hoare proof system is complete which can be proven by structural induction over formulas and terms
+							\end{betterlist}
+
 						\end{betterlist}
 					}}
 				\item Given an incorrect program, is it possible that the technique terminates with an UNKNOWN verdict? If so, in which cases can this happen?
@@ -360,7 +370,7 @@
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
 							\item unknown always for incorrect problems, because could just be that program correct but human just didn't right loop invariant
-							\item no, if loop invariant and program correct
+							\item no, if one assumes loop invariant and program together to be checked for correctness
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -370,14 +380,14 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item yes, have to try finitely many possibilities
+							\item yes, have to try finitely many inference rules
 						\end{betterlist}
 					}}
 				\item Does the technique always terminate for incorrect programs? If not, what might the technique do for an infinite amount of time (which step of the algorithm)? In which cases can this occur?
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item yes, have to try finitely many possibilities
+							\item yes, have to try finitely many inference rules
 						\end{betterlist}
 					}}
 			\end{betterlist}
@@ -386,6 +396,10 @@
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item have not assert inference rule, only programs for which statements one has proven soundness
+						\begin{betterlist}
+							\item some statements also can't be expressed in FOL logic as inference rules
+						\end{betterlist}
+
 					\end{betterlist}
 				}}
 		\end{betterlist}
@@ -412,12 +426,14 @@
 					-
 				}}
 			\item \checkboxChecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item loop invariants either by human or by invariant synthesis (but only linear ones)
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -432,7 +448,7 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item Either loop invariant incorrect or loop invariant incorrect
+						\item Either loop program incorrect or loop invariant incorrect
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
@@ -464,7 +480,9 @@
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item finding a derivation usually involves a lot of backtracking. We find out very late that our loop invariants were not sufficient and have to start again
+						\item deriviation tree not unique, composition, later or earlier strepre, before while rule or after, makes backtracking necessary
 						\item have to find loop invariant
+						\item smt-solver calls for equivalence tranformations
 					\end{betterlist}
 				}}
 			\item Are there particularly important optimizations?
@@ -497,6 +515,7 @@
 					\begin{betterlist}
 						\item Inference rules of hoare proof system
 						\item maybe invariant synthesis for loop invariant (only linear ones)
+						\item smt-solver used for equivalence transformations
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
@@ -644,12 +663,14 @@
 					-
 				}}
 			\item \checkboxChecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item each loop annotated by potential loop invariant, have to come up with one if invariant synthesis can't come up with one
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -664,7 +685,7 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item gives CE (starts in and ends in with variable assignments)
+						\item gives CE (starts in and ends in with variable assignments), information which of 3 conditions not satisfied in description of deductive verification at the top
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
@@ -726,7 +747,10 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item will not literally construct the proof tree, but does equivalence checks that boil down to finding out whether such a derivation exists
+						\item checks if there is some derivation in the Hoare proof system where the formulas are loop invariants of the respective while rules
+						\begin{betterlist}
+							\item will not literally construct the proof tree, but does equivalence checks that boil down to finding out whether such a derivation exists
+						\end{betterlist}
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
@@ -773,7 +797,11 @@
 
 				\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 						\begin{betterlist}
-							\item once it terminates and didn't find an error configuration
+							\item once it terminates and didn't find an error configuration,
+							\begin{betterlist}
+								\item one has explicit value, can just insert into postcondition and see if true or false
+							\end{betterlist}
+
 						\end{betterlist}
 					}}
 				\item Existence of false negatives: If the technique claims a program is correct, is the program guaranteed to be correct?
@@ -803,7 +831,10 @@
 			\end{betterlist}
 			\item Which assumptions (on the program, or the specification, or the program’s environment) are needed for soundness?
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					-
+					\begin{betterlist}
+						\item domains for variables finite
+					\end{betterlist}
+
 				}}
 		\end{betterlist}
 		\item \alert{Completeness}
@@ -875,10 +906,12 @@
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -957,7 +990,7 @@
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item Reachability Graph
-						\item relational semantics (via relations for different statements $[[st]]$)
+						\item relational semantics (via relations for different statements $[[st]]$), just execute statement
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
@@ -1110,10 +1143,12 @@
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -1128,10 +1163,7 @@
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
-						\item with the help of the CFG can determinte a trace to the error configuration (error trace)
-						\begin{betterlist}
-							\ssatoexecution
-						\end{betterlist}
+						\item Reachability graph directly provides execution to error configuration
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of \enquote{proof artifact} that can be created? If so, is it easy to understand for humans? Is it usable by machines?
@@ -1203,6 +1235,7 @@
 					\begin{betterlist}
 						\item precise Abstract Reachability Graph (precise ARG)
 						\item strongest post operator for different statements
+						\item breath first search
 					\end{betterlist}
 				}}
 			\item How much is the overall cost of applying the technique? The cost may depend on how much computing power is needed, but often the cost for human labor (salary for skilled engineers who provide invariants or perform proofs) is much higher
@@ -1275,12 +1308,13 @@
 					% \item any abstract annotation defines an abstract reachability graph. 
 					\item by using theory if fixpoints and lattices one can guarantee there always exist a solution to such an equation system that can be computed in finite time
 					\begin{betterlist}
-						\item every complete lattice and thus also the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) has a fixpoint as it is proven by the Knaster Tarksi fixpoint theorem, the complete lattice's structure allows us to construct the least fixed point by taking the least upper bound of elements that are "below" their image under the function (and similarly construct the greatest fixed point by taking the greatest lower bound of elements that are "above" their image), the greatst upper bound of these elements exists because a complete lattice has a least upper bound for every subset of it's domain
+						\item every complete lattice and thus also the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) has a fixpoint when inserted into an arbitrary monotone function as it is proven by the Knaster Tarksi fixpoint theorem, the complete lattice's structure allows us to construct the least fixed point by taking the least upper bound of elements that are "below" their image under the function (and similarly construct the greatest fixed point by taking the greatest lower bound of elements that are "above" their image), the greatst upper bound of these elements exists because a complete lattice has a least upper bound for every subset of it's domain
 						\item the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) represents the abstract states that a program can reach in it's execution, unfortunetely the Kanster Tarski fixpoint theorem does not guarantee that we can compute the fixpoint in finite time, in case of e.g. the interval domain it could be unreachable like $[-\infty, \infty]$
-						\item therefore we have the Theorem ACC-FP, it guarantess that we can reach a fixpiont of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ / we can compute a abstract annotation in finite time, by repeated application of $F^\#$, in case that the lattice (nonrelational abstract states $\mathbb{A}_S$) on which the function $F^\#$ operates satisfies the ACC
+						\item therefore we have the Theorem ACC-FP, it guarantess that we can reach a fixpiont of the monotone function $F^\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ / we can compute a abstract annotation in finite time, by repeated application of $F^\#$, in case that the lattice (nonrelational abstract states $\mathbb{A}_S$) on which the function $F^\#$ operates satisfies the ACC
 						\begin{betterlist}
 							\item thus in order to guarantee termination in all cases (all possible starting points of the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation)), we require that the lattice satisfies the ACC
 							\item by the lemma below the abstract states of non-relational abstract domains $\mathbb{A}_S$ and thus also the function $Loc \rightarrow \mathbb{A}_S$ (possible abstract annotation) satisfy the ACC, because explicit value domain (latest after 3 steps) and sign domain (latest after 5 steps) do
+							\item the function $F^\#$ is monotone, because $\sqsubseteq$ is the case for all abstract states of the locations and the function $F^\#$ only applies least upper bound to all operators
 						\end{betterlist}
 						\item in order to be sure to overapproximate as little as possible with our abstract annotation, as our function $F^\#$ is continous, we can use the Kleene Fixpoint Theorem, to guarantee that the fixpoint we reach is the least fixpoint of the function $F^\#$%, thus the fixpoint we reach is the most precise abstract annotation
 						\item an abstract annotation is a fixpoint of the monotone function $F_\#  : (Loc \rightarrow \mathbb{A}_S) \rightarrow (Loc \rightarrow \mathbb{A}_S)$ with:\\$F^\# (g) = \left\{\ell_{init} \mapsto g(\ell_{init}) \sqcup \alpha(\{\varphi_{pre}\}) \sqcup \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell_{init}) \in \Delta \}\right\}$\\$\cup  \left\{\ell \mapsto g(\ell) \sqcup  \bigsqcup \{post^\#(g(\ell'), st) \mid (\ell', st, \ell) \in \Delta \} | \ell \in Loc \setminus \{ \ell init\}\right\}$
@@ -1298,7 +1332,7 @@
 					\end{betterlist}
 					\item to ensure termination in abstract domains that do not satisfy the ACC, we introduce widening (interval domain does not satisfy ACC, because it has many infinite ascending chains that don't reach a repeating value: $[0, 1] \sqsubseteq [0, 2]\sqsubseteq [0, 3]\sqsubseteq [0, 4]\ldots$)
 					\begin{betterlist}
-					  \item the widening operator $\triangledown$ is an over approximation of the union and of the upper bound so one gets something bigger possibly and one is guaranteed by the second condition that one cannot infinitely often get something bigger at some point it will stay the same and using that one can then show that the kleene iteration with this function always terminates just relatively straightforward from the second condition of the widening operator and the result that one computes is still this kind of abstract annotation that one needed to build an abstract reachability graph and to show that it's still an abstract annotation one use the first condition of the winding operator because one overapproximates the least upper bound it's still fine
+						\item the widening operator $\triangledown$ is an over approximation of the union and of the upper bound so one gets something bigger possibly and one is guaranteed by the second condition that one cannot infinitely often get something bigger at some point it will stay the same and using that one can then show that the kleene iteration with this function always terminates just relatively straightforward from the second condition of the widening operator and the result that one computes is still this kind of abstract annotation that one needed to build an abstract reachability graph and to show that it's still an abstract annotation one use the first condition of the winding operator because one overapproximates the least upper bound it's still fine
 						\item a \alert{widening operator} for an abstract domain $(\mathbb{A}_S, \sqsubseteq, \alpha, \gamma)$ is a binary operator $\triangledown$ on abstract states such that:
 						\begin{betterlist}
 							\item for all $s^\#_1, s^\#_2 \in \mathbb{A}_S$, we have $\gamma(s^\#_1) \cup \gamma(s^\#_2) \subseteq \gamma(s^\#_1 \triangledown s^\#_2)$, and
@@ -1461,10 +1495,12 @@
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -1509,7 +1545,11 @@
 			\item What are the bottlenecks for the technique? Which steps of the algorithm may be particularly inefficient, and in which cases?
 
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
-					-
+					\begin{betterlist}
+						\item abstract strongest post might by costly, smt-solver call
+						\item call to smt-solver for checking strongest post for every error location
+					\end{betterlist}
+
 					% \begin{betterlist}
 					% \item the computation of $post^\#$ might be costly like in CEGAR
 					% \end{betterlist}
@@ -1726,6 +1766,14 @@
 							\item like for bounded model checking (precise abstract reachability graph) if one searches through the precise abstract reachability graph using BFS to find error trace, then if there's a feasible trace one will find it eventually (if it has length k, at some point one will have looked at all traces of lenght k, then one will have found it or there's none)
 							\begin{betterlist}
 								\item using DFS there one might be running throgh some loop forever and not find an error somewhere else that's really easy to reach
+								\item is due to the progress property and the fact that in the abstract reachability graph precise for $B$ the reachiblity graph has finite limit because of finite $B$
+								\begin{betterlist}
+									\item if one has an infesability proof set of formulas $B$, as this formulas $B$ only increase, this will always say no error configuration, will always find new possible error configurations for not sufficient $B$ and eventually it will find a true error configuration
+								\end{betterlist}
+								\begin{betterlist}
+									\item Let $\pi$  be a trace. If $\varphi_0,\ldots , \varphi_n$ is an infeasibility proof for $\pi$  and $B \supseteq \{ \varphi_0,\ldots \varphi_n\}$  then $\pi$  is not an error trace in an abstract reachability graph that is precise for $B$
+									\item \alert{Progress property:} In the CEGAR algorithm, if $\pi$ is the error trace that is analyzed in iteration $i$, then $\pi$ will not be an error trace of the abstract reachability graph in further iterations
+								\end{betterlist}
 							\end{betterlist}
 						\end{betterlist}
 					}}
@@ -1767,10 +1815,12 @@
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -2076,10 +2126,12 @@
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -2351,10 +2403,12 @@
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -2477,6 +2531,7 @@
 					\item We call a formula $\tau$ over primed and unprimed program variables a \alert{transition formula} for $st$ if the relation $[[st]]$ coincides with the following relation. $\{(s_1, s_2) | [[\tau]]_{M,\rho} \text{ is true and } \rho = s_1 \cup prime(s_2)\}$
 
 					\includegraphics[width=0.5\linewidth]{./figures/transition_formulas.png}
+					\item \underline{if bound is above and increasing:} \texttt{f(x, y) = 100 - x - y} for \texttt{while(x + y < 100)}
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -2602,10 +2657,12 @@
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -2744,24 +2801,24 @@
 					}
 			}
 	\end{myverbbox}
-  \begin{myverbbox}{codefour}
-oldx := fx(x);
-oldy := fy(x);
-while(x > 10){
-  if(){
-    x := x - 1;
-    y := y + 2;
-  } else {
-    y := y - 1
-    x := x + 2;
-  }
-  assert((fx(x) > oldx && oldx >= 0) || (fy(y) > oldy && oldy >= 0))
-  if(*) {
-    oldx := fx(x);
-    oldy := fy(x);
-  }
-}
-  \end{myverbbox}
+	\begin{myverbbox}{codefour}
+		oldx := fx(x);
+		oldy := fy(x);
+		while(x > 10){
+				if(){
+						x := x - 1;
+						y := y + 2;
+					} else {
+						y := y - 1
+						x := x + 2;
+					}
+				assert((fx(x) > oldx && oldx >= 0) || (fy(y) > oldy && oldy >= 0))
+				if(*) {
+						oldx := fx(x);
+						oldy := fy(x);
+					}
+			}
+	\end{myverbbox}
 	\raggedright
 	\fbox{Terminator}
 	\begin{betterlist}
@@ -2781,15 +2838,15 @@ while(x > 10){
 					\codeone
 					\codetwo
 					\item it does not need one (possibly complicated) ranking function for each loop but that it can use a combination of several ranking functions to prove termination of a single loop, because of the theoretical basis of disjunctively well-founded transition invariants
-          \begin{betterlist}
-            \item the proof uses a combinatorial result called Ramsey’s theorem to show that in every infinite execution, at least one of the two ranking functions would have to decrease infinitely often
-          \end{betterlist}
-          \item For concluding termination the nondeterministic assignments to \texttt{oldf1} and \texttt{oldf1} are vital. The safety proof does not only show that in each iteration the function \texttt{f1} or the function \texttt{f2} is decreasing, the safety proof shows that between every two (not necessarily consecutive) visits of the loop head the function \texttt{f1} or the function \texttt{f2} is decreasing
-          \begin{betterlist}
-            \item issue is that when a function does not decrease, it may increase by an arbitrary amount, force the function to decrease / increase in the oppositive direction for the other variable, while the function is still decreasing for one variable in every step
-          \end{betterlist}
-          
-            \codefour
+					\begin{betterlist}
+						\item the proof uses a combinatorial result called Ramsey’s theorem to show that in every infinite execution, at least one of the two ranking functions would have to decrease infinitely often
+					\end{betterlist}
+					\item For concluding termination the nondeterministic assignments to \texttt{oldf1} and \texttt{oldf1} are vital. The safety proof does not only show that in each iteration the function \texttt{f1} or the function \texttt{f2} is decreasing, the safety proof shows that between every two (not necessarily consecutive) visits of the loop head the function \texttt{f1} or the function \texttt{f2} is decreasing
+					\begin{betterlist}
+						\item issue is that when a function does not decrease, it may increase by an arbitrary amount, force the function to decrease / increase in the oppositive direction for the other variable, while the function is still decreasing for one variable in every step
+					\end{betterlist}
+
+					\codefour
 				\end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
@@ -2925,10 +2982,12 @@ while(x > 10){
 					-
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					-
 				}}
@@ -3149,12 +3208,14 @@ while(x > 10){
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked parts of the proof, e.g. invariants. Explain: What has to be given? Does it sometimes suffice to give parts, and the rest can be inferred?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item TODO
 					\end{betterlist}
 				}}
 			\item \checkboxUnchecked individual steps of the proof, using some proof system. Explain: Which steps can be applied systematically? Where is creativity needed?
+
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item TODO
@@ -3248,7 +3309,36 @@ while(x > 10){
 	\end{betterlist}
 \end{minipage}
 
-% \newpage
+\newpage
+
+% \usepackage{color}
+% \usepackage{tabularray}
+\begin{longtblr}[
+  label = none,
+  entry = none,
+]{
+  vlines,
+  hlines,
+  width = \linewidth,
+  colspec = {Q[5]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]},
+  row{1} = {PrimaryColor,fg=white},
+  column{1} = {PrimaryColor,fg=white},
+}
+                      & Semantics & Hoare & Deductive & Explicit & Bounded & Abstract & Cegar & Trace & Invariant & Ranking & Terminator \\
+short description     & {relational semantics, formal notation, natural language} & {template for proofs, finitely many inference rules, build a derivation tree, rule every step, deriving valid hoare triples} & invariants, contracts(requires,ensures), 3 things(stam to condition, iteration and condition, not condition and postcondition), interactive, automated, other verification tool check correct & set of reachable program configurations, reachability graph, cfg, location, configuration, state explizit, bfs, executing statements, set of reachable locations& abstract program configuration, abstract reachability graph, precise abstract reachability graph (not like CFG), bfs, applying strongest post (predicate transformer), special case false& grouping concrete states into equivalence classes reducing number of states needed to be considered, abstract domain elements are abstract states(complete lattice importan later (partial order, subset least upper bound and greatest lower bound), galois connection preserves order relationships between between concrete and abstract states forall sa, sc: c(sa) c sc iff sa < a(sc), a and c monotone), using nonrelations abstract domains that do not capture relationships between different program variables, lemma that abstract states of non-relational domain form lattice, abstract annotation gives abstract states add to each location to get ARG, defined via recursive equation system(incoming edges strongest post of formula and statement subset), abstract annotation also forms complete lattice(lemma), using fixpoint and complete lattice theory guarantee always exist solution to equation system, Knaster Tarski every lattice has fixpoint when inserted into monotone function, not guarantee compute in finite time, ACC-FP fixpoint monotone function f\#: (loc -> As) -> (loc -> As) can compute in finite time (abstract annotation) if (loc -> As) satisfies ACC, by lemma below non-relation domain and thus also (loc -> As) satisfy ACC, Kleene Fixpoint Theorem guarantees for continous function F\# that kleene iteration from bottom reaches a least fixpoint, widening for non-relational domains that do not satisfy ACC& acronym: CE guided abstraction refinement, ARG is abstraction of program, but not just build one, one "refines" it, CE guided because error traces are counter examples in sense that current ARG precise for unsufficient set of formulas B is not a safety proof and use these CE's or error traces to construct infeasability proofs to refine set of formulas B to get refined ARG's precise for B, steps, diagram, predicate abstraction approach to design customized abstract domain& &           &         &            \\
+Division by Zero      &           &       &           &          &         &          &       &       &           &         &            \\
+Pre-Post, Assert, Term&           &       &           &          &         &          &       &       &           &         &            \\
+Unknown correct       &           &       &           &          &         &          &       &       &           &         &            \\
+Unknown incorrect     &           &       &           &          &         &          &       &       &           &         &            \\
+Termination correct   &           &       &           &          &         &          &       &       &           &         &            \\
+Termination incorrect &           &       &           &          &         &          &       &       &           &         &            \\
+Get incorrect proof   &           &       &           &          &         &          &       &       &           &         &            \\
+Program convert to    &           &       &           &          &         &          &       &       &           &         &            \\
+Techniques            &           &       &           &          &         &          &       &       &           &         &            \\
+Optimazations         &           &       &           &          &         &          &       &       &           &         &            \\
+Complete              &     x     &   x   &     x     &    x     &         &          &       &       &           &         &            \\
+\end{longtblr}
+
 % \phantomsection
 % \addcontentsline{toc}{section}{Relational Semantics}
 % \includepdf[pages=-]{./content/Theo_questionnaire-relational_semantics.pdf}

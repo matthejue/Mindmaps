@@ -1102,6 +1102,28 @@ while (x>0 && y>0) {
 				\item It terminates for all inputs that satisfy the preconditions.
 			\end{betterlist}
 		\end{betterlist}
+    \item diese Funktion die abstract annotation auf abstract annotation abbildet ist monoton, da es <= für alle abstract states der locations
+    \item Terminator usw. wenn bound oben ist?, es ist doch decrease?: f(x, y) = 100 - x - y,  while(x + y < 100)
+    \item abstract strongest für abstract interpration warum genau smt-call -> inclusion mit eintailment, abstract states kann man mit konkretisierungfunktion zu Formel umwandeln
+    \item cegar no correctness guarantee up to k, because in error trace, the statements causing the error might be just at the beginning
+    \item trace abstaction also has progress property: one picks pi out of AP without all other automatons
+    \item Trace Abstraction solange, bis program automat leer ist, kein accepting state mehr erreichbar
+    \item emptyness check BFS for accepting states bei Trace Abstraction
+    \item trace abstraction refinement using BFS
+    \item ssa statisches assignment für laufendes Programm
+    \item Qunantorenfrei ist entscheidbar solange keine Multiplikation wie in Peano Arithmetic
+    \item mit abstraction bekommt man einfacheren infeasability proof -> Cegar
+    \item widening, wegen Definition nur finite often
+    \item abstraction of a trace: was für abstraction infeasible is also infesaible for original
+    \item abstract annotation is is result of equation system, incoming edges have go be superset like in strongest post
+    \item nicht periodisch, wenn jede Runde andere Statements genommen
+    \item ranking function synthesis, atomar, wie nur ein einziger Befehl
+    \item CEGAR executes BMC with new B, but finite B thus will terminate, in every iteration, finite many B, limit for ARG
+    \item how prove nontermination: finding a finite description of an infinite execution
+    \item wie infeasability proof genau umgesetzt wird: trace zur error location in ssa bringen, dann minimal unsatisfiable core builden und alle Statements abstrahieren, die sich nicht im core befinden. Dann einfach abstract post auf der abstraction des trace ausführen, angefangen mit true (ist more elegant proof als direkt auf den Statements auszuführen)
+    \item Cegar was man da macht, um B zu bekommen: nicht Formeln von Floyd Hoare annotation nehmen, sondern trace zu error location nehmen und in SSA bringen, erstmal feasiblity check, wenn negativ, dann minimal unsatisfiable core berechnen, alle Statements die nicht im core sind abstrahieren, dann strongest post auf auf abstraction des trace ausführen, angefangen mit true und sich ergebende Formlen dem Set B hinzufügen
+    \item Trace abstraction was man da macht um generalisierte Floyd Hoare automaton: zu bekommen: nicht Formeln von Floyd Hoare annotation des Program automaton nehmen, sondern trace zu error location nehmen und in SSA bringen, erstmal feasiblity check, wenn negativ, dann minimal unsatisfiable core berechnen, die statements, die im core sind landem im finalen generalisierten floyd hoare automaten
+    \item bei Trace Abstraction ist progress property, dass man den floyd-hoare automaten abzieht
 	\end{betterlist}
 \end{minipage}
 \begin{minipage}[t]{0.2\linewidth}

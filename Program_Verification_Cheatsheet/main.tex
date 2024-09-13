@@ -15,7 +15,7 @@
 		\item \href{https://ultimate-pa.org/?ui=tool&tool=automizer}{Ultimate Automizer}
 		\item \underline{Challenges:}
 		\begin{enumerate}
-			\item \alert{Undecidability:} The program verification problem is undecidable. There's no algorithm that verify the program and always hold (\underline{compromise:} verification algorithm that always tells correct resutl when it terminates but may not terminate or algorithm that sometimes terminates and says it could not prove the program). \underline{Solution:} Do not try to develop algorithms that solve the problem for all programs. Algorithms that solve the problem for some programs are also helpful.
+			\item \alert{Undecidability:} The program verification problem is undecidable. There's no algorithm that verify the program and always hold (\underline{compromise:} verification algorithm that always tells correct result when it terminates but may not terminate or algorithm that sometimes terminates and says it could not prove the program). \underline{Solution:} Do not try to develop algorithms that solve the problem for all programs. Algorithms that solve the problem for some programs are also helpful.
 			\item \alert{Ambiguities:} Different programming languages disagree what should happen for a piece of code. \underline{Solution:} Use mathematical logic to give programming languages a precise semantics
 			\item \alert{Correctness Proofs are Hard to Find:} We cannot track all executions.
 		\end{enumerate}
@@ -680,6 +680,10 @@
 		\item \color{orange}Given a trace $\pi = st_1, \ldots, st_n$, we call a \alert{sequence of formulas} $\varphi_0, . . . , \varphi_n$ \alert{inductive for $\pi$} if $sp(\{\varphi_i\}, st_{i+1}) \subseteq \{\varphi_{i+1}\}$ for all $i \in \{0, \ldots, n−1\}$\color{black} %(Inductive sequence of formulas)
 		\item If there exists a sequence of formulas $\varphi_0, \ldots , \varphi_n$ that is inductive for $\pi$ such that $\varphi_0$ is $true$ and $\varphi_n$ is $false$, then $\pi$ is infeasible
 		\item \color{orange}We call a sequence of formulas $\varphi_0, \ldots , \varphi_n$ a \alert{proof of infeasibility} if the sequence is inductive for $\pi$, $\varphi_0$ is $true$, and $\varphi_n$ is $false$\color{black}
+		\begin{betterlist}
+			\item \alert{wie infeasability proof genau umgesetzt wird:} trace zur error location in ssa bringen, dann minimal unsatisfiable core builden und alle Statements abstrahieren, die sich nicht im core befinden. Dann einfach abstract post auf der abstraction des trace ausführen, angefangen mit true (ist more elegant proof als direkt auf den Statements auszuführen)
+		\end{betterlist}
+
 		\item We define the \alert{abstraction of a statement} $abstract(st)$ as follows:
 
 		$abstract(st) = \begin{cases}
@@ -1124,11 +1128,7 @@ while (x>0 && y>0) {
 		\begin{betterlist}
 			\item same problem for cegar, different formulas everytime
 		\end{betterlist}
-    \item CEGAR progress property, man wird in späteren Iterationen genau dieselben Formeln verwenden können oder strongere Konjuntionen mehreren Formlen, es könnte nur wieder ne error configuration werden, wenn es weaker wird, aber mit abstract post nimmt man immer strongste Konjuntion von Formeln
-		\item \alert{wie infeasability proof genau umgesetzt wird:} trace zur error location in ssa bringen, dann minimal unsatisfiable core builden und alle Statements abstrahieren, die sich nicht im core befinden. Dann einfach abstract post auf der abstraction des trace ausführen, angefangen mit true (ist more elegant proof als direkt auf den Statements auszuführen)
-		\item \alert{Cegar was man da macht, um B zu bekommen:} nicht Formeln von Floyd Hoare annotation nehmen, sondern trace zu error location nehmen und in SSA bringen, erstmal feasiblity check, wenn negativ, dann minimal unsatisfiable core berechnen, alle Statements die nicht im core sind abstrahieren, dann strongest post auf auf abstraction des trace ausführen, angefangen mit true und sich ergebende Formlen dem Set B hinzufügen
-		\item \alert{Trace abstraction was man da macht um generalisierte Floyd Hoare automaton:} zu bekommen: nicht Formeln von Floyd Hoare annotation des Program automaton nehmen, sondern trace zu error location nehmen und in SSA bringen, erstmal feasiblity check, wenn negativ, dann minimal unsatisfiable core berechnen, die statements, die im core sind landem im finalen generalisierten floyd hoare automaten
-		\item \alert{Wie erstellt man CE execution to error configuration:} Trace in SSA form bringen, in sat solver schauen nach model fragen, die SSA von links nach rechts Beledungen einsetzen, x' ist Änderung des Wertes für x(in execution program configuration wird es x und  nicht x' zugeordnet)
+		\item CEGAR progress property, man wird in späteren Iterationen genau dieselben Formeln verwenden können oder strongere Konjuntionen mehreren Formlen, es könnte nur wieder ne error configuration werden, wenn es weaker wird, aber mit abstract post nimmt man immer strongste Konjuntion von Formeln
 		\item bei Trace Abstraction ist progress property, dass man den floyd-hoare automaten abzieht
 		\item liner ranking function ist z.B. $f(x, y) = 7\cdot x + 5\cdot y −4$, linear invariants sind: $\varphi_{\ell_1} \equiv 0x + 9 \geq 0\equiv true$, $\varphi_{\ell_2} \equiv 1x −3 \geq 0 \equiv x \geq 3$, $ \varphi_{\ell_3} \equiv 0x −4 \geq 0 \equiv false$
 		\item incorrectness proof, correctness proof, terminierung, bottleneck/restriction, smt-solver calls

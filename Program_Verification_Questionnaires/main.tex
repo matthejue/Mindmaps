@@ -8,7 +8,7 @@
 \begin{document}
 
 
-\fontsize{1.3pt}{1.3pt}\selectfont
+\fontsize{1.5pt}{1.5pt}\selectfont
 
 \addcontentsline{toc}{section}{Main Overview}
 
@@ -76,7 +76,52 @@
 \newcommand{\prepostreusetwo}{
 	\item if postcondition of first part equals precondition of second part
 }
+\begin{longtblr}[
+  label = none,
+  entry = none,
+]{
+  vlines,
+  hlines,
+  width = \linewidth,
+  colspec = {Q[5]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]},
+  row{1} = {PrimaryColor,fg=white},
+  column{1} = {PrimaryColor,fg=white},
+}
+                      & Relations semantics pen and paper proof & Hoare Proof System & Deductive Verification & Explicit-State Model Checking & Bounded & Abstract Interpretation & Cegar & Trace Abstraction Refinement & Invariant Synthesis & Ranking Function Synthesis & Terminator \\
+ short description     & {relational semantics, formal notation, natural language} & {template for proofs, finitely many inference rules, build a derivation tree, rule every step, deriving valid hoare triples} & invariants, contracts(requires,ensures), 3 things(stam to condition, iteration and condition, not condition and postcondition), interactive, automated, other verification tool check correct & set of reachable program configurations, reachability graph, cfg, location, configuration, state explizit, bfs, executing statements, set of reachable locations& abstract program configuration, abstract reachability graph, precise abstract reachability graph (not like CFG), bfs, applying strongest post (predicate transformer), special case false& grouping concrete states into equivalence classes reducing number of states needed to be considered, abstract domain elements are abstract states(complete lattice importan later (partial order, subset least upper bound and greatest lower bound), galois connection preserves order relationships between between concrete and abstract states forall sa, sc: c(sa) c sc iff sa < a(sc), a and c monotone), using nonrelations abstract domains that do not capture relationships between different program variables, lemma that abstract states of non-relational domain form lattice, abstract annotation gives abstract states add to each location to get ARG, defined via recursive equation system(incoming edges strongest post of formula and statement subset), abstract annotation also forms complete lattice(lemma), using fixpoint and complete lattice theory guarantee always exist solution to equation system, Knaster Tarski every lattice has fixpoint when inserted into monotone function, not guarantee compute in finite time, ACC-FP fixpoint monotone function f\#: (loc -> As) -> (loc -> As) can compute in finite time (abstract annotation) if (loc -> As) satisfies ACC, by lemma below non-relation domain and thus also (loc -> As) satisfy ACC, Kleene Fixpoint Theorem guarantees for continous function F\# that kleene iteration from bottom reaches a least fixpoint, widening for non-relational domains that do not satisfy ACC, post(c(s\#), st) c= c(post\#(s\#, st)), post\#B(X, st)=\{f € B| post(\{\^X\}, [[st]]) C= \{f\}\}& acronym: CE guided abstraction refinement, ARG is abstraction of program (and it's states), but not just build one, one "refines" it, CE guided because error traces are counter examples in sense that current ARG precise for unsufficient set of formulas B is not a safety proof and use these CE's or error traces to construct infeasability proofs to refine set of formulas B to get refined ARG's precise for B, steps(don't care for floyd hoare annotation after iteration), diagram, predicate abstraction approach to design customized abstract domain& high level divice and conquer(not priving enteire program, decompose program simpler programs, can be achieved by floyd hoare automatons where language of program automaton included in union of floyd hoare automatons, the crux is that program automaton can't distinguish between infesaible and feasible traces, all are accepted by automaton, idea from CEGAR use CE's, uses error traces derived from program automaton and uses them as basis to construct these floyd hoare automatons, the floyd hoare automatons only accept infeasible traces, and if all traces of the program automaton are subsets of the union of floyd hoare automtons, then the program is safe), steps to generate automtons that are floyd hoare automatons by construction& invariant(formula always true at certain location in CFG), find invariants that satisfy constraints of a floyd hoare automaton, by writing constraints into smt script and checking it with a smt-solver, because smt-solvers are not as powerful as we wish (no element of because of FOL, not deal with predicates of FOL that nonlinear, quantifiers), have to restrict ourselves and use some tricks like Farkas Lemma(remove qunantors, exists does not cause problem because of equisatisfiability) which also restricts invariants to only linear inequalities and also constraints need to have certain form(statements need to have transition formula and have to be writable as linear inequalties (x:= x*y not possible)), therefore constraits do not encode floyd-hoare annotation but something weaker, invariants(sets of states) should be representable as linear inequalities, only checking if floyd-hoare annotation of a certain form exists, constraints, Farka's lemma & well founded relation, Ranking function, for general program compution of ranking functiond difficult, therefore ultimately periodic traces, similar to invariant synthesis, find ranking function be writing constraints of ranking function into an smt-script and checking with smt-solver, unfortunetely smt-solvers not as powerful as we wish (no element of in FOL, no non-linear predicates, no quantifiers), have to restrict ourselves and use some tricks, like Farka's lemma (remove quantors, exists no problem for us because of equisatisfiability) which restricts ranking function to be linear and also constraints need to have a certain form(statements need to have transition formulas of a certain form to be writable as linear inequalities (x := x*y not possible)), therefore constraints do not encode a ranking functiono but something weaker, only checking if ranking function of a certain form(linear ranking function) exists, constraints, Farka's lemma, some loops only terminate for certain states(have to consider floyd hoare annotation), new constraints & improvement over ranking function synthesis, does not need one possibly complicated ranking function but uses combination of several ranking functions to prove termination of single loop with RankTermnate, loop with several ultimately periodic traces, each ranking function covers one ultimately periodic trace, theoretical basis of disjunctively well-founded transition invariants, in infinite execution at least one of ranking functions woule have to decrease infinitely often(ramseys theorem), steps, program modifications, because we are using ranking function synthesis to find our ranking functions we are liminted to linear ranking functions, reason for nondeterministic if, because there can be combination of ranking functions where in every step one decreases, but overall in every step the other variable gets increased and so over several steps achieved by nondetermnisitic have to check if function really decreasing, for function increasing can do: while(x<100){x := x+1} -> f(x) = 100 - x\\
+Division by Zero      &     x     &   -   &     x     &    -     &    -    &    -     &   x   &   x   &     x     &         &            \\
+Pre-Post, Assert, Term&     P     &   P   &     P     &    P     &    P    &    P     &   A   &   A   &     A     &   T     &     AT     \\
+Unknown correct       &     x     &   i   &     i     &          &    ts   &    xs    &   ts  &   ts  &      s    &    s    &      s     \\
+Unknown incorrect     &     x     &   i   &     i     &          &     s   &    xs    &   s   &   s   &     xs    &   xs    &     xs     \\
+Termination correct   &           &   x   &     x     &    x     &         &    x     &       &       &     xs    &   xs    &      s     \\
+Termination incorrect &           &   x   &     x     &    x     &    x    &    x     &   x   &   x   &     xs    &   xs    &      s     \\
+Get incorrect proof   &     x     &       &     x     &    x     &    x    &    -     &   x   &   x   &           &         &            \\
+Program convert to    & Rel Sem.  & String&  Trans. S.& CFG      & CFG     &  CFG     &  PA   &  PA   & SMT-scr   & SMT-scr.& SMT-scr.   \\
+Complete              &     x     &   x   &     x     &    x     &         &          &       &       &           &         &            \\
+Smt-solver calls      &           &   equivalence transformations   &     ?     & not needed, just insert values & check error configuration & check error configuration and sp\# für entsprechende domain & yes for sp\#B, for every B when constructing ARG precise for B, check error configuration & check error configuration & checking floyd hoare constraints with linear invaraints & checking linear ranking function constraints & checking linear ranking function constraints\\
+Corrctness proof      &     proof itself     & hoare-derivation tree &  witness?  & Reachability graph without error configurations & precise ARG without error configurations & ARG (convert abstrat states with concretization function) & ARG & Floyd Hoare automatons & Floyd Hoare Automaton (Invariants for Floyd Hoare Annotation) & Ranking Functions for loops(RankTerminate) & Ranking Function Sets for loops \\
+Techniques            & Relational semantics & Inference rules hoare proof system, invariant synthesis for loop invaraint & maybe also hoare, invariant synthesis for loop invariant & reachability graph & precise ARG & ARG, abstract domains & CE, infeasability proofs & CE, infeasability proofs, Automata theory (inclusion), floyd hoare automatons & smt-solver, floyd hoare annotation, farka's lemma & smt-solver, ranking functions, farka's lemma & smt-solver, ranking functions, farka's lemma\\
+Bottlenecks           & not scalabe large programs & find loop invaraint, backtracking (derivation tree not unique), smt-solver calls for equivalence transformations & find loop invariant & works bad for large variable domains & not working for many loops (not terminating) & find right abstract domain, strongest post smt-solver calls for every value abstraction symbol costly and check error configuration & strongest post smt solver calls for every formula in B, ARG precise B exponential in size of B (memory), not always terminating correct programs & not always terminating correct programs, safey proof not so nice with floyd hoare automatons & very restricted to invariants which are linear inequalities & restricted linear ranking function & restsricted to disjunction of linear ranking functions\\
+Requirement / Reason Soundness & Proof steps implications & Soundness of inference rules proven & reachablity graph without reachable error configuratios implies program safe & precise ARG without reachable error configurations is safety proof & ARG with concretisized abstract states from abstract annotation is safety proof & ARG precise for B without reachable error configurations is safety proof & Programt automaton subset of union of floyd hoare automatons means all traces are infeasible traces & Floyd Hoare autoamton means implies program safe & RankTermnate ist implication &         & RankTerminate is implication, Disjunctively well-founded transition invariants \\
+Restriction           & Need relational semantics for every statement & Need new inference rule every statement + Loop invariant & Need loop invariant & Domain variables finite & Most Programs with loops & Find good abstract domain &       &       &  Only invariant nonlinear inequalities & only linear ranking functions & only disjunction of linear ranking functions \\
+Optimazations & formulate lemmas& using invariant synthesis for loop invariant & using invariant synthesis for loop invariant & exit as soon as error config found & exit as soon as error config found, discard phi1 configs where \{phi1\}|= \{phi2\}(cegar), create execution to error location & widening start after some iterations, also faster termination where value abstraction satisfy ACC but less precision, predicate abstraction way to construct customized abstract domain& use partial order on AC's induced by entailment: discard phi1 configs where \{phi1\}|= \{phi2\}(feasible from smaller set os states also feasible from larger set of states), reuse previous ARG for B, one construct ARG precise for B as far as needed, use different sets B for different parts of ARG precise for B(because of smt-solver calls) & minimize program automaton by difference just found floyd hoare automaton(also better progress property) & boolean combination of linear inequalities &  boolean combination of linear inequalities& T2-tool, boolean combination of linear inequalities \\
+\end{longtblr}
+\begin{betterlist}
+  \item \alert{Legend:}
+  \begin{betterlist}
+    \item \verb|+|: yes absolutely passible
+    \item \verb|-|: possible, but not directly
+    \item \verb|P|: over pre-postcondition pairs
+    \item \verb|A|: over assert statements
+    \item \verb|T|: checks termination
+    \item \verb|i|: unknown, if one doesn't assume that program + invariant are both checked, but for just checking program correct it's always unknown because it could be that the right invariant just wasn't found
+    \item \verb|t|: unknown, if algorithm stops because of timeout and it's unclear if maybe with more time it would be proven incorrect or correct
+    \item \verb|s|: there could theoretically be an unknown due to the use of a smt-solver which could return unknown und lead to termination
+    \item \verb|?|: not in lecture
+  \end{betterlist}
+\end{betterlist}
 
+\newpage
 
 % \begin{landscape}
 \begin{minipage}[t]{0.16\linewidth}
@@ -87,6 +132,13 @@
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 				A human consults the definitions of the semantics, and the program text. They then prove properties about the semantic relation using normal mathematical reasoning, expressed in a mixture of formal notation and natural language.
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] Everything can be proven with it, also undecidability
+          \item[\color{red}{$\ominus$}] Scales badly
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
@@ -296,6 +348,16 @@
 						\end{betterlist}
 					\end{enumerate}
 				\end{betterlist}
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] wenn program korrekt ist, dann können wir es auch zeigen (completeness)
+          \item[\color{green}{$\oplus$}] terminiert immer
+          \item[\color{red}{$\ominus$}] loop invariant (not fully automatic)
+          \item[\color{red}{$\ominus$}] backtracking, because derivation tree not unique + smt-solver for equivalence transformations
+          \item[\color{red}{$\ominus$}] kein CE für incorrect, no hint
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
@@ -549,6 +611,15 @@
 					% \item \alert{Techniques:} ULTIMATE Referee utilizes automata theory to represent and analyze the behavior of programs. The program is converted into an abstract model (e.g., a transition system) which can be verified against a specification expressed as an automaton. The tool checks whether all possible executions of the program satisfy the given specification
 				\end{betterlist}
 			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] can prove results of other tools that e.g. want to find a loop invariant
+          \item[\color{green}{$\oplus$}] ist complete
+          \item[\color{green}{$\oplus$}] no false positives
+          \item[\color{red}{$\ominus$}] muss loop invariant erstmal selbst finden, nur guidance, too strong, too weak (not fully automatic)
+        \end{betterlist}
+			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
@@ -783,6 +854,17 @@
 				\end{betterlist}
 
 				\includegraphics[width=0.7\linewidth]{./figures/explicit_state.png}
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] wenn program korrekt ist, dann können wir es auch zeigen (completeness)
+          \item[\color{green}{$\oplus$}] can directly read execution from reachability graph
+          \item[\color{green}{$\oplus$}] fully automatic
+          \item[\color{green}{$\oplus$}] no smt-solver calls
+          \item[\color{red}{$\ominus$}] not working for infinite variable domains, no soundness
+          \item[\color{red}{$\ominus$}] for large domains might get large
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
@@ -1025,6 +1107,16 @@
 				\end{betterlist}
 
 				\includegraphics[width=0.7\linewidth]{./figures/bounded_model_checking.png}
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] guarentee up to a bound k knows that it's correct
+          \item[\color{green}{$\oplus$}] will eventuall find every error
+          \item[\color{green}{$\oplus$}] fully automatic
+          \item[\color{red}{$\ominus$}] not terminating for programs with loops, not complete
+          \item[\color{red}{$\ominus$}] smt-solver to check postconditions for every exit location
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
@@ -1349,6 +1441,17 @@
 					% \end{betterlist}
 				\end{betterlist}
 			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] always terminates for correct domain that is complete lattice and satisfies ACC and for some rare cases for normal complete lattices
+          \item[\color{red}{$\ominus$}] domain muss passend gewählt werden, not complete (not fully automatic)
+          \item[\color{red}{$\ominus$}] overapproximation, can only say correct or unknown
+          \item[\color{red}{$\ominus$}] smt-solver calls for strongest post
+          \item[\color{red}{$\ominus$}] abstract strongest post might by costly, smt-solver call
+          \item[\color{red}{$\ominus$}] for incorrect program one can get a possible error trace, but one doesn't know if it's really a error trace, because of overapproximation
+        \end{betterlist}
+			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
@@ -1649,6 +1752,7 @@
 					% \item to find formulas that should be added to $B$, get formulas of the error trace in the ARG precise for $B$, these formulas correpsond to the SSA of the error trace and try to find minimal unsatisfiable core, add formulas of minimal unsatisfiable core to $B$
 					\item to find formulas that should be added to $B$, find an error trace in the ARG precise for $B$ and construct the SSA of these formulas (one can't take the formulas from the ARG precise for $B$, because these formulas don't include primes for the order in which statements are executed) and try to find minimal unsatisfiable core, abstract all formulas not in the minimal unsatisfiable core and create a proof of infeasability, add formulas from this proof of infeasability to $B$
 					\begin{betterlist}
+            \item \alert{Cegar was man da macht, um B zu bekommen:} nicht Formeln von Floyd Hoare annotation nehmen, sondern trace zu error location nehmen und in SSA bringen, erstmal feasiblity check, wenn negativ, dann minimal unsatisfiable core berechnen, alle Statements die nicht im core sind abstrahieren, dann strongest post auf auf abstraction des trace ausführen, angefangen mit true und sich ergebende Formlen dem Set B hinzufügen
 						\item We define the \alert{static single-assignment form (SSA)} as the set of formulas $SSA(\pi) := \{\psi_1, \ldots, \psi_n\}$, where
 
 						$\psi_i =
@@ -1667,6 +1771,19 @@
 						\end{betterlist}
 					\end{betterlist}
 				\end{betterlist}
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] terminates for incorrect programs
+          \item[\color{green}{$\oplus$}] can return feasible trace and thus a exceution leading to an error location
+          \item[\color{green}{$\oplus$}] is fully automatic
+          \item[\color{red}{$\ominus$}] not terminating for all programs (not complete)
+          \item[\color{red}{$\ominus$}] the bigger B is the more abstract strongest post calls, besides that also for feasability check
+          \item[\color{red}{$\ominus$}] the bigger B, the bigger the abstract reachability graph, memory comsumption
+          \item[\color{red}{$\ominus$}] running time can vary a lot depending on how fast the right set B is found
+          \item[\color{red}{$\ominus$}] hard to decide, which minimal unsatisfiable core is the best one, leading to best formulas
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 		\framebox[0.90\textwidth][l]{\parbox{0.90\textwidth}{
@@ -1989,6 +2106,7 @@
 						\end{betterlist}
 					\end{enumerate}
 					\begin{betterlist}
+            \item \alert{Trace abstraction was man da macht um generalisierte Floyd Hoare automaton zu bekommen:} nicht Formeln von Floyd Hoare annotation des Program automaton nehmen, sondern trace zu error location nehmen, weil die nicht die Reihenefolge der Statements miteinbeziehen und in SSA bringen, erstmal feasiblity check, wenn negativ, dann minimal unsatisfiable core berechnen, die statements, die im core sind landem im finalen generalisierten floyd hoare automaten
 						\item a \alert{Floyd-Hoare annotation} for an automaton $\mathcal{A}$ is a mapping $\beta$ that assigns each state $q$ a formula $\beta(q)$ such that for every edge $\beta (q)q\, stmt\, q'\beta(q')$ the Hoare triple $\{\beta(q)\} stmt \{\beta(q′)\}$ is valid
 						\begin{betterlist}
 							\item Later doesn't care what annotation was, the only thing one has to remember is that there exist some, but one is not going to use it again, so one can forget about it
@@ -2007,6 +2125,18 @@
 						\item \underline{Lemma:} Every trace that is accepted by a Floyd-Hoare automaton is infeasible
 					\end{betterlist}
 				\end{betterlist}
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] terminates for incorrect programs
+          \item[\color{green}{$\oplus$}] is fully automatic
+          \item[\color{green}{$\oplus$}] mostly automaton theory, only smt-solver call for feasability check
+          \item[\color{green}{$\oplus$}] can return feasible trace and thus a exceution leading to an error location
+          \item[\color{green}{$\oplus$}] not such high memory comsumption as CEGAR
+          \item[\color{red}{$\ominus$}] not terminating for all programs (with loops there can be infinitely many possible error traces, runs that lead to accepting state, not complete)
+          \item[\color{red}{$\ominus$}] not so great safety proof with floyd hoare automatons
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
@@ -2149,6 +2279,10 @@
 			\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
 					\begin{betterlist}
 						\item same as for CEGAR
+            \begin{betterlist}
+              \item \alert{Wie erstellt man CE execution to error configuration:} Trace in SSA form bringen, in sat solver schauen nach model fragen, die SSA von links nach rechts Beledungen einsetzen, x' ist Änderung des Wertes für x (in execution program configuration wird es x und  nicht x' zugeordnet)
+            \end{betterlist}
+            
 					\end{betterlist}
 				}}
 			\item If the technique determines that a program is correct, what additional information can be provided to the user? E.g. is there some kind of ”proof artifact” that can be created? If so, is it easy to understand for humans? Is it usable by machines?
@@ -2282,6 +2416,18 @@
 					\end{betterlist}
 
 				\end{betterlist}
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] fully automatic
+          \item[\color{green}{$\oplus$}] only really simple smt-solver calls, no qunators, not predicates, only first order logic variables (<=)
+          \item[\color{green}{$\oplus$}] very likely to terminate, because of what is written above
+          \item[\color{green}{$\oplus$}] if there is a floyd hoare notation with linear inequalities as annotation, then one will find it (relative completeness)
+          \item[\color{green}{$\oplus$}] one gets floyd hoare annotation (byproduct) and proves correctness
+          \item[\color{red}{$\ominus$}] big restriction to invariants that are linear inequalities and for statements it has to be possible to bring them into a certain form of linear inequalities in matrix needed for Farkas lemma (no complete, many correct programs not provable)
+          \item[\color{red}{$\ominus$}] cannot proof incorrectness: no error trace, only testing constraints exactly for floyd hoare automaton
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
@@ -2536,6 +2682,17 @@
 					\includegraphics[width=0.5\linewidth]{./figures/transition_formulas.png}
 					\item \underline{if bound is above and increasing:} \texttt{f(x, y) = 100 - x - y} for \texttt{while(x + y < 100)}
 				\end{betterlist}
+			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] fully automatic
+          \item[\color{green}{$\oplus$}] only really simple smt-solver calls, no qunators, not predicates, only first order logic variables (<=)
+          \item[\color{green}{$\oplus$}] if there is a linear ranking function for a loop, then one will find it and thus if in a program all loops can be described by linear ranking functions one will prove termination for the program (relative completeness)
+          \item[\color{green}{$\oplus$}] one gets a ranking function per loop and proofs termination if all loops have one, one has partial results if termination can not be proven
+          \item[\color{red}{$\ominus$}] big restriction to linear ranking functions and for statements it has to be possible to bring them into a certain form of linear inequalities in matrix needed for Farkas lemma (no complete, many correct programs not provable, only for program with loops that can be described by one ultimately periodic trace)
+          \item[\color{red}{$\ominus$}] cannot proof non-termination, because one only checks every loop for linera ranking function, but loop could have a non-linear ranking function
+        \end{betterlist}
 			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
@@ -2852,6 +3009,17 @@
 					\codefour
 				\end{betterlist}
 			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] fully automatic
+          \item[\color{green}{$\oplus$}] can prove more complex loops that have multiple ultimately periodic traces, compared to simple ranking function synthesis
+          \item[\color{green}{$\oplus$}] if there is loop with multiple ultimately periodic traces, then one will find all linear ranking functions and if all loop in a program have this property, then one will prove termination for this program (relative completeness)
+          \item[\color{green}{$\oplus$}] one gets multiple linear ranking functions per loop that cover a possible more complicated ranking function and proofs termination if alll loops are covered, one has partial results if termination can not be proven
+          \item[\color{red}{$\ominus$}] still big restriction to disjuntion of linear ranking functions and for statements it has to be possible to bring them into a certain form of linear inequalities in matrix needed for Farkas lemma (no complete, many correct programs not provable, only for programs with loops that can be described by ultimately periodic traces)
+          \item[\color{red}{$\ominus$}] cannot proof non-termination, because one only checks every loop for linera ranking functions, but loop could have a non-linear ranking function not desribable by disjunction of multiple linear ranking functions
+        \end{betterlist}
+			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
@@ -3093,6 +3261,13 @@
 					\item TODO
 				\end{betterlist}
 			}}
+    \item Advantages and disadvantages.
+		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
+        \begin{betterlist}
+          \item[\color{green}{$\oplus$}] 
+          \item[\color{red}{$\ominus$}] 
+        \end{betterlist}
+			}}
 		\item Which kinds of specifications can be checked with the technique? E.g. precondition-postcondition pairs, assert statements, no division by zero, termination, ...
 
 		\framebox[0.90\textwidth][l]{\parbox{0.85\textwidth}{
@@ -3311,41 +3486,6 @@
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}
-
-\newpage
-
-% \usepackage{color}
-% \usepackage{tabularray}
-\begin{longtblr}[
-  label = none,
-  entry = none,
-]{
-  vlines,
-  hlines,
-  width = \linewidth,
-  colspec = {Q[5]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]Q[8]},
-  row{1} = {PrimaryColor,fg=white},
-  column{1} = {PrimaryColor,fg=white},
-}
-                      & Semantics & Hoare & Deductive & Explicit & Bounded & Abstract & Cegar & Trace & Invariant & Ranking & Terminator \\
- short description     & {relational semantics, formal notation, natural language} & {template for proofs, finitely many inference rules, build a derivation tree, rule every step, deriving valid hoare triples} & invariants, contracts(requires,ensures), 3 things(stam to condition, iteration and condition, not condition and postcondition), interactive, automated, other verification tool check correct & set of reachable program configurations, reachability graph, cfg, location, configuration, state explizit, bfs, executing statements, set of reachable locations& abstract program configuration, abstract reachability graph, precise abstract reachability graph (not like CFG), bfs, applying strongest post (predicate transformer), special case false& grouping concrete states into equivalence classes reducing number of states needed to be considered, abstract domain elements are abstract states(complete lattice importan later (partial order, subset least upper bound and greatest lower bound), galois connection preserves order relationships between between concrete and abstract states forall sa, sc: c(sa) c sc iff sa < a(sc), a and c monotone), using nonrelations abstract domains that do not capture relationships between different program variables, lemma that abstract states of non-relational domain form lattice, abstract annotation gives abstract states add to each location to get ARG, defined via recursive equation system(incoming edges strongest post of formula and statement subset), abstract annotation also forms complete lattice(lemma), using fixpoint and complete lattice theory guarantee always exist solution to equation system, Knaster Tarski every lattice has fixpoint when inserted into monotone function, not guarantee compute in finite time, ACC-FP fixpoint monotone function f\#: (loc -> As) -> (loc -> As) can compute in finite time (abstract annotation) if (loc -> As) satisfies ACC, by lemma below non-relation domain and thus also (loc -> As) satisfy ACC, Kleene Fixpoint Theorem guarantees for continous function F\# that kleene iteration from bottom reaches a least fixpoint, widening for non-relational domains that do not satisfy ACC, post(c(s\#), st) c= c(post\#(s\#, st)), post\#B(X, st)=\{f € B| post(\{\^X\}, [[st]]) C= \{f\}\}& acronym: CE guided abstraction refinement, ARG is abstraction of program (and it's states), but not just build one, one "refines" it, CE guided because error traces are counter examples in sense that current ARG precise for unsufficient set of formulas B is not a safety proof and use these CE's or error traces to construct infeasability proofs to refine set of formulas B to get refined ARG's precise for B, steps(don't care for floyd hoare annotation after iteration), diagram, predicate abstraction approach to design customized abstract domain& high level divice and conquer(not priving enteire program, decompose program simpler programs, can be achieved by floyd hoare automatons where language of program automaton included in union of floyd hoare automatons, the crux is that program automaton can't distinguish between infesaible and feasible traces, all are accepted by automaton, idea from CEGAR use CE's, uses error traces derived from program automaton and uses them as basis to construct these floyd hoare automatons, the floyd hoare automatons only accept infeasible traces, and if all traces of the program automaton are subsets of the union of floyd hoare automtons, then the program is safe), steps to generate automtons that are floyd hoare automatons by construction& invariant(formula always true at certain location in CFG), find invariants that satisfy constraints of a floyd hoare automaton, by writing constraints into smt script and checking it with a smt-solver, because smt-solvers are not as powerful as we wish (no element of because of FOL, not deal with predicates of FOL that nonlinear, quantifiers), have to restrict ourselves and use some tricks like Farkas Lemma(remove qunantors, exists does not cause problem because of equisatisfiability) which also restricts invariants to only linear inequalities and also constraints need to have certain form(statements need to have transition formula and have to be writable as linear inequalties (x:= x*y not possible)), therefore constraits do not encode floyd-hoare annotation but something weaker, invariants(sets of states) should be representable as linear inequalities, only checking if floyd-hoare annotation of a certain form exists, constraints, Farka's lemma & well founded relation, Ranking function, for general program compution of ranking functiond difficult, therefore ultimately periodic traces, similar to invariant synthesis, find ranking function be writing constraints of ranking function into an smt-script and checking with smt-solver, unfortunetely smt-solvers not as powerful as we wish (no element of in FOL, no non-linear predicates, no quantifiers), have to restrict ourselves and use some tricks, like Farka's lemma (remove quantors, exists no problem for us because of equisatisfiability) which restricts ranking function to be linear and also constraints need to have a certain form(statements need to have transition formulas of a certain form to be writable as linear inequalities (x := x*y not possible)), therefore constraints do not encode a ranking functiono but something weaker, only checking if ranking function of a certain form(linear ranking function) exists, constraints, Farka's lemma, some loops only terminate for certain states(have to consider floyd hoare annotation), new constraints & improvement over ranking function synthesis, does not need one possibly complicated ranking function but uses combination of several ranking functions to prove termination of single loop with RankTermnate, loop with several ultimately periodic traces, each ranking function covers one ultimately periodic trace, theoretical basis of disjunctively well-founded transition invariants, in infinite execution at least one of ranking functions woule have to decrease infinitely often(ramseys theorem), steps, program modifications, because we are using ranking function synthesis to find our ranking functions we are liminted to linear ranking functions, reason for nondeterministic if, because there can be combination of ranking functions where in every step one decreases, but overall in every step the other variable gets increased and so over several steps achieved by nondetermnisitic have to check if function really decreasing, for function increasing can do: while(x<100){x := x+1} -> f(x) = 100 - x\\
-Division by Zero      &     x     &   -   &     x     &    -     &    -    &    -     &   x   &   x   &     x     &         &            \\
-Pre-Post, Assert, Term&     P     &   P   &     P     &    P     &    P    &    P     &   A   &   A   &     A     &   T     &     AT     \\
-Unknown correct       &     x     &   i   &     i     &          &    ts   &    xs    &   ts  &   ts  &      s    &    s    &      s     \\
-Unknown incorrect     &     x     &   i   &     i     &          &     s   &    xs    &   s   &   s   &     xs    &   xs    &     xs     \\
-Termination correct   &           &   x   &     x     &    x     &         &    x     &       &       &     xs    &   xs    &      s     \\
-Termination incorrect &           &   x   &     x     &    x     &    x    &    x     &   x   &   x   &     xs    &   xs    &      s     \\
-Get incorrect proof   &     x     &       &     x     &    x     &    x    &    -     &   x   &   x   &           &         &            \\
-Program convert to    & Rel Sem.  & String&  Trans. S.& CFG      & CFG     &  CFG     &  PA   &  PA   & SMT-scr   & SMT-scr.& SMT-scr.   \\
-Complete              &     x     &   x   &     x     &    x     &         &          &       &       &           &         &            \\
-Smt-solver calls      &           &   equivalence transformations   &     ?     & not needed, just insert values & check error configuration & check error configuration and sp\# für entsprechende domain & yes for sp\#B, for every B when constructing ARG precise for B, check error configuration & check error configuration & checking floyd hoare constraints with linear invaraints & checking linear ranking function constraints & checking linear ranking function constraints\\
-Corrctness proof      &     proof itself     & hoare-derivation tree &  witness  & Reachability graph without error configurations & precise ARG without error configurations & ARG (convert abstrat states with concretization function) & ARG & Floyd Hoare automatons & Floyd Hoare Automaton (Invariants for Floyd Hoare Annotation) & Ranking Functions for loops(RankTerminate) & Ranking Function Sets for loops \\
-Techniques            & Relational semantics & Inference rules hoare proof system, invariant synthesis for loop invaraint & maybe also hoare, invariant synthesis for loop invariant & reachability graph & precise ARG & ARG, abstract domains & CE, infeasability proofs & CE, infeasability proofs, Automata theory (inclusion), floyd hoare automatons & smt-solver, floyd hoare annotation, farka's lemma & smt-solver, ranking functions, farka's lemma & smt-solver, ranking functions, farka's lemma\\
-Bottlenecks           & not scalabe large programs & find loop invaraint, backtracking (derivation tree not unique), smt-solver calls for equivalence transformations & find loop invariant & works bad for large variable domains & not working for many loops (not terminating) & find right abstract domain, strongest post smt-solver calls for every value abstraction symbol costly and check error configuration & strongest post smt solver calls for every formula in B, ARG precise B exponential in size of B (memory), not always terminating correct programs & not always terminating correct programs, safey proof not so nice with floyd hoare automatons & very restricted to invariants which are linear inequalities & restricted linear ranking function & restsricted to disjunction of linear ranking functions\\
-Requirement / Reason Soundness & Proof steps implications & Soundness of inference rules proven & reachablity graph without reachable error configuratios implies program safe & precise ARG without reachable error configurations is safety proof & ARG with concretisized abstract states from abstract annotation is safety proof & ARG precise for B without reachable error configurations is safety proof & Programt automaton subset of union of floyd hoare automatons means all traces are infeasible traces & Floyd Hoare autoamton means implies program safe & RankTermnate ist implication &         & RankTerminate is implication, Disjunctively well-founded transition invariants \\
-Restriction           & Need relational semantics for every statement & Need new inference rule every statement + Loop invariant & Need loop invariant & Domain variables finite & Most Programs with loops & Find good abstract domain &       &       &  Only invariant nonlinear inequalities & only linear ranking functions & only disjunction of linear ranking functions \\
-Optimazations & formulate lemmas& using invariant synthesis for loop invariant & using invariant synthesis for loop invariant & exit as soon as error config found & exit as soon as error config found, discard phi1 configs where \{phi1\}|= \{phi2\}(cegar), create execution to error location & widening start after some iterations, also faster termination where value abstraction satisfy ACC but less precision, predicate abstraction way to construct customized abstract domain& use partial order on AC's induced by entailment: discard phi1 configs where \{phi1\}|= \{phi2\}(feasible from smaller set os states also feasible from larger set of states), reuse previous ARG for B, one construct ARG precise for B as far as needed, use different sets B for different parts of ARG precise for B(because of smt-solver calls) & minimize program automaton by difference just found floyd hoare automaton(also better progress property) & boolean combination of linear inequalities &  boolean combination of linear inequalities& T2-tool, boolean combination of linear inequalities \\
-\end{longtblr}
 
 % \phantomsection
 % \addcontentsline{toc}{section}{Relational Semantics}

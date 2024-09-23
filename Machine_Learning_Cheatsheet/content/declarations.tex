@@ -1,0 +1,54 @@
+%!Tex Root = ../main.tex
+
+% ┌───────┐
+% │ Fonts │
+% └───────┘
+% \newfontfamily\caveat{Caveat}
+% \newfontfamily\caveatb{Caveat Brush} % sieht nicht echt genug aus
+% \newfontfamily\melissa{Melissa} % mäh
+% \newfontfamily\annie{Annie Use Your Telescope} % sieht nicht echt genug aus
+% \newfontfamily\cedarville{Cedarville Cursive}
+% \newfontfamily\flower{Indie Flower}
+% \newfontfamily\kristi{Kristi} % mäh
+% \newfontfamily\nanum{NanumPen} % sieht nicht echt genug aus
+% \newfontfamily\intolight{Shadows Into Light} % mäh
+% \newfontfamily\singleday{Single Day} % mäh
+
+% ┌──────────────────┐
+% │ Case distinction │
+% └──────────────────┘
+% \newtoggle{absolute}
+% \toggletrue{absolute}
+% \togglefalse{absolute}
+% \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/x/}{./}#1}
+
+% ┌───────┐
+% │ Boxes │
+% └───────┘
+\DeclareTotalTCBox{\inlinebox}{ m }
+{standard jigsaw,sharp corners,opacityback=0,colframe=SwitchColor,nobeforeafter,tcbox raise base,boxrule=0.01cm,top=0mm,bottom=0mm,right=0mm,left=0mm,boxsep=0cm}
+% ,arc=0cm
+{#1}
+
+% ┌───────┐
+% │ Paths │
+% └───────┘
+% \newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_1_Master/Hardware_Security_and_Trust/slides/Slides annotated/Hardware_Security_and_Trust_all_in_one.pdf:#1}{\inlinebox{#2}}}
+\newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/Lecture_Slides.pdf:#1}{\inlinebox{#2}}}
+\newcommand{\notesfirst}[1]{\href{opentext:/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/1._Introduction.md}{\inlinebox{#1}}}
+\newcommand{\notestwo}[1]{\href{opentext:/home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/2._Propositional_Logic.md}{\inlinebox{#1}}}
+\newcommand{\scriptfirst}[2]{\href{openpdf:///home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/1._Introduction.pdf:#1}{\inlinebox{#2}}}
+\newcommand{\scriptsecond}[2]{\href{openpdf:///home/areo/Documents/Studium/Semester_2_Master/Program_Verification/slides/bonus/2._Propositional_Logic.pdf:#1}{\inlinebox{#2}}}
+\newcommand{\lecturenotes}[1]{\href{opentext:#1}{\inlinebox{Lecture Notes}}}
+\newcommand{\additionalslides}[1]{\href{openpdf:#1:1}{\inlinebox{Additional Slides}}}
+% \newcommand{\script}[2]{\href[page=#1]{./Hardware_Security_and_Trust_all_in_one.pdf}{\inlinebox{#2}}}
+
+% ┌───────┐
+% │ Boxes │
+% └───────┘
+\newtcblisting{dnumberedcodebox}[1][]{
+	enhanced, colframe=PrimaryColor,colback=BoxColor,fonttitle=\bfseries\tiny,#1,listing only,halign title=center,sharp corners,boxrule=0.05cm,bottom=0.1cm,top=0.1cm,left=0.5cm,right=0.1cm,listing engine=minted,overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=0.5cm]frame.north west);\end{tcbclipinterior}}% arc=0.2cm
+}
+\renewcommand{\theFancyVerbLine}{\sffamily
+	\textcolor{white}{\tiny
+		\oldstylenums{\arabic{FancyVerbLine}}}}

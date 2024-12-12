@@ -7,10 +7,11 @@
 \usepackage{csquotes}
 \usepackage[parfill]{parskip}
 
+\usepackage{fontspec}
+
 \captionsetup{labelformat=empty, justification=centering, font={color=PrimaryColor}}
 
-\definecolor{PrimaryColor}{HTML}{E9C62F}
-\definecolor{PrimaryColorDimmed}{HTML}{A4B1E0}
+\definecolor{PrimaryColor}{HTML}{B01108}
 \newcommand\alert[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
 
 \begin{document}
@@ -29,15 +30,15 @@
 		\rule{\linewidth}{0.5mm}
 	}
 
-	Der alte Gütebahnhof liegt im Freiburger Stadtteil Brühl. Dieses Gebiet befindet sich auf dem ehemaligen Güterbahnhofareal, das in den letzten Jahrzehnten zu einem modernen Wohn- und Gewerbequartier umgestaltet wurde. Der Stadtteil ist geprägt von einer Mischung aus moderner Architektur und erhaltenen historischen Elementen, wie etwa der alten Lokhalle oder der alten Zollhalle, die saniert und modernisiert wurden.
+	Der \alert{alte Gütebahnhof} liegt im Freiburger Stadtteil Brühl. Dieses Gebiet befindet sich auf dem ehemaligen Güterbahnhofareal, das in den letzten Jahrzehnten zu einem modernen Wohn- und Gewerbequartier umgestaltet wurde. Der Stadtteil ist geprägt von einer Mischung aus moderner Architektur und erhaltenen historischen Elementen, wie etwa der alten Lokhalle oder der alten Zollhalle, die saniert und modernisiert wurden.
 
-	Historisch war das Güterbahnhofareal ein wichtiger Verkehrsknotenpunkt und Standort für Industrie und Logistik. Heute steht das Gebiet exemplarisch für urbane Transformation, mit einem Fokus auf Nachhaltigkeit und energieeffizienter Bauweise. Neben Wohnhäusern und Grünflächen beherbergt das Quartier auch kulturelle und gastronomische Angebote.%, die einen Brückenschlag zwischen Vergangenheit und Gegenwart schaffen.
+	Historisch war das Güterbahnhofareal ein wichtiger Verkehrsknotenpunkt und Standort für Industrie und Logistik. Heute steht das Gebiet exemplarisch für \alert{urbane Transformation}, mit einem Fokus auf Nachhaltigkeit und energieeffizienter Bauweise. Neben Wohnhäusern und Grünflächen beherbergt das Quartier auch kulturelle und gastronomische Angebote.%, die einen Brückenschlag zwischen Vergangenheit und Gegenwart schaffen.
 
 	\includegraphics[width=\linewidth]{./figures/guterbahnhof.png}
 	\captionof{figure}{Der alte Güterbahnhof}
 	\setlength{\parskip}{0.25cm}
 
-  Der Güterbahnhof in Freiburg wird aber tatsächlich noch für den Zugverkehr genutzt, allerdings in deutlich reduziertem Umfang und speziell für den Transitverkehr von Lastwagen. Die Schweizer Firma \alert{RAlpin} (Rollende Alpen) betreibt hier die sogenannte "Rollende Landstraße" (RoLa), ein umweltfreundliches Transportkonzept, bei dem komplette Lastwagen (Zugmaschine und Auflieger) auf speziellen Güterzügen transportiert werden. Der Bahnhof in Freiburg ist ein Zwischenstopp auf der Verbindung zwischen Deutschland und Italien (in Richtung Novara). Diese Strecke bietet eine Entlastung für die Straßen durch die Alpen und reduziert $CO_2$-Emissionen, da der Transport über die Schiene erfolgt. Lastwagen werden auf spezielle Niederflurwagen verladen, sodass sie problemlos auf den Zügen transportiert werden können. Die Fahrer haben während der Fahrt die Möglichkeit, in einem Begleitwagen auszuruhen.
+	Der Güterbahnhof in Freiburg wird aber tatsächlich noch für den Zugverkehr genutzt, allerdings in deutlich reduziertem Umfang und speziell für den Transitverkehr von Lastwagen. Die Schweizer Firma \alert{RAlpin} (Rollende Alpen) betreibt hier die sogenannte "Rollende Landstraße" (RoLa), ein umweltfreundliches Transportkonzept, bei dem komplette Lastwagen (Zugmaschine und Auflieger) auf speziellen Güterzügen transportiert werden. Der Bahnhof in Freiburg ist ein Zwischenstopp auf der Verbindung zwischen Deutschland und Italien (in Richtung Novara). Diese Strecke bietet eine Entlastung für die Straßen durch die Alpen und reduziert $CO_2$-Emissionen, da der Transport über die Schiene erfolgt. Lastwagen werden auf spezielle Niederflurwagen verladen, sodass sie problemlos auf den Zügen transportiert werden können. Die Fahrer haben während der Fahrt die Möglichkeit, in einem Begleitwagen auszuruhen.
 
 \end{minipage}
 \hspace{0.4cm}
@@ -49,74 +50,93 @@
 	\captionof{figure}{Wartefläche der \enquote{Rollenden Landstraße}}
 	\setlength{\parskip}{0.25cm}
 
-	Der Stadtteil Brühl entwickelte sich maßgeblich im Zusammenhang mit der Industrialisierung und der Errichtung des Güterbahnhofs in Freiburg. Der Güterbahnhof spielte seit dem 19. Jahrhundert eine zentrale Rolle für die Wirtschaft und Logistik der Region. Er diente als Umschlagplatz für Waren und war eng mit der Entwicklung der Industriegebiete in und um Freiburg verbunden. Der Güterbahnhof wurde um 1905 gebaut und diente als logistische Drehscheibe für den Warenverkehr in Freiburg und der Region. Die zunehmende Bedeutung des Schienenverkehrs am Ende des 19. Jahrhunderts führte dazu, dass Freiburg ein modernes Güterterminal benötigte.
-Der Güterbahnhof wurde insbesondere für die Lagerung und Verladung von Gütern wie landwirtschaftlichen Produkten, Kohle und Baumaterialien genutzt und war für die wachsende Wirtschaft der Stadt von großer Bedeutung.
+	Der Stadtteil \alert{Brühl} entwickelte sich maßgeblich im Zusammenhang mit der Industrialisierung und der Errichtung des Güterbahnhofs in Freiburg. Der Güterbahnhof spielte seit dem 19. Jahrhundert eine zentrale Rolle für die Wirtschaft und Logistik der Region. Er diente als Umschlagplatz für Waren und war eng mit der Entwicklung der Industriegebiete in und um Freiburg verbunden. Der Güterbahnhof wurde um 1905 gebaut und diente als logistische Drehscheibe für den Warenverkehr in Freiburg und der Region. Die zunehmende Bedeutung des Schienenverkehrs am Ende des 19. Jahrhunderts führte dazu, dass Freiburg ein modernes Güterterminal benötigte.
+	Der Güterbahnhof wurde insbesondere für die Lagerung und Verladung von Gütern wie landwirtschaftlichen Produkten, Kohle und Baumaterialien genutzt und war für die wachsende Wirtschaft der Stadt von großer Bedeutung.
 
-Der Bahnhof umfasste eine Vielzahl von Gebäuden, darunter Lagerhallen, Gleisanlagen, sowie Verwaltungsgebäude. Die Konstruktionen sind typisch für Industriebauten der Jahrhundertwende, mit Backsteinarchitektur und soliden, funktionalen Bauweisen. Einige der historischen Hallen und Gebäude, wie die alte Lokhalle, die alte Zollhalle und zahlreiche Lagerhallen sowie Überreste der Gleisanlagen und Verladerampen stehen bis heute und werden teilweise durch ihre robuste Architektur und denkmalgeschützten Status bewahrt.
+	Der Bahnhof umfasste eine Vielzahl von Gebäuden, darunter Lagerhallen, Gleisanlagen, sowie Verwaltungsgebäude. Die Konstruktionen sind typisch für Industriebauten der Jahrhundertwende, mit \alert{Backsteinarchitektur} und soliden, funktionalen Bauweisen. Einige der historischen Hallen und Gebäude, wie die alte Lokhalle, die alte Zollhalle und zahlreiche Lagerhallen, sowie Überreste der Gleisanlagen und Verladerampen stehen bis heute und werden teilweise durch ihre robuste Architektur und denkmalgeschützten Status bewahrt.
 
-  Ursprünglich war tatsächlich geplant, den Güterbahnhof näher am Stadtzentrum von Freiburg zu errichten, doch es kam zu erheblichem Widerstand von Bürgern und lokalen Interessengruppen, die diesen Standort ablehnten. Dieser Widerstand war entscheidend dafür, dass die Pläne angepasst und der Güterbahnhof weiter nördlich außerhalb angesiedelt wurde – an seinem heutigen Standort im Stadtteil Brühl.
+	Ursprünglich war tatsächlich geplant, den Güterbahnhof näher am Stadtzentrum von Freiburg zu errichten, doch es kam zu erheblichem \alert{Widerstand} von Bürgern und lokalen Interessengruppen, die diesen Standort ablehnten. Dieser Widerstand war entscheidend dafür, dass die Pläne angepasst und der Güterbahnhof weiter nördlich außerhalb angesiedelt wurde – an seinem heutigen Standort im Stadtteil Brühl.
 
-	Während der Zeit des Deutschen Kaiserreichs und später auch während der nationalsozialistischen Herrschaft wurden Teile des Gebiets militärisch genutzt. Es gab Kasernen und Logistikzentren, die strategisch günstig nahe dem Bahnhof lagen.
-	Nach dem Zweiten Weltkrieg lag der Stadtteil teils in Trümmern, da Bahnhöfe und industrielle Anlagen Ziel von Bombardements gewesen waren. Nach dem Krieg musste der Bahnhof teilweise wieder aufgebaut und modernisiert werden, um die beschädigten Strukturen zu reparieren und die Funktion als wichtiger Güterumschlagplatz wiederherzustellen.
+	Während der Zeit des \alert{Deutschen Kaiserreichs} und später auch während der \alert{nationalsozialistischen Herrschaft} wurden Teile des Gebiets militärisch genutzt. Es gab Kasernen und Logistikzentren, die strategisch günstig nahe dem Bahnhof lagen. Nach dem Zweiten Weltkrieg lag der Stadtteil teils in Trümmern, da Bahnhöfe und industrielle Anlagen Ziel von Bombardements gewesen waren. Nach dem Krieg musste der Bahnhof teilweise wieder aufgebaut und modernisiert werden, um die beschädigten Strukturen zu reparieren und die Funktion als wichtiger Güterumschlagplatz wiederherzustellen.
 
-  In den 1960er Jahren begann sich die Struktur des Güterverkehrs zu verändern, und der Lkw-Verkehr gewann an Bedeutung. Der Güterbahnhof wurde in den folgenden Jahrzehnten zunehmend weniger genutzt. In den späten 1990er Jahren wurde der Betrieb am alten Güterbahnhof schließlich eingestellt, da die Infrastruktur nicht mehr den modernen Anforderungen des Güterverkehrs entsprach.
-
-	Der alte Güterbahnhof hat seinen ursprünglichen Zweck größtenteils verloren und ist heute Teil einer urbanen Transformation. Seit den frühen 2000er Jahren gibt es Pläne zur Umnutzung des alten Güterbahnhofgeländes. Die Konversionsflächen und Gebäude wurden teilweise an neue Zwecke angepasst, das Gebiet wurde neu strukturiert und für moderne Bürokomplexe, kulturelle Einrichtungen und Wohnquartiere erschlossen. %In den Jahrzehnten danach wurde das Gebiet neu strukturiert und zunehmend für Gewerbe und Wohnraum erschlossen.
-
-  Heute ist der Stadtteil Brühl in Freiburg einer der am schnellsten wachsenden Stadtteile, insbesondere durch die Umwandlung ehemaliger Industrie- und Güterbahnhofareale in moderne Wohn- und Gewerbegebiete. Besonders das Areal rund um den ehemaligen Güterbahnhof und das Industriegebiet hat in den letzten Jahren erheblichen Wandel erlebt. Nach der Schließung des Güterbahnhofs im Jahr 1998 wurden neue Wohngebiete, Gewerbeflächen und Freizeitmöglichkeiten geschaffen, was zu einem Bevölkerungsanstieg und einer Attraktivitätssteigerung führte. 
-
-
+In den \alert{1960er Jahren} begann sich die Struktur des Güterverkehrs zu verändern, und der Lkw-Verkehr gewann an Bedeutung. 
 \end{minipage}
 \hspace{0.4cm}
 \begin{minipage}[t]{0.32\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
+	Der Güterbahnhof wurde in den folgenden Jahrzehnten zunehmend weniger genutzt. In den späten \alert{1990er Jahren} wurde der Betrieb am alten Güterbahnhof schließlich eingestellt, da die Infrastruktur nicht mehr den modernen Anforderungen des Güterverkehrs entsprach.
 
-	Der Name \enquote{Brühl} stammt aus dem Althochdeutschen \enquote{bruol}, er bedeutet so viel wie \enquote{feuchte Wiese}, \enquote{Sumpfgebiet} oder \enquote{Auwald}. Das Gelände um Freiburg war historisch von Flussauen und sumpfigen Wiesen geprägt, insbesondere entlang der Dreisam. Derartige Ortsnamen sind in vielen Regionen Deutschlands verbreitet deuten fast immer auf feuchte, tiefer liegende Gebiete hin, die häufig landwirtschaftlich genutzt wurden.
-
-  Brühl ist nicht nur ein Wohnort, sondern auch ein wichtiger Wirtschaftsstandort mit Einrichtungen wie der Messe Freiburg und dem Europa-Park-Stadion. Außerdem beherbergt der Stadtteil die technische Fakultät der Universität Freiburg und zahlreiche Forschungsinstitute, was zu einem lebendigen Mix aus Wissenschaft, Industrie und Kultur beiträgt
-
-	\includegraphics[width=\linewidth]{./figures/freiburg_brühl.png}
-	\captionof{figure}{Der am schnellsten wachsenste Stadtteil Freiburgs: Brühl-Güterbahnhof}
+	\includegraphics[width=\linewidth]{./figures/lokhalle_resized.png}
+	\captionof{figure}{Die denkmalgeschützte Lokhalle}
 	\setlength{\parskip}{0.25cm}
+
+	Der alte Güterbahnhof hat seinen ursprünglichen Zweck größtenteils verloren und ist heute Teil einer urbanen Transformation. Seit den \alert{frühen 2000er Jahren} gibt es Pläne zur Umnutzung des alten Güterbahnhofgeländes. Die Konversionsflächen und Gebäude wurden teilweise an neue Zwecke angepasst, das Gebiet wurde neu strukturiert und für moderne Bürokomplexe, kulturelle Einrichtungen und Wohnquartiere erschlossen. %In den Jahrzehnten danach wurde das Gebiet neu strukturiert und zunehmend für Gewerbe und Wohnraum erschlossen.
+
+  In einem Teil der alten Lokhalle wurde das \alert{Restaurant PURiNO} untergebracht, dabei wurde der historische Charakter des Gebäudes, wie die hohen Decken, großen Fenster und Backsteinwände, weitgehend erhalten, um durch die Kombination aus industrieller Architektur und modernem Design dem Restaurant eine besondere Atmosphäre zu verleihen.
+
+	\includegraphics[width=\linewidth]{./figures/innenbereich_purino_resized.png}
+	\captionof{figure}{Innenbereich des PURiNO Restaurants}
+	\setlength{\parskip}{0.25cm}
+
 \end{minipage}
 \newpage
 \begin{minipage}[t]{0.32\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
 
-	\includegraphics[width=\linewidth]{./figures/lokhalle.png}
-	\captionof{figure}{Die denkmalgeschützte Lokhalle}
+	% Heute ist der Stadtteil Brühl in Freiburg einer der am \alert{schnellsten wachsenden Stadtteile}, insbesondere durch die Umwandlung ehemaliger Industrie- und Güterbahnhofareale in moderne Wohn- und Gewerbegebiete. Besonders das Areal rund um den ehemaligen Güterbahnhof und das Industriegebiet hat in den letzten Jahren erheblichen Wandel erlebt. Nach der Schließung des Güterbahnhofs im Jahr 1998 wurden neue Wohngebiete, Gewerbeflächen und Freizeitmöglichkeiten geschaffen, was zu einem Bevölkerungsanstieg und einer Attraktivitätssteigerung führte.
+	Heute ist der Stadtteil Brühl in Freiburg einer der am \alert{schnellsten wachsenden Stadtteile}, nach der Schließung des Güterbahnhofs im Jahr 1998 wurden neue Wohngebiete, Gewerbeflächen und Freizeitmöglichkeiten geschaffen, was zu einem Bevölkerungsanstieg und einer Attraktivitätssteigerung führte.
+
+	\includegraphics[width=\linewidth]{./figures/freiburg_brühl.png}
+	\captionof{figure}{Der am schnellsten wachsenste Stadtteil Freiburgs: Brühl-Güterbahnhof}
 	\setlength{\parskip}{0.25cm}
 
-	% \includegraphics[width=\linewidth]{./figures/purino_innenbereich.png} 
-	\includegraphics[width=\linewidth]{./figures/innenbereich_purino.png}
-	\captionof{figure}{Innenbereich des PURiNO Restaurants}
-	\setlength{\parskip}{0.25cm}
+	Der Name \enquote{Brühl} stammt aus dem Althochdeutschen \alert{\enquote{bruol}}, er bedeutet so viel wie \enquote{feuchte Wiese}, \enquote{Sumpfgebiet} oder \enquote{Auwald}. Das Gelände um Freiburg war historisch von Flussauen und sumpfigen Wiesen geprägt, insbesondere entlang der Dreisam. Derartige Ortsnamen sind in vielen Regionen Deutschlands verbreitet deuten fast immer auf feuchte, tiefer liegende Gebiete hin, die häufig landwirtschaftlich genutzt wurden.
+
+	Brühl ist nicht nur ein Wohnort, sondern auch ein wichtiger \alert{Wirtschaftsstandort} mit Einrichtungen wie der Messe Freiburg und dem Europa-Park-Stadion. Außerdem beherbergt der Stadtteil die technische Fakultät der Universität Freiburg und zahlreiche Forschungsinstitute, was zu einem lebendigen Mix aus Wissenschaft, Industrie und Kultur beiträgt.
+
+  Die \alert{Technische Fakultät} der Universität Freiburg wurde 1995 als 15. Fakultät für Angewandte Wissenschaften gegründet. Das 101 ist das zentrale Lehrgebäude am Campus Flughafen. Es wurde 1999 errichtet und 2000 in Betrieb genommen. Einem fällt sofort das in das Gebäude integrierte Kunstwerk \enquote{Jump and Twist} des Land-, Body-Art und Installationskünstlers Dennis Oppenheim auf. Das Kunstwerk besteht aus drei Elementen und stellt einen Übergang zwischen Außen- und Innenraum dar. Die erste bauwagenähnliche Einheit, weist schräg auf die Glasfront, die zweite durchbricht die Fassade, während die dritte transparent im Innenraum schwebt und rotiert. Das Kunstwerk soll Technik und Natur miteinander verbinden.
+
+  Ursprünglich sollten das Gelände von einem Kleinflugzeug einscannbar den \alert{größten Barcode der Welt} beinhalten, es sollte da \enquote{Albert Ludwigs Universität} stehen, aber es bleibt ein unvollendetes Kunstprojekt.
 \end{minipage}
 \hspace{0.4cm}
 \begin{minipage}[t]{0.32\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
+
+ Es lässt sich nur \enquote{Albert} lesen, da durch die Bauarbeiten für das Messegelände und die damit verbundenen Veränderungen im städtebaulichen Plan die Umsetzung des Projekts unterbrochen und letztlich nicht abgeschlossen wurde.
+
+  Die \alert{Gebäude 051 und 052} wurden 1913 als Kasernengebäude geplant. Das Gebäude 051 war das Mannschaftsgebäude und das Gebäude 052 war das Gebäude für die Offiziere. Beide Gebäude wurden erst von den Deutschen und später von den Franzosen genutzt. Anfang der 90er Jahre sind die Franzosen abgezogen und das Gelände wurde erworben und für neue Zwecke genutzt: Mitte der 90er Jahre zog das Institut für Informatik (IIF) ein. Noch heute findet man in den Fluren der Gebäude Gewehrständer.
+
+  Für eine authentische, kulinarische Erfahrung der japanischen Küche gibt es im modernen Wohngebiet des Stadteils Brühl das Restaurant \alert{Unkai}. Das Wort Unkai stammt aus dem Japanischen. Es setzt sich aus zwei Kanji-Zeichen zusammen: \enquote{un}, welches \enquote{Wolke} bedeutet und \enquote{kai}, welches \enquote{Meer} bedeutet. Zusammen bedeutet Unkai also wörtlich \enquote{Wolkenmeer}. Geschmacklich macht das Restaurant unter anderem Halt in Korea und Japan, aber auch andere Einflüsse haben es in die Speisekarte geschafft (Asia Fusion). 
+
+  Die Speisekarte des Restaurants ist nach dem japanischen \alert{Izakaya-Stil} gestaltet, was bedeutet, dass die Gerichte in kleinen Portionen serviert werden, sodass sie mit lieben Mitmenschen, Freunden, Kollegen und Familie geteilt werden können. %Traditionel werden die kleinen Speisen mit Sake (japanischem Rotwein) zusammen genossen.
 
 	\includegraphics[width=\linewidth]{./figures/unkai_restaurant.png}
 	\captionof{figure}{Innenbereich des Unkai Restaurants}
 	\setlength{\parskip}{0.25cm}
 
-	Unkai heißt Wolkenmeer. Wir nehmen Dich mit auf eine Reise durch das Wolkenmeer. Während unserer Reise wirst Du neue Geschmackserlebnisse machen und verstehen was “Asia Fusion” bedeutet. Geschmacklich machen wir unter anderem Halt in Korea und Japan. Aber auch andere Einflüsse haben es in unsere Karte geschafft
+  Neben vielen Speisekarte bietet neben traditionelen japanischen Gerichten, wie Nigri und Maki Sushi sowie Sashimi, die in verschiedenen Sushi Sets angeboten werden auch eine Asia Fusion Küche an. \alert{Asia Fusion} ist ein kulinarischer Stil, der verschiedene Elemente aus verschiedenen asiatischen Ländern (z. B. Japan, China, Thailand, Korea, Vietnam) miteinander kombiniert. Manchmal schließt das auch mit ein, dass klassische asiatischen Technicken, Zutaten und Gerichte mit Ideen aus anderen Regionen, wie Europa, Amerika oder der Mittelmeerregion, vermischt werden.
 
-	Izakaya-Stil
-
-	% \includegraphics[width=\linewidth]{./figures/unkai_speisen.png}
-	\includegraphics[width=\linewidth]{./figures/geisha_liebt_nur_lachs.png}
-	\captionof{figure}{\enquote{Geisha Liebt nur Lachs} Sushi Set im Unkai Restaurant, welches koscher ist und obendrein auch noch cool ausschaut}
-	\setlength{\parskip}{0.25cm}
-	\vspace{0.15cm}
+  \alert{Nigiri} bedeutet \enquote{Geformt} oder \enquote{gedrückt}, es ist eine kleine Handform aus Sushi-Reis, die mit einer Scheibe Fisch oder Meeresfrüchten belegt wird.
 \end{minipage}
 \hspace{0.4cm}
 \begin{minipage}[t]{0.32\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
+
+Oft wird der Belag mit etwas Wasabi darunter oder mit einem dünnen Nori-Streifen (getrocknetes Seetangblatt) fixiert. Nigiri entstand während der Edo-Zeit (1603–1868) in Edo (dem heutigen Tokio). Es wurde als \enquote{Edomae Sushi} bekannt, da der Fisch oft aus der Bucht von Edo stammte.
+
+	\includegraphics[width=\linewidth]{./figures/geisha_liebt_nur_lachs.png}
+	\captionof{figure}{\enquote{Geisha Liebt nur Lachs} Sushi Set im Unkai Restaurant, welches koscher ist und obendrein auch noch cool ausschaut}
+	\setlength{\parskip}{0.25cm}
+
+  \alert{Maki} bedeutet \enquote{Rolle}, es bezeichnet Sushi, das mit Nori (Seetangblatt) umwickelt wird, um eine Rolle zu formen. Die Füllung besteht meist aus Reis, Fisch, Gemüse oder anderen Zutaten. Die Technik des Rollens symbolisiert Harmonie und Gleichgewicht – Werte, die in der japanischen Kultur hoch geschätzt werden.
+
+  \alert{Sashimi} bedeutet \enquote{Gestochenes Fleisch}, es besteht aus dünn geschnittenem, rohem Fisch oder Fleisch, der/das ohne Reis serviert wird. Sashimi ist älter als Sushi und hat Wurzeln, die bis ins Mittelalter reichen. In der traditionellen japanischen Küche war es ein Luxusgericht, das die Frische und Qualität des Fischs betonte. % Sashimi war oft das erste Gericht in einem mehrgängigen Kaiseki-Menü, um den Gaumen für die folgenden Gänge vorzubereiten. Die Ästhetik spielt eine große Rolle: Die Scheiben werden oft kunstvoll angerichtet, begleitet von Daikon-Rettich oder Shiso-Blättern. Historisch wurde die Zubereitung mit speziellen Schneidetechniken (wie Katsuramuki, das Schneiden dünner Rettichscheiben) und Messern (wie dem Yanagiba) perfektioniert.
+
+  Auf der anderen Straßenseite befindet sich die \alert{JHW-Kita Villa Shalom}, sie wird vom Jugendhilfswerk Freiburg (JHW) und der Israelitischen Gemeinde Freiburg betrieben. Dabei spielt die Vermittlung jüdischer Traditionen und Werte wie Toleranz und Frieden eine zentrale Rolle, ohne religiöse Erziehung im Vordergrund zu haben.
 
 	\includegraphics[width=\linewidth]{./figures/kita_shalom.png}
 	\captionof{figure}{JHW - Kita Villa Shalom}

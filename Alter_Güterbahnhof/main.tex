@@ -1,5 +1,6 @@
 \documentclass[landscape, a4paper]{article}
-\usepackage[top=0.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm]{geometry}
+% \usepackage[showframe,margin=0cm,top=0.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm]{geometry}
+\usepackage[margin=0cm,top=0.4cm,bottom=0.4cm,left=0.4cm,right=0.4cm]{geometry}
 \usepackage[export]{adjustbox}
 \usepackage{ipsum}
 \usepackage{xcolor}
@@ -15,8 +16,10 @@
 \newcommand\alert[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
 
 \begin{document}
+\centering
 \footnotesize
-\begin{minipage}[t]{0.32\textwidth}
+\noindent%
+\begin{minipage}[t]{0.31\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
 	\vspace{0.5cm}
@@ -40,9 +43,11 @@
 
 	Der Güterbahnhof in Freiburg wird tatsächlich noch für den Zugverkehr genutzt, allerdings in deutlich reduziertem Umfang und speziell für den Transitverkehr von Lastwagen. Die Schweizer Firma \alert{RAlpin} (Rollende Alpen) betreibt hier die sogenannte "Rollende Landstraße" (RoLa), ein umweltfreundliches Transportkonzept, bei dem komplette Lastwagen (Zugmaschine und Auflieger) auf speziellen Güterzügen transportiert werden. Der Bahnhof in Freiburg ist ein Zwischenstopp auf der Verbindung zwischen Deutschland und Italien (in Richtung Novara). Diese Strecke bietet eine Entlastung für die Straßen durch die Alpen und reduziert $CO_2$-Emissionen, da der Transport über die Schiene erfolgt. Lastwagen werden auf spezielle Niederflurwagen verladen, sodass sie problemlos auf den Zügen transportiert werden können. Die Fahrer haben während der Fahrt die Möglichkeit sich in einem Begleitwagen auszuruhen.
 
-\end{minipage}
-\hspace{0.4cm}
-\begin{minipage}[t]{0.32\textwidth}
+\end{minipage}%
+\hfill%
+\vrule width 0.01cm
+\hfill%
+\begin{minipage}[t]{0.31\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
 
@@ -61,9 +66,11 @@
 	Während der Zeit des \alert{Deutschen Kaiserreichs} und später auch während der \alert{nationalsozialistischen Herrschaft} wurden Teile des Gebiets militärisch genutzt. Es gab Kasernen und Logistikzentren, die strategisch günstig nahe dem Bahnhof lagen. Nach dem Zweiten Weltkrieg lag der Stadtteil teils in Trümmern, da Bahnhöfe und industrielle Anlagen Ziel von Bombardements gewesen waren. Nach dem Krieg musste der Bahnhof teilweise wieder aufgebaut und modernisiert werden, um die beschädigten Strukturen zu reparieren und die Funktion als wichtiger Güterumschlagplatz wiederherzustellen.
 
 In den \alert{1960er Jahren} begann sich die Struktur des Güterverkehrs zu verändern, und der Lkw-Verkehr gewann an Bedeutung. Der Güterbahnhof wurde in den folgenden Jahrzehnten zunehmend weniger genutzt.
-\end{minipage}
-\hspace{0.4cm}
-\begin{minipage}[t]{0.32\textwidth}
+\end{minipage}%
+\hfill\color{white}%
+\vrule width 0.01cm
+\hfill\color{black}%
+\begin{minipage}[t]{0.31\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
 	In den späten \alert{1990er Jahren} wurde der Betrieb am alten Güterbahnhof schließlich größtenteils eingestellt, da die Infrastruktur nicht mehr den modernen Anforderungen des Güterverkehrs entsprach.
@@ -79,10 +86,10 @@ In den \alert{1960er Jahren} begann sich die Struktur des Güterverkehrs zu ver�
 	\includegraphics[width=\linewidth]{./figures/innenbereich_purino_resized.png}
 	\captionof{figure}{Innenbereich des PURiNO Restaurants}
 	\setlength{\parskip}{0.25cm}
-
-\end{minipage}
-\newpage
-\begin{minipage}[t]{0.32\textwidth}
+\end{minipage}%
+\newpage%
+\noindent%
+\begin{minipage}[t]{0.31\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
 
@@ -90,7 +97,7 @@ In den \alert{1960er Jahren} begann sich die Struktur des Güterverkehrs zu ver�
 	Heute ist der Stadtteil Brühl in Freiburg einer der am \alert{schnellsten wachsenden Stadtteile}, nach der Schließung des eines Großteils des Güterbahnhofs im Jahr 1998 wurden neue Wohngebiete, Gewerbeflächen und Freizeitmöglichkeiten geschaffen, was zu einem Bevölkerungsanstieg und einer Attraktivitätssteigerung führte.
 
 	\includegraphics[width=\linewidth]{./figures/freiburg_brühl.png}
-	\captionof{figure}{Der am schnellsten wachsenste Stadtteil Freiburgs: Brühl-Güterbahnhof}
+	\captionof{figure}{Der am schnellsten wachsende Stadtteil Freiburgs Brühl}
 	\setlength{\parskip}{0.25cm}
 
 	Der Name \enquote{Brühl} stammt aus dem Althochdeutschen \alert{\enquote{bruol}}, er bedeutet so viel wie \enquote{feuchte Wiese}, \enquote{Sumpfgebiet} oder \enquote{Auwald}. Das Gelände um Freiburg war historisch von Flussauen und sumpfigen Wiesen geprägt, insbesondere entlang der Dreisam. Derartige Ortsnamen sind in vielen Regionen Deutschlands verbreitet und deuten fast immer auf feuchte, tiefer liegende Gebiete hin, die häufig landwirtschaftlich genutzt wurden.
@@ -100,17 +107,19 @@ In den \alert{1960er Jahren} begann sich die Struktur des Güterverkehrs zu ver�
   Die \alert{Technische Fakultät} der Universität Freiburg wurde 1995 als 15. Fakultät für Angewandte Wissenschaften gegründet. Das 101 ist das zentrale Lehrgebäude am Campus Flughafen. Es wurde 1999 errichtet und 2000 in Betrieb genommen. Einem fällt sofort das in das Gebäude integrierte Kunstwerk \enquote{Jump and Twist} des Land-, Body-Art und Installationskünstlers Dennis Oppenheim auf. Das Kunstwerk besteht aus drei Elementen und stellt einen Übergang zwischen Außen- und Innenraum dar. Die erste bauwagenähnliche Einheit, weist schräg auf die Glasfront, die zweite durchbricht die Fassade, während die dritte transparent im Innenraum schwebt und rotiert. Das Kunstwerk soll Technik und Natur miteinander verbinden.
 
   Ursprünglich sollten das Gelände von einem Kleinflugzeug einscannbar den \alert{größten Barcode der Welt} beinhalten, es sollte da \enquote{Albert Ludwigs Universität} stehen, aber es bleibt ein unvollendetes Kunstprojekt.
-\end{minipage}
-\hspace{0.4cm}
-\begin{minipage}[t]{0.32\textwidth}
+\end{minipage}%
+\hfill%
+\vrule width 0.01cm
+\hfill%
+\begin{minipage}[t]{0.31\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
 
  Es lässt sich nur \enquote{Albert} lesen, da durch die Bauarbeiten für das Messegelände und die damit verbundenen Veränderungen im städtebaulichen Plan die Umsetzung des Projekts unterbrochen und letztlich nicht abgeschlossen wurde.
 
-  Die \alert{Gebäude 051 und 052} wurden 1913 als Kasernengebäude geplant. Das Gebäude 051 war das Mannschaftsgebäude und das Gebäude 052 war das Gebäude für die Offiziere. Beide Gebäude wurden erst von den Deutschen und später von den Franzosen genutzt. Anfang der 90er Jahre sind die Franzosen abgezogen und das Gelände wurde erworben und für neue Zwecke genutzt; Mitte der 90er Jahre zog das Institut für Informatik (IIF) ein. Noch heute findet man in den Fluren der Gebäude Gewehrständer.
+  Die \alert{Gebäude 051 und 052} wurden 1913 als Kasernengebäude geplant. Das Gebäude 051 war das Mannschaftsgebäude und das Gebäude 052 war das Gebäude für die Offiziere. Beide Gebäude wurden erst von den Deutschen und später von den Franzosen genutzt. Anfang der 90er Jahre sind die Franzosen abgezogen und das Gelände wurde erworben und Mitte der 90er Jahre zog das Institut für Informatik (IIF) ein. Noch heute findet man in den Fluren der Gebäude Gewehrständer.
 
-  Für eine authentische, kulinarische Erfahrung der japanischen Küche gibt es im modernen Wohngebiet des Stadteils Brühl das Restaurant \alert{Unkai}. Das Wort Unkai stammt aus dem Japanischen. Es setzt sich aus zwei Kanji-Zeichen zusammen: \enquote{un}, welches \enquote{Wolke} bedeutet und \enquote{kai}, welches \enquote{Meer} bedeutet. Zusammen bedeutet Unkai also wörtlich \enquote{Wolkenmeer}. Geschmacklich macht das Restaurant unter anderem Halt in Korea und Japan, aber auch andere Einflüsse haben es in die Speisekarte geschafft (Asia Fusion). 
+  Für eine authentische, kulinarische Erfahrung der japanischen Küche gibt es im modernen Wohngebiet des Stadteils Brühl das Restaurant \alert{Unkai}. Das Wort Unkai stammt aus dem Japanischen, es setzt sich aus zwei Kanji-Zeichen zusammen: \enquote{un}, welches \enquote{Wolke} bedeutet und \enquote{kai}, welches \enquote{Meer} bedeutet. Zusammen bedeutet Unkai also wörtlich \enquote{Wolkenmeer}. Geschmacklich macht das Restaurant unter anderem Halt in Korea und Japan, aber auch andere Einflüsse haben es in die Speisekarte geschafft (Asia Fusion). 
 
   Die Speisekarte des Restaurants ist nach dem japanischen \alert{Izakaya-Stil} gestaltet, was bedeutet, dass die Gerichte in kleinen Portionen serviert werden, sodass sie mit lieben Mitmenschen, Freunden, Kollegen und Familie geteilt werden können. %Traditionel werden die kleinen Speisen mit Sake (japanischem Rotwein) zusammen genossen.
 
@@ -118,12 +127,14 @@ In den \alert{1960er Jahren} begann sich die Struktur des Güterverkehrs zu ver�
 	\captionof{figure}{Innenbereich des Unkai Restaurants}
 	\setlength{\parskip}{0.25cm}
 
-  Neben vielen Speisekarte bietet neben traditionelen japanischen Gerichten, wie Nigri und Maki Sushi sowie Sashimi, die in verschiedenen Sushi Sets angeboten werden auch eine Asia Fusion Küche an. \alert{Asia Fusion} ist ein kulinarischer Stil, der verschiedene Elemente aus verschiedenen asiatischen Ländern (z. B. Japan, China, Thailand, Korea, Vietnam) miteinander kombiniert. Manchmal schließt das auch mit ein, dass klassische asiatischen Technicken, Zutaten und Gerichte mit Ideen aus anderen Regionen, wie Europa, Amerika oder der Mittelmeerregion, vermischt werden.
+  Die Speisekarte bietet neben traditionelen japanischen Gerichten, wie Nigri und Maki Sushi, sowie Sashimi, die auch als Teil von verschiedenen Sushi Sets angeboten werden auch eine Asia Fusion Küche an. \alert{Asia Fusion} ist ein kulinarischer Stil, der verschiedene Elemente aus verschiedenen asiatischen Ländern (z.B. Japan, China, Thailand, Korea, Vietnam) miteinander kombiniert. Manchmal schließt das auch mit ein, dass klassische asiatischen Technicken, Zutaten und Gerichte mit Ideen aus anderen Regionen, wie Europa, Amerika oder der Mittelmeerregion vermischt werden.
 
-  \alert{Nigiri} bedeutet \enquote{Geformt} oder \enquote{gedrückt}, es ist eine kleine Handform aus Sushi-Reis, die mit einer Scheibe Fisch oder Meeresfrüchten belegt wird.
-\end{minipage}
-\hspace{0.4cm}
-\begin{minipage}[t]{0.32\textwidth}
+  \alert{Nigiri} bedeutet \enquote{geformt} oder \enquote{gedrückt}, es ist eine kleine Handform aus Sushi-Reis, die mit einer Scheibe Fisch oder Meeresfrüchten belegt wird.
+\end{minipage}%
+\hfill\color{white}%
+\vrule width 0.01cm
+\hfill\color{black}%
+\begin{minipage}[t]{0.31\textwidth}
 	\vspace{0cm}
 	\setlength{\parskip}{0.25cm}
 
@@ -142,5 +153,5 @@ Oft wird der Belag mit etwas Wasabi darunter oder mit einem dünnen Nori-Streife
 	\includegraphics[width=\linewidth]{./figures/kita_shalom.png}
 	\captionof{figure}{JHW - Kita Villa Shalom}
 	\setlength{\parskip}{0.25cm}
-\end{minipage}
+\end{minipage}%
 \end{document}

@@ -1,0 +1,711 @@
+\documentclass{standalone}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\begin{mindmap}
+	\begin{mindmapcontent}
+		\node (middle) at (current page.center) {Verification of Digital Circuits
+			\resizebox{\textwidth}{!}{
+				\begin{minipage}[t]{20cm}
+					\begin{itemize}
+						\item digital systems in electronics everywhere increasing
+						\item make circuits correct, find design errors, the later detect problem the harder to fix because of transformations (back to intial specification do all steps again)
+						\item just doing simulation, cannot systematically cover the whole input space with simulation and tests (64 bit input, 1 input in 1ns, 584 years), need formal methods
+						\item cause costs (Pentium FDIV-bug nowadays easilty to detect), all chips produced effected in case of design error
+						\item safety critical (Therac-25)
+						\item security (Spectre and Meltdown)
+					\end{itemize}
+				\end{minipage}
+			}
+		}
+		child {
+				node {Basic Technologies}
+				child {
+						node {Binary Decision Diagrams (BDD)
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item datastructure for representing boolean functions (can't compare gate level circuits not canonical, function tables canonical but comparison easy but don't scale n inputs $2^n$ lines (64 inputs have $2^64$ lines 1ns need 584 years for whole table), canonical disjunctive normal canonical but often explode)
+											\item easy to compare (ROBDD)
+											\item compact
+											\item construct efficiently from circuit
+											\item can explode which one can't avoid, but work for many practical cases if not choose random function
+											\begin{itemize}
+												\item don't work in all cases, not all functions relevant in practise have small representation multiplication, division, square root, can prove that no matter how choose variable order in bdd the representation will always be exponential in the number of bits of the multiplier, same for dividers, square root and a few other things
+											\end{itemize}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+						child {
+								node {Variable Order
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item variable order crucial for the size
+													\item some functions only good orders, some good and bad, some only bad
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Static heuristic
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item look at circuit and guess a good order
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Dynamic heuristic
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item pick initial order based on first heuristic and start constructing the bdd and if it becomes too large modify variable order
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Sifting
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item allows swapping 2 adjacent variables in the order and if do that systematically to find better variable order, do that during construction of the bdd
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child {
+										node {Theorem Finding good order NP-Complete
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item can guess variable order and try to construct bdd and if becomes too large abord
+															\item can verify in polynomial time in the size of the input bdd whether new variable order better than old, but finding that order can only be done in exponential time
+															\item not worth risking exponential running time, just for finding a better variable order, therefore do thing that are fast but without guarantee, heuristic, do best to find good order, but might be unlucky and not find one
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Theorem multplication no good variable order
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item independent of variable order multiplication has exponential size bdd
+															\item same idea as for proof method exponential size
+															\item but have to prove that holds for all the variable orders
+															\item many arithmetic functions have only bdd representation with exponential size
+															\item still works for many cases, not always, when look at modern verification tools, they do not rely on one technique
+															\item invented extensions of bdds that work for multipliers
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Proof method bdd exponential
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item on top have n variables, so have $2^n$ different assignments of these variables
+																	\item look at cofactors with respect to these variables
+																	\item take our function and replace the variables above the line by its assignment and then we get this table (count how many different functions get by replacing the first 3 variables by a constant)
+																	\item rightmost column have function we get after replacing the variable values (right column function obtained by replacing in this polynomial the first 3 variables by a constant)
+																	\item all of them are different
+																	\item if we follow path from root node, given by one of these assignments, the edge we traverse last has to end the bdd node that represents this function (edges crossing red line all point to different bdd nodes)
+																	\item and because $2^n$ different functions, $2^n$ different nodes to represent this cofactors, they are all reached by an edges from the top
+																	\item therefore below the cut have at least $2^n$ nodes, because these $2^n$ edges all have to point to a different node + in principle as few more (because have as many functions as variable evaluations, have as many nodes below the cut as have different combinations here)
+																	\item in this case don't have more, but in principle could have
+																	\item + nodes above
+																	\item way to prove is count different cofactors
+																	\item why other linear, either this monomial is 1 or have to look at remaining part
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+							}
+						child {
+								node {Actions on BDD}
+								child {
+										node {Derive function reprsented by BDD
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item start bottom and insert into shannon theorem
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Evaluate function value
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item start at root node and follow dashed and solid edges
+															\item if have bdd can evaluate the function value in time that is given by the length of the longest path
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Check Isomorphism
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item injective means need at least as many outputs as inputs, surjective needs at least as many inputs as outputs, bijective mapping exists iff size input and output set are the same, case for finite and infinite sets, integer and even numbers have same size, rational and natural numbers have same size, but integer and real numbers don't have same size, because no bijective mapping
+															\item starting and end point of low edge correspond to each other for all edges, bbds have the same structure, bdds identical iff isomorphic
+															\item if not isomorphic, then 2 circuits compute different functions
+															\item checking for ismoorphism is not difficult for bdds but still don't do it, all implementations construct shared bdds, share nodes, roots 1st and 2nd function overlap, check isomorphism by comparing the 2 pointers, isomorphic if point to same node, compare in constant time
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Construction / Building
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item pick variable rood node
+															\item compute negative and positive cofactor
+															\item compute recursively a bdd for them
+															\item attach to low and high edge
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {ITE-Algorithm
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item have long list of base cases that can answer without computation
+																	\item sooner or later get base case, because if you did recursion on all the variables one ends up with three constant parameters
+																	\item fgh are bdds with same variable order
+																	\item x, topmost variable that occurs in fgh, look at three root nodes and pick variable of rootnode and check which is the first one in the variable order
+																	\item call ITE recursively on cofactors
+																	\item negative cofactor of x, two cases, check if rootnode equal to x, if not the case just take f, because f is independent of x and therefore nothing changes
+																	\begin{itemize}
+																		\item efficient, doable in constant time
+																	\end{itemize}
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Forward construction / Symbolic simulation
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item one bdd for every output bit of a circuit
+																			\item for every primary input labeled xi construct such a bdd
+																			\item arrive at gate, apply e.g. and function for bdds at input of gate, algorithm takes 2 bdds and outpus bdd for e.g. and of functions represented by bdds
+																			\item create one non-terminal node bdds for inputs, traverse circuit topological order from inputs to outputs
+																			\item whenever arrive at gate apply corresponding function to input bdds and get bdd for output of the gate
+																			\item at primary outputs bdds are the representation of the functions computed by the circuit
+                                      \item \enquote{ands} and \enquote{or} calls to ITE
+                                      \item \enquote{not} just changing complementation mark of incoming edge
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Backward construction
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Unique Table
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item isomorphism reduction hash table, remembers all nodes already have, key is just triple variable low and high successor and output is pointer to corresponding node
+																			\item whenever create new node check if already have this combination, unique table
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node (iteop) {ITE-Operator
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item don't want implement one algorithm per gate type, reduce all of them to one boolean function -> ITE
+																			\item all binary functions can be reduced to this ITE operator
+																			\item f, g, h 3 boolean function represented as bdds with the same variable order
+																			\item directly want to get a robdd without going via function tables etc.
+																			\item use shannons decomposition theorem
+																			\item doesn't matter compute fg or not fh and replace all xi by 1 or vice versa
+																			\item look inside braces, it's ITE applied to negative and positive cofactor
+																			\item ITE(F, G, H) is same as not xi and ITE applied to negative cofactors or ... positive cofactors ...
+																			\item gives us recursive formulation, if want to compute ITE of fgh pick first variable in variable order and compute this expression and calling ITE recursively
+																			\item get 2 results for negative and positive cofactor, create new bdd node labeled with xi, attach negative and positive cofactor result to low and high edge
+                                      \item \underline{\alert{advantage} using ITE instead of nor, xor, equivalence etc.:}
+                                      \begin{itemize}
+                                        \item share same computed table for all ite calls
+                                        \item if have seperate implement for and, or etc. each one needs it's own computed table and then the hitrate is much lower
+                                      \end{itemize}
+                                      \item typical bdd algorithm, like ITE operator, bdds as parameters, compute result for cofactors of root node, then assemble the real result, running time depends on what have to do to ensemble final result
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Optimizations and Runtime
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item recursive calls with n variables, 2 calls, after 2 variables have 4 calls, after 3 have 8 calls
+																			\item num recursive calls exponential in worst case
+																			\item everything else constant time if have decent hash tables
+																			\item how many different recursive calls, have distinct arguments, num different combinations, much more calls $2^n$, don't compute same result again
+                                      \item everything else constant time, good hash table lookups, computing cofactors, computing top variable, comparing 2 pointers for shannon reduction, checking unique tables, creating new node
+                                      \item running time: constant * num recursive call, num recursive calls are number of node triples one can get
+                                      \item and, third parameter bdd 0 with 1 node
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+														child {
+																node {Computed Table
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+                                          \item dynamic programming
+                                          \item new hast table, key triple of bdd nodes, value result of ITE call
+                                          \item before computation, check already have result, computed table
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+                              child {
+                                node {Complemtnary Edges
+                                  \resizebox{\textwidth}{!}{
+                                    \begin{minipage}[t]{12cm}
+                                      \begin{itemize}
+                                        \item negation mark on edges of a bdd
+                                        \item if edge is negated, just negative everything below
+                                        \item careful, bdds should be canonical, if allow arbitrary negation mark they aren't
+                                        \item make restrictions where negation mark can appear, forbid terminal node 1
+                                        \item can normalize bdd such that no high edge is negated
+                                        \item get rid of negation mark high edge with, de-morgan rule
+                                        \item \underline{advantage complement edges:} 
+                                        \begin{itemize}
+                                          \item don't loose canonicity
+                                          \item save up to halve of the nodes, recuce bdd size / memory consumption up to 50\%, if represent function f and not f, they are without complement edges two different bdd nodes
+                                          \item does not cost memory, boolean on edge costs memory
+                                          \begin{itemize}
+                                            \item exploit memory alignment of processor, 64 bit processor, all pointers aligned to adresses divisible by 8
+                                            \item pointer dividable by 8 last three bits are 0, 32 2 bits
+                                            \item 3 bits left, abuse them to store negation mark,
+                                            \item just have to be careful if dereference pointer, have to clear last bit
+                                          \end{itemize}
+                                          \item don't slow down algorithm, just have to keep track, have seen even or odd number of negations
+                                        \end{itemize}
+                                      \end{itemize}
+                                    \end{minipage}
+                                  }
+                                }
+                              }
+													}
+											}
+									}
+							}
+						child {
+								node (shannon) {Shannon Theorem / Shannon's Decomposition Theorem
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item reminds of formula BDD and tells how to construct a BDD
+													\item proof case distinction, when xi is 0, then result is f not xi and that's exactly what you get if you replace xi with 0
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Theorem Shannon almost every boolean function
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{16cm}
+												\begin{itemize}
+													\item almost every boolean function requires exponential size
+													\item 2-input gates not to be taken to literally, can also put in any datastructure with n bits of memory or a constant number of memory
+													\item almost every boolean function means, if have collection of all n input function and randomly pick one then probability will converge to 1 that one needs at least $2^n/n$ bits for representation
+													\item the larger n is the more unlikely it gets that one gets a good function that can be represented compactly
+													\item \underline{idea why that's the case:} justification for this "no data structure" can represent all boolean functions efficiently
+													\begin{itemize}
+														\item how see so many boolean functions. boolean function uniquely represented by a function table, for every input combination has a row, and in output column have 0 or 1 for every row, $2^n$ rows, $2^n$ different input combinations
+														\item with m bits can represent $2^m$ different things
+														\item how large has M to be such that one can represent $2^(2^n)$ different functions
+														\item on average m has to be equal to $2^n$
+														\item on average means need $2^n$ bits to represent n bit functions on average
+														\item only thing can do is how some functions represented with fewer bits and other functions with more bits but the average has to be the same
+													\end{itemize}
+													\item \underline{$2^n/n$ if take 2 input gates is a minor issue:}
+													\begin{itemize}
+														\item have 2 input gates, they already do something, they have associated function that have to store in memory as well and then get this divided by n
+													\end{itemize}
+													\item also holds for bdds, because a bdd is just a multiplexer circuit
+													\begin{itemize}
+														\item implement in hardware by replacing every non-terminal node by a multiplexer
+														\item select signal just a variable, that's the label of the node
+														\item 0 and 1 is just the logic 0 and 1
+														\item no datastructure that works in all cases
+													\end{itemize}
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Reduced Ordered Binary Decision Diagram (ROBBD)
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item every node in bdd represents a different function
+													\item cannot apply any reduction rule
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Canonicity theorem
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item induction over number of variables on which F depends
+															\item n=0, function does not depend on any variable
+															\item replace all 0's by 1's
+															\item have to prove there's no other bdd for the same function which is reduced and ordered and so on
+															\item assume have bdd that represents the 0 function and it's different from the terminal node 0
+															\item that means it has at least one non-terminal node
+															\item because it's a 0 function all paths from that node to a terminal node have to end up in the terminal node that is labeled 0, otherwise would get function value of 1
+															\item it's a free bdd so you know all the path can be triggered
+															\item it's a finite acyclic graph, so sooner or later you will reach a node whose both successors a terminal node
+															\item only one 0 terminal node, shannon reduction
+															\item contradiction that it's a reduced obdd
+															\item assume have shown for n-1 variables and have bdd that depends on n variables
+															\item assume have 2 different bdds for the same variable order and both represent the same function
+															\item have to show root node labeled with the same variable
+															\item have to show they are really isomorphic
+															\item assume different nodes in the root
+															\item assume that because have fixed variable order, one has to appear before the other
+															\item other way round proof works exactly same way
+															\item if starts with xj, nothing further up, then have no xi in this bdd, there's no i xi here
+															\item if it contained an xi node it should have appeared before the xj
+															\item that bdd independent of xi
+															\item two functions that don't depend on xi are the same (xi 0 and xi 1 has no influence)
+															\item cofactors depend on n-1 variables, 2 cofactors depend on n-1 variables (that cofactor depends on 1 variable less, doesn't depend on xi, therefore can apply induction hypothesis, only one representation of these 2 cofactors)
+															\item property holds for n-1 variables so we know these to 2 sub-bdds have to be isomorphic
+															\item merge isomorphic sub-bdds, because it's a reduced bdd
+															\item can apply shannon reduction, but one can't it's a reduced bdd -> contradiction
+															\item wrong assumption that xi xj are different, not possible that root nodes have different labels
+															\item use isomorphism get by induction assumption, functions that depend on n-1 variables, plus root nodes
+															\item bdds typically overlap
+															\item for nodes in overlap have 2 isomorphism defined, mapping low to low, high to high
+															\item show that they're the same, because of structural properties they have to be the same
+															\item compute cofactor respect to xi, replace with 0 or 1 get same cofactor
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Ordered BDD (OBDD)}
+										child {
+												node {Free BDD
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item non-free have dead edges, free bdd walk along all edges, evaluation of variables that triggers every path
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+							}
+						child {
+								node {Reduction Rules
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item starting at the bottom, upwards level by level
+													\item in practise never do reduction, never create a redundant node, just costs memory, reduction afterwards costs time
+													\item they all do reduction on the fly, apply reduction rules immediately
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {\enquote{Isomorphism} reduction
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item 2 nodes both with \alert{same label}, both have the same low successor and high successor, means they do the same thing, if compute function represented by these 2 nodes see they are the same
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {\enquote{Shannon} reduction
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item distributivity, always true
+															\item remove upper one, xi depends on xj, but xj is independent of xi, both nodes define the same function, because upper node xi defines it's function in terms of the lower node xj, can't delete the lower node xj, because that would destroy the upper one
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+							}
+					}
+				child {
+						node {Sat Solvers}
+					}
+				child {
+						node {AND-Inverter Graphs}
+					}
+			}
+		child {
+				node {Equivlance Checking
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item compare design before and after transformation (vhdl/vetilog, rtl descirption, net level gate list), bug in software tool
+									\item design for testability, ensure not introduce errors
+									\item timing analysis, part chip to slow, replace by more efficient
+									\item compute bdds for 1st and 2nd circuit and check are they isomorphic thanks to cannonicity theorem for ROBDD's
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {Combinational Circuits
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item no states because no memory
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+						child {
+								node {BDD's}
+							}
+						child {
+								node {SAT}
+							}
+						child {
+								node {Exploiting structural information}
+							}
+					}
+				child {
+						node {Sequential Circuits}
+						child {
+								node {Product automata
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item automatons of 2 circuts, traverse simultaneously with dfs
+													\item doesn't scale (2 circuits 64 bit of state, product automaton 128 bit of state), cannot efford to visit every state
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {BDD based methods
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item turn dfs into bfs, compute all successor states in one step
+													\item characteristic functions
+													\item image and pre-image computation
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Generation of counter examples}
+							}
+					}
+			}
+		child {
+				node {Property Checking
+						\resizebox{\textwidth}{!}{
+							\begin{minipage}[t]{12cm}
+								\begin{itemize}
+									\item beginning only one circuit
+								\end{itemize}
+							\end{minipage}
+						}
+					}
+				child {
+						node {BDD based algorithms
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item take algorithm from equivalence checking and turn into algorithms for property checking
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
+						node {Bounded Model Checking (using SAT sovlers)
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item can prove design not correct, but bounded model checking itself not able to prove that the design is correct (\alert{incomplete}, if there's no counter example it will not terminate), boolean formula which is satisfiable iff there's CE to equivalence that leads to different outputs of two circuits within k steps
+											\item simplify properties to just safety and liveness
+										\end{itemize}
+									\end{minipage}
+								}}
+					}
+				child {
+						node {Unbounded Model Checking
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item complete, solves problem of bounded model checking
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+						child {
+								node {k-Induktion
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item induction proof but encoded in a sat formula
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Craig Interpolation
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item makes us of existence of certain kinds of formulas, where you can do a fixpoint iteration using a sat solver
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Property Directed Reachability (PDR)
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item gets rid of unrolling (problem with unrolling is that the formula grows)
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Prerequisites}
+								child {
+										node {Complexity Theory
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item measure how difficult problem is
+															\item difference polynomial and exponential, exponential computer 1000 times faster can only process 10 additional inputs, faster computers almost don't help to scale input
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {NP-Hard
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item class problems hardest in NP, if can solve that problem fast can solve all problems in NP fast (reduction)
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {NP-Complete
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item NP complete means it's part of NP, can guess and verify efficiently and it's at least as hard as all problems in NP
+																			\item Problems proven by Steven Cook in 1970 that all problems in NP can be formulated as sat problem, all problems can be reduced to "is this formula satisfiable". SAT first NP complete problem. If can solve SAT fast can solve everything in NP fast
+																			\item in practise no algorithm which runs in polynomial time in the worst case
+																			\item there are formulas can solve quickly, with every algorithm always be input for which this algorithm needs exponential time
+																			\item many people tried to find efficient algorithms or to prove that noone exists, no proof that exponential complexity is unavoidable
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+										child {
+												node {NP
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item NP problem, problem where can guess and verify that the solution is a solution in polynomial time
+																	\item N means non-deterministic, problem computers can't guess
+																	\item probably more NP problem than P problems, no prove yet, P=NP problem
+																	\item some practically relevant problems in NP, nobody found polynomial algorithm for them
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {P
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item P is the class of all problems where you have a solution algorithm in polynomial time without guessing
+																			\item all P problems subset of NP problems, if don't need guessing and fast, then also fast with guessing
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+									}
+							}
+					}
+			}
+	\end{mindmapcontent}
+	\begin{edges}
+		\edge{shannon}{iteop}
+	\end{edges}
+	% \annotation{test}{annotation}
+\end{mindmap}
+\end{document}

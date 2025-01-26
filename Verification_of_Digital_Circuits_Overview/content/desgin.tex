@@ -1,0 +1,50 @@
+%!Tex Root = ../main.tex
+
+% ┌────────────┐
+% │ Formatting │
+% └────────────┘
+% \setlength{\parskip}{0.4cm} % space between paragraphs, https://latexref.xyz/bs-par.html
+
+% ┌───────┐
+% │ Fonts │
+% └───────┘
+\usepackage{fontspec}
+\newfontfamily\gyre{DejaVu Math TeX Gyre}
+% colored bold
+% \newcommand\alert[1]{\textcolor{SwitchColor}{\textbf{#1}}}
+\newcommand\alert[1]{\textcolor{SwitchColor}{#1}}
+
+% ┌──────────────┐
+% │ Pseudo Code  │
+% └──────────────┘
+\newcounter{algorithm}
+\setcounter{algorithm}{0}
+\newtcbtheorem[use counter=algorithm]{algorithm}{\color{SecondaryColor}Algorithm}{pseudo/ruled}{alg}
+% \newcommand{\ma}[1]{$\mathcal{#1}$}
+% \renewcommand{\tt}[1]{{\small\texttt{#1}}}
+
+% ┌────────┐
+% │ Colors │
+% └────────┘
+\definecolor{PrimaryColor}{HTML}{025F03}
+\definecolor{PrimaryColorDimmed}{HTML}{DBE6DC}
+\definecolor{SecondaryColor}{HTML}{272983}
+\definecolor{SecondaryColorDimmed}{HTML}{DFE1EA}
+\definecolor{SwitchColor}{named}{PrimaryColor}
+\colorlet{BoxColor}{gray!10!white}
+
+% ┌───────┐
+% │ Links │
+% └───────┘
+% \usepackage[allbordercolors=PrimaryColor, pdfborder={0 0 0.2}]{hyperref}
+\usepackage[hidelinks]{hyperref}
+
+% ┌─────────┐
+% │ Mindmap │
+% └─────────┘
+\renewcommand{\labelitemi}{$\textcolor{SwitchColor}{\bullet}$}
+\renewcommand{\labelitemii}{$\textcolor{SwitchColor}{\blacktriangleright}$}
+\renewcommand{\labelitemiii}{$\textcolor{SwitchColor}{\blacksquare}$}
+\renewcommand{\labelitemiv}{$\textcolor{SwitchColor}{\circ}$}
+% \renewcommand{\labelitemiv}{$\textcolor{SwitchColor}{\diamond}$}
+\setlist[enumerate]{label=\bfseries\color{SwitchColor}\arabic*.}

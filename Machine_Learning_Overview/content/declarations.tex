@@ -1,0 +1,124 @@
+%!Tex Root = ../main.tex
+
+% ┌─────────┐
+% │ Mindmap │
+% └─────────┘
+\newlength{\leveldistance}
+\setlength{\leveldistance}{25cm}
+
+\newenvironment{edges}{\begin{pgfonlayer}{background}\draw [concept connection]}{;\end{pgfonlayer}}
+\newcommand{\edge}[2]{(#1) edge (#2)}
+\newcommand{\annotation}[2]{\path (#1) -- node[annotation, above, align=center, pos=0.03] {#2} (middle);}
+
+\newenvironment{resettikz}{\pgfsetlayers{nodelayer,edgelayer}\tikzset{every node/.style={fill opacity=1.0, draw opacity=1.0, minimum size=0cm, inner sep=0pt}}}{}
+
+\newenvironment{mindmap}{
+	\begin{tikzpicture}[
+			auto,
+			huge mindmap,
+			fill opacity=0.6,
+			draw opacity=0.8,
+			concept color = PrimaryColorDimmed,
+			every annotation/.style={fill=BoxColor, draw=none, align=center, fill = BoxColor, text width = 2cm},
+			grow cyclic,
+			level 1/.append style = {
+					concept color=SecondaryColorDimmed,
+					level distance=\leveldistance,
+					sibling angle=360/\the\tikznumberofchildren,
+					% https://tex.stackexchange.com/questions/501240/trying-to-use-the-array-environment-inside-a-tikz-node-with-execute-at-begin-no
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
+				},
+			level 2/.append style = {
+					concept color=PrimaryColorDimmed,
+					level distance=\leveldistance / 2,
+					sibling angle=60,
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
+				},
+			level 3/.append style = {
+					concept color=SecondaryColorDimmed,
+					level distance=\leveldistance / 3,
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
+				},
+			level 4/.append style = {
+					concept color=PrimaryColorDimmed,
+					level distance=\leveldistance / 4,
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
+				},
+			level 5/.append style = {
+					concept color=SecondaryColorDimmed,
+					level distance=\leveldistance / 5,
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
+				},
+			level 6/.append style = {
+					concept color=PrimaryColorDimmed,
+					level distance=\leveldistance / 6,
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
+				},
+			level 7/.append style = {
+					concept color=SecondaryColorDimmed,
+					level distance=\leveldistance / 7,
+					execute at begin node=\definecolor{SwitchColor}{named}{SecondaryColor}\definecolor{SwitchColorDimmed}{named}{PrimaryColorDimmed},
+				},
+			level 8/.append style = {
+					concept color=PrimaryColorDimmed,
+					level distance=\leveldistance / 8,
+					execute at begin node=\definecolor{SwitchColor}{named}{PrimaryColor}\definecolor{SwitchColorDimmed}{named}{SecondaryColorDimmed},
+				},
+			concept connection/.append style = {
+					color = BoxColor,
+				},
+		]
+		}{
+	\end{tikzpicture}
+}
+
+\newenvironment{mindmapcontent}{
+	\begin{scope}[
+			every node/.style = {concept, circular drop shadow}, % draw=none
+			every child/.style={concept},
+		]
+		}{
+		;\end{scope}
+}
+
+% ┌───────┐
+% │ Boxes │
+% └───────┘
+\DeclareTotalTCBox{\inlinebox}{ s m }
+{standard jigsaw,opacityback=0,colframe=SwitchColor,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
+	right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
+{\IfBooleanTF{#1}%
+	{\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}#2}%
+	{#2}}
+
+\DeclareTotalTCBox{\inlineboxtwo}{ s m }
+{standard jigsaw,opacityback=0,colframe=SwitchColorDimmed,nobeforeafter,tcbox raise base,top=0mm,bottom=0mm,
+	right=0mm,left=0mm,arc=0.1cm,boxsep=0.1cm}
+{\IfBooleanTF{#1}%
+	{\textcolor{SwitchColorDimmed}{\setBold >\enspace\ignorespaces}#2}%
+	{#2}}
+
+% ┌──────────────────┐
+% │ Case distinction │
+% └──────────────────┘
+% \newtoggle{absolute}
+% % \toggletrue{absolute}
+% \togglefalse{absolute}
+% \newcommand{\lpathgraph}[1]{\iftoggle{absolute}{/home/areo/Documents/Studium/Summaries/x/}{./}#1}
+
+% ┌───────┐
+% │ Fixes │
+% └───────┘
+% https://tex.stackexchange.com/questions/89467/why-does-pdftex-hang-on-this-file
+% \newcommand{\colon}{\mathrel{\mathop:}}
+
+% ┌───────┐
+% │ Paths │
+% └───────┘
+\newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_1_Master/Verification_of_Digital_Circuits/slides/annotated/Verification_of_Digital_Circuits_all_in_one.pdf:#1}{\inlinebox{#2}}}
+\newcommand{\scripttwo}[2]{\href{openpdf:///home/areo/Nextcloud/Verification of Digital Circuits - WS2324/Slides/annotated/bonus/lecture08_sat_aig.pdf:#1}{\inlinebox{#2}}}
+\newcommand{\videoseven}[2]{\href{https://youtu.be/ILBLSr7zO70?feature=shared&t=#1}{\inlineboxtwo{#2}}}
+\newcommand{\videoeight}[2]{\href{https://youtu.be/DCDNlu0I8GA?feature=shared&t=#1}{\inlineboxtwo{#2}}}
+\newcommand{\videonine}[2]{\href{https://youtu.be/DCDNlu0I8GA?feature=shared&t=#1}{\inlineboxtwo{#2}}}
+\newcommand{\videoeleven}[2]{\href{https://youtu.be/dKszaFJQF3I?si=v1Qhw6OC-VxS7z7A&t=#1}{\inlineboxtwo{#2}}}
+\newcommand{\videotwelve}[2]{\href{https://youtu.be/uVedKmgkKxU?si=Ne2tds-ok_b_k6i2&t=#1}{\inlineboxtwo{#2}}}

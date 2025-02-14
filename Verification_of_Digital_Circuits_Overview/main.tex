@@ -24,6 +24,42 @@
 		child {
 				node {Basic Technologies}
 				child {
+						node {Theorem Shannon almost every boolean function
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{16cm}
+										\begin{itemize}
+											\item no representation that works for all boolean functions such that it doesn't explode
+											\item almost every boolean function requires exponential size
+											\item bdd not representation for all practical functions
+											\item 2-input gates not to be taken to literally, can also put in any datastructure with n bits of memory or a constant number of memory
+											\item almost every boolean function means, if have collection of all n input function and randomly pick one then probability will converge to 1 that one needs at least $2^n/n$ bits for representation
+											\item the larger n is the more unlikely it gets that one gets a good function that can be represented compactly
+											\item \underline{idea why that's the case:} justification for this "no data structure" can represent all boolean functions efficiently
+											\begin{itemize}
+												\item how see so many boolean functions. boolean function uniquely represented by a function table, for every input combination has a row, and in output column have 0 or 1 for every row, $2^n$ rows, $2^n$ different input combinations
+												\item with m bits can represent $2^m$ different things
+												\item how large has M to be such that one can represent $2^(2^n)$ different functions
+												\item on average m has to be equal to $2^n$
+												\item on average means need $2^n$ bits to represent n bit functions on average
+												\item only thing can do is how some functions represented with fewer bits and other functions with more bits but the average has to be the same
+											\end{itemize}
+											\item \underline{$2^n/n$ if take 2 input gates is a minor issue:}
+											\begin{itemize}
+												\item have 2 input gates, they already do something, they have associated function that have to store in memory as well and then get this divided by n
+											\end{itemize}
+											\item also holds for bdds, because a bdd is just a multiplexer circuit
+											\begin{itemize}
+												\item implement in hardware by replacing every non-terminal node by a multiplexer
+												\item select signal just a variable, that's the label of the node
+												\item 0 and 1 is just the logic 0 and 1
+												\item no datastructure that works in all cases
+											\end{itemize}
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+					}
+				child {
 						node {Binary Decision Diagrams (BDD)
 								\resizebox{\textwidth}{!}{
 									\begin{minipage}[t]{12cm}
@@ -52,11 +88,13 @@
 										}
 									}
 								child {
-										node {Static heuristic
+										node {Static heuristic, define an initial variable order
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item look at circuit and guess a good order
+															\item if have more than one output, continue with 2nd output and do the same and append the missing variables
+															\item can be arbitrarily bad, but on average it returns an acceptable order and it's fast
 														\end{itemize}
 													\end{minipage}
 												}
@@ -68,6 +106,9 @@
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item pick initial order based on first heuristic and start constructing the bdd and if it becomes too large modify variable order
+															\item when look size bdds during creation bdd for some circuit see peak middle. Typically last bdd not always the largest one. not always, no guarantee
+															\item initial often good for whole circuit (not always) but in the middle it can be bad.
+															\item therefore modify variable order during construction of the bdds
 														\end{itemize}
 													\end{minipage}
 												}
@@ -78,6 +119,35 @@
 															\begin{minipage}[t]{12cm}
 																\begin{itemize}
 																	\item allows swapping 2 adjacent variables in the order and if do that systematically to find better variable order, do that during construction of the bdd
+																	\item most popular heuristic
+																	\item if xi has value and xj has value and arrive at some sub-bdd that has to be the same after swapping
+																	\item only affects 2 levels that we swap
+																	\item local operation that can be done quite efficiently
+																	\item implementations bdd packages that point along the levels, don't have to traverse whole bdd
+																	\item why case, because by swapping you enable further reductions, you see symmetries in the functions better
+																	\item example, no matter what value of xi is, if xj is 1, one ends up at k
+																	\item if swap don't have to ask anymore for the xi value, if xj is 1 the value of xi does not matter
+																	\item can apply shannon reduction to xi node, on other side can't, because low successors of the xj nodes are different and therefore these are 2 distinct nodes and you can't remove the xi
+																	\item but if you swap the order then you don't have to ask for xi if xj is one, you only have if xj is 0
+																	\item also reason for isomorphism reduction on other side
+																	\item swapping can also increase size, because if start with right bdd and swap get other one
+																	\item apply swapping of 2 adjacent levels such that in the end have a better bdd and sifting just does that systematically
+																	\item start with widest level of the bdd, start with level with the most nodes
+																	\item move x4 close end of the bdd, if upper half move it first to the root, if it's in the lower half you move it first to the leaf level
+																	\item keep track size bdd after the swap
+																	\item then move to opposite end
+																	\item then had x4 on every level of the bdd and kept track how large bdd is and determined position in which bdd was the smallest
+																	\item and then move x4 back to that position
+																	\item here level 3 bdd was the smallest
+																	\item necessary to do immediate steps. Couldn't one save this bdd, then it would cost more memory. If can efford keeping a copy can do that. Then don't need to shift it to most positions twice
+																	\item when finished one variable mark as finished and then continue next variable that is on the largest level that has not been processed yet and do that for all variables
+																	\item in the end bdd at least hasn't become larger
+																	\item problem if bdd size explodes during the sifting operation. there's no guarantee that it stays small for the intermediate steps. if growths to much just abord
+																	\item no reason to do every variable in every position
+																	\item might miss some good position, but at least doesn't explode in between
+																	\item therefore have threshold, so just allow growth by factor of 2 or sth
+																	\item if bdds size exceeds this threshold then stop, then get runtime n2 times size of input bdd
+																	\item other techniques, window optimization
 																\end{itemize}
 															\end{minipage}
 														}
@@ -90,8 +160,11 @@
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
 															\item can guess variable order and try to construct bdd and if becomes too large abord
-															\item can verify in polynomial time in the size of the input bdd whether new variable order better than old, but finding that order can only be done in exponential time
+															\item can verify in polynomial time in the size of the input bdd whether new variable order better than old, but \alert{finding} that order can only be done in exponential time
 															\item not worth risking exponential running time, just for finding a better variable order, therefore do thing that are fast but without guarantee, heuristic, do best to find good order, but might be unlucky and not find one
+															\item deciding if better variable order np-complete
+															\item and finding optimal as well, can just do binary search and check can find variable order halve size of bdd
+															\item optimization problem just as hard as decision problem
 														\end{itemize}
 													\end{minipage}
 												}
@@ -124,9 +197,7 @@
 																	\item all of them are different
 																	\item if we follow path from root node, given by one of these assignments, the edge we traverse last has to end the bdd node that represents this function (edges crossing red line all point to different bdd nodes)
 																	\item and because $2^n$ different functions, $2^n$ different nodes to represent this cofactors, they are all reached by an edges from the top
-																	\item therefore below the cut have at least $2^n$ nodes, because these $2^n$ edges all have to point to a different node + in principle as few more (because have as many functions as variable evaluations, have as many nodes below the cut as have different combinations here)
-																	\item in this case don't have more, but in principle could have
-																	\item + nodes above
+																	\item therefore below the cut have at least $2^n$ nodes, because these $2^n$ edges all have to point to a different node + in principle as few more (because have as many functions as variable evaluations, have as many nodes below the cut as have different combinations here), in this case don't have more, but in principle could have + nodes above
 																	\item way to prove is count different cofactors
 																	\item why other linear, either this monomial is 1 or have to look at remaining part
 																\end{itemize}
@@ -169,7 +240,7 @@
 															\item injective means need at least as many outputs as inputs, surjective needs at least as many inputs as outputs, bijective mapping exists iff size input and output set are the same, case for finite and infinite sets, integer and even numbers have same size, rational and natural numbers have same size, but integer and real numbers don't have same size, because no bijective mapping
 															\item starting and end point of low edge correspond to each other for all edges, bbds have the same structure, bdds identical iff isomorphic
 															\item if not isomorphic, then 2 circuits compute different functions
-															\item checking for ismoorphism is not difficult for bdds but still don't do it, all implementations construct shared bdds, share nodes, roots 1st and 2nd function overlap, check isomorphism by comparing the 2 pointers, isomorphic if point to same node, compare in constant time
+															\item checking for isomorphism is not difficult for bdds but still don't do it, all implementations construct shared bdds, share nodes, roots 1st and 2nd function overlap, check isomorphism by comparing the 2 pointers, isomorphic if point to same node, compare in constant time
 														\end{itemize}
 													\end{minipage}
 												}
@@ -211,14 +282,17 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
+																			\item forward, start inputs call ITE,
+																			\item start inputs and run though circuit in topological order
 																			\item one bdd for every output bit of a circuit
 																			\item for every primary input labeled xi construct such a bdd
 																			\item arrive at gate, apply e.g. and function for bdds at input of gate, algorithm takes 2 bdds and outpus bdd for e.g. and of functions represented by bdds
 																			\item create one non-terminal node bdds for inputs, traverse circuit topological order from inputs to outputs
 																			\item whenever arrive at gate apply corresponding function to input bdds and get bdd for output of the gate
 																			\item at primary outputs bdds are the representation of the functions computed by the circuit
-                                      \item \enquote{ands} and \enquote{or} calls to ITE
-                                      \item \enquote{not} just changing complementation mark of incoming edge
+																			\item do for all input assignments in one step
+																			\item \enquote{ands} and \enquote{or} calls to ITE
+																			\item \enquote{not} just changing complementation mark of incoming edge
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -229,10 +303,61 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item
+																			\item backward, start output and call compose
+																			\item for forward cosntruction may happen intermediate results much larger than final result, cannot continue if bdd size too large. alternative that might not always work, but maybe works in cases where the first method doesn't work
+																			\item not the solution, if one methods fails, take another one
+																			\item start bdd for output f, bdd labeled f low to 0, high to 1
+																			\item replace f with definition of the or-gate
+																			\item replace one edge with that next bdd
+																			\item continue until arrive primary inputs
+																			\item result is bdd that only depends on primary inputs and describes the circuit
+																			\item need algorithm that replaces a variable by a bdd called compose
+																			\item want to replace xi in F with the result of G
+																			\item result same as for forward. result the same, because bdds are canonical. bdds get in between are different for both methods. sometimes intermediate bdds for forward traversal are smaller, sometimes for backward traversal
+																			\item having choice good, because no method is guaranteed to work, if one doesn't work take another
 																		\end{itemize}
 																	\end{minipage}
 																}
+															}
+														child {
+																node {Substitution operator, compose
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item want to replace xi in F with the result of G
+																					\item formulate in terms of ITE
+																					\item make a case distinction on g
+																					\item know that function is a negative co-factor of f with respect to xi
+																					\item if g 1, have to replace x with 1, that's the positive cofactor
+																					\item in ITE did something similar
+																					\item but was different because variable was topmost variable of the bdd, and then just follow low edge to get negative cofactor
+																					\item this time xi not necessarily label of the rootnote
+																					\item start traversing bdd, when arrive at xi node just follow the low edge
+																					\item don't create xi node, but skip it by following the low edge
+																					\item when go back it works like an ITE, go down recursively, when skip when arrive at xi just return low successor
+																					\item and when go up create new nodes with computed / unique table etc.
+																					\item goes in linear time in size of the bdd
+																					\item call algorithm recursively both successors
+																					\item return pointer to that x3
+																					\item back original call, two different outputs from recursive calls
+																					\item create x1 node, attach result from the call to the left x2 node the low edge and other one to the high edge
+																					\item use computed table avoid doing things twice (for speeding up keep computed table)
+																					\item summary: do recursive traversal until hit base case (hit x2 node or a node below the x2 node). If have x2 node skip it an follow the low edge. then if return from recursive calls do the same as ITE. if the two results are the same, apply shannon reduction otherwise apply isomorphism reduction using unique table
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+																child {
+																		node {Proof
+																				\resizebox{\textwidth}{!}{
+																					\begin{minipage}[t]{12cm}
+																						\begin{itemize}
+																							\item if G is 0 then have to return f with xi replaced by 0 and then that's just the negative cofactor and the same holds for if G is 1
+																						\end{itemize}
+																					\end{minipage}
+																				}
+																			}
+																	}
 															}
 													}
 												child {
@@ -262,12 +387,12 @@
 																			\item ITE(F, G, H) is same as not xi and ITE applied to negative cofactors or ... positive cofactors ...
 																			\item gives us recursive formulation, if want to compute ITE of fgh pick first variable in variable order and compute this expression and calling ITE recursively
 																			\item get 2 results for negative and positive cofactor, create new bdd node labeled with xi, attach negative and positive cofactor result to low and high edge
-                                      \item \underline{\alert{advantage} using ITE instead of nor, xor, equivalence etc.:}
-                                      \begin{itemize}
-                                        \item share same computed table for all ite calls
-                                        \item if have seperate implement for and, or etc. each one needs it's own computed table and then the hitrate is much lower
-                                      \end{itemize}
-                                      \item typical bdd algorithm, like ITE operator, bdds as parameters, compute result for cofactors of root node, then assemble the real result, running time depends on what have to do to ensemble final result
+																			\item \underline{\alert{advantage} using ITE instead of nor, xor, equivalence etc.:}
+																			\begin{itemize}
+																				\item share same computed table for all ite calls
+																				\item if have seperate implement for and, or etc. each one needs it's own computed table and then the hitrate is much lower
+																			\end{itemize}
+																			\item typical bdd algorithm, like ITE operator, bdds as parameters, compute result for cofactors of root node, then assemble the real result, running time depends on what have to do to ensemble final result
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -278,13 +403,14 @@
 																\resizebox{\textwidth}{!}{
 																	\begin{minipage}[t]{12cm}
 																		\begin{itemize}
-																			\item recursive calls with n variables, 2 calls, after 2 variables have 4 calls, after 3 have 8 calls
+																			\item recursive calls with n variables, 2 calls, after 2 variables have 4 calls, after 3 have 8 calls (for every variable level double number of recursive calls, n levels, $2^n$ recursive calls)
 																			\item num recursive calls exponential in worst case
 																			\item everything else constant time if have decent hash tables
-																			\item how many different recursive calls, have distinct arguments, num different combinations, much more calls $2^n$, don't compute same result again
-                                      \item everything else constant time, good hash table lookups, computing cofactors, computing top variable, comparing 2 pointers for shannon reduction, checking unique tables, creating new node
-                                      \item running time: constant * num recursive call, num recursive calls are number of node triples one can get
-                                      \item and, third parameter bdd 0 with 1 node
+																			\item how many different recursive calls, have distinct arguments, num different combinations, much more calls $2^n$, don't compute same result again (cannot have arbitrary number of different calls, are all nodes of the original inputs)
+																			\item everything else constant time, good hash table lookups, computing cofactors, computing top variable, comparing 2 pointers for shannon reduction, checking unique tables, creating new node
+																			\item running time: constant * num recursive call, num recursive calls are number of node triples one can get
+																			\item but only improve average running time, worst case may be as bad as without the table, if have 3 bdds that have exponential nodes in the number of variables, if have exponential size bdd lost anyway
+																			\item and, third parameter bdd 0 with 1 node
 																		\end{itemize}
 																	\end{minipage}
 																}
@@ -294,43 +420,48 @@
 																		\resizebox{\textwidth}{!}{
 																			\begin{minipage}[t]{12cm}
 																				\begin{itemize}
-                                          \item dynamic programming
-                                          \item new hast table, key triple of bdd nodes, value result of ITE call
-                                          \item before computation, check already have result, computed table
+																					\item dynamic programming
+																					\item new hash table, key triple of bdd nodes, value result of ITE call
+																					\item before computation, check already have result, computed table
+																					\item in practise helps drastically
 																				\end{itemize}
 																			\end{minipage}
 																		}
 																	}
 															}
-                              child {
-                                node {Complemtnary Edges
-                                  \resizebox{\textwidth}{!}{
-                                    \begin{minipage}[t]{12cm}
-                                      \begin{itemize}
-                                        \item negation mark on edges of a bdd
-                                        \item if edge is negated, just negative everything below
-                                        \item careful, bdds should be canonical, if allow arbitrary negation mark they aren't
-                                        \item make restrictions where negation mark can appear, forbid terminal node 1
-                                        \item can normalize bdd such that no high edge is negated
-                                        \item get rid of negation mark high edge with, de-morgan rule
-                                        \item \underline{advantage complement edges:} 
-                                        \begin{itemize}
-                                          \item don't loose canonicity
-                                          \item save up to halve of the nodes, recuce bdd size / memory consumption up to 50\%, if represent function f and not f, they are without complement edges two different bdd nodes
-                                          \item does not cost memory, boolean on edge costs memory
-                                          \begin{itemize}
-                                            \item exploit memory alignment of processor, 64 bit processor, all pointers aligned to adresses divisible by 8
-                                            \item pointer dividable by 8 last three bits are 0, 32 2 bits
-                                            \item 3 bits left, abuse them to store negation mark,
-                                            \item just have to be careful if dereference pointer, have to clear last bit
-                                          \end{itemize}
-                                          \item don't slow down algorithm, just have to keep track, have seen even or odd number of negations
-                                        \end{itemize}
-                                      \end{itemize}
-                                    \end{minipage}
-                                  }
-                                }
-                              }
+														child {
+																node {Complemtnary Edges
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item negation mark on edges of a bdd
+																					\item if edge is negated, just negative everything below
+																					\item careful, bdds should be canonical, if allow arbitrary negation mark they aren't
+																					\item make restrictions where negation mark can appear, forbid terminal node 1
+																					\item can normalize bdd such that no high edge is negated
+																					\item get rid of negation mark high edge with, de-morgan rule
+																					\item \underline{advantage complement edges:}
+																					\begin{itemize}
+																						\item don't loose canonicity
+																						\item save up to halve of the nodes, recuce bdd size / memory consumption up to 50\%, if represent function f and not f, they are without complement edges two different bdd nodes
+																						\item does not cost memory, boolean on edge costs memory
+																						\begin{itemize}
+																							\item exploit memory alignment of processor, 64 bit processor, all pointers aligned to adresses divisible by 8
+																							\item pointer dividable by 8 last three bits are 0, 32 2 bits
+																							\item 3 bits left, abuse them to store negation mark,
+																							\item just have to be careful if dereference pointer, have to clear last bit
+																						\end{itemize}
+																						\item don't slow down algorithm, just have to keep track, have seen even or odd number of negations
+																						\item node representing function f and not f, in normal bdds can't merge them
+																						\item can negate bdd in constant time
+																						\item complement marks only advantages, no additional memory, reduce size of bdd, algorithms work as before, be careful bdds stay canonical
+																						\item only have leave 0 or 1, agree on one version. could also do dual, never complement low edge
+																					\end{itemize}
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
 													}
 											}
 									}
@@ -342,40 +473,6 @@
 												\begin{itemize}
 													\item reminds of formula BDD and tells how to construct a BDD
 													\item proof case distinction, when xi is 0, then result is f not xi and that's exactly what you get if you replace xi with 0
-												\end{itemize}
-											\end{minipage}
-										}
-									}
-							}
-						child {
-								node {Theorem Shannon almost every boolean function
-										\resizebox{\textwidth}{!}{
-											\begin{minipage}[t]{16cm}
-												\begin{itemize}
-													\item almost every boolean function requires exponential size
-													\item 2-input gates not to be taken to literally, can also put in any datastructure with n bits of memory or a constant number of memory
-													\item almost every boolean function means, if have collection of all n input function and randomly pick one then probability will converge to 1 that one needs at least $2^n/n$ bits for representation
-													\item the larger n is the more unlikely it gets that one gets a good function that can be represented compactly
-													\item \underline{idea why that's the case:} justification for this "no data structure" can represent all boolean functions efficiently
-													\begin{itemize}
-														\item how see so many boolean functions. boolean function uniquely represented by a function table, for every input combination has a row, and in output column have 0 or 1 for every row, $2^n$ rows, $2^n$ different input combinations
-														\item with m bits can represent $2^m$ different things
-														\item how large has M to be such that one can represent $2^(2^n)$ different functions
-														\item on average m has to be equal to $2^n$
-														\item on average means need $2^n$ bits to represent n bit functions on average
-														\item only thing can do is how some functions represented with fewer bits and other functions with more bits but the average has to be the same
-													\end{itemize}
-													\item \underline{$2^n/n$ if take 2 input gates is a minor issue:}
-													\begin{itemize}
-														\item have 2 input gates, they already do something, they have associated function that have to store in memory as well and then get this divided by n
-													\end{itemize}
-													\item also holds for bdds, because a bdd is just a multiplexer circuit
-													\begin{itemize}
-														\item implement in hardware by replacing every non-terminal node by a multiplexer
-														\item select signal just a variable, that's the label of the node
-														\item 0 and 1 is just the logic 0 and 1
-														\item no datastructure that works in all cases
-													\end{itemize}
 												\end{itemize}
 											\end{minipage}
 										}
@@ -487,7 +584,444 @@
 							}
 					}
 				child {
-						node {Sat Solvers}
+						node {SAT Solvers
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item first problem proven NP-Complete
+											\item if satisfiable want satisfying assignment, because that's a CE for equivalence
+											\item if not how can be sure sat-solver works
+										\end{itemize}
+									\end{minipage}
+								}
+							}
+						child {
+								node {Complete methods
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {Proprositional logic
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item if xi is formula, then truth value formula is just assignment of xi
+															\item algorithms expect formulas in certain shape
+															\item not x1 also a clause of length 1
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Notation
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {CNF
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+									}
+								child {
+										node {Resolution
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Resolution Lemma
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Resolution Theorem
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child {
+										node {Naive method
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Davis Putman (DP)-Algorithm
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Variable elimination
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Theorem satisfiability equivalent
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+										child {
+												node {Optimizations}
+												child {
+														node {Subsumption checks
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Pure literal elimination
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+									}
+								child {
+										node {DLL-Algorithm
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item dfs in space of assignments
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Unit Clause
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+									}
+								child {
+										node {Modern SAT algorithms
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item nowadays algorithms also work on resolution
+															\item dfs not recursively but as a while loop and add ingredients like preprocessing simplifying the formula, picking good variable assignments, like if run into assignment that does not satisfy formula find out reason why that's the case and take care never have the same reasons again (conflict analysis)
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {Improvements to DLL}
+											}
+										child {
+												node {Preprocessing
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item asdf
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Unit Propagation
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Unit Propagation Lookahead (UPLA)
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Self-Subsuming Resolution
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Variable Elimination by Resolution
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Variable Elimination by Substitution
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Forward Subsumption
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Backward Subsumption
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Blocked Clause Elimination
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Equivalent Literals
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+										child {
+												node {Decision Stack
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Decision Heuristics
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+											}
+										child {
+												node {Boolean Constraint Propagation
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Counter-Based Schemes
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+														child {
+																node {2-Counter Scheme
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+														child {
+																node {1-Counter Scheme
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+													}
+												child {
+														node {Watched Literals
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+											}
+									}
+							}
+						child {
+								node {Incomplete methods
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+							}
+						child {
+								node {Complexity
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {3-SAT
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {2-SAT
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+								child {
+										node {Horn formulas
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+									}
+							}
 					}
 				child {
 						node {AND-Inverter Graphs}
@@ -502,6 +1036,14 @@
 									\item design for testability, ensure not introduce errors
 									\item timing analysis, part chip to slow, replace by more efficient
 									\item compute bdds for 1st and 2nd circuit and check are they isomorphic thanks to cannonicity theorem for ROBDD's
+									\item co-np complete
+									\begin{itemize}
+										\item no answer, can guess circuits not equivalent, guess counterexample, guess input that leads to different outputs
+										\item can verify difference outputs in linear size in the circuit
+										\item apply to both circuits, propagate through all the gates and check outputs different
+										\item for yes have to verify for all inputs the outputs are the same
+										\item analogy formula, verify that it's not satisfiable, check for all inputs the output is 0 or false and that's hard to guess
+									\end{itemize}
 								\end{itemize}
 							\end{minipage}
 						}
@@ -521,6 +1063,61 @@
 							}
 						child {
 								node {SAT}
+								child {
+										node {Miter Circuit
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item
+														\end{itemize}
+													\end{minipage}
+												}
+											}
+										child {
+												node {CNF
+														\resizebox{\textwidth}{!}{
+															\begin{minipage}[t]{12cm}
+																\begin{itemize}
+																	\item
+																\end{itemize}
+															\end{minipage}
+														}
+													}
+												child {
+														node {Theorem size of formula
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+													}
+												child {
+														node {Tseitin Transformation
+																\resizebox{\textwidth}{!}{
+																	\begin{minipage}[t]{12cm}
+																		\begin{itemize}
+																			\item
+																		\end{itemize}
+																	\end{minipage}
+																}
+															}
+														child {
+																node {Satisfiability equivalent
+																		\resizebox{\textwidth}{!}{
+																			\begin{minipage}[t]{12cm}
+																				\begin{itemize}
+																					\item
+																				\end{itemize}
+																			\end{minipage}
+																		}
+																	}
+															}
+													}
+											}
+									}
 							}
 						child {
 								node {Exploiting structural information}
@@ -633,70 +1230,90 @@
 										}
 									}
 							}
+					}
+			}
+		child {
+				node {Prerequisites}
+				child {
+						node {Complexity Theory
+								\resizebox{\textwidth}{!}{
+									\begin{minipage}[t]{12cm}
+										\begin{itemize}
+											\item measure how difficult problem is
+											\item difference polynomial and exponential, exponential computer 1000 times faster can only process 10 additional inputs, faster computers almost don't help to scale input
+										\end{itemize}
+									\end{minipage}
+								}
+							}
 						child {
-								node {Prerequisites}
+								node {NP-Hard
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item class problems hardest in NP, if can solve that problem fast can solve all problems in NP fast (reduction)
+												\end{itemize}
+											\end{minipage}
+										}
+									}
 								child {
-										node {Complexity Theory
+										node {NP-Complete
 												\resizebox{\textwidth}{!}{
 													\begin{minipage}[t]{12cm}
 														\begin{itemize}
-															\item measure how difficult problem is
-															\item difference polynomial and exponential, exponential computer 1000 times faster can only process 10 additional inputs, faster computers almost don't help to scale input
+															\item NP complete means it's part of NP, can guess and verify efficiently and it's at least as hard as all problems in NP
+															\item Problems proven by Steven Cook in 1970 that all problems in NP can be formulated as sat problem, all problems can be reduced to "is this formula satisfiable". SAT first NP complete problem. If can solve SAT fast can solve everything in NP fast
+															\item in practise no algorithm which runs in polynomial time in the worst case
+															\item there are formulas can solve quickly, with every algorithm always be input for which this algorithm needs exponential time
+															\item many people tried to find efficient algorithms or to prove that noone exists, no proof that exponential complexity is unavoidable
 														\end{itemize}
 													\end{minipage}
 												}
 											}
-										child {
-												node {NP-Hard
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item class problems hardest in NP, if can solve that problem fast can solve all problems in NP fast (reduction)
-																\end{itemize}
-															\end{minipage}
-														}
-													}
-												child {
-														node {NP-Complete
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
-																		\begin{itemize}
-																			\item NP complete means it's part of NP, can guess and verify efficiently and it's at least as hard as all problems in NP
-																			\item Problems proven by Steven Cook in 1970 that all problems in NP can be formulated as sat problem, all problems can be reduced to "is this formula satisfiable". SAT first NP complete problem. If can solve SAT fast can solve everything in NP fast
-																			\item in practise no algorithm which runs in polynomial time in the worst case
-																			\item there are formulas can solve quickly, with every algorithm always be input for which this algorithm needs exponential time
-																			\item many people tried to find efficient algorithms or to prove that noone exists, no proof that exponential complexity is unavoidable
-																		\end{itemize}
-																	\end{minipage}
-																}
-															}
-													}
+									}
+							}
+						child {
+								node {NP
+										\resizebox{\textwidth}{!}{
+											\begin{minipage}[t]{12cm}
+												\begin{itemize}
+													\item NP problem, problem where can guess and verify that the solution is a solution in polynomial time
+													\item N means non-deterministic, problem computers can't guess
+													\item probably more NP problem than P problems, no prove yet, P=NP problem
+													\item some practically relevant problems in NP, nobody found polynomial algorithm for them
+													\item in practise algorithms running in exponential time in worst case
+												\end{itemize}
+											\end{minipage}
+										}
+									}
+								child {
+										node {CO-NP
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item co means can guess a no answer and verify it
+															\item open problem if np and co-np the same
+															\item noone found way to certify the no answer of np-complete problems efficiently or to verify yes answer of co-np complete problems efficiently or prove that they are different
+															\item practical implications, tool says circuits equivalent
+															\item can beiebe tool if it says equivalent, how make sure implementer of tool did not make any bugs
+															\item no has CE easy to check
+															\item nobody has found a way to check this result in polynomial time, how can convince that yes answer in case of equivalence checking is correct
+															\item also sat solving if unsatisfiable, how make sure not implementation wrong
+															\item if classes the same then can also verify the opposite answer in polynomial time, if not the same one can't
+														\end{itemize}
+													\end{minipage}
+												}
 											}
-										child {
-												node {NP
-														\resizebox{\textwidth}{!}{
-															\begin{minipage}[t]{12cm}
-																\begin{itemize}
-																	\item NP problem, problem where can guess and verify that the solution is a solution in polynomial time
-																	\item N means non-deterministic, problem computers can't guess
-																	\item probably more NP problem than P problems, no prove yet, P=NP problem
-																	\item some practically relevant problems in NP, nobody found polynomial algorithm for them
-																\end{itemize}
-															\end{minipage}
-														}
-													}
-												child {
-														node {P
-																\resizebox{\textwidth}{!}{
-																	\begin{minipage}[t]{12cm}
-																		\begin{itemize}
-																			\item P is the class of all problems where you have a solution algorithm in polynomial time without guessing
-																			\item all P problems subset of NP problems, if don't need guessing and fast, then also fast with guessing
-																		\end{itemize}
-																	\end{minipage}
-																}
-															}
-													}
+									}
+								child {
+										node {P
+												\resizebox{\textwidth}{!}{
+													\begin{minipage}[t]{12cm}
+														\begin{itemize}
+															\item P is the class of all problems where you have a solution algorithm in polynomial time without guessing
+															\item all P problems subset of NP problems, if don't need guessing and fast, then also fast with guessing
+														\end{itemize}
+													\end{minipage}
+												}
 											}
 									}
 							}

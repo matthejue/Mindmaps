@@ -79,9 +79,6 @@
 								% 	\end{minipage}
 								% }
 							}
-            child {
-              node {Limitations}
-            }
 						child {
 								node {Variable Order
 										% \resizebox{\textwidth}{!}{
@@ -215,12 +212,12 @@
 							}
 						child {
 								node {Actions on BDD}
-                child {
-                  node {Number satisfying assignments}
-                }
-                child {
-                  node {Size of Bdds}
-                }
+								child {
+										node {Number satisfying assignments}
+									}
+								child {
+										node {Size of Bdds}
+									}
 								child {
 										node {Derive function reprsented by BDD
 												% \resizebox{\textwidth}{!}{
@@ -409,9 +406,9 @@
 																% 	\end{minipage}
 																% }
 															}
-                              child {
-                                node {Theorem Decomposition of ITE-Opterator}
-                              }
+														child {
+																node {Theorem Decomposition of ITE-Opterator}
+															}
 													}
 												child {
 														node {Optimizations and Runtime
@@ -430,18 +427,18 @@
 																% 	\end{minipage}
 																% }
 															}
-                            child {
-                              node {Theorem Runtime}
-                              child {
-                                node {Lemma Runtime AND}
-                              }
-                              child {
-                                node {Lemma Runtime OR}
-                              }
-                              child {
-                                node {Lemma Runtime Negation}
-                              }
-                            }
+														child {
+																node {Theorem Runtime}
+																child {
+																		node {Lemma Runtime AND}
+																	}
+																child {
+																		node {Lemma Runtime OR}
+																	}
+																child {
+																		node {Lemma Runtime Negation}
+																	}
+															}
 														child {
 																node {Computed Table
 																		% \resizebox{\textwidth}{!}{
@@ -557,9 +554,9 @@
 												% 	\end{minipage}
 												% }
 											}
-                      child {
-                        node {Isomorphism}
-                      }
+										child {
+												node {Isomorphism}
+											}
 									}
 								child {
 										node {Ordered BDD (OBDD)}
@@ -614,7 +611,52 @@
 							}
 					}
 				child {
-						node {SAT Solvers
+						node {AND-Inverter Graphs}
+						child {
+								node {Normalization Rules}
+								child {
+										node {Redundant AND Elimination}
+									}
+								child {
+										node {Constant Zero Elimination}
+									}
+								child {
+										node {Constant Zero Propagation}
+									}
+								child {
+										node {Constant One Propagation}
+									}
+								child {
+										node {Strutural Hashing}
+									}
+							}
+						child {
+								node {Functionally Reduced AIGs (FRAIGs)}
+								child {
+										node {Semi-canonical, Invariant}
+									}
+								child {
+										node {Equivalence classes, Random Vectors, SAT, CE's refine simulation}
+									}
+								child {
+										node {Functional Reduction \enquote{on the fly}}
+									}
+							}
+						child {
+								node {Usecases}
+								child {
+										node {Replace ROBDDs where canonicity is not necessarily needed}
+										child {
+												node {Represent set of states in model checking}
+											}
+										child {
+												node {Sufficient for combinational equivalence checking}
+											}
+									}
+							}
+					}
+				child {
+						node (satsolver) {SAT Solvers
 								% \resizebox{\textwidth}{!}{
 								% 	\begin{minipage}[t]{12cm}
 								% 		\begin{itemize}
@@ -639,27 +681,27 @@
 												% 	\end{minipage}
 												% }
 											}
-                    child {
-                      node {Syntax and Semantics}
-                    }
+										child {
+												node {Syntax and Semantics}
+											}
 										child {
 												node {SAT-Problem and Satisfiability}
 											}
-                    child {
-                      node {Notation for clause}
-                      child {
-                        node {Empty clause}
-                      }
-                      child {
-                        node {Empty formula}
-                      }
-                      child {
-                        node {Union}
-                      }
-                      child {
-                        node {Difference}
-                      }
-                    }
+										child {
+												node {Notation for clause}
+												child {
+														node {Empty clause}
+													}
+												child {
+														node {Empty formula}
+													}
+												child {
+														node {Union}
+													}
+												child {
+														node {Difference}
+													}
+											}
 										child {
 												node {Clause and Literal}
 											}
@@ -678,9 +720,9 @@
 									}
 								child {
 										node {Naive method}
-                    child {
-                      node {Complexity}
-                    }
+										child {
+												node {Complexity}
+											}
 									}
 								child {
 										node {Davis Putman (DP)-Algorithm}
@@ -688,13 +730,13 @@
 												node {Variable elimination}
 												child {
 														node {Theorem satisfiability equivalent}
-                            child {
-                              node {Existential quantification}
-                            }
+														child {
+																node {Existential quantification}
+															}
 													}
-                        child {
-                          node {Resoluton of all pairs}
-                        }
+												child {
+														node {Resoluton of all pairs}
+													}
 											}
 										child {
 												node {Optimizations}
@@ -731,21 +773,21 @@
 												% 	\end{minipage}
 												% }
 											}
-                    child {
-                      node {Comparison to DLL}
-                      child {
-                        node {Algorithm}
-                      }
-                      child {
-                        node {Different meaning for Unit Clause}
-                      }
-                      child {
-                        node {Different meaning for Contradiction / Conflict}
-                      }
-                      child {
-                        node {Different meaning for Conflict Analysis and Backtracking}
-                      }
-                    }
+										child {
+												node {Comparison to DLL}
+												child {
+														node {Algorithm}
+													}
+												child {
+														node {Different meaning for Unit Clause}
+													}
+												child {
+														node {Different meaning for Contradiction / Conflict}
+													}
+												child {
+														node {Different meaning for Conflict Analysis and Backtracking}
+													}
+											}
 										child {
 												node {Preprocessing }
 												child {
@@ -773,7 +815,7 @@
 														node {Blocked Clause Elimination}
 													}
 												child {
-														node {Equivalent Literal Detection}
+														node {Equivalent Literals (Equivalent Literal Detection)}
 													}
 											}
 										child {
@@ -781,9 +823,18 @@
 											}
 										child {
 												node {Decision Heuristics}
+												child {
+														node {Classical Decision Heuristics}
+													}
+												child {
+														node {Variable State Independent Decaying Sum (VSIDS)}
+													}
 											}
 										child {
 												node {Boolean Constraint Propagation}
+												child {
+														node {Implication queue}
+													}
 												child {
 														node {Counter-Based Schemes}
 														child {
@@ -792,20 +843,56 @@
 														child {
 																node {1-Counter Scheme}
 															}
+														child {
+																node {Disadvantages}
+															}
 													}
 												child {
 														node {Watched Literals}
 													}
 											}
 										child {
-												node {Conflict Analysis and (Non-Chronological) Backtracking}
+												node {Conflict Analysis and (Non-)Chronological Backtracking}
+												child {
+														node {Chronological Backtracking}
+													}
+												child {
+														node {Non-Chronological Backtracking}
+														child {
+																node {Conflict Clause}
+															}
+														child {
+																node {Implication Graph}
+																child {
+																		node {1UIP Scheme}
+																		child {
+																				node {Unique Implication Point}
+																				child {
+																						node {Asserting Clause}
+																					}
+																			}
+																	}
+															}
+													}
 											}
-                    child {
-                      node {Unlearning (conflict clauses)}
-                    }
-                    child {
-                      node {Restarts}
-                    }
+										child {
+												node {Unlearning (conflict clauses)}
+											}
+										child {
+												node {Restarts}
+											}
+										child {
+												node {Termination}
+												child {
+														node {Ranking Function}
+													}
+											}
+										child {
+												node {Certificates of (un)satisfiability of a CNF formula}
+											}
+										child {
+												node {Incremental SAT solving}
+											}
 									}
 							}
 						child {
@@ -824,12 +911,9 @@
 									}
 							}
 					}
-				child {
-						node {AND-Inverter Graphs}
-					}
 			}
 		child {
-				node {Equivlance Checking
+				node {Equivalence Checking
 						% \resizebox{\textwidth}{!}{
 						% 	\begin{minipage}[t]{12cm}
 						% 		\begin{itemize}
@@ -861,15 +945,21 @@
 							}
 						child {
 								node {BDD's}
-                child {
-                  node {Boolean function specification and implementation as ROBDDs}
-                  child {
-                    node {Testing whether both ROBDDs equivalent up to isomorphism}
-                  }
-                }
+								child {
+										node {Limitations}
+									}
+								child {
+										node {Boolean function specification and implementation as ROBDDs}
+										child {
+												node {Testing whether both ROBDDs equivalent up to isomorphism}
+											}
+									}
 							}
 						child {
 								node {SAT}
+								child {
+										node {Limitations}
+									}
 								child {
 										node {Miter Circuit}
 										child {
@@ -891,15 +981,63 @@
 														child {
 																node {Satisfiability equivalent / Equisatisfiable}
 															}
-                            child {
-                              node {Linear number clauses in final CNF}
-                            }
+														child {
+																node {Linear number clauses in final CNF}
+															}
 													}
 											}
 									}
 							}
 						child {
-								node {Exploiting structural information}
+								node (structuralmethods) {Structural Methods (Exploiting structural information)}
+								child {
+										node {Kühlmann, IBM, 80\% equivalent nodes}
+									}
+								child {
+										node {Find such equivalences efficiently}
+										child {
+												node {Equivalence classes}
+											}
+										child {
+												node {ROBDD's or SAT}
+											}
+									}
+								child {
+										node {Basic Approach}
+									}
+                child {
+                  node {Cut points (internal equivalences simpler by locality)}
+                  child {
+                    node {False negative problem}
+                    child {
+                      node {Solution 0: Do not Use Cut Points, Disadvantage}
+                    }
+                    child {
+                      node {Solution 1: Simulation based on \enquote{Xor ROBDD}, Disadvantages}
+                    }
+                    child {
+                      node {Solution 2: SAT based on \enquote{Xor (/ Difference) ROBDD}}
+                    }
+                    child {
+                      node {Solution 3: Backward Traversal based on \enquote{Xor ROBDD}}
+                    }
+                    child {
+                      node {Solution 4: \enquote{Cuts and Heaps}, \enquote{BDD Sweeping}}
+                    }
+                    child {
+                      node {Solution 5: SAT Solving with Cuts, \enquote{SAT Sweeping}}
+                    }
+                  }
+                }
+								child {
+										node {Observation from real-world instances (local in most cases)}
+										child {
+												node {Only small changes in later design phases}
+											}
+										child {
+												node {In many cases logic optimizations respect hierarchy boundaries}
+											}
+									}
 							}
 					}
 				child {
@@ -1105,8 +1243,10 @@
 	\end{mindmapcontent}
 	\begin{edges}
 		\edge{shannon}{iteop}
-    \edge{shannonbooleanfunction}{bdds}
-    \edge{satcomplexity}{npcomplete}
+		\edge{shannonbooleanfunction}{bdds}
+		\edge{satcomplexity}{npcomplete}
+		\edge{structuralmethods}{satsolver}
+		\edge{structuralmethods}{bdds}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

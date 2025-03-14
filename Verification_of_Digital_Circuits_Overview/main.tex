@@ -1595,7 +1595,7 @@
 								child {
 										node {Algorithm}
 										child {
-												node {Induction Base}
+												node {Induction Base formula}
 												child {
 														node {Sat means unsafe (CE found)}
 													}
@@ -1604,7 +1604,7 @@
 													}
 											}
 										child {
-												node {Induction Step}
+												node (inductionstep) {Induction Step formula}
 												child {
 														node {for $k=0$ tautology check}
 													}
@@ -1640,7 +1640,7 @@
 								child {
 										node {Completeness}
 										child {
-												node {Need to add suffix for no state repetition (example)}
+												node (terminationsuffix) {Need to add suffix to Step formula for no state repetition (example)}
 												child {
 														node {Else algorithm won't terminate}
 													}
@@ -1989,6 +1989,7 @@
 		\edge{bmcincrementalsat}{incrementalsat}
 		\edge{pdrincrementalsat}{incrementalsat}
 		\edge{craigformulasatoriginal}{craigformulasat}
+		\edge{inductionstep}{terminationsuffix}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

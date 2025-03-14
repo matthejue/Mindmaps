@@ -4,7 +4,7 @@
 % │ Mindmap │
 % └─────────┘
 \newlength{\leveldistance}
-\setlength{\leveldistance}{25cm}
+\setlength{\leveldistance}{30cm}
 
 \newenvironment{edges}{\begin{pgfonlayer}{background}\draw [concept connection]}{;\end{pgfonlayer}}
 \newcommand{\edge}[2]{(#1) edge (#2)}
@@ -16,8 +16,8 @@
 	\begin{tikzpicture}[
 			auto,
 			huge mindmap,
-			fill opacity=0.6,
-			draw opacity=0.8,
+			fill opacity=0.4,
+			draw opacity=0.6,
 			concept color = PrimaryColorDimmed,
 			every annotation/.style={fill=BoxColor, draw=none, align=center, fill = BoxColor, text width = 2cm},
 			grow cyclic,
@@ -115,10 +115,6 @@
 % ┌───────┐
 % │ Paths │
 % └───────┘
-\newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_1_Master/Verification_of_Digital_Circuits/slides/annotated/Verification_of_Digital_Circuits_all_in_one.pdf:#1}{\inlinebox{#2}}}
-\newcommand{\scripttwo}[2]{\href{openpdf:///home/areo/Nextcloud/Verification of Digital Circuits - WS2324/Slides/annotated/bonus/lecture08_sat_aig.pdf:#1}{\inlinebox{#2}}}
-\newcommand{\videoseven}[2]{\href{https://youtu.be/ILBLSr7zO70?feature=shared&t=#1}{\inlineboxtwo{#2}}}
-\newcommand{\videoeight}[2]{\href{https://youtu.be/DCDNlu0I8GA?feature=shared&t=#1}{\inlineboxtwo{#2}}}
-\newcommand{\videonine}[2]{\href{https://youtu.be/DCDNlu0I8GA?feature=shared&t=#1}{\inlineboxtwo{#2}}}
-\newcommand{\videoeleven}[2]{\href{https://youtu.be/dKszaFJQF3I?si=v1Qhw6OC-VxS7z7A&t=#1}{\inlineboxtwo{#2}}}
-\newcommand{\videotwelve}[2]{\href{https://youtu.be/uVedKmgkKxU?si=Ne2tds-ok_b_k6i2&t=#1}{\inlineboxtwo{#2}}}
+% \newcommand{\script}[2]{\href{openpdf:/home/areo/Documents/Studium/Semester_1_Master/Verification_of_Digital_Circuits/slides/annotated/Verification_of_Digital_Circuits_all_in_one.pdf:#1}{\inlinebox{#2}}}
+% \newcommand{\scripttwo}[2]{\href{openpdf:///home/areo/Nextcloud/Verification of Digital Circuits - WS2324/Slides/annotated/bonus/lecture08_sat_aig.pdf:#1}{\inlinebox{#2}}}
+% \newcommand{\videoseven}[2]{\href{https://youtu.be/ILBLSr7zO70?feature=shared&t=#1}{\inlineboxtwo{#2}}}

@@ -60,9 +60,6 @@
 							}
 					}
 				child {
-						node {Scalability}
-					}
-				child {
 						node (bdds) {Binary Decision Diagrams (BDDs)
 								% \resizebox{\textwidth}{!}{
 								% 	\begin{minipage}[t]{12cm}
@@ -90,6 +87,9 @@
 										% 	\end{minipage}
 										% }
 									}
+                child {
+                  node {Example where varable order makes difference linear or exponential}
+                }
 								child {
 										node {Static heuristic, define an initial variable order (Method of Malik)
 												% \resizebox{\textwidth}{!}{
@@ -155,6 +155,9 @@
 														% 	\end{minipage}
 														% }
 													}
+                          child {
+                            node {Complexity}
+                          }
 											}
 									}
 								child {
@@ -306,6 +309,9 @@
 																% 	\end{minipage}
 																% }
 															}
+                              child {
+                                node {Topological Order}
+                              }
 													}
 												child {
 														node {Backward construction
@@ -328,6 +334,14 @@
 																% 	\end{minipage}
 																% }
 															}
+                            child {
+                              node {Reverse Topopolgical Order}
+                            }
+                            child {
+                              node {
+                                Auxiliary Variables
+                              }
+                            }
 														child {
 																node {Substitution operator, compose
 																		% \resizebox{\textwidth}{!}{
@@ -406,6 +420,9 @@
 																% 	\end{minipage}
 																% }
 															}
+                            child {
+                              node {Base Cases}
+                            }
 														child {
 																node {Theorem Decomposition of ITE-Opterator}
 															}
@@ -585,6 +602,9 @@
 										% 	\end{minipage}
 										% }
 									}
+                child {
+                  node {Applied in layers starting from Terminal Nodes}
+                }
 								child {
 										node {\enquote{Isomorphism} reduction
 												% \resizebox{\textwidth}{!}{
@@ -611,49 +631,7 @@
 							}
 					}
 				child {
-						node {AND-Inverter Graphs}
-						child {
-								node {Normalization Rules}
-								child {
-										node {Redundant AND Elimination}
-									}
-								child {
-										node {Constant Zero Elimination}
-									}
-								child {
-										node {Constant Zero Propagation}
-									}
-								child {
-										node {Constant One Propagation}
-									}
-								child {
-										node {Strutural Hashing}
-									}
-							}
-						child {
-								node {Functionally Reduced AIGs (FRAIGs)}
-								child {
-										node {Semi-canonical, Invariant}
-									}
-								child {
-										node {Equivalence classes, Random Vectors, SAT, CE's refine simulation}
-									}
-								child {
-										node {Functional Reduction \enquote{on the fly}}
-									}
-							}
-						child {
-								node {Usecases}
-								child {
-										node {Replace ROBDDs where canonicity is not necessarily needed}
-										child {
-												node {Represent set of states in model checking}
-											}
-										child {
-												node {Sufficient for combinational equivalence checking}
-											}
-									}
-							}
+						node {Scalability}
 					}
 				child {
 						node (satsolver) {SAT Solvers
@@ -965,6 +943,51 @@
 									}
 							}
 					}
+				child {
+						node {AND-Inverter Graphs}
+						child {
+								node {Normalization Rules}
+								child {
+										node {Redundant AND Elimination}
+									}
+								child {
+										node {Constant Zero Elimination}
+									}
+								child {
+										node {Constant Zero Propagation}
+									}
+								child {
+										node {Constant One Propagation}
+									}
+								child {
+										node {Strutural Hashing}
+									}
+							}
+						child {
+								node {Functionally Reduced AIGs (FRAIGs)}
+								child {
+										node {Semi-canonical, Invariant}
+									}
+								child {
+										node {Equivalence classes, Random Vectors, SAT, CE's refine simulation}
+									}
+								child {
+										node {Functional Reduction \enquote{on the fly}}
+									}
+							}
+						child {
+								node {Usecases}
+								child {
+										node {Replace ROBDDs where canonicity is not necessarily needed}
+										child {
+												node {Represent set of states in model checking}
+											}
+										child {
+												node {Sufficient for combinational equivalence checking}
+											}
+									}
+							}
+					}
 			}
 		child {
 				node (equivalencechecking) {Equivalence Checking
@@ -1016,6 +1039,9 @@
 									}
 								child {
 										node {Miter Circuit}
+                    child {
+                      node {Namensursprung: Gehrungsverbindung}
+                    }
 										child {
 												node {CNF}
 												child {
@@ -1880,15 +1906,18 @@
 									}
 								child {
 										node {Termination}
-                    child {
-                      node {If $N > 2^{\lvert\vec{s}\rvert}$ then for sure $S_{i-1} = S_i$ for some $2 \le i \le N$}
-                    }
+										child {
+												node {If $N > 2^{\lvert\vec{s}\rvert}$ then for sure $S_{i-1} = S_i$ for some $2 \le i \le N$}
+											}
 									}
 							}
 					}
 			}
 		child {
 				node {Prerequisites}
+				child {
+						node {Steps during the design of integrated circuits}
+					}
 				child {
 						node {Complexity Theory
 								% \resizebox{\textwidth}{!}{
@@ -1972,9 +2001,6 @@
 											}
 									}
 							}
-					}
-				child {
-						node {Steps during the design of integrated circuits}
 					}
 			}
 	\end{mindmapcontent}

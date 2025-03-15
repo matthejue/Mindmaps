@@ -87,9 +87,9 @@
 										% 	\end{minipage}
 										% }
 									}
-                child {
-                  node {Example where varable order makes difference linear or exponential}
-                }
+								child {
+										node {Example where varable order makes difference linear or exponential}
+									}
 								child {
 										node {Static heuristic, define an initial variable order (Method of Malik)
 												% \resizebox{\textwidth}{!}{
@@ -155,9 +155,9 @@
 														% 	\end{minipage}
 														% }
 													}
-                          child {
-                            node {Complexity}
-                          }
+												child {
+														node {Complexity}
+													}
 											}
 									}
 								child {
@@ -309,9 +309,9 @@
 																% 	\end{minipage}
 																% }
 															}
-                              child {
-                                node {Topological Order}
-                              }
+														child {
+																node {Topological Order}
+															}
 													}
 												child {
 														node {Backward construction
@@ -334,14 +334,14 @@
 																% 	\end{minipage}
 																% }
 															}
-                            child {
-                              node {Reverse Topopolgical Order}
-                            }
-                            child {
-                              node {
-                                Auxiliary Variables
-                              }
-                            }
+														child {
+																node {Reverse Topopolgical Order}
+															}
+														child {
+																node {
+																		Auxiliary Variables
+																	}
+															}
 														child {
 																node {Substitution operator, compose
 																		% \resizebox{\textwidth}{!}{
@@ -420,9 +420,9 @@
 																% 	\end{minipage}
 																% }
 															}
-                            child {
-                              node {Base Cases}
-                            }
+														child {
+																node {Base Cases}
+															}
 														child {
 																node {Theorem Decomposition of ITE-Opterator}
 															}
@@ -602,9 +602,9 @@
 										% 	\end{minipage}
 										% }
 									}
-                child {
-                  node {Applied in layers starting from Terminal Nodes}
-                }
+								child {
+										node {Applied in layers starting from Terminal Nodes}
+									}
 								child {
 										node {\enquote{Isomorphism} reduction
 												% \resizebox{\textwidth}{!}{
@@ -685,6 +685,9 @@
 											}
 										child {
 												node {CNF}
+												child {
+														node {Conversion into CNF}
+													}
 											}
 									}
 								child {
@@ -700,6 +703,12 @@
 										node {Naive method}
 										child {
 												node {Complexity}
+											}
+										child {
+												node {Sat if reaches fixpoint}
+											}
+										child {
+												node {Unsat if empty clause appears}
 											}
 									}
 								child {
@@ -725,6 +734,15 @@
 														node {Pure literal elimination}
 													}
 											}
+										child {
+												node {Algorithm}
+											}
+										child {
+												node {Sat if F is empty formula}
+											}
+										child {
+												node {Unsat if empty clause appears in F by unit clause rule on ${\ldots, (¬x), (x), \ldots}$}
+											}
 									}
 								child {
 										node {DLL-Algorithm
@@ -739,6 +757,15 @@
 										child {
 												node {Unit Clause}
 											}
+										child {
+												node {Sat if F is empty formula}
+											}
+										child {
+												node {Unsat if empty clause appears in F for all variable assignments}
+											}
+										child {
+												node {Algorithm Difference to DP-Algorithm}
+											}
 									}
 								child {
 										node {Modern SAT algorithms
@@ -752,18 +779,45 @@
 												% }
 											}
 										child {
-												node {Comparison to DLL}
+												node {Algorithm}
 												child {
-														node {Algorithm}
+														node {Sat if all variables assigned}
 													}
 												child {
-														node {Different meaning for Unit Clause}
+														node {Unsat if conflict on decision level 0}
 													}
 												child {
-														node {Different meaning for Contradiction / Conflict}
-													}
-												child {
-														node {Different meaning for Conflict Analysis and Backtracking}
+														node {Comparison to DLL}
+														child {
+																node {Recursion vs. Iteration}
+															}
+														child {
+																node {Different meaning for Unit Clause}
+																child {
+																		node {Modern Sat: Constraint Propagation (BCP) or Unit Propagation}
+																		child {
+																				node {Assignments}
+																			}
+																	}
+																child {
+																		node {DLL: Repeated application of the unit clause rule on recursion level until nothing changes}
+																	}
+															}
+														child {
+																node {Different meaning for Contradiction / Conflict}
+																child {
+																		node {Modern SAT: Learning of a conflict clause}
+																	}
+																child {
+																		node {DLL: Combination of the previously done decisions will always be considered}
+																		child {
+																				node {Backtracking to the recursion level of the last \enquote{branching}}
+																			}
+																	}
+															}
+														child {
+																node {Different meaning for Conflict Analysis and Backtracking}
+															}
 													}
 											}
 										child {
@@ -773,6 +827,9 @@
 													}
 												child {
 														node {Unit Propagation Lookahead (UPLA)}
+														child {
+																node {Requires binary clauses in the original formula}
+															}
 													}
 												child {
 														node {Self-Subsuming Resolution }
@@ -810,6 +867,9 @@
 											}
 										child {
 												node {Boolean Constraint Propagation}
+												child {
+														node {Determines implications}
+													}
 												child {
 														node {Implication queue}
 													}
@@ -1039,9 +1099,9 @@
 									}
 								child {
 										node {Miter Circuit}
-                    child {
-                      node {Namensursprung: Gehrungsverbindung}
-                    }
+										child {
+												node {Namensursprung: Gehrungsverbindung}
+											}
 										child {
 												node {CNF}
 												child {
@@ -1689,6 +1749,9 @@
 												node {Construction of a Craig Interpolant}
 												child {
 														node {Convention $c_1$ positive litral, $c_2$ negative literal}
+													}
+												child {
+														node {Resolution Graph}
 													}
 											}
 									}

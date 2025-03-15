@@ -794,29 +794,50 @@
 														child {
 																node {Different meaning for Unit Clause}
 																child {
-																		node {Modern Sat: Constraint Propagation (BCP) or Unit Propagation}
+																		node {Modern Sat: Clauses where all the literals but one are assigned }
+                                    child {
+                                      node {Constraint Propagation (BCP) or Unit Propagation}
+                                    }
 																		child {
 																				node {Assignments}
 																			}
 																	}
 																child {
-																		node {DLL: Repeated application of the unit clause rule on recursion level until nothing changes}
+																		node {DLL: Clause made of exactly one literal}
+                                    child {
+                                      node {Repeated application of the unit clause rule on recursion level until nothing changes}
+                                    }
 																	}
 															}
 														child {
 																node {Different meaning for Contradiction / Conflict}
 																child {
-																		node {Modern SAT: Learning of a conflict clause}
+																		node {Modern SAT: Unsatisfied clause}
 																	}
 																child {
-																		node {DLL: Combination of the previously done decisions will always be considered}
-																		child {
-																				node {Backtracking to the recursion level of the last \enquote{branching}}
-																			}
+																		node {DLL: Empty clause}
 																	}
 															}
 														child {
 																node {Different meaning for Conflict Analysis and Backtracking}
+																child {
+																		node {Modern SAT: Not all previously made \enquote{branchings} must involved in current conflict}
+                                    child {
+                                      node {Learning of a conflict clause}
+                                    }
+                                    child {
+                                      node {Backtrack with help of conflict clause or output UNSATISFIABLE}
+                                    }
+																	}
+																child {
+																		node {DLL: Combination of the previously done decisions will always be considered origin of conflict}
+																		child {
+																				node {Backtracking to the recursion level of the last \enquote{branching}}
+																			}
+																		child {
+																				node {If none exists the given CNF formula is unsatisfiable}
+																			}
+																	}
 															}
 													}
 											}
@@ -848,13 +869,31 @@
 													}
 												child {
 														node {Blocked Clause Elimination}
+														child {
+																node {Blocked Clause}
+															}
 													}
 												child {
 														node {Equivalent Literals (Equivalent Literal Detection)}
+														child {
+																node {Binary Clause Graph}
+															}
 													}
 											}
 										child {
 												node {Decision Stack}
+												child {
+														node {Decision Level 0}
+														child {
+																node {Stores only implications from unit clauses in original formula, no decisions}
+															}
+														child {
+																node {Decision Level -1}
+																child {
+																		node {Assumptions}
+																	}
+															}
+													}
 											}
 										child {
 												node {Decision Heuristics}

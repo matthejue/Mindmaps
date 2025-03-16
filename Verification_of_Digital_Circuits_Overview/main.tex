@@ -693,7 +693,7 @@
 								child {
 										node {Resolution }
 										child {
-												node {Resolution Lemma}
+												node (resolutionlemma) {Resolution Lemma}
 											}
 										child {
 												node {Resolution Theorem}
@@ -702,10 +702,16 @@
 								child {
 										node {Naive method}
 										child {
+												node {Problem}
+											}
+										child {
 												node {Complexity}
 											}
 										child {
 												node {Sat if reaches fixpoint}
+												child {
+														node {Not give satisfying assignment}
+													}
 											}
 										child {
 												node {Unsat if empty clause appears}
@@ -738,6 +744,9 @@
 												node {Algorithm}
 											}
 										child {
+												node {Improvement over Naive method}
+											}
+										child {
 												node {Sat if F is empty formula}
 											}
 										child {
@@ -758,10 +767,10 @@
 												node {Unit Clause}
 											}
 										child {
-												node {Sat if F is empty formula}
+												node {Sat if F is empty formula (1 case sat)}
 											}
 										child {
-												node {Unsat if empty clause appears in F for all variable assignments}
+												node {Unsat if empty clause appears in both cases for a variable (both cases unsat)}
 											}
 										child {
 												node {Algorithm Difference to DP-Algorithm}
@@ -836,12 +845,15 @@
 																			}
 																	}
 																child {
-																		node {DLL: Combination of the previously done decisions will always be considered origin of conflict}
+																		node {DLL: Combination of the previously done branches will always be considered origin of conflict}
 																		child {
-																				node {Backtracking to the recursion level of the last \enquote{branching}}
-																			}
-																		child {
-																				node {If none exists the given CNF formula is unsatisfiable}
+																				node {Chronological Backtracking}
+																				child {
+																						node {Backtracking last branch from which search space not explored for both values of variable}
+																					}
+																				child {
+																						node {If none exists the given CNF formula is unsatisfiable}
+																					}
 																			}
 																	}
 															}
@@ -856,6 +868,9 @@
 														node {Unit Propagation Lookahead (UPLA)}
 														child {
 																node {Requires binary clauses in the original formula}
+															}
+														child {
+																node {Advantages and Disadvantages}
 															}
 													}
 												child {
@@ -913,7 +928,7 @@
 															}
 													}
 											}
-										child {
+										child [level distance=10cm] {
 												node {Decision Heuristics}
 												child {
 														node {Classical Decision Heuristics}
@@ -923,9 +938,24 @@
 														child {
 																node {In most cases also weighted with the length of those clauses}
 															}
+														child {
+																node {Disadvantage}
+																child {
+																		node {Status each clause and distribution variables in (learned) clauses have to be computed updatet}
+																	}
+																child {
+																		node {Computation complexity determined by \#Clauses}
+																	}
+															}
 													}
 												child {
 														node {Variable State Independent Decaying Sum (VSIDS)}
+														child {
+																node {2 Activity Counters for each variable}
+															}
+														child {
+																node {Computation complexity determined by \#Variables}
+															}
 													}
 											}
 										child {
@@ -934,36 +964,114 @@
 														node {Determines implications}
 													}
 												child {
+														node {Roughly 80\% of runtime of SAT}
+													}
+												child {
 														node {Implication queue}
 													}
 												child {
 														node {Counter-Based Schemes}
 														child {
 																node {2-Counter Scheme}
+																child {
+																		node {Literals satisfy clause and unassigned for every clause}
+																		child {
+																				node {Unit propgation for $c_s=0$ and $c_u=1$}
+																			}
+																	}
 															}
 														child {
 																node {1-Counter Scheme}
+																child {
+																		node {Literals not falsified for every clause}
+																		child {
+																				node {Unit propgation for $c_f=1$}
+																			}
+																	}
 															}
 														child {
 																node {Disadvantages}
+																child {
+																		node {\enquote{Unnecessary} counter updates}
+																	}
+																child {
+																		node {Adjustment of the counter values during the backtracks}
+																	}
+																child {
+																		node {Need occurrences list}
+																		child {
+																				node {list for each variable and polarity}
+																			}
+																		child {
+																				node {store all the clause where variable having that polarity occurs}
+																			}
+																	}
 															}
 													}
-												child {
+												child [level distance=30cm] {
 														node {Watched Literals}
+														child {
+																node {Invariant: The 2 watched literals of a clause are either unassigned}
+																child {
+																		node {or at least one of them satisfies the clause}
+																	}
+															}
+														child {
+																node {Advantages}
+																child {
+																		node {Update operations only when necessary}
+																	}
+																child {
+																		node {One list containing only clauses currently watching literal}
+																	}
+															}
+														child {
+																node {Several literals checked until new unassigned literal found}
+															}
 													}
 											}
 										child {
 												node {Conflict Analysis and (Non-)Chronological Backtracking}
 												child {
-														node {Chronological Backtracking}
+														node {Chronological Backtracking (DLL)}
 													}
-												child {
+												child [level distance=13cm] {
 														node {Non-Chronological Backtracking}
 														child {
-																node {Conflict Clause}
+																node (conflictclause) {Conflict Clause}
 															}
 														child {
-																node {Implication Graph}
+																node {Implication Graph (directed, acyclic)}
+																child {
+																		node {Updated at every variable assignment and every backtrack operation}
+																	}
+																child {
+																		node {Partitions of implication graph into conflict side and reason side}
+																		child {
+																				node {Conflict clause by}
+																			}
+																		child {
+																				node {Negation of cube derived from incoming edges to conflict side}
+																				child [grow=-45] {
+																						node {By UIP unit clause with one literal current decision level}
+																						child {
+																								node {Other literals falisfied because other decision levels already happened}
+																								child {
+																										node {Because go to max decision level of not-UIP-literals}
+																									}
+																							}
+																					}
+																			}
+																		child {
+																				node {Resolution of unit clauses associated with nodes on the conflict side}
+																				child {
+																						node {By Resolution literals from conflict side get removed}
+																					}
+																				child {
+																						node {Because of resolution lemma can add to clause set}
+																					}
+																			}
+																	}
 																child {
 																		node {1UIP Scheme}
 																		child {
@@ -971,6 +1079,18 @@
 																				child {
 																						node {Asserting Clause}
 																					}
+																				child {
+																						node {Backtrack Level}
+																						child {
+																								node {Max Decision Level literals conflict clause except UIP literal}
+																							}
+																					}
+																			}
+																	}
+																child {
+																		node {Nodes correspond either decision or unit clause which triggererd assignment}
+																		child {
+																				node {Incoming edges falsify literals and node itself satisfies the one remaining literal}
 																			}
 																	}
 															}
@@ -978,14 +1098,29 @@
 											}
 										child {
 												node {Unlearning (conflict clauses)}
+												child {
+														node {Activity of a clause (often used to derive conflicts)}
+													}
+												child {
+														node {Age of a clause (order of learning)}
+													}
 											}
 										child {
 												node {Restarts}
+												child {
+														node {Keeps clausues learned and variable activities}
+													}
+												child {
+														node {increasing the interval between two restarts}
+													}
 											}
 										child {
 												node {Termination}
 												child {
 														node {Ranking Function}
+														child {
+																node {Well-founded relation}
+															}
 													}
 											}
 										child {
@@ -1057,6 +1192,9 @@
 								node (satcomplexity) {Complexity}
 								child {
 										node {3-SAT}
+										child {
+												node {Connecting Literals}
+											}
 									}
 								child {
 										node {2-SAT}
@@ -1163,6 +1301,27 @@
 								child {
 										node {Miter Circuit}
 										child {
+												node {For each pair outputs Xor-Gate}
+												child {
+														node {Connect outputs Xor-Gates by Or-Gate}
+														child {
+																node {Non-Equivalence enough if only 1 output pair differs}
+															}
+													}
+											}
+										child {
+												node {Sat (possible to produce 1 at output) not equivaelent}
+												child {
+														node {Xor is 1 when outputs different}
+													}
+											}
+										child {
+												node {Unsat (constant 0 function) equivalent}
+												child {
+														node {Xor is 0 when outputs same}
+													}
+											}
+										child {
 												node {Namensursprung: Gehrungsverbindung}
 											}
 										child {
@@ -1171,6 +1330,9 @@
 														node {Theorem size of formula}
 														child {
 																node {Size of formula}
+															}
+														child {
+																node {Exist formulas for which equivalent CNF formula always exponential blow up}
 															}
 													}
 												child {
@@ -1185,7 +1347,28 @@
 																node {Satisfiability equivalent / Equisatisfiable}
 															}
 														child {
-																node {Linear number clauses in final CNF}
+																node {CNF linear in number of gates of circuit}
+															}
+														child {
+																node {And-Connection to put together gates}
+																child {
+																		node {Signal assignment has to be consistent for all gates}
+																	}
+															}
+														child {
+																node {Fix output variable of circuit to be 1 via unit clause}
+																child {
+																		node {Because testing for satisfiability}
+																	}
+																child {
+																		node {Is just characteristic function}
+																		child {
+																				node {Just tells if there's consistent signal assignment (of inputs \& outputs) for function}
+																			}
+                                    child {
+                                      node {Consistent signal assignment checked by equivalence $c\equiv a\land b$}
+                                    }
+																	}
 															}
 													}
 											}
@@ -1327,7 +1510,7 @@
 											}
 										child [level distance=20cm] {
 												node {Symbolic Traversal of Automata steps}
-                        child [level distance=15cm] {
+												child [level distance=15cm] {
 														node {Optimizations}
 														child {
 																node {Backward traversal}
@@ -1629,7 +1812,7 @@
 									}
 								child {
 										node {Propositional logic formula satisfiable iff $M\models_k \varphi'$, Tseitin Transform}
-										child {
+										child [level distance=10cm] {
 												node {Characteristic Function}
 												child {
 														node {Characteristic f. of the initial states}
@@ -1943,7 +2126,7 @@
 														node {For $0 \le i \le N$, the set $S_i$ overapproximates the set of states reachable from $I$ in $\le i$ steps}
 													}
 											}
-                      child [level distance=15cm] {
+										child [level distance=15cm] {
 												node {Main Loop}
 												child {
 														node {Start with $N=1$}
@@ -2146,6 +2329,7 @@
 		\edge{pdrincrementalsat}{incrementalsat}
 		\edge{craigformulasatoriginal}{craigformulasat}
 		\edge{inductionstep}{terminationsuffix}
+		\edge{conflictclause}{resolutionlemma}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

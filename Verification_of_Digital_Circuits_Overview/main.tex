@@ -767,7 +767,7 @@
 												node {Algorithm Difference to DP-Algorithm}
 											}
 									}
-								child {
+								child [level distance=40cm] {
 										node {Modern SAT algorithms
 												% \resizebox{\textwidth}{!}{
 												% 	\begin{minipage}[t]{12cm}
@@ -782,6 +782,12 @@
 												node {Algorithm}
 												child {
 														node {Sat if all variables assigned}
+														child {
+																node {Not test whether the CNF formula is already satisfied during the search}
+																child {
+																		node {Indirectly guaranteed from assigning all variables without running into conflict}
+																	}
+															}
 													}
 												child {
 														node {Unsat if conflict on decision level 0}
@@ -795,18 +801,18 @@
 																node {Different meaning for Unit Clause}
 																child {
 																		node {Modern Sat: Clauses where all the literals but one are assigned }
-                                    child {
-                                      node {Constraint Propagation (BCP) or Unit Propagation}
-                                    }
+																		child {
+																				node {Constraint Propagation (BCP) or Unit Propagation}
+																			}
 																		child {
 																				node {Assignments}
 																			}
 																	}
 																child {
 																		node {DLL: Clause made of exactly one literal}
-                                    child {
-                                      node {Repeated application of the unit clause rule on recursion level until nothing changes}
-                                    }
+																		child {
+																				node {Repeated application of the unit clause rule on recursion level until nothing changes}
+																			}
 																	}
 															}
 														child {
@@ -822,12 +828,12 @@
 																node {Different meaning for Conflict Analysis and Backtracking}
 																child {
 																		node {Modern SAT: Not all previously made \enquote{branchings} must involved in current conflict}
-                                    child {
-                                      node {Learning of a conflict clause}
-                                    }
-                                    child {
-                                      node {Backtrack with help of conflict clause or output UNSATISFIABLE}
-                                    }
+																		child {
+																				node {Learning of a conflict clause}
+																			}
+																		child {
+																				node {Backtrack with help of conflict clause or output UNSATISFIABLE}
+																			}
 																	}
 																child {
 																		node {DLL: Combination of the previously done decisions will always be considered origin of conflict}
@@ -841,7 +847,7 @@
 															}
 													}
 											}
-										child {
+										child [level distance=30cm] {
 												node {Preprocessing }
 												child {
 														node {Unit Propagation}
@@ -883,15 +889,27 @@
 										child {
 												node {Decision Stack}
 												child {
+														node {Stores the order of the executed assignments}
+													}
+												child {
 														node {Decision Level 0}
 														child {
 																node {Stores only implications from unit clauses in original formula, no decisions}
 															}
+													}
+												child {
+														node {Decision level is initialized with 0}
 														child {
-																node {Decision Level -1}
-																child {
-																		node {Assumptions}
-																	}
+																node {It is incremented by one before decision is made}
+															}
+														child {
+																node {Backtracking decrements decision level appropriately}
+															}
+													}
+												child {
+														node {Decision Level -1}
+														child {
+																node {Assumptions}
 															}
 													}
 											}
@@ -899,6 +917,12 @@
 												node {Decision Heuristics}
 												child {
 														node {Classical Decision Heuristics}
+														child {
+																node {Among unassigned variables, choose that occurs more frequently in currently unsatisfied clauses}
+															}
+														child {
+																node {In most cases also weighted with the length of those clauses}
+															}
 													}
 												child {
 														node {Variable State Independent Decaying Sum (VSIDS)}
@@ -1186,7 +1210,7 @@
 									}
 								child {
 										node {Cut points (internal equivalences simpler by locality)}
-										child {
+										child [level distance=12cm] {
 												node {False negative problem}
 												child {
 														node {Solution 0: Do not Use Cut Points, Disadvantage}
@@ -1301,9 +1325,9 @@
 												% 	\end{minipage}
 												% }
 											}
-										child {
+										child [level distance=20cm] {
 												node {Symbolic Traversal of Automata steps}
-												child {
+                        child [level distance=15cm] {
 														node {Optimizations}
 														child {
 																node {Backward traversal}
@@ -1440,7 +1464,11 @@
 												node {Image, Preimage, Range}
 												child {
 														node {Efficient Range Computation}
+													}
+												child {
 														node {Efficient Image Computation}
+													}
+												child {
 														node {Efficient Preimage Computation}
 													}
 											}
@@ -1867,7 +1895,7 @@
 											}
 									}
 							}
-						child {
+						child [level distance=30cm] {
 								node {Property Directed Reachability (PDR)
 										% \resizebox{\textwidth}{!}{
 										% 	\begin{minipage}[t]{12cm}
@@ -1915,7 +1943,7 @@
 														node {For $0 \le i \le N$, the set $S_i$ overapproximates the set of states reachable from $I$ in $\le i$ steps}
 													}
 											}
-										child {
+                      child [level distance=15cm] {
 												node {Main Loop}
 												child {
 														node {Start with $N=1$}

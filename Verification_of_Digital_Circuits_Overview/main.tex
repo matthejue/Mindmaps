@@ -1265,9 +1265,6 @@
 							}
 						child {
 								node {Functionally Reduced AIGs (FRAIGs)}
-								child {
-										node {Semi-canonical, Invariant}
-									}
 								child [level distance=10cm] {
 										node {Functional reduction + Normalisation rules}
 										child {
@@ -1289,7 +1286,7 @@
 													}
 											}
 										child {
-												node {SAT for equivalence checking}
+												node {SAT (/ BDD's) for equivalence checking}
 											}
 										child {
 												node {Normalisation rules after merging}
@@ -1488,9 +1485,12 @@
 						child [level distance=35cm] {
 								node (structuralmethods) {Structural Methods (Exploiting structural information)}
 								child {
-										node {Solve several small problems instead of one large problem}
+										node {Circuits too large to be checked as a whole, Sat and BDDs fail}
 										child {
-												node {Make CEC problem stepwise simpler by proving internal equivalences}
+												node {Solve several small problems instead of one large problem}
+												child {
+														node {Make CEC problem stepwise simpler by proving internal equivalences}
+													}
 											}
 									}
 								child {
@@ -1516,40 +1516,265 @@
 														node {Simplifications might allow structural rewritings (AIG's)}
 													}
 											}
-										child {
+										child [level distance=8cm] {
 												node {Check Sat of Miter}
 											}
 									}
 								child {
 										node {Cut points (internal equivalences simpler by locality)}
-                    child {
-                      node {Introduce cut points at internal equivalence points}
-                    }
-                    child {
-                      node {Only reduced equivalence checking problems up to the cut points}
-                    }
-                    child {
-                      node {Solves Problem that Equivalence Checking still considers \enquote{global problems}}
-                    }
+										child {
+												node {Solves Problem that Equivalence Checking node pairs near outputs still considers \enquote{global problems}}
+												child {
+														node {Want arrive at more local problem}
+													}
+											}
+										child {
+												node {Introduce cut points at internal equivalence points}
+												child {
+														node {Already proven equivalence at internal equivalence points}
+													}
+											}
+										child {
+												node {Reduced equivalence checking problems up to the cut points}
+											}
 										child {
 												node {False negative problem}
 												child {
+														node {New variables at cut points may assume arbitrary values}
+														child {
+																node {Need only be equivalent for values at cut points produced by \enquote{leftmost} parts}
+															}
+													}
+												child {
+														node {XOR-ROBDD}
+														child {
+																node {Used in solutions 1 to 3}
+															}
+														child {
+																node {Element ON set is input assignment for which cut point circuits compute different result}
+															}
+														child {
+																node {False negative if assignment cannot be computed by some assignment to the primary inputs}
+															}
+													}
+												child {
 														node {Solution 0: Do not Use Cut Points, Disadvantage}
+														child {
+																node {Disadvantage: Huge equivalence checking problems for candidate pairs close to outputs}
+															}
 													}
 												child {
 														node {Solution 1: Simulation based on \enquote{Xor ROBDD}, Disadvantages}
+														child {
+																node {Enumerate satisfying assignments of Xor-ROBDD}
+															}
+														child {
+																node {For each satisfying assignments check if simulation leads to contradiction}
+															}
+														child {
+																node {Disadvantages}
+																child {
+																		node {Number of satisfying assignments may be large}
+																	}
+																child {
+																		node {Incomplete: Simulation rarely produces contradictions}
+																		child {
+																				node {If (many cut points) and no / only few primary inputs are assigned}
+																			}
+																		child {
+																				node {Can only find a contradiction if one of cut point signals}
+																				child {
+																						node {Is a successor of the input variables which occur in the Xor-BDD}
+																					}
+																			}
+																	}
+															}
 													}
-												child {
+												child [level distance=20cm] {
 														node {Solution 2: SAT based on \enquote{Xor (/ Difference) ROBDD}}
+														child {
+																node {Enumerate satisfying assignments of Xor-ROBDD}
+															}
+														child {
+																node {For each satisfying assignment compute a SAT problem}
+																child {
+																		node {\enquote{Leftmost} part of circuit computing cut point assignments}
+																	}
+																child {
+																		node {Unit clauses to fix assignments according to satisfying assignment}
+																	}
+																child {
+																		node {UNSAT, then false negative}
+																	}
+																child {
+																		node {SAT, then real counterexample to equivalence}
+																	}
+															}
+														child {
+																node {Advantages}
+																child {
+																		node {Complete Method}
+																	}
+																child {
+																		node {SAT problems highly simplified by unit propagation}
+																	}
+															}
+														child {
+																node {Disadvantages}
+																child {
+																		node {Number of satisfying assignments may be large}
+																	}
+																child {
+																		node {More expensive than simulation}
+																	}
+															}
 													}
 												child {
 														node {Solution 3: Backward Traversal based on \enquote{Xor ROBDD}}
+														child {
+																node (replacerobddvariables) {Replace ROBDD variables of the cut points by the functions of gates computing them}
+															}
+														child {
+																node {Stop, if}
+																child {
+																		node {Primary inputs are reached with non-zero ROBDD}
+																		child {
+																				node {Real counterexample(s)}
+																			}
+																	}
+																child {
+																		node {The XOR-ROBDD corresponds to the constant 0-function}
+																		child {
+																				node {All \enquote{counterexamples} are false negatives}
+																			}
+																	}
+															}
+														child {
+																node {Advantages}
+																child {
+																		node {Complete Method}
+																	}
+																child {
+																		node {No enumeration of satisfying assignments}
+																	}
+															}
+														child {
+																node {Disadvantages}
+																child {
+																		node {ROBDD may become large}
+																	}
+																child {
+																		node {Shows this method is only effective if have really false negatives}
+																		child {
+																				node {Else just computed XOR-BDD of 2 circuits}
+																			}
+																	}
+															}
 													}
-												child {
+												child [level distance=19cm] {
 														node {Solution 4: \enquote{Cuts and Heaps}, \enquote{BDD Sweeping}}
+														child {
+																node {Compute ROBDDs for internal equivalence candidates by backward traversal}
+															}
+														child {
+																node {Whole heap ROBDDs for one candidate}
+																child {
+																		node {First ROBDD expressed in closest cut point variables}
+																	}
+																child {
+																		node {Compute ROBDDs that are going beyond closest cut points}
+																	}
+																child {
+																		node {Computed up to some node limit}
+																	}
+															}
+														child {
+																node {Immediate circuit simplifications as soon as equivalences are found}
+															}
+														child {
+																node {If no more equivalences are found increase node limit}
+																child {
+																		node {By resource limit handle easy problems first}
+																	}
+															}
+														child {
+																node {Similar to method 3, but don't compute Xor-Bdd}
+																child {
+																		node {Look at identical BDDs for Spec and Impl}
+																	}
+															}
+														child {
+																node {Advantages}
+																child {
+																		node {Complete Method}
+																	}
+																child {
+																		node {Easy subproblems solved with small node limits}
+																	}
+																child {
+																		node {Structural methods may avoid larger subproblems}
+																	}
+															}
+														child {
+																node {Disadvantages}
+																child {
+																		node {ROBDDs may become large before problem is solved}
+																	}
+															}
 													}
-												child {
+												child [level distance=12cm] {
 														node {Solution 5: SAT Solving with Cuts, \enquote{SAT Sweeping}}
+														child {
+																node {Construct SAT problems for internal equivalence candidates from inputs to outputs}
+															}
+														child {
+																node {Stop miter construction at cut points}
+															}
+														child {
+																node {If UNSAT Equivalence proved}
+															}
+														child {
+																node {If SAT add clauses for more and more parts of the circuit}
+																child {
+																		node {Until UNSAT or current resource limit is reached}
+																	}
+																child {
+																		node {By adding more constraints possible turn a Sat into Unsat}
+																	}
+															}
+														child {
+																node {Immediate circuit simplifications as soon as equivalences are found}
+																child {
+																		node {Go over whole circuit filter out easy problems, do simplification}
+																	}
+																child {
+																		node {Several sweeps over circuit, finding equivalences}
+																	}
+															}
+														child {
+																node {If no more equivalences found irncrease ressource limit}
+															}
+														child {
+																node {Advantages}
+																child {
+																		node {Complete Method}
+																	}
+																child {
+																		node {Easy subproblems solved fast}
+																	}
+																child {
+																		node {Structural methods may avoid larger subproblems}
+																	}
+																child {
+																		node (similarsatproblems) {Many similar SAT problems. Can use Incremental SAT}
+																	}
+															}
+														child {
+																node {Disadvantages}
+																child {
+																		node {Possibly large CPU times}
+																	}
+															}
 													}
 											}
 									}
@@ -1654,7 +1879,7 @@
 												child [level distance=15cm] {
 														node {Optimizations}
 														child {
-																node {Backward traversal}
+																node (backwardtraversal) {Backward traversal}
 																child {
 																		node {Algorithm Exact Backward Traversal}
 																	}
@@ -1728,51 +1953,6 @@
 													}
 											}
 										child {
-												node {Fixpoint Theory}
-												child {
-														node {Partial Order}
-														child {
-																node {Lattice}
-																child {
-																		node {Supremum}
-																	}
-																child {
-																		node {Infimum}
-																	}
-																child {
-																		node {Complete Lattice}
-																		child {
-																				node {Lemma each finite Lattice Complete}
-																			}
-																		child {
-																				node {Lattice of Subsets, Union and Intersection}
-																			}
-																	}
-															}
-														child {
-																node {Monotone Increasing (/ Decreasing)}
-																child {
-																		node {Upward (/ downward) continuous}
-																	}
-																child {
-																		node {Lemma Upward or Downward Continuous then Monotone Increasing}
-																	}
-															}
-														child {
-																node {Fixed Point}
-																child {
-																		node {Theorem Unique least Fixed Point}
-																		child {
-																				node {Knaster-Tarski Fixed point Theorem (replace by monotone increasing)}
-																			}
-																	}
-																child {
-																		node {Theorem Automaton Traversal as Fixed Point Iteration}
-																	}
-															}
-													}
-											}
-										child {
 												node {Special form of Product automaton}
 												child {
 														node {Theorem Automata equivalent no Bad States reachable}
@@ -1808,6 +1988,51 @@
 									}
 								child {
 										node {Inefficient implementation Complexity}
+									}
+								child {
+										node {Fixpoint Theory}
+										child {
+												node {Partial Order}
+												child {
+														node {Lattice}
+														child {
+																node {Supremum}
+															}
+														child {
+																node {Infimum}
+															}
+														child {
+																node {Complete Lattice}
+																child {
+																		node {Lemma each finite Lattice Complete}
+																	}
+																child {
+																		node {Lattice of Subsets, Union and Intersection}
+																	}
+															}
+													}
+												child {
+														node {Monotone Increasing (/ Decreasing)}
+														child {
+																node {Upward (/ downward) continuous}
+															}
+														child {
+																node {Lemma Upward or Downward Continuous then Monotone Increasing}
+															}
+													}
+												child {
+														node {Fixed Point}
+														child {
+																node {Theorem Unique least Fixed Point}
+																child {
+																		node {Knaster-Tarski Fixed point Theorem (replace by monotone increasing)}
+																	}
+															}
+														child {
+																node {Theorem Automaton Traversal as Fixed Point Iteration}
+															}
+													}
+											}
 									}
 							}
 					}
@@ -2471,6 +2696,8 @@
 		\edge{craigformulasatoriginal}{craigformulasat}
 		\edge{inductionstep}{terminationsuffix}
 		\edge{conflictclause}{resolutionlemma}
+		\edge{replacerobddvariables}{backwardtraversal}
+		\edge{similarsatproblems}{incrementalsat}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

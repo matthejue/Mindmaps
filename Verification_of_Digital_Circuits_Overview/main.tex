@@ -1008,7 +1008,7 @@
 																	}
 															}
 													}
-												child [level distance=30cm] {
+												child [level distance=35cm] {
 														node {Watched Literals}
 														child {
 																node {Invariant: The 2 watched literals of a clause are either unassigned}
@@ -1074,7 +1074,7 @@
 																	}
 																child {
 																		node {1UIP Scheme}
-																		child {
+																		child [level distance=5cm] {
 																				node {Unique Implication Point}
 																				child {
 																						node {Asserting Clause}
@@ -1205,7 +1205,7 @@
 							}
 					}
 				child {
-						node {AND-Inverter Graphs}
+						node {AND-Inverter Graphs (AIGs)}
 						child {
 								node {Normalization Rules}
 								child {
@@ -1222,6 +1222,12 @@
 									}
 								child {
 										node {Strutural Hashing}
+										child {
+												node {Same as isomorphism reduction}
+											}
+										child {
+												node {Checks hash table exist node with identical inputs}
+											}
 									}
 							}
 						child {
@@ -1230,21 +1236,78 @@
 										node {Semi-canonical, Invariant}
 									}
 								child {
-										node {Equivalence classes, Random Vectors, SAT, CE's refine simulation}
+										node {Functional reduction + Normalisation rules}
+										child {
+												node {Simulation with Random Vectors and SAT}
+												child {
+														node {Equivalence classes}
+													}
+												child {
+														node {Checking each pair of Nodes too costly}
+													}
+												child {
+														node {Focus on promising candidates}
+													}
+												child {
+														node {CE's refine simulation}
+													}
+											}
+										child {
+												node {SAT for equivalence checking}
+											}
+										child {
+												node {Normalisation rules after merging}
+											}
 									}
 								child {
 										node {Functional Reduction \enquote{on the fly}}
+                    child {
+                      node {New node to bee inserted, check already a node representing same boolean function}
+                    }
+                    child {
+                      node {Nodes which are redundant in terms of the FRAIG idea are never inserted}
+                    }
+									}
+								child {
+										node {Semi-canonical}
+										child {
+												node {Invariant}
+												child {
+														node {No pair of 2 nodes which represent same Boolean function}
+														child {
+																node {Or a function and its negation}
+															}
+													}
+											}
 									}
 							}
 						child {
-								node {Usecases}
+								node {Usecases / Prroperties}
 								child {
 										node {Replace ROBDDs where canonicity is not necessarily needed}
-										child {
+										child [level distance=8cm] {
 												node {Represent set of states in model checking}
 											}
 										child {
 												node {Sufficient for combinational equivalence checking}
+											}
+									}
+								child {
+										node {Efficient, only one type of node}
+										child {
+												node {Trick last bit of pointer}
+											}
+									}
+								child {
+										node {Size linear in the circuit size}
+										child {
+												node {Can transform every gate into And + Inverters}
+											}
+									}
+								child {
+										node {Not canonical}
+										child {
+												node {AND Example}
 											}
 									}
 							}
@@ -1285,11 +1348,14 @@
 								node {BDD's}
 								child {
 										node {Limitations}
+										child {
+												node {Potentially huge memory consumption representing ROBDD (multiplier)}
+											}
 									}
 								child {
 										node {Boolean function specification and implementation as ROBDDs}
 										child {
-												node {Testing whether both ROBDDs equivalent up to isomorphism}
+												node {Testing whether both ROBDDs (canonical representation) equivalent up to isomorphism}
 											}
 									}
 							}
@@ -1297,6 +1363,9 @@
 								node {SAT}
 								child {
 										node {Limitations}
+										child {
+												node {Potentially huge CPU times solving SAT instance (NP-Complete)}
+											}
 									}
 								child {
 										node {Miter Circuit}
@@ -1310,7 +1379,7 @@
 													}
 											}
 										child {
-												node {Sat (possible to produce 1 at output) not equivaelent}
+												node {Sat (possible to produce 1 at output) not equivalent (found error)}
 												child {
 														node {Xor is 1 when outputs different}
 													}
@@ -1365,9 +1434,15 @@
 																		child {
 																				node {Just tells if there's consistent signal assignment (of inputs \& outputs) for function}
 																			}
-                                    child {
-                                      node {Consistent signal assignment checked by equivalence $c\equiv a\land b$}
-                                    }
+																		child {
+																				node {Consistent signal assignment checked by equivalence $c\equiv a\land b$}
+																			}
+																	}
+															}
+														child {
+																node {Can apply to circuits, miter-circuits or formulas}
+																child {
+																		node {For formulas introduce for each subformula a variable}
 																	}
 															}
 													}
@@ -1376,6 +1451,12 @@
 							}
 						child {
 								node (structuralmethods) {Structural Methods (Exploiting structural information)}
+                child {
+                  node {Solve several small problems instead of one large problem}
+                  child {
+                    node {Make the problem stepwise simpler by proving internal equivalences}
+                  }
+                }
 								child {
 										node {Kühlmann, IBM, 80\% equivalent nodes}
 									}
@@ -1415,7 +1496,7 @@
 													}
 											}
 									}
-								child {
+								child [level distance=5cm] {
 										node {Observation from real-world instances (local in most cases)}
 										child {
 												node {Only small changes in later design phases}
@@ -1433,7 +1514,7 @@
 						% [level 1/.style={sibling angle=60}]
 						child {
 								node {Transducer}
-								child  {
+								child [level distance=25cm] {
 										node (productautomaton) {Product automata
 												% \resizebox{\textwidth}{!}{
 												% 	\begin{minipage}[t]{12cm}

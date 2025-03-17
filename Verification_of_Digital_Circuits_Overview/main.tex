@@ -1198,15 +1198,48 @@
 									}
 								child {
 										node {2-SAT}
+										child {
+												node {Check every strongly connected component whether contains variable and it's negation}
+												child {
+														node {Linear Time with Tarjan’s algorithm}
+													}
+												child {
+														node {If contains varable and it's negation, formula unsatisfiable}
+														child {
+																node {Cycle: $l_1 \rightarrow l_2$ and $l_2 \rightarrow l_1$, then $l_1\equiv l_2$}
+																child {
+																		node {Path: $l\rightarrow \neg l\equiv \neg l\lor \neg l$}
+																	}
+																child {
+																		node {Path: $\neg l\rightarrow l\equiv l\lor l$}
+																	}
+															}
+													}
+												child {
+														node {If none contains variable and it's negation, formula satisfiable}
+													}
+											}
 									}
-								child {
+								child [level distance=22cm] {
 										node {Horn formulas}
+										child {
+												node {Almost like at least one negative, sete everything to false}
+											}
+										child {
+												node {Longer clauses with at most one positive literal have negative literals}
+												child [level distance=3cm] {
+														node {Only problem clauses exactly one positive literal (Unit Propagation)}
+													}
+											}
+										child {
+												node {Polynomial time}
+											}
 									}
 							}
 					}
 				child {
 						node {AND-Inverter Graphs (AIGs)}
-						child {
+						child [level distance=8cm] {
 								node {Normalization Rules}
 								child {
 										node {Redundant AND Elimination}
@@ -1235,12 +1268,15 @@
 								child {
 										node {Semi-canonical, Invariant}
 									}
-								child {
+								child [level distance=10cm] {
 										node {Functional reduction + Normalisation rules}
 										child {
 												node {Simulation with Random Vectors and SAT}
 												child {
 														node {Equivalence classes}
+														child {
+																node {Can show non-equivalence}
+															}
 													}
 												child {
 														node {Checking each pair of Nodes too costly}
@@ -1261,12 +1297,12 @@
 									}
 								child {
 										node {Functional Reduction \enquote{on the fly}}
-                    child {
-                      node {New node to bee inserted, check already a node representing same boolean function}
-                    }
-                    child {
-                      node {Nodes which are redundant in terms of the FRAIG idea are never inserted}
-                    }
+										child {
+												node {New node to bee inserted, check already a node representing same boolean function}
+											}
+										child {
+												node {Nodes which are redundant in terms of the FRAIG idea are never inserted}
+											}
 									}
 								child {
 										node {Semi-canonical}
@@ -1282,7 +1318,7 @@
 									}
 							}
 						child {
-								node {Usecases / Prroperties}
+								node {Usecases / Properties}
 								child {
 										node {Replace ROBDDs where canonicity is not necessarily needed}
 										child [level distance=8cm] {
@@ -1334,7 +1370,7 @@
 						% 	\end{minipage}
 						% }
 					}
-				child {
+				child [level distance=60cm] {
 						node {Combinational Circuits
 								% \resizebox{\textwidth}{!}{
 								% 	\begin{minipage}[t]{12cm}
@@ -1449,32 +1485,53 @@
 											}
 									}
 							}
-						child {
+						child [level distance=35cm] {
 								node (structuralmethods) {Structural Methods (Exploiting structural information)}
-                child {
-                  node {Solve several small problems instead of one large problem}
-                  child {
-                    node {Make the problem stepwise simpler by proving internal equivalences}
-                  }
-                }
 								child {
-										node {Kühlmann, IBM, 80\% equivalent nodes}
-									}
-								child {
-										node {Find such equivalences efficiently}
+										node {Solve several small problems instead of one large problem}
 										child {
-												node {Equivalence classes}
-											}
-										child {
-												node {ROBDD's or SAT}
+												node {Make CEC problem stepwise simpler by proving internal equivalences}
 											}
 									}
 								child {
 										node {Basic Approach}
+										child {
+												node {Traverse Circuits inputs to outputs}
+												child {
+														node {Replace Internal Equivalences signals nodes by shared represenative}
+														child {
+																node {Find internal equivalences efficiently}
+																child {
+																		node {Equivalence classes by Simulation with Random Patterns}
+																		child {
+																				node {Can show non-equivalence}
+																			}
+																	}
+																child {
+																		node {ROBDD's or SAT}
+																	}
+															}
+													}
+												child {
+														node {Simplifications might allow structural rewritings (AIG's)}
+													}
+											}
+										child {
+												node {Check Sat of Miter}
+											}
 									}
 								child {
 										node {Cut points (internal equivalences simpler by locality)}
-										child [level distance=12cm] {
+                    child {
+                      node {Introduce cut points at internal equivalence points}
+                    }
+                    child {
+                      node {Only reduced equivalence checking problems up to the cut points}
+                    }
+                    child {
+                      node {Solves Problem that Equivalence Checking still considers \enquote{global problems}}
+                    }
+										child {
 												node {False negative problem}
 												child {
 														node {Solution 0: Do not Use Cut Points, Disadvantage}
@@ -1504,6 +1561,9 @@
 										child {
 												node {In many cases logic optimizations respect hierarchy boundaries}
 											}
+										child {
+												node {Kühlmann, IBM, 80\% equivalent nodes}
+											}
 									}
 							}
 					}
@@ -1514,7 +1574,7 @@
 						% [level 1/.style={sibling angle=60}]
 						child {
 								node {Transducer}
-								child [level distance=25cm] {
+								child {
 										node (productautomaton) {Product automata
 												% \resizebox{\textwidth}{!}{
 												% 	\begin{minipage}[t]{12cm}

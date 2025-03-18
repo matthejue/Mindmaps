@@ -77,6 +77,18 @@
 								% }
 							}
 						child {
+								node {Idee}
+                child {
+                  node {Nodes correspond Multiplexers in a circuit}
+                }
+                child {
+                  node {Shannon Decomposition tells how to construct BDD}
+                }
+                child {
+                  node {Datastructure representing boolean functions and checking their equivalence by cannonicity}
+                }
+							}
+						child {
 								node {Variable Order
 										% \resizebox{\textwidth}{!}{
 										% 	\begin{minipage}[t]{12cm}
@@ -664,6 +676,12 @@
 											}
 										child {
 												node {SAT-Problem and Satisfiability}
+												child {
+														node {If many clauses and few variables, typically easy solve and unsatisfiable}
+													}
+												child {
+														node {Many variables and few clauses, typically easy to solve and satisfiable}
+													}
 											}
 										child {
 												node {Notation for clause}
@@ -1202,6 +1220,12 @@
 												node {Check every strongly connected component whether contains variable and it's negation}
 												child {
 														node {Linear Time with Tarjan’s algorithm}
+														child {
+																node {Connecting Literals construction doesn't work with only 2 literals}
+																child {
+																		node {Thus reduction of SAT to 2SAT not possible, but therefore linear time}
+																	}
+															}
 													}
 												child {
 														node {If contains varable and it's negation, formula unsatisfiable}
@@ -1337,21 +1361,27 @@
 												node {Can transform every gate into And + Inverters}
 											}
 									}
-                child {
-                  node {Applying transformation rules can be done in polynomial time}
-                  child {
-                    node {Can only apply rules polynomially often}
-                    child {
-                      node {As many times as one has nodes in the AIG (save 1 to 2 nodes)}
-                    }
-                  }
-                }
+								child {
+										node {Applying transformation rules can be done in polynomial time}
+										child {
+												node {Can only apply rules polynomially often}
+												child {
+														node {As many times as one has nodes in the AIG (save 1 to 2 nodes)}
+													}
+											}
+									}
 								child {
 										node {Not canonical}
 										child {
 												node {AND Example}
 											}
 									}
+                child {
+                  node {Multiplier in $n^2$ nodes, where a BDD would always have exponential size}
+                  child {
+                    node {BDD node just multiplexer via $3\mid B\mid$ AIG nodes}
+                  }
+                }
 							}
 					}
 			}
@@ -1422,7 +1452,7 @@
 											}
 									}
 								child {
-										node {Miter Circuit}
+										node (mitercircuit) {Miter Circuit}
 										child {
 												node {For each pair outputs Xor-Gate}
 												child {
@@ -1838,6 +1868,12 @@
 												% }
 											}
 										child {
+												node {Essentialy idea of Miter Circuit for Primary Outputs (Xor and extra negation, Or)}
+												child {
+														node {Just here product automaton output 1 (just convention) if the same and Miter 0}
+													}
+											}
+										child {
 												node {Theorem states equivalent}
 											}
 										child {
@@ -2004,9 +2040,9 @@
 																		node {Replace next state variables by current state variables via compose}
 																		child {
 																				node {Or pick variable order where every $p_i$ is next to $q_i$ either before or after}
-                                        child {
-                                          node {Then don't need compose, just replace $p_i$ with $q_i$}
-                                        }
+																				child {
+																						node {Then don't need compose, just replace $p_i$ with $q_i$}
+																					}
 																			}
 																	}
 															}
@@ -2780,6 +2816,7 @@
 		\edge{replacerobddvariables}{backwardtraversal}
 		\edge{similarsatproblems}{incrementalsat}
 		\edge{productautomaton}{specialproductautomaton}
+		\edge{productautomaton}{mitercircuit}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

@@ -1391,9 +1391,21 @@
 												node {Testing whether both ROBDDs (canonical representation) equivalent up to isomorphism}
 											}
 									}
+								child {
+										node {Generation of Counter Examples}
+										child {
+												node {Compute Xor-BDD, follow paths to leave 1}
+											}
+									}
 							}
 						child {
 								node {SAT}
+								child {
+										node {Generation of Counter Examples Steps}
+										child {
+												node {Satisfying assignment to Miter Circuit}
+											}
+									}
 								child {
 										node {Limitations}
 										child {
@@ -1798,6 +1810,12 @@
 						% [every child/.style={sibling angle=60}]
 						% [level 1/.style={sibling angle=60}]
 						child {
+								node {State of a Sequential Circuit}
+								child {
+										node {By memory cannot be modelled anymore as Boolean function, model as Automaton}
+									}
+							}
+						child {
 								node {Transducer}
 								child {
 										node (productautomaton) {Product automata
@@ -1817,6 +1835,9 @@
 												node {Theorem (Equivalence check with reachability analysis)}
 												child {
 														node {Properties of Product Automata}
+														child {
+																node {If no non-equivalent pair of states reachable from pair, then pair equivalent}
+															}
 													}
 											}
 									}
@@ -1824,15 +1845,18 @@
 										node {Bit vector and Sequence notations}
 									}
 								child {
-										node {Deterministic Finite Automata (DFA)}
-										child {
-												node {State of a Sequential Circuit}
-											}
+										node {General Definition of Equivalence of Finit Automata}
 										child {
 												node {(Behaviorial) Equivalence}
 											}
+									}
+								child {
+										node {Deterministic Finite Automata (DFA)}
 										child {
 												node {Equivalence with Identical State Encoding}
+											}
+										child {
+												node {Equivalence with Isomomorphic State Encoding}
 											}
 										child {
 												node {General Case}
@@ -1846,6 +1870,9 @@
 															}
 													}
 											}
+									}
+								child {
+										node {Semantics of Transducers}
 									}
 							}
 						child {
@@ -1882,6 +1909,15 @@
 																node (backwardtraversal) {Backward traversal}
 																child {
 																		node {Algorithm Exact Backward Traversal}
+																		child {
+																				node {If reach initial state automata not equivalent}
+																			}
+																		child {
+																				node {If no initial state reached until fixed point reached automata are equivalent}
+																				child {
+																						node {Number of states in product automaton is finite}
+																					}
+																			}
 																	}
 															}
 														child {
@@ -1943,6 +1979,15 @@
 																child {
 																		node {Sequential Depth}
 																	}
+																child {
+																		node {If reach bad state automata not equivalent}
+																	}
+																child {
+																		node {If no bad state reached until fixed point reached automata are equivalent}
+																		child {
+																				node {Number of states in product automaton is finite}
+																			}
+																	}
 															}
 														child {
 																node {Improved Algorithm (Image Computation only new states)}
@@ -1953,19 +1998,25 @@
 													}
 											}
 										child {
-												node {Special form of Product automaton}
+												node (specialproductautomaton) {Special form of Product automaton}
 												child {
 														node {Theorem Automata equivalent no Bad States reachable}
 														child {
-																node {Set of Bad States}
+																node {Set of Bad States Formula}
 															}
 													}
 											}
 										child {
 												node {Existential Quantification and Existential Quantifier}
+												child {
+														node {Lemma Replace variables with all combinations and Or}
+													}
 											}
 										child {
 												node {Image, Preimage, Range}
+												child {
+														node {Current and Next-State Variables}
+													}
 												child {
 														node {Efficient Range Computation}
 													}
@@ -1983,6 +2034,9 @@
 													}
 												child {
 														node {Characteristic Function of Boolean Relation}
+														child {
+																node {Turn several BDDs into single one}
+															}
 													}
 											}
 									}
@@ -1994,9 +2048,15 @@
 										child {
 												node {Partial Order}
 												child {
+														node {Reflexive, Antisymmetric, Transitive}
+													}
+												child {
 														node {Lattice}
 														child {
 																node {Supremum}
+																child {
+																		node {Example where does not exist}
+																	}
 															}
 														child {
 																node {Infimum}
@@ -2698,6 +2758,7 @@
 		\edge{conflictclause}{resolutionlemma}
 		\edge{replacerobddvariables}{backwardtraversal}
 		\edge{similarsatproblems}{incrementalsat}
+		\edge{productautomaton}{specialproductautomaton}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

@@ -750,7 +750,7 @@
 												node {Sat if F is empty formula}
 											}
 										child {
-												node {Unsat if empty clause appears in F by unit clause rule on ${\ldots, (¬x), (x), \ldots}$}
+												node {Unsat if empty clause appears in F by unit clause rule on ${\ldots, (\neg x), (x), \ldots}$}
 											}
 									}
 								child {
@@ -776,7 +776,7 @@
 												node {Algorithm Difference to DP-Algorithm}
 											}
 									}
-								child [level distance=40cm] {
+								child [level distance=60cm] {
 										node {Modern SAT algorithms
 												% \resizebox{\textwidth}{!}{
 												% 	\begin{minipage}[t]{12cm}
@@ -1337,6 +1337,15 @@
 												node {Can transform every gate into And + Inverters}
 											}
 									}
+                child {
+                  node {Applying transformation rules can be done in polynomial time}
+                  child {
+                    node {Can only apply rules polynomially often}
+                    child {
+                      node {As many times as one has nodes in the AIG (save 1 to 2 nodes)}
+                    }
+                  }
+                }
 								child {
 										node {Not canonical}
 										child {
@@ -1367,7 +1376,7 @@
 						% 	\end{minipage}
 						% }
 					}
-				child [level distance=60cm] {
+				child [level distance=80cm] {
 						node {Combinational Circuits
 								% \resizebox{\textwidth}{!}{
 								% 	\begin{minipage}[t]{12cm}
@@ -1937,10 +1946,13 @@
 																				node {Care function}
 																			}
 																		child {
-																				node {Theorem Composition with Mapping function}
+																				node {Mapping function}
 																			}
 																		child {
 																				node {Algorithm Computing the Generalized Cofactor}
+																			}
+																		child {
+																				node {Theorem Composition with Mapping function}
 																			}
 																		child {
 																				node {Properties}
@@ -1952,7 +1964,7 @@
 																					}
 																			}
 																		child {
-																				node {Efficient formula}
+																				node {Efficient formula for Image computation}
 																			}
 																	}
 																child {
@@ -1986,6 +1998,15 @@
 																		node {If no bad state reached until fixed point reached automata are equivalent}
 																		child {
 																				node {Number of states in product automaton is finite}
+																			}
+																	}
+																child {
+																		node {Replace next state variables by current state variables via compose}
+																		child {
+																				node {Or pick variable order where every $p_i$ is next to $q_i$ either before or after}
+                                        child {
+                                          node {Then don't need compose, just replace $p_i$ with $q_i$}
+                                        }
 																			}
 																	}
 															}

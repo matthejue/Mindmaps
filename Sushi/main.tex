@@ -71,8 +71,9 @@
 
 	\resizebox{\textwidth}{!}{
 		\begin{tblr}{
-				width = \textwidth,
+				width = 1.2\textwidth,
 				cells = {bg=BoxColor},
+				colspec = {X[l] X[c]}, % Flexible column widths with alignment
 				row{1} = {PrimaryColor,c,fg=white},
 				row{2} = {PrimaryColorDimmed},
 				row{8} = {PrimaryColorDimmed},
@@ -80,7 +81,7 @@
 				row{20} = {PrimaryColorDimmed},
 				cell{2}{1} = {c=2}{},
 				cell{8}{1} = {c=2}{},
-				cell{16-19}{1} = {c=2}{},
+				cell{16-25}{1} = {c=2}{},
 			}
 			\textbf{Ingredient}                               & \textbf{Amount}                        \\
 			For the sushi rice:                               &                                        \\
@@ -95,9 +96,9 @@
 			Cucumber (seeded):                                & 15 g (cut into matchsticks)            \\
 			Ripe avocado:                                     & 20 g (cut into thin strips)            \\
 			Toasted white sesame seeds:                       & 1 tsp (3 g)                            \\
-      Mayonnaise (preferably Japanese mayo like Kewpie) & 10 g (about 2 tsp) \\
+			Mayonnaise (preferably Japanese mayo like Kewpie) & 10 g (about 2 tsp)                     \\
 
-      Sriracha or another chili sauce (adjust to taste) & 2–3 g (½ tsp) \\
+			Sriracha or another chili sauce (adjust to taste) & 2–3 g (½ tsp)                          \\
 
 			For serving:                                      &                                        \\
 			Soy sauce                                         &                                        \\
@@ -133,7 +134,7 @@
 		\item Peel and seed the cucumber, then slice into thin matchsticks (approx.\ 5 mm wide, 8 cm long).
 		\item Cut avocado into thin strips.
 		\item Shred or slice imitation crab if necessary.
-    \item Mix 10 g mayonnaise with 2–3 g sriracha in a small bowl. Stir until smooth. For spicy mayo 
+		\item Mix 10 g mayonnaise with 2–3 g sriracha in a small bowl. Stir until smooth. For spicy mayo
 	\end{itemize}
 
 	\subsection*{3. Assemble the Roll (10 mins)}
@@ -232,7 +233,7 @@
 	\resizebox{\textwidth}{!}{
 		\begin{tblr}{
 				width = \textwidth,
-				cells = {bg=BoxColor},
+				colspec = {X[l] X[c]}, % Flexible column widths with alignment
 				row{1} = {PrimaryColor,c,fg=white},
 				row{2} = {PrimaryColorDimmed},
 				row{8} = {PrimaryColorDimmed},
@@ -367,12 +368,12 @@
 	\begin{minipage}[t]{0.48\textwidth}
 		\begin{itemize}
 			\item Tamagoyaki (Japanese omelette): 1 piece, about 30 g (instructions above)
-      \item Tofu
-      \item Grilled chicken (teriyaki or plain)
-      \item Beef strips (shabu shabu-style or teriyaki beef)
-      \item Cream cheese
-      \item Tempura shrimp
-      \item Surimi (paste from white fish processed and flavored to imitation crab)
+			\item Tofu
+			\item Grilled chicken (teriyaki or plain)
+			\item Beef strips (shabu shabu-style or teriyaki beef)
+			\item Cream cheese
+			\item Tempura shrimp
+			\item Surimi (paste from white fish processed and flavored to imitation crab)
 		\end{itemize}
 	\end{minipage}
 	\hfill
@@ -380,14 +381,14 @@
 		\begin{itemize}
 			\item Cucumber (julienned): 20 g
 			\item Carrot (julienned, lightly blanched or pickled): 15 g
-      % \item Kanpyo (dried gourd strips): 10 g (rehydrated) – optional
-      % \item Shiitake mushrooms (sweet-simmered): 20 g
-      \item Pickled daikon radish (takuan): 10 g
-      \item Avocado (sliced): 30 g
-      \item Mango
-      \item Pineapple
-      \item Jalapeño
-      \item Sun-dried tomato
+			% \item Kanpyo (dried gourd strips): 10 g (rehydrated) – optional
+			% \item Shiitake mushrooms (sweet-simmered): 20 g
+			\item Pickled daikon radish (takuan): 10 g
+			\item Avocado (sliced): 25 - 30 g (medium avocado yields 120–150 g of usable flesh)
+			\item Mango
+			\item Pineapple
+			\item Jalapeño
+			\item Sun-dried tomato
 		\end{itemize}
 	\end{minipage}
 

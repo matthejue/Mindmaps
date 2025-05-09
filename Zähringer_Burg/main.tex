@@ -1,0 +1,120 @@
+\documentclass[landscape, a4paper]{article}
+\usepackage[margin=0cm,top=0.4cm,bottom=0.4cm,left=0.4cm,right=0.4cm]{geometry}
+% \usepackage[showframe,margin=0cm,top=0.5cm,bottom=0.5cm,left=0.5cm,right=0.5cm]{geometry}
+\usepackage[export]{adjustbox}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage{titlesec}
+\usepackage{etoolbox} % Add this to your preamble
+\usepackage[parfill]{parskip}
+
+\newtoggle{isEnglish}
+\toggletrue{isEnglish}
+% \togglefalse{isEnglish}
+
+\captionsetup{labelformat=empty, justification=centering, font={color=PrimaryColor}}
+
+\definecolor{PrimaryColor}{HTML}{8FA85F}
+\newcommand\alert[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
+
+\titleformat{\section}
+{\color{PrimaryColor}\normalfont\normalsize\bfseries}
+{\thesection}{0.5cm}{}
+\titlespacing{\section}{0cm}{0.2cm}{0.2cm}
+% \renewcommand{\thesection}{\arabic{section}}
+
+\titleformat{\subsection}
+{\color{PrimaryColor}\normalfont\normalsize\bfseries}
+{\thesubsection}{0.5cm}{}
+\titlespacing{\subsection}{0cm}{0.1cm}{0.1cm}
+
+\begin{document}
+\noindent
+\centering
+\footnotesize
+\begin{minipage}[t]{0.31\textwidth}
+	\setlength{\parskip}{0.25cm}
+	\vspace{0.5cm}
+
+	\textcolor{PrimaryColor}{
+		\rule{\linewidth}{0.5mm}
+		\vspace{-0.1cm}
+		\begin{center}
+			\large
+			\textsc{\iftoggle{isEnglish}{Wanderung zur Zähringer Burg}{}}
+		\end{center}
+		\rule{\linewidth}{0.5mm}
+	}
+
+	\iftoggle{isEnglish}{
+	}{
+	}
+
+	\includegraphics[width=\linewidth]{./figures/zaehringer_burg_resized.png}
+	\captionof{figure}{\iftoggle{isEnglish}{Zähringen Castle Ruin}{}}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+    Hallo!!
+	}{
+	}
+
+\end{minipage}%
+\hfill%
+\vrule width 0.01cm
+\hfill%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+	\iftoggle{isEnglish}{
+    Hallo!!
+	}{
+	}
+
+\end{minipage}%
+\hfill\color{white}%
+\vrule width 0.01cm
+\hfill\color{black}%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+	\iftoggle{isEnglish}{
+    Hallo!!
+	}{
+  }
+\end{minipage}%
+\newpage
+\begin{minipage}[t]{0.31\textwidth}
+\end{minipage}%
+\hfill%
+\vrule width 0.01cm
+\hfill%
+\begin{minipage}[t]{0.31\textwidth}
+\end{minipage}%
+\hfill\color{white}%
+\vrule width 0.01cm
+\hfill\color{black}%
+\begin{minipage}[t]{0.31\textwidth}
+\end{minipage}%
+\newpage
+\begin{minipage}[t]{0.31\textwidth}
+	\setlength{\parskip}{0.25cm}
+
+	\vspace{0.5cm}
+
+	\textcolor{PrimaryColor}{
+		\rule{\linewidth}{0.5mm}
+		\vspace{-0.1cm}
+		\begin{center}
+			\large
+			\textsc{Addendum}
+		\end{center}
+		\rule{\linewidth}{0.5mm}
+	}
+
+	\iftoggle{isEnglish}{
+	}{
+	}
+\end{minipage}%
+\end{document}

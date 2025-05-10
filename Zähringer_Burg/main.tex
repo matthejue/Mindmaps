@@ -15,7 +15,7 @@
 
 \captionsetup{labelformat=empty, justification=centering, font={color=PrimaryColor}}
 
-\definecolor{PrimaryColor}{HTML}{8FA85F}
+\definecolor{PrimaryColor}{HTML}{7E375F} % Tyrian purple
 \newcommand\alert[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
 
 \titleformat{\section}
@@ -42,65 +42,191 @@
 		\vspace{-0.1cm}
 		\begin{center}
 			\large
-			\textsc{\iftoggle{isEnglish}{Wanderung zur Zähringer Burg}{}}
+			\textsc{\iftoggle{isEnglish}{Hike to the Zähringer castle ruin}{}}
 		\end{center}
 		\rule{\linewidth}{0.5mm}
 	}
+
+	\iftoggle{isEnglish}{
+		Our trip begins at the \alert{\enquote{Schwabentor} (swabian gate)}, one of the two remaining medieval city gates of Freiburg im Breisgau. This striking gate, whose name translates to "Swabian Gate," is not just an architectural relic, it's a doorway into centuries of history, legend, and the cultural crossroads of southern Germany.
+
+		The \enquote{Schwabentor} was built around 1250 as part of Freiburg’s second city wall expansion. At the time, Freiburg was growing rapidly, and the city’s leadership recognized the need for better fortifications. The gate stood as both a protective bulwark and a checkpoint for traders and travelers entering the city from the south and southeast, especially from the direction of the Swabian regions which gives the gate its name.
+	}{
+	}
+
+	\includegraphics[width=\linewidth]{./figures/schwabentor.png}
+	\captionof{figure}{\iftoggle{isEnglish}{\enquote{Schwabentor} and \enquote{Schwabentorsteg} (swabian gate and swabian gate footbridge)}{}}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		Perhaps the most captivating feature of the \enquote{Schwabentor} is the large fresco on its inner wall, painted by Fritz Geiges in 1903. It depicts a Swabian merchant who, according to legend, once tried to buy all of Freiburg with a cart full of gold, but when it turned out his \enquote{gold} was just sand-covered rocks, he was laughed out of town.
+
+		This legend, while likely apocryphal, ties into a long-standing rivalry and playful mockery between the people of Baden (where Freiburg is located) and Swabians to the east. Hence, the name \alert{Swabian Gate} could be a mix of historical reference and local humor.
+
+		Our trip continues to the \alert{\enquote{Schlossberg} (castle hill)}, the towering hill that rises to the east of Freiburg’s \enquote{Altstadt} (old town), offering not only stunning panoramic views of the city and the Rhine Valley, but also a deep and complex history stretching back over a thousand years.
+	}{
+	}
+
+\end{minipage}%
+\hfill%
+\vrule width 0.01cm
+\hfill%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		% The Schlossberg, \enquote{literally Castle Hill}, has always held strategic importance due to its elevation and its commanding view over the surrounding region. Archaeological evidence suggests that the hill was used for fortified settlements as early as the Bronze Age, but its most significant period began in the 11th century.
+		In 1091, \alert{Berthold II of Zähringen}, Duke of Swabia and founder of Freiburg, constructed a fortress on the Schlossberg. This castle, known as the Castellum de Friburch, was the power base for the Zähringer family and gave Freiburg its name: \enquote{frei Burg} meaning \enquote{free castle}.
+
+		The castle's location allowed the Zähringers to control key trade routes through the Black Forest and the Dreisam Valley. The original castle was likely a mix of stone and timber structures, fairly modest by later standards, but it was formidable for its time.
+
+		After the Zähringers died out in 1218, the castle passed to the \alert{Counts of Urach}, later known as the Counts of Freiburg, and eventually to the Habsburgs, who ruled the region for centuries.
+	}{
+	}
+
+	\includegraphics[width=\linewidth]{./figures/rosskopf_resized.png}
+	\captionof{figure}{\iftoggle{isEnglish}{\enquote{Schlossberg} (castle hill) and behind it \enquote{Roßkopfberg} (horse head mountain)}{}}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		In the 17th century, during the Thirty Years’ War, the Schlossberg again became a focal point for military strategy. Recognizing its importance, the \alert{French} under Louis XIV had their star military engineer, Sébastien Le Prestre de Vauban, build a massive baroque fortress on the hill when they captured Freiburg in the late 1600s.
+
+		\alert{Sébastien Le Prestre de Vauban (1633–1707)} was a brilliant French military engineer and Marshal of France under King Louis XIV. Vauban is widely regarded as one of the greatest minds in military architecture, revolutionizing fortification design during the age of gunpowder.
+
+		Vauban’s hallmark was his distinctive \alert{star-shaped fortress system}, designed to withstand and repel the increasing power of cannon fire, which had made traditional medieval walls obsolete. Instead of relying on high vertical walls, which could be easily destroyed by artillery, Vauban used low, angled ramparts to deflect cannonballs, Bastions and zigzag-shaped outer defenses to eliminate blind spots and allow overlapping fields of fire, moats, earthworks, and tunnels to absorb shock and delay attackers.
+
+		Freiburg came under French occupation in 1677 during the Franco-Dutch War, and Vauban was ordered to transform the city into a modern fortress at the edge of French-controlled territory.
+	}{
+	}
+\end{minipage}%
+\hfill\color{white}%
+\vrule width 0.01cm
+\hfill\color{black}%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		From 1679 to 1681, and again after another French occupation in 1744, he oversaw the construction of an enormous fortress complex on the Schlossberg and redesigned the city’s defenses to match his cutting-edge military theories.
+
+		After the \alert{Treaty of Ryswick in 1697}, Freiburg reverted to Austrian control, and the French were forced to destroy the fortifications in 1745 during the War of the Austrian Succession. They did so thoroughly: the entire fortress was blown up with explosives, and much of what remained was later quarried for building stone.
+		% Though most of the fortress was blown up in 1745 during France's withdrawal (as required by treaty), the legacy of Vauban’s work remains etched into the landscape and memory of Freiburg—especially on the Schlossberg, where remnants of his fortifications are still visible.
+
+		In the 1990s, Freiburg took a bold step in urban planning and named a new sustainable district after the famed engineer. The Vauban district, located on the site of a former French military base (used after World War II), became a model eco-neighborhood when development began in 1998.
+
+		On the Schlossberg, we're going to see a lot of interesting sights that bring Freiburg’s rich history, scenic beauty, and local culture to life. From former fortifications to memorials, fountains, and lookout points, each stop reveals a unique story.
+
+		The \alert{\enquote{Schwabentorsteg} (swabian gate footbridge)} is a covered wooden pedestrian bridge located at the eastern edge of Freiburg’s Old Town. Built in 1970, the bridge spans the Schlossbergring, a four-lane bypass road encircling the historic city center. Measuring approximately 25 meters in length, the Schwabentorsteg blends harmoniously with the historic atmosphere of the Old Town thanks to its traditional wooden construction.
+
+		% Its purpose is to connect Salzstraße, one of Freiburg’s oldest and most charming streets, directly with the Schlossberg, the city's iconic castle hill.
+
+		No full structures remain from the Zähringer castle or Vauban fortress, but you can still find ruins of fortification walls and one can visit the \alert{\enquote{Kanonenplatz} (cannon plaza)}. This iconic terrace was once part of the French artillery positions during Freiburg’s occupation under Louis XIV. Named “Cannon Plaza”, it offers a panoramic view over the Old Town and was first fortified during the 1670s, when Vauban built the city’s massive defensive system
+		% , a scenic overlook that once held French artillery. 
+	}{
+	}
+
+	\includegraphics[width=\linewidth]{./figures/kanonenplatz_resized.png}
+	\captionof{figure}{\iftoggle{isEnglish}{\enquote{Kanonenplatz} (cannon plaza)}{}}
+	\setlength{\parskip}{0.25cm}
+\end{minipage}%
+\newpage
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		There’s also a metal viewing tower, the \alert{\enquote{Schlossbergturm} (castle hille tower)}, built in 2002 and 35 meters tall, that gives a 360-degree view over Freiburg, the Black Forest, and even the Vosges mountains in France on a clear day.
+
+	}{
+	}
+
+	\includegraphics[width=\linewidth]{./figures/schlossbergturm.png}
+	\captionof{figure}{\iftoggle{isEnglish}{\enquote{Schlossbergturm} (castle hill tower)}{}}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		Installed in 2017 an interactive marble run called \alert{\enquote{Schlossberg Kugelbahn}} is a modern attraction for children and families. It winds creatively along the hillside using wood and steel tracks, letting visitors roll large wooden balls down the slope. %It playfully blends modern design with the natural landscape.
+
+		% Built in 2002, the Schlossberg Tower stands 35 meters tall and was designed by architect Jürgen Grossmann. Constructed using local larch wood and steel, it stands on the site of former military signal towers and offers a 360-degree view—stretching from the Black Forest to the Vosges mountains.
+
+		From the Schlossberg, our journey continues to the \alert{Roßkopf}, a prominent peak in the Black Forest just northeast of Freiburg’s city center. With an elevation of 737 meters above sea level, the Roßkopf stands as one of the highest points near the city, offering expansive views over the Rhine Valley, the Kaiserstuhl hills, and on clear days, even to the Vosges Mountains in France.
+
+		The name Roßkopf translates literally to \enquote{horse’s head}. It likely stems from the mountain’s rounded summit, which was said to resemble the shape of a horse's head when viewed from the surrounding valleys. The term "Roß" is an old German word for horse.%, emphasizing the area's long-standing connection to traditional rural life.
+
+		One of the most striking modern features of the Roßkopf summit is a set of four \alert{large wind turbines}, installed in 2003 and each standing about 98 meters tall and each producing clean electricity for approximately 3,000 households.%, they were among the first citizen-funded wind energy projects in Baden-Württemberg.%The turbines produce renewable electricity for thousands of households and symbolize Freiburg’s commitment to sustainability.
+	}{
+	}
+
+	\includegraphics[width=\linewidth]{./figures/windpark-rosskopf_pic_768.jpg}
+	\captionof{figure}{\iftoggle{isEnglish}{Wind turbines on top of the Roßkopf}{}}
+	\setlength{\parskip}{0.25cm}
+
+\end{minipage}%
+\hfill%
+\vrule width 0.01cm
+\hfill%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+
+
+		Another major highlight is the \alert{\enquote{Roßkopfturm}}, a metal observation tower built in 1889 by the \enquote{Schwarzwaldverein} (Black Forest Association). Standing 34.4 meters high, the tower was erected as a monument to regional tourism and nature appreciation. Its steel lattice design, rare for its time, still offers one of the best panoramic viewpoints in the region. It is also known as \enquote{Friedrichsturm},named in honor of Grand Duke Friedrich I of Baden, a patron of nature conservation and tourism.
+
+
+	}{
+	}
+
+	\includegraphics[width=\linewidth]{./figures/friedrichsturm.png}
+	\captionof{figure}{\iftoggle{isEnglish}{\enquote{Roßkopfturm} (Roßkopf tower)}{}}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		Nestled between the slopes of the Roßkopf and the Schönberg, the \alert{Wildtal} is a peaceful side valley of the Glottertal, just northeast of Freiburg. Though easily accessible, it retains the charm of a secluded rural landscape with deep roots in the region’s natural and cultural history.
+
+		The name \alert{\enquote{Wildtal}} literally means \enquote{Wild Valley}, and is believed to derive from the abundance of wild animals, especially deer and boar, that once roamed the area. In medieval times, it served as a hunting ground for local nobility and monastic orders. %The name likely also reflects the dense, uncultivated forests that once covered the slopes before extensive clearing began in the Middle Ages.
+
+		%Perched at approximately 478 meters above sea level on a ridge between the Wildtal and Gundelfingen, this castle is considered the ancestral seat of the House of Zähringen, one of the most influential noble families in southwest Germany.
+		On the way into the Wildtal, we pass the \alert{Zähringer Castle Ruin} (\enquote{Zähringer Burg}), a site of great historical significance. The original Zähringer Castle was likely constructed around the early 11th century, though the first documented reference appears in 1128. It served as a fortified residence for the Zähringer dukes, who controlled extensive territories across Baden, Switzerland, and parts of Alsace.
+
+		The \alert{Zähringers} played a decisive role in the founding of Freiburg in 1120, which they developed as a free market city. However, after the extinction of the Zähringer male line in 1218, the castle began to lose its importance. Today, visitors can see the foundation walls, a reconstructed tower (built in 1906), and information panels about the site’s past
+
+		Later as we'll be descending from the Zähringer Castle Ruin, we're going to arrive in the \alert{district of Zähringen}, a part of Freiburg that carries the name and legacy of this southern Germany’s influential noble family.
+	}{
+	}
+\end{minipage}%
+\hfill\color{white}%
+\vrule width 0.01cm
+\hfill\color{black}%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
 
 	\iftoggle{isEnglish}{
 	}{
 	}
 
 	\includegraphics[width=\linewidth]{./figures/zaehringer_burg_resized.png}
-	\captionof{figure}{\iftoggle{isEnglish}{Zähringen Castle Ruin}{}}
+	\captionof{figure}{\iftoggle{isEnglish}{\enquote{Zähringer Burgruine} (Zähringer Castle Ruin)}{}}
 	\setlength{\parskip}{0.25cm}
 
 	\iftoggle{isEnglish}{
-    Hallo!!
+		After exploring the natural and historical treasures of the region, we visit \alert{DaCarmelo Ristorante Pizzeria}, a charming Italian restaurant. This family-run restaurant offers a warm atmosphere and authentic Italian cuisine, making it a favorite among locals and visitors alike. It specializes in traditional Italian dishes prepared with fresh ingredients and a passion for flavor and has earned a stellar reputation, boasting a 4.9 out of 5 rating on Google based on over 280 reviews. Guests frequently praise the restaurant for its delicious food, friendly service, and excellent value for money.
+		% located at Talstraße 131 in Gundelfingen
 	}{
 	}
 
-\end{minipage}%
-\hfill%
-\vrule width 0.01cm
-\hfill%
-\begin{minipage}[t]{0.31\textwidth}
-	\vspace{0cm}
+	\includegraphics[width=\linewidth]{./figures/dacarmelo.png}
+	\captionof{figure}{\iftoggle{isEnglish}{DaCarmelo Ristorante Pizzeria}{}}
 	\setlength{\parskip}{0.25cm}
-	\iftoggle{isEnglish}{
-    Hallo!!
-	}{
-	}
 
-\end{minipage}%
-\hfill\color{white}%
-\vrule width 0.01cm
-\hfill\color{black}%
-\begin{minipage}[t]{0.31\textwidth}
-	\vspace{0cm}
-	\setlength{\parskip}{0.25cm}
-	\iftoggle{isEnglish}{
-    Hallo!!
-	}{
-  }
-\end{minipage}%
-\newpage
-\begin{minipage}[t]{0.31\textwidth}
-\end{minipage}%
-\hfill%
-\vrule width 0.01cm
-\hfill%
-\begin{minipage}[t]{0.31\textwidth}
-\end{minipage}%
-\hfill\color{white}%
-\vrule width 0.01cm
-\hfill\color{black}%
-\begin{minipage}[t]{0.31\textwidth}
+	Our journey through Freiburg’s storied heights and hidden valleys draws to a close in Zähringen at the tram terminus, where modern convenience meets medieval heritage. From the panoramic Schlossberg and its many historical sights, to the forested slopes of the Roßkopf crowned by the Friedrichsturm, and onward past the commanding Zähringen Castle Ruin, we’ve walked in the footsteps of dukes, pilgrims, and visionaries. This route through nature and time offers more than just landscapes: it’s a historical roundup, woven with forest paths, fortress stones, and culinary moments. And it ends, appropriately, where Freiburg’s dynastic roots still echo, in Zähringen.
 \end{minipage}%
 \newpage
 \begin{minipage}[t]{0.31\textwidth}
 	\setlength{\parskip}{0.25cm}
-
 	\vspace{0.5cm}
 
 	\textcolor{PrimaryColor}{
@@ -114,6 +240,61 @@
 	}
 
 	\iftoggle{isEnglish}{
+		Located near the Kanonenplatz, this war memorial was erected in 1930 to honor the soldiers of the \alert{\enquote{5th Badenisches Feldartillerie-Regiment Nr. 76}}, based in Freiburg and active during World War I. The regiment had a close relationship with the city, and the monument remains a place of remembrance.
+
+		The \alert{\enquote{Ludwigshöhe}}, named after Grand Duke Ludwig I of Baden, this high point on the southern slope of the Schlossberg was laid out in the 19th century as a scenic overlook and picnic area. It offers sweeping views toward the Rhine Valley and the Kaiserstuhl hills. It was part of a romantic landscaping effort to make the hill more accessible for leisure walks.
+
+		The \alert{\enquote{Silberbrunnen} (silver fountain)} lies in a quiet, wooded section of the Schlossberg and dates back to medieval times. It supplied water to both the castle and city below. According to local legend, the name comes from the silvery shimmer of the water or possibly from silver coins found near the spring. Its cool water still flows today.
+
+		There's also the \alert{\enquote{Kleiner Kanonenplatz} (little cannon plaza)}, it's a smaller, lesser-known platform located above the main Kanonenplatz. It offers a more intimate view over the city and was also part of the historic French fortification system built by Vauban in the late 17th century.
+
+		The \alert{Tusculum} is a modest villa-like structure built in the 19th century as a leisure and event house for Freiburg’s educated elite. Named after the ancient Roman retreat town of Tusculum, it was a symbol of cultured urban recreation. Today, it's occasionally used for cultural events and private gatherings.
+
+		The \alert{\enquote{Festung Freiburger Schlossberg}} is a historical trail. This self-guided historical walking route, marked with signs and maps, takes visitors through the remaining fortification structures from the Vauban era and earlier medieval layers. It traces bastions, walls, trenches, and casemates, offering rich context through on-site information boards.
+
+		The \alert{\enquote{Brunnen bei den Siebenlinden}} is a fountain near the Seven Lindens area is named for a group of linden trees that once stood prominently here. The trees were a landmark on the 19th-century romantic walking paths, and the small spring-fed fountain served local hikers and picnic-goers.
+
+		The \alert{\enquote{Katharinenbrunnen} (catherine’s fountain)}, located near the remnants of old fortress walls, was named after Saint Catherine, likely due to a nearby former chapel or shrine. Though modest, it reflects the spiritual and practical significance of water sources on the hill.
+	}{
+	}
+\end{minipage}%
+\hfill%
+\vrule width 0.01cm
+\hfill%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		Located near a former forest trail junction, the \alert{\enquote{Husarenbrunnen}} (Hussars’ fountain) is a small spring named after the light cavalry units (Hussars) who are said to have watered their horses here in the 19th century, possibly during Prussian military movements or training exercises in the region.
+
+		The \alert{\enquote{Martinsfelsen}} (Martin’s rock), is a rugged sandstone outcrop located just below the summit plateau of the Roßkopf. It is named after St. Martin, one of the most venerated saints in the region. It may have been a historic waypoint for pilgrims or shepherds, although no formal shrine existed here.
+
+		On the way to the Roßkopf, we pass by the \alert{Waldrestaurant St. Ottilien}, a beloved forest eatery nestled amidst the serene woodlands of Freiburg. Located at Kartäuserstraße 135, this charming restaurant offers a delightful pause for hikers and nature enthusiasts alike. The menu features a diverse array of dishes like seasonal vegetarian and vegan specialties, traditional regional fare and fresh salads and cheese platters. For those with a sweet tooth, the restaurant offers homemade cakes delivered fresh from the Bäckerei Grossmann in Kirchzarten.
+
+		In April 2025, St. Ottilien faced a significant challenge when a fire broke out in the dishwashing area, causing damage to the kitchen and dining spaces. While the indoor areas are undergoing restoration, the restaurant has partially reopened, serving guests in the outdoor seating area. A community-led fundraising campaign is underway to support the establishment during this rebuilding phase. Despite these setbacks, the dedicated team at St. Ottilien continues to provide warm hospitality and delicious meals, making it a worthwhile stop on your journey to the Roßkopf.
+
+		A short walk uphill from the Forest Restaurant St. Ottilien (Waldrestaurant St. Ottilien) brings you to the \alert{\enquote{Waldheiligtum St. Ottilien} (Forest Sanctuary of St. Ottilien)}, a peaceful, wooded place that has drawn pilgrims and locals alike for centuries. This quiet sanctuary, nestled into the hillsides of Freiburg, is not only a site of natural beauty but also of deep spiritual and historical resonance.
+
+		The sanctuary is dedicated to \alert{Saint Odile (Ottilia)}, a 7th-century Alsatian noblewoman and abbess of Hohenbourg Abbey (later known as Mont Sainte-Odile in Alsace). Born blind, Odile miraculously gained her sight during baptism, and she has since been venerated as the patron saint of the blind and those with eye ailments.
+
+		The name St. Ottilien reflects this connection: in the Middle Ages, a healing spring emerged near this site in Freiburg’s forest, believed to possess curative powers, especially for eye conditions. Over time, the site became known as a place of prayer and pilgrimage, particularly among those seeking relief or guidance.
+
+		A small chapel was eventually erected here in the 17th century, serving as a destination for pilgrims from the region. The chapel has undergone restorations but retains its intimate, rustic character, surrounded by large trees, stone steps, and benches for reflection. The spring still flows beside the sanctuary, marked by a stone basin and devotional figures.
+	}{
+	}
+\end{minipage}%
+\hfill\color{white}%
+\vrule width 0.01cm
+\hfill\color{black}%
+\begin{minipage}[t]{0.31\textwidth}
+	\vspace{0cm}
+	\setlength{\parskip}{0.25cm}
+
+	\iftoggle{isEnglish}{
+		The nearby Forest Restaurant St. Ottilien takes its name from this sacred site. Originally developed as a resting place for pilgrims and hikers, the restaurant honors the area’s history by providing a place of refreshment and hospitality near the sanctuary.
+
+		On the way to the Zähringen Castle Ruin, we pass by the \alert{Forest Restaurant Zähringer Burg}, a charming woodland eatery nestled at the foot of the historic castle site. This restaurant offers a delightful stop for hikers and history enthusiasts alike. The Forest Restaurant Zähringer Burg is renowned for its regional and seasonal specialties. For those seeking lighter fare or a quick bite, the restaurant offers a selection of snacks and desserts, such as Homemade cakes and Ice cream desserts.
 	}{
 	}
 \end{minipage}%

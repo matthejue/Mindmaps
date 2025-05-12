@@ -47,15 +47,15 @@
 																node {Stochastic Gradient Descent}
 															}
 													}
-                        child {
-                          node {Gradients}
-                          child {
-                            node {Linear Regression}
-                          }
-                          child {
-                            node {Logistic Regression}
-                          }
-                        }
+												child {
+														node {Gradients}
+														child {
+																node {Linear Regression}
+															}
+														child {
+																node {Logistic Regression}
+															}
+													}
 											}
 									}
 								child {
@@ -117,11 +117,371 @@
 										% }
 									}
 							}
-						child {
+						child [level distance=30cm] {
 								node {Decision Trees}
+								child {
+										node {Properties}
+										child {
+												node {Change data $\rightarrow$ get very different tree}
+											}
+										child {
+												node {High variance model}
+											}
+										child {
+												node {Low bias model}
+											}
+									}
+								child [level distance=15cm] {
+										node {Hyperparameters}
+										child {
+												node {Minimum number of samples per split}
+											}
+										child {
+												node {Minimum number of samples in a leaf (min\_leaf)}
+											}
+										child {
+												node {Maximal depth of the tree (max\_depth)}
+											}
+										child {
+												node {Total number of nodes}
+											}
+										child {
+												node {Leaf model (weak learner; here constant)}
+											}
+										child {
+												node {Split criterion}
+											}
+									}
+								child {
+										node {Pros / Advantages}
+										child {
+												node {Simple and interpretable}
+											}
+										child {
+												node {Can directly handle categorical features}
+											}
+										child {
+												node {Very flexible framework that can scale to large training data}
+											}
+									}
+								child {
+										node {Cons / Disadvantages}
+										child {
+												node {Are deterministic}
+											}
+										child {
+												node {Are prone to overfitting}
+											}
+									}
+								child {
+										node {Step Function to tree}
+										child {
+												node {Feature space partitioning}
+											}
+									}
+								child {
+										node {Depth and height}
+									}
+								child {
+										node {Tree Prediction Model}
+									}
+								child {
+										node {Choosing splits that maximize purity}
+										child {
+												node {CART Algorithm}
+												child {
+														node {Computational Complexity}
+													}
+											}
+										child {
+												node {Gain in purity}
+												child {
+														node {Impurity}
+													}
+											}
+										child {
+												node {Regression Tree}
+												child {
+														node {Variance}
+													}
+												child {
+														node {Variance reduction (minimum variance)}
+													}
+											}
+										child {
+												node {Decision Tree}
+												child {
+														node {Entropy}
+													}
+												child {
+														node {(Maximum) information gain}
+													}
+											}
+									}
+								child {
+										node {Regularization}
+										child {
+												node {Too many steps $\approx$ Too many leaves}
+											}
+										child {
+												node {Too large step jumps $\approx$ Too large leaves’ output values ($w$)}
+											}
+									}
 							}
 						child {
+								node {Support Vector Machines (SVM)}
+								child {
+										node {Pros and Cons}
+									}
+								child {
+										node {Loss/Response}
+										child {
+												node {Misclassification Rate}
+											}
+										child {
+												node {Accuracy}
+											}
+									}
+								child {
+										node {Hyperparameters}
+										child {
+												node {Tradeoff $C$}
+											}
+										child {
+												node {Choice of Kernel}
+											}
+										child {
+												node {Kernel width $\gamma$}
+											}
+										child {
+												node {Kernel degree $d$}
+											}
+									}
+								child {
+										node {Non-Linear SVM}
+										child {
+												node {Nonlinear Mapping}
+											}
+										child {
+												node {Replacing dot product with kernel function}
+											}
+									}
+								child {
+										node {Linear SVM}
+										child {
+												node {Logistic Classification (Perceptron)}
+												child {
+														node {Linear Hyperplane}
+														child {
+																node {Sign function}
+															}
+														child {
+																node {Optimizing perceptron}
+																child {
+																		node {Loss over miss-classified instances}
+																	}
+																child {
+																		node {Gradient, Update by step}
+																	}
+																child {
+																		node {Algorithm}
+																	}
+															}
+													}
+												child {
+														node {Maximum margin hyperplane}
+														child {
+																node {Regularized Hinge Loss Optimization}
+															}
+														child {
+																node {Linear SVM as a Regularized Loss}
+																child {
+																		node {SGD (like Logistic Regression) but using the sub-gradient of loss}
+																	}
+															}
+														child {
+																node {Dual Optimization}
+															}
+													}
+											}
+									}
+							}
+						child [level distance=35cm] {
 								node {Neural Networks}
+								child {
+										node {Composite Functions}
+										child {
+												node {Single Neuron}
+											}
+										child {
+												node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
+											}
+									}
+								child {
+										node {Feedforward, fully-connected, Network}
+										child {
+												node {No backward connections or cycles}
+											}
+										child {
+												node {No intra-layer connections}
+											}
+										child {
+												node {Acyclic directed graph}
+											}
+									}
+								child {
+										node {Loss/Response}
+										child {
+												node {Misclassification Rate / Accuracy}
+											}
+										child {
+												node {MSE}
+											}
+									}
+								child {
+										node {Hyperparameters}
+										child {
+												node {Number of hidden layers}
+											}
+										child {
+												node {Number of neurons per layer}
+											}
+										child {
+												node {Choice of activation function}
+											}
+										child {
+												node {Dropout rate}
+											}
+										child {
+												node {Regularization penalty on weights}
+											}
+										child {
+												node {Learning rate}
+											}
+										child {
+												node {Choice of optimization algorithms}
+											}
+									}
+								child {
+										node {Depth network = number hidden layers}
+									}
+								child {
+										node {Width network = number neurons each layer}
+									}
+								child {
+										node {Activation}
+										child {
+												node {Types}
+												child {
+														node {Rectified linear unit (ReLU)}
+													}
+												child {
+														node {Logistic Sigmoid Sigmoid (Binary Classification)}
+													}
+												child {
+														node {Softmax (Multi-Class Classification)}
+													}
+												child {
+														node {Hyperbolic Tangent}
+													}
+												child {
+														node {Linear}
+													}
+											}
+										child {
+												node {Importance of Non-linear activations}
+											}
+										child {
+												node {Nonlinear Mapping into new space (hidden layers) for nonlinear problems}
+											}
+									}
+								child {
+										node {Optimizing Neural Networks}
+										child {
+												node {Inference}
+											}
+										child {
+												node {Tranining}
+												child {
+														node {Compute gradients}
+														child {
+																node {Backpropagation}
+																child {
+																		node {Algorithm}
+																	}
+																child {
+																		node {Forward pass}
+																	}
+																child {
+																		node {Backward pass}
+																	}
+															}
+														child {
+																node {Chain-rule of Calculus}
+																child {
+																		node {Fuction composition because of feedforward}
+																	}
+															}
+														child {
+																node {Total Derivative}
+															}
+													}
+												child {
+														node {Update weights}
+														child {
+																node {SGD for Neural Networks}
+																child {
+																		node {Algorithm}
+																	}
+															}
+													}
+												% child {
+												% 		node {Gradient Descent}
+												% 	}
+												% child {
+												% 		node {Stochastic Gradient Descent}
+												% 	}
+											}
+									}
+								child {
+										node {Regularization Techniques}
+										child {
+												node {L2 Regularization}
+											}
+										child {
+												node {L1 Regularization}
+											}
+										child {
+												node {Early Stopping as a Regularizer}
+											}
+									}
+								child {
+										node {Convolutional Neural Networks}
+										child {
+												node {Parameter Sharing or Tied-Weights (sharing weights)}
+												child {
+														node {Advantages}
+														child {
+																node {Smaller models}
+															}
+														child {
+																node {Lower complexity}
+															}
+														child {
+																node {Better generalization}
+															}
+													}
+											}
+										child {
+												node {Multi-layered Sparse Connectivity}
+												child {
+														node {Translation-equivariant capturing of patterns}
+													}
+											}
+										child {
+												node {Stacked Convolutions with Nonlinear Activations}
+											}
+									}
 							}
 						child {
 								node {Non-parametric Models
@@ -249,7 +609,7 @@
 									}
 							}
 					}
-				child {
+				child [level distance=20cm] {
 						node (loss) {Loss Functions}
 						child {
 								node {Maximum Likelihood Estimation
@@ -326,10 +686,203 @@
 									}
 							}
 					}
-				child {
+				child [level distance=35cm] {
 						node {Regularisation}
+						child [level distance=20cm] {
+								node {Families of Regularization Techniques}
+								child {
+										node {Capacity}
+										child {
+												node {Number of parameters}
+											}
+									}
+								child {
+										node {Structural}
+										child {
+												node {Skip connections}
+											}
+										% : NAS, , ResNet, etc.
+									}
+								child {
+										node {Weight decay}
+										child {
+												node {Penalty term to the empirical risk}
+											}
+										child {
+												node {L1}
+											}
+										child {
+												node {L2}
+											}
+									}
+								child [level distance=15cm] {
+										node {Ensembling, Ensembles}
+										child {
+												node {Reduces variance}
+											}
+										child [level distance=15cm] {
+												node {Bagging}
+												child {
+														node {Short for Bootstrap AGGregatING}
+													}
+												child {
+														node {Sampling with replacement}
+														child {
+																node {Reduce the final model’s variance}
+															}
+														child {
+																node {Without affecting the bias much}
+															}
+													}
+												child {
+														node {Requirements}
+														child {
+																node {Low bias individual models}
+															}
+														child {
+																node {Uncorrelated individual models}
+																child {
+																		node {The errors of the models should be uncorrelated}
+																		child {
+																				node {So that the overall error gets reduced}
+																			}
+																	}
+															}
+														child {
+																node {Bagged Trees}
+																child {
+																		node {Low bias but might be correlated}
+																	}
+																child {
+																		node {Decorrelation by randomizing choice of features to split upon}
+																	}
+															}
+														child {
+																node {Random Forests}
+																child {
+																		node {Randomness in terms of the split conditions}
+																	}
+																child {
+																		node {Algoritm}
+																	}
+															}
+													}
+											}
+										child {
+												node {Boosting}
+												child {
+														node {Aggregate high-bias models to create a low-bias ensemble}
+														child {
+																node {Train parameters next model keeping past models fixed}
+															}
+													}
+												child {
+														node {Loss can be linearly approximated via the first-order Taylor expansion}
+													}
+												child {
+														node {Algorithm: Gradient Boosting}
+													}
+												child {
+														node {Algorithm: AdaBoost}
+													}
+												child {
+														node {Gradient Boosted Decision Trees}
+														child {
+																node {Hyperparameters}
+																child {
+																		node {$\gamma$ is the weight of the penalty on the number of leaves}
+																	}
+																child {
+																		node {$\lambda$ is the weight of the penalty on the weights}
+																	}
+															}
+														child {
+																node {Complexity}
+															}
+														child {
+																node {Advantages}
+																child {
+																		node {No need for data preprocessing}
+																	}
+																child {
+																		node {Work well with categorical features}
+																	}
+																child {
+																		node {Ability to work with arbitrary loss functions}
+																	}
+																child {
+																		node {Very low-bias, yet relatively low-variance}
+																	}
+																child {
+																		node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
+																	}
+															}
+													}
+											}
+										% child {
+										% 		node {Dropout}
+										% 	}
+									}
+								child {
+										node {Weight Aggregation}
+										child {
+												node {Stochastic Weight Averaging}
+											}
+										child {
+												node {Snapshot Ensembles}
+											}
+									}
+								child {
+										node {Learning dynamics}
+										child {
+												node {Early stopping}
+											}
+										% child {
+										%   node {Learning rate schedulers}
+										% }
+									}
+								child {
+										node {Implicit}
+										child {
+												node {Batch normalization}
+											}
+									}
+							}
+						child {
+								node {Bias-Variance Tradeoff}
+								child {
+										node {Formula}
+									}
+								child {
+										node {Model complexity all cases with variance and bias}
+										child {
+												node {Goal}
+											}
+									}
+								child {
+										node {Estimated model}
+									}
+								child {
+										node (expected test error) {Expected test error}
+									}
+								child {
+										node (expected prediction model) {Expected prediction model}
+									}
+								child {
+										node {Expected Target}
+										child {
+												node (expected value) {Expected Value}
+												child {
+														node {Properties of Expectation}
+													}
+											}
+									}
+							}
 						child {
 								node {Underfitting}
+							}
+						child {
+								node {Generalizing}
 							}
 						child {
 								node {Overfitting}
@@ -338,6 +891,54 @@
 				child {
 						node {Objective Function}
 					}
+			}
+		child {
+				node {Hyperparameter Optimization}
+				child {
+						node {Hyperparameters usually cannot be determined analytically}
+					}
+				child {
+						node {Response function}
+					}
+        child {
+          node {Algorithms}
+          child {
+            node {K-Fold Cross Validation}
+          }
+          child {
+            node {Black-box Search}
+            child {
+              node {Grid and Random Search}
+            }
+            child {
+              node {Sequential Model Based Optimization / Bayesian Optimization}
+              child {
+                node {Surrogate Model}
+              }
+              child {
+                node {Exploration vs. Exploitation}
+              }
+              child {
+                node {Acquisition function}
+              }
+              child {
+                node {Gaussian Process Learning}
+              }
+            }
+          }
+          child {
+            node {Gray-box Search}
+            child {
+              node {Hyperband}
+              child {
+                node {Learning Curve Tuning}
+              }
+              child {
+                node {Successive Halving}
+              }
+            }
+          }
+        }
 			}
 		child {
 				node {Unsupervised Learning}
@@ -448,6 +1049,8 @@
 	\end{mindmapcontent}
 	\begin{edges}
 		\edge{loss}{target}
+		\edge{expected prediction model}{expected value}
+		\edge{expected test error}{expected value}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

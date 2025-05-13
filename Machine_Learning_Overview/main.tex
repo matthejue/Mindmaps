@@ -221,10 +221,43 @@
 								child {
 										node {Regularization}
 										child {
-												node {Too many steps $\approx$ Too many leaves}
+												node {Penalize number of leaves}
+												child {
+														node {Too many steps $\approx$ Too many leaves}
+													}
 											}
 										child {
-												node {Too large step jumps $\approx$ Too large leaves’ output values ($w$)}
+												node {Reduce maximum depth}
+												child {
+														node {Too large step jumps $\approx$ Too large leaves’ output values ($w$)}
+													}
+											}
+										child {
+												node {Single decision tree}
+												child {
+														node {Minimum instances per leaf}
+													}
+												child {
+														node {Maximum number of leaves}
+													}
+												child {
+														node {Maximum tree depth}
+													}
+												child {
+														node {Minimum gain for a split}
+													}
+												child {
+														node {Penalty term on leaf outputs}
+													}
+											}
+										child {
+												node {Ensemble of decision trees}
+												child {
+														node {Number of trees (steps in boosting)}
+													}
+												child {
+														node {Boosting additive weight}
+													}
 											}
 									}
 							}
@@ -339,6 +372,183 @@
 											}
 									}
 								child {
+										node {Regularization Techniques}
+										child {
+												node {Specific to Neural Networks}
+												child {
+														node {Structural and Linearization}
+														child {
+																node {Skip connections (Across layers)}
+															}
+														child {
+																node {Residual blocks}
+																child {
+																		node {Skip connections from all preceding layers to all succeeding layers}
+																	}
+																child {
+																		node {Make the gradient flow backwards}
+																		child {
+																				node {Avoiding vanishing / exploding gradient}
+																			}
+																	}
+																child {
+																		node {Network can learn not use some layers by using identity layers}
+																	}
+															}
+														child {
+																node {Shake shake}
+																child {
+																		node {Randomly weight the paths for each mini-batch}
+																	}
+															}
+													}
+												child {
+														node {Model Averaging}
+														child {
+																node {Dropout}
+																child {
+																		node {Bagging of random neural subnetworks}
+																		child {
+																				node {Aims at reducing variance (error) of model}
+																			}
+																	}
+																child {
+																		node {Dropout node multiplying output by zero}
+																		child {
+																				node {Only input and hidden nodes dropped out}
+																			}
+																		child {
+																				node {Input unit included probability 0.8}
+																			}
+																		child {
+																				node {Hidden unit probability 0.5}
+																			}
+																		child {
+																				node {Computations}
+																				child {
+																						node {Forward computation}
+																					}
+																				child {
+																						node {Back-propagation}
+																						child {
+																								node {As usual multiplying activations by mask}
+																							}
+																					}
+																				child {
+																						node {Inference}
+																					}
+																			}
+																	}
+															}
+													}
+											}
+										child [level distance = 23cm] {
+												node {General methods}
+												child {
+														node {Weight decay}
+														child {
+																node {L2 Regularization}
+																child {
+																		node {See older NN slides}
+																	}
+															}
+														child {
+																node {L1 Regularization}
+																child {
+																		node {See older NN slides}
+																	}
+															}
+													}
+												child {
+														node {Data Augmentation}
+														child {
+																node {Apply random data augmentation online}
+																child {
+																		node {Create different version of same sample at different epochs}
+																	}
+																child {
+																		node {Methods}
+																		child {
+																				node {Domain-specific manual policies}
+																				child {
+																						node {Cutout }
+																					}
+																				child {
+																						node {Mixup}
+																					}
+																				child {
+																						node {Cutmix}
+																					}
+																			}
+																		child {
+																				node {Trainable (data) augmentation policies/algorithms}
+																				child {
+																						node {A policy consists of 5 sub-policies}
+																						child {
+																								node {Each sub-policy 2 image operations applied in sequence}
+																							}
+																					}
+																				child [level distance = 10cm] {
+																						node {Image Augmentation Operations}
+																						child {
+																								node {ShearX/Y}
+																							}
+																						child {
+																								node {TranslateX/Y}
+																							}
+																						child {
+																								node {Rotate}
+																							}
+																						child {
+																								node {AutoContrast}
+																							}
+																						child {
+																								node {Invert}
+																							}
+																						child {
+																								node {Equalize}
+																							}
+																						child {
+																								node {Solarize}
+																							}
+																						child {
+																								node {Posterize}
+																							}
+																						child {
+																								node {Contrast}
+																							}
+																						child {
+																								node {Color}
+																							}
+																						child {
+																								node {Brightness}
+																							}
+																						child {
+																								node {Sharpness}
+																							}
+																						child {
+																								node {Cutout}
+																							}
+																						child {
+																								node {Sample Pairing}
+																							}
+																					}
+																			}
+																	}
+															}
+													}
+												child {
+														node {Learning Dynamics}
+														child {
+																node {Early Stopping as a Regularizer}
+																child {
+																		node {See older NN slides}
+																	}
+															}
+													}
+											}
+									}
+								child {
 										node {Hyperparameters}
 										child {
 												node {Number of hidden layers}
@@ -441,18 +651,6 @@
 												% child {
 												% 		node {Stochastic Gradient Descent}
 												% 	}
-											}
-									}
-								child {
-										node {Regularization Techniques}
-										child {
-												node {L2 Regularization}
-											}
-										child {
-												node {L1 Regularization}
-											}
-										child {
-												node {Early Stopping as a Regularizer}
 											}
 									}
 								child {
@@ -819,9 +1017,9 @@
 															}
 													}
 											}
-										% child {
-										% 		node {Dropout}
-										% 	}
+										child {
+												node {Dropout}
+											}
 									}
 								child {
 										node {Weight Aggregation}
@@ -846,6 +1044,12 @@
 										child {
 												node {Batch normalization}
 											}
+									}
+							}
+						child {
+								node {Combining Regularizers as a Cocktail}
+								child {
+										node {Better than singular regularizer}
 									}
 							}
 						child {
@@ -900,48 +1104,198 @@
 				child {
 						node {Response function}
 					}
-        child {
-          node {Algorithms}
-          child {
-            node {K-Fold Cross Validation}
-          }
-          child {
-            node {Black-box Search}
-            child {
-              node {Grid and Random Search}
-            }
-            child {
-              node {Sequential Model Based Optimization / Bayesian Optimization}
-              child {
-                node {Surrogate Model}
-              }
-              child {
-                node {Exploration vs. Exploitation}
-              }
-              child {
-                node {Acquisition function}
-              }
-              child {
-                node {Gaussian Process Learning}
-              }
-            }
-          }
-          child {
-            node {Gray-box Search}
-            child {
-              node {Hyperband}
-              child {
-                node {Learning Curve Tuning}
-              }
-              child {
-                node {Successive Halving}
-              }
-            }
-          }
-        }
+				child {
+						node {Algorithms}
+						child {
+								node {K-Fold Cross Validation}
+							}
+						child {
+								node {Black-box Search}
+								child {
+										node {Grid and Random Search}
+									}
+								child {
+										node {Sequential Model Based Optimization / Bayesian Optimization}
+										child {
+												node {Surrogate Model}
+											}
+										child {
+												node {Exploration vs. Exploitation}
+											}
+										child {
+												node {Acquisition function}
+											}
+										child {
+												node {Gaussian Process Learning}
+											}
+									}
+							}
+						child {
+								node {Gray-box Search}
+								child {
+										node {Hyperband}
+										child {
+												node {Learning Curve Tuning}
+											}
+										child {
+												node {Successive Halving}
+											}
+									}
+							}
+					}
 			}
 		child {
-				node {Unsupervised Learning}
+				node {Fighting Overfitting}
+				child {
+						node {Basic Principles}
+						child {
+								node {Overfitting}
+								child {
+										node {Add more data}
+									}
+								child {
+										node {Reduce model complexity}
+										child {
+												node {Feature engineering}
+											}
+										child {
+												node {Increase regularization}
+											}
+									}
+								child {
+										node {Ensembling}
+									}
+							}
+						child {
+								node {Underfitting}
+								child {
+										node {Add informative features}
+									}
+								child {
+										node {Decrease Regularization}
+									}
+								child {
+										node {Increase model capacity}
+									}
+							}
+					}
+			}
+		child {
+				node {Error Measures}
+				child {
+						node {Classification and Regression}
+						child {
+								node {Classification}
+								child {
+										node {Binary}
+										child {
+												node {Miss-classification Rate (MCR)}
+												child {
+														node {Confusion matrix}
+													}
+											}
+										child {
+												node {Receiver Operating Characteristic curve (ROC curve)}
+                        child {
+                          node {Gives equal importance to positive and negative classes}
+                        }
+                        child {
+                          node {Area under the ROC curve (AUC)}
+                        }
+											}
+                    child {
+                      node {Precision-Recall curve (PR curve)}
+                      child {
+                        node {Cares more about the positive class}
+                      }
+                      child {
+                        node {Area under the Precision-Recall (PR) curve}
+                      }
+                      child {
+                        node {F1}
+                        child {
+                          node {Harmonic mean between Precision and Recall}
+                        }
+                      }
+                    }
+										child {
+												node {Proxy Losses}
+                        child {
+                          node {Differentiable approximation of an error measure}
+                          child {
+                            node {Can’t use it for gradient descent}
+                          }
+                        }
+                        child {
+                          node {Should have same minimum point of original error measure}
+                        }
+                        child {
+                          node {Proxy of 0/1 error is logistic loss}
+                        }
+												child {
+														node {Imbalanced Target}
+													}
+											}
+									}
+							}
+						child {
+								node {Regression}
+                child {
+                  node {Need no Proxies}
+                }
+                child {
+                  node {Scale-dependent errors}
+                  child {
+                    node {Mean Absolute Error}
+                  }
+                  child {
+                    node {Root Mean Square Error}
+                  }
+                }
+                child {
+                  node {Percentage errors}
+                  child {
+                    node {Independent to scale}
+                  }
+                  child {
+                    node {Mean Absolute Percentage Error}
+                  }
+                }
+                child {
+                  node {Mean Absolute Scaled Error (MAPE)}
+                  child {
+                    node {Alternative to percentage errors}
+                    child {
+                      node {Percentage errors are undefined when $y_n = 0$ and produce extreme values when $y_n\approx 0$}
+                    }
+                  }
+                  child {
+                    node {Nominator and denominator are same scale, cannot be perceived percentually}
+                  }
+                }
+							}
+					}
+          child {
+            node {Ranking and Information Retrieval}
+            child {
+              node {Discounted cumulative gain (DCG)}
+            }
+            child {
+              node {Normalized discounted cumulative gain (NDCG)}
+              child {
+                node {Ideal discounted cumulative gain (IDCG)}
+              }
+            }
+            child {
+              node {Pairwise Rank Loss}
+              child {
+                node {Algorithm}
+              }
+              child {
+                node {Pairwise Loss is non-optimal for NDCG}
+              }
+            }
+          }
 			}
 		child {
 				node {Design Cycle
@@ -1045,6 +1399,9 @@
 								% }
 							}
 					}
+			}
+		child {
+				node {Unsupervised Learning}
 			}
 	\end{mindmapcontent}
 	\begin{edges}

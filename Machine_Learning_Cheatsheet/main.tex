@@ -25,6 +25,7 @@
 	\begin{betterlist}
 		\item Target is given by an expert (ground-truth)
 		\item Classification, Regression, Ranking
+		\item \script{23}{Supervised Learning Example}
 		\item \aalert{Archetype:}
 		\begin{betterlist}
 			\item \alert{data dimensions:} $N$ instances having $M$ features
@@ -42,7 +43,6 @@
 			\item \alert{regularisation:} $\Omega(\theta): \mathbb{R}^k \rightarrow \mathbb{R}$, fights overfitting to the noise of the measured data
 			\item \alert{objective function:} $\displaystyle \underset{\theta}{argmin} \sum^N_{n=1} \mathcal{L}(y_n, \hat y_n) + \Omega(\theta)$
 		\end{betterlist}
-		\item \script{22}{Supervised Learning Example}
 	\end{betterlist}
 	\fbox{Prediction Models}
 	\begin{betterlist}
@@ -56,15 +56,15 @@
 		\end{betterlist}
 		\item \aalert{Decision Trees}
 		\begin{betterlist}
-			\item \script{28}{as a Prediction Model}
-			\item \script{29}{as a Step-wise Function}
+			\item \script{29}{as a Prediction Model}
+			\item \script{30}{as a Step-wise Function}
 		\end{betterlist}
 		\item \aalert{Neural Networks}
 		\begin{betterlist}
 			\item Composite functions, i.e., functions of functions
 			\item A neuron indexed i is a non-linear function $f_i(x, \theta_i)$
 			\item If neuron $i$ is connected to neuron $j$ the model is $f_j (f_i (x, \theta_i ), \theta_j)$
-			\item \script{30}{Example}
+			\item \script{31}{Example}
 		\end{betterlist}
 	\end{betterlist}
 	\fbox{Loss Functions}
@@ -75,7 +75,25 @@
 			\item \alert{Least-squares:} $\mathcal{L}(y_n, \hat y_n) := (y_n - \hat y_n)^2$
 			\item \alert{L1:} $\mathcal{L}(y_n, \hat y_n) := |y_n - \hat y_n|$
 		\end{betterlist}
-		\item \aalert{Multi-class Classification}
+		\item \aalert{Binary Classification}
+		\begin{betterlist}
+			\item \alert{Logistic loss}, $y_n\in\{0, 1\}$:
+			\begin{betterlist}
+				\item $\mathcal{L}(y_n, \hat y_n) := -y_n log(\hat y_n) - (1 - y_n)log(1-\hat y_n)$
+				\item is \alert{convex}, but there's no analytic solution
+				\item \alert{as case destinction:}\\
+				\begin{betterlist}
+					\item $J\left(h_{\mathbf{w}}\left(y_i, \mathbf{x}_i\right)\right)=\left\{\begin{array}{rll}
+							-\log \left(h_{\mathbf{w}}\left(\mathbf{x}_i\right)\right)   & \text { for } & y_i=1 \\
+							-\log \left(1-h_{\mathbf{w}}\left(\mathbf{x}_i\right)\right) & \text { for } & y_i=0\end{array}\right)$
+				\end{betterlist}
+			\end{betterlist}
+			\item \alert{Hinge loss}, $y_n\in\{-1,1\}$:
+			\begin{betterlist}
+				\item $\mathcal{L}(y_n, \hat y_n) := max(0, 1 - y_n\hat y_n)$
+			\end{betterlist}
+		\end{betterlist}
+		\item \aalert{Multi-class loss - Softmax}
 		\begin{betterlist}
 			\item Re-express targets $y_n \in \{1, \ldots , C\}$ as one-vs-all, i.e. $y_{n, c} := \begin{cases}
 					1 & y_n = C    \\
@@ -83,37 +101,23 @@
 				\end{cases}$
 			\item Learn model parameters per class $\theta \in \mathbb{R}^{C\times K}$
 			\item Estimations expressed as probabilities among classes: $\displaystyle\hat y_{n,c} = \frac{e^{f(x_n,\uptheta_c)}}{\sum^{C}_{q=1} e^{f(x_n,\uptheta_q)}}$
-			\item Logloss: $\displaystyle L(y_{n,:}, ˆy_{n,:}) := −\sum^{C}_{c=1} y_{n,c} log(\hat y_{n,c})$
-			\item \aalert{Binary Classification}
 			\begin{betterlist}
-				\item \alert{Logistic loss}, $y_n\in\{0, 1\}$:
-				\begin{betterlist}
-					\item $\mathcal{L}(y_n, \hat y_n) := -y_n log(\hat y_n) - (1 - y_n)log(1-\hat y_n)$
-					\item is \alert{convex}, but there's no analytic solution
-					\item \alert{as case destinction:}\\
-					\begin{betterlist}
-						\item $J\left(h_{\mathbf{w}}\left(y_i, \mathbf{x}_i\right)\right)=\left\{\begin{array}{rll}
-								-\log \left(h_{\mathbf{w}}\left(\mathbf{x}_i\right)\right)   & \text { for } & y_i=1 \\
-								-\log \left(1-h_{\mathbf{w}}\left(\mathbf{x}_i\right)\right) & \text { for } & y_i=0\end{array}\right)$
-					\end{betterlist}
-				\end{betterlist}
-				\item \alert{Hinge loss}, $y_n\in\{-1,1\}$:
-				\begin{betterlist}
-					\item $\mathcal{L}(y_n, \hat y_n) := max(0, 1 - y_n\hat y_n)$
-				\end{betterlist}
+				\item use the exponential function to avoid negative probabilities
 			\end{betterlist}
+			\item Logloss: $\displaystyle L(y_{n,:}, ˆy_{n,:}) := −\sum^{C}_{c=1} y_{n,c} log(\hat y_{n,c})$
 		\end{betterlist}
 	\end{betterlist}
 	\fbox{Generalization Performance}
 	\begin{betterlist}
-		\item \alert{Overfitting} (High model variance): Model perfectly fits the training data (incl. noise). Captering noise.
 		\item \alert{Underfitting} (High model bias): Model fails to fit the training data. Unable to capture complexity
+		\item \alert{Overfitting} (High model variance): Model perfectly fits the training data (incl. noise). Captering noise.
 		\item \alert{Generalization}: Model is accurate on test data
-		\item \script{33}{Example (f.)}
+		\item \alert{Regularization}: Fights overfitting to the noise of the measured data
+		\item \script{36}{Example (f.)}
 	\end{betterlist}
 	\fbox{Probability Theory}
 	\begin{betterlist}
-		\item \script{36}{Example with linear model (ff.)}
+		\item \script{43}{Example with linear model (ff.)}
 		\item \aalert{Maximum Likelihood Estimation}
 		\begin{betterlist}
 			\item \alert{likelihood} of observing the \alert{target} $y \in \mathbb{R}^N$ is $\displaystyle \mathcal{L}(\theta) = \prod^N_{n=1} \hat p(y_n | x_n, \theta)$
@@ -123,21 +127,28 @@
 			\end{betterlist}
 			\item \alert{Aim:} Estimate the $\theta$-s which maximize the likelihood
 			\begin{betterlist}
-				\item $\underset{\theta}{\operatorname{argmax}}\;g(\theta)=\underset{\theta}{\operatorname{argmax}}\;\log (g(\theta))$
-				\item $\displaystyle log\;\mathcal{L}(\theta) = \log \prod_{n=1}^N \hat{p}\left(y_n \mid \theta\right)=\sum_{n=1}^N \log \left(\hat{p}\left(y_n \mid \theta\right)\right)$
+				\item $\underset{\theta}{\operatorname{argmax}}\;g(\theta)=\underset{\theta}{\operatorname{argmax}}\;\log (g(\theta))$, $log(a\cdot b) = log(a) + log(b)$
+				\item $\displaystyle \log \prod_{n=1}^N \hat{p}\left(y_n \mid \theta\right)=\sum_{n=1}^N \log \left(\hat{p}\left(y_n \mid \theta\right)\right)$
+				\begin{betterlist}
+					\item $\displaystyle log L(\Theta) = \sum^N_{n=1} log\left(\frac{1}{\sqrt{2\pi\sigma}} e^{−\frac{(yn-\hat yn)^2}{2\sigma^2}}\right)$
+					\begin{betterlist}
+						\item \script{48}{Deriving further}
+					\end{betterlist}
+				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
-		\item \script{49}{Nearest Neighbors Example (ff.)}
+		\item \script{64}{Nearest Neighbors Example (ff.)}
 		\item \aalert{Bayes Rule}
 		\begin{betterlist}
 			\item \underline{assume $x \in X, y \in Y$:}
 			\begin{betterlist}
 				\item $\displaystyle P(y | x) = P(y)\frac{P(x | y)}{P(x)} = P(y) \frac{P(x | y)}{\sum_{y′\in Y} P(x | y')P(y')}$
 			\end{betterlist}
+			\item \script{69}{Success plan Example}
+			\item \script{72}{COVID-19 Example (ff.)}
 			\item \alert{Multiple conditional variables:}
 
 			$\displaystyle P(y | x_1, x_2 \ldots , x_M) = P(y)\frac{P(x_1, x_2 \ldots , x_M | y)}{P(x_1, x_2 \ldots, x_M)}$
-			\item \script{54}{COVID-19 Example (ff.)}
 			\item \alert{Naive Bayes}
 			\begin{betterlist}
 				\item assume $x_1, x_2 \ldots, x_M$ are all independent given $y$ :\\ $\begin{aligned}[t]
@@ -146,8 +157,11 @@
 					\end{aligned}$
 				\item if the goal is only to predict $y$ we can drop the denominator:\\ $P\left(y \mid x_1, x_2 \ldots, x_M\right) \propto P(y) P\left(x_1 \mid y\right) P\left(x_2 \mid y\right) \ldots P\left(x_M \mid y\right)$
 			\end{betterlist}
+			\item \script{76}{COVID-19 Example}
 		\end{betterlist}
 	\end{betterlist}
+\end{minipage}
+\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Machine Learning Design Cycle}
 
 	\includegraphics[width=0.8\linewidth, center]{./figures/ml_design_cycle.png}
@@ -175,7 +189,7 @@
 			\end{betterlist}
 			\item \alert{Engineer features:}
 			\begin{betterlist}
-				\item E.g., body mass index: BMI = weight/ (height2)
+				\item E.g., body mass index: $BMI = \dfrac{weight}{height^2}$
 			\end{betterlist}
 			\item \alert{Encode features:}
 			\begin{betterlist}
@@ -209,49 +223,137 @@
 			\end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
-\end{minipage}
-\begin{minipage}[t]{0.2\linewidth}
 	\fbox{Linear methods}
 	\begin{betterlist}
+		\item \script{85}{Example: Predicting housing prices}
+		\item \alert{Formal Regression Problem}
+		\begin{betterlist}
+			\item Given a dataset of $N$ instances, each instance consisting of:
+			\begin{betterlist}
+				\item feature vector $x_i \in \mathbb{R}^D$ are D-dimensional vectors $\forall i \in \{ 1,\ldots , N\}$
+				\item Target is $y_i \in \mathbb{R}$ uni-dimensional $\forall i \in \{ 1,\ldots , N\}$
+			\end{betterlist}
+			\item \alert{Objective:} Find a prediction model $\hat y := f : \mathbb{R}^D \rightarrow \mathbb{R}$ that estimates $y$ by minimizing a loss $J : \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}_+$:
+			\begin{betterlist}
+				\item $\displaystyle \underset{f}{arg\,min} \sum^N_{i=1} J(y_i, f(x_i))$
+			\end{betterlist}
+			\item \alert{ Refined Objective:}  Find a parametric model $\hat y := f : \mathbb{R}^D \times  W \mapsto \mathbb{R}$:
+			\begin{betterlist}
+				\item $\displaystyle \underset{w\in W}{arg\,min} \sum^N_{i=1} J(y_i, f(x_i; w))$
+			\end{betterlist}
+		\end{betterlist}
 		\item \aalert{Linear Regression}
 		\begin{betterlist}
-			\item $f\left(\mathbf{x}_i ; \mathbf{w}\right)=w_0+w_1 x_{i, 1}+\ldots+w_D x_{i, D}=w_0+w^T x_i$
-			\item non-linear function can be approximated by a linear function if one maps the feature x into a new dimensionality with a \alert{basis function}: $\phi: \mathbb{R}^D\rightarrow \mathbb{R}^M$
-			\item \alert{enhanced linear regression model:} linear combinations of fixed \alert{nonlinear functions} of the input variables: $\displaystyle f(x_i, \omega) = \omega_0 + \sum^{M}_{j=1} \omega_j\phi(x_i)_j$
+			\item simplest regression model
+			\item $f\left(\mathbf{x}_i ; \mathbf{w}\right)=w_0+w_1 x_{i, 1}+\ldots+w_D x_{i, D}=w_0+w^T x_i$, where $w_0$ is a fixed offset, called the \alert{bias} and $w$ is the \alert{weight vector} or \alert{parameter vector}
 			\begin{betterlist}
-				\item $f(x, w)$ is still a \alert{linear function} of the weights / parameters $w_i$
-				\item $f(x, w)$ is a \alert{nonlinear} function of the input dimensions / variables $x_i$
-				\item Analytical solution
+				\item \alert{Characteristics:}
 				\begin{betterlist}
-					\item setting the \alert{partial derivatives} w.r.t. $w$ to zero: $\displaystyle\dfrac{\partial}{\partial \omega} \sum^N_{n=1} \mathcal{L}(y_n, f_n(x, \omega)) = 0$
-					\item solving for $\omega$
+					\item Linear function of the weights / parameters $w \in \mathbb{R}^{D+1}$
+					\item Linear function of the input dimensions / variables $x \in \mathbb{R}^{D+1}$
+				\end{betterlist}
+			\end{betterlist}
+			\item \aalert{Linear Regression with Basis Functions:} \alert{Non-linear function} can be approximated by a linear function if one maps the feature x into a new dimensionality: $x\rightarrow \Phi(x) = (a, b)$
+			\begin{betterlist}
+				\item \script{90}{Example}
+				\item Nonlinear projection of features $\phi: \mathbb{R}^D\rightarrow \mathbb{R}^M$
+				\item Linear combinations of fixed \alert{nonlinear functions} of the input variables: $\displaystyle f(x_i, w) = w_0 + \sum^M_{j=1} w_j\phi(x_i)_j$ where $\phi(x_i)_j$ are known as \alert{basis functions}
+				\item Characteristics of this \alert{enhanced} linear regression model:
+				\begin{betterlist}
+					\item $f(x, w)$ is still a linear function of the weights / parameters $w_i$
+					\item $f(x, w)$ is a \alert{nonlinear} function of the input dimensions / variables $x_i$
+					\item Adding basis functions may enlarge the dimensionality
+					\item The use of fixed basis functions corresponds to an earlier step in the ML pipeline: \alert{feature extraction / encoding. Combine features:}
+					\begin{betterlist}
+						\item We can use complex operations to combine features
+						\item Combined features can be more expressive than their components (use expert knowledge!)
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+			% \item \alert{enhanced linear regression model:} linear combinations of fixed \alert{nonlinear functions} of the input variables: $\displaystyle f(x_i, \omega) = \omega_0 + \sum^{M}_{j=1} \omega_j\phi(x_i)_j$
+			% \begin{betterlist}
+			% 	\item $f(x, w)$ is still a \alert{linear function} of the weights / parameters $w_i$
+			% 	\item $f(x, w)$ is a \alert{nonlinear} function of the input dimensions / variables $x_i$
+			% 	\item Analytical solution
+			% 	\begin{betterlist}
+			% 		\item setting the \alert{partial derivatives} w.r.t. $w$ to zero: $\displaystyle\dfrac{\partial}{\partial \omega} \sum^N_{n=1} \mathcal{L}(y_n, f_n(x, \omega)) = 0$
+			% 		\item solving for $\omega$
+			% 	\end{betterlist}
+			% \end{betterlist}
+			\item \script{95}{\aalert{Interpretation of the Quality of the Model (f.)}}
+			\begin{betterlist}
+				\item \alert{Residual Error:} $\displaystyle \epsilon_i = y_i − f(x_i; w)$
+				\item \alert{Loss/Cost:} $\displaystyle J(w) = \sum^N_{i =1} J(y_i, f(x_i; w))$ e.g. $J(y_i, f(x_i; w)) = \epsilon^2_i$
+				\begin{betterlist}
+					\item Typical loss choices, either $L_2: J(y,\hat y) = (y - \hat y)^2$, or $L_1: J(y,\hat y) = |y - \hat y|$
+					\begin{betterlist}
+						\item With $L_2$, outliers are heavily penalized and heavily influence the model. $L_1$ does not emphasize outliers as much
+						\item The \script{100}{\alert{Huber loss}} tries to take the best from both approaches
+					\end{betterlist}
+				\end{betterlist}
+			\end{betterlist}
+			\item \underline{\aalert{Weight vector $w$ in $\displaystyle \underset{w}{arg min} \sum^N_{i =1} J(y_i, f(x_i; w))$ can be derived in (at least) two manners:}}
+			\begin{betterlist}
+				\item \alert{Option 1:} Determine the weights analytically
+				\begin{betterlist}
+					\item Assumptions Required for Analytical Solution: $y_i = w_0 + w_1x_1 + \ldots + w_D x_D + \epsilon_i$. The analytical solution is based on \alert{three assumptions}. If violated, the model may fail or underperform:
+					\begin{betterlist}
+						\item \alert{A1:} The expected value of the residual errors is zero: $\forall i ∶E(\epsilon_i) = 0$
+						\item \alert{A2:} The residual errors are uncorrelated and share the same variance: $\forall i ∶Var(\epsilon_i) = \sigma^2$
+						\item \alert{A3:} The residual errors follow a normal distribution: $\epsilon_i \sim \mathcal{N}(0, \sigma^2)$
+					\end{betterlist}
+					\item \script{103}{Example: Optimization of $w$ via Least Squares Loss Function (ff.)}
+					\begin{betterlist}
+						\item \underline{slightly more elegant formulation for linear regression (in augmented vector notation):} $y = X w + \epsilon$
+						\item \script{108}{Solution}
+					\end{betterlist}
+				\end{betterlist}
+				\item \alert{Option 2:} Guess the entries of $w$ and try to improve them iteratively
+				\begin{betterlist}
+					\item \alert{Use of Linear Regression:} To predict unknown values $y_i$ for novel input variables $x_i$
+          \begin{betterlist}
+            \item Estimate the influence of a single input variable or several variables (e.g. in medicine), i.e. estimating the strength of the \alert{correlation} between $x_i$ and $y$. \alert{BUT: Does not allow for causal interpretation!}
+          \end{betterlist}
 				\end{betterlist}
 			\end{betterlist}
 		\end{betterlist}
-		\item \aalert{Linear Classification}
+		% \item \aalert{Linear Classification}
+		% \begin{betterlist}
+		% 	\item using \alert{logistic regression} which bounds the output of linear regression to $0 \le h_w(x) \le 1$
+		% 	\begin{betterlist}
+		% 		\item e.g. $h_w(x) = g(w^Tx)$ with \alert{sigmoid} function or \alert{logistic function} $\displaystyle g(z) = \frac{1}{1 + e^{-z}}$ introduces \alert{non-linearity}
+		% 		\item $h_w(x) = P(y=1|x; \omega)$, estimated probability, that $y = 1$
+		% 	\end{betterlist}
+		% 	\item Gradient Descent
+		% 	\begin{betterlist}
+		% 		\item  if there is \alert{no analytic solution}
+		% 		\item start with a guess for $\omega$
+		% 		\item move $\omega$ towards the minimum of $J(\omega)$
+		% 		\item minimize $J(\omega)$ by updating $\omega$ in the negative direction of $\dfrac{\partial J(\omega)}{\partial\omega}$: $\displaystyle\omega^{next} \leftarrow \omega^{prev} - \eta \frac{\partial J(\omega)}{\partial\omega^{prev}} $
+		% 		\item Gradients
+		% 		\begin{betterlist}
+		% 			\item for \alert{linear regression}
+		% 			\item for \alert{logistic regression}
+		% 		\end{betterlist}
+		% 		\item Stochastic Gradient Descent
+		% 		\begin{betterlist}
+		% 			\item for \alert{large dimensions}
+		% 			\item nice if the error function is \alert{convex}
+		% 		\end{betterlist}
+		% 	\end{betterlist}
+		% \end{betterlist}
+		\item \aalert{Linear Classification:}
 		\begin{betterlist}
-			\item using \alert{logistic regression} which bounds the output of linear regression to $0 \le h_w(x) \le 1$
-			\begin{betterlist}
-				\item e.g. $h_w(x) = g(w^Tx)$ with \alert{sigmoid} function or \alert{logistic function} $\displaystyle g(z) = \frac{1}{1 + e^{-z}}$ introduces \alert{non-linearity}
-				\item $h_w(x) = P(y=1|x; \omega)$, estimated probability, that $y = 1$
-			\end{betterlist}
-			\item Gradient Descent
-			\begin{betterlist}
-				\item  if there is \alert{no analytic solution}
-				\item start with a guess for $\omega$
-				\item move $\omega$ towards the minimum of $J(\omega)$
-				\item minimize $J(\omega)$ by updating $\omega$ in the negative direction of $\dfrac{\partial J(\omega)}{\partial\omega}$: $\displaystyle\omega^{next} \leftarrow \omega^{prev} - \eta \frac{\partial J(\omega)}{\partial\omega^{prev}} $
-				\item Gradients
-				\begin{betterlist}
-					\item for \alert{linear regression}
-					\item for \alert{logistic regression}
-				\end{betterlist}
-				\item Stochastic Gradient Descent
-				\begin{betterlist}
-					\item for \alert{large dimensions}
-					\item nice if the error function is \alert{convex}
-				\end{betterlist}
-			\end{betterlist}
+			\item \script{114}{Example: Tumor Classification (ff.)}
+      \item \script{122}{Logistic Regression Model}
+      \begin{betterlist}
+        \item We want: $0\le h_w(x) \le 1$. Standard linear regression (using the inner product) delivers: $h_w(x) = w^Tx$. A subtle change introduces non-linearity: $h_w(x) = g(w^Tx)$, with $\displaystyle g(z) = \frac{1}{1 + e^{−z}}$ (\alert{sigmoid function} or \alert{logistic function}) $\displaystyle \Rightarrow ℎ_w(x) = \frac{1}{1 + e^{−w^Tx}}$ 
+      \end{betterlist}
+      \item \alert{Interpretation of Model Output}: $h_w(x) \approx$ estimated probability, that $y = 1$
+      \begin{betterlist}
+        \item More formally, we work with a hypothesis: $h_w(x) = P(y = 1 | x ; w )$. \enquote{Probability that $y = 1$, given that the input is $x$ and the model is parameterized by $w$}
+        % \item The actual labels are still discrete (𝑦= 0 or 𝑦= 1), but the probabilities need to add to one: P(𝑦= 0 | 𝒙; 𝒘) + P(𝑦= 1 | 𝒙; 𝒘) = 1 P(𝑦= 0 | 𝒙; 𝒘) = 1 −P(𝑦= 1 | 𝒙; 𝒘)
+      \end{betterlist}
 		\end{betterlist}
 	\end{betterlist}
 \end{minipage}

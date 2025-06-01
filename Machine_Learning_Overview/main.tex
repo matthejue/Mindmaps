@@ -65,17 +65,20 @@
 												child {
 														node {Characteristics of enhanced linear regression model}
 													}
+                        child {
+                          node {Corresponds to Feature Extraction / encoding step} % in ML pipeline
+                        }
+											}
+										child {
+												node {Quality of model}
 												child {
-														node {Quality of model}
-														child {
-																node {L1 loss}
-															}
-														child {
-																node {L2 loss}
-															}
-														child {
-																node {Huber loss}
-															}
+														node {L1 loss}
+													}
+												child {
+														node {L2 loss}
+													}
+												child {
+														node {Huber loss}
 													}
 											}
 									}
@@ -132,7 +135,7 @@
 											}
 									}
 								child [level distance=15cm] {
-										node {Hyperparameters}
+										node (hyperparameters) {Hyperparameters}
 										child {
 												node {Minimum number of samples per split}
 											}
@@ -1196,42 +1199,42 @@
 											}
 										child {
 												node {Receiver Operating Characteristic curve (ROC curve)}
-                        child {
-                          node {Gives equal importance to positive and negative classes}
-                        }
-                        child {
-                          node {Area under the ROC curve (AUC)}
-                        }
+												child {
+														node {Gives equal importance to positive and negative classes}
+													}
+												child {
+														node {Area under the ROC curve (AUC)}
+													}
 											}
-                    child {
-                      node {Precision-Recall curve (PR curve)}
-                      child {
-                        node {Cares more about the positive class}
-                      }
-                      child {
-                        node {Area under the Precision-Recall (PR) curve}
-                      }
-                      child {
-                        node {F1}
-                        child {
-                          node {Harmonic mean between Precision and Recall}
-                        }
-                      }
-                    }
+										child {
+												node {Precision-Recall curve (PR curve)}
+												child {
+														node {Cares more about the positive class}
+													}
+												child {
+														node {Area under the Precision-Recall (PR) curve}
+													}
+												child {
+														node {F1}
+														child {
+																node {Harmonic mean between Precision and Recall}
+															}
+													}
+											}
 										child {
 												node {Proxy Losses}
-                        child {
-                          node {Differentiable approximation of an error measure}
-                          child {
-                            node {Can’t use it for gradient descent}
-                          }
-                        }
-                        child {
-                          node {Should have same minimum point of original error measure}
-                        }
-                        child {
-                          node {Proxy of 0/1 error is logistic loss}
-                        }
+												child {
+														node {Differentiable approximation of an error measure}
+														child {
+																node {Can’t use it for gradient descent}
+															}
+													}
+												child {
+														node {Should have same minimum point of original error measure}
+													}
+												child {
+														node {Proxy of 0/1 error is logistic loss}
+													}
 												child {
 														node {Imbalanced Target}
 													}
@@ -1240,62 +1243,62 @@
 							}
 						child {
 								node {Regression}
-                child {
-                  node {Need no Proxies}
-                }
-                child {
-                  node {Scale-dependent errors}
-                  child {
-                    node {Mean Absolute Error}
-                  }
-                  child {
-                    node {Root Mean Square Error}
-                  }
-                }
-                child {
-                  node {Percentage errors}
-                  child {
-                    node {Independent to scale}
-                  }
-                  child {
-                    node {Mean Absolute Percentage Error}
-                  }
-                }
-                child {
-                  node {Mean Absolute Scaled Error (MAPE)}
-                  child {
-                    node {Alternative to percentage errors}
-                    child {
-                      node {Percentage errors are undefined when $y_n = 0$ and produce extreme values when $y_n\approx 0$}
-                    }
-                  }
-                  child {
-                    node {Nominator and denominator are same scale, cannot be perceived percentually}
-                  }
-                }
+								child {
+										node {Need no Proxies}
+									}
+								child {
+										node {Scale-dependent errors}
+										child {
+												node {Mean Absolute Error}
+											}
+										child {
+												node {Root Mean Square Error}
+											}
+									}
+								child {
+										node {Percentage errors}
+										child {
+												node {Independent to scale}
+											}
+										child {
+												node {Mean Absolute Percentage Error}
+											}
+									}
+								child {
+										node {Mean Absolute Scaled Error (MAPE)}
+										child {
+												node {Alternative to percentage errors}
+												child {
+														node {Percentage errors are undefined when $y_n = 0$ and produce extreme values when $y_n\approx 0$}
+													}
+											}
+										child {
+												node {Nominator and denominator are same scale, cannot be perceived percentually}
+											}
+									}
 							}
 					}
-          child {
-            node {Ranking and Information Retrieval}
-            child {
-              node {Discounted cumulative gain (DCG)}
-            }
-            child {
-              node {Normalized discounted cumulative gain (NDCG)}
-              child {
-                node {Ideal discounted cumulative gain (IDCG)}
-              }
-            }
-            child {
-              node {Pairwise Rank Loss}
-              child {
-                node {Algorithm}
-              }
-              child {
-                node {Pairwise Loss is non-optimal for NDCG}
-              }
-            }
-          }
+				child {
+						node {Ranking and Information Retrieval}
+						child {
+								node {Discounted cumulative gain (DCG)}
+							}
+						child {
+								node {Normalized discounted cumulative gain (NDCG)}
+								child {
+										node {Ideal discounted cumulative gain (IDCG)}
+									}
+							}
+						child {
+								node {Pairwise Rank Loss}
+								child {
+										node {Algorithm}
+									}
+								child {
+										node {Pairwise Loss is non-optimal for NDCG}
+									}
+							}
+					}
 			}
 		child {
 				node {Design Cycle
@@ -1330,6 +1333,12 @@
 								% 	\end{minipage}
 								% }
 							}
+						child {
+								node {Collectng data}
+							}
+						child {
+								node {Cleaning data}
+							}
 					}
 				child {
 						node {2. Feature extraction / encoding
@@ -1343,6 +1352,15 @@
 								% 		\end{itemize}
 								% 	\end{minipage}
 								% }
+							}
+						child {
+								node {Feature extraction}
+							}
+						child {
+								node {Feature engineering}
+							}
+						child {
+								node {Fature encoding}
 							}
 					}
 				child {
@@ -1371,7 +1389,7 @@
 							}
 					}
 				child {
-						node {5. Evaluation \& model selection
+						node (evalmodsel) {5. Evaluation \& model selection
 								% \resizebox{\textwidth}{!}{
 								% 	\begin{minipage}[t]{16cm}
 								% 		\begin{itemize}
@@ -1408,6 +1426,7 @@
 		\edge{loss}{target}
 		\edge{expected prediction model}{expected value}
 		\edge{expected test error}{expected value}
+		\edge{hyperparameters}{evalmodsel}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

@@ -916,11 +916,12 @@
 					}
 			}
 		child [level distance=50cm] {
-		node {Neural Networks}
-		% change connections between neurons in a way that output matches as close as possible to the true target y
+		node {Deeplearning}
 		child {
-		node {Optimizing Neural Networks}
-		child [level distance=20cm] {
+		node {Neural Network Architectures}
+		child {
+		node {Output layer and Loss Function}
+		child [level distance=10cm] {
 				node {Continous Target, Regression}
 				child {
 						node {Interpretation: NN gives mean of the distribution of target y given input X}
@@ -965,7 +966,7 @@
 					}
 			}
 		}
-		child [level distance=20cm] {
+		child [level distance=12cm] {
 				node {Multi-Class Classification / Multi-category Target}
 				child {
 						node {Softmax Activation for output layer}
@@ -992,68 +993,87 @@
 							}
 					}
 			}
-		child {
-				node {Algorithms}
+		}
+		}
+		child [level distance=30cm] {
+				node {Optimizing Neural Networks / Optimization Techniques for Neural Networks}
 				child {
-						node {Gradient Descent}
-						% if gradient very small then probably very close to the minimum
-						% take gradient and multiply with step size
-						% gradient gives direction and magnitude of how big the slope is, use this to know how much should take step towards the minimum
-						% if want to minimize that then have to go in opposite direction of the slope
-						% why: if change w one step to the left then have positive gain in J(w), so have increase in J(w), so tangent is positive
-						% derivative tells direction in which the function goes up
-						% gradient is derivative of function j of w with respect to each of the w's, tells tangent line
+						node {Gradient is derivative of function j of w with respect to each of the w's, tells tangent line}
 						child {
-								node {Gradient is derivative of function j of w with respect to each of the w's, tells tangent line}
+								node {Joined space of all w's}
+							}
+						child {
+								node {Derivative tells direction in which the function goes up}
 								child {
-										node {Derivative tells direction in which the function goes up}
+										node {If change w one step to left then positive gain (increase) in J(w)}
+									}
+								child {
+										node {Gives direction and magnitude of how big the slope is}
+									}
+								child {
+										node {If gradient small then probably very close to minimum}
+									}
+								child {
+										node {For Minimize have to go in opposite direction of slope}
+									}
+							}
+					}
+				child {
+						node {Algorithms}
+						child [level distance=10cm] {
+								node {Gradient Descent}
+								child {
+										node {Hyperparamater: step size / learning rate}
+									}
+								child {
+										node {Most often just x number of epochs}
 										child {
-												node {If change w one step to left then positive gain (increase) in J(w)}
+												node {Other convergence criteria: Difference between the next - previous less epsilon}
 											}
+									}
+								child {
+										node {Problem: Very expensive operation}
 										child {
-												node {Gives direction and magnitude of how big the slope is}
-											}
-										child {
-												node {If gradient small then probably very close to minimum}
-											}
-										child {
-												node {For Minimize have to go in opposite direction of slope}
+												node {Derivative with respect to all parameters and summation over all points in training set}
 											}
 									}
 							}
 						child {
-								node {Hyperparamater: step size / learning rate}
+								node {Stochastic Gradient Descent}
+								child {
+										node {Union of those mini-batches gives training set (but not disjoint)}
+										child {
+												node {Mini-batches can have repeating instances maybe located in several mini-batches}
+											}
+									}
+								child {
+										node {Random order: There's more chance one avoids local optima}
+										child {
+												node {Because gradients are not going to always follow same sequence}
+											}
+										child {
+												node {Not the same sequence of subsets at every iteration}
+											}
+									}
+								child {
+										node {Optimize parameters w to minimize the errors on this mini-batches}
+									}
 							}
 					}
-				child {
-						node {Stochastic Gradient Descent}
-					}
+			}
+		child {
+				node {Regularization approaches for Neural Networks}
 			}
 		}
-		}
+		% child  {
+		% 		node {Neural Networks}
+		% 		% change connections between neurons in a way that output matches as close as possible to the true target y
+		% 		child {
+		% 				node {}
+		% 			}
+		% 	}
 		% child [level distance=50cm] {
 		% 		node {Neural Networks}
-		% 		child {
-		% 				node {Composite Functions}
-		% 				child {
-		% 						node {Single Neuron}
-		% 					}
-		% 				child {
-		% 						node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
-		% 					}
-		% 			}
-		% 		child {
-		% 				node {Feedforward, fully-connected, Network}
-		% 				child {
-		% 						node {No backward connections or cycles}
-		% 					}
-		% 				child {
-		% 						node {No intra-layer connections}
-		% 					}
-		% 				child {
-		% 						node {Acyclic directed graph}
-		% 					}
-		% 			}
 		% 		child {
 		% 				node {Loss/Response}
 		% 				child {

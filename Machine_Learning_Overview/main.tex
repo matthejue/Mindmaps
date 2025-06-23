@@ -8,14 +8,8 @@
 \begin{mindmap}
 	\begin{mindmapcontent}
 		\node (middle) at (current page.center) {Machine Learning (Supervised Learning)}
-		child {
-		node {Objective Function}
-		child [level distance=30cm] {
-		node (loss) {Loss Functions}
-		child {
-		node {Estimated target $\hat y$ - Ground-truth target $y$}
-		child [level distance=10cm] {
-		node {Prediction Models}
+    child [level distance=100cm] {
+		node (prediction models) {Prediction Models}
 		child {
 				node {Non-parametric Models
 						% \resizebox{\textwidth}{!}{
@@ -731,7 +725,7 @@
 							}
 					}
 			}
-		child [level distance=20cm] {
+		child [level distance=30cm] {
 				node {Choosing splits that maximize purity}
 				child {
 						node {CART Algorithm}
@@ -915,10 +909,59 @@
 							}
 					}
 			}
-		child [level distance=50cm] {
+		child [level distance=100cm] {
 		node {Deeplearning}
 		child {
+				node {Deep means have lots of these connections between neurons}
+			}
+		child {
 		node {Neural Network Architectures}
+		% node {Neural Networks}
+    child [level distance=30cm] {
+				node {Composite Functions (where every function is parameterized)}
+				child {
+						node {Single Neuron}
+						child {
+								node {Num parameters on every neuron are num inputs +1 cuz of bias}
+							}
+						child {
+								node {Linear function (aggregation) with activation can become non-linear}
+								child {
+										node {Aggreegation: Operation defined over input values}
+									}
+							}
+					}
+				child {
+						node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
+						child {
+								node {Feedforward, fully-connected, Network}
+								child {
+										node {Feedforward}
+										child {
+												node {\enquote{Input passes through chain of steps, every step is a neuron before outputting y}}
+											}
+										child {
+												node {No backward connections or cycles}
+												child {
+														node {Cycles present $\rightarrow$ Recurrent Neural Networks}
+													}
+											}
+										child {
+												node {No intra-layer connections}
+											}
+									}
+								child {
+										node {Fully-connected}
+										child {
+												node {Each neuron in layer is connected to all neurons in next layer}
+											}
+									}
+								child {
+										node {Acyclic directed graph}
+									}
+							}
+					}
+			}
 		child {
 		node {Output layer and Loss Function}
 		child [level distance=10cm] {
@@ -995,7 +1038,7 @@
 			}
 		}
 		}
-		child [level distance=30cm] {
+		child [level distance=40cm] {
 				node {Optimizing Neural Networks / Optimization Techniques for Neural Networks}
 				child {
 						node {Gradient is derivative of function j of w with respect to each of the w's, tells tangent line}
@@ -1063,8 +1106,46 @@
 			}
 		child {
 				node {Regularization approaches for Neural Networks}
+				child {
+						node {Hyperparameters}
+						child {
+								node {Number of hidden layers}
+								child {
+										node {Depth network = number hidden layers}
+									}
+								child {
+										node {The deeper network the higher complexity}
+										child {
+												node {The higher it's complexity, the more will be low bias and high variance model}
+											}
+									}
+								child {
+										node {Number of neurons per layer}
+										child {
+												node {Width network}
+												child {
+														node {Also num neurons in every layer defines complexity, but not same as depth}
+													}
+											}
+									}
+								child {
+										node {Choice of activation function}
+									}
+								child {
+										node {Dropout rate}
+									}
+								child {
+										node {Regularization penalty on weights}
+									}
+								child {
+										node {Learning rate}
+									}
+								child {
+										node {Choice of optimization algorithms}
+									}
+							}
+					}
 			}
-		}
 		% child  {
 		% 		node {Neural Networks}
 		% 		% change connections between neurons in a way that output matches as close as possible to the true target y
@@ -1261,36 +1342,6 @@
 		% 					}
 		% 			}
 		% 		child {
-		% 				node {Hyperparameters}
-		% 				child {
-		% 						node {Number of hidden layers}
-		% 					}
-		% 				child {
-		% 						node {Number of neurons per layer}
-		% 					}
-		% 				child {
-		% 						node {Choice of activation function}
-		% 					}
-		% 				child {
-		% 						node {Dropout rate}
-		% 					}
-		% 				child {
-		% 						node {Regularization penalty on weights}
-		% 					}
-		% 				child {
-		% 						node {Learning rate}
-		% 					}
-		% 				child {
-		% 						node {Choice of optimization algorithms}
-		% 					}
-		% 			}
-		% 		child {
-		% 				node {Depth network = number hidden layers}
-		% 			}
-		% 		child {
-		% 				node {Width network = number neurons each layer}
-		% 			}
-		% 		child {
 		% 				node {Activation}
 		% 				child {
 		% 						node {Types}
@@ -1396,391 +1447,398 @@
 		}
 		}
 		child {
-				node {Maximum Likelihood Estimation
-						% \resizebox{\textwidth}{!}{
-						% 	\begin{minipage}[t]{12cm}
-						% 		\begin{itemize}
-						% 			\item probabilistic logic behind loss functions
-						% 			\item minimizing least square error is equivalent to maximizing likelihood of observing the target given the data
-						% 			\item and the mean of the errors is located at the estimated target
-						% 			\item on average the highest density would be at the predicted value and then there's where you would have the smallest likelihood for an error, at the point of the estimation
-						% 			\item mean is prediction of this linear model
-						% 			\item mean value of predictions is going to be output of prediction model
-						% 			\item likelihood of predicting y given X and the prediction model should be as large as possible
-						% 			\item should be large on all the measurements that we have seen so it should be large on the first data point given the first observed features and the predictions of a model and it should be high on the second data point it should be high as well on all the other data points
-						% 			\item have to maximize this likelihood in order for our prediction model to be accurate in estimating y
-						% 			\item average value in normal distribution replaced with output of prediction model
-						% 			\item as you see here maximizing the probabilistic likelihood of observing the targets if you assume that the errors are normally distributed that is equivalent to just learning a prediction model that minimizes the least square error
-						% 			\item what does it mean to optimize the prediction model to minimize the sum of the losses of observed instances in other words to minimize the amount of error that we are doing in our prediction
-						% 		\end{itemize}
-						% 	\end{minipage}
-						% }
-					}
-			}
-		child {
-				node {Regression}
-				child {
-						node {Least Squares}
-					}
-				child {
-						node {L1}
-					}
-			}
-		child {
-				node {(Multi-class) Classification}
-				child {
-						node {Logloss}
+				node {Objective Function}
+				child [level distance=50cm] {
+						node (loss) {Loss Functions}
 						child {
-								node {Softmax
-										% \resizebox{\textwidth}{!}{
-										% 	\begin{minipage}[t]{12cm}
-										% 		\begin{itemize}
-										% 			\item re-exrpess target variable as being as many binary targets as there categories
-										% 			\item learrn one prediction model for every category
-										% 			\item then connect together with (this) formula
-										% 			\item prediction for class c and then normalize by sum of probabilies of all classes together
-										% 			\item that ensures us that we have probability distribution of C
-										% 			\item sum of probabilities is going to sum to 1
-										% 			\item each between 0 and 1, because every component smaller than sum of all components
-										% 			\item how well does proability for the 6th class match the true target of the sixth class, is either 1 or 0 because of definition above
-										% 			\item if is 1 then want this log part be close to 0 by making ync be close to 1
-										% 			\item this means this loss function is going to be small only in cases where prediction matches exactly the case of the instance of the class where it is one
-										% 		\end{itemize}
-										% 	\end{minipage}
-										% }
-									}
-							}
-					}
-				child {
-						node {Binary Classification}
-						child {
-								node {Logistic Loss
-										% \resizebox{\textwidth}{!}{
-										% 	\begin{minipage}[t]{12cm}
-										% 		\begin{itemize}
-										% 			\item if is 1, left handside, log($\hat y$) goes to 0 if $\hat y$ goes to 1, for values that go towards 0 the logarithm will be negative quantity, - in front, so large positive value, measure high error in cases where $\hat y$ is 0 and true y was one, in cases where true y was 1 and $\hat y$ was close to 1, log(1) comes 0, so do 0 error
-										% 		\end{itemize}
-										% 	\end{minipage}
-										% }
-									}
-							}
-						child {
-								node {Hinge Loss}
-							}
-					}
-			}
-		}
-		child { % [level distance=20cm] 
-				node {Regularisation}
-				% child {
-				% 		node {Add penalty term to empirical risk}
-				% 	}
-				% child {
-				% 		node {Combining Regularizers as a Cocktail}
-				% 		child {
-				% 				node {Better than singular regularizer}
-				% 			}
-				% 	}
-				child {
-						node {Bias-Variance Tradeoff}
-						child {
-								node {Bias and Variance about family of models, not single model}
-							}
-						child {
-								node (expected test error) {Expected test error}
+								node (estimated target minus ground truth) {Estimated target $\hat y$ - Ground-truth target $y$}
 								child {
-										node {Variance}
-										child {
-												node (estimated model) {Estimated model}
-											}
-										child {
-												node (expected prediction model) {Expected prediction model}
-											}
-										child {
-												node {High variance}
-												child {
-														node {Risk Overfitting}
-													}
-											}
-										child {
-												node {Low variance}
-												child {
-														node {Generalization}
-													}
+										node {Maximum Likelihood Estimation
+												% \resizebox{\textwidth}{!}{
+												% 	\begin{minipage}[t]{12cm}
+												% 		\begin{itemize}
+												% 			\item probabilistic logic behind loss functions
+												% 			\item minimizing least square error is equivalent to maximizing likelihood of observing the target given the data
+												% 			\item and the mean of the errors is located at the estimated target
+												% 			\item on average the highest density would be at the predicted value and then there's where you would have the smallest likelihood for an error, at the point of the estimation
+												% 			\item mean is prediction of this linear model
+												% 			\item mean value of predictions is going to be output of prediction model
+												% 			\item likelihood of predicting y given X and the prediction model should be as large as possible
+												% 			\item should be large on all the measurements that we have seen so it should be large on the first data point given the first observed features and the predictions of a model and it should be high on the second data point it should be high as well on all the other data points
+												% 			\item have to maximize this likelihood in order for our prediction model to be accurate in estimating y
+												% 			\item average value in normal distribution replaced with output of prediction model
+												% 			\item as you see here maximizing the probabilistic likelihood of observing the targets if you assume that the errors are normally distributed that is equivalent to just learning a prediction model that minimizes the least square error
+												% 			\item what does it mean to optimize the prediction model to minimize the sum of the losses of observed instances in other words to minimize the amount of error that we are doing in our prediction
+												% 		\end{itemize}
+												% 	\end{minipage}
+												% }
 											}
 									}
-								child [level distance=20cm] {
-										node (bias) {Bias$^2$}
+								child {
+										node {Regression}
 										child {
-												node (expected target) {Expected Target}
+												node {Least Squares}
+											}
+										child {
+												node {L1}
+											}
+									}
+								child {
+										node {(Multi-class) Classification}
+										child {
+												node {Logloss}
 												child {
-														node (expected value) {Expected Value}
-														child {
-																node {Properties of Expectation}
+														node {Softmax
+																% \resizebox{\textwidth}{!}{
+																% 	\begin{minipage}[t]{12cm}
+																% 		\begin{itemize}
+																% 			\item re-exrpess target variable as being as many binary targets as there categories
+																% 			\item learrn one prediction model for every category
+																% 			\item then connect together with (this) formula
+																% 			\item prediction for class c and then normalize by sum of probabilies of all classes together
+																% 			\item that ensures us that we have probability distribution of C
+																% 			\item sum of probabilities is going to sum to 1
+																% 			\item each between 0 and 1, because every component smaller than sum of all components
+																% 			\item how well does proability for the 6th class match the true target of the sixth class, is either 1 or 0 because of definition above
+																% 			\item if is 1 then want this log part be close to 0 by making ync be close to 1
+																% 			\item this means this loss function is going to be small only in cases where prediction matches exactly the case of the instance of the class where it is one
+																% 		\end{itemize}
+																% 	\end{minipage}
+																% }
 															}
 													}
 											}
 										child {
-												node {High bias}
+												node {Binary Classification}
 												child {
-														node {Risk Underfitting}
+														node {Logistic Loss
+																% \resizebox{\textwidth}{!}{
+																% 	\begin{minipage}[t]{12cm}
+																% 		\begin{itemize}
+																% 			\item if is 1, left handside, log($\hat y$) goes to 0 if $\hat y$ goes to 1, for values that go towards 0 the logarithm will be negative quantity, - in front, so large positive value, measure high error in cases where $\hat y$ is 0 and true y was one, in cases where true y was 1 and $\hat y$ was close to 1, log(1) comes 0, so do 0 error
+																% 		\end{itemize}
+																% 	\end{minipage}
+																% }
+															}
+													}
+												child {
+														node {Hinge Loss}
 													}
 											}
-										child {
-												node {Low bias}
-												child {
-														node {Fitting}
-													}
-											}
-									}
-								child {
-										node (noise) {Noise}
-										child {
-												node {Real Target}
-											}
-										child {
-												node {High noise}
-												child {
-														node {Challenging Task}
-													}
-											}
-										child {
-												node {Low noise}
-												child {
-														node {Easy Task}
-													}
-											}
-									}
-								child [level distance=15cm] {
-										node {Model complexity will either}
-										child {
-												node {Increase bias}
-												child {
-														node {Decrease variance}
-													}
-											}
-										child {
-												node {Increase variance}
-												child {
-														node {Decrease bias}
-													}
-											}
-									}
-								child {
-										node {Goal low bias and low variance}
 									}
 							}
-					}
-				child [level distance=30cm] {
-						node {Generalization Performance}
-						child {
-								node {Underfitting}
+						child [level distance=20cm] {
+								node {Regularisation}
+								% child {
+								% 		node {Add penalty term to empirical risk}
+								% 	}
+								% child {
+								% 		node {Combining Regularizers as a Cocktail}
+								% 		child {
+								% 				node {Better than singular regularizer}
+								% 			}
+								% 	}
 								child {
-										node {Model fails to fit the training data}
-									}
-								child {
-										node {Both training and test errors descend, but get stuck}
-									}
-							}
-						child {
-								node {Generalizing}
-								child {
-										node {Model is accurate on test data}
-									}
-								child {
-										node {Both training and test errors descend and approach a minimum}
-									}
-							}
-						child {
-								node {Overfitting}
-								child {
-										node {Model perfectly fits training data (incl. noise)}
-									}
-								child {
-										node {Training error getting smaller, while test error increases}
-									}
-							}
-						child {
-								node {Training data and Test data}
-							}
-					}
-				child [level distance=20cm] {
-						node {Families of Regularization Techniques}
-						child {
-								node {Capacity}
-								child {
-										node {Number of parameters}
-									}
-							}
-						child {
-								node {Structural}
-								child {
-										node {Skip connections}
-									}
-								% : NAS, , ResNet, etc.
-							}
-						child {
-								node {Weight decay}
-								child {
-										node {Add penalty term to empirical risk}
+										node {Bias-Variance Tradeoff}
 										child {
-												node {$+ \alpha \Omega(\Theta)$}
+												node {Bias and Variance about family of models, not single model}
 											}
 										child {
-												node {Increase alpha}
+												node (expected test error) {Expected test error}
 												child {
-														node {Circle smaller, increasing bias}
-													}
-											}
-										child {
-												node {Decrease alpha}
-												child {
-														node {Circle bigger, model less constrained, does overfit more}
-													}
-											}
-									}
-								child {
-										node {L1}
-									}
-								child {
-										node {L2}
-									}
-							}
-						child [level distance=15cm] {
-								node {Ensembling, Ensembles}
-								child {
-										node {Reduces variance}
-									}
-								child [level distance=15cm] {
-										node {Bagging}
-										child {
-												node {Short for Bootstrap AGGregatING}
-											}
-										child {
-												node {Sampling with replacement}
-												child {
-														node {Reduce the final model’s variance}
-													}
-												child {
-														node {Without affecting the bias much}
-													}
-											}
-										child {
-												node {Requirements}
-												child {
-														node {Low bias individual models}
-													}
-												child {
-														node {Uncorrelated individual models}
+														node {Variance}
 														child {
-																node {The errors of the models should be uncorrelated}
+																node (estimated model) {Estimated model}
+															}
+														child {
+																node (expected prediction model) {Expected prediction model}
+															}
+														child {
+																node {High variance}
 																child {
-																		node {So that the overall error gets reduced}
+																		node {Risk Overfitting}
+																	}
+															}
+														child {
+																node {Low variance}
+																child {
+																		node {Generalization}
+																	}
+															}
+													}
+												child [level distance=20cm] {
+														node (bias) {Bias$^2$}
+														child {
+																node (expected target) {Expected Target}
+																child {
+																		node (expected value) {Expected Value}
+																		child {
+																				node {Properties of Expectation}
+																			}
+																	}
+															}
+														child {
+																node {High bias}
+																child {
+																		node {Risk Underfitting}
+																	}
+															}
+														child {
+																node {Low bias}
+																child {
+																		node {Fitting}
 																	}
 															}
 													}
 												child {
-														node {Bagged Trees}
+														node (noise) {Noise}
 														child {
-																node {Low bias but might be correlated}
+																node {Real Target}
 															}
 														child {
-																node {Decorrelation by randomizing choice of features to split upon}
+																node {High noise}
+																child {
+																		node {Challenging Task}
+																	}
+															}
+														child {
+																node {Low noise}
+																child {
+																		node {Easy Task}
+																	}
+															}
+													}
+												child [level distance=15cm] {
+														node {Model complexity will either}
+														child {
+																node {Increase bias}
+																child {
+																		node {Decrease variance}
+																	}
+															}
+														child {
+																node {Increase variance}
+																child {
+																		node {Decrease bias}
+																	}
 															}
 													}
 												child {
-														node {Random Forests}
-														child {
-																node {Randomness in terms of the split conditions}
-															}
-														child {
-																node {Algoritm}
-															}
+														node {Goal low bias and low variance}
 													}
 											}
 									}
-								child {
-										node {Boosting}
+								child [level distance=40cm] {
+										node {Generalization Performance}
 										child {
-												node {Aggregate high-bias models to create a low-bias ensemble}
+												node {Underfitting}
 												child {
-														node {Train parameters next model keeping past models fixed}
-													}
-											}
-										child {
-												node {Loss can be linearly approximated via the first-order Taylor expansion}
-											}
-										child {
-												node {Algorithm: Gradient Boosting}
-											}
-										child {
-												node {Algorithm: AdaBoost}
-											}
-										child {
-												node {Gradient Boosted Decision Trees}
-												child {
-														node {Hyperparameters}
-														child {
-																node {$\gamma$ is the weight of the penalty on the number of leaves}
-															}
-														child {
-																node {$\lambda$ is the weight of the penalty on the weights}
-															}
+														node {Model fails to fit the training data}
 													}
 												child {
-														node {Complexity}
-													}
-												child {
-														node {Advantages}
-														child {
-																node {No need for data preprocessing}
-															}
-														child {
-																node {Work well with categorical features}
-															}
-														child {
-																node {Ability to work with arbitrary loss functions}
-															}
-														child {
-																node {Very low-bias, yet relatively low-variance}
-															}
-														child {
-																node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
-															}
+														node {Both training and test errors descend, but get stuck}
 													}
 											}
+										child {
+												node {Generalizing}
+												child {
+														node {Model is accurate on test data}
+													}
+												child {
+														node {Both training and test errors descend and approach a minimum}
+													}
+											}
+										child {
+												node {Overfitting}
+												child {
+														node {Model perfectly fits training data (incl. noise)}
+													}
+												child {
+														node {Training error getting smaller, while test error increases}
+													}
+											}
+										child {
+												node {Training data and Test data}
+											}
 									}
-								child {
-										node {Dropout}
-									}
-							}
-						child {
-								node {Weight Aggregation}
-								child {
-										node {Stochastic Weight Averaging}
-									}
-								child {
-										node {Snapshot Ensembles}
-									}
-							}
-						child {
-								node {Learning dynamics}
-								child {
-										node {Early stopping}
-									}
-								% child {
-								%   node {Learning rate schedulers}
-								% }
-							}
-						child {
-								node {Implicit}
-								child {
-										node {Batch normalization}
+								child [level distance=20cm] {
+										node {Families of Regularization Techniques}
+										child {
+												node {Capacity}
+												child {
+														node {Number of parameters}
+													}
+											}
+										child {
+												node {Structural}
+												child {
+														node {Skip connections}
+													}
+												% : NAS, , ResNet, etc.
+											}
+										child {
+												node {Weight decay}
+												child {
+														node {Add penalty term to empirical risk}
+														child {
+																node {$+ \alpha \Omega(\Theta)$}
+															}
+														child {
+																node {Increase alpha}
+																child {
+																		node {Circle smaller, increasing bias}
+																	}
+															}
+														child {
+																node {Decrease alpha}
+																child {
+																		node {Circle bigger, model less constrained, does overfit more}
+																	}
+															}
+													}
+												child {
+														node {L1}
+													}
+												child {
+														node {L2}
+													}
+											}
+										child [level distance=15cm] {
+												node {Ensembling, Ensembles}
+												child {
+														node {Reduces variance}
+													}
+												child [level distance=15cm] {
+														node {Bagging}
+														child {
+																node {Short for Bootstrap AGGregatING}
+															}
+														child {
+																node {Sampling with replacement}
+																child {
+																		node {Reduce the final model’s variance}
+																	}
+																child {
+																		node {Without affecting the bias much}
+																	}
+															}
+														child {
+																node {Requirements}
+																child {
+																		node {Low bias individual models}
+																	}
+																child {
+																		node {Uncorrelated individual models}
+																		child {
+																				node {The errors of the models should be uncorrelated}
+																				child {
+																						node {So that the overall error gets reduced}
+																					}
+																			}
+																	}
+																child {
+																		node {Bagged Trees}
+																		child {
+																				node {Low bias but might be correlated}
+																			}
+																		child {
+																				node {Decorrelation by randomizing choice of features to split upon}
+																			}
+																	}
+																child {
+																		node {Random Forests}
+																		child {
+																				node {Randomness in terms of the split conditions}
+																			}
+																		child {
+																				node {Algoritm}
+																			}
+																	}
+															}
+													}
+												child {
+														node {Boosting}
+														child {
+																node {Aggregate high-bias models to create a low-bias ensemble}
+																child {
+																		node {Train parameters next model keeping past models fixed}
+																	}
+															}
+														child {
+																node {Loss can be linearly approximated via the first-order Taylor expansion}
+															}
+														child {
+																node {Algorithm: Gradient Boosting}
+															}
+														child {
+																node {Algorithm: AdaBoost}
+															}
+														child {
+																node {Gradient Boosted Decision Trees}
+																child {
+																		node {Hyperparameters}
+																		child {
+																				node {$\gamma$ is the weight of the penalty on the number of leaves}
+																			}
+																		child {
+																				node {$\lambda$ is the weight of the penalty on the weights}
+																			}
+																	}
+																child {
+																		node {Complexity}
+																	}
+																child {
+																		node {Advantages}
+																		child {
+																				node {No need for data preprocessing}
+																			}
+																		child {
+																				node {Work well with categorical features}
+																			}
+																		child {
+																				node {Ability to work with arbitrary loss functions}
+																			}
+																		child {
+																				node {Very low-bias, yet relatively low-variance}
+																			}
+																		child {
+																				node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
+																			}
+																	}
+															}
+													}
+												child {
+														node {Dropout}
+													}
+											}
+										child {
+												node {Weight Aggregation}
+												child {
+														node {Stochastic Weight Averaging}
+													}
+												child {
+														node {Snapshot Ensembles}
+													}
+											}
+										child {
+												node {Learning dynamics}
+												child {
+														node {Early stopping}
+													}
+												% child {
+												%   node {Learning rate schedulers}
+												% }
+											}
+										child {
+												node {Implicit}
+												child {
+														node {Batch normalization}
+													}
+											}
 									}
 							}
 					}
 			}
-		}
 		child {
 				node {Hyperparameter Optimization}
 				child {
@@ -2128,6 +2186,7 @@
 		% \edge{expected test error}{expected value}
 		\edge{hyperparameters}{evalmodsel}
 		\edge{expected prediction model}{bias}
+		\edge{estimated target minus ground truth}{prediction models}
 		\edge{expected target}{noise}
 	\end{edges}
 	% \annotation{test}{annotation}

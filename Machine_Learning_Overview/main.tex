@@ -987,6 +987,18 @@
 								node {Layers}
 								child {
 										node {Input, Hidden, Output Layers}
+										child {
+												node {Activation of the 0-th layer is input}
+											}
+										child {
+                      node {Activations per layer $h^{(i)}\in \mathbb{R}^{datapoints\times neurons}$}
+											}
+										child {
+												node {Different inputs cause different activations in intermediate layers}
+												child {
+														node {When going through all datapoints in training set}
+													}
+											}
 									}
 								child {
 										node {Project N(l-1) to N(l) many values}
@@ -995,27 +1007,42 @@
 										% column oder row ist linear model je nachdem ob transposed
 										% die Sache mit oben und unten bei den indexes und Matrizen
 										child {
-                      node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
-												child {
-														node {Dim matrix: Left edge x Upper edge}
-														child {
-																node {Num Neurons last layer x Num Neurons current layer}
-															}
-														child {
-																node {Transposed matrix: Num Neurons current layer x Num Neurons last layer}
-															}
-                            child {
-                              node {$w_{i,j}$, move i down and j right}
-                              child {
-                                node {$w_{i,j}$ connects neuron $i$ (last layer) and $j$ (current layer))}
-                              }
-                              child {
-                                node {Transposed matrix: $w_{j,i}$ connects neuron $i$ (last layer) to $j$ (current layer))}
-                              }
-                            }
-													}
+												node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
 												child {
 														node {Inner dimensionalities cancel: (Left edge wT, Upper edge v)}
+													}
+												child {
+														node {Weight matrix}
+														child {
+																node {Dimensionality: Left edge x Upper edge}
+																child {
+																		node {Num Neurons last layer x Num Neurons current layer}
+																	}
+																child {
+																		node {Transposed matrix: Num Neurons current layer x Num Neurons last layer}
+																	}
+															}
+														child {
+																node {$w_{i,j}$, move i down and j right, i-th row, j-th column}
+																child {
+																		node {$w_{i,j}$ connects neuron $i$ (last layer) and $j$ (current layer))}
+																	}
+																child {
+																		node {Transposed matrix: $w_{j,i}$ connects neuron $i$ (last layer) to $j$ (current layer))}
+																	}
+															}
+														child {
+																node {Each column prediction models of linear function of a neuron in current layer}
+																child {
+																		node {Transposed matrix: Each row}
+																	}
+															}
+													}
+												child {
+														node {Dim Bias: Num Neurons particular layer}
+														child {
+																node {For every neuronn in particular layer have a bias}
+															}
 													}
 											}
 									}

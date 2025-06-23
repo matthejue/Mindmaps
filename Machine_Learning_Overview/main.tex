@@ -8,7 +8,7 @@
 \begin{mindmap}
 	\begin{mindmapcontent}
 		\node (middle) at (current page.center) {Machine Learning (Supervised Learning)}
-    child [level distance=100cm] {
+		child [level distance=100cm] {
 		node (prediction models) {Prediction Models}
 		child {
 				node {Non-parametric Models
@@ -917,7 +917,7 @@
 		child {
 		node {Neural Network Architectures}
 		% node {Neural Networks}
-    child [level distance=30cm] {
+		child [level distance=30cm] {
 				node {Composite Functions (where every function is parameterized)}
 				child {
 						node {Single Neuron}
@@ -925,9 +925,20 @@
 								node {Num parameters on every neuron are num inputs +1 cuz of bias}
 							}
 						child {
-								node {Linear function (aggregation) with activation can become non-linear}
+								node {Linear model for every neuron with activation can become non-linear}
+								% hidden layers do it in a way by parametrizing this representations, projection to a new dimensionality is controlled with parameters of those hidden layers theta
+								% with hidden layers learn a mapping, learn how to project original input to a new dimensionality (previous slide)
+								% so the actual extraction of the features can be thought as a process that can be trained as a model
+								% 3rd approach: don't know which features should use, but feature generation generating function can also be parametrized with theta
+								% take pixels and then create polynomial expansions of pixels or rbf projection and those are the generic kernel expansion that you use for the SVM
+								% hand-craft with heuristics
+								% called representation learning: project features into some new features where linear model can then capturer target variable
+								% if I create a new representation then in this new representation a linear function with some linear coefficients can actually approximate a function which originally was nonlinear with respect to the to its input
 								child {
 										node {Aggreegation: Operation defined over input values}
+									}
+								child {
+										node {Activations per layer can be different}
 									}
 							}
 					}
@@ -958,6 +969,55 @@
 									}
 								child {
 										node {Acyclic directed graph}
+									}
+							}
+						child {
+								node {Parametrize and learn Nonlinear Mapping}
+								child {
+										node {Hidden layers learn how project original input to new dimensionality}
+										child {
+												node {Representation Learning: Project features into new features where linear model can capture target variable}
+												child {
+														node {In new representation a linear function can approximate function which was nonlinear} % with some linear coefficients , respect to the to its input
+													}
+											}
+									}
+							}
+						child {
+								node {Layers}
+								child {
+										node {Input, Hidden, Output Layers}
+									}
+								child {
+										node {Project N(l-1) to N(l) many values}
+										% die Sache mit Dimensionen, rauscanceln
+										% bedeutung eines Eintrage in Matrix wenn transpose und nicht transposed
+										% column oder row ist linear model je nachdem ob transposed
+										% die Sache mit oben und unten bei den indexes und Matrizen
+										child {
+                      node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
+												child {
+														node {Dim matrix: Left edge x Upper edge}
+														child {
+																node {Num Neurons last layer x Num Neurons current layer}
+															}
+														child {
+																node {Transposed matrix: Num Neurons current layer x Num Neurons last layer}
+															}
+                            child {
+                              node {$w_{i,j}$, move i down and j right}
+                              child {
+                                node {$w_{i,j}$ connects neuron $i$ (last layer) and $j$ (current layer))}
+                              }
+                              child {
+                                node {Transposed matrix: $w_{j,i}$ connects neuron $i$ (last layer) to $j$ (current layer))}
+                              }
+                            }
+													}
+												child {
+														node {Inner dimensionalities cancel: (Left edge wT, Upper edge v)}
+													}
+											}
 									}
 							}
 					}

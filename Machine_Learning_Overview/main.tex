@@ -918,214 +918,265 @@
 		node {Neural Network Architectures}
 		% node {Neural Networks}
 		child [level distance=30cm] {
-				node {Composite Functions (where every function is parameterized)}
+		node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
+		child {
+				node {Feedforward, fully-connected, Network}
 				child {
-						node {Single Neuron}
+						node {Composite Functions (where every function is parameterized)}
+					}
+				child {
+						node {Feedforward}
 						child {
-								node {Num parameters on every neuron are num inputs +1 cuz of bias}
+								node {\enquote{Input passes through chain of steps, every step is a neuron before outputting y}}
 							}
 						child {
-								node {Linear model for every neuron with activation can become non-linear}
-								% hidden layers do it in a way by parametrizing this representations, projection to a new dimensionality is controlled with parameters of those hidden layers theta
-								% with hidden layers learn a mapping, learn how to project original input to a new dimensionality (previous slide)
-								% so the actual extraction of the features can be thought as a process that can be trained as a model
-								% 3rd approach: don't know which features should use, but feature generation generating function can also be parametrized with theta
-								% take pixels and then create polynomial expansions of pixels or rbf projection and those are the generic kernel expansion that you use for the SVM
-								% hand-craft with heuristics
-								% called representation learning: project features into some new features where linear model can then capturer target variable
-								% if I create a new representation then in this new representation a linear function with some linear coefficients can actually approximate a function which originally was nonlinear with respect to the to its input
+								node {No backward connections or cycles}
 								child {
-										node {Aggreegation: Operation defined over input values}
+										node {Cycles present $\rightarrow$ Recurrent Neural Networks}
 									}
-								child {
-										node {Activations per layer can be different}
-									}
+							}
+						child {
+								node {No intra-layer connections}
 							}
 					}
 				child {
-						node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
+						node {Fully-connected}
 						child {
-								node {Feedforward, fully-connected, Network}
-								child {
-										node {Feedforward}
-										child {
-												node {\enquote{Input passes through chain of steps, every step is a neuron before outputting y}}
-											}
-										child {
-												node {No backward connections or cycles}
-												child {
-														node {Cycles present $\rightarrow$ Recurrent Neural Networks}
-													}
-											}
-										child {
-												node {No intra-layer connections}
-											}
-									}
-								child {
-										node {Fully-connected}
-										child {
-												node {Each neuron in layer is connected to all neurons in next layer}
-											}
-									}
-								child {
-										node {Acyclic directed graph}
-									}
+								node {Each neuron in layer is connected to all neurons in next layer}
+							}
+					}
+				child {
+						node {Acyclic directed graph}
+					}
+			}
+		child [level distance=20cm] {
+		node {Single Neuron}
+		child {
+				node {Aggreegation: Operation defined over input values}
+				child {
+						node {Summation of linear model + bias is aggregation}
+						child {
+								node {Passed to activation function}
 							}
 						child {
-								node {Parametrize and learn Nonlinear Mapping}
-								child {
-										node {Hidden layers learn how project original input to new dimensionality}
-										child {
-												node {Representation Learning: Project features into new features where linear model can capture target variable}
-												child {
-														node {In new representation a linear function can approximate function which was nonlinear} % with some linear coefficients , respect to the to its input
-													}
-											}
-									}
+								node {Linear model for every neuron}
 							}
-						child {
-								node {Layers}
-								child {
-										node {Input, Hidden, Output Layers}
-										child {
-												node {Activation of the 0-th layer is input}
-											}
-										child {
-                      node {Activations per layer $h^{(i)}\in \mathbb{R}^{datapoints\times neurons}$}
-											}
-										child {
-												node {Different inputs cause different activations in intermediate layers}
-												child {
-														node {When going through all datapoints in training set}
-													}
-											}
-									}
-								child {
-										node {Project N(l-1) to N(l) many values}
-										% die Sache mit Dimensionen, rauscanceln
-										% bedeutung eines Eintrage in Matrix wenn transpose und nicht transposed
-										% column oder row ist linear model je nachdem ob transposed
-										% die Sache mit oben und unten bei den indexes und Matrizen
-										child {
-												node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
-												child {
-														node {Inner dimensionalities cancel: (Left edge wT, Upper edge v)}
-													}
-												child {
-														node {Weight matrix}
-														child {
-																node {Dimensionality: Left edge x Upper edge}
-																child {
-																		node {Num Neurons last layer x Num Neurons current layer}
-																	}
-																child {
-																		node {Transposed matrix: Num Neurons current layer x Num Neurons last layer}
-																	}
-															}
-														child {
-																node {$w_{i,j}$, move i down and j right, i-th row, j-th column}
-																child {
-																		node {$w_{i,j}$ connects neuron $i$ (last layer) and $j$ (current layer))}
-																	}
-																child {
-																		node {Transposed matrix: $w_{j,i}$ connects neuron $i$ (last layer) to $j$ (current layer))}
-																	}
-															}
-														child {
-																node {Each column prediction models of linear function of a neuron in current layer}
-																child {
-																		node {Transposed matrix: Each row}
-																	}
-															}
-													}
-												child {
-														node {Dim Bias: Num Neurons particular layer}
-														child {
-																node {For every neuronn in particular layer have a bias}
-															}
-													}
-											}
-									}
-							}
+					}
+				child {
+						node {Num parameters on every neuron are num inputs +1 cuz of bias}
 					}
 			}
 		child {
-		node {Output layer and Loss Function}
-		child [level distance=10cm] {
-				node {Continous Target, Regression}
+		node {Activation}
+		child {
+				node {Linear model with activation can become non-linear}
 				child {
-						node {Interpretation: NN gives mean of the distribution of target y given input X}
+						node {If not use g after aggregation will be linear model}
 						child {
-								node {Most likely Target value y given X that is being trained as max likelihood estimation}
+								node {If multiply chain of matrices result still matrix}
 							}
 					}
-				child {
-						node {No Activation for output layer}
-					}
-				child {
-						node {Least Square Error Loss}
-					}
+				% hidden layers do it in a way by parametrizing this representations, projection to a new dimensionality is controlled with parameters of those hidden layers theta
+				% with hidden layers learn a mapping, learn how to project original input to a new dimensionality (previous slide)
+				% so the actual extraction of the features can be thought as a process that can be trained as a model
+				% 3rd approach: don't know which features should use, but feature generation generating function can also be parametrized with theta
+				% take pixels and then create polynomial expansions of pixels or rbf projection and those are the generic kernel expansion that you use for the SVM
+				% hand-craft with heuristics
+				% called representation learning: project features into some new features where linear model can then capturer target variable
+				% if I create a new representation then in this new representation a linear function with some linear coefficients can actually approximate a function which originally was nonlinear with respect to the to its input
 			}
 		child {
-		node {Binary Classification  / Binary Classification Target}
+				node {Activations per layer can be different}
+			}
 		child {
-				node {Binary target variables follow Bernoulli distribution}
+		node {Types}
+		child {
+		node {Output (Layer) Activation fuctions}
+		child {
+				node (linear) {Linear (Transformation) / Identity}
 			}
 		child [level distance=10cm] {
-		node {Sigmoid Activation for output layer}
+		node (sigmoid) {Logistic Sigmoid (Binary Classification)}
+		child {
+				node {If z goes to 0, e to the power of 0 becomes 1, then it becomes $\frac{1}{1+1}$}
+			}
+		child {
+				node {If z goes to $\infty$, e to the power of $-\infty$ becomes 0, then it becomes $\frac{1}{1+0}$}
+			}
+		child {
+				node {If z goes to $-\infty$, e to the power of $\infty$ becomes $\infty$, then it becomes $\frac{1}{1+\infty} = 0$}
+			}
 		child {
 		node {$\frac{1}{1+e^{-z}}$}
 		}
 		child {
 				node {$\hat y$ between 0 and 1, probability}
 			}
-		child {
+		child [level distance=5cm] {
 				node {Naive option doesn't work, must be differentiable with respect to aggregation, derivative 0}
 			}
 		}
 		child {
-				node {Logistic Loss or the Cross-entropy}
+				node (softmax) {Softmax (Multi-Class Classification)}
 				child {
-						node {Only of term non-zero: $-0\cdot log(\hat y) - (1-0)\cdot log(1-\hat y)$}
+						node {Num neurons output layer = Num classes}
 					}
 				child {
-						node {left $-1\cdot log(1) = 0$, right $-(1-0)\cdot log(1-0) = 0$}
+						node {Normalized probability estimation}
 					}
 				child {
-						node {left $-1\cdot log(0) = \infty$, right $-(1-0)\cdot log(1-1) = \infty$}
-					}
-			}
-		}
-		child [level distance=12cm] {
-				node {Multi-Class Classification / Multi-category Target}
-				child {
-						node {Softmax Activation for output layer}
+						node {$e^z$ makes it positive}
 						child {
-								node {Num neurons output layer = Num classes}
-							}
-						child {
-								node {Normalized probability estimation}
-							}
-						child {
-								node {$e^z$ makes it positive}
-								child {
-										node {Dividing by sum of all total predictions makes it a distribution}
-									}
-							}
-					}
-				child {
-						node {Log-likelihood Loss}
-						child {
-								node {Function only becomes 1 for true class and 0 for all other classes}
-								child {
-										node {Only for case where $y_n=1$ wants probability 1, cuz $log(1)=0$}
-									}
+								node {Dividing by sum of all total predictions makes it a distribution}
 							}
 					}
 			}
 		}
+		child {
+				node {Rectified linear unit (ReLU)}
+				child {
+						node {Instead of being a linear function, truncate negative values to 0}
+					}
+				child [level distance=10cm] {
+						node {Benefit: Sparse out some of neurons in network, learn how to spezialize them}
+					}
+				child {
+						node {$g(z) = max(0, z)$}
+					}
+			}
+		child {
+				node {Hyperbolic Tangent}
+				child {
+						node {Derivation of sigmoid}
+						child {
+								node {Range between -1 and 1}
+								child {
+										node {If range is between 0 and 1 than the negative can get is 2*0-1=-1}
+									}
+								child {
+										node {If it has a maximum is 2*1-1=1}
+									}
+							}
+					}
+			}
 		}
-		child [level distance=40cm] {
+		}
+		}
+		child {
+				node {Project N(l-1) to N(l) many values}
+				% die Sache mit Dimensionen, rauscanceln
+				% bedeutung eines Eintrage in Matrix wenn transpose und nicht transposed
+				% column oder row ist linear model je nachdem ob transposed
+				% die Sache mit oben und unten bei den indexes und Matrizen
+				child {
+						node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
+						child {
+								node {Inner dimensionalities cancel: (Left edge wT, Upper edge v)}
+							}
+						child {
+								node {Weight matrix}
+								child {
+										node {Dimensionality: Left edge x Upper edge}
+										child {
+												node {Num Neurons last layer x Num Neurons current layer}
+											}
+										child {
+												node {Transposed matrix: Num Neurons current layer x Num Neurons last layer}
+											}
+									}
+								child [level distance=10cm] {
+										node {$w_{i,j}$, move i down and j right, i-th row, j-th column}
+										child {
+												node {$w_{i,j}$ connects neuron $i$ (last layer) and $j$ (current layer))}
+											}
+										child {
+												node {Transposed matrix: $w_{j,i}$ connects neuron $i$ (last layer) to $j$ (current layer))}
+											}
+									}
+								child {
+										node {Each column prediction models of linear function of a neuron in current layer}
+										child {
+												node {Transposed matrix: Each row}
+											}
+									}
+							}
+						child {
+								node {Dim Bias: Num Neurons particular layer}
+								child {
+										node {For every neuron in particular layer have a bias}
+									}
+								child {
+										node {If take $h^{(i)}\in \mathbb{R}^{d\times a}$ of particular n just $a$ remains}
+										child {
+												node {Can represent as $a\times1$}
+											}
+									}
+							}
+					}
+			}
+		child {
+				node {Parametrize and learn Nonlinear Mapping}
+				child {
+						node {Hidden layers learn how project original input to new dimensionality}
+						child {
+								node {Representation Learning: Project features into new features where linear model can capture target variable}
+								child {
+										node {In new representation a linear function can approximate function which was nonlinear} % with some linear coefficients , respect to the to its input
+									}
+							}
+					}
+			}
+		}
+		child {
+				node {Loss Function}
+				child [level distance=10cm] {
+						node {Continous Target, Regression}
+						child {
+								node {Interpretation: NN gives mean of the distribution of target y given input X}
+								child {
+										node {Most likely Target value y given X that is being trained as max likelihood estimation}
+									}
+							}
+						child {
+								node (no activation) {No Activation for output layer}
+							}
+						child {
+								node {Least Square Error Loss}
+							}
+					}
+				child {
+						node (binary) {Binary Classification  / Binary Classification Target}
+						child {
+								node {Binary target variables follow Bernoulli distribution}
+							}
+						child {
+								node {Logistic Loss or the Cross-entropy}
+								child {
+										node {Only of term non-zero: $-0\cdot log(\hat y) - (1-0)\cdot log(1-\hat y)$}
+									}
+								child {
+										node {left $-1\cdot log(1) = 0$, right $-(1-0)\cdot log(1-0) = 0$}
+									}
+								child {
+										node {left $-1\cdot log(0) = \infty$, right $-(1-0)\cdot log(1-1) = \infty$}
+									}
+							}
+					}
+				child [level distance=20cm] {
+						node (multi-class) {Multi-Class Classification / Multi-category Target}
+						child {
+								node {Log-likelihood Loss}
+								child {
+										node {Function only becomes 1 for true class and 0 for all other classes}
+										child {
+												node {Only for case where $y_n=1$ wants probability 1, cuz $log(1)=0$}
+											}
+									}
+							}
+					}
+			}
+		}
+		child [level distance=50cm] {
 				node {Optimizing Neural Networks / Optimization Techniques for Neural Networks}
 				child {
 						node {Gradient is derivative of function j of w with respect to each of the w's, tells tangent line}
@@ -1149,7 +1200,7 @@
 							}
 					}
 				child {
-						node {Algorithms}
+						node {Algorithms to find optimal parameters}
 						child [level distance=10cm] {
 								node {Gradient Descent}
 								child {
@@ -1188,6 +1239,12 @@
 								child {
 										node {Optimize parameters w to minimize the errors on this mini-batches}
 									}
+							}
+					}
+				child {
+						node {Backpropagation}
+						child {
+								node {Finds gradient of loss function with respect to all weights}
 							}
 					}
 			}
@@ -2275,6 +2332,9 @@
 		\edge{expected prediction model}{bias}
 		\edge{estimated target minus ground truth}{prediction models}
 		\edge{expected target}{noise}
+		\edge{no activation}{linear}
+		\edge{binary}{sigmoid}
+		\edge{multi-class}{softmax}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

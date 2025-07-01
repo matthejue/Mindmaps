@@ -917,7 +917,274 @@
 		child {
 		node {Neural Network Architectures}
 		% node {Neural Networks}
-		child [level distance=30cm] {
+		child [level distance=20cm] {
+				node {Convolutional Neural Networks}
+				child {
+						node {Analogy neural network}
+						child {
+								node {CNN: feature maps in, kernels being applied, feature maps out}
+								child {
+										node {In 3 aspects different}
+										child {
+												node {Spacity: no full connection between feature maps}
+												child {
+														node {Just have small sectional patch}
+													}
+											}
+										child {
+												node {Receptive field is hierarchically growing: See patterns occur in large portion of original image}
+											}
+										child {
+												node {Reuse same weights, just learn one kernel}
+												child {
+														node {Same weights applied to each those patch locations}
+													}
+												child {
+														node {Don't learn one weight for every pixel in feature map}
+													}
+											}
+									}
+							}
+						child [level distance=8cm] {
+								node {NN: activations in, weights w applied, activations out}
+							}
+					}
+				child [level distance=70cm] {
+						node {Parts}
+						child {
+								node {Image}
+								child {
+										node {Cuz it's 3-dimensional kernel also needs to be}
+										child {
+												node {In case of rgb depth 3}
+											}
+										child {
+												node {Iteration over channel, num rows and columns}
+											}
+									}
+							}
+						child [level distance=20cm] {
+								node {Kernels}
+								child {
+										node {Is 3-dimensional structure}
+									}
+								child {
+										node {In case of convolution it's the same convolution being applied}
+										child {
+												node {Like NN's but weights of every neuron same}
+												child {
+														node {In neural networks each neuron has own weights}
+													}
+											}
+										child {
+												node {Don't look same because input different}
+											}
+									}
+								child [level distance=10cm] {
+										node {Convolution: Sum of pairwise product all cells kernel with cells image}
+										child {
+												node {Connect only to neurons that are located nearby in a patch}
+												child {
+														node {Extract pattern that have a neighborhood relation}
+														child {
+																node {Extract particular aspects of image (patterns, edges)}
+																child {
+																		node {Detect local presences of spatially related patterns}
+																	}
+															}
+													}
+												child {
+														node {Reducing number of connectivity}
+														child {
+																node {Reduces complexity drastically}
+															}
+													}
+												child {
+														node {Receptive field}
+														child {
+																node {If stack many layers on top of each other}
+																child {
+																		node {A very deep layer has interaction large array of pixels in original representation}
+																	}
+															}
+													}
+											}
+										child {
+												node {Number of rows and columns after applying convolutional not same as original image}
+												child {
+														node {Cannot move convolution outside of borders of image}
+													}
+											}
+										child {
+												node {Start index x + index on the patch, m going from 1 to m(l)}
+												child {
+														node {Applied on all the channels}
+													}
+												child {
+														node {-1 because start from 1 and want have very first point x,y}
+													}
+											}
+									}
+								child {
+										node {Once have convolution also apply non-linear activation}
+										child {
+												node {E.g. ReLU}
+												child {
+														node {Helps focus more on shapes and less on contrast}
+													}
+											}
+									}
+								child {
+										node {Dim kernels, had I(l) many kernels, each those kernels had same depth I(l-1) with number channes of incoming image}
+									}
+								child {
+										node {Kernel tensor of 4 dimensions}
+									}
+							}
+						child {
+								node {Feature Maps}
+								child {
+										node {is 2-dimensional}
+									}
+								child {
+										node {Feature map is neuron in next layer}
+										child {
+												node {Input feature map is activations of previous layer}
+											}
+										child {
+												node {Incoming activation previous layer not vector, two-dimensional matrix}
+												child {
+														node {Cuz patches being applied for every row and every column}
+													}
+											}
+									}
+								child {
+										node {Feature maps as input, beginning image itself}
+										child {
+												node {For subsequent layers input is feature map of previous convolutional layer}
+											}
+										% child {
+										% 		node {As many feature maps as kernels applied} % on original image
+										% 	}
+										child {
+												node {For every kernel generate one feature map}
+											}
+									}
+								child {
+										node {Feature map always dim of number kernels applied previous layer and resulting dim image resolution}
+									}
+								child {
+										node {Is output of convolution + non-linear activation}
+									}
+							}
+						child [level distance=10cm] {
+								node {Parameters}
+								child {
+										node {V are feature maps, equivalent of activations h}
+									}
+								child {
+										node {I many kernels at every layer}
+										child {
+												node {NN's: M many neurons every layer}
+											}
+										child {
+												node {I(0) number of (original) channels c, greyscale: 1, RGB: 3}
+											}
+										child {
+												node {M is size of applied patch} % M is resolution of feature map
+											}
+										child {
+												node {Actually x(l) and y(l) cuz can change at every layer}
+												child {
+														node {For simplicity assume resolution is same at every layers, same xy}
+														child {
+																node {Think of filled with 0's to preserve resolution}
+															}
+													}
+											}
+									}
+							}
+					}
+				child {
+						node {Identifying images}
+						child {
+								node {Extract image representations by CNN}
+							}
+						child {
+								node {Prediction layer}
+								child {
+										node {Input: image representation, converts to categories (for classification)}
+										child {
+												node {Last layer as classifier for images}
+												child {
+														node {Flatten cells across all dimensions as vector, $i\cdot x\cdot y\times 1$ vector}
+													}
+												child {
+														node {Flattened tensor can input it to standard DFN}
+													}
+											}
+									}
+							}
+						child {
+								node {Need derivative of loss with respect to all the kernels}
+								% child {
+								% 		node {Keep Gradient of J with respect to V(l) as gradient G and push it backwards}
+								% 	}
+								child {
+										node {Have to start from prediction layer}
+										child {
+												node {G multiplied with gradient V(l) with respect to K(l)}
+												child {
+														node {G: Sum of G' multiplied with gradient of h(1) with respect to V(l)}
+														child {
+																node {G is gradient of J with respect to V(l)}
+																child {
+																		node {in NN: h(l-1)}
+																	}
+															}
+														child {
+																node {G': Gradient J with respect to h(1) of DFN} % 1st hidden layer
+															}
+													}
+												% child {
+												%   node {Only need on gradient of J with respect to kernel, cuz all the same}
+												% }
+												child {
+														node {Push backwards for gradient of J with respect to l-1 feature map, l-2 feature map etc.}
+														child {
+																node {Once have dJ/dV can compute gradient of loss with respect to kernels}
+															}
+													}
+											}
+									}
+							}
+					}
+				% child {
+				% 		node {Parameter Sharing or Tied-Weights (sharing weights)}
+				% 		child {
+				% 				node {Advantages}
+				% 				child {
+				% 						node {Smaller models}
+				% 					}
+				% 				child {
+				% 						node {Lower complexity}
+				% 					}
+				% 				child {
+				% 						node {Better generalization}
+				% 					}
+				% 			}
+				% 	}
+				% child {
+				% 		node {Multi-layered Sparse Connectivity}
+				% 		child {
+				% 				node {Translation-equivariant capturing of patterns}
+				% 			}
+				% 	}
+				% child {
+				% 		node {Stacked Convolutions with Nonlinear Activations}
+				% 	}
+			}
+		child [level distance=40cm] {
 		node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
 		child {
 				node {Feedforward, fully-connected, Network}
@@ -1133,57 +1400,57 @@
 					}
 			}
 		}
-		child {
-				node {Loss Function}
-				child [level distance=10cm] {
-						node {Continous Target, Regression}
-						child {
-								node {Interpretation: NN gives mean of the distribution of target y given input X}
-								child {
-										node {Most likely Target value y given X that is being trained as max likelihood estimation}
-									}
-							}
-						child {
-								node (no activation) {No Activation for output layer}
-							}
-						child {
-								node {Least Square Error Loss}
-							}
-					}
+		}
+		child [level distance=80cm] {
+				node {Optimizing Neural Networks / Optimization Techniques for Neural Networks}
 				child {
-						node (binary) {Binary Classification  / Binary Classification Target}
-						child {
-								node {Binary target variables follow Bernoulli distribution}
-							}
-						child {
-								node {Logistic Loss or the Cross-entropy}
+						node {Loss Function}
+						child [level distance=10cm] {
+								node {Continous Target, Regression}
 								child {
-										node {Only of term non-zero: $-0\cdot log(\hat y) - (1-0)\cdot log(1-\hat y)$}
-									}
-								child {
-										node {left $-1\cdot log(1) = 0$, right $-(1-0)\cdot log(1-0) = 0$}
-									}
-								child {
-										node {left $-1\cdot log(0) = \infty$, right $-(1-0)\cdot log(1-1) = \infty$}
-									}
-							}
-					}
-				child [level distance=20cm] {
-						node (multi-class) {Multi-Class Classification / Multi-category Target}
-						child {
-								node {Log-likelihood Loss}
-								child {
-										node {Function only becomes 1 for true class and 0 for all other classes}
+										node {Interpretation: NN gives mean of the distribution of target y given input X}
 										child {
-												node {Only for case where $y_n=1$ wants probability 1, cuz $log(1)=0$}
+												node {Most likely Target value y given X that is being trained as max likelihood estimation}
+											}
+									}
+								child {
+										node (no activation) {No Activation for output layer}
+									}
+								child {
+										node {Least Square Error Loss}
+									}
+							}
+						child {
+								node (binary) {Binary Classification  / Binary Classification Target}
+								child {
+										node {Binary target variables follow Bernoulli distribution}
+									}
+								child {
+										node {Logistic Loss or the Cross-entropy}
+										child {
+												node {Only of term non-zero: $-0\cdot log(\hat y) - (1-0)\cdot log(1-\hat y)$}
+											}
+										child {
+												node {left $-1\cdot log(1) = 0$, right $-(1-0)\cdot log(1-0) = 0$}
+											}
+										child {
+												node {left $-1\cdot log(0) = \infty$, right $-(1-0)\cdot log(1-1) = \infty$}
+											}
+									}
+							}
+						child [level distance=20cm] {
+								node (multi-class) {Multi-Class Classification / Multi-category Target}
+								child {
+										node {Log-likelihood Loss}
+										child {
+												node {Function only becomes 1 for true class and 0 for all other classes}
+												child {
+														node {Only for case where $y_n=1$ wants probability 1, cuz $log(1)=0$}
+													}
 											}
 									}
 							}
 					}
-			}
-		}
-		child [level distance=50cm] {
-				node {Optimizing Neural Networks / Optimization Techniques for Neural Networks}
 				child {
 						node {Gradient is derivative of function j of w with respect to each of the w's, tells tangent line}
 						child {
@@ -1256,7 +1523,7 @@
 														node {Compute the loss given paramters x, input features to NN}
 													}
 											}
-                      child [level distance=10cm] {
+										child [level distance=10cm] {
 												node {Backpropagation}
 												child {
 														node {Finds gradient of loss function with respect to all weights (and biases)}
@@ -1325,7 +1592,7 @@
 																		node {Gradient of neuron to that particular weight}
 																	}
 															}
-                              child [level distance=10cm] {
+														child [level distance=10cm] {
 																node {Gradient of final function with respect to parameters of a particular function}
 																child {
 																		node {Final function is loss of the estimated targets (final layer)}
@@ -1453,7 +1720,7 @@
 							}
 						child {
 								node {Learning dynamics}
-                child [level distance=10cm] {
+								child [level distance=10cm] {
 										node {Early stopping}
 										child {
 												node {Controlling dynamics of optimization}
@@ -1476,7 +1743,7 @@
 														node {Done by checking performance on validation set}
 													}
 											}
-                      child [level distance=10cm] {
+										child [level distance=10cm] {
 												node {Algoritm}
 												child {
 														node {Stop if p many steps where no reduction in validation set error}
@@ -1845,273 +2112,6 @@
 		% 					}
 		% 			}
 		% 	}
-		child [level distance=20cm] {
-				node {Convolutional Neural Networks}
-				child {
-						node {Analogy neural network}
-						child {
-								node {CNN: feature maps in, kernels being applied, feature maps out}
-								child {
-										node {In 3 aspects different}
-										child {
-												node {Spacity: no full connection between feature maps}
-												child {
-														node {Just have small sectional patch}
-													}
-											}
-										child {
-												node {Receptive field is hierarchically growing: See patterns occur in large portion of original image}
-											}
-										child {
-												node {Reuse same weights, just learn one kernel}
-												child {
-														node {Same weights applied to each those patch locations}
-													}
-												child {
-														node {Don't learn one weight for every pixel in feature map}
-													}
-											}
-									}
-							}
-              child [level distance=8cm] {
-								node {NN: activations in, weights w applied, activations out}
-							}
-					}
-          child [level distance=70cm] {
-						node {Parts}
-						child {
-								node {Image}
-								child {
-										node {Cuz it's 3-dimensional kernel also needs to be}
-										child {
-												node {In case of rgb depth 3}
-											}
-										child {
-												node {Iteration over channel, num rows and columns}
-											}
-									}
-							}
-              child [level distance=20cm] {
-								node {Kernels}
-								child {
-										node {Is 3-dimensional structure}
-									}
-								child {
-										node {In case of convolution it's the same convolution being applied}
-										child {
-												node {Like NN's but weights of every neuron same}
-												child {
-														node {In neural networks each neuron has own weights}
-													}
-											}
-										child {
-												node {Don't look same because input different}
-											}
-									}
-                  child [level distance=10cm] {
-										node {Convolution: Sum of pairwise product all cells kernel with cells image}
-										child {
-												node {Connect only to neurons that are located nearby in a patch}
-												child {
-														node {Extract pattern that have a neighborhood relation}
-														child {
-																node {Extract particular aspects of image (patterns, edges)}
-																child {
-																		node {Detect local presences of spatially related patterns}
-																	}
-															}
-													}
-												child {
-														node {Reducing number of connectivity}
-														child {
-																node {Reduces complexity drastically}
-															}
-													}
-												child {
-														node {Receptive field}
-														child {
-																node {If stack many layers on top of each other}
-																child {
-																		node {A very deep layer has interaction large array of pixels in original representation}
-																	}
-															}
-													}
-											}
-										child {
-												node {Number of rows and columns after applying convolutional not same as original image}
-												child {
-														node {Cannot move convolution outside of borders of image}
-													}
-											}
-										child {
-												node {Start index x + index on the patch, m going from 1 to m(l)}
-												child {
-														node {Applied on all the channels}
-													}
-												child {
-														node {-1 because start from 1 and want have very first point x,y}
-													}
-											}
-									}
-								child {
-										node {Once have convolution also apply non-linear activation}
-										child {
-												node {E.g. ReLU}
-												child {
-														node {Helps focus more on shapes and less on contrast}
-													}
-											}
-									}
-								child {
-										node {Dim kernels, had I(l) many kernels, each those kernels had same depth I(l-1) with number channes of incoming image}
-									}
-								child {
-										node {Kernel tensor of 4 dimensions}
-									}
-							}
-						child {
-								node {Feature Maps}
-								child {
-										node {is 2-dimensional}
-									}
-								child {
-										node {Feature map is neuron in next layer}
-										child {
-												node {Input feature map is activations of previous layer}
-											}
-										child {
-												node {Incoming activation previous layer not vector, two-dimensional matrix}
-												child {
-														node {Cuz patches being applied for every row and every column}
-													}
-											}
-									}
-								child {
-										node {Feature maps as input, beginning image itself}
-										child {
-												node {For subsequent layers input is feature map of previous convolutional layer}
-											}
-										% child {
-										% 		node {As many feature maps as kernels applied} % on original image
-										% 	}
-										child {
-												node {For every kernel generate one feature map}
-											}
-									}
-								child {
-										node {Feature map always dim of number kernels applied previous layer and resulting dim image resolution}
-									}
-								child {
-										node {Is output of convolution + non-linear activation}
-									}
-							}
-						child [level distance=10cm] {
-              node {Parameters}
-								child {
-										node {V are feature maps, equivalent of activations h}
-									}
-								child {
-										node {I many kernels at every layer}
-										child {
-												node {NN's: M many neurons every layer}
-											}
-										child {
-												node {I(0) number of (original) channels c, greyscale: 1, RGB: 3}
-											}
-										child {
-												node {M is size of applied patch} % M is resolution of feature map
-											}
-										child {
-												node {Actually x(l) and y(l) cuz can change at every layer}
-												child {
-														node {For simplicity assume resolution is same at every layers, same xy}
-														child {
-																node {Think of filled with 0's to preserve resolution}
-															}
-													}
-											}
-									}
-							}
-					}
-				child {
-						node {Identifying images}
-						child {
-								node {Extract image representations by CNN}
-							}
-						child {
-								node {Prediction layer}
-								child {
-										node {Input: image representation, converts to categories (for classification)}
-										child {
-												node {Last layer as classifier for images}
-												child {
-														node {Flatten cells across all dimensions as vector, $i\cdot x\cdot y\times 1$ vector}
-													}
-												child {
-														node {Flattened tensor can input it to standard DFN}
-													}
-											}
-									}
-							}
-						child {
-								node {Need derivative of loss with respect to all the kernels}
-								% child {
-								% 		node {Keep Gradient of J with respect to V(l) as gradient G and push it backwards}
-								% 	}
-								child {
-										node {Have to start from prediction layer}
-										child {
-												node {G multiplied with gradient V(l) with respect to K(l)}
-												child {
-														node {G: Sum of G' multiplied with gradient of h(1) with respect to V(l)}
-                            child {
-                              node {G is gradient of J with respect to V(l)}
-                              child {
-                                node {in NN: h(l-1)}
-                              }
-                            }
-														child {
-																node {G': Gradient J with respect to h(1) of DFN} % 1st hidden layer
-															}
-													}
-                        % child {
-                        %   node {Only need on gradient of J with respect to kernel, cuz all the same}
-                        % }
-                        child {
-                          node {Push backwards for gradient of J with respect to l-1 feature map, l-2 feature map etc.}
-                          child {
-                            node {Once have dJ/dV can compute gradient of loss with respect to kernels}
-                          }
-                        }
-											}
-									}
-							}
-					}
-				% child {
-				% 		node {Parameter Sharing or Tied-Weights (sharing weights)}
-				% 		child {
-				% 				node {Advantages}
-				% 				child {
-				% 						node {Smaller models}
-				% 					}
-				% 				child {
-				% 						node {Lower complexity}
-				% 					}
-				% 				child {
-				% 						node {Better generalization}
-				% 					}
-				% 			}
-				% 	}
-				% child {
-				% 		node {Multi-layered Sparse Connectivity}
-				% 		child {
-				% 				node {Translation-equivariant capturing of patterns}
-				% 			}
-				% 	}
-				% child {
-				% 		node {Stacked Convolutions with Nonlinear Activations}
-				% 	}
-			}
 		}
 		}
 		child {

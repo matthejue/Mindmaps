@@ -1660,7 +1660,7 @@
 											}
 									}
 							}
-						child {
+              child [level distance=10cm] {
 								node {Structural}
 								child {
 										node {Different connectivity patterns}
@@ -2195,290 +2195,290 @@
 											}
 									}
 							}
-						child [level distance=20cm] {
-								node {Regularisation}
+					}
+			}
+		child [level distance=100cm] {
+				node (regularisation) {Regularisation}
+				child {
+						node {Increase bias and reduce variance to decrease overall test error}
+					}
+				% child {
+				% 		node {Add penalty term to empirical risk}
+				% 	}
+				% child {
+				% 		node {Combining Regularizers as a Cocktail}
+				% 		child {
+				% 				node {Better than singular regularizer}
+				% 			}
+				% 	}
+				child {
+						node {Bias-Variance Tradeoff}
+						child {
+								node {Bias and Variance about family of models, not single model}
+							}
+						child {
+								node (expected test error) {Expected test error}
 								child {
-										node {Increase bias and reduce variance to decrease overall test error}
-									}
-								% child {
-								% 		node {Add penalty term to empirical risk}
-								% 	}
-								% child {
-								% 		node {Combining Regularizers as a Cocktail}
-								% 		child {
-								% 				node {Better than singular regularizer}
-								% 			}
-								% 	}
-								child {
-										node {Bias-Variance Tradeoff}
+										node {Variance}
 										child {
-												node {Bias and Variance about family of models, not single model}
+												node (estimated model) {Estimated model}
 											}
 										child {
-												node (expected test error) {Expected test error}
+												node (expected prediction model) {Expected prediction model}
+											}
+										child {
+												node {High variance}
 												child {
-														node {Variance}
-														child {
-																node (estimated model) {Estimated model}
-															}
-														child {
-																node (expected prediction model) {Expected prediction model}
-															}
-														child {
-																node {High variance}
-																child {
-																		node {Risk Overfitting}
-																	}
-															}
-														child {
-																node {Low variance}
-																child {
-																		node {Generalization}
-																	}
-															}
+														node {Risk Overfitting}
 													}
-												child [level distance=20cm] {
-														node (bias) {Bias$^2$}
-														child {
-																node (expected target) {Expected Target}
-																child {
-																		node (expected value) {Expected Value}
-																		child {
-																				node {Properties of Expectation}
-																			}
-																	}
-															}
-														child {
-																node {High bias}
-																child {
-																		node {Risk Underfitting}
-																	}
-															}
-														child {
-																node {Low bias}
-																child {
-																		node {Fitting}
-																	}
-															}
-													}
+											}
+										child {
+												node {Low variance}
 												child {
-														node (noise) {Noise}
-														child {
-																node {Real Target}
-															}
-														child {
-																node {High noise}
-																child {
-																		node {Challenging Task}
-																	}
-															}
-														child {
-																node {Low noise}
-																child {
-																		node {Easy Task}
-																	}
-															}
-													}
-												child [level distance=15cm] {
-														node {Model complexity will either}
-														child {
-																node {Increase bias}
-																child {
-																		node {Decrease variance}
-																	}
-															}
-														child {
-																node {Increase variance}
-																child {
-																		node {Decrease bias}
-																	}
-															}
-													}
-												child {
-														node {Goal low bias and low variance}
+														node {Generalization}
 													}
 											}
 									}
-								child [level distance=40cm] {
-										node {Generalization Performance}
+								child [level distance=20cm] {
+										node (bias) {Bias$^2$}
 										child {
-												node {Underfitting}
+												node (expected target) {Expected Target}
 												child {
-														node {Model fails to fit the training data}
-													}
-												child {
-														node {Both training and test errors descend, but get stuck}
+														node (expected value) {Expected Value}
+														child {
+																node {Properties of Expectation}
+															}
 													}
 											}
 										child {
-												node {Generalizing}
+												node {High bias}
 												child {
-														node {Model is accurate on test data}
-													}
-												child {
-														node {Both training and test errors descend and approach a minimum}
+														node {Risk Underfitting}
 													}
 											}
 										child {
-												node {Overfitting}
+												node {Low bias}
 												child {
-														node {Model perfectly fits training data (incl. noise)}
+														node {Fitting}
 													}
-												child {
-														node {Training error getting smaller, while test error increases}
-													}
-											}
-										child {
-												node {Training data and Test data}
 											}
 									}
 								child {
-										node {General Regularization Techniques}
-										child [level distance=15cm] {
-												node {Ensembling, Ensembles}
+										node (noise) {Noise}
+										child {
+												node {Real Target}
+											}
+										child {
+												node {High noise}
 												child {
-														node {Reduces variance}
-													}
-												child [level distance=15cm] {
-														node {Bagging}
-														child {
-																node {Short for Bootstrap AGGregatING}
-															}
-														child {
-																node {Sampling with replacement}
-																child {
-																		node {Reduce the final model’s variance}
-																	}
-																child {
-																		node {Without affecting the bias much}
-																	}
-															}
-														child {
-																node {Requirements}
-																child {
-																		node {Low bias individual models}
-																	}
-																child {
-																		node {Uncorrelated individual models}
-																		child {
-																				node {The errors of the models should be uncorrelated}
-																				child {
-																						node {So that the overall error gets reduced}
-																					}
-																			}
-																	}
-																child {
-																		node {Bagged Trees}
-																		child {
-																				node {Low bias but might be correlated}
-																			}
-																		child {
-																				node {Decorrelation by randomizing choice of features to split upon}
-																			}
-																	}
-																child {
-																		node {Random Forests}
-																		child {
-																				node {Randomness in terms of the split conditions}
-																			}
-																		child {
-																				node {Algoritm}
-																			}
-																	}
-															}
-													}
-												child {
-														node {Boosting}
-														child {
-																node {Aggregate high-bias models to create a low-bias ensemble}
-																child {
-																		node {Train parameters next model keeping past models fixed}
-																	}
-															}
-														child {
-																node {Loss can be linearly approximated via the first-order Taylor expansion}
-															}
-														child {
-																node {Algorithm: Gradient Boosting}
-															}
-														child {
-																node {Algorithm: AdaBoost}
-															}
-														child {
-																node {Gradient Boosted Decision Trees}
-																child {
-																		node {Hyperparameters}
-																		child {
-																				node {$\gamma$ is the weight of the penalty on the number of leaves}
-																			}
-																		child {
-																				node {$\lambda$ is the weight of the penalty on the weights}
-																			}
-																	}
-																child {
-																		node {Complexity}
-																	}
-																child {
-																		node {Advantages}
-																		child {
-																				node {No need for data preprocessing}
-																			}
-																		child {
-																				node {Work well with categorical features}
-																			}
-																		child {
-																				node {Ability to work with arbitrary loss functions}
-																			}
-																		child {
-																				node {Very low-bias, yet relatively low-variance}
-																			}
-																		child {
-																				node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
-																			}
-																	}
-															}
-													}
-												child {
-														node {Dropout}
+														node {Challenging Task}
 													}
 											}
 										child {
-												node (weight decay 2) {Weight decay}
+												node {Low noise}
 												child {
-														node {Add penalty term to empirical risk}
-														child {
-																node {$+ \alpha \Omega(\Theta)$}
-															}
-														child {
-																node {Increase alpha}
-																child {
-																		node {Circle smaller, increasing bias}
-																	}
-															}
-														child {
-																node {Decrease alpha}
-																child {
-																		node {Circle bigger, model less constrained, does overfit more}
-																	}
-															}
-														% child {
-														%   node {Compromise close to loss function minimum and lying within radius of weights}
-														% }
-														child {
-																node {Within permissible range of regularization want find point close to minimum as possible}
-															}
+														node {Easy Task}
 													}
-											}
-										child {
-												node {Universal, applied to Linear Models, Polynomial Regression Models, NN's}
-											}
-										child {
-												node {L1}
-											}
-										child {
-												node {L2}
 											}
 									}
+								child [level distance=15cm] {
+										node {Model complexity will either}
+										child {
+												node {Increase bias}
+												child {
+														node {Decrease variance}
+													}
+											}
+										child {
+												node {Increase variance}
+												child {
+														node {Decrease bias}
+													}
+											}
+									}
+								child {
+										node {Goal low bias and low variance}
+									}
+							}
+					}
+				child [level distance=40cm] {
+						node {Generalization Performance}
+						child {
+								node {Underfitting}
+								child {
+										node {Model fails to fit the training data}
+									}
+								child {
+										node {Both training and test errors descend, but get stuck}
+									}
+							}
+						child {
+								node {Generalizing}
+								child {
+										node {Model is accurate on test data}
+									}
+								child {
+										node {Both training and test errors descend and approach a minimum}
+									}
+							}
+						child {
+								node {Overfitting}
+								child {
+										node {Model perfectly fits training data (incl. noise)}
+									}
+								child {
+										node {Training error getting smaller, while test error increases}
+									}
+							}
+						child {
+								node {Training data and Test data}
+							}
+					}
+				child {
+						node {General Regularization Techniques}
+						child [level distance=15cm] {
+								node {Ensembling, Ensembles}
+								child {
+										node {Reduces variance}
+									}
+								child [level distance=15cm] {
+										node {Bagging}
+										child {
+												node {Short for Bootstrap AGGregatING}
+											}
+										child {
+												node {Sampling with replacement}
+												child {
+														node {Reduce the final model’s variance}
+													}
+												child {
+														node {Without affecting the bias much}
+													}
+											}
+										child {
+												node {Requirements}
+												child {
+														node {Low bias individual models}
+													}
+												child {
+														node {Uncorrelated individual models}
+														child {
+																node {The errors of the models should be uncorrelated}
+																child {
+																		node {So that the overall error gets reduced}
+																	}
+															}
+													}
+												child {
+														node {Bagged Trees}
+														child {
+																node {Low bias but might be correlated}
+															}
+														child {
+																node {Decorrelation by randomizing choice of features to split upon}
+															}
+													}
+												child {
+														node {Random Forests}
+														child {
+																node {Randomness in terms of the split conditions}
+															}
+														child {
+																node {Algoritm}
+															}
+													}
+											}
+									}
+								child {
+										node {Boosting}
+										child {
+												node {Aggregate high-bias models to create a low-bias ensemble}
+												child {
+														node {Train parameters next model keeping past models fixed}
+													}
+											}
+										child {
+												node {Loss can be linearly approximated via the first-order Taylor expansion}
+											}
+										child {
+												node {Algorithm: Gradient Boosting}
+											}
+										child {
+												node {Algorithm: AdaBoost}
+											}
+										child {
+												node {Gradient Boosted Decision Trees}
+												child {
+														node {Hyperparameters}
+														child {
+																node {$\gamma$ is the weight of the penalty on the number of leaves}
+															}
+														child {
+																node {$\lambda$ is the weight of the penalty on the weights}
+															}
+													}
+												child {
+														node {Complexity}
+													}
+												child {
+														node {Advantages}
+														child {
+																node {No need for data preprocessing}
+															}
+														child {
+																node {Work well with categorical features}
+															}
+														child {
+																node {Ability to work with arbitrary loss functions}
+															}
+														child {
+																node {Very low-bias, yet relatively low-variance}
+															}
+														child {
+																node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
+															}
+													}
+											}
+									}
+								child {
+										node {Dropout}
+									}
+							}
+						child {
+								node (weight decay 2) {Weight decay}
+								child {
+										node {Add penalty term to empirical risk}
+										child {
+												node {$+ \alpha \Omega(\Theta)$}
+											}
+										child {
+												node {Increase alpha}
+												child {
+														node {Circle smaller, increasing bias}
+													}
+											}
+										child {
+												node {Decrease alpha}
+												child {
+														node {Circle bigger, model less constrained, does overfit more}
+													}
+											}
+										% child {
+										%   node {Compromise close to loss function minimum and lying within radius of weights}
+										% }
+										child {
+												node {Within permissible range of regularization want find point close to minimum as possible}
+											}
+									}
+							}
+						child {
+								node {Universal, applied to Linear Models, Polynomial Regression Models, NN's}
+							}
+						child {
+								node {L1}
+							}
+						child {
+								node {L2}
 							}
 					}
 			}
@@ -2835,6 +2835,7 @@
 		\edge{binary}{sigmoid}
 		\edge{multi-class}{softmax}
 		\edge{weight decay 2}{weight decay}
+		\edge{loss}{regularisation}
 	\end{edges}
 	% \annotation{test}{annotation}
 \end{mindmap}

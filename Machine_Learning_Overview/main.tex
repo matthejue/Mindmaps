@@ -12,138 +12,30 @@
 		node (prediction models) {Prediction Models}
 		child {
 				node {Non-parametric Models
-						% \resizebox{\textwidth}{!}{
-						% 	\begin{minipage}[t]{12cm}
-						% 		\begin{itemize}
-						% 			\item non-parametric models in contrast to the models that um we covered in the previous lecture content um we are not going to have prediction models that have parameters Theta instead the prediction models that we are going to see next are models that do not train Theta instead that they look directly at the data that we have collected in the past in order to make prediction so they are going to exploit the data and the logic is going to be based directly by Computing some information from the data instead of accumulating the knowledge into the parameters
-						% 			\item such type of models that do not have their own parameters but instead they look up the data they are called otherwise as lazy models in the sense that they are lazy they don't train their own parameters but they look up the data directly
-						% 			\item should understand that both nearest neighbor and naive bayes just did computations on the data
-						% 			\item so that is different to for instance neural networks that have weights and that try to memorize things such type of models that we saw such as nearest neighbors and naive bayes they don't have memory they just look look into the values they do computations on the fly that's it that's how those nonparametric models work
-						% 		\end{itemize}
-						% 	\end{minipage}
-						% }
 					}
 				child {
 						node {Nearest Neighbors
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{16cm}
-								% 		\begin{itemize}
-								% 			\item the logic of the nearest neighbor classifier is that it looks up all the training examples in your data set and finds the ones that are the most similar to the instance for which you want for which you want to make a prediction
-								% 			\item so U you find the K nearest neighbors of X and you aggregate the target variables of those instances and when we say we want to find the nearest neighbors it means we want to find the neighbors that have the smallest distance and the distance is measured by a function D that takes as an input two feature vectors and computes their actual inverse of the similarities so the smaller is the D the more the more similar data points are
-								% 			\item so basically we take the most likely option here which is one
-								% 			\item we say that that the prediction is one because we computed the similarity of this new value nine to all the previous values in our recording data data set and that we found out that the most similar ones have a target of one so our prediction is one
-								% 			\item compute the distance between this point and all the points
-								% 			\item in this case it can be for example be the euclidean distance or square of the euclidean distance or even the absolute value can be used
-								% 			\item that shows you the sensitivity actually of the nearest neighbor algorithm to the setting of how many neighbors you use
-								% 			\item k for example is a hyper parameter based on the way you select K you are going to have different results in terms of your prediction and then based on that you are going to have different accuracies of your prediction
-								% 			\item has motivations into way how humans reason, if don't know much about domain try to remember similar situations in the past
-								% 			\item nearest neighbor is not always accurate and we saw that it is very sensitive to the choice of K and it is not immune to outliers
-								% 			\item D is actually a set of tuples and the tuples have two vectors the feature and the target
-								% 			\item so X is in the dimensionality of M many features y if it is a multi categorical can be a vector of one hot encoded Target values or it can be a single binary value or a single continuous value if it is a continuous variable
-								% 			\item but in essence our data is composed of features and targets for n many instances that we have collected in the past
-								% 			\item there is no other combination of three elements which are going to have a smaller sum than the ones that have the smallest distance so the sum of the three smallest values is always the subset of the data where the total sum is the smallest possible
-								% 			\item so that's just a math definition of saying give me the instances X that achieve X actually the smallest possible distance to an item for which we want to make a prediction
-								% 			\item hausing good example, most similiar hauses based on features of the house, e.g. compute euclidean distance between this feature vector
-								%                   \item y nearest of x is just projection y into the y elements of the tuples of the nearest neighbors s of x
-								% 			\item short summary: finds similar examples and predicts based on them
-								% 		\end{itemize}
-								% 		\begin{center}
-								% 			\color{SwitchColor}\rule{14cm}{0.25mm}
-								% 		\end{center}
-								% 		\begin{itemize}
-								% 			\item nearest neighbor iterated over training examples and count the most nearest neighbors
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 						child {
 								node {Aggregation for continuous target
-										% \resizebox{\textwidth}{!}{
-										% 	\begin{minipage}[t]{12cm}
-										% 		\begin{itemize}
-										%                     \item for continous target aggregation is for every element $\hat y$ in the set of the target values for the nearest neighbor of x that is basically the average of those values
-										% 			\item if those three targets are in fact continuous values then the aggregation will take the average of them
-										% 		\end{itemize}
-										% 	\end{minipage}
-										% }
 									}
 							}
 						child {
 								node {Aggregation for nominal targets (class c)
-										% \resizebox{\textwidth}{!}{
-										% 	\begin{minipage}[t]{12cm}
-										% 		\begin{itemize}
-										% 			\item nominal / categorical variable
-										% 			\item want to make prediction for every class
-										% 			\item for evey class prediction is basically: we say how many of the nearest neighbors y' belong to this category (cardinality of set of items that match the class) and we device it by the number of nearest neighbors
-										% 			\item der mittlere | ist ein fuer die gilt ':'
-										% 		\end{itemize}
-										% 	\end{minipage}
-										% }
 									}
 							}
 					}
 				child {
 						node {Naive Bayes
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{14cm}
-								% 		\begin{itemize}
-								% 			\item problem, this exact example never appears in our data, neither for positive nor negative class of covid
-								% 			\item if this term is 0, then this probability becomes 0
-								% 			\item so problem is: if have lots of variables then the chance of having coverage of all possible combinations becomes even smaller that have coverage of all possible combinations
-								% 			\item example, 10 binary variables, then $2^{10}$ combinations of values, chance of having $2^{10}$ many patients and where all these combiantions of symptoms occur is very low, so don't have sufficient data to cover all those scenarios
-								% 			\item symptoms help to get knowledge about the data
-								% 			\item is there a way to make us of they (symptoms) even tough such combination does not occur directly in the data, naive bayes tells way how to do it
-								% 			\item don't try to find occurrences where they all occur together but tread them as occurring alone and independently
-								% 			\item multiply because... Multiplying is that they are all occurring individually in separation
-								% 			\item replacing joint conditional probability with independent probabilities
-								% 			\item if want to make prediction on y, then denominator is not needed as term in denominator does not depend on y
-								% 			\item can compute just nominator part above for covid positive and covid negative and then check which one has the highest value
-								% 			\item can drop denominator because which of the value of y is more likely instead of computing the exact probability of values
-								% 			\item formula tells probabilty of y given of some additional factors / symptoms x1 to xn is initial probablity of y times a correction factor, how much it helps to know that x1 occured, if x1 occurs often with y it is a high probability, it helps it increases belief to knowing that y occurs
-								% 			\item maybe some of the factors will increase probability, some other of them will decrease, in the end total product will tell some information whether those additional factors / variables they will actually increase of decrease initial believe about y happening
-								% 		\end{itemize}
-								% 		\begin{center}
-								% 			\color{SwitchColor}\rule{12cm}{0.25mm}
-								% 		\end{center}
-								% 		\begin{itemize}
-								% 			\item while naive bayes iterated over all the data to compute probabilities conditional variables subject to the target and the probability of the Target or the probability of the of the conditional variable occurring however it did not store any logic it just looked up at the table
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 						child {
 								node {Bayes Rule
-										% \resizebox{\textwidth}{!}{
-										% 	% \begin{minipage}[t]{12cm}
-										% 	% 	\begin{itemize}
-										% 	% 		\item probability of y happening, have additional information x, know a little bit more what factors contribute to y, probability of y occuring will either increase / decrease based on how x will contribute to y
-										% 	% 		\item how does ratio work, nominator says what is likelyhood for x occuring among the occurencies of y
-										% 	% 		\item in other words, if x is more likely to occur with y then it is likely to occur alone, then it means x is a contributing factor to y because it occurs more often when y occurs
-										% 	% 		\item mit x kommt weitere Variable dazu, und wenn man was über diese Variable weiß kann man diese Information nutzen als wenn man normal einfach ne weitere Variable hinzufügt und Faktor 1 (unabhängigkeit) annimmt bei den neuen Paaren
-										% 	% 	\end{itemize}
-										% 	% 	\begin{center}
-										% 	% 		\color{SwitchColor}\rule{12cm}{0.25mm}
-										% 	% 	\end{center}
-										% 	% 	\begin{itemize}
-										% 	% 		\item are those factors if they occur alone more frequent or less frequent when they occur together with a value of y
-										% 	% 		\item man tut von der conditional variable alle entsprechenden cases nehmen und schauen wie oft die eigentliche Variable darin ihren entsprechenden Wert hat
-										% 	% 	\end{itemize}
-										% 	% \end{minipage}
-										% }
 									}
 							}
 					}
 			}
 		child [level distance=20cm] {
 				node {Linear Model
-						% \resizebox{\textwidth}{!}{
-						% 	\begin{minipage}[t]{12cm}
-						% 		\begin{itemize}
-						% 			\item cannot capture complex interactions between different features
-						% 		\end{itemize}
-						% 	\end{minipage}
-						% }
 					}
 				child {
 						node {Properties}
@@ -213,7 +105,7 @@
 											}
 									}
 								child {
-										node {Corresponds to Feature Extraction / encoding step} % in ML pipeline
+										node {Corresponds to Feature Extraction / encoding step}
 									}
 							}
 						child {
@@ -264,7 +156,7 @@
 										node {Sigmoid / logistic function}
 									}
 								child {
-										node {Loss function} % (for logistic regression)
+										node {Loss function}
 										child {
 												node {Formulation avoiding case distinction}
 											}
@@ -283,31 +175,10 @@
 			}
 		child {
 				node {Polynomial Regression
-						% \resizebox{\textwidth}{!}{
-						% 	\begin{minipage}[t]{12cm}
-						% 		\begin{itemize}
-						% 			\item all these terms called monimials
-						% 			\item can capture relation between features
-						% 			\item high cofficient downplay inportance of combnation of features
-						% 		\end{itemize}
-						% 	\end{minipage}
-						% }
 					}
 			}
 		child [level distance=30cm] {
 				node {Support Vector Machines (SVM)}
-				% child {
-				% 		node {Pros and Cons}
-				% 	}
-				% child {
-				% 		node {Loss/Response}
-				% 		child {
-				% 				node {Misclassification Rate}
-				% 			}
-				% 		child {
-				% 				node {Accuracy}
-				% 			}
-				% 	}
 				child [level distance=10cm] {
 						node {Hyperparameters}
 						child {
@@ -465,24 +336,9 @@
 																		node {Platt}
 																	}
 															}
-														% child {
-														% 		node {Predict the label of new instance}
-														% 		child {
-														% 				node {Only compute similarity (dot product) with support vectors}
-														% 			}
-														% 	}
 													}
 											}
 									}
-								% child {
-								% 		node {Regularized Hinge Loss Optimization}
-								% 	}
-								% child {
-								% 		node {Linear SVM as a Regularized Loss}
-								% 		child {
-								% 				node {SGD (like Logistic Regression) but using the sub-gradient of loss}
-								% 			}
-								% 	}
 							}
 					}
 				child {
@@ -611,27 +467,6 @@
 						node {Split criterion}
 					}
 			}
-		% child {
-		% 		node {Pros / Advantages}
-		% 		child {
-		% 				node {Simple and interpretable}
-		% 			}
-		% 		child {
-		% 				node {Can directly handle categorical features}
-		% 			}
-		% 		child {
-		% 				node {Very flexible framework that can scale to large training data}
-		% 			}
-		% 	}
-		% child {
-		% 		node {Cons / Disadvantages}
-		% 		child {
-		% 				node {Are deterministic}
-		% 			}
-		% 		child {
-		% 				node {Are prone to overfitting}
-		% 			}
-		% 	}
 		child {
 				node {Parameteres}
 				child {
@@ -662,7 +497,7 @@
 												node {Formula}
 											}
 										child {
-												node {Leaf model / Aggregation operation} % Regression or classification differernt aggregation operation
+												node {Leaf model / Aggregation operation}
 												child {
 														node {Mean for Regression}
 													}
@@ -759,12 +594,6 @@
 											}
 									}
 							}
-						% child {
-						%   node {Optimal split for Regression Tree}
-						% }
-						% child {
-						%   node {Optimal split for Decision Tree}
-						% }
 						child {
 								node {Computational complexity of Fitting}
 								child {
@@ -867,19 +696,7 @@
 							}
 					}
 				child {
-						node {Regularization (for Decision Trees)}
-						child {
-								node {Penalize number of leaves}
-								child {
-										node {Too many steps $\approx$ Too many leaves}
-									}
-							}
-						child {
-								node {Reduce maximum depth}
-								child {
-										node {Too large step jumps $\approx$ Too large leaves’ output values ($w$)}
-									}
-							}
+						node (regularization for dts) {Regularization (for Decision Trees)}
 						child [level distance=10cm] {
 								node {Single decision tree}
 								child {
@@ -887,9 +704,21 @@
 									}
 								child {
 										node {Maximum number of leaves}
+										child {
+												node {Penalize number of leaves}
+												child {
+														node {Too many steps $\approx$ Too many leaves}
+													}
+											}
 									}
 								child {
 										node {Maximum tree depth}
+										child {
+												node {Reduce maximum depth}
+												child {
+														node {Too large step jumps $\approx$ Too large leaves’ output values ($w$)}
+													}
+											}
 									}
 								child {
 										node {Minimum gain for a split}
@@ -916,7 +745,6 @@
 			}
 		child {
 		node {Neural Network Architectures}
-		% node {Neural Networks}
 		child [level distance=20cm] {
 				node {Convolutional Neural Networks}
 				child {
@@ -1063,9 +891,6 @@
 										child {
 												node {For subsequent layers input is feature map of previous convolutional layer}
 											}
-										% child {
-										% 		node {As many feature maps as kernels applied} % on original image
-										% 	}
 										child {
 												node {For every kernel generate one feature map}
 											}
@@ -1091,7 +916,7 @@
 												node {I(0) number of (original) channels c, greyscale: 1, RGB: 3}
 											}
 										child {
-												node {M is size of applied patch} % M is resolution of feature map
+												node {M is size of applied patch}
 											}
 										child {
 												node {Actually x(l) and y(l) cuz can change at every layer}
@@ -1127,9 +952,6 @@
 							}
 						child {
 								node {Need derivative of loss with respect to all the kernels}
-								% child {
-								% 		node {Keep Gradient of J with respect to V(l) as gradient G and push it backwards}
-								% 	}
 								child {
 										node {Have to start from prediction layer}
 										child {
@@ -1143,12 +965,9 @@
 																	}
 															}
 														child {
-																node {G': Gradient J with respect to h(1) of DFN} % 1st hidden layer
+																node {G': Gradient J with respect to h(1) of DFN}
 															}
 													}
-												% child {
-												%   node {Only need on gradient of J with respect to kernel, cuz all the same}
-												% }
 												child {
 														node {Push backwards for gradient of J with respect to l-1 feature map, l-2 feature map etc.}
 														child {
@@ -1159,30 +978,6 @@
 									}
 							}
 					}
-				% child {
-				% 		node {Parameter Sharing or Tied-Weights (sharing weights)}
-				% 		child {
-				% 				node {Advantages}
-				% 				child {
-				% 						node {Smaller models}
-				% 					}
-				% 				child {
-				% 						node {Lower complexity}
-				% 					}
-				% 				child {
-				% 						node {Better generalization}
-				% 					}
-				% 			}
-				% 	}
-				% child {
-				% 		node {Multi-layered Sparse Connectivity}
-				% 		child {
-				% 				node {Translation-equivariant capturing of patterns}
-				% 			}
-				% 	}
-				% child {
-				% 		node {Stacked Convolutions with Nonlinear Activations}
-				% 	}
 			}
 		child [level distance=40cm] {
 		node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
@@ -1243,14 +1038,6 @@
 								node {If multiply chain of matrices result still matrix}
 							}
 					}
-				% hidden layers do it in a way by parametrizing this representations, projection to a new dimensionality is controlled with parameters of those hidden layers theta
-				% with hidden layers learn a mapping, learn how to project original input to a new dimensionality (previous slide)
-				% so the actual extraction of the features can be thought as a process that can be trained as a model
-				% 3rd approach: don't know which features should use, but feature generation generating function can also be parametrized with theta
-				% take pixels and then create polynomial expansions of pixels or rbf projection and those are the generic kernel expansion that you use for the SVM
-				% hand-craft with heuristics
-				% called representation learning: project features into some new features where linear model can then capturer target variable
-				% if I create a new representation then in this new representation a linear function with some linear coefficients can actually approximate a function which originally was nonlinear with respect to the to its input
 			}
 		child {
 				node {Activations per layer can be different}
@@ -1337,10 +1124,6 @@
 		}
 		child {
 				node {Project N(l-1) to N(l) many values}
-				% die Sache mit Dimensionen, rauscanceln
-				% bedeutung eines Eintrage in Matrix wenn transpose und nicht transposed
-				% column oder row ist linear model je nachdem ob transposed
-				% die Sache mit oben und unten bei den indexes und Matrizen
 				child {
 						node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
 						child {
@@ -1394,7 +1177,7 @@
 						child {
 								node {Representation Learning: Project features into new features where linear model can capture target variable}
 								child {
-										node {In new representation a linear function can approximate function which was nonlinear} % with some linear coefficients , respect to the to its input
+										node {In new representation a linear function can approximate function which was nonlinear}
 									}
 							}
 					}
@@ -1472,7 +1255,7 @@
 									}
 							}
 					}
-				child [level distance=20cm] {
+				child [level distance=30cm] {
 						node {Algorithms to find optimal parameters}
 						child [level distance=20cm] {
 								node {Gradient Descent}
@@ -1542,19 +1325,11 @@
 														child {
 																node {Symbol of partial derivative identifies that now take derivative of h with respect to another function f}
 															}
-														% child {
-														% 		node {Partial derivative denoted with gradient of h with respect to g and f}
-														% 	}
 														child {
 																node {Total derivative rule}
 																child {
-																		% node {Total derivative is summation of paths that contribute to how J depends on X}
 																		node {Total derivative is summation of paths through which X is contributing to J}
-																		% child {
-																		% 		node {Shortcut: Need accumulated gradients of the final function with respect to gradient of X and immediate next function f}
-																		% 	}
 																		child {
-																				% node {Shortcut: Parent node or function of x accumulated all paths}
 																				node {Shortcut: Accumulate paths up to an intermediate parent level of variable x}
 																				child {
 																						node {Accumulated gradients already capture all paths}
@@ -1565,9 +1340,6 @@
 																				child {
 																						node {Left Gradients in chain rule have higher layer in NN}
 																					}
-																				% child {
-																				%   node {Accumulate paths up to an intermediate parent level of variable x with respect to which want to compute the derivatives}
-																				% }
 																			}
 																	}
 															}
@@ -1603,7 +1375,6 @@
 																child {
 																		node {Theta first influences it's own function and then this function influences next function}
 																	}
-																% and all those paths from this next function j to n they are just the gradient of n with respect to j how can theta go to j, 
 															}
 													}
 												child {
@@ -1645,160 +1416,155 @@
 					}
 			}
 		child {
-				node {Regularization approaches for Neural Networks}
+				node {Generalization Methods}
 				child [level distance=80cm] {
-						node {Families of Regularization Techniques for DFN}
-						child {
-								node {Capacity}
+						node (regularization nns) {Regularization (Approaches for Neural Networks)}
+						child [level distance=15cm] {
+								node (families of regularization techniques for dfn) {Families of Regularization Techniques for DFN}
 								child {
-										node {Number of parameters}
+										node {Capacity}
 										child {
-												node {Smaller capacity is more regularization}
+												node {Number of parameters}
 												child {
-														node {Worse fit training set, higher bias, smaller variance}
-													}
-											}
-									}
-							}
-              child [level distance=10cm] {
-								node {Structural}
-								child {
-										node {Different connectivity patterns}
-									}
-								child {
-										node {(NAS)}
-									}
-								child {
-										node {Skip connections}
-									}
-								child {
-										node {(ResNet)}
-										child {
-												node {2 parallel layers}
-											}
-									}
-								% etc.
-							}
-						child {
-								node (weight decay) {Weight decay}
-								child {
-										node {Have derivative of empirical risk and of regularization term}
-									}
-								child {
-										node {L1}
-										child {
-												node {Derivative: Case destinction 1 and -1}
-												child {
-														node {Include 0 into negative to have applicable case for all w}
-													}
-											}
-									}
-								child {
-										node {L2}
-										child {
-												node {When multiply alpha/2 by derivative, becomes just alpha}
-											}
-									}
-							}
-						child {
-								node {Ensembling}
-								child {
-										node {Dropout}
-									}
-							}
-						child {
-								node {(Weight Aggregation)}
-								% child {
-								%   node {Aggregate weights from candidate nn prediction models}
-								% }
-								child {
-										node {(Stochastic Weight Averaging)}
-									}
-								child {
-										node {(Snapshot Ensembles)}
-									}
-							}
-						child {
-								node {Learning dynamics}
-								child [level distance=10cm] {
-										node {Early stopping}
-										child {
-												node {Controlling dynamics of optimization}
-											}
-										child {
-												node {Overfit to noise present in training set}
-												child {
-														node {Performance new validation set gets worse}
+														node {Smaller capacity is more regularization}
 														child {
-																node {Validation set not used to update model parameters}
-															}
-														child {
-																node {In beginning both decrease}
+																node {Worse fit training set, higher bias, smaller variance}
 															}
 													}
 											}
+									}
+								child {
+										node (structural) {Structural}
 										child {
-												node {Stop early optimization before starts to overfit}
+												node {Different connectivity patterns}
+											}
+										child {
+												node {NAS}
+											}
+										child {
+												node {ResNet}
 												child {
-														node {Done by checking performance on validation set}
+														node {(2 parallel layers)}
 													}
 											}
+									}
+								child {
+										node (ensembling) {Ensembling}
+									}
+								child {
+										node {Weight Aggregation}
+										child {
+												node {Stochastic Weight Averaging}
+											}
+										child {
+												node {Snapshot Ensembles}
+											}
+									}
+								child {
+										node {Learning Dynamics}
 										child [level distance=10cm] {
-												node {Algoritm}
+												node {Early stopping}
 												child {
-														node {Stop if p many steps where no reduction in validation set error}
+														node {Controlling dynamics of optimization}
+													}
+												child {
+														node {Overfit to noise present in training set}
 														child {
-																node {p many steps = tolerance}
-															}
-														child {
-																node {Steps called epochs}
-															}
-														child {
-																node {Tolerance is needed cuz performance oscillates}
+																node {Performance new validation set gets worse}
+																child {
+																		node {Validation set not used to update model parameters}
+																	}
+																child {
+																		node {In beginning both decrease}
+																	}
 															}
 													}
 												child {
-														node {j counts steps seen without improvement}
-													}
-												child {
-														node {Check validation set error of current w}
+														node {Stop early optimization before starts to overfit}
 														child {
-																node {If it does not improve ones previous best v, then increase counter}
-															}
-														child {
-																node {Otherwise one resets counter, stores the best parameters}
+																node {Done by checking performance on validation set}
 															}
 													}
+												child [level distance=10cm] {
+														node {Algoritm}
+														child {
+																node {Stop if p many steps where no reduction in validation set error}
+																child {
+																		node {p many steps = tolerance}
+																	}
+																child {
+																		node {Steps called epochs}
+																	}
+																child {
+																		node {Tolerance is needed cuz performance oscillates}
+																	}
+															}
+														child {
+																node {j counts steps seen without improvement}
+															}
+														child {
+																node {Check validation set error of current w}
+																child {
+																		node {If it does not improve ones previous best v, then increase counter}
+																	}
+																child {
+																		node {Otherwise one resets counter, stores the best parameters}
+																	}
+															}
+														child {
+																node {If counter exceeds tolerance number steps one returns best found}
+															}
+													}
 												child {
-														node {If counter exceeds tolerance number steps one returns best found}
+														node {Acts as a regularizer}
+														child {
+																node {Stop in between before going to optimum}
+															}
 													}
 											}
 										child {
-												node {Acts as a regularizer}
+												node {Learning rate schedulers}
 												child {
-														node {Stop in between before going to optimum}
+														node {Learning rate can be dynamic}
+														child {
+																node {Can be adapted on every paramete}
+															}
+													}
+												child {
+														node {Specify scheduler how initial learening rate change after every epoch}
 													}
 											}
 									}
 								child {
-										node {(Learning rate schedulers)}
-										child {
-												node {Learning rate can be dynamic}
-												child {
-														node {Can be adapted on every paramete}
-													}
-											}
-										child {
-												node {Specify scheduler how initial learening rate change after every epoch}
-											}
+										node (implicit) {Implicit}
 									}
 							}
 						child {
-								node {Implicit}
+								node {Structural and Linearization}
 								child {
-										node {Batch normalization}
+										node (skip connections) {Skip connections}
 									}
-								% etc.
+								child {
+										node {Residual blocks}
+									}
+								child {
+										node {Shake shake}
+									}
+							}
+						child {
+								node {(Learning Dynamics)}
+								child {
+										node (batch normalization) {Batch Normalization}
+									}
+							}
+						child {
+								node {Model Averaging}
+								child {
+										node (dropout) {Dropout}
+									}
+							}
+						child {
+								node {(Neural Architecture Search)}
 							}
 					}
 				child {
@@ -1841,277 +1607,6 @@
 							}
 					}
 			}
-		% child  {
-		% 		node {Neural Networks}
-		% 		% change connections between neurons in a way that output matches as close as possible to the true target y
-		% 		child {
-		% 				node {}
-		% 			}
-		% 	}
-		% child [level distance=50cm] {
-		% 		node {Neural Networks}
-		% 		child {
-		% 				node {Loss/Response}
-		% 				child {
-		% 						node {Misclassification Rate / Accuracy}
-		% 					}
-		% 				child {
-		% 						node {MSE}
-		% 					}
-		% 			}
-		% 		child {
-		% 				node {Regularization Techniques}
-		% 				child {
-		% 						node {Specific to Neural Networks}
-		% 						child {
-		% 								node {Structural and Linearization}
-		% 								child {
-		% 										node {Skip connections (Across layers)}
-		% 									}
-		% 								child {
-		% 										node {Residual blocks}
-		% 										child {
-		% 												node {Skip connections from all preceding layers to all succeeding layers}
-		% 											}
-		% 										child {
-		% 												node {Make the gradient flow backwards}
-		% 												child {
-		% 														node {Avoiding vanishing / exploding gradient}
-		% 													}
-		% 											}
-		% 										child {
-		% 												node {Network can learn not use some layers by using identity layers}
-		% 											}
-		% 									}
-		% 								child {
-		% 										node {Shake shake}
-		% 										child {
-		% 												node {Randomly weight the paths for each mini-batch}
-		% 											}
-		% 									}
-		% 							}
-		% 						child {
-		% 								node {Model Averaging}
-		% 								child {
-		% 										node {Dropout}
-		% 										child {
-		% 												node {Bagging of random neural subnetworks}
-		% 												child {
-		% 														node {Aims at reducing variance (error) of model}
-		% 													}
-		% 											}
-		% 										child {
-		% 												node {Dropout node multiplying output by zero}
-		% 												child {
-		% 														node {Only input and hidden nodes dropped out}
-		% 													}
-		% 												child {
-		% 														node {Input unit included probability 0.8}
-		% 													}
-		% 												child {
-		% 														node {Hidden unit probability 0.5}
-		% 													}
-		% 												child {
-		% 														node {Computations}
-		% 														child {
-		% 																node {Forward computation}
-		% 															}
-		% 														child {
-		% 																node {Back-propagation}
-		% 																child {
-		% 																		node {As usual multiplying activations by mask}
-		% 																	}
-		% 															}
-		% 														child {
-		% 																node {Inference}
-		% 															}
-		% 													}
-		% 											}
-		% 									}
-		% 							}
-		% 					}
-		% 				child [level distance = 23cm] {
-		% 						node {General methods}
-		% 						child {
-		% 								node {Weight decay}
-		% 								child {
-		% 										node {L2 Regularization}
-		% 										child {
-		% 												node {See older NN slides}
-		% 											}
-		% 									}
-		% 								child {
-		% 										node {L1 Regularization}
-		% 										child {
-		% 												node {See older NN slides}
-		% 											}
-		% 									}
-		% 							}
-		% 						child {
-		% 								node {Data Augmentation}
-		% 								child {
-		% 										node {Apply random data augmentation online}
-		% 										child {
-		% 												node {Create different version of same sample at different epochs}
-		% 											}
-		% 										child {
-		% 												node {Methods}
-		% 												child {
-		% 														node {Domain-specific manual policies}
-		% 														child {
-		% 																node {Cutout }
-		% 															}
-		% 														child {
-		% 																node {Mixup}
-		% 															}
-		% 														child {
-		% 																node {Cutmix}
-		% 															}
-		% 													}
-		% 												child {
-		% 														node {Trainable (data) augmentation policies/algorithms}
-		% 														child {
-		% 																node {A policy consists of 5 sub-policies}
-		% 																child {
-		% 																		node {Each sub-policy 2 image operations applied in sequence}
-		% 																	}
-		% 															}
-		% 														child [level distance = 10cm] {
-		% 																node {Image Augmentation Operations}
-		% 																child {
-		% 																		node {ShearX/Y}
-		% 																	}
-		% 																child {
-		% 																		node {TranslateX/Y}
-		% 																	}
-		% 																child {
-		% 																		node {Rotate}
-		% 																	}
-		% 																child {
-		% 																		node {AutoContrast}
-		% 																	}
-		% 																child {
-		% 																		node {Invert}
-		% 																	}
-		% 																child {
-		% 																		node {Equalize}
-		% 																	}
-		% 																child {
-		% 																		node {Solarize}
-		% 																	}
-		% 																child {
-		% 																		node {Posterize}
-		% 																	}
-		% 																child {
-		% 																		node {Contrast}
-		% 																	}
-		% 																child {
-		% 																		node {Color}
-		% 																	}
-		% 																child {
-		% 																		node {Brightness}
-		% 																	}
-		% 																child {
-		% 																		node {Sharpness}
-		% 																	}
-		% 																child {
-		% 																		node {Cutout}
-		% 																	}
-		% 																child {
-		% 																		node {Sample Pairing}
-		% 																	}
-		% 															}
-		% 													}
-		% 											}
-		% 									}
-		% 							}
-		% 						child {
-		% 								node {Learning Dynamics}
-		% 								child {
-		% 										node {Early Stopping as a Regularizer}
-		% 										child {
-		% 												node {See older NN slides}
-		% 											}
-		% 									}
-		% 							}
-		% 					}
-		% 			}
-		% 		child {
-		% 				node {Activation}
-		% 				child {
-		% 						node {Types}
-		% 						child {
-		% 								node {Rectified linear unit (ReLU)}
-		% 							}
-		% 						child {
-		% 								node {Logistic Sigmoid Sigmoid (Binary Classification)}
-		% 							}
-		% 						child {
-		% 								node {Softmax (Multi-Class Classification)}
-		% 							}
-		% 						child {
-		% 								node {Hyperbolic Tangent}
-		% 							}
-		% 						child {
-		% 								node {Linear}
-		% 							}
-		% 					}
-		% 				child {
-		% 						node {Importance of Non-linear activations}
-		% 					}
-		% 				child {
-		% 						node {Nonlinear Mapping into new space (hidden layers) for nonlinear problems}
-		% 					}
-		% 			}
-		% 		child {
-		% 				node {Optimizing Neural Networks}
-		% 				child {
-		% 						node {Inference}
-		% 					}
-		% 				child {
-		% 						node {Tranining}
-		% 						child {
-		% 								node {Compute gradients}
-		% 								child {
-		% 										node {Backpropagation}
-		% 										child {
-		% 												node {Algorithm}
-		% 											}
-		% 										child {
-		% 												node {Forward pass}
-		% 											}
-		% 										child {
-		% 												node {Backward pass}
-		% 											}
-		% 									}
-		% 								child {
-		% 										node {Chain-rule of Calculus}
-		% 										child {
-		% 												node {Fuction composition because of feedforward}
-		% 											}
-		% 									}
-		% 								child {
-		% 										node {Total Derivative}
-		% 									}
-		% 							}
-		% 						child {
-		% 								node {Update weights}
-		% 								child {
-		% 										node {SGD for Neural Networks}
-		% 										child {
-		% 												node {Algorithm}
-		% 											}
-		% 									}
-		% 							}
-		% 						% child {
-		% 						% 		node {Gradient Descent}
-		% 						% 	}
-		% 						% child {
-		% 						% 		node {Stochastic Gradient Descent}
-		% 						% 	}
-		% 					}
-		% 			}
-		% 	}
 		}
 		}
 		child {
@@ -2122,24 +1617,6 @@
 								node (estimated target minus ground truth) {Estimated target $\hat y$ - Ground-truth target $y$}
 								child {
 										node {Maximum Likelihood Estimation
-												% \resizebox{\textwidth}{!}{
-												% 	\begin{minipage}[t]{12cm}
-												% 		\begin{itemize}
-												% 			\item probabilistic logic behind loss functions
-												% 			\item minimizing least square error is equivalent to maximizing likelihood of observing the target given the data
-												% 			\item and the mean of the errors is located at the estimated target
-												% 			\item on average the highest density would be at the predicted value and then there's where you would have the smallest likelihood for an error, at the point of the estimation
-												% 			\item mean is prediction of this linear model
-												% 			\item mean value of predictions is going to be output of prediction model
-												% 			\item likelihood of predicting y given X and the prediction model should be as large as possible
-												% 			\item should be large on all the measurements that we have seen so it should be large on the first data point given the first observed features and the predictions of a model and it should be high on the second data point it should be high as well on all the other data points
-												% 			\item have to maximize this likelihood in order for our prediction model to be accurate in estimating y
-												% 			\item average value in normal distribution replaced with output of prediction model
-												% 			\item as you see here maximizing the probabilistic likelihood of observing the targets if you assume that the errors are normally distributed that is equivalent to just learning a prediction model that minimizes the least square error
-												% 			\item what does it mean to optimize the prediction model to minimize the sum of the losses of observed instances in other words to minimize the amount of error that we are doing in our prediction
-												% 		\end{itemize}
-												% 	\end{minipage}
-												% }
 											}
 									}
 								child {
@@ -2157,22 +1634,6 @@
 												node {Logloss}
 												child {
 														node {Softmax
-																% \resizebox{\textwidth}{!}{
-																% 	\begin{minipage}[t]{12cm}
-																% 		\begin{itemize}
-																% 			\item re-exrpess target variable as being as many binary targets as there categories
-																% 			\item learrn one prediction model for every category
-																% 			\item then connect together with (this) formula
-																% 			\item prediction for class c and then normalize by sum of probabilies of all classes together
-																% 			\item that ensures us that we have probability distribution of C
-																% 			\item sum of probabilities is going to sum to 1
-																% 			\item each between 0 and 1, because every component smaller than sum of all components
-																% 			\item how well does proability for the 6th class match the true target of the sixth class, is either 1 or 0 because of definition above
-																% 			\item if is 1 then want this log part be close to 0 by making ync be close to 1
-																% 			\item this means this loss function is going to be small only in cases where prediction matches exactly the case of the instance of the class where it is one
-																% 		\end{itemize}
-																% 	\end{minipage}
-																% }
 															}
 													}
 											}
@@ -2180,13 +1641,6 @@
 												node {Binary Classification}
 												child {
 														node {Logistic Loss
-																% \resizebox{\textwidth}{!}{
-																% 	\begin{minipage}[t]{12cm}
-																% 		\begin{itemize}
-																% 			\item if is 1, left handside, log($\hat y$) goes to 0 if $\hat y$ goes to 1, for values that go towards 0 the logarithm will be negative quantity, - in front, so large positive value, measure high error in cases where $\hat y$ is 0 and true y was one, in cases where true y was 1 and $\hat y$ was close to 1, log(1) comes 0, so do 0 error
-																% 		\end{itemize}
-																% 	\end{minipage}
-																% }
 															}
 													}
 												child {
@@ -2195,22 +1649,217 @@
 											}
 									}
 							}
+						child [level distance=40cm] {
+								node {Generalization Performance}
+								child {
+										node {Underfitting}
+										child {
+												node {Model fails to fit the training data}
+											}
+										child {
+												node {Both training and test errors descend, but get stuck}
+											}
+									}
+								child {
+										node {Generalizing}
+										child {
+												node {Model is accurate on test data}
+											}
+										child {
+												node {Both training and test errors descend and approach a minimum}
+											}
+										child {
+												node (generalization methods) {Generalization Methods}
+											}
+									}
+								child {
+										node {Overfitting}
+										child {
+												node {Model perfectly fits training data (incl. noise)}
+											}
+										child {
+												node {Training error getting smaller, while test error increases}
+											}
+									}
+								child {
+										node {Training data and Test data}
+									}
+							}
 					}
 			}
-		child [level distance=100cm] {
-				node (regularisation) {Regularisation}
+		child [level distance=20cm] {
+				node (ensembles) {Ensembles}
+				child {
+						node {Reduces variance}
+					}
+        child {
+          node {Aggregations of multiple base models}
+        }
+				child [level distance=15cm] {
+						node {Bagging}
+						child {
+								node {Short for Bootstrap AGGregatING}
+							}
+            child {
+              node {Average predictions of sub-models, trained on bootstrap datasets sampled with replacement from original training data}
+            }
+						child {
+								node {Sampling with replacement}
+								child {
+										node {Reduce the final model’s variance}
+										child {
+												node {Without affecting the bias much}
+											}
+									}
+							}
+						child {
+								node {Requirements}
+								child {
+										node {Low bias individual models}
+									}
+								child {
+										node {Uncorrelated individual models}
+										child {
+												node {The errors of the models should be uncorrelated}
+												child {
+														node {So that the overall error gets reduced}
+													}
+											}
+									}
+							}
+						child {
+								node {Random Forests}
+								child {
+										node {Bagged Trees with randomness in terms of the split conditions}
+									}
+								child {
+										node {Algoritm}
+									}
+								child {
+										node {Bagged Trees}
+										child {
+												node {Low bias but might be correlated}
+												child {
+														node {Further decorrelation by randomizing choice of features to split upon}
+													}
+											}
+									}
+							}
+						child {
+								node {Uncertainty and Out-of-Bag Error}
+								child {
+										node {Variance of an ensemble can be used as uncertainty}
+									}
+								child {
+										node {Bagged ensembles produce estimate of test error via out-of-bag training error}
+										child {
+												node {$S(x_n)$ is set of models that not see sample $x_n$ during training}
+											}
+									}
+							}
+					}
+          child [level distance=70cm] {
+						node {Boosting}
+            child {
+              node {Sequentially train a weak model that tries to fix the problems of all previous ones, while keeping them fixed}
+              child {
+                node {Resulting ensemble is the weighted sum of the sub-models}
+              }
+            }
+						child {
+								node {Aggregate high-bias models to create a low-bias ensemble}
+								child {
+										node {Train parameters next model keeping past models fixed}
+									}
+							}
+            child {
+              node {$\alpha$ is coefficient that scales contribution of each weak model in ensemble}
+            }
+						child {
+								node {Loss can be linearly approximated via the first-order Taylor expansion}
+							}
+						child {
+								node {Algorithm: Gradient Boosting}
+                child {
+                  node {$\alpha$ represents a learning rate (shrinkage parameter)}
+                  child {
+                    node {Negative gradient of the loss, its contribution is scaled by $\alpha$}
+                  }
+                  child {
+                    node {Prevents overfitting by making smaller, controlled updates}
+                  }
+                }
+                child {
+                  node {Uses the gradient to improve a series of models sequentially}
+                }
+                child {
+                  node {Errors from previous models are identified by gradients}
+                }
+								child {
+										node {Algorithm: AdaBoost}
+                    child {
+                      node {$\alpha$ is model specific}
+                      child {
+                        node {$\varepsilon_k$ is the weighted error rate of model $f^{(k)}$}
+                      }
+                      child {
+                        node {Weak models with low error get larger $\alpha$, and those with error close to random guessing get almost no weight}
+                      }
+                      child {
+                        node {Every one of $N$ training points $(x_i, y_i)$ has its own weight $w_i$}
+                      }
+                      child {
+                        node {Sign: Weak learners combined into a weighted real-valued score, but classification task requires discrete label ($-1$ or $+1$)}
+                      }
+                    }
+                    child {
+                      node {Particular loss function weighting points misclassified by previous models higher than correctly classified}
+                    }
+                    child {
+                      node {Errors from previous models are identified by high weights}
+                    }
+									}
+							}
+              child [level distance=30cm] {
+								node {Gradient Boosted Decision Trees}
+								child {
+										node {Hyperparameters}
+										child {
+												node {$\gamma$ is the weight of the penalty on the number of leaves}
+											}
+										child {
+												node {$\lambda$ is the weight of the penalty on the weights}
+											}
+									}
+								child {
+										node {Complexity}
+									}
+								child {
+										node {Advantages}
+										child {
+												node {No need for data preprocessing}
+											}
+										child {
+												node {Work well with categorical features}
+											}
+										child {
+												node {Ability to work with arbitrary loss functions}
+											}
+										child {
+												node {Very low-bias, yet relatively low-variance}
+											}
+										child {
+												node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
+											}
+									}
+							}
+					}
+			}
+		child [level distance=20cm] {
+				node (regularization) {Regularization}
 				child {
 						node {Increase bias and reduce variance to decrease overall test error}
 					}
-				% child {
-				% 		node {Add penalty term to empirical risk}
-				% 	}
-				% child {
-				% 		node {Combining Regularizers as a Cocktail}
-				% 		child {
-				% 				node {Better than singular regularizer}
-				% 			}
-				% 	}
 				child {
 						node {Bias-Variance Tradeoff}
 						child {
@@ -2281,7 +1930,7 @@
 													}
 											}
 									}
-								child [level distance=15cm] {
+								child [level distance=10cm] {
 										node {Model complexity will either}
 										child {
 												node {Increase bias}
@@ -2301,151 +1950,28 @@
 									}
 							}
 					}
-				child [level distance=40cm] {
-						node {Generalization Performance}
-						child {
-								node {Underfitting}
-								child {
-										node {Model fails to fit the training data}
-									}
-								child {
-										node {Both training and test errors descend, but get stuck}
-									}
-							}
-						child {
-								node {Generalizing}
-								child {
-										node {Model is accurate on test data}
-									}
-								child {
-										node {Both training and test errors descend and approach a minimum}
-									}
-							}
-						child {
-								node {Overfitting}
-								child {
-										node {Model perfectly fits training data (incl. noise)}
-									}
-								child {
-										node {Training error getting smaller, while test error increases}
-									}
-							}
-						child {
-								node {Training data and Test data}
-							}
-					}
-				child {
+				child [level distance=30cm] {
 						node {General Regularization Techniques}
-						child [level distance=15cm] {
-								node {Ensembling, Ensembles}
-								child {
-										node {Reduces variance}
-									}
-								child [level distance=15cm] {
-										node {Bagging}
-										child {
-												node {Short for Bootstrap AGGregatING}
-											}
-										child {
-												node {Sampling with replacement}
-												child {
-														node {Reduce the final model’s variance}
-													}
-												child {
-														node {Without affecting the bias much}
-													}
-											}
-										child {
-												node {Requirements}
-												child {
-														node {Low bias individual models}
-													}
-												child {
-														node {Uncorrelated individual models}
-														child {
-																node {The errors of the models should be uncorrelated}
-																child {
-																		node {So that the overall error gets reduced}
-																	}
-															}
-													}
-												child {
-														node {Bagged Trees}
-														child {
-																node {Low bias but might be correlated}
-															}
-														child {
-																node {Decorrelation by randomizing choice of features to split upon}
-															}
-													}
-												child {
-														node {Random Forests}
-														child {
-																node {Randomness in terms of the split conditions}
-															}
-														child {
-																node {Algoritm}
-															}
-													}
-											}
-									}
-								child {
-										node {Boosting}
-										child {
-												node {Aggregate high-bias models to create a low-bias ensemble}
-												child {
-														node {Train parameters next model keeping past models fixed}
-													}
-											}
-										child {
-												node {Loss can be linearly approximated via the first-order Taylor expansion}
-											}
-										child {
-												node {Algorithm: Gradient Boosting}
-											}
-										child {
-												node {Algorithm: AdaBoost}
-											}
-										child {
-												node {Gradient Boosted Decision Trees}
-												child {
-														node {Hyperparameters}
-														child {
-																node {$\gamma$ is the weight of the penalty on the number of leaves}
-															}
-														child {
-																node {$\lambda$ is the weight of the penalty on the weights}
-															}
-													}
-												child {
-														node {Complexity}
-													}
-												child {
-														node {Advantages}
-														child {
-																node {No need for data preprocessing}
-															}
-														child {
-																node {Work well with categorical features}
-															}
-														child {
-																node {Ability to work with arbitrary loss functions}
-															}
-														child {
-																node {Very low-bias, yet relatively low-variance}
-															}
-														child {
-																node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
-															}
-													}
-											}
-									}
-								child {
-										node {Dropout}
-									}
-							}
 						child {
-								node (weight decay 2) {Weight decay}
+								node (weight decay) {Weight decay}
+								child {
+										node {L1}
+										child {
+												node {Derivative: Case destinction 1 and -1}
+												child {
+														node {Include 0 into negative to have applicable case for all w}
+													}
+											}
+									}
+								child {
+										node {L2}
+										child {
+												node {When multiply alpha/2 by derivative, becomes just alpha}
+											}
+									}
+								child {
+										node {Have derivative of empirical risk and of regularization term}
+									}
 								child {
 										node {Add penalty term to empirical risk}
 										child {
@@ -2463,22 +1989,37 @@
 														node {Circle bigger, model less constrained, does overfit more}
 													}
 											}
-										% child {
-										%   node {Compromise close to loss function minimum and lying within radius of weights}
-										% }
 										child {
 												node {Within permissible range of regularization want find point close to minimum as possible}
 											}
 									}
 							}
 						child {
+								node {Data Augmentation}
+							}
+						child {
+								node {Learning Dynamics}
+								child {
+										node {Early stopping}
+									}
+								child {
+										node {Learning rate adatpion}
+									}
+								child {
+										node {Initial learning rate schedulers}
+									}
+							}
+						child {
+								node {Model Averaging}
+								child {
+										node {Stochastic Weight Averaging}
+									}
+								child {
+										node {Snapshot Ensembles}
+									}
+							}
+						child {
 								node {Universal, applied to Linear Models, Polynomial Regression Models, NN's}
-							}
-						child {
-								node {L1}
-							}
-						child {
-								node {L2}
 							}
 					}
 			}
@@ -2688,36 +2229,9 @@
 			}
 		child {
 				node {Design Cycle
-						% \resizebox{\textwidth}{!}{
-						% 	\begin{minipage}[t]{14cm}
-						% 		\begin{itemize}
-						% 			\item those three steps here the steps before applying machine learning are actually crucial they're crucial because if you don't do them appropriately then your machine learning models will will not be very successful they will not be very accurate so you must clean the data well you must do diligent feature extraction and encoding and you must apply feature selection if it is necessary
-						% 			\item we can merge those four steps (at the beginnning) in what we call end to end learning for example deep learning is typically one way of doing of doing end-to-end learning still in deep learning sometimes you have to do pre-processing but in essence the concept of end-to-end learning is that you provide the data in a in an as original manner as possible as you collected and then the feature extraction and the feature selection is done by the same model that does the prediction
-						% 			\item ... so what it means is that the prediction it means is that the prediction model incorporates it the feature representation
-						% 			\item ... which means it incorporates the extraction and the selection steps together
-						% 			\item sometimes the prediction model by the nature of the way it is designed for example as a deep neural network might not need a lot of pre-processing so if you have lots of data and if your model is end to end learn end to end it is set up as an endtoend learning then you might need little pre-processing but pre-processing is is often used in practice because it improves accuracy
-						% 		\end{itemize}
-						% 		\begin{center}
-						% 			\vspace{-0.35cm}
-						% 			\color{SwitchColor}\rule{13cm}{0.25mm}
-						% 		\end{center}
-						% 		\begin{itemize}
-						% 			\item the evaluation and model evaluation and model selection can also be more generic than that well in instance can be what if I don't know what machine learning algorithm do I use that is the part that we are we are actually also figuring out here so we can try a different machine learning algorithm and that means we move back to this step try this machine learning algorithm train it evaluate it measure its accuracy and calibrate its hyperparameters or its settings find the best settings for an algorithm and then you can try another algorithm uh maybe try first a linear model and see if you calibrate the the hyper parameters what accuracy you achieve then maybe you try a decision tree then maybe you try a neural network then maybe you try support Vector machine and in the end you keep the one that that works the best
-						% 		\end{itemize}
-						% 	\end{minipage}
-						% }
 					}
 				child {
 						node {1. Preprocessing
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{12cm}
-								% 		\begin{itemize}
-								% 			\item in real life not offered clean data like matrix x that was in the dimensionality of n instances and m features, data scattered in relational data base that is found in different tables, find out way how to join all the features with primary keys of the tables
-								% 			\item unbalanced target, cancer detection, 99% don't have it, very few cases to learn to classify the cancer, oversample minorty class, donwsample majority class
-								% 			\item standardize data, maybe one column is normally distributed, maybe other column is not normally distributed, so might want to make all of them have a similar range for example that the column values they are then uh standardized to have a mean zero and a standard deviation of one
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 						child {
 								node {Collectng data}
@@ -2728,16 +2242,6 @@
 					}
 				child {
 						node {2. Feature extraction / encoding
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{12cm}
-								% 		\begin{itemize}
-								% 			\item that you need to convert features which originally are not in a vector format you need to convert them to a vector format
-								% 			\item want to engineer features, use the weight and the height Square in order to create a new feature
-								% 			\item sometimes those features are not uh they are not defined in a continuous
-								% 			\item domain for example you might have uh the city as a feature if you want to for example predict the price of a house and you have the location where the house is actually situated and that could be Berlin or friborg or London and these are not numerical features that you can train a prediction model so you have to convert them to some numerical feature and one way to handle it is the one hot encoding of categorical features so if you have 10 categories then instead of this 10 category features you create 10 different features each being either zero or one for example  location Berlin one it is if it is Berlin zero if it is not so you create one feature per each category and value zero or one if that particular value uh if that particular instance has the respective binary feature or not we call that one hot encoding of categorical features
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 						child {
 								node {Feature extraction}
@@ -2766,56 +2270,18 @@
 					}
 				child {
 						node {3. Feature selection
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{12cm}
-								% 		\begin{itemize}
-								% 			\item we have many settings for the machine learning models and all the settings of those machine learning models which which we need to figure out a way how to handle they are part of the step of evaluation and model selection so we need to select what algorithm do I use how do I set those settings how do I design my experimental protocol with data in order to conduct that
-								% 			\item you might have one feature for every product in your catalog and if you have millions of products well then you have lots of features and in essence sometimes for uh scalability reasons or also for accuracy reason reasons we might want to select only a subset of those features we call that a variable of feature subset selection process
-								% 			\item some algorithms actually do it on their own for example decision trees so the step of feature selection is something that you don't always have to do uh you have to do it depending on what machine learning model you have to use and that comes with experience after you learn the characteristics of the prediction model then you can understand whether they do feature selection or not and then you decide whether to apply this step or not in the pipeline of Designing machine learning models
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 					}
 				child {
 						node {4. Machine learning
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{12cm}
-								% 		\begin{itemize}
-								% 			\item once you have finally a set of relevant features that have been extracted and pre-processed then you can train a prediction model that is the Box called that we are labeled labeling as machine learning that's the part where you define a prediction model and also you train the parameters of the prediction model in order to accurately estimate a Target variable
-								% 			\item designing prediction models and actually optimizing the parameters of the prediction models in order to minimize a loss function
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 					}
 				child {
 						node (evalmodsel) {5. Evaluation \& model selection
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{16cm}
-								% 		\begin{itemize}
-								% 			\item we have to make sure that the models we train are carefully calibrated to achieve the highest accuracy
-								% 			\item for example if you work with neuron networks you want to control the capacity the number of layers so how deep this networks have to be for some simpler tasks they don't have to be very deep for very complex tasks they need to be very deep so depending on the complexity of the task also the complexity of the prediction model has to be adapted and adapted means it needs to be configured
-								% 			\item so this step is the step where we configure actually the settings of a prediction model which we otherwise call them hyperparameters
-								% 			\item so remember prediction model has has parameters those are the thetas that we use to make prediction for instance in the linear model or the polinomial model
-								% 			\item hyperparameters is a term that means those are parameters but they are not used to make prediction instead they are settings of the of the prediction model that's why we use
-								% 			\item if you carefully select the hyper parameters then you achieve what we call generalization that the model can actually accurately predict the target value of new data
-								% 			\item we don't want just a model that can correctly or accurately estimate the target variable of our previous collected data that is important of course because we learn from it however we don't want to to overfeed or we don't want to to actually feed to the noise of the recorded data so we want the model to be successful in the future because that's the purpose of machine learning we learn from the past so we can be accurate in the future and that is what we call generalization that we can generalize to new instances or generalize to Future instances and we we can design experiments how to control that we we are actually generalizing well to unseen instances
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 					}
 				child {
 						node {6. Postprocessing
-								% \resizebox{\textwidth}{!}{
-								% 	\begin{minipage}[t]{12cm}
-								% 		\begin{itemize}
-								% 			\item if you have for example a sensitive attribute so let's say your attributes were were from X1 X2 until XM and actually one of those attributes is sensitive it could be for instance Ray so what what you want is is you want that the probability of estimating the target given if X2 the race is maybe is maybe africanamerican that this probability of Y given um it's equal to the probability of Y if X2 is maybe white American so you want to make sure that the that the estimations are done in way that those two probabilities U are as close as possible and that you can do by actually uh updating or um modifying the predictions in a way that that such fairness criterias hold
-								% 			\item and for example some models don't yield  probabilities for example you might have models such as let's say support Vector machines which don't yield probababilities so you might want to adapt the predictions in a way that that they achieve probabilities and that is another post-processing step
-								% 		\end{itemize}
-								% 	\end{minipage}
-								% }
 							}
 					}
 			}
@@ -2825,8 +2291,6 @@
 	\end{mindmapcontent}
 	\begin{edges}
 		\edge{loss}{target}
-		% \edge{expected prediction model}{expected value}
-		% \edge{expected test error}{expected value}
 		\edge{hyperparameters}{evalmodsel}
 		\edge{expected prediction model}{bias}
 		\edge{estimated target minus ground truth}{prediction models}
@@ -2834,9 +2298,17 @@
 		\edge{no activation}{linear}
 		\edge{binary}{sigmoid}
 		\edge{multi-class}{softmax}
-		\edge{weight decay 2}{weight decay}
-		\edge{loss}{regularisation}
+		\edge{weight decay}{weight decay}
+		\edge{regularization}{regularization nns}
+		\edge{regularization}{regularization for dts}
+		\edge{families of regularization techniques for dfn}{weight decay}
+		\edge{structural}{skip connections}
+		\edge{ensembling}{dropout}
+		\edge{batch normalization}{implicit}
+		\edge{generalization methods}{regularization}
+		\edge{generalization methods}{ensembles}
+		\edge{dropout}{ensembles}
+		\edge{dropout}{regularization}
 	\end{edges}
-	% \annotation{test}{annotation}
 \end{mindmap}
 \end{document}

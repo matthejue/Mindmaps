@@ -385,672 +385,1264 @@
 					}
 			}
 		child {
-		node {Decision Trees}
-		child {
-				node {Pros and Cons}
+				node {Decision Trees}
 				child {
-						node {Pros}
+						node {Pros and Cons}
 						child {
-								node {Flexible framework with exchangeable components}
+								node {Pros}
 								child {
-										node {Splitting criterion}
-									}
-								child {
-										node {Leaf model}
-									}
-								child {
-										node {Type of split}
-									}
-							}
-						child {
-								node {Interpretability}
-								child {
-										node {Can check decisions, understand better how works}
-									}
-							}
-						child {
-								node {Handle categorical input values natively}
-							}
-						child {
-								node {Handle unimportant features well}
-								child {
-										node {Feature that does not reduce purity not used in decision tree}
-									}
-							}
-						child {
-								node {Scalable for large datasets}
-							}
-					}
-				child {
-						node {Cons}
-						child {
-								node {Tend to overfit}
-							}
-						child {
-								node {Deterministic, i.e. not suitable for some ensemble methods}
-							}
-					}
-			}
-		child [level distance=10cm] {
-				node {Properties}
-				child {
-						node {Change data $\rightarrow$ get very different tree}
-					}
-				child {
-						node {Very expressive models}
-					}
-				child {
-						node {High variance model}
-					}
-				child {
-						node {Low bias model}
-					}
-			}
-		child [level distance=20cm] {
-				node (hyperparameters) {Hyperparameters}
-				child {
-						node {Minimum number of samples per split}
-					}
-				child {
-						node {Minimum number of samples in a leaf (min\_leaf)}
-					}
-				child {
-						node {Maximal depth of the tree (max\_depth)}
-					}
-				child {
-						node {Total number of nodes}
-					}
-				child {
-						node {Leaf model (weak learner; here constant)}
-					}
-				child {
-						node {Split criterion}
-					}
-			}
-		child {
-				node {Parameteres}
-				child {
-						node {Regions $R_1, \ldots, R_J$}
-						child {
-								node {One comes for free}
-							}
-					}
-				child {
-						node {Constant prediction models $\hat y^{(R_1)}, \ldots, \hat y^{(R_j)}$}
-					}
-				child {
-						node {Step Function written as tree}
-						child {
-								node {Feature space partitioned into regions $R_j$}
-								child {
-										node {Each region $R_j$ own prediction value}
+										node {Flexible framework with exchangeable components}
 										child {
-												node {Subset of data that belongs to that region}
-												child {
-														node {Region could also be points that are not part of dataset}
-														child {
-																node {Make computations on our dataset, so subset}
-															}
-													}
+												node {Splitting criterion}
 											}
 										child {
-												node {Formula}
+												node {Leaf model}
 											}
 										child {
-												node {Leaf model / Aggregation operation}
-												child {
-														node {Mean for Regression}
-													}
-												child {
-														node {Majority vote or probability of data in the leaf (full distribution) for Classification}
-													}
+												node {Type of split}
 											}
 									}
 								child {
-										node {$>1$ dimension feature) space}
+										node {Interpretability}
 										child {
-												node {In decision tree, split after $x_1$ and then $x_2$}
-											}
-										child {
-												node {In 2D both axis are features, color dots target axis}
-											}
-									}
-							}
-						child {
-								node {Components of tree}
-								child {
-										node {Decision node}
-										child {
-												node {Every step in function has a decision node}
+												node {Can check decisions, understand better how works}
 											}
 									}
 								child {
-										node {Prediction leaf}
+										node {Handle categorical input values natively}
+									}
+								child {
+										node {Handle unimportant features well}
 										child {
-												node {Every flat horizonntal region has leaf that makes prediction}
+												node {Feature that does not reduce purity not used in decision tree}
 											}
 									}
-							}
-						child {
-								node {K split just as series of binary splits}
 								child {
-										node {Binary splits easier computed and stored}
+										node {Scalable for large datasets}
 									}
 							}
 						child {
-								node {Depth and height of tree}
+								node {Cons}
+								child {
+										node {Tend to overfit}
+									}
+								child {
+										node {Deterministic, i.e. not suitable for some ensemble methods}
+									}
 							}
 					}
-			}
-		child {
-				node {Tree prediction}
-				child {
-						node {Formula}
+				child [level distance=10cm] {
+						node {Properties}
 						child {
-								node {Indicator function}
-							}
-					}
-				child {
-						node {Computational complexity}
-						child {
-								node {Best case: $O(log(N))$}
+								node {Change data $\rightarrow$ get very different tree}
 							}
 						child {
-								node {Worst case: $O(N)$}
-							}
-					}
-			}
-		child [level distance=30cm] {
-				node {Choosing splits that maximize purity}
-				child {
-						node {CART Algorithm}
-						child {
-								node {Build trees with more than 1 decision node}
-								child {
-										node {For training decision trees}
-									}
+								node {Very expressive models}
 							}
 						child {
-								node {Exhaustive Search accross all Decision Splits: $SearchSplit(D)$}
-								child {
-										node {Argmax Formula}
-									}
-								child {
-										node {Runtime complexity is $O(N^2M)$ if naively implemented}
-										child {
-												node {$N$ many midpoints, num obervations}
-												child {
-														node {For several features one adds them up}
-													}
-											}
-										child {
-												node {$M$ many features}
-											}
-										child {
-												node {Check condition for all $N$ points}
-											}
-										child {
-												node {In CARD algoritm improvement used}
-											}
-									}
+								node {High variance model}
 							}
 						child {
-								node {Computational complexity of Fitting}
-								child {
-										node {Best case: $O(M\cdot N\cdot log(N))$}
-										child {
-												node {Pay $O(M\cdot N)$ at each of $log(N)$ levels}
-											}
-									}
-								child {
-										node {Worst case: $O(M\cdot N^2)$}
-									}
-								child {
-										node {Shift point from one subtree to other one}
-										child {
-												node {Don't need recompute full impurity of new created left and right subtrees}
-											}
-										child {
-												node {Classification: Remove 1 point from histogram on right and add it to histogram on the left}
-											}
-										child {
-												node {Regression: Substract this residual from left subtree and add to hight subtree}
-											}
-									}
+								node {Low bias model}
 							}
 					}
 				child [level distance=20cm] {
-						node {Gain in purity $I(x \le v)$}
+						node (hyperparameters) {Hyperparameters}
 						child {
-								node {$\lvert D\rvert\cdot H(D) - (\lvert D^{(L)}\rvert\cdot H(D^{(L)}) + \lvert D^{(R)}\rvert\cdot H(D^{(R)}))$}
-								child {
-										node {Maximize difference impurity before and after split}
-									}
-								child {
-										node {Impurity after split should be as small as possible}
-									}
-								child {
-										node {Balance between measuring purity split and sizes of subsets of data that belong to each of the splits}
-										child {
-												node {Capture effect more importance to subsets that have more elements}
-												child {
-														node {Multiply withh size of the sets}
-													}
-											}
-									}
+								node {Minimum number of samples per split}
 							}
 						child {
-								node {Impurity $H(D)$}
+								node {Minimum number of samples in a leaf (min\_leaf)}
+							}
+						child {
+								node {Maximal depth of the tree (max\_depth)}
+							}
+						child {
+								node {Total number of nodes}
+							}
+						child {
+								node {Leaf model (weak learner; here constant)}
 							}
 						child {
 								node {Split criterion}
+							}
+					}
+				child {
+						node {Parameteres}
+						child {
+								node {Regions $R_1, \ldots, R_J$}
 								child {
-										node {Variance reduction (minimum variance) for Regression Tree}
+										node {One comes for free}
+									}
+							}
+						child {
+								node {Constant prediction models $\hat y^{(R_1)}, \ldots, \hat y^{(R_j)}$}
+							}
+						child {
+								node {Step Function written as tree}
+								child {
+										node {Feature space partitioned into regions $R_j$}
 										child {
-												node {Variance: $\lvert D\rvert \cdot H(D) = \sum_{(x, y)\in D} (y - \hat y(x))^2$}
-														child {
-																node {Impurity of subtree is residual between mean and observations (variance)}
-																child {
-																		node {Multiplied by size is just counting residuals}
-																	}
-															}
-													}
-											}
-										child [level distance=10cm] {
-												node {(Maximum) information gain for Decision (Classification) Tree}
+												node {Each region $R_j$ own prediction value}
 												child {
-														node {Entropy: $H(V) = -\sum_{k=1}^{K} p(v_k) \cdot log_2(p(v_k))$}
+														node {Subset of data that belongs to that region}
 														child {
-																node {$\lvert D\rvert \cdot H(D) = -N \sum_{v_k\in V} p(v_k)\cdot log_2(p(v_k))$}
-															}
-														child {
-																node {K possible outcomes $v_k$}
-															}
-														child {
-																node {Discrete random variable $V$}
-															}
-														child {
-																node {Worst case: All probabilities for target variable outcomes is same}
-															}
-														child {
-																node {Best case: All poins belong to 1 outcome}
+																node {Region could also be points that are not part of dataset}
 																child {
-																		node {Can't compute logarithm of 0, lim going to 0}
+																		node {Make computations on our dataset, so subset}
 																	}
 															}
-														child [level distance=10cm] {
-																node {Difference of a distribution to worst case scenario where all outcomes same probability}
+													}
+												child {
+														node {Formula}
+													}
+												child {
+														node {Leaf model / Aggregation operation}
+														child {
+																node {Mean for Regression}
 															}
 														child {
-																node {Derivation over Kullback–Leibler (KL) divergence}
-																child {
-																		node {Measures how different 2 distributions are}
-																	}
+																node {Majority vote or probability of data in the leaf (full distribution) for Classification}
 															}
 													}
 											}
 										child {
-												node {Gini index}
+												node {$>1$ dimension feature) space}
+												child {
+														node {In decision tree, split after $x_1$ and then $x_2$}
+													}
+												child {
+														node {In 2D both axis are features, color dots target axis}
+													}
 											}
+									}
+								child {
+										node {Components of tree}
+										child {
+												node {Decision node}
+												child {
+														node {Every step in function has a decision node}
+													}
+											}
+										child {
+												node {Prediction leaf}
+												child {
+														node {Every flat horizonntal region has leaf that makes prediction}
+													}
+											}
+									}
+								child {
+										node {K split just as series of binary splits}
+										child {
+												node {Binary splits easier computed and stored}
+											}
+									}
+								child {
+										node {Depth and height of tree}
 									}
 							}
 					}
 				child {
-						node (regularization for dts) {Regularization (for Decision Trees)}
-						child [level distance=10cm] {
-								node {Single decision tree}
+						node {Tree prediction}
+						child {
+								node {Formula}
 								child {
-										node {Minimum instances per leaf}
-									}
-								child {
-										node {Maximum number of leaves}
-										child {
-												node {Penalize number of leaves}
-												child {
-														node {Too many steps $\approx$ Too many leaves}
-													}
-											}
-									}
-								child {
-										node {Maximum tree depth}
-										child {
-												node {Reduce maximum depth}
-												child {
-														node {Too large step jumps $\approx$ Too large leaves’ output values ($w$)}
-													}
-											}
-									}
-								child {
-										node {Minimum gain for a split}
-									}
-								child {
-										node {Penalty term on leaf outputs}
+										node {Indicator function}
 									}
 							}
 						child {
-								node {Ensemble of decision trees}
+								node {Computational complexity}
 								child {
-										node {Number of trees (steps in boosting)}
+										node {Best case: $O(log(N))$}
 									}
 								child {
-										node {Boosting additive weight}
+										node {Worst case: $O(N)$}
 									}
 							}
 					}
-			}
-		child [level distance=100cm] {
-		node {Deeplearning}
-		child {
-				node {Deep means have lots of these connections between neurons}
-			}
-		child {
-		node {Neural Network Architectures}
-		child [level distance=20cm] {
-				node {Convolutional Neural Networks}
-				child {
-						node {Analogy neural network}
+				child [level distance=30cm] {
+						node {Choosing splits that maximize purity}
 						child {
-								node {CNN: feature maps in, kernels being applied, feature maps out}
+								node {CART Algorithm}
 								child {
-										node {In 3 aspects different}
+										node {Build trees with more than 1 decision node}
 										child {
-												node {Spacity: no full connection between feature maps}
-												child {
-														node {Just have small sectional patch}
-													}
+												node {For training decision trees}
+											}
+									}
+								child {
+										node {Exhaustive Search accross all Decision Splits: $SearchSplit(D)$}
+										child {
+												node {Argmax Formula}
 											}
 										child {
-												node {Receptive field is hierarchically growing: See patterns occur in large portion of original image}
-											}
-										child {
-												node {Reuse same weights, just learn one kernel}
+												node {Runtime complexity is $O(N^2M)$ if naively implemented}
 												child {
-														node {Same weights applied to each those patch locations}
+														node {$N$ many midpoints, num obervations}
+														child {
+																node {For several features one adds them up}
+															}
 													}
 												child {
-														node {Don't learn one weight for every pixel in feature map}
+														node {$M$ many features}
+													}
+												child {
+														node {Check condition for all $N$ points}
+													}
+												child {
+														node {In CARD algoritm improvement used}
 													}
 											}
 									}
-							}
-						child [level distance=8cm] {
-								node {NN: activations in, weights w applied, activations out}
-							}
-					}
-				child [level distance=70cm] {
-						node {Parts}
-						child {
-								node {Image}
 								child {
-										node {Cuz it's 3-dimensional kernel also needs to be}
+										node {Computational complexity of Fitting}
 										child {
-												node {In case of rgb depth 3}
+												node {Best case: $O(M\cdot N\cdot log(N))$}
+												child {
+														node {Pay $O(M\cdot N)$ at each of $log(N)$ levels}
+													}
 											}
 										child {
-												node {Iteration over channel, num rows and columns}
+												node {Worst case: $O(M\cdot N^2)$}
+											}
+										child {
+												node {Shift point from one subtree to other one}
+												child {
+														node {Don't need recompute full impurity of new created left and right subtrees}
+													}
+												child {
+														node {Classification: Remove 1 point from histogram on right and add it to histogram on the left}
+													}
+												child {
+														node {Regression: Substract this residual from left subtree and add to hight subtree}
+													}
 											}
 									}
 							}
 						child [level distance=20cm] {
-								node {Kernels}
+								node {Gain in purity $I(x \le v)$}
 								child {
-										node {Is 3-dimensional structure}
-									}
-								child {
-										node {In case of convolution it's the same convolution being applied}
+										node {$\lvert D\rvert\cdot H(D) - (\lvert D^{(L)}\rvert\cdot H(D^{(L)}) + \lvert D^{(R)}\rvert\cdot H(D^{(R)}))$}
 										child {
-												node {Like NN's but weights of every neuron same}
+												node {Maximize difference impurity before and after split}
+											}
+										child {
+												node {Impurity after split should be as small as possible}
+											}
+										child {
+												node {Balance between measuring purity split and sizes of subsets of data that belong to each of the splits}
 												child {
-														node {In neural networks each neuron has own weights}
+														node {Capture effect more importance to subsets that have more elements}
+														child {
+																node {Multiply withh size of the sets}
+															}
 													}
 											}
+									}
+								child {
+										node {Impurity $H(D)$}
+									}
+								child {
+										node {Split criterion}
 										child {
-												node {Don't look same because input different}
+												node {Variance reduction (minimum variance) for Regression Tree}
+												child {
+														node {Variance: $\lvert D\rvert \cdot H(D) = \sum_{(x, y)\in D} (y - \hat y(x))^2$}
+																child {
+																		node {Impurity of subtree is residual between mean and observations (variance)}
+																		child {
+																				node {Multiplied by size is just counting residuals}
+																			}
+																	}
+															}
+													}
+												child [level distance=10cm] {
+														node {(Maximum) information gain for Decision (Classification) Tree}
+														child {
+																node {Entropy: $H(V) = -\sum_{k=1}^{K} p(v_k) \cdot log_2(p(v_k))$}
+																child {
+																		node {$\lvert D\rvert \cdot H(D) = -N \sum_{v_k\in V} p(v_k)\cdot log_2(p(v_k))$}
+																	}
+																child {
+																		node {K possible outcomes $v_k$}
+																	}
+																child {
+																		node {Discrete random variable $V$}
+																	}
+																child {
+																		node {Worst case: All probabilities for target variable outcomes is same}
+																	}
+																child {
+																		node {Best case: All poins belong to 1 outcome}
+																		child {
+																				node {Can't compute logarithm of 0, lim going to 0}
+																			}
+																	}
+																child [level distance=10cm] {
+																		node {Difference of a distribution to worst case scenario where all outcomes same probability}
+																	}
+																child {
+																		node {Derivation over Kullback–Leibler (KL) divergence}
+																		child {
+																				node {Measures how different 2 distributions are}
+																			}
+																	}
+															}
+													}
+												child {
+														node {Gini index}
+													}
 											}
 									}
+							}
+						child {
+								node (regularization for dts) {Regularization (for Decision Trees)}
 								child [level distance=10cm] {
-										node {Convolution: Sum of pairwise product all cells kernel with cells image}
+										node {Single decision tree}
 										child {
-												node {Connect only to neurons that are located nearby in a patch}
+												node {Minimum instances per leaf}
+											}
+										child {
+												node {Maximum number of leaves}
 												child {
-														node {Extract pattern that have a neighborhood relation}
+														node {Penalize number of leaves}
 														child {
-																node {Extract particular aspects of image (patterns, edges)}
+																node {Too many steps $\approx$ Too many leaves}
+															}
+													}
+											}
+										child {
+												node {Maximum tree depth}
+												child {
+														node {Reduce maximum depth}
+														child {
+																node {Too large step jumps $\approx$ Too large leaves’ output values ($w$)}
+															}
+													}
+											}
+										child {
+												node {Minimum gain for a split}
+											}
+										child {
+												node {Penalty term on leaf outputs}
+											}
+									}
+								child {
+										node {Ensemble of decision trees}
+										child {
+												node {Number of trees (steps in boosting)}
+											}
+										child {
+												node {Boosting additive weight}
+											}
+									}
+							}
+					}
+				child [level distance=100cm] {
+						node {Deeplearning}
+						child {
+								node {Deep means have lots of these connections between neurons}
+							}
+						child {
+								node {Neural Network Architectures}
+								child [level distance=20cm] {
+										node {Convolutional Neural Networks}
+										child {
+												node {Analogy neural network}
+												child {
+														node {CNN: feature maps in, kernels being applied, feature maps out}
+														child {
+																node {In 3 aspects different}
 																child {
-																		node {Detect local presences of spatially related patterns}
+																		node {Spacity: no full connection between feature maps}
+																		child {
+																				node {Just have small sectional patch}
+																			}
+																	}
+																child {
+																		node {Receptive field is hierarchically growing: See patterns occur in large portion of original image}
+																	}
+																child {
+																		node {Reuse same weights, just learn one kernel}
+																		child {
+																				node {Same weights applied to each those patch locations}
+																			}
+																		child {
+																				node {Don't learn one weight for every pixel in feature map}
+																			}
+																	}
+															}
+													}
+												child [level distance=8cm] {
+														node {NN: activations in, weights w applied, activations out}
+													}
+											}
+										child [level distance=60cm] {
+												node {Parts}
+												child {
+														node {Image}
+														child {
+																node {Cuz it's 3-dimensional kernel also needs to be}
+																child {
+																		node {In case of rgb depth 3}
+																	}
+																child {
+																		node {Iteration over channel, num rows and columns}
+																	}
+															}
+													}
+												child [level distance=20cm] {
+														node {Kernels}
+														child {
+																node {Is 3-dimensional structure}
+															}
+														child {
+																node {In case of convolution it's the same convolution being applied}
+																child {
+																		node {Like NN's but weights of every neuron same}
+																		child {
+																				node {In neural networks each neuron has own weights}
+																			}
+																	}
+																child {
+																		node {Don't look same because input different}
+																	}
+															}
+														child [level distance=10cm] {
+																node {Convolution: Sum of pairwise product all cells kernel with cells image}
+																child {
+																		node {Connect only to neurons that are located nearby in a patch}
+																		child {
+																				node {Extract pattern that have a neighborhood relation}
+																				child {
+																						node {Extract particular aspects of image (patterns, edges)}
+																						child {
+																								node {Detect local presences of spatially related patterns}
+																							}
+																					}
+																			}
+																		child {
+																				node {Reducing number of connectivity}
+																				child {
+																						node {Reduces complexity drastically}
+																					}
+																			}
+																		child {
+																				node {Receptive field}
+																				child {
+																						node {If stack many layers on top of each other}
+																						child {
+																								node {A very deep layer has interaction large array of pixels in original representation}
+																							}
+																					}
+																			}
+																	}
+																child {
+																		node {Number of rows and columns after applying convolutional not same as original image}
+																		child {
+																				node {Cannot move convolution outside of borders of image}
+																			}
+																	}
+																child {
+																		node {Start index x + index on the patch, m going from 1 to m(l)}
+																		child {
+																				node {Applied on all the channels}
+																			}
+																		child {
+																				node {-1 because start from 1 and want have very first point x,y}
+																			}
+																	}
+															}
+														child {
+																node {Once have convolution also apply non-linear activation}
+																child {
+																		node {E.g. ReLU}
+																		child {
+																				node {Helps focus more on shapes and less on contrast}
+																			}
+																	}
+															}
+														child {
+																node {Dim kernels, had I(l) many kernels, each those kernels had same depth I(l-1) with number channes of incoming image}
+															}
+														child {
+																node {Kernel tensor of 4 dimensions}
+															}
+													}
+												child {
+														node {Feature Maps}
+														child {
+																node {is 2-dimensional}
+															}
+														child {
+																node {Feature map is neuron in next layer}
+																child {
+																		node {Input feature map is activations of previous layer}
+																	}
+																child {
+																		node {Incoming activation previous layer not vector, two-dimensional matrix}
+																		child {
+																				node {Cuz patches being applied for every row and every column}
+																			}
+																	}
+															}
+														child {
+																node {Feature maps as input, beginning image itself}
+																child {
+																		node {For subsequent layers input is feature map of previous convolutional layer}
+																	}
+																child {
+																		node {For every kernel generate one feature map}
+																	}
+															}
+														child {
+																node {Feature map always dim of number kernels applied previous layer and resulting dim image resolution}
+															}
+														child {
+																node {Is output of convolution + non-linear activation}
+															}
+													}
+												child [level distance=10cm] {
+														node {Parameters}
+														child {
+																node {V are feature maps, equivalent of activations h}
+															}
+														child {
+																node {I many kernels at every layer}
+																child {
+																		node {NN's: M many neurons every layer}
+																	}
+																child {
+																		node {I(0) number of (original) channels c, greyscale: 1, RGB: 3}
+																	}
+																child {
+																		node {M is size of applied patch}
+																	}
+																child {
+																		node {Actually x(l) and y(l) cuz can change at every layer}
+																		child {
+																				node {For simplicity assume resolution is same at every layers, same xy}
+																				child {
+																						node {Think of filled with 0's to preserve resolution}
+																					}
+																			}
+																	}
+															}
+													}
+											}
+										child {
+												node {Identifying images}
+												child {
+														node {Extract image representations by CNN}
+													}
+												child {
+														node {Prediction layer}
+														child {
+																node {Input: image representation, converts to categories (for classification)}
+																child {
+																		node {Last layer as classifier for images}
+																		child {
+																				node {Flatten cells across all dimensions as vector, $i\cdot x\cdot y\times 1$ vector}
+																			}
+																		child {
+																				node {Flattened tensor can input it to standard DFN}
+																			}
 																	}
 															}
 													}
 												child {
-														node {Reducing number of connectivity}
+														node {Need derivative of loss with respect to all the kernels}
 														child {
-																node {Reduces complexity drastically}
+																node {Have to start from prediction layer}
+																child {
+																		node {G multiplied with gradient V(l) with respect to K(l)}
+																		child {
+																				node {G: Sum of G' multiplied with gradient of h(1) with respect to V(l)}
+																				child {
+																						node {G is gradient of J with respect to V(l)}
+																						child {
+																								node {in NN: h(l-1)}
+																							}
+																					}
+																				child {
+																						node {G': Gradient J with respect to h(1) of DFN}
+																					}
+																			}
+																		child {
+																				node {Push backwards for gradient of J with respect to l-1 feature map, l-2 feature map etc.}
+																				child {
+																						node {Once have dJ/dV can compute gradient of loss with respect to kernels}
+																					}
+																			}
+																	}
+															}
+													}
+											}
+									}
+								child [level distance=40cm] {
+										node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
+										child {
+												node {Feedforward, fully-connected, Network}
+												child {
+														node {Composite Functions (where every function is parameterized)}
+													}
+												child {
+														node {Feedforward}
+														child {
+																node {\enquote{Input passes through chain of steps, every step is a neuron before outputting y}}
+															}
+														child {
+																node {No backward connections or cycles}
+																child {
+																		node {Cycles present $\rightarrow$ Recurrent Neural Networks}
+																	}
+															}
+														child {
+																node {No intra-layer connections}
 															}
 													}
 												child {
-														node {Receptive field}
+														node {Fully-connected}
 														child {
-																node {If stack many layers on top of each other}
+																node {Each neuron in layer is connected to all neurons in next layer}
+															}
+													}
+												child {
+														node {Acyclic directed graph}
+													}
+											}
+										child [level distance=20cm] {
+												node {Single Neuron}
+												child {
+														node {Aggreegation: Operation defined over input values}
+														child {
+																node {Summation of linear model + bias is aggregation}
 																child {
-																		node {A very deep layer has interaction large array of pixels in original representation}
+																		node {Passed to activation function}
+																	}
+																child {
+																		node {Linear model for every neuron}
+																	}
+															}
+														child {
+																node {Num parameters on every neuron are num inputs +1 cuz of bias}
+															}
+													}
+												child {
+														node {Activation}
+														child {
+																node {Linear model with activation can become non-linear}
+																child {
+																		node {If not use g after aggregation will be linear model}
+																		child {
+																				node {If multiply chain of matrices result still matrix}
+																			}
+																	}
+															}
+														child {
+																node {Activations per layer can be different}
+															}
+														child {
+																node {Types}
+																child [level distance=10cm] {
+																		node (output layer) {Output (Layer) Activation fuctions}
+																		child {
+																				node (linear) {Linear (Transformation) / Identity}
+																			}
+																	}
+																child {
+																		node {Rectified linear unit (ReLU)}
+																		child {
+																				node {Instead of being a linear function, truncate negative values to 0}
+																				child {
+																						node {Keeps only non-negative values}
+																					}
+																			}
+																		child [level distance=10cm] {
+																				node {Benefit: Sparse out some of neurons in network, learn how to spezialize them}
+																			}
+																		child {
+																				node {$g(z) = max(0, z)$}
+																			}
+																	}
+																child {
+																		node {Hyperbolic Tangent}
+																		child {
+																				node {Derivation of sigmoid}
+																				child {
+																						node {Range between -1 and 1}
+																						child {
+																								node {If range is between 0 and 1 than the negative can get is 2*0-1=-1}
+																							}
+																						child {
+																								node {If it has a maximum is 2*1-1=1}
+																							}
+																					}
+																			}
 																	}
 															}
 													}
 											}
 										child {
-												node {Number of rows and columns after applying convolutional not same as original image}
+												node {Project N(l-1) to N(l) many values}
 												child {
-														node {Cannot move convolution outside of borders of image}
-													}
-											}
-										child {
-												node {Start index x + index on the patch, m going from 1 to m(l)}
-												child {
-														node {Applied on all the channels}
-													}
-												child {
-														node {-1 because start from 1 and want have very first point x,y}
-													}
-											}
-									}
-								child {
-										node {Once have convolution also apply non-linear activation}
-										child {
-												node {E.g. ReLU}
-												child {
-														node {Helps focus more on shapes and less on contrast}
-													}
-											}
-									}
-								child {
-										node {Dim kernels, had I(l) many kernels, each those kernels had same depth I(l-1) with number channes of incoming image}
-									}
-								child {
-										node {Kernel tensor of 4 dimensions}
-									}
-							}
-						child {
-								node {Feature Maps}
-								child {
-										node {is 2-dimensional}
-									}
-								child {
-										node {Feature map is neuron in next layer}
-										child {
-												node {Input feature map is activations of previous layer}
-											}
-										child {
-												node {Incoming activation previous layer not vector, two-dimensional matrix}
-												child {
-														node {Cuz patches being applied for every row and every column}
-													}
-											}
-									}
-								child {
-										node {Feature maps as input, beginning image itself}
-										child {
-												node {For subsequent layers input is feature map of previous convolutional layer}
-											}
-										child {
-												node {For every kernel generate one feature map}
-											}
-									}
-								child {
-										node {Feature map always dim of number kernels applied previous layer and resulting dim image resolution}
-									}
-								child {
-										node {Is output of convolution + non-linear activation}
-									}
-							}
-						child [level distance=10cm] {
-								node {Parameters}
-								child {
-										node {V are feature maps, equivalent of activations h}
-									}
-								child {
-										node {I many kernels at every layer}
-										child {
-												node {NN's: M many neurons every layer}
-											}
-										child {
-												node {I(0) number of (original) channels c, greyscale: 1, RGB: 3}
-											}
-										child {
-												node {M is size of applied patch}
-											}
-										child {
-												node {Actually x(l) and y(l) cuz can change at every layer}
-												child {
-														node {For simplicity assume resolution is same at every layers, same xy}
+														node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
 														child {
-																node {Think of filled with 0's to preserve resolution}
+																node {Inner dimensionalities cancel: (Left edge wT, Upper edge v)}
 															}
-													}
-											}
-									}
-							}
-					}
-				child {
-						node {Identifying images}
-						child {
-								node {Extract image representations by CNN}
-							}
-						child {
-								node {Prediction layer}
-								child {
-										node {Input: image representation, converts to categories (for classification)}
-										child {
-												node {Last layer as classifier for images}
-												child {
-														node {Flatten cells across all dimensions as vector, $i\cdot x\cdot y\times 1$ vector}
-													}
-												child {
-														node {Flattened tensor can input it to standard DFN}
-													}
-											}
-									}
-							}
-						child {
-								node {Need derivative of loss with respect to all the kernels}
-								child {
-										node {Have to start from prediction layer}
-										child {
-												node {G multiplied with gradient V(l) with respect to K(l)}
-												child {
-														node {G: Sum of G' multiplied with gradient of h(1) with respect to V(l)}
 														child {
-																node {G is gradient of J with respect to V(l)}
+																node {Weight matrix}
 																child {
-																		node {in NN: h(l-1)}
+																		node {Dimensionality: Left edge x Upper edge}
+																		child {
+																				node {Num Neurons last layer x Num Neurons current layer}
+																			}
+																		child {
+																				node {Transposed matrix: Num Neurons current layer x Num Neurons last layer}
+																			}
+																	}
+																child [level distance=10cm] {
+																		node {$w_{i,j}$, move i down and j right, i-th row, j-th column}
+																		child {
+																				node {$w_{i,j}$ connects neuron $i$ (last layer) and $j$ (current layer))}
+																			}
+																		child {
+																				node {Transposed matrix: $w_{j,i}$ connects neuron $i$ (last layer) to $j$ (current layer))}
+																			}
+																	}
+																child {
+																		node {Each column prediction models of linear function of a neuron in current layer}
+																		child {
+																				node {Transposed matrix: Each row}
+																			}
 																	}
 															}
 														child {
-																node {G': Gradient J with respect to h(1) of DFN}
+																node {Dim Bias: Num Neurons particular layer}
+																child {
+																		node {For every neuron in particular layer have a bias}
+																	}
+																child {
+																		node {If take $h^{(i)}\in \mathbb{R}^{d\times a}$ of particular n just $a$ remains}
+																		child {
+																				node {Can represent as $a\times1$}
+																			}
+																	}
+															}
+													}
+											}
+										child {
+												node {Parametrize and learn Nonlinear Mapping}
+												child {
+														node {Hidden layers learn how project original input to new dimensionality}
+														child {
+																node {Representation Learning: Project features into new features where linear model can capture target variable}
+																child {
+																		node {In new representation a linear function can approximate function which was nonlinear}
+																	}
+															}
+													}
+											}
+									}
+							}
+						child [level distance=100cm] {
+								node {Optimizing Neural Networks / Optimization Techniques for Neural Networks}
+								child {
+										node {Loss Function}
+										child [level distance=10cm] {
+												node (continous target regression) {Continous Target, Regression}
+												child {
+														node {Interpretation: NN gives mean of the distribution of target y given input X}
+														child {
+																node {Most likely Target value y given X that is being trained as max likelihood estimation}
 															}
 													}
 												child {
-														node {Push backwards for gradient of J with respect to l-1 feature map, l-2 feature map etc.}
+														node (no activation) {No Activation for output layer}
+													}
+												% child {
+												% 		node {Least Square Error Loss}
+												% 	}
+											}
+										child {
+												node (binary) {Binary Classification  / Binary Classification Target}
+												child {
+														node {Binary target variables follow Bernoulli distribution}
+													}
+											}
+										child [level distance=20cm] {
+												node (multi-class) {Multi-Class Classification / Multi-category Target}
+											}
+									}
+								child {
+										node {Gradient is derivative of function j of w with respect to each of the w's, tells tangent line}
+										child {
+												node {Joined space of all w's}
+											}
+										child {
+												node {Derivative tells direction in which the function goes up}
+												child {
+														node {If change w one step to left then positive gain (increase) in J(w)}
+													}
+												child {
+														node {Gives direction and magnitude of how big the slope is}
+													}
+												child {
+														node {If gradient small then probably very close to minimum}
+													}
+												child {
+														node {For Minimize have to go in opposite direction of slope}
+													}
+											}
+									}
+								child [level distance=30cm] {
+										node {Algorithms to find optimal parameters}
+										child [level distance=20cm] {
+												node {Gradient Descent}
+												child {
+														node {Move all weights one step towards negative direction of derivative of J with respect to W}
+													}
+												child {
+														node {Hyperparamater: step size / learning rate}
+													}
+												child {
+														node {Most often just x number of epochs}
 														child {
-																node {Once have dJ/dV can compute gradient of loss with respect to kernels}
+																node {Other convergence criteria: Difference between the next - previous less epsilon}
 															}
+													}
+												child {
+														node {Problem: Very expensive operation}
+														child {
+																node {Derivative with respect to all parameters and summation over all points in training set}
+															}
+													}
+											}
+										child {
+												node {Stochastic Gradient Descent}
+												child {
+														node {Union of those mini-batches gives training set (but not disjoint)}
+														child {
+																node {Mini-batches can have repeating instances maybe located in several mini-batches}
+															}
+													}
+												child {
+														node {Random order: There's more chance one avoids local optima}
+														child {
+																node {Because gradients are not going to always follow same sequence}
+															}
+														child {
+																node {Not the same sequence of subsets at every iteration}
+															}
+													}
+												child {
+														node {Optimize parameters w to minimize the errors on this mini-batches}
+													}
+												child {
+														node {Algorithm: SGD for Neural Networks}
+														child {
+																node {Forward pass}
+																child {
+																		node {Compute the loss given paramters x, input features to NN}
+																	}
+															}
+														child [level distance=10cm] {
+																node {Backpropagation}
+																child {
+																		node {Finds gradient of loss function with respect to all weights (and biases)}
+																	}
+																child {
+																		node {Chain rule of calculus}
+																		child {
+																				node {Going over other function}
+																			}
+																	}
+																child {
+																		node {Partial derivative}
+																		child {
+																				node {If h depends on 2 functions}
+																			}
+																		child {
+																				node {Symbol of partial derivative identifies that now take derivative of h with respect to another function f}
+																			}
+																		child {
+																				node {Total derivative rule}
+																				child {
+																						node {Total derivative is summation of paths through which X is contributing to J}
+																						child {
+																								node {Shortcut: Accumulate paths up to an intermediate parent level of variable x}
+																								child {
+																										node {Accumulated gradients already capture all paths}
+																									}
+																								child {
+																										node {Reshare terms if go one layer at a time backwards}
+																									}
+																								child {
+																										node {Left Gradients in chain rule have higher layer in NN}
+																									}
+																							}
+																					}
+																			}
+																	}
+																child [level distance=15cm] {
+																		node {Real Neural Network}
+																		child {
+																				node {Chain rule decomposition}
+																				child {
+																						node {Gradient of loss with respect to this neuron in which my weight belongs}
+																						child {
+																								node {Have to account all paths that go from that neuron to final function}
+																								child {
+																										node {Go through contributions of the neurons at layer l+1}
+																										child {
+																												node {If I go from last layer to one layer before then can reshare computations}
+																											}
+																									}
+																							}
+																					}
+																				child {
+																						node {Gradient of neuron to that particular weight}
+																					}
+																			}
+																		child [level distance=10cm] {
+																				node {Gradient of final function with respect to parameters of a particular function}
+																				child {
+																						node {Final function is loss of the estimated targets (final layer)}
+																					}
+																			}
+																		child {
+																				node {Functions that depend on x but also have a variable or parameter}
+																				child {
+																						node {Theta first influences it's own function and then this function influences next function}
+																					}
+																			}
+																	}
+																child {
+																		node {Algorithm}
+																		child {
+																				node {G is within sum, G' is sum itself (sum if >1 successor neuron)}
+																				child {
+																						node {G is always with respect to current / previous neuron h}
+																					}
+																				child {
+																						node {G' becomes G for predecessor layer}
+																					}
+																			}
+																		child {
+																				node {Line 12 special case}
+																				child {
+																						node {Bias not connected to any neuron from the previous layer}
+																						child {
+																								node {Derivative is just $g' \cdot 1$}
+																								child {
+																										node {as inside activation $g$, $w_0$ not multiplied with anything}
+																									}
+																							}
+																					}
+																			}
+																		child {
+																				node {One can calculate G's of all layers first}
+																				child {
+																						node {and then multiply all G' with gradient of neuron with respect to weight}
+																					}
+																			}
+																	}
+															}
+														child {
+																node {1 forward and backward pass for every mini-batch}
+															}
+													}
+											}
+									}
+							}
+						child {
+								node {Generalization Methods}
+								child [level distance=80cm] {
+										node (regularization nns) {Regularization (Approaches for Neural Networks)}
+										child [level distance=15cm] {
+												node (families of regularization techniques for dfn) {Families of Regularization Techniques for DFN}
+												child {
+														node {Capacity}
+														child {
+																node {Number of parameters}
+																child {
+																		node {Smaller capacity is more regularization}
+																		child {
+																				node {Worse fit training set, higher bias, smaller variance}
+																			}
+																	}
+															}
+													}
+												child {
+														node (structural) {Structural}
+														child {
+																node {Different connectivity patterns}
+															}
+														child {
+																node {NAS}
+															}
+														child {
+																node {ResNet}
+																child {
+																		node {(2 parallel layers)}
+																	}
+															}
+													}
+												child {
+														node (ensembling) {Ensembling}
+													}
+												child {
+														node {Weight Aggregation}
+														child {
+																node {Stochastic Weight Averaging}
+															}
+														child {
+																node {Snapshot Ensembles}
+															}
+													}
+												child {
+														node {Learning Dynamics}
+														child [level distance=10cm] {
+																node {Early stopping}
+																child {
+																		node {Controlling dynamics of optimization}
+																	}
+																child {
+																		node {Overfit to noise present in training set}
+																		child {
+																				node {Performance new validation set gets worse}
+																				child {
+																						node {Validation set not used to update model parameters}
+																					}
+																				child {
+																						node {In beginning both decrease}
+																					}
+																			}
+																	}
+																child {
+																		node {Stop early optimization before starts to overfit}
+																		child {
+																				node {Done by checking performance on validation set}
+																			}
+																	}
+																child [level distance=10cm] {
+																		node {Algoritm}
+																		child {
+																				node {Stop if p many steps where no reduction in validation set error}
+																				child {
+																						node {p many steps = tolerance}
+																					}
+																				child {
+																						node {Steps called epochs}
+																					}
+																				child {
+																						node {Tolerance is needed cuz performance oscillates}
+																					}
+																			}
+																		child {
+																				node {j counts steps seen without improvement}
+																			}
+																		child {
+																				node {Check validation set error of current w}
+																				child {
+																						node {If it does not improve ones previous best v, then increase counter}
+																					}
+																				child {
+																						node {Otherwise one resets counter, stores the best parameters}
+																					}
+																			}
+																		child {
+																				node {If counter exceeds tolerance number steps one returns best found}
+																			}
+																	}
+																child {
+																		node {Acts as a regularizer}
+																		child {
+																				node {Stop in between before going to optimum}
+																			}
+																	}
+															}
+														child {
+																node {Learning rate schedulers}
+																child {
+																		node {Learning rate can be dynamic}
+																		child {
+																				node {Can be adapted on every paramete}
+																			}
+																	}
+																child {
+																		node {Specify scheduler how initial learening rate change after every epoch}
+																	}
+															}
+													}
+												child {
+														node (implicit) {Implicit}
+													}
+											}
+										child {
+												node {Structural and Linearization}
+												child {
+														node (skip connections) {Skip connections}
+													}
+												child {
+														node {Residual blocks}
+													}
+												child {
+														node {Shake shake}
+													}
+											}
+										child {
+												node {(Learning Dynamics)}
+												child {
+														node (batch normalization) {Batch Normalization}
+													}
+											}
+										child {
+												node {Model Averaging}
+												child {
+														node (dropout) {Dropout}
+													}
+											}
+										child {
+												node {(Neural Architecture Search)}
+											}
+									}
+								child {
+										node {Hyperparameters}
+										child {
+												node {Number of hidden layers}
+												child {
+														node {Depth network = number hidden layers}
+													}
+												child {
+														node {The deeper network the higher complexity}
+														child {
+																node {The higher it's complexity, the more will be low bias and high variance model}
+															}
+													}
+												child {
+														node {Number of neurons per layer}
+														child {
+																node {Width network}
+																child {
+																		node {Also num neurons in every layer defines complexity, but not same as depth}
+																	}
+															}
+													}
+												child {
+														node {Choice of activation function}
+													}
+												child {
+														node {Dropout rate}
+													}
+												child {
+														node {Regularization penalty on weights}
+													}
+												child {
+														node {Learning rate}
+													}
+												child {
+														node {Choice of optimization algorithms}
 													}
 											}
 									}
 							}
 					}
 			}
-		child [level distance=40cm] {
-		node {Multi-Layer Perceptrons (MLP) \tiny (Deep Forward Network (DFN), feedforward networks)}
 		child {
-				node {Feedforward, fully-connected, Network}
+		node {Objective Function}
+		child [level distance=50cm] {
+		node (loss) {Loss Functions}
+		child {
+				node {Regression}
 				child {
-						node {Composite Functions (where every function is parameterized)}
+						node (estimated target minus ground truth) {Estimated target $\hat y$ - Ground-truth target $y$}
 					}
 				child {
-						node {Feedforward}
+						node (l2) {Least Squares (L2)}
 						child {
-								node {\enquote{Input passes through chain of steps, every step is a neuron before outputting y}}
-							}
-						child {
-								node {No backward connections or cycles}
-								child {
-										node {Cycles present $\rightarrow$ Recurrent Neural Networks}
+								node {Maximum Likelihood Estimation
 									}
 							}
-						child {
-								node {No intra-layer connections}
-							}
+            child {
+              node {Increases quadratically with error}
+            }
 					}
 				child {
-						node {Fully-connected}
-						child {
-								node {Each neuron in layer is connected to all neurons in next layer}
-							}
-					}
-				child {
-						node {Acyclic directed graph}
-					}
-			}
-		child [level distance=20cm] {
-		node {Single Neuron}
-		child {
-				node {Aggreegation: Operation defined over input values}
-				child {
-						node {Summation of linear model + bias is aggregation}
-						child {
-								node {Passed to activation function}
-							}
-						child {
-								node {Linear model for every neuron}
-							}
-					}
-				child {
-						node {Num parameters on every neuron are num inputs +1 cuz of bias}
+						node {L1}
+            child {
+              node {Increases only linearly with error}
+              child {
+                node {In presence of outliers better suited}
+              }
+            }
 					}
 			}
 		child {
-		node {Activation}
-		child {
-				node {Linear model with activation can become non-linear}
-				child {
-						node {If not use g after aggregation will be linear model}
-						child {
-								node {If multiply chain of matrices result still matrix}
-							}
-					}
-			}
-		child {
-				node {Activations per layer can be different}
-			}
-		child {
-		node {Types}
+		node {Classification}
 		child [level distance=10cm] {
-		node {Output (Layer) Activation fuctions}
-		child {
-				node (linear) {Linear (Transformation) / Identity}
+				node {Strategies}
+				child {
+						node {One-vs-All (OvA) / One-vs-Rest (OvR)}
+						child {
+								node {Train K classifiers}
+								child {
+										node {Each classifier tries to separate one class from all the other classes combined}
+									}
+							}
+						child {
+								node {Class with the highest score is chosen}
+							}
+					}
+				child {
+						node {One-vs-One (OvO)}
+						child {
+								node {Train a classifier for every pair of classes}
+								child {
+										node {Each classifier only distinguishes between two classes at a time}
+									}
+								child {
+										node {$\frac{K \times (K - 1)}{2}$}
+									}
+							}
+						child {
+								node {Class with the most votes is chosen}
+							}
+					}
 			}
-		child [level distance=10cm] {
-		node (sigmoid) {Logistic Sigmoid (Binary Classification)}
+		child {
+				node (multiclass classification) {Multi-class Classification}
+				child {
+						node (log-likelihood loss) {Log-likelihood Loss / Logloss}
+            child [level distance=20cm] {
+								node (softmax) {Softmax} % (Multi-Class Classification)
+								child {
+										node {Num neurons output layer = Num classes}
+									}
+								child {
+										node {Normalized probability estimation}
+									}
+								child {
+										node {$e^z$ makes it positive}
+										child {
+												node {Dividing by sum of all total predictions makes it a distribution}
+											}
+									}
+							}
+						child {
+								node {Function only becomes 1 for true class and 0 for all other classes}
+								child {
+										node {Only for case where $y_n=1$ wants probability 1, cuz $log(1)=0$}
+									}
+							}
+					}
+			}
+		child {
+		node {Binary Classification}
+		child {
+		node (logistic loss) {Logistic Loss or the Cross-entropy}
+		child [level distance=30cm] {
+		node (sigmoid) {Logistic Sigmoid} % (Binary Classification)
 		child {
 				node {If z goes to 0, e to the power of 0 becomes 1, then it becomes $\frac{1}{1+1}$}
 			}
@@ -1074,635 +1666,87 @@
 			}
 		}
 		child {
-				node (softmax) {Softmax (Multi-Class Classification)}
-				child {
-						node {Num neurons output layer = Num classes}
-					}
-				child {
-						node {Normalized probability estimation}
-					}
-				child {
-						node {$e^z$ makes it positive}
-						child {
-								node {Dividing by sum of all total predictions makes it a distribution}
-							}
-					}
+				node {Only of term non-zero: $-0\cdot log(\hat y) - (1-0)\cdot log(1-\hat y)$}
+			}
+		child {
+				node {left $-1\cdot log(1) = 0$, right $-(1-0)\cdot log(1-0) = 0$}
+			}
+		child {
+				node {left $-1\cdot log(0) = \infty$, right $-(1-0)\cdot log(1-1) = \infty$}
 			}
 		}
 		child {
-				node {Rectified linear unit (ReLU)}
-				child {
-						node {Instead of being a linear function, truncate negative values to 0}
-						child {
-								node {Keeps only non-negative values}
-							}
-					}
-				child [level distance=10cm] {
-						node {Benefit: Sparse out some of neurons in network, learn how to spezialize them}
-					}
-				child {
-						node {$g(z) = max(0, z)$}
-					}
+				node {Hinge Loss}
 			}
-		child {
-				node {Hyperbolic Tangent}
-				child {
-						node {Derivation of sigmoid}
-						child {
-								node {Range between -1 and 1}
-								child {
-										node {If range is between 0 and 1 than the negative can get is 2*0-1=-1}
-									}
-								child {
-										node {If it has a maximum is 2*1-1=1}
-									}
-							}
-					}
-			}
-		}
-		}
 		}
 		child {
-				node {Project N(l-1) to N(l) many values}
+				node {(Multi-label Classification)}
+			}
+		}
+		child [level distance=40cm] {
+				node {Generalization Performance}
 				child {
-						node {$w^{T}v$: (Left edge wT,  Upper edge wT) x (Left edge v, Upper edge v)}
+						node (generalization methods) {Generalization Methods}
+					}
+				child {
+						node {Underfitting}
 						child {
-								node {Inner dimensionalities cancel: (Left edge wT, Upper edge v)}
+								node {Model fails to fit the training data}
 							}
 						child {
-								node {Weight matrix}
-								child {
-										node {Dimensionality: Left edge x Upper edge}
-										child {
-												node {Num Neurons last layer x Num Neurons current layer}
-											}
-										child {
-												node {Transposed matrix: Num Neurons current layer x Num Neurons last layer}
-											}
-									}
-								child [level distance=10cm] {
-										node {$w_{i,j}$, move i down and j right, i-th row, j-th column}
-										child {
-												node {$w_{i,j}$ connects neuron $i$ (last layer) and $j$ (current layer))}
-											}
-										child {
-												node {Transposed matrix: $w_{j,i}$ connects neuron $i$ (last layer) to $j$ (current layer))}
-											}
-									}
-								child {
-										node {Each column prediction models of linear function of a neuron in current layer}
-										child {
-												node {Transposed matrix: Each row}
-											}
-									}
-							}
-						child {
-								node {Dim Bias: Num Neurons particular layer}
-								child {
-										node {For every neuron in particular layer have a bias}
-									}
-								child {
-										node {If take $h^{(i)}\in \mathbb{R}^{d\times a}$ of particular n just $a$ remains}
-										child {
-												node {Can represent as $a\times1$}
-											}
-									}
+								node {Both training and test errors descend, but get stuck}
 							}
 					}
-			}
-		child {
-				node {Parametrize and learn Nonlinear Mapping}
 				child {
-						node {Hidden layers learn how project original input to new dimensionality}
+						node {Generalizing}
 						child {
-								node {Representation Learning: Project features into new features where linear model can capture target variable}
-								child {
-										node {In new representation a linear function can approximate function which was nonlinear}
-									}
+								node {Model is accurate on test data}
 							}
+						child {
+								node {Both training and test errors descend and approach a minimum}
+							}
+					}
+				child {
+						node {Overfitting}
+						child {
+								node {Model perfectly fits training data (incl. noise)}
+							}
+						child {
+								node {Training error getting smaller, while test error increases}
+							}
+					}
+				child {
+						node {Training data and Test data}
 					}
 			}
 		}
 		}
-		child [level distance=100cm] {
-				node {Optimizing Neural Networks / Optimization Techniques for Neural Networks}
-				child {
-						node {Loss Function}
-						child [level distance=10cm] {
-								node {Continous Target, Regression}
-								child {
-										node {Interpretation: NN gives mean of the distribution of target y given input X}
-										child {
-												node {Most likely Target value y given X that is being trained as max likelihood estimation}
-											}
-									}
-								child {
-										node (no activation) {No Activation for output layer}
-									}
-								child {
-										node {Least Square Error Loss}
-									}
-							}
-						child {
-								node (binary) {Binary Classification  / Binary Classification Target}
-								child {
-										node {Binary target variables follow Bernoulli distribution}
-									}
-								child {
-										node {Logistic Loss or the Cross-entropy}
-										child {
-												node {Only of term non-zero: $-0\cdot log(\hat y) - (1-0)\cdot log(1-\hat y)$}
-											}
-										child {
-												node {left $-1\cdot log(1) = 0$, right $-(1-0)\cdot log(1-0) = 0$}
-											}
-										child {
-												node {left $-1\cdot log(0) = \infty$, right $-(1-0)\cdot log(1-1) = \infty$}
-											}
-									}
-							}
-						child [level distance=20cm] {
-								node (multi-class) {Multi-Class Classification / Multi-category Target}
-								child {
-										node {Log-likelihood Loss}
-										child {
-												node {Function only becomes 1 for true class and 0 for all other classes}
-												child {
-														node {Only for case where $y_n=1$ wants probability 1, cuz $log(1)=0$}
-													}
-											}
-									}
-							}
-					}
-				child {
-						node {Gradient is derivative of function j of w with respect to each of the w's, tells tangent line}
-						child {
-								node {Joined space of all w's}
-							}
-						child {
-								node {Derivative tells direction in which the function goes up}
-								child {
-										node {If change w one step to left then positive gain (increase) in J(w)}
-									}
-								child {
-										node {Gives direction and magnitude of how big the slope is}
-									}
-								child {
-										node {If gradient small then probably very close to minimum}
-									}
-								child {
-										node {For Minimize have to go in opposite direction of slope}
-									}
-							}
-					}
-				child [level distance=30cm] {
-						node {Algorithms to find optimal parameters}
-						child [level distance=20cm] {
-								node {Gradient Descent}
-								child {
-										node {Move all weights one step towards negative direction of derivative of J with respect to W}
-									}
-								child {
-										node {Hyperparamater: step size / learning rate}
-									}
-								child {
-										node {Most often just x number of epochs}
-										child {
-												node {Other convergence criteria: Difference between the next - previous less epsilon}
-											}
-									}
-								child {
-										node {Problem: Very expensive operation}
-										child {
-												node {Derivative with respect to all parameters and summation over all points in training set}
-											}
-									}
-							}
-						child {
-								node {Stochastic Gradient Descent}
-								child {
-										node {Union of those mini-batches gives training set (but not disjoint)}
-										child {
-												node {Mini-batches can have repeating instances maybe located in several mini-batches}
-											}
-									}
-								child {
-										node {Random order: There's more chance one avoids local optima}
-										child {
-												node {Because gradients are not going to always follow same sequence}
-											}
-										child {
-												node {Not the same sequence of subsets at every iteration}
-											}
-									}
-								child {
-										node {Optimize parameters w to minimize the errors on this mini-batches}
-									}
-								child {
-										node {Algorithm: SGD for Neural Networks}
-										child {
-												node {Forward pass}
-												child {
-														node {Compute the loss given paramters x, input features to NN}
-													}
-											}
-										child [level distance=10cm] {
-												node {Backpropagation}
-												child {
-														node {Finds gradient of loss function with respect to all weights (and biases)}
-													}
-												child {
-														node {Chain rule of calculus}
-														child {
-																node {Going over other function}
-															}
-													}
-												child {
-														node {Partial derivative}
-														child {
-																node {If h depends on 2 functions}
-															}
-														child {
-																node {Symbol of partial derivative identifies that now take derivative of h with respect to another function f}
-															}
-														child {
-																node {Total derivative rule}
-																child {
-																		node {Total derivative is summation of paths through which X is contributing to J}
-																		child {
-																				node {Shortcut: Accumulate paths up to an intermediate parent level of variable x}
-																				child {
-																						node {Accumulated gradients already capture all paths}
-																					}
-																				child {
-																						node {Reshare terms if go one layer at a time backwards}
-																					}
-																				child {
-																						node {Left Gradients in chain rule have higher layer in NN}
-																					}
-																			}
-																	}
-															}
-													}
-												child [level distance=15cm] {
-														node {Real Neural Network}
-														child {
-																node {Chain rule decomposition}
-																child {
-																		node {Gradient of loss with respect to this neuron in which my weight belongs}
-																		child {
-																				node {Have to account all paths that go from that neuron to final function}
-																				child {
-																						node {Go through contributions of the neurons at layer l+1}
-																						child {
-																								node {If I go from last layer to one layer before then can reshare computations}
-																							}
-																					}
-																			}
-																	}
-																child {
-																		node {Gradient of neuron to that particular weight}
-																	}
-															}
-														child [level distance=10cm] {
-																node {Gradient of final function with respect to parameters of a particular function}
-																child {
-																		node {Final function is loss of the estimated targets (final layer)}
-																	}
-															}
-														child {
-																node {Functions that depend on x but also have a variable or parameter}
-																child {
-																		node {Theta first influences it's own function and then this function influences next function}
-																	}
-															}
-													}
-												child {
-														node {Algorithm}
-														child {
-																node {G is within sum, G' is sum itself (sum if >1 successor neuron)}
-																child {
-																		node {G is always with respect to current / previous neuron h}
-																	}
-																child {
-																		node {G' becomes G for predecessor layer}
-																	}
-															}
-														child {
-																node {Line 12 special case}
-																child {
-																		node {Bias not connected to any neuron from the previous layer}
-																		child {
-																				node {Derivative is just $g' \cdot 1$}
-																				child {
-																						node {as inside activation $g$, $w_0$ not multiplied with anything}
-																					}
-																			}
-																	}
-															}
-														child {
-																node {One can calculate G's of all layers first}
-																child {
-																		node {and then multiply all G' with gradient of neuron with respect to weight}
-																	}
-															}
-													}
-											}
-										child {
-												node {1 forward and backward pass for every mini-batch}
-											}
-									}
-							}
-					}
-			}
-		child {
-				node {Generalization Methods}
-				child [level distance=80cm] {
-						node (regularization nns) {Regularization (Approaches for Neural Networks)}
-						child [level distance=15cm] {
-								node (families of regularization techniques for dfn) {Families of Regularization Techniques for DFN}
-								child {
-										node {Capacity}
-										child {
-												node {Number of parameters}
-												child {
-														node {Smaller capacity is more regularization}
-														child {
-																node {Worse fit training set, higher bias, smaller variance}
-															}
-													}
-											}
-									}
-								child {
-										node (structural) {Structural}
-										child {
-												node {Different connectivity patterns}
-											}
-										child {
-												node {NAS}
-											}
-										child {
-												node {ResNet}
-												child {
-														node {(2 parallel layers)}
-													}
-											}
-									}
-								child {
-										node (ensembling) {Ensembling}
-									}
-								child {
-										node {Weight Aggregation}
-										child {
-												node {Stochastic Weight Averaging}
-											}
-										child {
-												node {Snapshot Ensembles}
-											}
-									}
-								child {
-										node {Learning Dynamics}
-										child [level distance=10cm] {
-												node {Early stopping}
-												child {
-														node {Controlling dynamics of optimization}
-													}
-												child {
-														node {Overfit to noise present in training set}
-														child {
-																node {Performance new validation set gets worse}
-																child {
-																		node {Validation set not used to update model parameters}
-																	}
-																child {
-																		node {In beginning both decrease}
-																	}
-															}
-													}
-												child {
-														node {Stop early optimization before starts to overfit}
-														child {
-																node {Done by checking performance on validation set}
-															}
-													}
-												child [level distance=10cm] {
-														node {Algoritm}
-														child {
-																node {Stop if p many steps where no reduction in validation set error}
-																child {
-																		node {p many steps = tolerance}
-																	}
-																child {
-																		node {Steps called epochs}
-																	}
-																child {
-																		node {Tolerance is needed cuz performance oscillates}
-																	}
-															}
-														child {
-																node {j counts steps seen without improvement}
-															}
-														child {
-																node {Check validation set error of current w}
-																child {
-																		node {If it does not improve ones previous best v, then increase counter}
-																	}
-																child {
-																		node {Otherwise one resets counter, stores the best parameters}
-																	}
-															}
-														child {
-																node {If counter exceeds tolerance number steps one returns best found}
-															}
-													}
-												child {
-														node {Acts as a regularizer}
-														child {
-																node {Stop in between before going to optimum}
-															}
-													}
-											}
-										child {
-												node {Learning rate schedulers}
-												child {
-														node {Learning rate can be dynamic}
-														child {
-																node {Can be adapted on every paramete}
-															}
-													}
-												child {
-														node {Specify scheduler how initial learening rate change after every epoch}
-													}
-											}
-									}
-								child {
-										node (implicit) {Implicit}
-									}
-							}
-						child {
-								node {Structural and Linearization}
-								child {
-										node (skip connections) {Skip connections}
-									}
-								child {
-										node {Residual blocks}
-									}
-								child {
-										node {Shake shake}
-									}
-							}
-						child {
-								node {(Learning Dynamics)}
-								child {
-										node (batch normalization) {Batch Normalization}
-									}
-							}
-						child {
-								node {Model Averaging}
-								child {
-										node (dropout) {Dropout}
-									}
-							}
-						child {
-								node {(Neural Architecture Search)}
-							}
-					}
-				child {
-						node {Hyperparameters}
-						child {
-								node {Number of hidden layers}
-								child {
-										node {Depth network = number hidden layers}
-									}
-								child {
-										node {The deeper network the higher complexity}
-										child {
-												node {The higher it's complexity, the more will be low bias and high variance model}
-											}
-									}
-								child {
-										node {Number of neurons per layer}
-										child {
-												node {Width network}
-												child {
-														node {Also num neurons in every layer defines complexity, but not same as depth}
-													}
-											}
-									}
-								child {
-										node {Choice of activation function}
-									}
-								child {
-										node {Dropout rate}
-									}
-								child {
-										node {Regularization penalty on weights}
-									}
-								child {
-										node {Learning rate}
-									}
-								child {
-										node {Choice of optimization algorithms}
-									}
-							}
-					}
-			}
-		}
-		}
-		child {
-				node {Objective Function}
-				child [level distance=50cm] {
-						node (loss) {Loss Functions}
-						child {
-								node (estimated target minus ground truth) {Estimated target $\hat y$ - Ground-truth target $y$}
-								child {
-										node {Maximum Likelihood Estimation
-											}
-									}
-								child {
-										node {Regression}
-										child {
-												node {Least Squares}
-											}
-										child {
-												node {L1}
-											}
-									}
-								child {
-										node {(Multi-class) Classification}
-										child {
-												node {Logloss}
-												child {
-														node {Softmax
-															}
-													}
-											}
-										child {
-												node {Binary Classification}
-												child {
-														node {Logistic Loss
-															}
-													}
-												child {
-														node {Hinge Loss}
-													}
-											}
-									}
-							}
-						child [level distance=40cm] {
-								node {Generalization Performance}
-								child {
-										node {Underfitting}
-										child {
-												node {Model fails to fit the training data}
-											}
-										child {
-												node {Both training and test errors descend, but get stuck}
-											}
-									}
-								child {
-										node {Generalizing}
-										child {
-												node {Model is accurate on test data}
-											}
-										child {
-												node {Both training and test errors descend and approach a minimum}
-											}
-										child {
-												node (generalization methods) {Generalization Methods}
-											}
-									}
-								child {
-										node {Overfitting}
-										child {
-												node {Model perfectly fits training data (incl. noise)}
-											}
-										child {
-												node {Training error getting smaller, while test error increases}
-											}
-									}
-								child {
-										node {Training data and Test data}
-									}
-							}
-					}
-			}
 		child [level distance=20cm] {
 				node (ensembles) {Ensembles}
+				% child {
+				% 		node {Reduces variance}
+				% 	}
 				child {
-						node {Reduces variance}
+						node {Aggregations of multiple base models}
 					}
-        child {
-          node {Aggregations of multiple base models}
-        }
-				child [level distance=15cm] {
+				child [level distance=80cm] {
 						node {Bagging}
 						child {
 								node {Short for Bootstrap AGGregatING}
 							}
             child {
-              node {Average predictions of sub-models, trained on bootstrap datasets sampled with replacement from original training data}
+              node {Replacing the single model with an average ensemble \alert{reduces the variance}}
             }
+						child {
+								node {Average predictions of sub-models, trained on bootstrap datasets sampled with replacement from original training data}
+								% TODO: Question to prof: not aggregated?
+								child {
+										node {Regression: Averaging}
+									}
+								child {
+										node {Classification: Majority Voting}
+									}
+							}
 						child {
 								node {Sampling with replacement}
 								child {
@@ -1719,6 +1763,9 @@
 									}
 								child {
 										node {Uncorrelated individual models}
+                    child {
+                      node {If errors are uncorrelated then the error is reduced linearly}
+                    }
 										child {
 												node {The errors of the models should be uncorrelated}
 												child {
@@ -1758,98 +1805,152 @@
 									}
 							}
 					}
-          child [level distance=70cm] {
+				child [level distance=135cm] {
 						node {Boosting}
-            child {
-              node {Sequentially train a weak model that tries to fix the problems of all previous ones, while keeping them fixed}
-              child {
-                node {Resulting ensemble is the weighted sum of the sub-models}
-              }
-            }
 						child {
-								node {Aggregate high-bias models to create a low-bias ensemble}
+								node {\alert{\textbf{Sequentially}} train a weak model that tries to fix the problems of all previous ones, while keeping them fixed}
+								child {
+										node {Resulting ensemble is the weighted sum of the sub-models}
+									}
+							}
+						child {
+								node {Sequentially aggregates high-bias models to create a \alert{low-bias ensemble}}
 								child {
 										node {Train parameters next model keeping past models fixed}
 									}
 							}
-            child {
-              node {$\alpha$ is coefficient that scales contribution of each weak model in ensemble}
-            }
+						child {
+								node {$\alpha$ is coefficient that scales contribution of each weak model in ensemble}
+							}
 						child {
 								node {Loss can be linearly approximated via the first-order Taylor expansion}
 							}
 						child {
 								node {Algorithm: Gradient Boosting}
-                child {
-                  node {$\alpha$ represents a learning rate (shrinkage parameter)}
-                  child {
-                    node {Negative gradient of the loss, its contribution is scaled by $\alpha$}
-                  }
-                  child {
-                    node {Prevents overfitting by making smaller, controlled updates}
-                  }
-                }
-                child {
-                  node {Uses the gradient to improve a series of models sequentially}
-                }
-                child {
-                  node {Errors from previous models are identified by gradients}
-                }
+								child {
+										node {$\alpha$ represents a learning rate (shrinkage parameter)}
+										child {
+												node {Negative gradient of the loss, its contribution is scaled by $\alpha$}
+											}
+										child {
+												node {Prevents overfitting by making smaller, controlled updates}
+											}
+									}
+								child {
+										node {Uses the gradient to improve a series of models sequentially}
+									}
+								child {
+										node {Errors from previous models are identified by gradients}
+									}
+								child {
+										node {Works with any differentiable loss function}
+									}
+								child [level distance=30cm] {
+										node {Gradient Boosted Decision Trees}
+										child {
+												node {Instantiation of Gradient Boosting}
+											}
+										child {
+												node {Hyperparameters}
+												child {
+														node {$\gamma$ is the weight of the penalty on the number of leaves}
+													}
+												child {
+														node {$\lambda$ is the weight of the penalty on the weights}
+													}
+											}
+										child {
+												node {Algorithm}
+												child {
+														node {Optimal leaf weight}
+														child {
+																node {Second-order Taylor approximation + regularization}
+																child {
+																		node {Take gradient, set = 0 and solve for w}
+																	}
+															}
+													}
+												child {
+														node {Optimal objective function}
+														child {
+																node {Used as gain cuz allows to determine does split reduce loss more than keeping the node as is}
+															}
+														child {
+																node {Calculate gain}
+																child {
+																		node {Determine G and H}
+																	}
+																child {
+																		node {Calculate G and H for all features and insert in gain calculation}
+																	}
+															}
+														child {
+																node {Inserting optimal leave weight into objective function}
+																child {
+																		node {Get best possible contribution of that leaf to the loss reduction}
+																	}
+															}
+													}
+											}
+										child {
+												node {Complexity}
+												child {
+														node {$O(k\cdot M\cdot N\cdot log(T))$ with k trees}
+													}
+											}
+										child {
+												node {Advantages}
+												child {
+														node {No need for data preprocessing}
+													}
+												child {
+														node {Work well with categorical features}
+													}
+												child {
+														node {Ability to work with arbitrary loss functions}
+													}
+												child {
+														node {Very low-bias, yet relatively low-variance}
+													}
+												child {
+														node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
+													}
+											}
+									}
 								child {
 										node {Algorithm: AdaBoost}
-                    child {
-                      node {$\alpha$ is model specific}
-                      child {
-                        node {$\varepsilon_k$ is the weighted error rate of model $f^{(k)}$}
-                      }
-                      child {
-                        node {Weak models with low error get larger $\alpha$, and those with error close to random guessing get almost no weight}
-                      }
-                      child {
-                        node {Every one of $N$ training points $(x_i, y_i)$ has its own weight $w_i$}
-                      }
-                      child {
-                        node {Sign: Weak learners combined into a weighted real-valued score, but classification task requires discrete label ($-1$ or $+1$)}
-                      }
-                    }
-                    child {
-                      node {Particular loss function weighting points misclassified by previous models higher than correctly classified}
-                    }
-                    child {
-                      node {Errors from previous models are identified by high weights}
-                    }
-									}
-							}
-              child [level distance=30cm] {
-								node {Gradient Boosted Decision Trees}
-								child {
-										node {Hyperparameters}
 										child {
-												node {$\gamma$ is the weight of the penalty on the number of leaves}
+												node {Special case of Gradient Boosting}
 											}
 										child {
-												node {$\lambda$ is the weight of the penalty on the weights}
+												node {$\alpha$ is model specific}
+												child {
+														node {$\varepsilon_k$ is the weighted error rate of model $f^{(k)}$}
+													}
+												child {
+														node {Weak models with low error get larger $\alpha$, and those with error close to random guessing get almost no weight}
+													}
+												child {
+														node {Every one of $N$ training points $(x_i, y_i)$ has its own weight $w_i$}
+													}
+												child {
+														node {Sign: Weak learners combined into a weighted real-valued score, but classification task requires discrete label ($-1$ or $+1$)}
+													}
+												child {
+														node {Minimizes weighted particular loss}
+														child {
+																node {Original works with loss function for binary classification}
+																child {
+																		node {Instance-penalty loss that is approximated by expoential loss}
+																	}
+															}
+													}
 											}
-									}
-								child {
-										node {Complexity}
-									}
-								child {
-										node {Advantages}
 										child {
-												node {No need for data preprocessing}
+												node {Particular loss function weighting points misclassified by previous models higher than correctly classified}
 											}
 										child {
-												node {Work well with categorical features}
-											}
-										child {
-												node {Ability to work with arbitrary loss functions}
-											}
-										child {
-												node {Very low-bias, yet relatively low-variance}
-											}
-										child {
-												node {Very fast algorithm $O(k\cdot M\cdot N\cdot log(T))$}
+												node {Errors from previous models are identified by high weights}
 											}
 									}
 							}
@@ -2023,16 +2124,33 @@
 							}
 					}
 			}
-		child {
+		child [level distance=150cm] {
 				node {Hyperparameter Optimization}
 				child {
 						node {Hyperparameters usually cannot be determined analytically}
 					}
 				child {
-						node {Response function}
+						node {Response function $f\colon \Lambda \times \mathcal{D} \to \mathbb{R}$}%$f: \Lambda \times \mathcal{D} \to \mathbb{R}$}
+						child {
+								node [text width=6cm, align=center] {
+										$\lambda^* = \arg\min_{\lambda \in \Lambda} \mathcal{L}\big(\hat{y}_\lambda^{\text{opt}}(D^{\text{train}}), D^{\text{val}}\big)$\\
+										$= \arg\min_{\lambda \in \Lambda} f(\lambda, D)$
+									}
+								child {
+										node {Search for configuration yielding a learned model with best validation performance}
+									}
+							}
+						%         child {
+						%           node {$\lambda^\star := \arg\min_{\lambda \in \Lambda} 
+						% \mathcal{L}\big(\hat{y}_\lambda^{\text{opt}}(D^{\text{train}}), D^{\text{val}}\big) 
+						% := \arg\min_{\lambda \in \Lambda} f(\lambda, D)$}
+						%         }
 					}
 				child {
 						node {Algorithms}
+						child {
+								node {Single-split Validation}
+							}
 						child {
 								node {K-Fold Cross Validation}
 							}
@@ -2048,12 +2166,12 @@
 											}
 										child {
 												node {Exploration vs. Exploitation}
-											}
-										child {
-												node {Acquisition function}
-											}
-										child {
-												node {Gaussian Process Learning}
+												child {
+														node {Acquisition function}
+														child {
+																node {Gaussian Process Learning}
+															}
+													}
 											}
 									}
 							}
@@ -2309,6 +2427,17 @@
 		\edge{generalization methods}{ensembles}
 		\edge{dropout}{ensembles}
 		\edge{dropout}{regularization}
+		\edge{log-likelihood loss}{multi-class}
+		\edge{binary}{logistic loss}
+		\edge{continous target regression}{l2}
+		\edge{softmax}{output layer}
+		\edge{sigmoid}{output layer}
 	\end{edges}
 \end{mindmap}
 \end{document}
+
+% TODO: Was ist mit SVM und anderen Modellen, kann man mit denen regression, multiclass und binary classification und ranking machen?
+% TODO: begriffe wie multilayer perceptron und perceptron? Verbindung NN und SVMs
+% TODO: Linear fixen, loss functions
+% TODO: boosting redue variane, bagging redue bias oder so
+% TODO: Ensemble reduces variance?

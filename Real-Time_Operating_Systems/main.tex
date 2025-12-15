@@ -1,0 +1,320 @@
+\documentclass{standalone}
+
+\input{./content/packages}
+\input{./content/desgin}
+\input{./content/declarations}
+
+\begin{document}
+\begin{mindmap}
+	\begin{mindmapcontent}
+		\node (middle) at (current page.center) {Real-Time Operating Systems (Scheduling for RTOS)}
+		child {
+				node {Scheduling approaches for general systems}
+				child {
+						node {Non-preemptive}
+						child {
+								node {Fixed priorities}
+							}
+						child {
+								node {First come first served (FCFS)}
+							}
+						child {
+								node {Shortest job first (SJF)}
+							}
+					}
+				child {
+						node {Preemptive}
+						child {
+								node {Round robin (RR)}
+							}
+					}
+				child {
+						node {Scheduling anomalies}
+						child {
+								node {Theorem Graham ’76}
+							}
+					}
+				child {
+						node {Not real-time}
+						% TODO: all others are real time?
+					}
+			}
+		child {
+				node {Basics}
+				child {
+						node {Basic definitions}
+						child {
+								node {Feasible}
+							}
+						child {
+								node {Schedulable}
+							}
+					}
+				child {
+						node {Constraints}
+						child {
+								node {Timing constraints}
+							}
+						child {
+								node {Precedence constraints}
+							}
+						child {
+								node (resources) {Resource constraints (Mutual exclusion constraints on shared resources)}
+							}
+					}
+				child {
+						node {Timing parameters}
+						child {
+								node {Only periodic tasks}
+							}
+					}
+				child
+			}
+		child {
+				node {Aperiodic scheduling}
+				child {
+						node {Preemptive}
+						child {
+								node (edf ap) {Earliest Deadline First (EDF)}
+                child {
+                  node {?Non-synchronous arrival times}
+                }
+								child {
+										node {Optimality}
+										child {
+												node {Theorem (Horn ’74)}
+											}
+									}
+								child {
+										node {Test of schedulability}
+										child {
+												node {
+														\includegraphics[width=\linewidth]{./figures/edf_sched_test.png}
+													}
+											}
+										child {
+												node {EDF with $n$ tasks and dynamic guarantee tests in $O(n^2)$}
+												child {
+														node {$1$ dynamic guarantee test in $O(n)$}
+													}
+											}
+									}
+								child {
+										node {Complexity}
+										child {
+												node {$O(n \log n)$}
+											}
+									}
+							}
+					}
+				child {
+						node {Non-preemptive}
+						child {
+								node {Earliest Due Date (EDD)}
+                child {
+                  node {?Synchronous arrival times}
+                }
+								child {
+										node {Optimality}
+										child {
+												node {Jackson’s rule, Theorem (Jackson ’55)}
+											}
+									}
+								child {
+										node {Test of schedulability}
+										child {
+												node {
+														\includegraphics[width=\linewidth]{./figures/edd_sched_test.png}
+													}
+											}
+										child {
+												node {Non-schedulability by EDD implies non-schedulability in general}
+												child {
+														node {Since EDD is optimal}
+													}
+											}
+									}
+								child {
+										node {Complexity}
+										child {
+												node {$O(n \log n)$}
+											}
+									}
+							}
+						child {
+								node {Bratley’s algorithm}
+								child {
+										node {Off-line algorithm}
+										child {
+												node {Worst time complexity $O(n)$}
+											}
+										child {
+												node {Schedule stored in task activation list}
+											}
+									}
+							}
+					}
+				child {
+						node {Scheduling with precedence constraints}
+						child {
+								node {Preemptive}
+								child {
+										node {Modified EDF}
+                    child {
+                      node {Schedulablity Test}
+                      child {
+                        node {Theorem: J schedulable iff $J°*$ is schedulable by standard EDF}
+                      }
+                    }
+										child {
+												node {Optimality}
+                        child {
+                          node {Only without precedence contraints}
+                        }
+											}
+									}
+							}
+						child {
+								node {?Non-preemptive}
+								child {
+										node {Latest deadline first (LDF)}
+										child {
+												node {Optimality}
+												child {
+														node {Theorem (Lawler 73): LDF is optimal wrt. maximum lateness}
+													}
+												child {
+														node {Off-line algorithm}
+													}
+												child {
+														node {Complexity}
+														child {
+																node {\includegraphics[width=\linewidth]{./figures/complecity_ldf.png}}
+															}
+													}
+											}
+									}
+							}
+					}
+			}
+		child {
+				node {Periodic Scheduling}
+				child {
+						node {Preemptive}
+						child {
+								node {Rate monotonic scheduling (RM)}
+								child {
+										node {Optimality}
+										child {
+												node {Theorem (Liu, Layland, 1973)}
+												child {
+														node {Optimal solution among all fixed-priority schedulers}
+													}
+											}
+									}
+								child {
+										node {Schedulability check}
+										child {
+												node {Sufficient}
+												child {
+														node {\includegraphics[width=\linewidth]{./figures/rm_sched_test.png}}
+													}
+											}
+										child {
+												node {Sufficient and necessary}
+												child {
+														node {\includegraphics[width=\linewidth]{./figures/rm_sched_test.png}}
+													}
+											}
+									}
+							}
+						child {
+								node {Earliest deadline first (EDF)}
+								child {
+										node {Optimality}
+										child {
+												node {Optimal solution among all schedulers}
+											}
+									}
+								child {
+										node {Schedulability check}
+										child {
+												node {\includegraphics[width=\linewidth]{./figures/edf_sched_check_periodic.png}}
+											}
+									}
+							}
+					}
+			}
+		child {
+				node {A-periodic and periodic tasks together}
+				child {
+						node {Background scheduling}
+					}
+				child {
+						node {Server}
+					}
+				child {
+						node (tbs) {Total Bandwidth Server (TBS)}
+						child {
+								node {\includegraphics[width=\linewidth]{./figures/utilization_tbs.png}}
+							}
+					}
+			}
+		child {
+				node (scheduling resources) {Scheduling with resource constraints}
+				child {
+						node (pip) {Priority inheritance protocol (PIP)}
+						child {
+								node (spi) {solves Priority Inversion}
+							}
+					}
+				child {
+						node (pcp) {Priority Ceiling Protocol (PCP)}
+						child {
+								node (scb) {solves Chained Blocking}
+							}
+					}
+				child {
+						node {Types of Blocking}
+						child {
+								node (db) {Direct blocking}
+								child {
+										node {caused by Critical section (Mutual exclusion)}
+									}
+							}
+						child {
+								node (ptb) {Push-through blocking}
+								child {
+										node (cpi) {caused by Priority inversion}
+									}
+								child {
+										node (ccb) {caused by chained blocking}
+									}
+							}
+						child {
+								node (cb) {Ceiling blocking}
+								child {
+										node {No problem, because blocked by higher priority task}
+									}
+								child {
+										node {sideeffect of PCP}
+									}
+							}
+					}
+			}
+		child {
+				node {Worst Case Execution Time (WCET) Analysis}
+			}
+	\end{mindmapcontent}
+	\begin{edges}
+		\edge{ptb}{pip}
+		\edge{db}{pip}
+		\edge{db}{pcp}
+		\edge{cb}{pcp}
+		\edge{resources}{scheduling resources}
+		\edge{scb}{ccb}
+		\edge{spi}{cpi}
+		\edge{tbs}{edf ap}
+	\end{edges}
+\end{mindmap}
+\end{document}

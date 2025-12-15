@@ -76,9 +76,9 @@
 						node {Preemptive}
 						child {
 								node (edf ap) {Earliest Deadline First (EDF)}
-                child {
-                  node {?Non-synchronous arrival times}
-                }
+								child {
+										node {?Non-synchronous arrival times}
+									}
 								child {
 										node {Optimality}
 										child {
@@ -111,9 +111,9 @@
 						node {Non-preemptive}
 						child {
 								node {Earliest Due Date (EDD)}
-                child {
-                  node {?Synchronous arrival times}
-                }
+								child {
+										node {?Synchronous arrival times}
+									}
 								child {
 										node {Optimality}
 										child {
@@ -146,7 +146,7 @@
 								child {
 										node {Off-line algorithm}
 										child {
-												node {Worst time complexity $O(n)$}
+												node {Worst time complexity O(n!)}
 											}
 										child {
 												node {Schedule stored in task activation list}
@@ -160,17 +160,17 @@
 								node {Preemptive}
 								child {
 										node {Modified EDF}
-                    child {
-                      node {Schedulablity Test}
-                      child {
-                        node {Theorem: J schedulable iff $J°*$ is schedulable by standard EDF}
-                      }
-                    }
+										child {
+												node {Schedulablity Test}
+												child {
+														node {Theorem: J schedulable iff $J°*$ is schedulable by standard EDF}
+													}
+											}
 										child {
 												node {Optimality}
-                        child {
-                          node {Only without precedence contraints}
-                        }
+												child {
+														node {Only without precedence contraints}
+													}
 											}
 									}
 							}
@@ -304,6 +304,78 @@
 			}
 		child {
 				node {Worst Case Execution Time (WCET) Analysis}
+				child {
+						node {Control Flow Graph (CFG)}
+						child {
+								node {Standard Semantics for Flow Graphs}
+							}
+						child {
+								node {Collecting Semantics for Flow Graphs}
+								child {
+										node {Several solutions to System of equations}
+										child {
+												node {Fixed point theory}
+												child {
+														node {Partial order}
+														child {
+																node {Least upper bound or supremum}
+															}
+														child {
+																node {Greatest lower bound or infimum}
+															}
+														child {
+																node {Lattice}
+																child {
+																		node {Complete Lattice}
+																	}
+															}
+													}
+												child {
+														node {Monotonically increasing}
+													}
+												child {
+														node {Upward continuous and downward continuous}
+														child {
+																node {Lemma: If $f:A \rightarrow A$ is upward or downward continuous, then $f$ is monotonically increasing}
+															}
+													}
+												child {
+														node {Fixed point}
+														child {
+																node {Tarski‘s Fixed Point Theorem}
+															}
+													}
+											}
+                      child {
+                        node {Ascending chain condition}
+                        child {
+                          node {Fixed-point iteration may still converge}
+                        }
+                        child {
+                          node {Still possible by approximation technqiue called Widening}
+                          child {
+                            node {May, however, yield a solution which is not the least fixed-point solution}
+                          }
+                        }
+                      }
+                      child {
+                        node {Theorem by Kleene}
+                      }
+									}
+							}
+						child {
+								node {Basic Blocks}
+							}
+					}
+				child {
+						node {Abstract Interpretation}
+					}
+				child {
+						node {Value Analysis}
+						child {
+								node {Collecting Semantic}
+							}
+					}
 			}
 	\end{mindmapcontent}
 	\begin{edges}

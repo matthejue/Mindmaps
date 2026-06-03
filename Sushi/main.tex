@@ -4,6 +4,8 @@
 \usepackage[export]{adjustbox}
 % \usepackage{ipsum}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{eso-pic}
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{tabularray}
@@ -19,25 +21,75 @@
 \setlist[itemize]{leftmargin=0.6cm}
 \setlist[enumerate]{leftmargin=0.7cm}
 
-\captionsetup{labelformat=empty, justification=centering, font={color=PrimaryColor}}
+\captionsetup{labelformat=empty, justification=centering, font={color=InviteOrange}}
 
-\definecolor{PrimaryColor}{HTML}{DD6503}
-\definecolor{PrimaryColorDimmed}{HTML}{f1c197}
-\colorlet{BoxColor}{gray!10!white}
+\definecolor{InviteGreen}{HTML}{CEC15F}
+\definecolor{InviteOrange}{HTML}{FCA644}
+\definecolor{TableHeader}{HTML}{FCA644}
+\colorlet{HighlightOrange}{InviteOrange!82!black}
+\colorlet{PrimaryColor}{HighlightOrange}
+\colorlet{PrimaryColorDimmed}{InviteGreen!52!white}
+\colorlet{InvitationGold}{InviteOrange}
+\colorlet{WasabiOlive}{InviteGreen}
+\colorlet{WasabiText}{InviteGreen!78!black}
+\colorlet{WasabiSoft}{InviteGreen}
+\colorlet{TableBand}{InviteGreen}
+\definecolor{SoyBrown}{HTML}{4B2A1A}
+\definecolor{NoriGreen}{HTML}{293B31}
+\colorlet{PageCream}{InviteOrange!21!white}
+\colorlet{PanelWash}{white!91!InviteOrange}
+\colorlet{PanelBorder}{InviteGreen!74!black}
+\colorlet{DividerColor}{InviteGreen!82!black}
+\colorlet{BoxColor}{PanelWash}
 \newcommand\alert[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
+\newcommand{\sushipagebackground}{%
+	\begin{tikzpicture}[remember picture, overlay]
+		\fill[InviteOrange!18!white] (current page.south west) rectangle (current page.north east);
+		\fill[InviteGreen!78!white] ([xshift=-4.1cm,yshift=1.0cm]current page.north east) circle[x radius=8.2cm, y radius=4.9cm];
+		\fill[InviteGreen!66!white] ([xshift=2.0cm,yshift=-1.8cm]current page.south west) circle[x radius=6.0cm, y radius=3.8cm];
+		\fill[InviteGreen!54!white] ([xshift=13.6cm,yshift=-1.7cm]current page.north west)
+			.. controls +(3.9cm,-0.4cm) and +(-2.4cm,0.6cm) .. ([xshift=23.0cm,yshift=-4.0cm]current page.north west)
+			.. controls +(1.3cm,-2.0cm) and +(1.8cm,1.0cm) .. ([xshift=17.7cm,yshift=-7.6cm]current page.north west)
+			.. controls +(-2.5cm,-1.0cm) and +(0.4cm,-1.6cm) .. cycle;
+		\fill[InviteOrange!70!white] ([xshift=-2.2cm,yshift=-0.4cm]current page.north west)
+			.. controls +(3.2cm,-0.7cm) and +(-1.9cm,1.3cm) .. ([xshift=4.4cm,yshift=-4.4cm]current page.north west)
+			.. controls +(1.1cm,-2.5cm) and +(1.2cm,0.8cm) .. ([xshift=-0.4cm,yshift=-7.6cm]current page.north west)
+			-- (current page.north west) -- cycle;
+		\fill[InviteOrange!56!white] ([xshift=-0.2cm,yshift=1.1cm]current page.south east) circle[x radius=4.7cm, y radius=2.7cm];
+		\fill[InviteOrange!50!white] ([xshift=16.0cm,yshift=1.5cm]current page.south west) circle[x radius=4.9cm, y radius=2.4cm];
+		\foreach \x/\y/\r/\c in {
+			2.0/18.0/18/InviteOrange,
+			5.4/2.0/-18/WasabiOlive,
+			9.2/18.8/-8/WasabiOlive,
+			14.8/19.0/12/InviteOrange,
+			18.0/2.2/14/InviteOrange,
+			23.8/1.6/20/InviteOrange,
+			27.0/15.8/-18/WasabiOlive%
+		}{
+			\begin{scope}[shift={(\x cm,\y cm)}, rotate=\r, opacity=0.16]
+				\fill[\c] (0,0) ellipse[x radius=1.1cm, y radius=0.34cm];
+				\fill[white] (-0.72,-0.09) rectangle (0.72,0.09);
+			\end{scope}
+		}
+		\foreach \x in {0.32,10.18,20.04}{
+			\fill[PanelWash, opacity=0.84, rounded corners=7pt] (\x cm,0.34cm) rectangle ++(9.32cm,20.32cm);
+			\draw[PanelBorder, opacity=0.88, line width=0.55pt, rounded corners=7pt] (\x cm,0.34cm) rectangle ++(9.32cm,20.32cm);
+		}
+	\end{tikzpicture}%
+}
 
 \usepackage{amssymb} % For \blacktriangleright and other symbols
 
 \renewcommand{\labelitemi}{$\textcolor{PrimaryColor}{\bullet}$}
-\renewcommand{\labelitemii}{$\textcolor{PrimaryColor}{\blacktriangleright}$}
-\renewcommand{\labelitemiii}{$\textcolor{PrimaryColor}{\blacksquare}$}
+\renewcommand{\labelitemii}{$\textcolor{WasabiText}{\blacktriangleright}$}
+\renewcommand{\labelitemiii}{$\textcolor{InvitationGold}{\blacksquare}$}
 
 \renewcommand{\labelenumi}{\textbf{\textcolor{PrimaryColor}{\theenumi.}}}
-\renewcommand{\labelenumii}{\textbf{\textcolor{PrimaryColor}{\theenumii.}}}
-\renewcommand{\labelenumiii}{\textbf{\textcolor{PrimaryColor}{\theenumiii.}}}
+\renewcommand{\labelenumii}{\textbf{\textcolor{WasabiText}{\theenumii.}}}
+\renewcommand{\labelenumiii}{\textbf{\textcolor{InvitationGold}{\theenumiii.}}}
 
 \titleformat{\section}
-{\color{PrimaryColor}\normalfont\large\bfseries}
+{\color{WasabiText}\normalfont\large\bfseries}
 {\thesection}{0.5cm}{}
 \titlespacing{\section}{0cm}{0.2cm}{0.2cm}
 
@@ -52,6 +104,8 @@
 % \titlespacing{\subsubsection}{0cm}{0.1cm}{0.1cm}
 
 \begin{document}
+\AddToShipoutPictureBG{\sushipagebackground}
+\color{SoyBrown}
 \noindent
 \centering
 \footnotesize
@@ -59,7 +113,7 @@
 	\setlength{\parskip}{0.25cm}
 	\vspace{0.5cm}
 
-	\textcolor{PrimaryColor}{
+	\textcolor{WasabiText}{
 		\rule{\linewidth}{0.5mm}
 		\vspace{-0.1cm}
 		\begin{center}
@@ -77,11 +131,11 @@
 		\begin{tblr}{
 			width = \textwidth,
 			colspec = {X[0.8,l] X[0.2,c]}, % 80% left, 20% right
-			row{1} = {PrimaryColor,c,fg=white},
-			row{2} = {PrimaryColorDimmed},
-			row{6} = {PrimaryColorDimmed},
-			row{11} = {PrimaryColorDimmed},
-			row{16} = {PrimaryColorDimmed},
+			row{1} = {TableHeader,c,fg=white},
+			row{2} = {TableBand},
+			row{6} = {TableBand},
+			row{11} = {TableBand},
+			row{16} = {TableBand},
 			% cell{2,6}{1} = {c=2}{},
       % cell{10-19}{1} = {c=2}{},
 				}
@@ -117,7 +171,9 @@
 
 \end{minipage}%
 \hfill%
+\color{DividerColor}%
 \vrule width 0.01cm
+\color{SoyBrown}%
 \hfill%
 \begin{minipage}[t]{0.31\textwidth}
 	\vspace{0.5cm}
@@ -166,7 +222,7 @@
 		\end{itemize}
 	\end{itemize}
 
-	\textcolor{PrimaryColor}{
+	\textcolor{WasabiText}{
 		\rule{\linewidth}{0.5mm}
 		\vspace{-0.1cm}
 		\begin{center}
@@ -212,14 +268,14 @@
 	\end{minipage}
 
 \end{minipage}%
-\hfill\color{white}%
+\hfill\color{DividerColor}%
 \vrule width 0.01cm
-\hfill\color{black}%
+\hfill\color{SoyBrown}%
 \begin{minipage}[t]{0.31\textwidth}
 	\vspace{0.5cm}
 	\setlength{\parskip}{0.25cm}
 
-	\textcolor{PrimaryColor}{
+	\textcolor{WasabiText}{
 		\rule{\linewidth}{0.5mm}
 		\vspace{-0.1cm}
 		\begin{center}
@@ -253,7 +309,7 @@
 	\vspace{0.5cm}
 	\setlength{\parskip}{0.25cm}
 
-	\textcolor{PrimaryColor}{
+	\textcolor{WasabiText}{
 		\rule{\linewidth}{0.5mm}
 		\vspace{-0.1cm}
 		\begin{center}
@@ -303,13 +359,15 @@
 	\end{center}
 \end{minipage}%
 \hfill%
+\color{DividerColor}%
 \vrule width 0.01cm
+\color{SoyBrown}%
 \hfill%
 \begin{minipage}[t]{0.31\textwidth}
 	\vspace{0.5cm}
 	\setlength{\parskip}{0.25cm}
 
-	\textcolor{PrimaryColor}{
+	\textcolor{WasabiText}{
 		\rule{\linewidth}{0.5mm}
 		\vspace{-0.1cm}
 		\begin{center}
@@ -325,8 +383,8 @@
 		\begin{tblr}{
 			width = \textwidth,
 			colspec = {X[0.8,l] X[0.2,c]},
-			row{1} = {PrimaryColor,c,fg=white},
-			row{2,6,10} = {PrimaryColorDimmed},
+			row{1} = {TableHeader,c,fg=white},
+			row{2,6,10} = {TableBand},
 					cell{2}{1} = {c=2}{},
 					cell{6}{1} = {c=2}{},
 					cell{10}{1} = {c=2}{},
@@ -358,14 +416,14 @@
 		\item \alert{Resting:} cover shaped onigiri with a clean towel so they do not dry out.
 	\end{itemize}
 \end{minipage}%
-\hfill\color{white}%
+\hfill\color{DividerColor}%
 \vrule width 0.01cm
-\hfill\color{black}%
+\hfill\color{SoyBrown}%
 \begin{minipage}[t]{0.31\textwidth}
 	\vspace{0.5cm}
 	\setlength{\parskip}{0.25cm}
 
-	\textcolor{PrimaryColor}{
+	\textcolor{WasabiText}{
 		\rule{\linewidth}{0.5mm}
 		\vspace{-0.1cm}
 		\begin{center}
